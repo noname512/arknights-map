@@ -17,12 +17,13 @@ public class DublinnFlamechaserSoldier : CustomMonsterModel
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 35, 30);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 35, 30);
-    private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 11, 9);
-    private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 8);
+    private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 9, 8);
+    private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 8, 7);
     // public override string? CustomVisualPath => "res://test/scenes/test_monster.tscn";
 
     public override async Task AfterAddedToRoom()
     {
+        await PowerCmd.Apply<UndeadPower>(Creature, 5m, Creature, null);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -59,4 +60,6 @@ public class DublinnFlamechaserSoldier : CustomMonsterModel
 
         return new MonsterMoveStateMachine([attack1, attack2, attack3], attack1);
     }
+
+
 }
