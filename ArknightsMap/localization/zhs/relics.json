@@ -1,5 +1,5 @@
 {
     "SOUL_SPARK.TITLE": "生灵火花",
-    "SOUL_SPARK.Description": "战斗开始时，对所有敌人造成[yellow]20[/yellow]点伤害。在第二层Boss战中伤害提高至其50%最大生命值。",
-    "SOUL_SPARK.flavor": "占位符3"
+    "SOUL_SPARK.Description": "战斗开始时，对所有敌人造成[yellow]{Damage}[/yellow]点伤害。在第二层[red]Boss[/red]战中伤害改为最大生命值的一半。",
+    "SOUL_SPARK.flavor": "燃尽一切死亡，烧出生命之火。"
 }
