@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils.NodeFactories;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -10,20 +8,26 @@ using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Enemies;
 
-public class DublinnFlamechaserSoldier : CustomMonsterModel
+[RegisterMonster]
+public class DublinnFlamechaserSoldier : ModMonsterTemplate
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 35, 30);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 35, 30);
     private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 9, 8);
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 8, 7);
-    // public override string? CustomVisualPath => "res://test/scenes/test_monster.tscn";
+    // 怪物场景
+    // public override MonsterAssetProfile AssetProfile => new(
+    //     VisualsScenePath: "res://Test/scenes/test_monster.tscn"
+    // );
 
     public override async Task AfterAddedToRoom()
     {
-        await PowerCmd.Apply<UndeadPower>(Creature, 5m, Creature, null);
+        await PowerCmd.Apply<StrengthPower>(Creature, 5m, Creature, null);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()

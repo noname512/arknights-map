@@ -19,13 +19,19 @@
       <Private>false</Private>
     </Reference>
 
+    <PackageReference Include="STS2.RitsuLib" Version="*" />
+    <!-- <Reference Include="STS2RitsuLib">
+      <HintPath>$(Sts2DataDir)\mods\STS2.RitsuLib.0.2.10.github\STS2-RitsuLib.dll</HintPath>
+      <Private>false</Private>
+    </Reference> -->
+
+    <!-- <Reference Include="BaseLib">
+      <HintPath>$(Sts2Dir)\mods\BaseLib\BaseLib.dll</HintPath>
+      <Private>false</Private>
+    </Reference> -->
+
     <Reference Include="0Harmony">
       <HintPath>$(Sts2DataDir)\0Harmony.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-
-    <Reference Include="BaseLib">
-      <HintPath>$(Sts2Dir)\mods\BaseLib\BaseLib.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
