@@ -3,3 +3,13 @@
     "SOUL_SPARK.Description": "战斗开始时，对所有敌人造成[yellow]{Damage}[/yellow]点伤害。在第二层[red]Boss[/red]战中伤害改为最大生命值的一半。",
     "SOUL_SPARK.flavor": "燃尽一切死亡，烧出生命之火。"
 }
+{
+  "BURN_SCAR.TITLE": "灼痕",
+  "BURN_SCAR.Description": "为你的打击附魔：灼燃。",
+  "BURN_SCAR.flavor": "燃尽一切死亡，烧出生命之火。"
+}
+{
+  "AID_OF_LEADER.TITLE": "“领袖”的援助",
+  "AID_OF_LEADER.Description": "战斗开始时，对所有敌人造成[yellow]{Damage}[/yellow]点伤害。在第二层[red]Boss[/red]战中伤害改为最大生命值的一半。",
+  "AID_OF_LEADER.flavor": "燃尽一切死亡，烧出生命之火。"
+}

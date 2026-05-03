@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Relics;
 using Godot;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Models.Relics;
@@ -30,19 +31,19 @@ public class Reed : ModAncientEventTemplate
 
     // 固定池一和二
     private IReadOnlyList<EventOption> Pool1 => [
-            CreateModRelicOption<Akabeko>(),
-            CreateModRelicOption<Anchor>(),
+            CreateModRelicOption<BurnScar>(),   // 灼痕
+            // CreateModRelicOption<Anchor>(),
         ];
     private IReadOnlyList<EventOption> Pool2 => [
-            CreateModRelicOption<LizardTail>(),
-            CreateModRelicOption<ArcaneScroll>(),
+            CreateModRelicOption<SoulSpark>(),  // 生灵火花
+            // CreateModRelicOption<ArcaneScroll>(),
         ];
 
     // 带权重池三。权重越大越有机会生成。当然你也可以写自定义的列表生成函数
     private WeightedList<EventOption> Pool3 => new()
     {
-        { CreateModRelicOption<YummyCookie>(), 2 },
-        { CreateModRelicOption<WingCharm>(), 1 }
+        { CreateModRelicOption<AidOfLeader>(), 1 }, // “领袖”的援助
+        // { CreateModRelicOption<WingCharm>(), 1 }
     };
 
     // 所有可能的选项

@@ -19,12 +19,12 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
-public class SoulSpark : ModRelicTemplate
+public class AidOfLeader : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
-	protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(20m, ValueProp.Unpowered)];
-
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(5)];
+	
     public override RelicAssetProfile AssetProfile => new(
         // 小图标（原版85x85）
         IconPath: $"res://Test/images/relics/{GetType().Name}.png",
@@ -39,21 +39,10 @@ public class SoulSpark : ModRelicTemplate
 		if (player == Owner)
 		{
 			CombatState combatState = player.Creature.CombatState;
-			if (combatState.RoundNumber == 1)
+			if (combatState.RoundNumber == 2)
 			{
 				Flash();
-				VfxCmd.PlayOnCreatureCenters(combatState.HittableEnemies, "vfx/vfx_attack_slash");
-				if (Owner.RunState.CurrentRoom == null || Owner.RunState.CurrentRoom.RoomType != RoomType.Boss || Owner.RunState.CurrentActIndex != 1)
-				{
-				    await CreatureCmd.Damage(choiceContext, combatState.HittableEnemies, base.DynamicVars.Damage, base.Owner.Creature);
-				}
-				else
-				{
-				    foreach (Creature hittableEnemy in combatState.HittableEnemies)
-                	{
-		                await CreatureCmd.Damage(choiceContext, hittableEnemy, new DamageVar(hittableEnemy.CurrentHp / 2, ValueProp.Unpowered), base.Owner.Creature);
-                    }
-				}
+				await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
 			}
 		}
 	}

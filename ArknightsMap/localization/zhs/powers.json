@@ -2,3 +2,7 @@
     "CHASE_FLAME_POWER.smartDescription": "死亡时，变为一个[blue]{Amount}[/blue]点生命值的且拥有[gold]无实体[/gold]的[gold]余烬[/gold]。若[gold]余烬[/gold]在[blue]3[/blue]回合内未被击倒，则减少[red]1[/red]点[gold]生命上限[/gold]并重生。",
     "CHASE_FLAME_POWER.title": "逐火"
 }
+{
+    "FLAMING_DAMAGE_POWER.smartDescription": "当灼燃损伤累计到[red]20[/red]点时，在回合开始时，{Owner}将受到[red]8[/red]点伤害，并获得一层[gold]易伤[/gold]。",
+    "FLAMING_DAMAGE_POWER.title": "灼燃损伤"
+}
