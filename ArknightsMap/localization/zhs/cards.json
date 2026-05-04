@@ -1,0 +1,7 @@
+﻿{
+  "OVERLOAD_STRIKE.title": "过载打击",
+  "OVERLOAD_STRIKE.description": "造成{Damage:diff()}点伤害3次。 \n 当你抽到这张牌时，失去{Energy}。",
+
+  "SEED_OF_HOPE.title": "保存的火种",
+  "SEED_OF_HOPE.description": "不可打出。 \n 战斗结束时，如果这张牌未被消耗，则恢复已损失{Heal}%的生命值。"
+}

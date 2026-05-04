@@ -1,6 +1,7 @@
 using ArknightsMap.Scripts.Relics;
 using Godot;
 using MegaCrit.Sts2.Core.Events;
+using MegaCrit.Sts2.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Runs;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -36,7 +37,7 @@ public class Reed : ModAncientEventTemplate
         ];
     private IReadOnlyList<EventOption> Pool2 => [
             CreateModRelicOption<SoulSpark>(),  // 生灵火花
-            // CreateModRelicOption<ArcaneScroll>(),
+            CreateModRelicOption<LiveFlame>(),  // 活化火苗
         ];
 
     // 带权重池三。权重越大越有机会生成。当然你也可以写自定义的列表生成函数
