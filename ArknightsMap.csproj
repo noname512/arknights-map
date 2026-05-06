@@ -21,7 +21,7 @@
 
     <PackageReference Include="STS2.RitsuLib" Version="*" />
     <!-- <Reference Include="STS2RitsuLib">
-      <HintPath>$(Sts2DataDir)\mods\STS2.RitsuLib.0.2.10.github\STS2-RitsuLib.dll</HintPath>
+      <HintPath>$(Sts2Dir)\mods\STS2-RitsuLib\STS2-RitsuLib.dll</HintPath>
       <Private>false</Private>
     </Reference> -->
 

@@ -41,7 +41,7 @@ public class Flaming : ModEnchantmentTemplate
     {
         if (cardSource == Card)
         {
-            PowerCmd.Apply<FlamingDamagePower>(target, amount, dealer, Card);
+            PowerCmd.Apply<FlamingDamagePower>(choiceContext, target, amount, dealer, Card);
         }
         return Task.CompletedTask;
     }

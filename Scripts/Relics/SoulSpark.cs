@@ -38,7 +38,7 @@ public class SoulSpark : ModRelicTemplate
 	{
 		if (player == Owner)
 		{
-			CombatState combatState = player.Creature.CombatState;
+			ICombatState combatState = player.Creature.CombatState;
 			if (combatState.RoundNumber == 1)
 			{
 				Flash();

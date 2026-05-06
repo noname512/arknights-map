@@ -10,9 +10,12 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Models.RelicPools;
+using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Relics;
+[RegisterRelic(typeof(SharedRelicPool))]
 public class LiveFlame : ModRelicTemplate
 {
        public override RelicRarity Rarity => RelicRarity.Ancient;
@@ -43,7 +46,7 @@ public class LiveFlame : ModRelicTemplate
         return amount + DynamicVars.Energy.IntValue;
     }
     
-    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
     {
         if (player == Owner && combatState.RoundNumber == 1)
         {
@@ -53,7 +56,7 @@ public class LiveFlame : ModRelicTemplate
             {
                 list.Add(combatState.CreateCard<Burn>(Owner));
             }
-            CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, addedByPlayer: true, CardPilePosition.Random));
+            CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, player, CardPilePosition.Random));
             await Cmd.Wait(3f);
         }
     }

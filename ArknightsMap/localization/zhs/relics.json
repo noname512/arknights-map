@@ -1,17 +1,14 @@
 {
-    "SOUL_SPARK.TITLE": "生灵火花",
-    "SOUL_SPARK.Description": "战斗开始时，对所有敌人造成[yellow]{Damage}[/yellow]点伤害。在第二层[red]Boss[/red]战中伤害改为最大生命值的一半。",
-    "SOUL_SPARK.flavor": "燃尽一切死亡，烧出生命之火。",
-  
-    "BURN_SCAR.TITLE": "灼痕",
-    "BURN_SCAR.Description": "为你的打击附魔：灼燃。",
-    "BURN_SCAR.flavor": "警告：对无实体角色效果不好。",
-  
-    "AID_OF_LEADER.TITLE": "“领袖”的援助",
-    "AID_OF_LEADER.Description": "战斗开始时，对所有敌人造成[yellow]{Damage}[/yellow]点伤害。在第二层[red]Boss[/red]战中伤害改为最大生命值的一半。",
-    "AID_OF_LEADER.flavor": "她说，希望一定能战胜绝望。",
-
-    "LIVE_FLAME.TITLE": "活化火苗",
-    "LIVE_FLAME.Description": "在每回合开始时获得{Energy}。在战斗开始时，将{Card}张晕眩放入你的抽牌堆。",
-    "LIVE_FLAME.flavor": "小心，别被烫伤。"
+    "ARKNIGHTS_MAP_RELIC_SOUL_SPARK.title": "生灵火花",
+    "ARKNIGHTS_MAP_RELIC_SOUL_SPARK.description": "战斗开始时，对所有敌人造成[yellow]{Damage}[/yellow]点伤害。在第二层[red]Boss[/red]战中伤害改为最大生命值的一半。",
+    "ARKNIGHTS_MAP_RELIC_SOUL_SPARK.flavor": "燃尽一切死亡，烧出生命之火。",
+    "ARKNIGHTS_MAP_RELIC_BURN_SCAR.title": "灼痕",
+    "ARKNIGHTS_MAP_RELIC_BURN_SCAR.description": "为你的打击附魔：灼燃。",
+    "ARKNIGHTS_MAP_RELIC_BURN_SCAR.flavor": "警告：对无实体角色效果不好。",
+    "ARKNIGHTS_MAP_RELIC_AID_OF_LEADER.title": "“领袖”的援助",
+    "ARKNIGHTS_MAP_RELIC_AID_OF_LEADER.description": "战斗开始时，对所有敌人造成[yellow]{Damage}[/yellow]点伤害。在第二层[red]Boss[/red]战中伤害改为最大生命值的一半。",
+    "ARKNIGHTS_MAP_RELIC_AID_OF_LEADER.flavor": "她说，希望一定能战胜绝望。",
+    "ARKNIGHTS_MAP_RELIC_LIVE_FLAME.title": "活化火苗",
+    "ARKNIGHTS_MAP_RELIC_LIVE_FLAME.description": "在每回合开始时获得{Energy}。在战斗开始时，将{Card}张晕眩放入你的抽牌堆。",
+    "ARKNIGHTS_MAP_RELIC_LIVE_FLAME.flavor": "小心，别被烫伤。"
 }
