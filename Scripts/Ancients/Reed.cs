@@ -19,7 +19,7 @@ public class Reed : ModAncientEventTemplate
     public override Color DialogueColor => new(0.12f, 0.2f, 0.8f);
     // 自定义场景的路径
     public override EventAssetProfile AssetProfile => new(
-        BackgroundScenePath: "res://Test/scenes/test_ancient.tscn"
+        BackgroundScenePath: "res://ArknightsMap/scenes/Reed.tscn"
     );
 
     // 自定义地图图标和轮廓的路径

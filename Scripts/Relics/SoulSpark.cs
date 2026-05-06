@@ -21,18 +21,18 @@ namespace ArknightsMap.Scripts.Relics;
 [RegisterRelic(typeof(SharedRelicPool))]
 public class SoulSpark : ModRelicTemplate
 {
-    public override RelicRarity Rarity => RelicRarity.Ancient;
+	public override RelicRarity Rarity => RelicRarity.Ancient;
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(20m, ValueProp.Unpowered)];
 
-    public override RelicAssetProfile AssetProfile => new(
-        // 小图标（原版85x85）
-        IconPath: $"res://Test/images/relics/{GetType().Name}.png",
-        // 轮廓图标（原版85x85）
-        IconOutlinePath: $"res://Test/images/relics/{GetType().Name}.png",
-        // 大图标（原版256x256）
-        BigIconPath: $"res://Test/images/relics/{GetType().Name}.png"
-    );
+	public override RelicAssetProfile AssetProfile => new(
+		// 小图标（原版85x85）
+		IconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png",
+		// 轮廓图标（原版85x85）
+		IconOutlinePath: $"res://ArknightsMap/images/relics/{GetType().Name}.png",
+		// 大图标（原版256x256）
+		BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
+	);
 
 	public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
 	{
@@ -45,14 +45,14 @@ public class SoulSpark : ModRelicTemplate
 				VfxCmd.PlayOnCreatureCenters(combatState.HittableEnemies, "vfx/vfx_attack_slash");
 				if (Owner.RunState.CurrentRoom == null || Owner.RunState.CurrentRoom.RoomType != RoomType.Boss || Owner.RunState.CurrentActIndex != 1)
 				{
-				    await CreatureCmd.Damage(choiceContext, combatState.HittableEnemies, base.DynamicVars.Damage, base.Owner.Creature);
+					await CreatureCmd.Damage(choiceContext, combatState.HittableEnemies, base.DynamicVars.Damage, base.Owner.Creature);
 				}
 				else
 				{
-				    foreach (Creature hittableEnemy in combatState.HittableEnemies)
-                	{
-		                await CreatureCmd.Damage(choiceContext, hittableEnemy, new DamageVar(hittableEnemy.CurrentHp / 2, ValueProp.Unpowered), base.Owner.Creature);
-                    }
+					foreach (Creature hittableEnemy in combatState.HittableEnemies)
+					{
+						await CreatureCmd.Damage(choiceContext, hittableEnemy, new DamageVar(hittableEnemy.CurrentHp / 2, ValueProp.Unpowered), base.Owner.Creature);
+					}
 				}
 			}
 		}

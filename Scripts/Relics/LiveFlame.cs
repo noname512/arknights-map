@@ -15,19 +15,20 @@ using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Relics;
+
 [RegisterRelic(typeof(SharedRelicPool))]
 public class LiveFlame : ModRelicTemplate
 {
-       public override RelicRarity Rarity => RelicRarity.Ancient;
+    public override RelicRarity Rarity => RelicRarity.Ancient;
 
-       protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[2]
-        {
+    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[2]
+     {
             new EnergyVar(1),
             new CardsVar(2)
-        };
+     };
 
-        protected override IEnumerable<IHoverTip> AdditionalHoverTips
-        {
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips
+    {
         get
         {
             List<IHoverTip> list = new List<IHoverTip>();
@@ -36,7 +37,16 @@ public class LiveFlame : ModRelicTemplate
             return list;
         }
     }
-    
+
+    public override RelicAssetProfile AssetProfile => new(
+        // 小图标（原版85x85）
+        IconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png",
+        // 轮廓图标（原版85x85）
+        IconOutlinePath: $"res://ArknightsMap/images/relics/{GetType().Name}.png",
+        // 大图标（原版256x256）
+        BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
+    );
+
     public override decimal ModifyMaxEnergy(Player player, decimal amount)
     {
         if (player != Owner)
@@ -45,7 +55,7 @@ public class LiveFlame : ModRelicTemplate
         }
         return amount + DynamicVars.Energy.IntValue;
     }
-    
+
     public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
     {
         if (player == Owner && combatState.RoundNumber == 1)
