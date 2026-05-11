@@ -27,12 +27,12 @@ public class OverloadStrike : ModCardTemplate
     private const TargetType targetType = TargetType.AnyEnemy;
     // 卡图资源
     public override CardAssetProfile AssetProfile => new(
-        PortraitPath: $"res://Test/images/cards/{GetType().Name}.png"
-        // 卡框等，有需求自己添加。需要自行判断卡牌类型（攻击、技能、能力等）设置，建议写在基类里。
-        // 如果使用自定义卡池，需要改下material（TODO）
-        // FramePath: "", // 卡牌背景
-        // PortraitBorderPath: "", // 边框（状态牌感染使用的）
-        // BannerTexturePath: "" // 横幅（不同类型）
+        PortraitPath: $"res://ArknightsMap/images/cards/{GetType().Name}.png"
+    // 卡框等，有需求自己添加。需要自行判断卡牌类型（攻击、技能、能力等）设置，建议写在基类里。
+    // 如果使用自定义卡池，需要改下material（TODO）
+    // FramePath: "", // 卡牌背景
+    // PortraitBorderPath: "", // 边框（状态牌感染使用的）
+    // BannerTexturePath: "" // 横幅（不同类型）
     );
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -59,7 +59,7 @@ public class OverloadStrike : ModCardTemplate
             .Targeting(cardPlay.Target!)
             .Execute(choiceContext);
     }
-    
+
     public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
         if (card == this)
