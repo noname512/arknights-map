@@ -37,12 +37,11 @@ public class Flaming : ModEnchantmentTemplate
         return cardType == CardType.Attack;
     }
 
-    public override Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         if (cardSource == Card)
         {
-            PowerCmd.Apply<FlamingDamagePower>(choiceContext, target, amount, dealer, Card);
+            await PowerCmd.Apply<FlamingDamagePower>(choiceContext, target, amount, dealer, Card);
         }
-        return Task.CompletedTask;
     }
 }

@@ -30,13 +30,12 @@ public class DealFlamingDamagePower : ModPowerTemplate
         BigIconPath: "res://Test/images/powers/test_power.png"
     );
     
-    public override Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         if (dealer == Owner)
         {
-            PowerCmd.Apply<FlamingDamagePower>(choiceContext, target, amount, dealer, null);
+            await PowerCmd.Apply<FlamingDamagePower>(choiceContext, target, amount, dealer, null);
         }
-        return Task.CompletedTask;
     }
 
 }

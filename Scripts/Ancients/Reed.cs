@@ -44,7 +44,7 @@ public class Reed : ModAncientEventTemplate
     private WeightedList<EventOption> Pool3 => new()
     {
         { CreateModRelicOption<AidOfLeader>(), 1 }, // “领袖”的援助
-        // { CreateModRelicOption<WingCharm>(), 1 }
+        { CreateModRelicOption<Kindling>(), 1 }, // 火种
     };
 
     // 所有可能的选项

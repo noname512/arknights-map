@@ -46,17 +46,16 @@ public class SeedOfHope : ModCardTemplate
     {
     }
 
-    public override Task AfterCombatEnd(CombatRoom room)
+    public override async Task AfterCombatEnd(CombatRoom room)
     {
-        if (Pile.Type == PileType.Exhaust)
+        if (Pile.Type == PileType.Exhaust || Pile.Type == PileType.Deck)
         {
-            return Task.CompletedTask;
+            return;
         }
 
         int HpLose = Owner.Creature.MaxHp - Owner.Creature.CurrentHp;
         int HealAmount = (int)(0.15F * HpLose);
-        CreatureCmd.Heal(Owner.Creature, HealAmount);
-        return Task.CompletedTask;
+        await CreatureCmd.Heal(Owner.Creature, HealAmount);
     }
     // 升级后的效果逻辑
     protected override void OnUpgrade()
