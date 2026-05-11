@@ -1,5 +1,5 @@
 {
     "ARKNIGHTS_MAP_ENCHANTMENT_FLAMING.title": "灼燃",
-    "ARKNIGHTS_MAP_ENCHANTMENT_FLAMING.extraCardText": "这张牌造成的伤害为灼燃伤害。",
+    "ARKNIGHTS_MAP_ENCHANTMENT_FLAMING.extraCardText": "这张牌造成伤害时，会附加等量的[gold]灼燃损伤[/gold]。",
     "ARKNIGHTS_MAP_ENCHANTMENT_FLAMING.description": "这张牌造成伤害时，会附加等量的灼燃损伤。"
 }

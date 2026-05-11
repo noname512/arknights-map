@@ -36,7 +36,7 @@ public class Flaming : ModEnchantmentTemplate
     {
         return cardType == CardType.Attack;
     }
-    
+
     public override Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         if (cardSource == Card)
