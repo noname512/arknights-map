@@ -38,7 +38,7 @@ public class Kindling : ModRelicTemplate
 	public override async Task AfterObtained()
 	{
 		List<CardPileAddResult> results = new List<CardPileAddResult>();
-		CardModel card = base.Owner.RunState.CreateCard<OverloadStrike>(base.Owner);
+		CardModel card = Owner.RunState.CreateCard<SeedOfHope>(Owner);
 		results.Add(await CardPileCmd.Add(card, PileType.Deck));
 		CardCmd.PreviewCardPileAdd(results, 1f);
 	}

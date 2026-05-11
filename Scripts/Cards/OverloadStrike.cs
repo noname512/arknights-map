@@ -36,7 +36,7 @@ public class OverloadStrike : ModCardTemplate
     );
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(12, ValueProp.Move)
+        new DamageVar(12, ValueProp.Move), new EnergyVar(1)
     ];
 
     public OverloadStrike() : base(energyCost, type, rarity, targetType)
