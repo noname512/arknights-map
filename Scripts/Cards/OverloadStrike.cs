@@ -25,6 +25,7 @@ public class OverloadStrike : ModCardTemplate
     private const CardRarity rarity = CardRarity.Common;
     // 目标类型（AnyEnemy表示任意敌人）
     private const TargetType targetType = TargetType.AnyEnemy;
+    protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Strike };
     // 卡图资源
     public override CardAssetProfile AssetProfile => new(
         PortraitPath: $"res://ArknightsMap/images/cards/{GetType().Name}.png"
