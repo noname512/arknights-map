@@ -18,7 +18,7 @@ namespace ArknightsMap.Scripts.Powers;
 public class DealFlamingDamagePower : ModPowerTemplate
 {
     // 类型，Buff或Debuff
-    public override PowerType Type => PowerType.Debuff;
+    public override PowerType Type => PowerType.Buff;
     // 叠加类型，Counter表示可叠加，Single表示不可叠加
     public override PowerStackType StackType => PowerStackType.Single;
     protected override IEnumerable<DynamicVar> CanonicalVars => [];

@@ -36,8 +36,18 @@ public class FlamingDamagePower : ModPowerTemplate
         {
             Flash();
             await CreatureCmd.Damage(choiceContext, Owner, new DamageVar(8, ValueProp.Unpowered), Owner);
-            await PowerCmd.Apply<VulnerablePower>(choiceContext, Owner, 1, Owner, null, false);
-            await PowerCmd.Remove(this);
+            if (Owner.IsAlive)
+            {
+                if ((side == CombatSide.Enemy) && (!Owner.HasPower<VulnerablePower>()))
+                {
+                    await PowerCmd.Apply<VulnerablePower>(choiceContext, Owner, 2, Owner, null, false);
+                }
+                else
+                {
+                    await PowerCmd.Apply<VulnerablePower>(choiceContext, Owner, 1, Owner, null, false);
+                }
+                await PowerCmd.Remove(this);
+            }
         }
     }
 }
