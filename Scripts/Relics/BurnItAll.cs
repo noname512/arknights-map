@@ -10,6 +10,8 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.Extensions;
+using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Hooks;
@@ -47,7 +49,7 @@ public class BurnItAll : ModRelicTemplate
         // 大图标（原版256x256）
         BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
     );
-
+    
     public override async Task AfterObtained()
     {
         IEnumerable<CardModel> cardsPile = PileType.Deck.GetPile(Owner).Cards.ToList();
@@ -62,38 +64,36 @@ public class BurnItAll : ModRelicTemplate
         
         PileType.Deck.GetPile(Owner).Clear();
         
-        /*
-
         Player player = Owner;
         
-        List<CardModel> possibleCards = Owner.Character.CardPool.GetUnlockedCards(Owner.UnlockState, Owner.RunState.CardMultiplayerConstraint).Where((c => c.Rarity != CardRarity.Basic && c.Rarity != CardRarity.Ancient && c.Rarity != CardRarity.Event)).ToList();
-        List<CardModel> chosenCards = [];
+        CardCreationOptions options = CardCreationOptions.ForNonCombatWithUniformOdds([Owner.Character.CardPool], c => c.Rarity != CardRarity.Basic && c.Rarity != CardRarity.Event && c.Rarity != CardRarity.Ancient).WithFlags(CardCreationFlags.NoRarityModification);
         List<CardCreationResult> cards = [];
         if (hasDirge)
         {
-            chosenCards.AddRange(possibleCards.ToArray().Where(c => c.Rarity == CardRarity.Rare).ToList());
+            foreach (var card in options.GetPossibleCards(player))
+            {
+                if (card.Rarity == CardRarity.Rare)
+                {
+                    cards.Add(new CardCreationResult(card));
+                }
+            }
         }
 
-        while (chosenCards.Count <= DynamicVars.Cards.IntValue)
+        while (cards.Count < DynamicVars.Cards.IntValue)
         {
-            chosenCards.Add(possibleCards.ElementAt(0));
+            cards.AddRange(CardFactory.CreateForReward(player, 1, options));
         }
-
-        foreach (var card in chosenCards)
-        {
-            cards.Add(new CardCreationResult(card));
-        }
-        CardCreationOptions options = CardCreationOptions.ForNonCombatWithUniformOdds([Owner.Character.CardPool], c => c.Rarity != CardRarity.Basic && c.Rarity != CardRarity.Event && c.Rarity != CardRarity.Ancient).WithFlags(CardCreationFlags.NoRarityModification);
 
         if (Hook.TryModifyCardRewardOptions(player.RunState, player, cards, options, out List<AbstractModel> modifiers))
         {
             await TaskHelper.RunSafely(Hook.AfterModifyingCardRewardOptions(player.RunState, modifiers));
         }
         
+        // cards.Sort((a,b) => a.Card.Rarity < b.Card.Rarity ? 1 : -1);
+        
         foreach (CardModel item in await CardSelectCmd.FromSimpleGridForRewards(prefs: new CardSelectorPrefs(L10NLookup("ROOM_FULL_OF_CHEESE.pages.GORGE.selectionScreenPrompt"), 20), context: new BlockingPlayerChoiceContext(), cards: cards, player: Owner))
         {
             CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(item, PileType.Deck));
         }
-        */
     }
 }
