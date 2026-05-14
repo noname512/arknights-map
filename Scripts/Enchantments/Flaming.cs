@@ -45,4 +45,13 @@ public class Flaming : ModEnchantmentTemplate
             await PowerCmd.Apply<FlamingDamagePower>(choiceContext, target, amount, dealer, Card);
         }
     }
+    public override decimal EnchantDamageMultiplicative(decimal originalDamage, ValueProp props)
+    {
+        if (!props.IsPoweredAttack())
+        {
+            return 1m;
+        }
+        return 2m;
+    }
+    
 }

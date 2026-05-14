@@ -30,15 +30,15 @@ public class FlamingDamagePower : ModPowerTemplate
         BigIconPath: "res://Test/images/powers/test_power.png"
     );
     
-    public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, ICombatState combatState)
+    public override async Task AfterTurnEndLate(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        if (Amount >= 20)
+        if ((Amount >= 20) && (side != Owner.Side))
         {
             Flash();
             await CreatureCmd.Damage(choiceContext, Owner, new DamageVar(8, ValueProp.Unpowered), Owner);
             if (Owner.IsAlive)
             {
-                if ((side == CombatSide.Enemy) && (!Owner.HasPower<VulnerablePower>()))
+                if ((side == CombatSide.Player) && (!Owner.HasPower<VulnerablePower>()))
                 {
                     await PowerCmd.Apply<VulnerablePower>(choiceContext, Owner, 2, Owner, null, false);
                 }
