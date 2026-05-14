@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
-namespace ArknightsMap.Scripts.Enemies;
+namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
 public class DublinnFlamechaserSoldier : ModMonsterTemplate
@@ -22,9 +22,9 @@ public class DublinnFlamechaserSoldier : ModMonsterTemplate
     private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 9, 8);
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 8, 7);
     // 怪物场景
-    // public override MonsterAssetProfile AssetProfile => new(
-    //     VisualsScenePath: "res://Test/scenes/test_monster.tscn"
-    // );
+    public override MonsterAssetProfile AssetProfile => new(
+        VisualsScenePath: "res://ArknightsMap/scenes/monsters/DublinnFlamechaserSoldier.tscn"
+    );
 
     public override async Task AfterAddedToRoom()
     {

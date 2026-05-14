@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://cawcbngvk8ef7"
+path="res://.godot/imported/enemy_1288_duskls_424.skel-578ffc641108035e240aa722f4358bf0.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnFlamechaserSoldier/enemy_1288_duskls_424.skel"
+dest_files=["res://.godot/imported/enemy_1288_duskls_424.skel-578ffc641108035e240aa722f4358bf0.spskel"]
+
+[params]
+

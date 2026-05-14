@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://03567xm8tig4"
+path="res://.godot/imported/enemy_1288_duskls.atlas-548781f07dbe45790a21fe4972cdd95b.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnFlamechaserSoldier/enemy_1288_duskls.atlas"
+dest_files=["res://.godot/imported/enemy_1288_duskls.atlas-548781f07dbe45790a21fe4972cdd95b.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"
