@@ -33,7 +33,7 @@ public class Reed : ModAncientEventTemplate
     // 固定池一和二
     private IReadOnlyList<EventOption> Pool1 => [
             CreateModRelicOption<BurnScar>(),   // 灼痕
-            // CreateModRelicOption<Anchor>(),
+            CreateModRelicOption<Hope>(),       // 希望
         ];
     private IReadOnlyList<EventOption> Pool2 => [
             CreateModRelicOption<SoulSpark>(),  // 生灵火花

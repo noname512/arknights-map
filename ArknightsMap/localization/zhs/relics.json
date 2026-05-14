@@ -16,5 +16,8 @@
     "ARKNIGHTS_MAP_RELIC_KINDLING.flavor": "永远别放弃！",
     "ARKNIGHTS_MAP_RELIC_MARK_OF_TARA.title": "塔拉印记",
     "ARKNIGHTS_MAP_RELIC_MARK_OF_TARA.description": "当你的生命值将要降到[blue]0[/blue]或以下时，回复到[green]{Heal}[/green]点生命值，并获得[blue]{Intangible}[/blue]层[gold]无实体[/gold]。（仅能生效一次）",
-    "ARKNIGHTS_MAP_RELIC_MARK_OF_TARA.flavor": "你真的还活着吗？还是和逐火战士一样呢？"
+    "ARKNIGHTS_MAP_RELIC_MARK_OF_TARA.flavor": "你真的还活着吗？还是和逐火战士一样呢？",
+    "ARKNIGHTS_MAP_RELIC_HOPE.title": "希望",
+    "ARKNIGHTS_MAP_RELIC_HOPE.description": "在第二幕，所有战斗中额外掉落一次卡牌。",
+    "ARKNIGHTS_MAP_RELIC_HOPE.flavor": "未来一定会更好。"
 }
