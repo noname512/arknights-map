@@ -1,8 +1,11 @@
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Animation;
+using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
@@ -11,6 +14,7 @@ using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
+using ArknightsMap.Scripts.Powers;
 
 namespace ArknightsMap.Scripts.Monsters;
 
@@ -28,12 +32,13 @@ public class DublinnFlamechaserSoldier : ModMonsterTemplate
 
     public override async Task AfterAddedToRoom()
     {
-        await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 5m, Creature, null);
+        await PowerCmd.Apply<ChaseFlamePower>(new ThrowingPlayerChoiceContext(), Creature, 5m, Creature, null);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
-        var attack1 = new MoveState(
+        List<MonsterState> list = new List<MonsterState>();
+        MoveState attack1 = new MoveState(
             "ATTACK1",
             async targets => await DamageCmd
                 .Attack(Damage1)
@@ -42,7 +47,7 @@ public class DublinnFlamechaserSoldier : ModMonsterTemplate
                 .Execute(null),
             new SingleAttackIntent(Damage1)
         );
-        var attack2 = new MoveState(
+        MoveState attack2 = new MoveState(
             "ATTACK2",
             async targets => await DamageCmd
                 .Attack(Damage2)
@@ -50,7 +55,7 @@ public class DublinnFlamechaserSoldier : ModMonsterTemplate
                 .Execute(null),
             new SingleAttackIntent(Damage2)
         );
-        var attack3 = new MoveState(
+        MoveState attack3 = new MoveState(
             "ATTACK3",
             async targets => await DamageCmd
                 .Attack(Damage1)
@@ -63,8 +68,34 @@ public class DublinnFlamechaserSoldier : ModMonsterTemplate
         attack2.FollowUpState = attack3;
         attack3.FollowUpState = attack1;
 
-        return new MonsterMoveStateMachine([attack1, attack2, attack3], attack1);
+        list.Add(attack1);
+        list.Add(attack2);
+        list.Add(attack3);
+
+        return new MonsterMoveStateMachine(list, attack1);
     }
 
-
+    public override CreatureAnimator GenerateAnimator(MegaSprite controller)
+    {
+        Log.Info($"override GenerateAnimator success");
+        AnimState idleState = new AnimState("Idle", isLooping: true);
+        AnimState attackState = new AnimState("Attack");
+        AnimState dieState = new AnimState("Die");
+        AnimState startState = new AnimState("Start");
+        AnimState idleState2 = new AnimState("Idle_2", isLooping: true);
+        AnimState dieState2 = new AnimState("Die_2");
+        AnimState preReviveState = new AnimState("Die_2");
+        AnimState reviveState = new AnimState("Revive");
+        attackState.NextState = idleState;
+        dieState.NextState = startState;
+        startState.NextState = idleState2;
+        preReviveState.NextState = reviveState;
+        reviveState.NextState = idleState;
+        CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
+        creatureAnimator.AddAnyState("Revive", dieState);
+        creatureAnimator.AddAnyState("Revive2", preReviveState);
+        creatureAnimator.AddAnyState("Dead", dieState2);
+        creatureAnimator.AddAnyState("Attack", attackState);
+        return creatureAnimator;
+    }
 }
