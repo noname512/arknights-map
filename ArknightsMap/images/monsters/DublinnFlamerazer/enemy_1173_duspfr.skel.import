@@ -1,0 +1,13 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://cm76mtnhgoh3s"
+valid=false
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnFlamerazer/enemy_1173_duspfr.skel"
+
+[params]
+

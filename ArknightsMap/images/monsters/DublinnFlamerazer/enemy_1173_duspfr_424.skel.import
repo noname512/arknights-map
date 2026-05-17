@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://r7ymfwrhspo1"
+path="res://.godot/imported/enemy_1173_duspfr_424.skel-9fa4c37e53a27313fdd4ae41644637ab.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnFlamerazer/enemy_1173_duspfr_424.skel"
+dest_files=["res://.godot/imported/enemy_1173_duspfr_424.skel-9fa4c37e53a27313fdd4ae41644637ab.spskel"]
+
+[params]
+

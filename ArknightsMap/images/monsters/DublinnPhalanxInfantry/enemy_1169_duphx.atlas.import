@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://mhiayufopv4m"
+path="res://.godot/imported/enemy_1169_duphx.atlas-b8dd41842217e7c8cb7f695c37385005.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnPhalanxInfantry/enemy_1169_duphx.atlas"
+dest_files=["res://.godot/imported/enemy_1169_duphx.atlas-b8dd41842217e7c8cb7f695c37385005.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

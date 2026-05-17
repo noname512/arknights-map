@@ -1,31 +1,33 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://c8jn14eccm1pt"]
 
 [ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_v77x8"]
-[ext_resource type="SpineSkeletonDataResource" uid="uid://0ula7pkxcmp0" path="res://ArknightsMap/images/monsters/DublinnFlameChaserSoldier/DublinnFlameChaserSoldier.tres" id="dfcs"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bpjfkdrcl12iu" path="res://ArknightsMap/images/monsters/CabbageSeedling/CabbageSeedling.tres" id="cs"]
 
-[node name="DublinnFlamechaserSoldier" type="Node2D"]
+[node name="CabbageSeedling" type="Node2D"]
 script = ExtResource("1_v77x8")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="Visuals" type="SpineSprite" parent="."]
-skeleton_data_res = ExtResource("dfcs")
+skeleton_data_res = ExtResource("cs")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
 unique_name_in_owner = true
-position = Vector2(0, 0)
 scale = Vector2(-0.5, 0.5)
 
 [node name="Bounds" type="Control" parent="."]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
-offset_left = -80.0
-offset_top = -180.0
-offset_right = 80.0
+offset_left = -37.0
+offset_top = -104.0
+offset_right = 91.0
 
 [node name="IntentPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -230)
+position = Vector2(10, -150)
 
 [node name="CenterPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, 0)

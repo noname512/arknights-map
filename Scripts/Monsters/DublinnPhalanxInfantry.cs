@@ -1,4 +1,3 @@
-using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
@@ -7,27 +6,31 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
+using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 using ArknightsMap.Scripts.Powers;
+using MegaCrit.Sts2.Core.MonsterMoves;
 
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class DublinnFlamechaserSoldier : ModMonsterTemplate
+public class DublinnPhalanxInfantry : ModMonsterTemplate
 {
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 35, 30);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 35, 30);
-    private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 9, 8);
-    private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 8, 7);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 32, 28);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 32, 28);
+    private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 8, 7);
+    private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 7, 6);
+    private int Damage3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 4, 3);
+    private int Block3 => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 3, 3);
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: "res://ArknightsMap/scenes/monsters/DublinnFlamechaserSoldier.tscn"
+        VisualsScenePath: "res://ArknightsMap/scenes/monsters/DublinnPhalanxInfantry.tscn"
     );
 
     public override async Task AfterAddedToRoom()
     {
-        await PowerCmd.Apply<ChaseFlamePower>(new ThrowingPlayerChoiceContext(), Creature, 5m, Creature, null);
+        await PowerCmd.Apply<PhalanxPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -52,22 +55,29 @@ public class DublinnFlamechaserSoldier : ModMonsterTemplate
         );
         MoveState attack3 = new MoveState(
             "ATTACK3",
-            async targets => await DamageCmd
-                .Attack(Damage1)
-                .FromMonster(this)
-                .Execute(null),
-            new SingleAttackIntent(Damage1)
+            async targets =>
+            {
+                await DamageCmd.Attack(Damage3).FromMonster(this).Execute(null);
+                await CreatureCmd.GainBlock(base.Creature, Block3, ValueProp.Move, null);
+            },
+            new SingleAttackIntent(Damage3),
+            new DefendIntent()
         );
 
-        attack1.FollowUpState = attack2;
-        attack2.FollowUpState = attack3;
-        attack3.FollowUpState = attack1;
+        RandomBranchState randomBranchState = new RandomBranchState("RAND");
+        randomBranchState.AddBranch(attack1, MoveRepeatType.CannotRepeat);
+        randomBranchState.AddBranch(attack2, MoveRepeatType.CannotRepeat);
+        randomBranchState.AddBranch(attack3, MoveRepeatType.CannotRepeat);
+        attack1.FollowUpState = randomBranchState;
+        attack2.FollowUpState = randomBranchState;
+        attack3.FollowUpState = randomBranchState;
 
         list.Add(attack1);
         list.Add(attack2);
         list.Add(attack3);
+        list.Add(randomBranchState);
 
-        return new MonsterMoveStateMachine(list, attack1);
+        return new MonsterMoveStateMachine(list, randomBranchState);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
@@ -75,21 +85,10 @@ public class DublinnFlamechaserSoldier : ModMonsterTemplate
         AnimState idleState = new AnimState("Idle", isLooping: true);
         AnimState attackState = new AnimState("Attack");
         AnimState dieState = new AnimState("Die");
-        AnimState startState = new AnimState("Start");
-        AnimState idleState2 = new AnimState("Idle_2", isLooping: true);
-        AnimState dieState2 = new AnimState("Die_2");
-        AnimState preReviveState = new AnimState("Die_2");
-        AnimState reviveState = new AnimState("Revive");
         attackState.NextState = idleState;
-        dieState.NextState = startState;
-        startState.NextState = idleState2;
-        preReviveState.NextState = reviveState;
-        reviveState.NextState = idleState;
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
-        creatureAnimator.AddAnyState("Revive", dieState);
-        creatureAnimator.AddAnyState("Revive2", preReviveState);
-        creatureAnimator.AddAnyState("Dead", dieState2);
         creatureAnimator.AddAnyState("Attack", attackState);
+        creatureAnimator.AddAnyState("Dead", dieState);
         return creatureAnimator;
     }
 }
