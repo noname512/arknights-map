@@ -7,7 +7,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Encounters;
 
-[RegisterActEncounter(typeof(Glory))]
+[RegisterActEncounter(typeof(Hive))]
 public class BurnTheHaystacks : ModEncounterTemplate
 {
     // 所有可能出现的怪物

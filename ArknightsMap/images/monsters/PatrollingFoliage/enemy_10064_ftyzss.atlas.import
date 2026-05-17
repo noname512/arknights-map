@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://bkf7ggej7o5vg"
+path="res://.godot/imported/enemy_10064_ftyzss.atlas-d0a01102b849dfd5c0bae12383debe46.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/PatrollingFoliage/enemy_10064_ftyzss.atlas"
+dest_files=["res://.godot/imported/enemy_10064_ftyzss.atlas-d0a01102b849dfd5c0bae12383debe46.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

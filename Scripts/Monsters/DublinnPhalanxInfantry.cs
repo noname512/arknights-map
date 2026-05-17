@@ -64,29 +64,17 @@ public class DublinnPhalanxInfantry : ModMonsterTemplate
             new DefendIntent()
         );
 
-        RandomBranchState randomBranchState1 = new RandomBranchState("RAND1");
-        randomBranchState1.AddBranch(attack2, MoveRepeatType.CanRepeatForever);
-        randomBranchState1.AddBranch(attack3, MoveRepeatType.CanRepeatForever);
-        RandomBranchState randomBranchState2 = new RandomBranchState("RAND2");
-        randomBranchState2.AddBranch(attack1, MoveRepeatType.CanRepeatForever);
-        randomBranchState2.AddBranch(attack3, MoveRepeatType.CanRepeatForever);
-        RandomBranchState randomBranchState3 = new RandomBranchState("RAND3");
-        randomBranchState3.AddBranch(attack1, MoveRepeatType.CanRepeatForever);
-        randomBranchState3.AddBranch(attack2, MoveRepeatType.CanRepeatForever);
-        attack1.FollowUpState = randomBranchState1;
-        attack2.FollowUpState = randomBranchState2;
-        attack3.FollowUpState = randomBranchState3;
         RandomBranchState randomBranchState = new RandomBranchState("RAND");
-        randomBranchState.AddBranch(attack1, MoveRepeatType.CanRepeatForever);
-        randomBranchState.AddBranch(attack2, MoveRepeatType.CanRepeatForever);
-        randomBranchState.AddBranch(attack3, MoveRepeatType.CanRepeatForever);
+        randomBranchState.AddBranch(attack1, MoveRepeatType.CannotRepeat);
+        randomBranchState.AddBranch(attack2, MoveRepeatType.CannotRepeat);
+        randomBranchState.AddBranch(attack3, MoveRepeatType.CannotRepeat);
+        attack1.FollowUpState = randomBranchState;
+        attack2.FollowUpState = randomBranchState;
+        attack3.FollowUpState = randomBranchState;
 
         list.Add(attack1);
         list.Add(attack2);
         list.Add(attack3);
-        list.Add(randomBranchState1);
-        list.Add(randomBranchState2);
-        list.Add(randomBranchState3);
         list.Add(randomBranchState);
 
         return new MonsterMoveStateMachine(list, randomBranchState);

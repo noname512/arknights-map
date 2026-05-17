@@ -1,7 +1,7 @@
 [gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://dc8iul8fsolc3"]
 
-[ext_resource type="SpineAtlasResource" uid="uid://atlas_ref" path="res://ArknightsMap/images/monsters/DublinnPhalanxInfantry/enemy_1169_duphx.atlas" id="1_atlas"]
-[ext_resource type="SpineSkeletonFileResource" uid="uid://skel_ref" path="res://ArknightsMap/images/monsters/DublinnPhalanxInfantry/enemy_1169_duphx_424.skel" id="2_skel"]
+[ext_resource type="SpineAtlasResource" uid="uid://mhiayufopv4m" path="res://ArknightsMap/images/monsters/DublinnPhalanxInfantry/enemy_1169_duphx.atlas" id="1_atlas"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://c8642fvvlgpc8" path="res://ArknightsMap/images/monsters/DublinnPhalanxInfantry/enemy_1169_duphx_424.skel" id="2_skel"]
 
 [resource]
 atlas_res = ExtResource("1_atlas")

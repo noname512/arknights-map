@@ -4,7 +4,7 @@
     "ARKNIGHTS_MAP_POWER_CHASE_FLAME_RES.description": "若这个怪物在[blue]3[/blue]回合内未被击倒，则减少[gold]生命上限[/gold]并复活为初始形态。",
     "ARKNIGHTS_MAP_POWER_CHASE_FLAME_RES.smartDescription": "若[gold]{OwnerName}[/gold]在[blue]3[/blue]回合内未被击倒，则减少[blue]1[/blue]点[gold]生命上限[/gold]并复活为初始形态。（剩余[blue]{Amount}[/blue]回合）",
     "ARKNIGHTS_MAP_POWER_CHASE_FLAME_POWER.title": "逐火",
-    "ARKNIGHTS_MAP_POWER_FLAMING_DAMAGE_POWER.description": "当灼燃损伤累计到[blue]20[/blue]点，其拥有者将在回合结束时受到[blue]8[/blue]点伤害，并获得一层[gold]易伤[/gold]。",
+    "ARKNIGHTS_MAP_POWER_FLAMING_DAMAGE_POWER.description": "若累计到[blue]20[/blue]点，其拥有者将在回合结束时受到[blue]8[/blue]点伤害，并获得一层[gold]易伤[/gold]。",
     "ARKNIGHTS_MAP_POWER_FLAMING_DAMAGE_POWER.smartDescription": "当前有[blue]{Amount}[/blue]点。若累计到[blue]{Bound}[/blue]点，在{OnPlayer:敌人|玩家}的回合结束时，{OwnerName}将受到[blue]{ExtraDamage}[/blue]点伤害，并获得一层[gold]易伤[/gold]。",
     "ARKNIGHTS_MAP_POWER_FLAMING_DAMAGE_POWER.title": "灼燃损伤",
     "ARKNIGHTS_MAP_POWER_DEAL_FLAMING_DAMAGE_POWER.description": "这个敌人造成的[gold]攻击[/gold]伤害均附带[gold]灼燃损伤[/gold]。",
@@ -12,5 +12,11 @@
     "ARKNIGHTS_MAP_POWER_DEAL_FLAMING_DAMAGE_POWER.title": "造成灼燃损伤",
     "ARKNIGHTS_MAP_POWER_PHALANX_POWER.description": "场上每有一个[gold]深池方阵战士[/gold]，这个怪物每次受到伤害时降低[blue]2[/blue]点。",
     "ARKNIGHTS_MAP_POWER_PHALANX_POWER.smartDescription": "场上每有一个同名敌人，[gold]{OwnerName}[/gold]每次受到伤害时降低[blue]2[/blue]点。（当前为[blue]{Amount}[/blue]点）",
-    "ARKNIGHTS_MAP_POWER_PHALANX_POWER.title": "方阵"
+    "ARKNIGHTS_MAP_POWER_PHALANX_POWER.title": "方阵",
+    "ARKNIGHTS_MAP_POWER_CAUGHT_OUT_POWER.description": "这个生物“靠近”时会现出原形。",
+    "ARKNIGHTS_MAP_POWER_CAUGHT_OUT_POWER.smartDescription": "这个生物“靠近”时会现出原形。",
+    "ARKNIGHTS_MAP_POWER_CAUGHT_OUT_POWER.title": "现形",
+    "ARKNIGHTS_MAP_POWER_BURNING_POWER.description": "这个敌人攻击时会附加等量的[gold]灼燃损伤[/gold]，死亡时对你造成[blue]15[/blue]点伤害。",
+    "ARKNIGHTS_MAP_POWER_BURNING_POWER.smartDescription": "[gold]{OwnerName}[/gold]攻击时会附加等量的[gold]灼燃损伤[/gold]，死亡时对{OnPlayer:敌人|玩家}造成[blue]{Amount}[/blue]点伤害。",
+    "ARKNIGHTS_MAP_POWER_BURNING_POWER.title": "燃烧"
 }

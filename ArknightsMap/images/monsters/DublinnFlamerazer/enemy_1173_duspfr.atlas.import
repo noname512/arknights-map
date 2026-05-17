@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://bwjrr74iyolk5"
+path="res://.godot/imported/enemy_1173_duspfr.atlas-407ba32f31f20f6d68e501f9c0f8d9d4.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnFlamerazer/enemy_1173_duspfr.atlas"
+dest_files=["res://.godot/imported/enemy_1173_duspfr.atlas-407ba32f31f20f6d68e501f9c0f8d9d4.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

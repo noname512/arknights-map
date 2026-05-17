@@ -15,8 +15,6 @@ public class PhalanxPower : ModPowerTemplate
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override bool ShouldScaleInMultiplayer => false;
-
     // 自定义图标路径。1:1即可。原版游戏大图256x256，小图64x64。
     public override PowerAssetProfile AssetProfile => new(
         IconPath: "res://Test/images/powers/test_power.png",

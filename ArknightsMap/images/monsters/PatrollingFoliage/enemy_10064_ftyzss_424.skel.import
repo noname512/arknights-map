@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bhu7us4e6g6r7"
+path="res://.godot/imported/enemy_10064_ftyzss_424.skel-8fbd3885a9336303c39a59ab69cafd09.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/PatrollingFoliage/enemy_10064_ftyzss_424.skel"
+dest_files=["res://.godot/imported/enemy_10064_ftyzss_424.skel-8fbd3885a9336303c39a59ab69cafd09.spskel"]
+
+[params]
+

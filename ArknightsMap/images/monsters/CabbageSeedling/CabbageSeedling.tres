@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://bpjfkdrcl12iu"]
+
+[ext_resource type="SpineAtlasResource" path="res://ArknightsMap/images/monsters/CabbageSeedling/enemy_10065_ftzlc.atlas" id="1_j13qf"]
+[ext_resource type="SpineSkeletonFileResource" path="res://ArknightsMap/images/monsters/CabbageSeedling/enemy_10065_ftzlc_424.skel" id="2_3inp4"]
+
+[resource]
+atlas_res = ExtResource("1_j13qf")
+skeleton_file_res = ExtResource("2_3inp4")

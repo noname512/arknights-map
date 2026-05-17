@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://b67xqyulcab0e"
+path="res://.godot/imported/enemy_10065_ftzlc.atlas-6a0b184f93caf6ad8787267c408f543c.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/CabbageSeedling/enemy_10065_ftzlc.atlas"
+dest_files=["res://.godot/imported/enemy_10065_ftzlc.atlas-6a0b184f93caf6ad8787267c408f543c.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"
