@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -28,7 +29,7 @@ public class DublinnFlamechaserSoldier : ModMonsterTemplate
 
     public override async Task AfterAddedToRoom()
     {
-        await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 5m, Creature, null);
+        await PowerCmd.Apply<ChaseFlamePower>(new ThrowingPlayerChoiceContext(), Creature, 5m, Creature, null);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()

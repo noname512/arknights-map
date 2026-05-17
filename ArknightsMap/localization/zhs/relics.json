@@ -22,5 +22,6 @@
     "ARKNIGHTS_MAP_RELIC_HOPE.flavor": "未来一定会更好。",
     "ARKNIGHTS_MAP_RELIC_BURN_IT_ALL.title": "燃烧殆尽",
     "ARKNIGHTS_MAP_RELIC_BURN_IT_ALL.description": "拾取时，移除你的整个[gold]卡组[/gold]。从[blue]{Cards}[/blue]张卡牌中，选择[blue]{CardsPick}[/blue]张作为你的新[gold]卡组[/gold]。",
-    "ARKNIGHTS_MAP_RELIC_BURN_IT_ALL.flavor": "等到大雨落下，太阳升起，我们既跨越生，亦跨越死。"
+    "ARKNIGHTS_MAP_RELIC_BURN_IT_ALL.flavor": "等到大雨落下，太阳升起，我们既跨越生，亦跨越死。",
+    "ARKNIGHTS_MAP_RELIC_BURN_IT_ALL.choose": "选择20张牌。"
 }

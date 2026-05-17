@@ -70,28 +70,18 @@ public class BurnItAll : ModRelicTemplate
         List<CardCreationResult> cards = [];
         if (hasDirge)
         {
-            foreach (var card in options.GetPossibleCards(player))
-            {
-                if (card.Rarity == CardRarity.Rare)
-                {
-                    cards.Add(new CardCreationResult(card));
-                }
-            }
+            CardCreationOptions rareOptions = CardCreationOptions.ForNonCombatWithUniformOdds([Owner.Character.CardPool], c => c.Rarity == CardRarity.Rare).WithFlags(CardCreationFlags.NoRarityModification);
+            cards.AddRange(CardFactory.CreateForReward(player, rareOptions.GetPossibleCards(player).Count(), rareOptions));
         }
 
         while (cards.Count < DynamicVars.Cards.IntValue)
         {
             cards.AddRange(CardFactory.CreateForReward(player, 1, options));
         }
-
-        if (Hook.TryModifyCardRewardOptions(player.RunState, player, cards, options, out List<AbstractModel> modifiers))
-        {
-            await TaskHelper.RunSafely(Hook.AfterModifyingCardRewardOptions(player.RunState, modifiers));
-        }
         
         // cards.Sort((a,b) => a.Card.Rarity < b.Card.Rarity ? 1 : -1);
         
-        foreach (CardModel item in await CardSelectCmd.FromSimpleGridForRewards(prefs: new CardSelectorPrefs(L10NLookup("ROOM_FULL_OF_CHEESE.pages.GORGE.selectionScreenPrompt"), 20), context: new BlockingPlayerChoiceContext(), cards: cards, player: Owner))
+        foreach (CardModel item in await CardSelectCmd.FromSimpleGridForRewards(prefs: new CardSelectorPrefs(L10NLookup("ARKNIGHTS_MAP_RELIC_BURN_IT_ALL.choose"), DynamicVars["CardsPick"].IntValue), context: new BlockingPlayerChoiceContext(), cards: cards, player: Owner))
         {
             CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(item, PileType.Deck));
         }

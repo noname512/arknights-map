@@ -64,8 +64,8 @@ public class Reed : ModAncientEventTemplate
     }
 
     // 出现条件。这里是只能在第二幕出现（索引为1）
-    // public override bool IsAllowed(IRunState runState)
-    // {
-    //     return runState.CurrentActIndex == 1;
-    // }
+    public override bool IsAllowed(IRunState runState)
+    {
+        return runState.CurrentActIndex == 1;
+    }
 }
