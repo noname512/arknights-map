@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://c8642fvvlgpc8"
+path="res://.godot/imported/enemy_1169_duphx_424.skel-2d5aded10635069f54e5e7e204f0fbec.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnPhalanxInfantry/enemy_1169_duphx_424.skel"
+dest_files=["res://.godot/imported/enemy_1169_duphx_424.skel-2d5aded10635069f54e5e7e204f0fbec.spskel"]
+
+[params]
+

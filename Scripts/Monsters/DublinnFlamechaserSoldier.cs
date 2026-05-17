@@ -2,16 +2,10 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Entities.Ascension;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Logging;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
-using MegaCrit.Sts2.Core.Nodes.Combat;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
-using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 using ArknightsMap.Scripts.Powers;
@@ -77,7 +71,6 @@ public class DublinnFlamechaserSoldier : ModMonsterTemplate
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
     {
-        Log.Info($"override GenerateAnimator success");
         AnimState idleState = new AnimState("Idle", isLooping: true);
         AnimState attackState = new AnimState("Attack");
         AnimState dieState = new AnimState("Die");

@@ -1,4 +1,6 @@
 {
     "ARKNIGHTS_MAP_ENCOUNTER_BURN_THE_HAYSTACKS.title": "引燃草垛",
-    "ARKNIGHTS_MAP_ENCOUNTER_BURN_THE_HAYSTACKS.loss": "{character}被火光吞噬了"
+    "ARKNIGHTS_MAP_ENCOUNTER_BURN_THE_HAYSTACKS.loss": "{character}被火光吞噬了",
+    "ARKNIGHTS_MAP_ENCOUNTER_DUBLINN_PHALANX.title": "深池方阵",
+    "ARKNIGHTS_MAP_ENCOUNTER_DUBLINN_PHALANX.loss": "{character}没能突破敌人的方阵"
 }

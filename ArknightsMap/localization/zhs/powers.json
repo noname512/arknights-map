@@ -9,5 +9,8 @@
     "ARKNIGHTS_MAP_POWER_FLAMING_DAMAGE_POWER.title": "灼燃损伤",
     "ARKNIGHTS_MAP_POWER_DEAL_FLAMING_DAMAGE_POWER.description": "这个敌人造成的[gold]攻击[/gold]伤害均附带[gold]灼燃损伤[/gold]。",
     "ARKNIGHTS_MAP_POWER_DEAL_FLAMING_DAMAGE_POWER.smartDescription": "这个敌人造成的[gold]攻击[/gold]伤害均附带[gold]灼燃损伤[/gold]。",
-    "ARKNIGHTS_MAP_POWER_DEAL_FLAMING_DAMAGE_POWER.title": "造成灼燃损伤"
+    "ARKNIGHTS_MAP_POWER_DEAL_FLAMING_DAMAGE_POWER.title": "造成灼燃损伤",
+    "ARKNIGHTS_MAP_POWER_PHALANX_POWER.description": "场上每有一个[gold]深池方阵战士[/gold]，这个怪物每次受到伤害时降低[blue]2[/blue]点。",
+    "ARKNIGHTS_MAP_POWER_PHALANX_POWER.smartDescription": "场上每有一个同名敌人，[gold]{OwnerName}[/gold]每次受到伤害时降低[blue]2[/blue]点。（当前为[blue]{Amount}[/blue]点）",
+    "ARKNIGHTS_MAP_POWER_PHALANX_POWER.title": "方阵"
 }

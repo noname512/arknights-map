@@ -1,0 +1,13 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://dbltybykg000h"
+valid=false
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnPhalanxInfantry/enemy_1169_duphx.skel"
+
+[params]
+
