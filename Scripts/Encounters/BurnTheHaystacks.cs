@@ -1,13 +1,13 @@
+using ArknightsMap.Scripts.Acts;
 using ArknightsMap.Scripts.Monsters;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Acts;
 using MegaCrit.Sts2.Core.Rooms;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Encounters;
 
-[RegisterActEncounter(typeof(Hive))]
+[RegisterActEncounter(typeof(Wilds))]
 public class BurnTheHaystacks : ModEncounterTemplate
 {
     // 所有可能出现的怪物

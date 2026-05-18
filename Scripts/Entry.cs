@@ -1,4 +1,5 @@
 using System.Reflection;
+using ArknightsMap.Scripts.Acts;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
 using STS2RitsuLib;
@@ -20,5 +21,10 @@ public class Entry
         RitsuLibFramework.EnsureGodotScriptsRegistered(assembly, Logger);
         // 自动注册内容
         ModTypeDiscoveryHub.RegisterModAssembly(ModId, assembly);
+
+        RitsuLibFramework.CreateContentPack(ModId)
+            .ActEnterUniformPool(1)
+            .ActEnterUniformPoolCandidate<Wilds>(1, ctx => true)
+            .Apply();
     }
 }
