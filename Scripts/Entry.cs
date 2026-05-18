@@ -23,8 +23,8 @@ public class Entry
         ModTypeDiscoveryHub.RegisterModAssembly(ModId, assembly);
 
         RitsuLibFramework.CreateContentPack(ModId)
-            .ActEnterUniformPool(1)
-            .ActEnterUniformPoolCandidate<Wilds>(1, ctx => true)
+            .ActEnterWeightedPool(1)
+            .ActEnterWeightedPoolCandidate<Wilds>(1, ctx => true, weight => 99999)
             .Apply();
     }
 }

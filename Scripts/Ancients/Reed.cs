@@ -38,6 +38,7 @@ public class Reed : ModAncientEventTemplate
             CreateModRelicOption<SoulSpark>(),  // 生灵火花
             CreateModRelicOption<LiveFlame>(),  // 活化火苗
             CreateModRelicOption<MarkOfTara>(),  // 塔拉印记
+            CreateModRelicOption<WitherAndThrive>(),  // 枯荣共息
         ];
 
     // 带权重池三。权重越大越有机会生成。当然你也可以写自定义的列表生成函数
