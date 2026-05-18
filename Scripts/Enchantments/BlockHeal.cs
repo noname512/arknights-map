@@ -58,6 +58,6 @@ public class BlockHeal : ModEnchantmentTemplate
     
     public override void RecalculateValues()
     {
-        DynamicVars.Block.BaseValue = Card.DynamicVars.Damage.PreviewValue;
+        DynamicVars.Block.BaseValue = Card.DynamicVars.Damage.PreviewValue / 2;
     }    
 }
