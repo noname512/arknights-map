@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://8324aclwc43j"
+path="res://.godot/imported/enemy_1174_duholy.atlas-69818da16d25f269b29651cea30262fa.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnCompanionGuard/enemy_1174_duholy.atlas"
+dest_files=["res://.godot/imported/enemy_1174_duholy.atlas-69818da16d25f269b29651cea30262fa.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

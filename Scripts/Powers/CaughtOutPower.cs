@@ -37,7 +37,7 @@ public class CaughtOutPower : ModPowerTemplate
     public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
         if (side != base.Owner.Side) return;
-        if (base.Owner.CombatState.RoundNumber >= AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 5))
+        if (Owner.CombatState.RoundNumber >= AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 5))
         {
             await SummonSeed();
         }
@@ -45,22 +45,10 @@ public class CaughtOutPower : ModPowerTemplate
 
     public async Task SummonSeed()
     {
-        GD.Print("[CaughtOutPower] SummonSeed started");
-        try
+        for (int i = 0; i < 3; i++)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                GD.Print($"[CaughtOutPower] Creating seed {i + 1}");
-                await CreatureCmd.Add<CabbageSeedling>(base.CombatState, $"seed{i + 1}");
-                GD.Print($"[CaughtOutPower] Created seed {i + 1}");
-            }
-            GD.Print("[CaughtOutPower] All seeds created, killing owner");
-            if (base.Owner.IsAlive) await CreatureCmd.Kill(base.Owner);
-            GD.Print("[CaughtOutPower] Owner killed");
+            await CreatureCmd.Add<CabbageSeedling>(base.CombatState, $"seed{i + 1}");
         }
-        catch (Exception ex)
-        {
-            GD.PrintErr($"[CaughtOutPower] Error in SummonSeed: {ex}");
-        }
+        if (base.Owner.IsAlive) await CreatureCmd.Kill(base.Owner);
     }
 }

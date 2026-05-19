@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://cm0sc5hs1ahle"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://8324aclwc43j" path="res://ArknightsMap/images/monsters/DublinnCompanionGuard/enemy_1174_duholy.atlas" id="1_pgq1y"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cgi8nkb1ijijw" path="res://ArknightsMap/images/monsters/DublinnCompanionGuard/enemy_1174_duholy_424.skel" id="2_gwrsa"]
+
+[resource]
+atlas_res = ExtResource("1_pgq1y")
+skeleton_file_res = ExtResource("2_gwrsa")
