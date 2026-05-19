@@ -25,6 +25,9 @@
     "ARKNIGHTS_MAP_RELIC_BURN_IT_ALL.flavor": "等到大雨落下，太阳升起，我们既跨越生，亦跨越死。",
     "ARKNIGHTS_MAP_RELIC_BURN_IT_ALL.choose": "选择20张牌。",
     "ARKNIGHTS_MAP_RELIC_WITHER_AND_THRIVE.title": "枯荣共息",
-    "ARKNIGHTS_MAP_RELIC_WITHER_AND_THRIVE.description": "从你的[gold]牌组[/gold]中选择[blue]{Amount}[/blue]张攻击牌。为这些牌[gold]附魔[/gold]：咒愈。",
-    "ARKNIGHTS_MAP_RELIC_WITHER_AND_THRIVE.flavor": "如果我还没有倒下，那么你也不会倒下。"
+    "ARKNIGHTS_MAP_RELIC_WITHER_AND_THRIVE.description": "从你的[gold]牌组[/gold]中选择[blue]{Cards}[/blue]张攻击牌。为这些牌[gold]附魔[/gold]：咒愈。",
+    "ARKNIGHTS_MAP_RELIC_WITHER_AND_THRIVE.flavor": "如果我还没有倒下，那么你也不会倒下。",
+    "ARKNIGHTS_MAP_RELIC_MARK_OF_WITHER.title": "枯萎印记",
+    "ARKNIGHTS_MAP_RELIC_MARK_OF_WITHER.description": "所有的敌人前两回合中，失去[blue]{StrengthPower}[/blue]点[gold]力量[/gold]。",
+    "ARKNIGHTS_MAP_RELIC_MARK_OF_WITHER.flavor": "停下。"
 }
