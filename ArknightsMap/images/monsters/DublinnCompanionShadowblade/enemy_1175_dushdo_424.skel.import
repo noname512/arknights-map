@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://dwhba1ay255k"
+path="res://.godot/imported/enemy_1175_dushdo_424.skel-2f52dd67c0f63fa649c77b5f96dd5713.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnCompanionShadowblade/enemy_1175_dushdo_424.skel"
+dest_files=["res://.godot/imported/enemy_1175_dushdo_424.skel-2f52dd67c0f63fa649c77b5f96dd5713.spskel"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://cgi8nkb1ijijw"
+path="res://.godot/imported/enemy_1174_duholy_424.skel-336aea32796dfc112428ccdf30669012.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnCompanionGuard/enemy_1174_duholy_424.skel"
+dest_files=["res://.godot/imported/enemy_1174_duholy_424.skel-336aea32796dfc112428ccdf30669012.spskel"]
+
+[params]
+

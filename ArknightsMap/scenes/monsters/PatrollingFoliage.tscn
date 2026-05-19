@@ -10,8 +10,8 @@ metadata/_edit_lock_ = true
 
 [node name="Visuals" type="SpineSprite" parent="."]
 skeleton_data_res = ExtResource("df")
-preview_skin = "Default"
-preview_animation = "-- Empty --"
+preview_skin = "default"
+preview_animation = "Idle"
 preview_frame = false
 preview_time = 0.0
 unique_name_in_owner = true

@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://bq55xvhbsfut1"
+path="res://.godot/imported/enemy_1175_dushdo.atlas-3ba6c40cfa108c99af1945bdb7969372.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnCompanionShadowblade/enemy_1175_dushdo.atlas"
+dest_files=["res://.godot/imported/enemy_1175_dushdo.atlas-3ba6c40cfa108c99af1945bdb7969372.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

@@ -59,6 +59,7 @@ public sealed class Wilds : ModActTemplate
         ModelDb.Encounter<BurnTheHaystacks>(),
         ModelDb.Encounter<DublinnPhalanx>(),
         ModelDb.Encounter<PatrollingFoliageNormal>(),
+        ModelDb.Encounter<DublinnCompanion>(),
     };
 
     protected override void ApplyActDiscoveryOrderModifications(UnlockState unlockState) { }
