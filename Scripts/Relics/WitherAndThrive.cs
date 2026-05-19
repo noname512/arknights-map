@@ -53,14 +53,12 @@ public class WitherAndThrive : ModRelicTemplate
 
     public override async Task AfterObtained()
     {
-        foreach (CardModel item in await CardSelectCmd.FromDeckForEnchantment(prefs: new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, base.DynamicVars.Cards.IntValue), player: base.Owner, enchantment: ModelDb.Enchantment<BlockHeal>(), amount: 1))
+        CardSelectorPrefs prefs = new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, base.DynamicVars.Cards.IntValue);
+        BlockHeal enchantment = ModelDb.Enchantment<BlockHeal>();
+        foreach (CardModel item in await CardSelectCmd.FromDeckForEnchantment(base.Owner, enchantment, 1, prefs))
         {
-            CardCmd.Enchant<BlockHeal>(item, 1m);
-            NCardEnchantVfx nCardEnchantVfx = NCardEnchantVfx.Create(item);
-            if (nCardEnchantVfx != null)
-            {
-                NRun.Instance?.GlobalUi.CardPreviewContainer.AddChildSafely(nCardEnchantVfx);
-            }
+            CardCmd.Enchant(enchantment.ToMutable(), item, 1m);
+            CardCmd.Preview(item);
         }
-    }   
+    }
 }

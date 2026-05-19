@@ -55,9 +55,10 @@ public class BlockHeal : ModEnchantmentTemplate
             await CreatureCmd.GainBlock(Card.Owner.Creature, var, null);
         }
     }
-    
+
     public override void RecalculateValues()
     {
+        if (Card == null) return;
         DynamicVars.Block.BaseValue = Card.DynamicVars.Damage.PreviewValue / 2;
     }
 }
