@@ -33,6 +33,7 @@ public class Reed : ModAncientEventTemplate
     private IReadOnlyList<EventOption> Pool1 => [
             CreateModRelicOption<BurnScar>(),   // 灼痕
             CreateModRelicOption<Hope>(),       // 希望
+            CreateModRelicOption<MarkOfWither>(), // 枯萎印记
         ];
     private IReadOnlyList<EventOption> Pool2 => [
             CreateModRelicOption<SoulSpark>(),  // 生灵火花
@@ -47,6 +48,7 @@ public class Reed : ModAncientEventTemplate
         { CreateModRelicOption<AidOfLeader>(), 1 }, // “领袖”的援助
         { CreateModRelicOption<Kindling>(), 1 }, // 火种
         { CreateModRelicOption<BurnItAll>(), 1 }, // 燃烧殆尽
+        { CreateModRelicOption<WildfireSpread>(), 1 }, // 燃烧殆尽
     };
 
     // 所有可能的选项

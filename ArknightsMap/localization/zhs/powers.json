@@ -20,6 +20,6 @@
     "ARKNIGHTS_MAP_POWER_BURNING_POWER.smartDescription": "[gold]{OwnerName}[/gold]攻击时会附加等量的[gold]灼燃损伤[/gold]，死亡时对{OnPlayer:敌人|玩家}造成[blue]{Amount}[/blue]点伤害。",
     "ARKNIGHTS_MAP_POWER_BURNING_POWER.title": "燃烧",
     "ARKNIGHTS_MAP_POWER_WITHER_POWER.description": "这个敌人在前两回合的力量减少。",
-    "ARKNIGHTS_MAP_POWER_WITHER_POWER.smartDescription": "这个敌人在前两回合的力量减少{Amount}点。",
+    "ARKNIGHTS_MAP_POWER_WITHER_POWER.smartDescription": "这个敌人在前两回合的力量减少[blue]{Amount}[/blue]点。",
     "ARKNIGHTS_MAP_POWER_WITHER_POWER.title": "枯萎"
 }
