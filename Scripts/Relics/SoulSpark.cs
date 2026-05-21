@@ -23,7 +23,17 @@ public class SoulSpark : ModRelicTemplate
 {
 	public override RelicRarity Rarity => RelicRarity.Ancient;
 
-	protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(20m, ValueProp.Unpowered)];
+	protected override IEnumerable<DynamicVar> CanonicalVars => [
+		new DamageVar(20m, ValueProp.Unpowered),
+		/*
+		new DynamicVar("Percent", 
+			Owner == null? 50 :
+			Owner.RunState.Players.Count == 1? 50 :
+			Owner.RunState.Players.Count == 2? 40 :
+			Owner.RunState.Players.Count == 3? 35 :
+			120 / Owner.RunState.Players.Count
+			) */
+	];
 
 	public override RelicAssetProfile AssetProfile => new(
 		// 小图标（原版85x85）
@@ -51,7 +61,7 @@ public class SoulSpark : ModRelicTemplate
 				{
 					foreach (Creature hittableEnemy in combatState.HittableEnemies)
 					{
-						await CreatureCmd.Damage(choiceContext, hittableEnemy, new DamageVar(hittableEnemy.CurrentHp / 2, ValueProp.Unpowered), base.Owner.Creature);
+						await CreatureCmd.Damage(choiceContext, hittableEnemy, new DamageVar((int)Math.Ceiling((double)hittableEnemy.CurrentHp * /*DynamicVars["Percent"].IntValue*/ 50 / 100), ValueProp.Unpowered), base.Owner.Creature);
 					}
 				}
 			}

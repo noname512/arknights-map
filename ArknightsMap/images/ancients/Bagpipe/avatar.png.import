@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxl0yqxr33nw6"
-path="res://.godot/imported/background.png-50c05e3fcecad83b4ca6686526a3b946.ctex"
+uid="uid://d0ol5ge2prq5i"
+path="res://.godot/imported/avatar.png-bb943236cb68f129ebe71f0e99115f8f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/ancients/Bagepipe/background.png"
-dest_files=["res://.godot/imported/background.png-50c05e3fcecad83b4ca6686526a3b946.ctex"]
+source_file="res://ArknightsMap/images/ancients/Bagpipe/avatar.png"
+dest_files=["res://.godot/imported/avatar.png-bb943236cb68f129ebe71f0e99115f8f.ctex"]
 
 [params]
 
