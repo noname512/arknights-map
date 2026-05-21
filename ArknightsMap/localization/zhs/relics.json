@@ -37,5 +37,11 @@
     "以下是风笛遗物": "拿来当分隔符用的，好像不能空行来着。",
     "ARKNIGHTS_MAP_RELIC_HIGH_IMPACT_ASSAULT.title": "高效冲击",
     "ARKNIGHTS_MAP_RELIC_HIGH_IMPACT_ASSAULT.description": "拾取时，随机为[blue]{Cards}[/blue]张牌[gold]附魔[/gold]：[purple]涡旋[/purple]。",
-    "ARKNIGHTS_MAP_RELIC_HIGH_IMPACT_ASSAULT.flavor": "求求了，不要给打防上！"
+    "ARKNIGHTS_MAP_RELIC_HIGH_IMPACT_ASSAULT.flavor": "求求了，不要给打防上！",
+    "ARKNIGHTS_MAP_RELIC_THE_SPEAR.title": "破城矛",
+    "ARKNIGHTS_MAP_RELIC_THE_SPEAR.description": "拾取时，为你所有的攻击牌[gold]附魔[/gold]：[purple]锋利[/purple][blue]{Sharp}[/blue]。",
+    "ARKNIGHTS_MAP_RELIC_THE_SPEAR.flavor": "我和我的破城矛，来自维多利亚！",
+    "ARKNIGHTS_MAP_RELIC_LOCKED_BREECH_BURST.title": "闭膛连发",
+    "ARKNIGHTS_MAP_RELIC_LOCKED_BREECH_BURST.description": "将一张[gold]过载打击[/gold]加入你的卡组。",
+    "ARKNIGHTS_MAP_RELIC_LOCKED_BREECH_BURST.flavor": "37/40。"
 }

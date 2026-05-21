@@ -29,13 +29,13 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
-public class HighImpactAssault : ModRelicTemplate
+public class TheSpear : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("Sharp", 4)];
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromEnchantment<SpiralSpecial>();
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromEnchantment<Sharp>();
 
     public override RelicAssetProfile AssetProfile => new(
         // 小图标（原版85x85）
@@ -49,11 +49,10 @@ public class HighImpactAssault : ModRelicTemplate
     public override Task AfterObtained()
     {
         IEnumerable<CardModel> enumerable = PileType.Deck.GetPile(Owner).Cards.Where(
-                c => ModelDb.Enchantment<SpiralSpecial>().CanEnchant(c)).ToList().StableShuffle(Owner.RunState.Rng.Niche)
-            .Take(DynamicVars.Cards.IntValue);
+                c => ModelDb.Enchantment<Sharp>().CanEnchant(c)).ToList();
         foreach (CardModel item in enumerable)
         {
-            CardCmd.Enchant<SpiralSpecial>(item, 1m);
+            CardCmd.Enchant<Sharp>(item, DynamicVars["Sharp"].IntValue);
             NCardEnchantVfx nCardEnchantVfx = NCardEnchantVfx.Create(item);
             if (nCardEnchantVfx != null)
             {

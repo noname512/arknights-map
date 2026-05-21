@@ -33,8 +33,8 @@ public class Bagpipe : ModAncientEventTemplate
     // 所有可能的选项
     public override IEnumerable<EventOption> AllPossibleOptions => [
         RelicOption<HighImpactAssault>(),       //高效冲击
-        RelicOption<BurnScar>(),
-        RelicOption<BurnScar>(),
+        RelicOption<TheSpear>(),                //破城矛
+        RelicOption<LockedBreechBurst>(),       //闭膛连发
     ];
 
     // 生成选项

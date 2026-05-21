@@ -47,6 +47,7 @@ public sealed class Wilds : ModActTemplate
     public override IEnumerable<AncientEventModel> AllAncients => new AncientEventModel[]
     {
         ModelDb.AncientEvent<Reed>(),
+        ModelDb.AncientEvent<Bagpipe>(),
     };
 
     public override IEnumerable<EncounterModel> BossDiscoveryOrder => new EncounterModel[]

@@ -23,10 +23,11 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
-public class Kindling : ModRelicTemplate
+public class LockedBreechBurst : ModRelicTemplate
 {
 	public override RelicRarity Rarity => RelicRarity.Ancient;
-	protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromCard<SeedOfHope>()];
+	
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromCard<OverloadStrike>()];
 	
 	public override RelicAssetProfile AssetProfile => new(
 		// 小图标（原版85x85）
@@ -40,7 +41,7 @@ public class Kindling : ModRelicTemplate
 	public override async Task AfterObtained()
 	{
 		List<CardPileAddResult> results = new List<CardPileAddResult>();
-		CardModel card = Owner.RunState.CreateCard<SeedOfHope>(Owner);
+		CardModel card = Owner.RunState.CreateCard<OverloadStrike>(Owner);
 		results.Add(await CardPileCmd.Add(card, PileType.Deck));
 		CardCmd.PreviewCardPileAdd(results, 1f);
 	}
