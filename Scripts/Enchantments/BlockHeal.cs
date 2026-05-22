@@ -1,4 +1,5 @@
 ﻿using ArknightsMap.Scripts.Powers;
+using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -11,6 +12,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -26,12 +28,7 @@ public class BlockHeal : ModEnchantmentTemplate
     public override bool HasExtraCardText => true;
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(0, ValueProp.Move)
-        /*
-        new CalculationBaseVar(0),
-        new CalculationExtraVar(1),
-        new CalculatedBlockVar(ValueProp.Move).WithMultiplier((Func<CardModel, Creature, Decimal>) ((card, _) => card.DynamicVars.Damage.PreviewValue))
-        */
+        new BlockHealDynamicVar(0, ValueProp.Move),
     ];
 
     // 像卡牌、遗物、药水等一样，可以使用DynamicVars和ExtraHoverTips
@@ -56,7 +53,7 @@ public class BlockHeal : ModEnchantmentTemplate
         }
     }
 
-    public override void RecalculateValues()
+    /*public override void RecalculateValues()
     {
         if (!HasCard)
         {
@@ -64,5 +61,5 @@ public class BlockHeal : ModEnchantmentTemplate
             return;
         }
         DynamicVars.Block.BaseValue = Card.DynamicVars.Damage.PreviewValue / 2;
-    }
+    }*/
 }
