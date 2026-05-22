@@ -35,6 +35,9 @@ public class Bagpipe : ModAncientEventTemplate
         RelicOption<HighImpactAssault>(),       //高效冲击
         RelicOption<TheSpear>(),                //破城矛
         RelicOption<LockedBreechBurst>(),       //闭膛连发
+        RelicOption<LandenBeer>(),              //兰登佳酿
+        RelicOption<PreciseReloading>(),        //精密填弹
+        
     ];
 
     // 生成选项
