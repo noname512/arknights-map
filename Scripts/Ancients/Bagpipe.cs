@@ -3,6 +3,7 @@ using ArknightsMap.Scripts.Relics;
 using Godot;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Extensions;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Runs;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -37,7 +38,7 @@ public class Bagpipe : ModAncientEventTemplate
         RelicOption<LockedBreechBurst>(),       //闭膛连发
         RelicOption<LandenBeer>(),              //兰登佳酿
         RelicOption<PreciseReloading>(),        //精密填弹
-        
+        RelicOption<EjectionBullet>(),          //弹射弹药
     ];
 
     // 生成选项

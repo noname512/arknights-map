@@ -4,7 +4,7 @@
   "ARKNIGHTS_MAP_ENCHANTMENT_FLAMING.description": "这张牌的攻击伤害翻倍。且命中时，会附加等量的[gold]灼燃损伤[/gold]。",
   "ARKNIGHTS_MAP_ENCHANTMENT_BLOCK_HEAL.title": "咒愈",
   "ARKNIGHTS_MAP_ENCHANTMENT_BLOCK_HEAL.extraCardText": "这张牌每次命中时，会获得{BlockHeal:diff()}点格挡。",
-  "ARKNIGHTS_MAP_ENCHANTMENT_BLOCK_HEAL.description": "这张牌每次命中时，会获得伤害数值一半的数量的[gold]格挡[/gold]。[red]（卡面数据仅供参考，可能有bug，以描述为准）[/red]",
+  "ARKNIGHTS_MAP_ENCHANTMENT_BLOCK_HEAL.description": "这张牌每次命中时，会获得伤害数值一半的数量的[gold]格挡[/gold]。",
   "ARKNIGHTS_MAP_ENCHANTMENT_SPIRAL_SPECIAL.title": "涡旋",
   "ARKNIGHTS_MAP_ENCHANTMENT_SPIRAL_SPECIAL.extraCardText": "",
   "ARKNIGHTS_MAP_ENCHANTMENT_SPIRAL_SPECIAL.description": "这张牌获得[gold]重放[/gold][blue]{Times}[/blue]"
