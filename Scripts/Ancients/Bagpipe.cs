@@ -39,6 +39,7 @@ public class Bagpipe : ModAncientEventTemplate
         RelicOption<LandenBeer>(),              //兰登佳酿
         RelicOption<PreciseReloading>(),        //精密填弹
         RelicOption<EjectionBullet>(),          //弹射弹药
+        RelicOption<Haystack>(),                //干草垛
     ];
 
     // 生成选项

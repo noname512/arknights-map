@@ -19,18 +19,17 @@ using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Characters;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
-public class EjectionBullet : ModRelicTemplate
+public class Haystack : ModRelicTemplate
 {
 	public override RelicRarity Rarity => RelicRarity.Ancient;
 
-	protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(4, ValueProp.Unpowered)];
-
-	protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromKeyword(CardKeyword.Exhaust), HoverTipFactory.Static(StaticHoverTip.Block)];
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.Static(StaticHoverTip.Energy), HoverTipFactory.Static(StaticHoverTip.Block)];
 
 	public override RelicAssetProfile AssetProfile => new(
 		// 小图标（原版85x85）
@@ -41,17 +40,12 @@ public class EjectionBullet : ModRelicTemplate
 		BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
 	);
 
-	public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+	public override async Task AfterSideTurnEndLate(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 	{
-		if (participants.Contains(Owner.Creature) && !PileType.Hand.GetPile(Owner).IsEmpty)
+		if (participants.Contains(Owner.Creature) && Owner.GetEnergy() > 0)
 		{
 			Flash();
-			List<CardModel> list = PileType.Hand.GetPile(base.Owner).Cards.ToList();
-			foreach (CardModel item in list)
-			{
-				await CardCmd.Exhaust(choiceContext, item);
-				await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, null);
-			}
+			await CreatureCmd.GainBlock(Owner.Creature, new BlockVar(Owner.Creature.Block, ValueProp.Unpowered), null);
 		}
 	}
 	
