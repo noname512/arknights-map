@@ -4,8 +4,14 @@ using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
 using STS2RitsuLib;
 using STS2RitsuLib.Interop;
+using STS2RitsuLib.Utils.Persistence;
 
 namespace ArknightsMap.Scripts;
+
+public sealed class WheatBeerCounter
+{
+    public int Value { get; set; }
+}
 
 [ModInitializer(nameof(Init))]
 public class Entry
@@ -26,5 +32,28 @@ public class Entry
             .ActEnterWeightedPool(1)
             .ActEnterWeightedPoolCandidate<Wilds>(1, ctx => true, weight => 99999)
             .Apply();
+        
+        
+        using (RitsuLibFramework.BeginModDataRegistration(ModId))
+        {
+            var store = RitsuLibFramework.GetDataStore(ModId);
+
+            store.Register<WheatBeerCounter>(
+                key: "wheatbeercounter",
+                fileName: "wheatbeercounter.json",
+                scope: SaveScope.Profile,
+                defaultFactory: () => new WheatBeerCounter(),
+                autoCreateIfMissing: true);
+        }
+        
+        /*
+        RitsuLibFramework.SubscribeLifecycle<ProfileDataReadyEvent>(_ =>
+        {
+            var store = RitsuLibFramework.GetDataStore(ModId);
+            store.Modify<WheatBeerCounter>("wheatbeercounter", data => data.Value += 1);
+            store.Save("wheatbeercounter");
+            Logger.Info($"counter.Value = {store.Get<WheatBeerCounter>("wheatbeercounter").Value}");
+        });*/
+        
     }
 }

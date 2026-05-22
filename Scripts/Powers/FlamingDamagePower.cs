@@ -33,7 +33,7 @@ public class FlamingDamagePower : ModPowerTemplate, IHealthBarForecastSource
         BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png"
     );
 
-    public override async Task AfterTurnEndLate(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterSideTurnEndLate(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if ((Amount >= DynamicVars["Bound"].IntValue) && (side != Owner.Side))
         {

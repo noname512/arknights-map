@@ -21,5 +21,8 @@
     "ARKNIGHTS_MAP_POWER_BURNING_POWER.title": "燃烧",
     "ARKNIGHTS_MAP_POWER_WITHER_POWER.description": "这个敌人在前两回合的力量减少。",
     "ARKNIGHTS_MAP_POWER_WITHER_POWER.smartDescription": "这个敌人在前两回合的力量减少[blue]{Amount}[/blue]点。",
-    "ARKNIGHTS_MAP_POWER_WITHER_POWER.title": "枯萎"
+    "ARKNIGHTS_MAP_POWER_WITHER_POWER.title": "枯萎",
+    "ARKNIGHTS_MAP_POWER_WHEAT_BEER_POWER.description": "当你受到大于[blue]0[/blue]点的伤害时，恢复这么多生命值。",
+    "ARKNIGHTS_MAP_POWER_WHEAT_BEER_POWER.smartDescription": "当你受到大于[blue]0[/blue]点的伤害时，恢复{Amount}点生命值。",
+    "ARKNIGHTS_MAP_POWER_WHEAT_BEER_POWER.title": "小麦酒"
 }

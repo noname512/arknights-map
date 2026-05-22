@@ -36,8 +36,7 @@ public class WitherPower : ModPowerTemplate
         _isFirstTurn = true;
         await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), target, -amount, applier, cardSource, true);
     }
-    
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         WitherPower power = this;
         if (side != power.Owner.Side)
