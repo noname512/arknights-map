@@ -1,0 +1,13 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://duqc8a24o0ppk"
+valid=false
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Mandragora/enemy_1523_mandra.skel"
+
+[params]
+

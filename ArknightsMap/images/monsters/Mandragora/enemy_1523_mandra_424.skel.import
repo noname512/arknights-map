@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://deu6x44v6egj2"
+path="res://.godot/imported/enemy_1523_mandra_424.skel-9913ca3787e6ae903bf221aa63d83a0c.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Mandragora/enemy_1523_mandra_424.skel"
+dest_files=["res://.godot/imported/enemy_1523_mandra_424.skel-9913ca3787e6ae903bf221aa63d83a0c.spskel"]
+
+[params]
+

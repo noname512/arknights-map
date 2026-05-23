@@ -1,5 +1,5 @@
 {
-    "ARKNIGHTS_MAP_POWER_CHASE_FLAME_POWER.description": "当这个怪物将要被击败时，变为一个较低生命值的且拥有[gold]无实体[/gold]的[gold]余烬[/gold]。若[gold]余烬[/gold]在[blue]3[/blue]回合内未被击倒，则减少[gold]生命上限[/gold]并复活。",
+    "ARKNIGHTS_MAP_POWER_CHASE_FLAME_POWER.description": "当这个敌人将要被击败时，变为一个较低生命值的且拥有[gold]无实体[/gold]的[gold]余烬[/gold]。若[gold]余烬[/gold]在[blue]3[/blue]回合内未被击倒，则减少[gold]生命上限[/gold]并复活。",
     "ARKNIGHTS_MAP_POWER_CHASE_FLAME_POWER.smartDescription": "当[gold]{OwnerName}[/gold]将要被击败时，变为一个[blue]{Amount}[/blue]点生命值的且拥有[gold]无实体[/gold]的[gold]余烬[/gold]。若[gold]余烬[/gold]在[blue]3[/blue]回合内未被击倒，则减少[blue]1[/blue]点[gold]生命上限[/gold]并复活。",
     "ARKNIGHTS_MAP_POWER_CHASE_FLAME_RES.description": "若这个怪物在[blue]3[/blue]回合内未被击倒，则减少[gold]生命上限[/gold]并复活为初始形态。",
     "ARKNIGHTS_MAP_POWER_CHASE_FLAME_RES.smartDescription": "若[gold]{OwnerName}[/gold]在[blue]3[/blue]回合内未被击倒，则减少[blue]1[/blue]点[gold]生命上限[/gold]并复活为初始形态。（剩余[blue]{Amount}[/blue]回合）",
@@ -22,7 +22,16 @@
     "ARKNIGHTS_MAP_POWER_WITHER_POWER.description": "这个敌人在前两回合的力量减少。",
     "ARKNIGHTS_MAP_POWER_WITHER_POWER.smartDescription": "这个敌人在前两回合的力量减少[blue]{Amount}[/blue]点。",
     "ARKNIGHTS_MAP_POWER_WITHER_POWER.title": "枯萎",
-    "ARKNIGHTS_MAP_POWER_WHEAT_BEER_POWER.description": "当你受到大于[blue]0[/blue]点的伤害时，恢复这么多生命值。",
+    "ARKNIGHTS_MAP_POWER_WHEAT_BEER_POWER.description": "当你受到大于[blue]0[/blue]点的伤害时，恢复若干生命值。",
     "ARKNIGHTS_MAP_POWER_WHEAT_BEER_POWER.smartDescription": "当你受到大于[blue]0[/blue]点的伤害时，恢复{Amount}点生命值。",
-    "ARKNIGHTS_MAP_POWER_WHEAT_BEER_POWER.title": "小麦酒"
+    "ARKNIGHTS_MAP_POWER_WHEAT_BEER_POWER.title": "小麦酒",
+    "ARKNIGHTS_MAP_POWER_MANDRAGORA_GAZE_POWER.description": "你每打出一张技能牌，受到[blue]4[/blue]点伤害。",
+    "ARKNIGHTS_MAP_POWER_MANDRAGORA_GAZE_POWER.smartDescription": "你每打出一张技能牌，受到[blue]{Amount}[/blue]点伤害。",
+    "ARKNIGHTS_MAP_POWER_MANDRAGORA_GAZE_POWER.title": "蔓德拉的注目",
+    "ARKNIGHTS_MAP_POWER_STONESHIELD_POWER.description": "这个敌人受到的伤害降低[blue]50%[/blue]。",
+    "ARKNIGHTS_MAP_POWER_STONESHIELD_POWER.smartDescription": "[gold]{OwnerName}[/gold]受到的伤害降低[blue]50%[/blue]。",
+    "ARKNIGHTS_MAP_POWER_STONESHIELD_POWER.title": "石之盾",
+    "ARKNIGHTS_MAP_POWER_COLLAPSE_POWER.description": "这个敌人死亡时，对蔓德拉造成[blue]70[/blue]点伤害，改变她的意图并移除[gold]石之盾[/gold]。",
+    "ARKNIGHTS_MAP_POWER_COLLAPSE_POWER.smartDescription": "[gold]{OwnerName}[/gold]死亡时，对蔓德拉造成[blue]{Amount}[/blue]点伤害，改变她的意图并移除[gold]石之盾[/gold]。",
+    "ARKNIGHTS_MAP_POWER_COLLAPSE_POWER.title": "崩塌"
 }

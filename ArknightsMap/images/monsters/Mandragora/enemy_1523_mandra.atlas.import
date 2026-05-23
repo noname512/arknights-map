@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://c00h50xjtuemo"
+path="res://.godot/imported/enemy_1523_mandra.atlas-a5879917f5a744bc2dd30e501cdf92b4.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Mandragora/enemy_1523_mandra.atlas"
+dest_files=["res://.godot/imported/enemy_1523_mandra.atlas-a5879917f5a744bc2dd30e501cdf92b4.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

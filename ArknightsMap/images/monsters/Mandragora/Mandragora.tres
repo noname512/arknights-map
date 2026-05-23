@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://c1c4d0qcj38sy"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://c00h50xjtuemo" path="res://ArknightsMap/images/monsters/Mandragora/enemy_1523_mandra.atlas" id="1_1hqbe"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://deu6x44v6egj2" path="res://ArknightsMap/images/monsters/Mandragora/enemy_1523_mandra_424.skel" id="2_n157i"]
+
+[resource]
+atlas_res = ExtResource("1_1hqbe")
+skeleton_file_res = ExtResource("2_n157i")
