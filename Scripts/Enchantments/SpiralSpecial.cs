@@ -32,7 +32,7 @@ public class SpiralSpecial : ModEnchantmentTemplate
 
     // 图标位置。大小1:1就行，原版是64x64
     public override EnchantmentAssetProfile AssetProfile => new(
-        IconPath: "enchantments/spiral.png"
+        IconPath: "res://images/enchantments/spiral.png"
     );
     
     public override int EnchantPlayCount(int originalPlayCount)
