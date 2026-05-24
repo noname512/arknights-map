@@ -1,7 +1,10 @@
+using ArknightsMap.Scripts.Monsters;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -23,6 +26,33 @@ public class CollapsePower : ModPowerTemplate
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature target, bool wasRemovalPrevented, float deathAnimLength)
     {
         if (wasRemovalPrevented || target != base.Owner) return;
-        // TODO
+        Creature mandragora = base.CombatState.Enemies.First(m => m.Monster is Mandragora);
+        if (mandragora.IsAlive)
+        {
+            MoveState curState = mandragora.Monster.NextMove;
+            MoveState newSummonState = ((Mandragora)mandragora.Monster).GetSummonState();
+            newSummonState.FollowUpState = curState.FollowUpState;
+            foreach (var (k, v) in mandragora.Monster.MoveStateMachine.States)
+            {
+                if (v is not MoveState) continue;
+                MoveState moveState = (MoveState)v;
+                if (moveState.FollowUpState == curState)
+                {
+                    moveState.FollowUpState = newSummonState;
+                }
+            }
+            newSummonState.RegisterStates(mandragora.Monster.MoveStateMachine.States);
+            if (mandragora.HasPower<StoneshieldPower>())
+            {
+                await PowerCmd.Remove<StoneshieldPower>(mandragora);
+            }
+        }
+        foreach (var m in CombatState.Enemies)
+        {
+            if (m.IsAlive && m.Monster is not TatteredPillar)
+            {
+                await CreatureCmd.LoseMaxHp(choiceContext, m, Amount, false);
+            }
+        }
     }
 }

@@ -16,7 +16,7 @@ public class DublinnCompanion : ModEncounterTemplate
     ];
 
     public override EncounterAssetProfile AssetProfile => new(
-        EncounterScenePath: "res://ArknightsMap/scenes/encounters/DublinnCompanion.tscn"
+        EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
     );
 
     public override IReadOnlyList<string> Slots => [

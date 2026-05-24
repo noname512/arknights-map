@@ -10,6 +10,7 @@ using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 
 namespace ArknightsMap.Scripts.Monsters;
 
@@ -25,8 +26,9 @@ public class Mandragora : ModMonsterTemplate
     private int HitCount3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 5);
     private int Damage4 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 27, 25);
     public bool IsHovering { get; set; } = true;
+    private int SummonTimes { get; set; } = 0;
     public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: "res://ArknightsMap/scenes/monsters/Mandragora.tscn"
+        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
     );
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -62,16 +64,7 @@ public class Mandragora : ModMonsterTemplate
             new SingleAttackIntent(Damage4),
             new DebuffIntent()
         );
-        MoveState summon = new MoveState(
-            "SUMMON",
-            async targets =>
-            {
-                await CreatureCmd.Add<TatteredPillar>(base.CombatState, "TatteredPillar");
-                await PowerCmd.Apply<StoneshieldPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
-            },
-            new SummonIntent(),
-            new BuffIntent()
-        );
+        MoveState summon = GetSummonState();
 
         attack1.FollowUpState = attack2;
         attack2.FollowUpState = attack3;
@@ -85,6 +78,34 @@ public class Mandragora : ModMonsterTemplate
         list.Add(summon);
 
         return new MonsterMoveStateMachine(list, summon);
+    }
+
+    public MoveState GetSummonState()
+    {
+        if (SummonTimes >= 3)
+        {
+            return new MoveState(
+                "SUMMON" + SummonTimes,
+                ShieldAndSummon,
+                new BuffIntent()
+            );
+        }
+        return new MoveState(
+            "SUMMON" + SummonTimes,
+            ShieldAndSummon,
+            new SummonIntent(),
+            new BuffIntent()
+        );
+    }
+
+    public async Task ShieldAndSummon(IReadOnlyList<Creature> targets)
+    {
+        if (SummonTimes < 3)
+        {
+            await CreatureCmd.Add<TatteredPillar>(CombatState, "second");
+            SummonTimes++;
+        }
+        await PowerCmd.Apply<StoneshieldPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

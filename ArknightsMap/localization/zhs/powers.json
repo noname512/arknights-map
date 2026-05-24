@@ -31,7 +31,7 @@
     "ARKNIGHTS_MAP_POWER_STONESHIELD_POWER.description": "这个敌人受到的伤害降低[blue]50%[/blue]。",
     "ARKNIGHTS_MAP_POWER_STONESHIELD_POWER.smartDescription": "[gold]{OwnerName}[/gold]受到的伤害降低[blue]50%[/blue]。",
     "ARKNIGHTS_MAP_POWER_STONESHIELD_POWER.title": "石之盾",
-    "ARKNIGHTS_MAP_POWER_COLLAPSE_POWER.description": "这个敌人死亡时，对蔓德拉造成[blue]70[/blue]点伤害，改变她的意图并移除[gold]石之盾[/gold]。",
-    "ARKNIGHTS_MAP_POWER_COLLAPSE_POWER.smartDescription": "[gold]{OwnerName}[/gold]死亡时，对蔓德拉造成[blue]{Amount}[/blue]点伤害，改变她的意图并移除[gold]石之盾[/gold]。",
+    "ARKNIGHTS_MAP_POWER_COLLAPSE_POWER.description": "这个敌人死亡时，扣除所有敌方单位[blue]70[/blue]点最大生命值，改变[gold]蔓德拉[/gold]的意图并移除她的[gold]石之盾[/gold]。",
+    "ARKNIGHTS_MAP_POWER_COLLAPSE_POWER.smartDescription": "[gold]{OwnerName}[/gold]死亡时，扣除所有敌方单位[blue]{Amount}[/blue]点最大生命值，改变[gold]蔓德拉[/gold]的意图并移除她的[gold]石之盾[/gold]。",
     "ARKNIGHTS_MAP_POWER_COLLAPSE_POWER.title": "崩塌"
 }

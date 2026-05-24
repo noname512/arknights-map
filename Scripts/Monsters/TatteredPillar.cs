@@ -24,7 +24,7 @@ public class TatteredPillar : ModMonsterTemplate
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 10, 10) + GetExtraHp();
     public override int MaxInitialHp => MinInitialHp;
     public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: "res://ArknightsMap/scenes/monsters/TatteredPillar.tscn"
+        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
     );
 
     public override async Task AfterAddedToRoom()

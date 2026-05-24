@@ -25,7 +25,7 @@ public class CabbageSeedling : ModMonsterTemplate
     private bool IsBurning;
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: "res://ArknightsMap/scenes/monsters/CabbageSeedling.tscn"
+        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
     );
 
     private bool IsBurningVineInCombat()

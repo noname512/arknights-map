@@ -18,7 +18,7 @@ public class BurnTheHaystacks : ModEncounterTemplate
 
     // 遭遇场景（用来指定每个怪物站哪）
     public override EncounterAssetProfile AssetProfile => new(
-        EncounterScenePath: "res://ArknightsMap/scenes/encounters/BurnTheHaystacks.tscn"
+        EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
     );
 
     // 怪物槽位的名字
@@ -33,6 +33,7 @@ public class BurnTheHaystacks : ModEncounterTemplate
 
     // 生成怪物列表
     protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<DublinnFlamechaserSoldier>().ToMutable(), "first")
+        (ModelDb.Monster<DublinnFlamechaserSoldier>().ToMutable(), "first"),
+        (ModelDb.Monster<DublinnFlamechaserSoldier>().ToMutable(), "second")
     ];
 }

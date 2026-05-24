@@ -25,7 +25,7 @@ public class DublinnCompanionGuard : ModMonsterTemplate
     private int Block3 => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 12, 11);
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: "res://ArknightsMap/scenes/monsters/DublinnCompanionGuard.tscn"
+        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
     );
 
     public override async Task AfterAddedToRoom()

@@ -23,7 +23,7 @@ public class DublinnCompanionShadowblade : ModMonsterTemplate
     private int Damage3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 12, 11);
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: "res://ArknightsMap/scenes/monsters/DublinnCompanionShadowblade.tscn"
+        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
     );
 
     public override async Task AfterAddedToRoom()

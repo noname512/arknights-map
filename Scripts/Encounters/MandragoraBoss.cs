@@ -8,11 +8,9 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Encounters;
 
 [RegisterActEncounter(typeof(Wilds))]
-public class PatrollingFoliageNormal : ModEncounterTemplate
+public class MandragoraBoss : ModEncounterTemplate
 {
-    public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<PatrollingFoliage>()];
-
-    public override bool IsWeak => true;
+    public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<Mandragora>(), ModelDb.Monster<TatteredPillar>()];
 
     public override EncounterAssetProfile AssetProfile => new(
         EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
@@ -20,14 +18,15 @@ public class PatrollingFoliageNormal : ModEncounterTemplate
 
     public override IReadOnlyList<string> Slots => [
         "first",
-        "seed1",
-        "seed2",
-        "seed3"
+        "second"
     ];
 
-    public override RoomType RoomType => RoomType.Monster;
+    public override RoomType RoomType => RoomType.Boss;
+
+    // 如果你的场景太大，可以调整缩放。此外还可以使用 GetCameraOffset 来调整摄像机位置
+    // public override float GetCameraScaling() => 0.8f;
 
     protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<PatrollingFoliage>().ToMutable(), "first")
+        (ModelDb.Monster<Mandragora>().ToMutable(), "first")
     ];
 }

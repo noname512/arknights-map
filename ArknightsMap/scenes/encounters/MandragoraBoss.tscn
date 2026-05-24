@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[node name="BurnTheHaystacks" type="Control"]
+[node name="MandragoraBoss" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,7 +10,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="first" type="Marker2D" parent="."]
-position = Vector2(1457, 716)
-
-[node name="second" type="Marker2D" parent="."]
 position = Vector2(1657, 716)
+
+[node name="seed1" type="Marker2D" parent="."]
+position = Vector2(1357, 716)

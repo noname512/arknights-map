@@ -15,7 +15,7 @@ public class DublinnPhalanx : ModEncounterTemplate
     public override bool IsWeak => true;
 
     public override EncounterAssetProfile AssetProfile => new(
-        EncounterScenePath: "res://ArknightsMap/scenes/encounters/DublinnPhalanx.tscn"
+        EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
     );
 
     public override IReadOnlyList<string> Slots => [
