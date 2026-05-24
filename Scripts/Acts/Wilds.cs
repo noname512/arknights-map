@@ -52,7 +52,7 @@ public sealed class Wilds : ModActTemplate
 
     public override IEnumerable<EncounterModel> BossDiscoveryOrder => new EncounterModel[]
     {
-        ModelDb.Encounter<TheInsatiableBoss>()
+        ModelDb.Encounter<MandragoraBoss>(),
     };
 
     public override IEnumerable<EncounterModel> GenerateAllEncounters() => new EncounterModel[]
@@ -61,6 +61,7 @@ public sealed class Wilds : ModActTemplate
         ModelDb.Encounter<DublinnPhalanx>(),
         ModelDb.Encounter<PatrollingFoliageNormal>(),
         ModelDb.Encounter<DublinnCompanion>(),
+        ModelDb.Encounter<MandragoraBoss>(),
     };
 
     protected override void ApplyActDiscoveryOrderModifications(UnlockState unlockState) { }
