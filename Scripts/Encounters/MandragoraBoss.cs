@@ -13,8 +13,12 @@ public class MandragoraBoss : ModEncounterTemplate
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<Mandragora>(), ModelDb.Monster<TatteredPillar>()];
 
     public override EncounterAssetProfile AssetProfile => new(
+        RunHistoryIconPath: $"res://ArknightsMap/images/map/{GetType().Name}History.png",
+        RunHistoryIconOutlinePath: $"res://ArknightsMap/images/map/{GetType().Name}History_outline.png",
         EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
     );
+
+    public override string BossNodePath => $"res://ArknightsMap/images/map/{GetType().Name}Icon";
 
     public override IReadOnlyList<string> Slots => [
         "first",
