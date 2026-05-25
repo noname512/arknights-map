@@ -17,6 +17,8 @@ public class CollapsePower : ModPowerTemplate
     public override PowerStackType StackType => PowerStackType.Single;
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
+    public override bool ShouldScaleInMultiplayer => true;
+
     // 自定义图标路径。1:1即可。原版游戏大图256x256，小图64x64。
     public override PowerAssetProfile AssetProfile => new(
         IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png",
