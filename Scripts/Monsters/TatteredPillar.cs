@@ -21,7 +21,7 @@ public class TatteredPillar : ModMonsterTemplate
         int hp = m.MaxHp - m.CurrentHp;
         return hp * AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 13, 10) / 10;
     }
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 10, 10) + GetExtraHp();
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 10, 10);
     public override int MaxInitialHp => MinInitialHp;
     public override MonsterAssetProfile AssetProfile => new(
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
@@ -29,8 +29,9 @@ public class TatteredPillar : ModMonsterTemplate
 
     public override async Task AfterAddedToRoom()
     {
+        await CreatureCmd.GainMaxHp(Creature, GetExtraHp());
         await PowerCmd.Apply<CollapsePower>(new ThrowingPlayerChoiceContext(), Creature, 70m, Creature, null);
-        await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
+        await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
