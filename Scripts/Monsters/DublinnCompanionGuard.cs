@@ -16,12 +16,12 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class DublinnCompanionGuard : ModMonsterTemplate
 {
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 62, 57);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 62, 57);
-    private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 18, 17);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 62, 58);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 62, 58);
+    private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 18, 16);
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 12, 11);
-    private int Block1 => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 15, 14);
-    private int Block2 => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 30, 28);
+    private int Block1 => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 15, 13);
+    private int Block2 => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 30, 27);
     private int Block3 => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 12, 11);
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(
@@ -30,7 +30,7 @@ public class DublinnCompanionGuard : ModMonsterTemplate
 
     public override async Task AfterAddedToRoom()
     {
-        await PowerCmd.Apply<CompanionDefPower>(new ThrowingPlayerChoiceContext(), Creature, 6m, Creature, null);
+        await PowerCmd.Apply<CompanionDefPower>(new ThrowingPlayerChoiceContext(), Creature, AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 6, 5), Creature, null);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -51,7 +51,7 @@ public class DublinnCompanionGuard : ModMonsterTemplate
             "DEFEND2",
             async targets =>
             {
-                foreach (var monster in CombatState.Enemies.Where(m => m.IsAlive && m.Monster is DublinnCompanionGuard))
+                foreach (var monster in CombatState.Enemies.Where(m => m.IsAlive && m.Monster is DublinnCompanionShadowblade))
                 {
                     await CreatureCmd.GainBlock(monster, Block2, ValueProp.Move, null);
                 }

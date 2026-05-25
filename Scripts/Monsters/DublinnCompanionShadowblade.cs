@@ -10,17 +10,20 @@ using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
 public class DublinnCompanionShadowblade : ModMonsterTemplate
 {
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 62, 57);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 62, 57);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 62, 58);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 62, 58);
     private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 9);
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 8, 7);
     private int Damage3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 12, 11);
+    private int UpgradeStrength => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 2, 1);
+    private int InitBlock => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 15, 13);
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
@@ -29,6 +32,7 @@ public class DublinnCompanionShadowblade : ModMonsterTemplate
     public override async Task AfterAddedToRoom()
     {
         await PowerCmd.Apply<CompanionAtkPower>(new ThrowingPlayerChoiceContext(), Creature, 2m, Creature, null);
+        await CreatureCmd.GainBlock(Creature, InitBlock, ValueProp.Unpowered, null);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -50,7 +54,7 @@ public class DublinnCompanionShadowblade : ModMonsterTemplate
             async targets =>
             {
                 await PowerCmd.Apply<CompanionAtkPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
-                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
+                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, UpgradeStrength, Creature, null);
             },
             new BuffIntent()
         );
