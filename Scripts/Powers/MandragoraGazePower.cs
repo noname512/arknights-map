@@ -30,7 +30,7 @@ public class MandragoraGazePower : ModPowerTemplate
          if (cardPlay.Card.Type == CardType.Skill)
          {
              // TODO：写卡上
-             await DamageCmd.Attack(Amount).Targeting(Owner).Execute(choiceContext);
+             await CreatureCmd.Damage(choiceContext, Owner, new DamageVar(Amount, ValueProp.Unpowered), (CardModel)null);
          }
     }
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
