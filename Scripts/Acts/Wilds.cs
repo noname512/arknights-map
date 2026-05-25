@@ -9,7 +9,6 @@ using MegaCrit.Sts2.Core.Map;
 using MegaCrit.Sts2.Core.Random;
 using STS2RitsuLib.Interop.AutoRegistration;
 using MegaCrit.Sts2.Core.Models.Events;
-using MegaCrit.Sts2.Core.Models.Encounters;
 
 namespace ArknightsMap.Scripts.Acts;
 
@@ -58,7 +57,9 @@ public sealed class Wilds : ModActTemplate
     public override IEnumerable<EncounterModel> GenerateAllEncounters() => new EncounterModel[]
     {
         ModelDb.Encounter<BurnTheHaystacks>(),
+        ModelDb.Encounter<ScorchingDream>(),
         ModelDb.Encounter<DublinnPhalanx>(),
+        ModelDb.Encounter<DublinnPhalanxWeak>(),
         ModelDb.Encounter<PatrollingFoliageNormal>(),
         ModelDb.Encounter<DublinnCompanion>(),
         ModelDb.Encounter<MandragoraBoss>(),
