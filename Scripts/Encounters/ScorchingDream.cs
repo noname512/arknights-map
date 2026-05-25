@@ -8,13 +8,13 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Encounters;
 
 [RegisterActEncounter(typeof(Wilds))]
-public class BurnTheHaystacks : ModEncounterTemplate
+public class ScorchingDream : ModEncounterTemplate
 {
     // 所有可能出现的怪物
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<DublinnFlamechaserSoldier>()];
 
     // 这个遭遇是否是弱怪池
-    public override bool IsWeak => true;
+    public override bool IsWeak => false;
 
     // 遭遇场景（用来指定每个怪物站哪）
     public override EncounterAssetProfile AssetProfile => new(
@@ -24,7 +24,8 @@ public class BurnTheHaystacks : ModEncounterTemplate
     // 怪物槽位的名字
     public override IReadOnlyList<string> Slots => [
         "first",
-        "second"
+        "second",
+        "third"
     ];
 
     public override RoomType RoomType => RoomType.Monster; // 这个遭遇的房间类型，这里是普通怪物
@@ -35,6 +36,7 @@ public class BurnTheHaystacks : ModEncounterTemplate
     // 生成怪物列表
     protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
         (ModelDb.Monster<DublinnFlamechaserSoldier>().ToMutable(), "first"),
-        (ModelDb.Monster<DublinnFlamechaserSoldier>().ToMutable(), "second")
+        (ModelDb.Monster<DublinnFlamechaserSoldier>().ToMutable(), "second"),
+        (ModelDb.Monster<DublinnFlamechaserSoldier>().ToMutable(), "third")
     ];
 }

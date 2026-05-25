@@ -12,7 +12,7 @@ public class DublinnPhalanx : ModEncounterTemplate
 {
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<DublinnPhalanxInfantry>()];
 
-    public override bool IsWeak => true;
+    public override bool IsWeak => false;
 
     public override EncounterAssetProfile AssetProfile => new(
         EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
@@ -20,7 +20,8 @@ public class DublinnPhalanx : ModEncounterTemplate
 
     public override IReadOnlyList<string> Slots => [
         "first",
-        "second"
+        "second",
+        "third"
     ];
 
     public override RoomType RoomType => RoomType.Monster;
@@ -30,6 +31,7 @@ public class DublinnPhalanx : ModEncounterTemplate
 
     protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
         (ModelDb.Monster<DublinnPhalanxInfantry>().ToMutable(), "first"),
-        (ModelDb.Monster<DublinnPhalanxInfantry>().ToMutable(), "second")
+        (ModelDb.Monster<DublinnPhalanxInfantry>().ToMutable(), "second"),
+        (ModelDb.Monster<DublinnPhalanxInfantry>().ToMutable(), "third")
     ];
 }
