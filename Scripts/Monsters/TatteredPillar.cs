@@ -19,7 +19,7 @@ public class TatteredPillar : ModMonsterTemplate
     {
         Creature m = base.CombatState.Enemies.First(m => m.Monster is Mandragora);
         int hp = m.MaxHp - m.CurrentHp;
-        return hp * AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 13, 10) / 10;
+        return hp * AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 13, 10) / 100;
     }
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 10, 10);
     public override int MaxInitialHp => MinInitialHp;

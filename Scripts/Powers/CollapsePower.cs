@@ -38,12 +38,13 @@ public class CollapsePower : ModPowerTemplate
             {
                 if (v is not MoveState) continue;
                 MoveState moveState = (MoveState)v;
-                if (moveState.FollowUpState == curState)
+                if (moveState.FollowUpState.Id == curState.Id)
                 {
                     moveState.FollowUpState = newSummonState;
                 }
             }
             newSummonState.RegisterStates(mandragora.Monster.MoveStateMachine.States);
+            mandragora.Monster.SetMoveImmediate(newSummonState);
             if (mandragora.HasPower<StoneshieldPower>())
             {
                 await PowerCmd.Remove<StoneshieldPower>(mandragora);

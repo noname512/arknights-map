@@ -44,7 +44,7 @@ public class Mandragora : ModMonsterTemplate
             async targets =>
             {
                 await DamageCmd.Attack(Damage2).WithHitCount(HitCount2).FromMonster(this).Execute(null);
-                await PowerCmd.Apply<MandragoraGazePower>(new ThrowingPlayerChoiceContext(), Creature, 4m, Creature, null);
+                await PowerCmd.Apply<MandragoraGazePower>(new ThrowingPlayerChoiceContext(), targets, 4m, Creature, null);
             },
             new MultiAttackIntent(Damage2, HitCount2),
             new DebuffIntent()
@@ -59,7 +59,7 @@ public class Mandragora : ModMonsterTemplate
             async targets =>
             {
                 await DamageCmd.Attack(Damage4).FromMonster(this).Execute(null);
-                await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), Creature, 4m, Creature, null);
+                await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), targets, 4m, Creature, null);
             },
             new SingleAttackIntent(Damage4),
             new DebuffIntent()
@@ -70,6 +70,7 @@ public class Mandragora : ModMonsterTemplate
         attack2.FollowUpState = attack3;
         attack3.FollowUpState = attack4;
         attack4.FollowUpState = attack1;
+        summon.FollowUpState = attack1;
 
         list.Add(attack1);
         list.Add(attack2);
