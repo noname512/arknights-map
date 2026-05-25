@@ -88,6 +88,7 @@ public class Mandragora : ModMonsterTemplate
             return new MoveState(
                 "SUMMON" + SummonTimes,
                 ShieldAndSummon,
+                new StunIntent(),
                 new BuffIntent()
             );
         }
