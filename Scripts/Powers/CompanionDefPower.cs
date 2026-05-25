@@ -36,6 +36,7 @@ public class CompanionDefPower : ModPowerTemplate
         if (creature.IsMonster && creature.Monster is DublinnCompanionShadowblade)
         {
             await CreatureCmd.Stun(Owner, "SINGLE_ATTACK");
+            await PowerCmd.Remove<CompanionAtkPower>(Owner);
         }
     }
 }
