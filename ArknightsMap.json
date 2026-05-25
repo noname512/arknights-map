@@ -2,16 +2,16 @@
   "id": "ArknightsMap",
   "name": "明日方舟地图",
   "author": "_noname, absi2011",
-  "description": "新增",
-  "version": "1.0",
+  "description": "新增一张第二幕地图。",
+  "version": "0.1",
   "has_pck": true,
   "has_dll": true,
   "dependencies": [
     {
       "id": "STS2-RitsuLib",
-      "min_version": "0.2.27"
+      "min_version": "0.3.2"
     }
   ],
   "affects_gameplay": true,
-  "min_game_version": "0.105.1"
+  "min_game_version": "0.106.1"
 }

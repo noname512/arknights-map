@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -24,12 +25,21 @@ public class MandragoraGazePower : ModPowerTemplate
         BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png"
     );
 
-    // TODO: 是永久的吗？
-    // public virtual async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-    // {
-    //     if (cardPlay.Card.Type == CardType.Skill)
-    //     {
-    //         await DamageCmd.Attack(Amount).Execute(null);
-    //     }
-    // }
+    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    {
+         if (cardPlay.Card.Type == CardType.Skill)
+         {
+             // TODO：写卡上
+             await DamageCmd.Attack(Amount).Targeting(Owner).Execute(choiceContext);
+         }
+    }
+    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+    {
+        if (participants.Contains(Owner))
+        {
+            Flash();
+            await PowerCmd.Remove(this);
+        }
+    }
+    
 }
