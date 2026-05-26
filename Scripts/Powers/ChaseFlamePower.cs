@@ -60,6 +60,7 @@ public class ChaseFlamePower : ModPowerTemplate
             MoveState sleep = new MoveState("SLEEP", SleepMove, new SleepIntent());
             sleep.FollowUpState = sleep;
             creature.Monster.SetMoveImmediate(sleep, true);
+            sleep.RegisterStates(Owner.Monster.MoveStateMachine.States);
             base.SetAmount(3);
             InitialHp--;
         }
