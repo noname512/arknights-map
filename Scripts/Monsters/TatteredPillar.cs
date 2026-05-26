@@ -17,7 +17,8 @@ public class TatteredPillar : ModMonsterTemplate
 {
     private int GetExtraHp()
     {
-        Creature m = base.CombatState.Enemies.First(m => m.Monster is Mandragora);
+        Creature m = base.CombatState.Enemies.FirstOrDefault(m => m.Monster is Mandragora, null);
+        if (m == null) return 0;
         int hp = m.MaxHp - m.CurrentHp;
         return hp * AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 13, 10) / 100;
     }
@@ -29,7 +30,10 @@ public class TatteredPillar : ModMonsterTemplate
 
     public override async Task AfterAddedToRoom()
     {
-        await CreatureCmd.GainMaxHp(Creature, GetExtraHp());
+        if (GetExtraHp() > 0)
+        {
+            await CreatureCmd.GainMaxHp(Creature, GetExtraHp());
+        }
         await PowerCmd.Apply<CollapsePower>(new ThrowingPlayerChoiceContext(), Creature, 70m, Creature, null);
         await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
     }
