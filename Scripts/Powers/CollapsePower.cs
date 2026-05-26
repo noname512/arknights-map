@@ -41,7 +41,7 @@ public class CollapsePower : ModPowerTemplate
                 MoveState moveState = (MoveState)v;
                 if (moveState.FollowUpState.Id == curState.Id)
                 {
-                    moveState.FollowUpState = newSummonState;
+                    moveState.FollowUpState = curState.FollowUpState;
                 }
             }
             newSummonState.RegisterStates(mandragora.Monster.MoveStateMachine.States);
