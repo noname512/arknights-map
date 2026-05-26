@@ -61,7 +61,7 @@
     "ARKNIGHTS_MAP_RELIC_STARRY_SKY_PHOTO.title": "星空照片",
     "ARKNIGHTS_MAP_RELIC_STARRY_SKY_PHOTO.description": "你每进入[blue]{IntVars.Rooms}[/blue]个房间，随机[gold]升级[/gold]你卡组中的一张攻击牌、一张技能牌和一张能力牌。",
     "ARKNIGHTS_MAP_RELIC_STARRY_SKY_PHOTO.flavor": "那天晚上我和苇草躺在干草垛上仰望星空。",
-    "ARKNIGHTS_MAP_RELIC_MARTIAL_TRADITION.description": "在每场战斗的第一回合，[gold]击晕[/gold]所有敌人，获得[blue]{Energy:energyIcons()}[/blue]，无法打出攻击牌。",
+    "ARKNIGHTS_MAP_RELIC_MARTIAL_TRADITION.description": "在每场战斗的第一回合，[gold]击晕[/gold]所有敌人，失去{Energy:energyIcons()}，无法打出攻击牌。",
     "ARKNIGHTS_MAP_RELIC_MARTIAL_TRADITION.title": "军事传统",
     "ARKNIGHTS_MAP_RELIC_MARTIAL_TRADITION.flavor": "这是我们军队的传统，第一回合先把敌人吓一跳！",
     "ARKNIGHTS_MAP_RELIC_OFFER_ASSISTANCE.description": "在每个回合开始时，从[blue]{Cards}[/blue]张任意颜色的多人模式卡牌中选择一张，加入你的手牌。",

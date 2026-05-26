@@ -27,10 +27,10 @@ public class MartialTradition : ModRelicTemplate
 
 	public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 	{
-		if (side == base.Owner.Creature.Side && combatState.RoundNumber <= 1)
+		if (side == Owner.Creature.Side && combatState.RoundNumber <= 1)
 		{
 			Flash();
-			await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
+			await PlayerCmd.LoseEnergy(DynamicVars.Energy.BaseValue, Owner);
 			foreach (var enemy in Owner.Creature.CombatState.Enemies.Where(e => e.IsAlive))
 			{
 				await CreatureCmd.Stun(enemy);

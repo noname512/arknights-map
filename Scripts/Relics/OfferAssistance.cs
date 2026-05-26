@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 
 namespace ArknightsMap.Scripts.Relics;
 
@@ -34,19 +35,16 @@ public class OfferAssistance : ModRelicTemplate
 		return runState.Players.Count > 1;
 	}
 
-	public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
+	public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
 	{
-		if (side == base.Owner.Creature.Side)
+		IEnumerable<CardModel> customCardPool = from c in ModelDb.AllCards
+												where c.MultiplayerConstraint == CardMultiplayerConstraint.MultiplayerOnly
+												select c;
+		List<CardModel> options = CardFactory.GetDistinctForCombat(Owner, customCardPool, (int)DynamicVars.Cards.BaseValue, Owner.RunState.Rng.CombatCardGeneration).ToList();
+		CardModel chosenCard = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, Owner, canSkip: true);
+		if (chosenCard != null)
 		{
-			IEnumerable<CardModel> customCardPool = from c in ModelDb.AllCards
-													where c.MultiplayerConstraint == CardMultiplayerConstraint.MultiplayerOnly
-													select c;
-			List<CardModel> options = CardFactory.GetDistinctForCombat(base.Owner, customCardPool, (int)DynamicVars.Cards.BaseValue, base.Owner.RunState.Rng.CombatCardGeneration).ToList();
-			CardModel chosenCard = await CardSelectCmd.FromChooseACardScreen(new ThrowingPlayerChoiceContext(), options, Owner, canSkip: true);
-			if (chosenCard != null)
-			{
-				CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(chosenCard, PileType.Hand));
-			}
+			CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(chosenCard, PileType.Hand));
 		}
 	}
 }
