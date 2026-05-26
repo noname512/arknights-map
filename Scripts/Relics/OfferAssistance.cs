@@ -5,12 +5,10 @@ using MegaCrit.Sts2.Core.Models.RelicPools;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 
 namespace ArknightsMap.Scripts.Relics;

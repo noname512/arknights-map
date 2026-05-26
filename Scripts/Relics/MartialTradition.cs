@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace ArknightsMap.Scripts.Relics;
 
@@ -15,6 +16,7 @@ namespace ArknightsMap.Scripts.Relics;
 public class MartialTradition : ModRelicTemplate
 {
 	public override RelicRarity Rarity => RelicRarity.Ancient;
+	protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1)];
 
 	public override RelicAssetProfile AssetProfile => new(
 		// 小图标（原版85x85）
