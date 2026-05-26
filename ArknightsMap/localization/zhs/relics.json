@@ -33,7 +33,6 @@
     "ARKNIGHTS_MAP_RELIC_WILDFIRE_SPREAD.title": "燎原",
     "ARKNIGHTS_MAP_RELIC_WILDFIRE_SPREAD.description": "每场战斗中你第一次消耗攻击牌或技能牌时，将那张牌的[blue]{Cards}[/blue]张复制品加入你的手牌。",
     "ARKNIGHTS_MAP_RELIC_WILDFIRE_SPREAD.flavor": "一个倒下去，两个站起来。",
-    
     "以下是风笛遗物": "拿来当分隔符用的，好像不能空行来着。",
     "ARKNIGHTS_MAP_RELIC_HIGH_IMPACT_ASSAULT.title": "高效冲击",
     "ARKNIGHTS_MAP_RELIC_HIGH_IMPACT_ASSAULT.description": "拾取时，随机为[blue]{Cards}[/blue]张牌[gold]附魔[/gold]：[purple]涡旋[/purple]。",
@@ -55,6 +54,17 @@
     "ARKNIGHTS_MAP_RELIC_EJECTION_BULLET.flavor": "起飞！",
     "ARKNIGHTS_MAP_RELIC_HAYSTACK.title": "干草跺",
     "ARKNIGHTS_MAP_RELIC_HAYSTACK.description": "在你的回合结束时，如果你还有多余的[gold]能量[/gold]，翻倍你的[gold]格挡[/gold]。",
-    "ARKNIGHTS_MAP_RELIC_HAYSTACK.flavor": "我发现，躺在上面闭上眼睛会很舒服。"
-  
+    "ARKNIGHTS_MAP_RELIC_HAYSTACK.flavor": "我发现，躺在上面闭上眼睛会很舒服。",
+    "ARKNIGHTS_MAP_RELIC_WHEAT_EAR.title": "麦穗",
+    "ARKNIGHTS_MAP_RELIC_WHEAT_EAR.description": "每当你完全[gold]格挡[/gold]掉敌人的一次攻击时，抽[blue]{Cards}[/blue]张牌。",
+    "ARKNIGHTS_MAP_RELIC_WHEAT_EAR.flavor": "麦子成熟了。",
+    "ARKNIGHTS_MAP_RELIC_STARRY_SKY_PHOTO.title": "星空照片",
+    "ARKNIGHTS_MAP_RELIC_STARRY_SKY_PHOTO.description": "你每进入[blue]{IntVars.Rooms}[/blue]个房间，随机[gold]升级[/gold]你卡组中的一张攻击牌、一张技能牌和一张能力牌。",
+    "ARKNIGHTS_MAP_RELIC_STARRY_SKY_PHOTO.flavor": "那天晚上我和苇草躺在干草垛上仰望星空。",
+    "ARKNIGHTS_MAP_RELIC_MARTIAL_TRADITION.description": "在每场战斗的第一回合，[gold]击晕[/gold]所有敌人，获得[blue]{Energy:energyIcons()}[/blue]，无法打出攻击牌。",
+    "ARKNIGHTS_MAP_RELIC_MARTIAL_TRADITION.title": "军事传统",
+    "ARKNIGHTS_MAP_RELIC_MARTIAL_TRADITION.flavor": "这是我们军队的传统，第一回合先把敌人吓一跳！",
+    "ARKNIGHTS_MAP_RELIC_OFFER_ASSISTANCE.description": "在每个回合开始时，从[blue]{Cards}[/blue]张任意颜色的多人模式卡牌中选择一张，加入你的手牌。",
+    "ARKNIGHTS_MAP_RELIC_OFFER_ASSISTANCE.title": "施以援手",
+    "ARKNIGHTS_MAP_RELIC_OFFER_ASSISTANCE.flavor": "需要帮忙吗？"
 }

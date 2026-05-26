@@ -1,21 +1,22 @@
-using ArknightsMap.Scripts.Cards;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.RelicPools;
+using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
+using MegaCrit.Sts2.Core.Models;
 
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
-public class LockedBreechBurst : ModRelicTemplate
+public class WheatEar : ModRelicTemplate
 {
 	public override RelicRarity Rarity => RelicRarity.Ancient;
 
-	protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromCard<OverloadStrike>()];
+	protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1)];
 
 	public override RelicAssetProfile AssetProfile => new(
 		// 小图标（原版85x85）
@@ -26,11 +27,11 @@ public class LockedBreechBurst : ModRelicTemplate
 		BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
 	);
 
-	public override async Task AfterObtained()
+	public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
 	{
-		List<CardPileAddResult> results = new List<CardPileAddResult>();
-		CardModel card = Owner.RunState.CreateCard<OverloadStrike>(Owner);
-		results.Add(await CardPileCmd.Add(card, PileType.Deck));
-		CardCmd.PreviewCardPileAdd(results, 1f);
+		if (target == Owner.Creature && result.UnblockedDamage == 0 && props.IsPoweredAttack() && dealer != null && dealer.IsMonster)
+		{
+			await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
+		}
 	}
 }

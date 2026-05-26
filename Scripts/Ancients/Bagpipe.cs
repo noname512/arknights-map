@@ -40,6 +40,10 @@ public class Bagpipe : ModAncientEventTemplate
         RelicOption<PreciseReloading>(),        //精密填弹
         RelicOption<EjectionBullet>(),          //弹射弹药
         RelicOption<Haystack>(),                //干草垛
+        RelicOption<WheatEar>(),                //麦穗
+        RelicOption<StarrySkyPhoto>(),          //星空照片
+        RelicOption<MartialTradition>(),        //军事传统
+        RelicOption<OfferAssistance>(),         //施以援手
     ];
 
     // 生成选项
@@ -47,7 +51,7 @@ public class Bagpipe : ModAncientEventTemplate
     {
         List<EventOption> list = AllPossibleOptions.ToList();
         list.UnstableShuffle(Rng);
-        return list.Take(3).ToList();        
+        return list.Take(3).ToList();
     }
 
     // 出现条件。这里是只能在第二幕出现（索引为1）
