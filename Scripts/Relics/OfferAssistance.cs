@@ -35,6 +35,7 @@ public class OfferAssistance : ModRelicTemplate
 
 	public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
 	{
+		if (player != Owner) return;
 		IEnumerable<CardModel> customCardPool = from c in ModelDb.AllCards
 												where c.MultiplayerConstraint == CardMultiplayerConstraint.MultiplayerOnly
 												select c;
