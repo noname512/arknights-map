@@ -57,14 +57,19 @@ public class Bagpipe : ModAncientEventTemplate
         RelicOption<WheatEar>(),                //麦穗
         RelicOption<StarrySkyPhoto>(),          //星空照片
         RelicOption<MartialTradition>(),        //军事传统
-        RelicOption<OfferAssistance>(),         //施以援手
     ];
     // 生成选项
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
         List<EventOption> list = SinglePlayerChoice.ToList();
         list.UnstableShuffle(Rng);
-        return list.Take(3).ToList();
+        list = list.Take(3).ToList();
+        if (Owner.RunState.Players.Count > 1)
+        {
+            list = list.Take(2).ToList();
+            list.Add(RelicOption<OfferAssistance>());
+        }
+        return list;
     }
 
     // 出现条件。这里是只能在第二幕出现（索引为1）
