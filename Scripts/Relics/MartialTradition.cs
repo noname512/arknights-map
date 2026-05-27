@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace ArknightsMap.Scripts.Relics;
@@ -32,11 +33,18 @@ public class MartialTradition : ModRelicTemplate
 		if (side == Owner.Creature.Side && combatState.RoundNumber <= 1)
 		{
 			Flash();
-			await PlayerCmd.LoseEnergy(DynamicVars.Energy.BaseValue, Owner);
 			foreach (var enemy in Owner.Creature.CombatState.Enemies.Where(e => e.IsAlive))
 			{
 				await CreatureCmd.Stun(enemy);
 			}
+		}
+	}
+
+	public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
+	{
+		if (player == Owner && Owner.PlayerCombatState.TurnNumber == 1)
+		{
+			await PlayerCmd.LoseEnergy(DynamicVars.Energy.BaseValue, Owner);
 		}
 	}
 

@@ -2,5 +2,9 @@
   "ARKNIGHTS_MAP_CARD_OVERLOAD_STRIKE.title": "过载打击",
   "ARKNIGHTS_MAP_CARD_OVERLOAD_STRIKE.description": "造成{Damage:diff()}点伤害3次。 \n 当你抽到这张牌时，失去{Energy:energyIcons()}。",
   "ARKNIGHTS_MAP_CARD_SEED_OF_HOPE.title": "保存的火种",
-  "ARKNIGHTS_MAP_CARD_SEED_OF_HOPE.description": "战斗结束时，如果这张牌未被[gold]消耗[/gold]，则恢复已损失生命值的{Heal}%。"
+  "ARKNIGHTS_MAP_CARD_SEED_OF_HOPE.description": "战斗结束时，如果这张牌未被[gold]消耗[/gold]，则恢复已损失生命值的{Heal}%。",
+  "ARKNIGHTS_MAP_CARD_PURPLE_FLAME.title": "紫焰",
+  "ARKNIGHTS_MAP_CARD_PURPLE_FLAME.description": "受到{Damage}点[purple]伤害[/purple]与[gold]灼燃伤害[/gold]。",
+  "ARKNIGHTS_MAP_CARD_PUT_OUT_FIRE.title": "灭火",
+  "ARKNIGHTS_MAP_CARD_PUT_OUT_FIRE.description": "受到{Damage}点伤害与[gold]灼燃伤害[/gold]。 \n 将芦苇丛变为[gold]未燃烧[/gold]状态。"
 }
