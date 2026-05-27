@@ -46,10 +46,23 @@ public class Bagpipe : ModAncientEventTemplate
         RelicOption<OfferAssistance>(),         //施以援手
     ];
 
+    public IEnumerable<EventOption> SinglePlayerChoice => [
+        RelicOption<HighImpactAssault>(),       //高效冲击
+        RelicOption<TheSpear>(),                //破城矛
+        RelicOption<LockedBreechBurst>(),       //闭膛连发
+        RelicOption<LandenBeer>(),              //兰登佳酿
+        RelicOption<PreciseReloading>(),        //精密填弹
+        RelicOption<EjectionBullet>(),          //弹射弹药
+        RelicOption<Haystack>(),                //干草垛
+        RelicOption<WheatEar>(),                //麦穗
+        RelicOption<StarrySkyPhoto>(),          //星空照片
+        RelicOption<MartialTradition>(),        //军事传统
+        RelicOption<OfferAssistance>(),         //施以援手
+    ];
     // 生成选项
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        List<EventOption> list = AllPossibleOptions.ToList();
+        List<EventOption> list = SinglePlayerChoice.ToList();
         list.UnstableShuffle(Rng);
         return list.Take(3).ToList();
     }

@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Map;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
+using MegaCrit.Sts2.Core.Saves.Runs;
 
 namespace ArknightsMap.Scripts.Relics;
 
@@ -18,7 +19,25 @@ public class StarrySkyPhoto : ModRelicTemplate
 	public override RelicRarity Rarity => RelicRarity.Ancient;
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("Rooms", 5)];
-	private int roomsEntered = 0;
+	
+	private int _roomsEntered;
+
+	[SavedProperty]
+	private int RoomsEntered
+	{
+		get
+		{
+			return _roomsEntered;
+		}
+		set
+		{
+			AssertMutable();
+			_roomsEntered = value;
+			InvokeDisplayAmountChanged();
+		}
+	}
+	public override bool ShowCounter => true;
+	public override int DisplayAmount => RoomsEntered;
 
 	public override RelicAssetProfile AssetProfile => new(
 		// 小图标（原版85x85）
@@ -37,10 +56,10 @@ public class StarrySkyPhoto : ModRelicTemplate
 			if (currentMapPoint != null && currentMapPoint.PointType != MapPointType.Monster && currentMapPoint.PointType != MapPointType.Elite && currentMapPoint.PointType != MapPointType.Boss)
 			{
 				Flash();
-				roomsEntered++;
-				if (roomsEntered >= DynamicVars["Rooms"].IntValue)
+				RoomsEntered++;
+				if (RoomsEntered >= DynamicVars["Rooms"].IntValue)
 				{
-					roomsEntered = 0;
+					RoomsEntered = 0;
 					foreach (var type in new[] { CardType.Attack, CardType.Skill, CardType.Power })
 					{
 						List<CardModel> upgradableCards = PileType.Deck.GetPile(Owner).Cards.Where(c => c is { IsUpgradable: true } && c.Type == type).ToList();
