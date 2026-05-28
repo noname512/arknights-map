@@ -104,7 +104,8 @@ public class Mandragora : ModMonsterTemplate
     {
         if (SummonTimes < 3)
         {
-            await CreatureCmd.Add<TatteredPillar>(CombatState, "second");
+            Creature m = await CreatureCmd.Add<TatteredPillar>(CombatState, "second");
+            await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), m, 1, Creature, null);
             SummonTimes++;
         }
         await PowerCmd.Apply<StoneshieldPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);

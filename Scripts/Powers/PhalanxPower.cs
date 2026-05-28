@@ -23,7 +23,7 @@ public class PhalanxPower : ModPowerTemplate
 
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        SetAmount(base.CombatState.Enemies.Count(e => e.IsAlive && e.IsMonster && e.Monster is DublinnPhalanxInfantry) * 2);
+        SetAmount(base.CombatState.Enemies.Count(e => e.IsAlive && e.IsMonster && e.Monster is DublinnPhalanxInfantry) * 2 - 2);
         return Task.CompletedTask;
     }
 
@@ -31,6 +31,7 @@ public class PhalanxPower : ModPowerTemplate
     {
         if (creature.IsMonster && creature.Monster is DublinnPhalanxInfantry)
         {
+            Flash();
             SetAmount(Amount + 2);
         }
         return Task.CompletedTask;
@@ -40,6 +41,7 @@ public class PhalanxPower : ModPowerTemplate
     {
         if (creature.IsMonster && creature.Monster is DublinnPhalanxInfantry)
         {
+            Flash();
             SetAmount(Amount - 2);
         }
         return Task.CompletedTask;
@@ -47,7 +49,7 @@ public class PhalanxPower : ModPowerTemplate
 
     public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (base.Owner != target) return 0;
+        if (Owner != target) return 0;
         return -Amount;
     }
 }

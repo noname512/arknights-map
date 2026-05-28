@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Ascension;
@@ -27,17 +28,44 @@ public class TombkeeperGrotesque : ModMonsterTemplate
     private int HitCount3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 4, 4);
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 105, 100);
     public override int MaxInitialHp => MinInitialHp;
+
+    private MoveState _deadState;
+    private MoveState DeadState
+    {
+        get
+        {
+            return _deadState;
+        }
+        set
+        {
+            AssertMutable();
+            _deadState = value;
+        }
+    }
     public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
+        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}ERROR.tscn"  //不ERROR Debuff上不去！
     );
 
     public override async Task AfterAddedToRoom()
     {
+        await PowerCmd.Apply<RebornPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
+        DeadState = new MoveState("RESPAWN_MOVE", RespawnMove, new HealIntent(), new BuffIntent())
+        {
+            MustPerformOnceBeforeTransitioning = true
+        };
+        MoveState Respawn2 = new MoveState("RESPAWN_2", _ => { return Task.CompletedTask;}, new StunIntent());
+        MoveState Respawn3 = new MoveState("RESPAWN_3", _ => { return Task.CompletedTask;}, new StunIntent());
+        MoveState Respawn4 = new MoveState("RESPAWN_4", async _ => 
+        {
+            await PowerCmd.Remove<DamageOutPower>(Creature);
+            await PowerCmd.Apply<SoarPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
+            await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 4m, Creature, null);
+        }, new BuffIntent());
         MoveState attack1 = new MoveState(
             "ATTACK1",
             async targets => await DamageCmd.Attack(Damage1).FromMonster(this).Execute(null),
@@ -61,10 +89,36 @@ public class TombkeeperGrotesque : ModMonsterTemplate
         attack1.FollowUpState = attack2;
         attack2.FollowUpState = attack3;
         attack3.FollowUpState = attack1;
+        DeadState.FollowUpState = Respawn2;
+        Respawn2.FollowUpState = Respawn3;
+        Respawn3.FollowUpState = Respawn4;
+        Respawn4.FollowUpState = attack1;
+        list.Add(DeadState);
+        list.Add(Respawn2);
+        list.Add(Respawn3);
+        list.Add(Respawn4);
         list.Add(attack1);
         list.Add(attack2);
         list.Add(attack3);
 
         return new MonsterMoveStateMachine(list, attack1);
+    }
+
+    private async Task RespawnMove(IReadOnlyList<Creature> targets)
+    {
+        Creature.GetPower<RebornPower>()?.DoRevive();
+        await CreatureCmd.Heal(Creature, Creature.MaxHp);
+        await PowerCmd.Apply<DamageOutPower>(new ThrowingPlayerChoiceContext(), Creature, 10, Creature, null);
+        await PowerCmd.Remove<RebornPower>(Creature);
+        Creature m = base.CombatState.Enemies.FirstOrDefault(m => m.Monster is TatteredPillar, null);
+        if (m != null)
+        {
+            await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), m, 1, Creature, null);
+        }
+    }
+    
+    public async Task TriggerDeadState()
+    {
+        SetMoveImmediate(DeadState, forceTransition: true);
     }
 }

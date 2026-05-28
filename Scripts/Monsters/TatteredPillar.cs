@@ -35,7 +35,6 @@ public class TatteredPillar : ModMonsterTemplate
             await CreatureCmd.GainMaxHp(Creature, GetExtraHp());
         }
         await PowerCmd.Apply<CollapsePower>(new ThrowingPlayerChoiceContext(), Creature, 70m, Creature, null);
-        await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()

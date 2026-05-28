@@ -20,7 +20,10 @@ public class DecayPower : ModPowerTemplate
 {
     public override PowerType Type => PowerType.Debuff; 
     public override PowerStackType StackType => PowerStackType.Single;
+    public override bool ShouldScaleInMultiplayer => true;
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromPowerWithPowerHoverTips<StrengthPower>();
+
+    private int counter = 0;
 
     public override PowerAssetProfile AssetProfile => new(
         IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png",
@@ -31,7 +34,10 @@ public class DecayPower : ModPowerTemplate
     {
         if (target == Owner && result.UnblockedDamage > 0)
         {
-            await PowerCmd.Apply<StrengthPower>(choiceContext, Owner, -result.UnblockedDamage, Owner, null);
+            Flash();
+            counter += result.UnblockedDamage;
+            await PowerCmd.Apply<StrengthPower>(choiceContext, Owner, -(counter / Amount), Owner, null);
+            counter %= Amount;
         }
     }
 }
