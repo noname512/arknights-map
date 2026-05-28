@@ -9,6 +9,8 @@ using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 using ArknightsMap.Scripts.Powers;
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -32,7 +34,19 @@ public class DublinnCompanionShadowblade : ModMonsterTemplate
     public override async Task AfterAddedToRoom()
     {
         await PowerCmd.Apply<CompanionAtkPower>(new ThrowingPlayerChoiceContext(), Creature, 2m, Creature, null);
-        await CreatureCmd.GainBlock(Creature, InitBlock, ValueProp.Unpowered, null);
+    }
+
+    public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
+    {
+        if (side != CombatSide.Player)
+        {
+            return Task.CompletedTask;
+        }
+        if (combatState.RoundNumber > 1)
+        {
+            return Task.CompletedTask;
+        }
+        return CreatureCmd.GainBlock(Creature, InitBlock, ValueProp.Unpowered, null);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
