@@ -39,5 +39,11 @@
     "ARKNIGHTS_MAP_POWER_COMPANION_ATK_POWER.title": "伙友·刃",
     "ARKNIGHTS_MAP_POWER_COMPANION_DEF_POWER.description": "若[gold]深池伙友影刃[/gold]在场，这个敌人受到的伤害降低。",
     "ARKNIGHTS_MAP_POWER_COMPANION_DEF_POWER.smartDescription": "若[gold]深池伙友影刃[/gold]在场，[gold]{OwnerName}[/gold]受到的伤害降低[blue]{Amount}[/blue]点。",
-    "ARKNIGHTS_MAP_POWER_COMPANION_DEF_POWER.title": "伙友·卫"
+    "ARKNIGHTS_MAP_POWER_COMPANION_DEF_POWER.title": "伙友·卫",
+    "ARKNIGHTS_MAP_POWER_TAUNT_POWER.description": "你的指向敌人的卡牌必须指向这个敌人。",
+    "ARKNIGHTS_MAP_POWER_TAUNT_POWER.smartDescription": "你的指向敌人的卡牌必须指向[gold]{OwnerName}[/gold]。",
+    "ARKNIGHTS_MAP_POWER_TAUNT_POWER.title": "嘲讽",
+    "ARKNIGHTS_MAP_POWER_DECAY_POWER.description": "受到伤害后，失去等量的[gold]力量[/gold]。",
+    "ARKNIGHTS_MAP_POWER_DECAY_POWER.smartDescription": "在[gold]{OwnerName}[/gold]受到伤害后，失去等量的[gold]力量[/gold]。",
+    "ARKNIGHTS_MAP_POWER_DECAY_POWER.title": "消退"
 }

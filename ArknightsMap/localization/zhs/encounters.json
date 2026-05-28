@@ -12,5 +12,7 @@
     "ARKNIGHTS_MAP_ENCOUNTER_DUBLINN_COMPANION.title": "深池伙友",
     "ARKNIGHTS_MAP_ENCOUNTER_DUBLINN_COMPANION.loss": "{character}被深池精锐行动队击败了",
     "ARKNIGHTS_MAP_ENCOUNTER_MANDRAGORA_BOSS.title": "蔓德拉",
-    "ARKNIGHTS_MAP_ENCOUNTER_MANDRAGORA_BOSS.loss": "{character}被破碎支柱砸死了"
+    "ARKNIGHTS_MAP_ENCOUNTER_MANDRAGORA_BOSS.loss": "{character}被破碎支柱砸死了",
+    "ARKNIGHTS_MAP_ENCOUNTER_SCALDING_EARTH.title": "大地滚烫",
+    "ARKNIGHTS_MAP_ENCOUNTER_SCALDING_EARTH.loss": "{character}被火球炸死了"
 }
