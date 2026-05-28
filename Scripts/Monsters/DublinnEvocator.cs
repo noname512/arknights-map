@@ -4,9 +4,11 @@ using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
+using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -26,25 +28,26 @@ public class DublinnEvocator : ModMonsterTemplate
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
-        MoveState explode = new MoveState("SUMMON", Summon, new SummonIntent());
+        MoveState summon = new MoveState("SUMMON", Summon, new SummonIntent());
 
-        explode.FollowUpState = explode;
+        summon.FollowUpState = summon;
 
-        list.Add(explode);
+        list.Add(summon);
 
-        return new MonsterMoveStateMachine(list, explode);
+        return new MonsterMoveStateMachine(list, summon);
     }
 
     public async Task Summon(IReadOnlyList<Creature> targets)
     {
-        string position = CombatState.Encounter?.GetNextSlot(base.CombatState);
+        string position = CombatState.Encounter?.Slots.LastOrDefault<string>((s => CombatState.Enemies.All<Creature>((Func<Creature, bool>) (c => c.SlotName != s))), string.Empty);
         if (!string.IsNullOrEmpty(position))
         {
             await CreatureCmd.Add<Fireball>(CombatState, position);
         }
         else
         {
-            await DamageCmd.Attack(ExplodeDamage).FromMonster(this).Execute(null);
+            await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), targets, new DamageVar(ExplodeDamage, ValueProp.Unpowered), Creature);
+            await PowerCmd.Apply<FlamingDamagePower>(new ThrowingPlayerChoiceContext(), targets, ExplodeDamage, Creature, null);
         }
     }
 }

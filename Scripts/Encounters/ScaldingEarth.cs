@@ -35,7 +35,6 @@ public class ScaldingEarth : ModEncounterTemplate
 
     // 生成怪物列表
     protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<DublinnEvocator>().ToMutable(), "first"),
-        (ModelDb.Monster<Fireball>().ToMutable(), "second"),
+        (ModelDb.Monster<DublinnEvocator>().ToMutable(), "third")
     ];
 }
