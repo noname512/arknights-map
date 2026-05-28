@@ -21,7 +21,7 @@ public class WheatBeer: ModPotionTemplate
 
     public override PotionUsage Usage => PotionUsage.CombatOnly;
     
-    public override TargetType TargetType => TargetType.Self;
+    public override TargetType TargetType => TargetType.AnyPlayer;
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [new HealVar(10)];
 

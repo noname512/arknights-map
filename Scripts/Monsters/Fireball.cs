@@ -15,7 +15,7 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class Fireball : ModMonsterTemplate
 {
-    public override int MinInitialHp => 999999999;
+    public override int MinInitialHp => 99999999;
     public override int MaxInitialHp => MinInitialHp;
     public override MonsterAssetProfile AssetProfile => new(
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
