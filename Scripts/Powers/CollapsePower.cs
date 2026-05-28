@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -29,26 +30,42 @@ public class CollapsePower : ModPowerTemplate
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature target, bool wasRemovalPrevented, float deathAnimLength)
     {
         if (wasRemovalPrevented || target != base.Owner) return;
-        Creature mandragora = base.CombatState.Enemies.First(m => !(m.Monster is TatteredPillar));
-        if (mandragora.IsAlive)
+        Creature partner = base.CombatState.Enemies.First(m => !(m.Monster is TatteredPillar));
+        if (partner.IsAlive)
         {
-            MoveState curState = mandragora.Monster.NextMove;
-            MoveState newSummonState = ((Mandragora)mandragora.Monster).GetSummonState();
-            newSummonState.FollowUpState = curState.FollowUpState;
-            foreach (var (k, v) in mandragora.Monster.MoveStateMachine.States)
+            MoveState curState = partner.Monster.NextMove;
+            MoveState newState;
+            if (partner is Mandragora)
             {
-                if (v is not MoveState) continue;
-                MoveState moveState = (MoveState)v;
-                if (moveState.FollowUpState.Id == curState.Id)
+                newState = ((Mandragora)partner.Monster).GetSummonState();
+            }
+            else
+            {
+                newState = new MoveState("STUN", _ => { return Task.CompletedTask;}, new StunIntent());
+            }
+            if (curState.Intents.OfType<AttackIntent>().Any())
+            {
+                newState.FollowUpState = curState.FollowUpState;
+                foreach (var (k, v) in partner.Monster.MoveStateMachine.States)
                 {
-                    moveState.FollowUpState = curState.FollowUpState;
+                    if (v is not MoveState) continue;
+                    MoveState moveState = (MoveState)v;
+                    if (moveState.FollowUpState.Id == curState.Id)
+                    {
+                        moveState.FollowUpState = curState.FollowUpState;
+                    }
                 }
             }
-            newSummonState.RegisterStates(mandragora.Monster.MoveStateMachine.States);
-            mandragora.Monster.SetMoveImmediate(newSummonState);
-            if (mandragora.HasPower<StoneshieldPower>())
+            else
             {
-                await PowerCmd.Remove<StoneshieldPower>(mandragora);
+                newState.FollowUpState = curState;
+            }
+            newState.RegisterStates(partner.Monster.MoveStateMachine.States);
+            partner.Monster.SetMoveImmediate(newState);
+            
+            if (partner.HasPower<StoneshieldPower>())
+            {
+                await PowerCmd.Remove<StoneshieldPower>(partner);
             }
         }
         foreach (var m in CombatState.Enemies)

@@ -64,6 +64,7 @@ public sealed class Wilds : ModActTemplate
         ModelDb.Encounter<DublinnCompanion>(),
         ModelDb.Encounter<MandragoraBoss>(),
         ModelDb.Encounter<ScaldingEarth>(),
+        ModelDb.Encounter<ApparitionalWaves>(),
     };
 
     protected override void ApplyActDiscoveryOrderModifications(UnlockState unlockState) { }

@@ -1,0 +1,70 @@
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Context;
+using MegaCrit.Sts2.Core.Entities.Ascension;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.MonsterMoves.Intents;
+using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
+
+namespace ArknightsMap.Scripts.Monsters;
+
+[RegisterMonster]
+public class TombkeeperGrotesque : ModMonsterTemplate
+{
+    private bool _isStage2 = false;
+    private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 17, 15);
+    private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 8, 7);
+    private int Status2 => 2;
+    private int Damage3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 4, 3);
+    private int HitCount3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 4, 4);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 105, 100);
+    public override int MaxInitialHp => MinInitialHp;
+    public override MonsterAssetProfile AssetProfile => new(
+        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
+    );
+
+    public override async Task AfterAddedToRoom()
+    {
+    }
+
+    protected override MonsterMoveStateMachine GenerateMoveStateMachine()
+    {
+        List<MonsterState> list = new List<MonsterState>();
+        MoveState attack1 = new MoveState(
+            "ATTACK1",
+            async targets => await DamageCmd.Attack(Damage1).FromMonster(this).Execute(null),
+            new SingleAttackIntent(Damage1)
+        );
+        MoveState attack2 = new MoveState(
+            "ATTACK2",
+            async targets =>
+            {
+                await DamageCmd.Attack(Damage2).FromMonster(this).Execute(null);
+                await CardPileCmd.AddToCombatAndPreview<Dazed>(targets, PileType.Discard, Status2, null);
+            },
+            new SingleAttackIntent(Damage2),
+            new StatusIntent(Status2)
+        );
+        MoveState attack3 = new MoveState(
+            "ATTACK3",
+            async targets => await DamageCmd.Attack(Damage3).WithHitCount(HitCount3).FromMonster(this).Execute(null),
+            new MultiAttackIntent(Damage3, HitCount3)
+        );
+        attack1.FollowUpState = attack2;
+        attack2.FollowUpState = attack3;
+        attack3.FollowUpState = attack1;
+        list.Add(attack1);
+        list.Add(attack2);
+        list.Add(attack3);
+
+        return new MonsterMoveStateMachine(list, attack1);
+    }
+}
