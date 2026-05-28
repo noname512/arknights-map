@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3]
 
 [ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_v77x8"]
-[ext_resource type="SpineSkeletonDataResource" uid="uid://0ula7pkxcmp0" path="res://ArknightsMap/images/monsters/DublinnFlameChaserSoldier/DublinnFlameChaserSoldier.tres" id="dfcs"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://0ula7pkxcmp0" path="res://ArknightsMap/images/monsters/DublinnFlameChaserSoldier/DublinnFlameChaserSoldier.tres" id="ssdr"]
 
 [node name="DublinnFlamechaserSoldier" type="Node2D"]
 script = ExtResource("1_v77x8")
@@ -9,7 +9,7 @@ metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="Visuals" type="SpineSprite" parent="."]
-skeleton_data_res = ExtResource("dfcs")
+skeleton_data_res = ExtResource("ssdr")
 preview_skin = "default"
 preview_animation = "Idle"
 preview_frame = false
@@ -31,4 +31,4 @@ position = Vector2(0, -230)
 
 [node name="CenterPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, 0)
+position = Vector2(0, 90)

@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://dinuk8sr7ak8w"
+path="res://.godot/imported/enemy_10070_ftkbtt.atlas-c5d1f25141b48828ba11727bf55ff03c.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/AshCreation/enemy_10070_ftkbtt.atlas"
+dest_files=["res://.godot/imported/enemy_10070_ftkbtt.atlas-c5d1f25141b48828ba11727bf55ff03c.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

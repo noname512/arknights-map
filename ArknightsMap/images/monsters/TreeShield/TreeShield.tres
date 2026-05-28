@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://bjov6kyh4qg8q"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cynk2j2r0x2o8" path="res://ArknightsMap/images/monsters/TreeShield/enemy_10069_ftlsj.atlas" id="1_slhmp"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bv8ybxdir0ria" path="res://ArknightsMap/images/monsters/TreeShield/enemy_10069_ftlsj_424.skel" id="2_idcoo"]
+
+[resource]
+atlas_res = ExtResource("1_slhmp")
+skeleton_file_res = ExtResource("2_idcoo")

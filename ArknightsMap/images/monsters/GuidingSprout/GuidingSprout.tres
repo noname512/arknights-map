@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://bwgo4foym0ld8"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://ce2gfgiarirve" path="res://ArknightsMap/images/monsters/GuidingSprout/enemy_10068_ftxsr.atlas" id="1_3h3wl"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://c45ni3ls0n8kx" path="res://ArknightsMap/images/monsters/GuidingSprout/enemy_10068_ftxsr_424.skel" id="2_uf7ch"]
+
+[resource]
+atlas_res = ExtResource("1_3h3wl")
+skeleton_file_res = ExtResource("2_uf7ch")

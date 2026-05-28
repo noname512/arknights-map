@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://dx2uw8wamdqv0"
+path="res://.godot/imported/enemy_1289_dubmb_424.skel-48ea77ae5b31ab1da3813c570fadb881.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnCannoneer/enemy_1289_dubmb_424.skel"
+dest_files=["res://.godot/imported/enemy_1289_dubmb_424.skel-48ea77ae5b31ab1da3813c570fadb881.spskel"]
+
+[params]
+

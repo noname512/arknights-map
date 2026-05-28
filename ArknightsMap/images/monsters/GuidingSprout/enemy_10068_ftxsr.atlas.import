@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://ce2gfgiarirve"
+path="res://.godot/imported/enemy_10068_ftxsr.atlas-6278d8cf05e31b48ace66b438b3e083a.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/GuidingSprout/enemy_10068_ftxsr.atlas"
+dest_files=["res://.godot/imported/enemy_10068_ftxsr.atlas-6278d8cf05e31b48ace66b438b3e083a.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

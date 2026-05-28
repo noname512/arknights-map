@@ -1,0 +1,13 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bpj62m6l5awnj"
+valid=false
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnEvocator/enemy_1176_dusocr.skel"
+
+[params]
+

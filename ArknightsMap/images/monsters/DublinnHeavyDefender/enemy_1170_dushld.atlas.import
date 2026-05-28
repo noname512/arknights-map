@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://3of67dxqw7q1"
+path="res://.godot/imported/enemy_1170_dushld.atlas-852f1af4b1da3a3cfe1099a11dcba433.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnHeavyDefender/enemy_1170_dushld.atlas"
+dest_files=["res://.godot/imported/enemy_1170_dushld.atlas-852f1af4b1da3a3cfe1099a11dcba433.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

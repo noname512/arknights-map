@@ -1,0 +1,13 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://b06qg3mh83fbd"
+valid=false
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/TreeShield/enemy_10069_ftlsj.skel"
+
+[params]
+

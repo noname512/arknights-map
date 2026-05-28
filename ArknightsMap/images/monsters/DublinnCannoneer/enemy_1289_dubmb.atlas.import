@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://48k2vjsahshm"
+path="res://.godot/imported/enemy_1289_dubmb.atlas-8ddcc9a310e0f9345377fabd2ab7db01.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnCannoneer/enemy_1289_dubmb.atlas"
+dest_files=["res://.godot/imported/enemy_1289_dubmb.atlas-8ddcc9a310e0f9345377fabd2ab7db01.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

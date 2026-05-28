@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://70ngopnsle2v"
+path="res://.godot/imported/enemy_1176_dusocr.atlas-caf6893a7a6d0d24f8ac112ce41e4e41.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnEvocator/enemy_1176_dusocr.atlas"
+dest_files=["res://.godot/imported/enemy_1176_dusocr.atlas-caf6893a7a6d0d24f8ac112ce41e4e41.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

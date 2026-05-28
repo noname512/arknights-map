@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://dj20lo1ost81v"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://c3nvbb7fthqpm" path="res://ArknightsMap/images/monsters/TombkeeperGrotesque/enemy_1172_dugago.atlas" id="1_eao47"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://b82tc3awigify" path="res://ArknightsMap/images/monsters/TombkeeperGrotesque/enemy_1172_dugago_424.skel" id="2_ym0hp"]
+
+[resource]
+atlas_res = ExtResource("1_eao47")
+skeleton_file_res = ExtResource("2_ym0hp")

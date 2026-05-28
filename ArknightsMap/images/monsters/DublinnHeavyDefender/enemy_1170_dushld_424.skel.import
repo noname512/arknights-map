@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://d0cpm8tb8bi3c"
+path="res://.godot/imported/enemy_1170_dushld_424.skel-e283c22bd26a9d151588ea67369dc878.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnHeavyDefender/enemy_1170_dushld_424.skel"
+dest_files=["res://.godot/imported/enemy_1170_dushld_424.skel-e283c22bd26a9d151588ea67369dc878.spskel"]
+
+[params]
+

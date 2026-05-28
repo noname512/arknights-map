@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://dikckcobw5ab"
+path="res://.godot/imported/enemy_1176_dusocr_424.skel-d1255f7f03dde19d407cf1dc08ec9d9c.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnEvocator/enemy_1176_dusocr_424.skel"
+dest_files=["res://.godot/imported/enemy_1176_dusocr_424.skel-d1255f7f03dde19d407cf1dc08ec9d9c.spskel"]
+
+[params]
+

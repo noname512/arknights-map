@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://c3nvbb7fthqpm"
+path="res://.godot/imported/enemy_1172_dugago.atlas-1fb53979f7b1a14af829b513133242c5.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/TombkeeperGrotesque/enemy_1172_dugago.atlas"
+dest_files=["res://.godot/imported/enemy_1172_dugago.atlas-1fb53979f7b1a14af829b513133242c5.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

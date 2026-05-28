@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://c45ni3ls0n8kx"
+path="res://.godot/imported/enemy_10068_ftxsr_424.skel-c32c39ba4af3bdedb40d045f8085aefb.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/GuidingSprout/enemy_10068_ftxsr_424.skel"
+dest_files=["res://.godot/imported/enemy_10068_ftxsr_424.skel-c32c39ba4af3bdedb40d045f8085aefb.spskel"]
+
+[params]
+
