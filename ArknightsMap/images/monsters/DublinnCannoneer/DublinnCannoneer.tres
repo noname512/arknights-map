@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://dyhkxe7cxeffc"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://48k2vjsahshm" path="res://ArknightsMap/images/monsters/DublinnCannoneer/enemy_1289_dubmb.atlas" id="1_xdujr"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dx2uw8wamdqv0" path="res://ArknightsMap/images/monsters/DublinnCannoneer/enemy_1289_dubmb_424.skel" id="2_1nybg"]
+
+[resource]
+atlas_res = ExtResource("1_xdujr")
+skeleton_file_res = ExtResource("2_1nybg")

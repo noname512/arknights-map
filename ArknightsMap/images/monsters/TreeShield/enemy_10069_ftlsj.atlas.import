@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://cynk2j2r0x2o8"
+path="res://.godot/imported/enemy_10069_ftlsj.atlas-b90532643684a3928ec7405fd495781b.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/TreeShield/enemy_10069_ftlsj.atlas"
+dest_files=["res://.godot/imported/enemy_10069_ftlsj.atlas-b90532643684a3928ec7405fd495781b.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

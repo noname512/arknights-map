@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://b82tc3awigify"
+path="res://.godot/imported/enemy_1172_dugago_424.skel-0cbb5e7e725c790ae5f8d9326f9a5742.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/TombkeeperGrotesque/enemy_1172_dugago_424.skel"
+dest_files=["res://.godot/imported/enemy_1172_dugago_424.skel-0cbb5e7e725c790ae5f8d9326f9a5742.spskel"]
+
+[params]
+

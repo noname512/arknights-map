@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://tt440bh2jbkl"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://70ngopnsle2v" path="res://ArknightsMap/images/monsters/DublinnEvocator/enemy_1176_dusocr.atlas" id="1_txwyt"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dikckcobw5ab" path="res://ArknightsMap/images/monsters/DublinnEvocator/enemy_1176_dusocr_424.skel" id="2_jwwpc"]
+
+[resource]
+atlas_res = ExtResource("1_txwyt")
+skeleton_file_res = ExtResource("2_jwwpc")

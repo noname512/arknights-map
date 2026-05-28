@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://c7gjqm22vq3ev"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cuu0cymmg6ccp" path="res://ArknightsMap/images/monsters/BurningVine/enemy_10067_ftsjc.atlas" id="1_bgr1r"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://1ipjr0wlcvs1" path="res://ArknightsMap/images/monsters/BurningVine/enemy_10067_ftsjc_424.skel" id="2_5tu4l"]
+
+[resource]
+atlas_res = ExtResource("1_bgr1r")
+skeleton_file_res = ExtResource("2_5tu4l")

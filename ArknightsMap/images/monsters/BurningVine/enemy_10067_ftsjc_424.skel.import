@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://1ipjr0wlcvs1"
+path="res://.godot/imported/enemy_10067_ftsjc_424.skel-2d3e5b15670503553b5b9f472b6e0cb4.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/BurningVine/enemy_10067_ftsjc_424.skel"
+dest_files=["res://.godot/imported/enemy_10067_ftsjc_424.skel-2d3e5b15670503553b5b9f472b6e0cb4.spskel"]
+
+[params]
+

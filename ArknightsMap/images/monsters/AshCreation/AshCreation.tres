@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://i28dmky50s5j"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://dinuk8sr7ak8w" path="res://ArknightsMap/images/monsters/AshCreation/enemy_10070_ftkbtt.atlas" id="1_82qhg"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bq2jrc2hu8fl1" path="res://ArknightsMap/images/monsters/AshCreation/enemy_10070_ftkbtt_424.skel" id="2_0m0l8"]
+
+[resource]
+atlas_res = ExtResource("1_82qhg")
+skeleton_file_res = ExtResource("2_0m0l8")

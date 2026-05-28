@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://djp3ab5hv4500"
+path="res://.godot/imported/enemy_1293_duswrd.atlas-849b78a5c09973edf180caf989fa4abc.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnSpecOps/enemy_1293_duswrd.atlas"
+dest_files=["res://.godot/imported/enemy_1293_duswrd.atlas-849b78a5c09973edf180caf989fa4abc.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

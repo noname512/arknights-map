@@ -18,14 +18,15 @@ public class ScaldingEarth : ModEncounterTemplate
 
     // 遭遇场景（用来指定每个怪物站哪）
     public override EncounterAssetProfile AssetProfile => new(
-        EncounterScenePath: $"res://ArknightsMap/scenes/encounters/ScorchingDream.tscn"
+        EncounterScenePath: $"res://ArknightsMap/scenes/encounters/ScaldingEarth.tscn"
     );
 
     // 怪物槽位的名字
     public override IReadOnlyList<string> Slots => [
-        "first",
-        "second",
-        "third"
+        "fire1",
+        "fire2",
+        "fire3",
+        "evocator"
     ];
 
     public override RoomType RoomType => RoomType.Monster; // 这个遭遇的房间类型，这里是普通怪物
@@ -35,6 +36,6 @@ public class ScaldingEarth : ModEncounterTemplate
 
     // 生成怪物列表
     protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<DublinnEvocator>().ToMutable(), "third")
+        (ModelDb.Monster<DublinnEvocator>().ToMutable(), "evocator")
     ];
 }

@@ -1,11 +1,12 @@
 using ArknightsMap.Scripts.Powers;
+using MegaCrit.Sts2.Core.Animation;
+using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -22,7 +23,7 @@ public class DublinnEvocator : ModMonsterTemplate
     public override MonsterAssetProfile AssetProfile => new(
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
     );
-    
+
     private int ExplodeDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 25, 23);
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -39,7 +40,7 @@ public class DublinnEvocator : ModMonsterTemplate
 
     public async Task Summon(IReadOnlyList<Creature> targets)
     {
-        string position = CombatState.Encounter?.Slots.LastOrDefault<string>((s => CombatState.Enemies.All<Creature>((Func<Creature, bool>) (c => c.SlotName != s))), string.Empty);
+        string position = CombatState.Encounter?.Slots.LastOrDefault<string>((s => CombatState.Enemies.All<Creature>((Func<Creature, bool>)(c => c.SlotName != s))), string.Empty);
         if (!string.IsNullOrEmpty(position))
         {
             await CreatureCmd.Add<Fireball>(CombatState, position);
@@ -49,5 +50,17 @@ public class DublinnEvocator : ModMonsterTemplate
             await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), targets, new DamageVar(ExplodeDamage, ValueProp.Unpowered), Creature);
             await PowerCmd.Apply<FlamingDamagePower>(new ThrowingPlayerChoiceContext(), targets, ExplodeDamage, Creature, null);
         }
+    }
+
+    public override CreatureAnimator GenerateAnimator(MegaSprite controller)
+    {
+        AnimState idleState = new AnimState("Idle", isLooping: true);
+        AnimState skillState = new AnimState("Skill");
+        AnimState dieState = new AnimState("Die");
+        skillState.NextState = idleState;
+        CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
+        creatureAnimator.AddAnyState("Attack", skillState);
+        creatureAnimator.AddAnyState("Dead", dieState);
+        return creatureAnimator;
     }
 }
