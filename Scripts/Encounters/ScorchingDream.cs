@@ -8,8 +8,9 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Encounters;
 
 [RegisterActEncounter(typeof(Wilds))]
-public class ScorchingDream : ModEncounterTemplate
+public class ScorchingDream : MyAbstractEncounter
 {
+    public override bool isBurningAtStart => true;
     // 所有可能出现的怪物
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<DublinnFlamechaserSoldier>()];
 

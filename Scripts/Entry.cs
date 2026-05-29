@@ -18,6 +18,7 @@ public class Entry
 {
     public const string ModId = "ArknightsMap";
     public static readonly Logger Logger = RitsuLibFramework.CreateLogger(ModId);
+    public static ReedBed reedBed => new ReedBed();
     public static void Init()
     {
         // harmony可用，但是最好用ritsu的封装patch（TODO）
@@ -32,8 +33,7 @@ public class Entry
             .ActEnterWeightedPool(1)
             .ActEnterWeightedPoolCandidate<Wilds>(1, ctx => true, weight => 99999)
             .Apply();
-        
-        
+
         using (RitsuLibFramework.BeginModDataRegistration(ModId))
         {
             var store = RitsuLibFramework.GetDataStore(ModId);
@@ -45,7 +45,7 @@ public class Entry
                 defaultFactory: () => new WheatBeerCounter(),
                 autoCreateIfMissing: true);
         }
-        
+
         /*
         RitsuLibFramework.SubscribeLifecycle<ProfileDataReadyEvent>(_ =>
         {
@@ -54,6 +54,7 @@ public class Entry
             store.Save("wheatbeercounter");
             Logger.Info($"counter.Value = {store.Get<WheatBeerCounter>("wheatbeercounter").Value}");
         });*/
-        
+
+        RitsuLibFramework.SubscribeLifecycle(reedBed);
     }
 }

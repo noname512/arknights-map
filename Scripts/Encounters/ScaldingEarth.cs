@@ -8,7 +8,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Encounters;
 
 [RegisterActEncounter(typeof(Wilds))]
-public class ScaldingEarth : ModEncounterTemplate
+public class ScaldingEarth : MyAbstractEncounter
 {
     // 所有可能出现的怪物
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<DublinnEvocator>(), ModelDb.Monster<Fireball>()];

@@ -8,7 +8,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Encounters;
 
 [RegisterActEncounter(typeof(Wilds))]
-public class ApparitionalWaves : ModEncounterTemplate
+public class ApparitionalWaves : MyAbstractEncounter
 {
     // 所有可能出现的怪物
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<TombkeeperGrotesque>(), ModelDb.Monster<TatteredPillar>()];

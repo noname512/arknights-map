@@ -57,6 +57,7 @@ public class PutOutFire : ModCardTemplate
         SfxCmd.Play("event:/sfx/characters/attack_fire");
         await CreatureCmd.Damage(choiceContext, Owner.Creature, DynamicVars.Damage, this);
         await PowerCmd.Apply<FlamingDamagePower>(choiceContext, Owner.Creature, DynamicVars.Damage.IntValue, Owner.Creature, this);
+        await Entry.reedBed.SetBurningDurningCombat(false, CombatState);
     }
 
     // 升级后的效果逻辑
