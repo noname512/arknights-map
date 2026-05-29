@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -56,11 +57,12 @@ public class ChaseFlamePower : ModPowerTemplate
             creature.GetCreatureNode().SetAnimationTrigger("Revive");
             CurState = 1;
             await CreatureCmd.SetMaxAndCurrentHp(base.Owner, InitialHp);
+            await PowerCmd.Apply<IntangiblePower>(choiceContext, Owner, 99, Owner, null);
             NextMove = creature.Monster.NextMove;
-            MoveState sleep = new MoveState("SLEEP", SleepMove, new SleepIntent());
-            sleep.FollowUpState = sleep;
-            creature.Monster.SetMoveImmediate(sleep, true);
-            sleep.RegisterStates(Owner.Monster.MoveStateMachine.States);
+            MoveState stun = new MoveState("STUN", SleepMove, new StunIntent());
+            stun.FollowUpState = stun;
+            creature.Monster.SetMoveImmediate(stun, true);
+            stun.RegisterStates(Owner.Monster.MoveStateMachine.States);
             base.SetAmount(3);
             InitialHp--;
         }
@@ -79,7 +81,8 @@ public class ChaseFlamePower : ModPowerTemplate
             if (remainingTurns <= 0)
             {
                 base.Owner.GetCreatureNode().SetAnimationTrigger("Revive2");
-                await CreatureCmd.SetMaxAndCurrentHp(base.Owner, MaxHp);
+                await CreatureCmd.SetMaxAndCurrentHp(Owner, MaxHp);
+                await PowerCmd.Remove<IntangiblePower>(Owner);
                 base.Owner.Monster.SetMoveImmediate(NextMove, true);
                 base.SetAmount(InitialHp);
                 CurState = 0;
