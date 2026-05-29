@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://5q7dmsvk2phs"
+path="res://.godot/imported/enemy_1292_duskld.atlas-6710437cff914031cbacfa5baf981a82.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnFlamechaserGuard/enemy_1292_duskld.atlas"
+dest_files=["res://.godot/imported/enemy_1292_duskld.atlas-6710437cff914031cbacfa5baf981a82.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

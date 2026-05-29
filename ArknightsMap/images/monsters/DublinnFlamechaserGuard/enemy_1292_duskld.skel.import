@@ -1,0 +1,13 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://b133ar1avpvt3"
+valid=false
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DublinnFlamechaserGuard/enemy_1292_duskld.skel"
+
+[params]
+

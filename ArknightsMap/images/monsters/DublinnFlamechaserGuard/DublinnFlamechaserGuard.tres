@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://epoqbb34fdxo"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://5q7dmsvk2phs" path="res://ArknightsMap/images/monsters/DublinnFlamechaserGuard/enemy_1292_duskld.atlas" id="1_deig6"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dbojn0pggppfi" path="res://ArknightsMap/images/monsters/DublinnFlamechaserGuard/enemy_1292_duskld_424.skel" id="2_873qx"]
+
+[resource]
+atlas_res = ExtResource("1_deig6")
+skeleton_file_res = ExtResource("2_873qx")

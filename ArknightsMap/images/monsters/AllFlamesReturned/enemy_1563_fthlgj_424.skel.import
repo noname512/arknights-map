@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://dr7vo0fwm6s80"
+path="res://.godot/imported/enemy_1563_fthlgj_424.skel-7f25884aba24ea59a133ff43f084fb19.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/AllFlamesReturned/enemy_1563_fthlgj_424.skel"
+dest_files=["res://.godot/imported/enemy_1563_fthlgj_424.skel-7f25884aba24ea59a133ff43f084fb19.spskel"]
+
+[params]
+

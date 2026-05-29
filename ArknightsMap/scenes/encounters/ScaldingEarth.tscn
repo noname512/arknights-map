@@ -10,13 +10,13 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="fire1" type="Marker2D" parent="."]
-position = Vector2(1257, 716)
+position = Vector2(807, 716)
 
 [node name="fire2" type="Marker2D" parent="."]
-position = Vector2(1407, 716)
+position = Vector2(1072, 716)
 
 [node name="fire3" type="Marker2D" parent="."]
-position = Vector2(1557, 716)
+position = Vector2(1382, 716)
 
 [node name="evocator" type="Marker2D" parent="."]
-position = Vector2(1757, 716)
+position = Vector2(1657, 716)

@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bbgfj4n502pf4"
+path="res://.godot/imported/enemy_1536_ncrmcr_424.skel-b7753ab8591b33227b70b2513319c426.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/TheLeader/enemy_1536_ncrmcr_424.skel"
+dest_files=["res://.godot/imported/enemy_1536_ncrmcr_424.skel-b7753ab8591b33227b70b2513319c426.spskel"]
+
+[params]
+

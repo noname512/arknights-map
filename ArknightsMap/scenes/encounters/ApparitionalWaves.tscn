@@ -13,4 +13,4 @@ mouse_filter = 2
 position = Vector2(1257, 716)
 
 [node name="second" type="Marker2D" parent="."]
-position = Vector2(1507, 716)
+position = Vector2(1607, 716)
