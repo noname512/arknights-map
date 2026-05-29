@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://0h4ua0bj0sm4"
+path="res://.godot/imported/enemy_10066_ftxjl.atlas-a3e15537ae2fad09b170d0e45d672605.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Nest/enemy_10066_ftxjl.atlas"
+dest_files=["res://.godot/imported/enemy_10066_ftxjl.atlas-a3e15537ae2fad09b170d0e45d672605.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

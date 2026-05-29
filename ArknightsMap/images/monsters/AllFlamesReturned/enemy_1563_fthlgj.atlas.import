@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://by0k4687svxx0"
+path="res://.godot/imported/enemy_1563_fthlgj.atlas-daa7cb498341b0cd502bb1e4c6cc9f18.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/AllFlamesReturned/enemy_1563_fthlgj.atlas"
+dest_files=["res://.godot/imported/enemy_1563_fthlgj.atlas-daa7cb498341b0cd502bb1e4c6cc9f18.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

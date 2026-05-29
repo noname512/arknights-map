@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://dugr804apv24k"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://by0k4687svxx0" path="res://ArknightsMap/images/monsters/AllFlamesReturned/enemy_1563_fthlgj.atlas" id="1_dfhk6"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dr7vo0fwm6s80" path="res://ArknightsMap/images/monsters/AllFlamesReturned/enemy_1563_fthlgj_424.skel" id="2_sdbs0"]
+
+[resource]
+atlas_res = ExtResource("1_dfhk6")
+skeleton_file_res = ExtResource("2_sdbs0")

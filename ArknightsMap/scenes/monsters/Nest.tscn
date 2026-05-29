@@ -1,10 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://bd042ed5guwf0"]
 
-[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_v77x8"]
-[ext_resource type="SpineSkeletonDataResource" uid="uid://bkyglhss72taa" path="res://ArknightsMap/images/monsters/DublinnFlamecaller/DublinnFlamecaller.tres" id="ssdr"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cg5kwxjickheg" path="res://ArknightsMap/images/monsters/Nest/Nest.tres" id="ssdr"]
 
-[node name="DublinnFlamecaller" type="Node2D"]
-script = ExtResource("1_v77x8")
+[node name="Nest" type="Node2D"]
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
@@ -21,14 +19,14 @@ scale = Vector2(-0.5, 0.5)
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
-offset_left = -100.0
-offset_top = -180.0
-offset_right = 105.0
+offset_left = -85.0
+offset_top = -200.0
+offset_right = 85.0
 
 [node name="IntentPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -225)
+position = Vector2(0, -245)
 
 [node name="CenterPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -90)
+position = Vector2(0, -100)

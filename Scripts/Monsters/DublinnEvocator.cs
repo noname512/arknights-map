@@ -40,6 +40,7 @@ public class DublinnEvocator : ModMonsterTemplate
 
     public async Task Summon(IReadOnlyList<Creature> targets)
     {
+        await CreatureCmd.TriggerAnim(Creature, "Skill", 0);
         string position = CombatState.Encounter?.Slots.LastOrDefault<string>((s => CombatState.Enemies.All<Creature>((Func<Creature, bool>)(c => c.SlotName != s))), string.Empty);
         if (!string.IsNullOrEmpty(position))
         {
@@ -59,8 +60,8 @@ public class DublinnEvocator : ModMonsterTemplate
         AnimState dieState = new AnimState("Die");
         skillState.NextState = idleState;
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
-        creatureAnimator.AddAnyState("Attack", skillState);
         creatureAnimator.AddAnyState("Dead", dieState);
+        creatureAnimator.AddAnyState("Skill", skillState);
         return creatureAnimator;
     }
 }

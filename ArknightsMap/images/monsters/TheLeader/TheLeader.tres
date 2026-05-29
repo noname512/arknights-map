@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://kahd8f4flgy1"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://l0ma6vq86f8p" path="res://ArknightsMap/images/monsters/TheLeader/enemy_1536_ncrmcr.atlas" id="1_r4xlk"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bbgfj4n502pf4" path="res://ArknightsMap/images/monsters/TheLeader/enemy_1536_ncrmcr_424.skel" id="2_se8vi"]
+
+[resource]
+atlas_res = ExtResource("1_r4xlk")
+skeleton_file_res = ExtResource("2_se8vi")

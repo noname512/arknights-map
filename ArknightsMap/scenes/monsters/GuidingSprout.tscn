@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://cy4iq6nvcub3x"]
+[gd_scene load_steps=2 format=3]
 
 [ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_v77x8"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://bwgo4foym0ld8" path="res://ArknightsMap/images/monsters/GuidingSprout/GuidingSprout.tres" id="ssdr"]

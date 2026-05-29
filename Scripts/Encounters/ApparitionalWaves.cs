@@ -34,7 +34,7 @@ public class ApparitionalWaves : ModEncounterTemplate
 
     // 生成怪物列表
     protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<TombkeeperGrotesque>().ToMutable(), "first"),
-        (ModelDb.Monster<TatteredPillar>().ToMutable(), "second")
+        (ModelDb.Monster<TombkeeperGrotesque>().ToMutable(), "second"),
+        (ModelDb.Monster<TatteredPillar>().ToMutable(), "first")
     ];
 }

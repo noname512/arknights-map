@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://l0ma6vq86f8p"
+path="res://.godot/imported/enemy_1536_ncrmcr.atlas-e4062da934dc0164dcf38d22108bde48.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/TheLeader/enemy_1536_ncrmcr.atlas"
+dest_files=["res://.godot/imported/enemy_1536_ncrmcr.atlas-e4062da934dc0164dcf38d22108bde48.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

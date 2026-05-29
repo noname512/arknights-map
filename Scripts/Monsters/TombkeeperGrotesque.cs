@@ -1,4 +1,6 @@
 using ArknightsMap.Scripts.Powers;
+using MegaCrit.Sts2.Core.Animation;
+using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Ascension;
@@ -43,7 +45,7 @@ public class TombkeeperGrotesque : ModMonsterTemplate
         }
     }
     public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}ERROR.tscn"  //不ERROR Debuff上不去！
+        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
     );
 
     public override async Task AfterAddedToRoom()
@@ -58,13 +60,15 @@ public class TombkeeperGrotesque : ModMonsterTemplate
         {
             MustPerformOnceBeforeTransitioning = true
         };
-        MoveState Respawn2 = new MoveState("RESPAWN_2", _ => { return Task.CompletedTask;}, new StunIntent());
-        MoveState Respawn3 = new MoveState("RESPAWN_3", _ => { return Task.CompletedTask;}, new StunIntent());
-        MoveState Respawn4 = new MoveState("RESPAWN_4", async _ => 
+        MoveState Respawn2 = new MoveState("RESPAWN_2", _ => { return Task.CompletedTask; }, new StunIntent());
+        MoveState Respawn3 = new MoveState("RESPAWN_3", _ => { return Task.CompletedTask; }, new StunIntent());
+        MoveState Respawn4 = new MoveState("RESPAWN_4", async _ =>
         {
+            await CreatureCmd.TriggerAnim(Creature, "Start", 0);
             await PowerCmd.Remove<DamageOutPower>(Creature);
             await PowerCmd.Apply<SoarPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
             await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 4m, Creature, null);
+            _isStage2 = true;
         }, new BuffIntent());
         MoveState attack1 = new MoveState(
             "ATTACK1",
@@ -116,9 +120,32 @@ public class TombkeeperGrotesque : ModMonsterTemplate
             await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), m, 1, Creature, null);
         }
     }
-    
+
     public async Task TriggerDeadState()
     {
         SetMoveImmediate(DeadState, forceTransition: true);
+    }
+
+    public override CreatureAnimator GenerateAnimator(MegaSprite controller)
+    {
+        AnimState idleState = new AnimState("Idle", isLooping: true);
+        AnimState attackState = new AnimState("Attack");
+        AnimState dieState = new AnimState("Die");
+        AnimState sleepState = new AnimState("Sleep");
+        AnimState startState = new AnimState("Start");
+        AnimState idleState2 = new AnimState("Idle_2", isLooping: true);
+        AnimState attackState2 = new AnimState("Attack_2");
+        AnimState dieState2 = new AnimState("Die_2");
+        attackState.NextState = idleState;
+        dieState.NextState = sleepState;
+        startState.NextState = idleState2;
+        attackState2.NextState = idleState2;
+        CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
+        creatureAnimator.AddAnyState("Attack", attackState, () => !_isStage2);
+        creatureAnimator.AddAnyState("Attack", attackState2, () => _isStage2);
+        creatureAnimator.AddAnyState("Dead", dieState, () => !_isStage2);
+        creatureAnimator.AddAnyState("Dead", dieState2, () => _isStage2);
+        creatureAnimator.AddAnyState("Start", startState);
+        return creatureAnimator;
     }
 }
