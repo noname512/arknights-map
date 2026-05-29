@@ -20,6 +20,7 @@ public class DublinnFlamechaserSoldier : ModMonsterTemplate
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 35, 30);
     private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 9, 8);
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 8, 7);
+    public override bool ShouldDisappearFromDoom => Creature.HasPower<ChaseFlamePower>() && Creature.GetPower<ChaseFlamePower>()?.CurState == 0;
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
@@ -58,14 +59,25 @@ public class DublinnFlamechaserSoldier : ModMonsterTemplate
                 .Execute(null),
             new SingleAttackIntent(Damage1)
         );
+        MoveState stun1 = new MoveState("STUN1", _ => { return Task.CompletedTask; }, new StunIntent());
+        MoveState stun2 = new MoveState("STUN2", _ => { return Task.CompletedTask; }, new StunIntent());
+        MoveState stun3 = new MoveState("STUN3", async _ =>
+        {
+            await Creature.GetPower<ChaseFlamePower>()?.Revive();
+        }, new HealIntent(), new BuffIntent());
 
         attack1.FollowUpState = attack2;
         attack2.FollowUpState = attack3;
         attack3.FollowUpState = attack1;
+        stun1.FollowUpState = stun2;
+        stun2.FollowUpState = stun3;
 
         list.Add(attack1);
         list.Add(attack2);
         list.Add(attack3);
+        list.Add(stun1);
+        list.Add(stun2);
+        list.Add(stun3);
 
         return new MonsterMoveStateMachine(list, attack1);
     }

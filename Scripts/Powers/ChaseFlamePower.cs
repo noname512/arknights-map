@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
+using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -20,15 +21,17 @@ public class ChaseFlamePower : ModPowerTemplate
     public override PowerType Type => PowerType.Buff;
     // 叠加类型，Counter表示可叠加，Single表示不可叠加
     public override PowerStackType StackType => PowerStackType.Counter;
-    public int CurState { get; set; } = 0; // 0: 初始状态，1: 余烬
-    public int InitialHp { get; set; } = 0;
-    public int MaxHp { get; set; } = 0;
+    public int CurState = 0; // 0: 初始状态，1: 余烬
+    public int InitialHp = 0;
+    public int MaxHp = 0;
+    public int DecreaseHp = 0;
     MoveState NextMove = null!;
 
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
         InitialHp = Amount;
-        MaxHp = base.Owner.MaxHp;
+        MaxHp = Owner.MaxHp;
+        DecreaseHp = MaxHp / Amount;
         return base.AfterApplied(applier, cardSource);
     }
 
@@ -45,32 +48,46 @@ public class ChaseFlamePower : ModPowerTemplate
 
     private static Task SleepMove(IReadOnlyList<Creature> targets) => Task.CompletedTask;
 
-    public override bool ShouldCreatureBeRemovedFromCombatAfterDeath(Creature creature) => creature != base.Owner || CurState == 1;
+    public override bool ShouldCreatureBeRemovedFromCombatAfterDeath(Creature creature) => creature != base.Owner || CurState == 1 || InitialHp <= 0;
 
     public override bool ShouldPowerBeRemovedAfterOwnerDeath() => false;
 
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
     {
         if (creature != base.Owner) return;
+        if (InitialHp <= 0) return;
         if (CurState == 0)
         {
             creature.GetCreatureNode().SetAnimationTrigger("Revive");
             CurState = 1;
             await CreatureCmd.SetMaxAndCurrentHp(base.Owner, InitialHp);
-            await PowerCmd.Apply<IntangiblePower>(choiceContext, Owner, 99, Owner, null);
             NextMove = creature.Monster.NextMove;
-            MoveState stun = new MoveState("STUN", SleepMove, new StunIntent());
-            stun.FollowUpState = stun;
+            MoveState stun = (MoveState)Owner.Monster.MoveStateMachine.States["STUN1"];
             creature.Monster.SetMoveImmediate(stun, true);
-            stun.RegisterStates(Owner.Monster.MoveStateMachine.States);
-            base.SetAmount(3);
-            InitialHp--;
+            ((MoveState)Owner.Monster.MoveStateMachine.States["STUN3"]).FollowUpState = NextMove;
+            SetAmount(3);
         }
+    }
+
+    public async Task Revive()
+    {
+        MaxHp -= DecreaseHp;
+        if (MaxHp <= 0)
+        {
+            await CreatureCmd.Kill(Owner);
+            return;
+        }
+        Owner.GetCreatureNode().SetAnimationTrigger("Revive2");
+        await CreatureCmd.SetMaxAndCurrentHp(Owner, MaxHp);
+        Owner.Monster.SetMoveImmediate(NextMove, true);
+        InitialHp--;
+        SetAmount(InitialHp);
+        CurState = 0;
     }
 
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (side != base.Owner.Side)
+        if (side != Owner.Side)
         {
             return;
         }
@@ -80,13 +97,41 @@ public class ChaseFlamePower : ModPowerTemplate
             base.SetAmount(remainingTurns);
             if (remainingTurns <= 0)
             {
-                base.Owner.GetCreatureNode().SetAnimationTrigger("Revive2");
-                await CreatureCmd.SetMaxAndCurrentHp(Owner, MaxHp);
-                await PowerCmd.Remove<IntangiblePower>(Owner);
-                base.Owner.Monster.SetMoveImmediate(NextMove, true);
-                base.SetAmount(InitialHp);
-                CurState = 0;
+                await Revive();
             }
         }
     }
+    
+    public override Decimal ModifyHpLostAfterOsty(
+        Creature target,
+        Decimal amount,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource)
+    {
+        if (CurState == 0) return amount;
+        return !CombatManager.Instance.IsInProgress || target != this.Owner || amount < 1M ? amount : 1M;
+    }
+    
+    public override Task AfterModifyingHpLostAfterOsty()
+    {
+        if (CurState == 1) Flash();
+        return Task.CompletedTask;
+    }
+    public override Decimal ModifyDamageCap(
+        Creature? target,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource)
+    {
+        if (CurState == 0) return Decimal.MaxValue;
+        return target != this.Owner ? Decimal.MaxValue : 1M;
+    }
+
+    public override Task AfterModifyingDamageAmount(CardModel? cardSource)
+    {
+        if (CurState == 1) Flash();
+        return Task.CompletedTask;
+    }
+
 }

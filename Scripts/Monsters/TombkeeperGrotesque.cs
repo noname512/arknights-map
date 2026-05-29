@@ -30,6 +30,7 @@ public class TombkeeperGrotesque : ModMonsterTemplate
     private int HitCount3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 4, 4);
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 105, 100);
     public override int MaxInitialHp => MinInitialHp;
+    public override bool ShouldDisappearFromDoom => _isStage2;
 
     private MoveState _deadState;
     private MoveState DeadState

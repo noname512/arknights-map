@@ -31,5 +31,11 @@ public class DamageOutPower : ModPowerTemplate
         if (Owner != target) return 0;
         return -Amount;
     }
-    
+
+    public override Task AfterModifyingHpLostAfterOsty()
+    {
+        this.Flash();
+        return Task.CompletedTask;
+    }
+
 }

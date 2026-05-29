@@ -27,6 +27,12 @@ public class PhalanxPower : ModPowerTemplate
         return Task.CompletedTask;
     }
 
+    public override Task AfterModifyingHpLostAfterOsty()
+    {
+        this.Flash();
+        return Task.CompletedTask;
+    }
+
     public override Task AfterCreatureAddedToCombat(Creature creature)
     {
         if (creature.IsMonster && creature.Monster is DublinnPhalanxInfantry)

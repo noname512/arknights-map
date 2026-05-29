@@ -39,4 +39,10 @@ public class CompanionDefPower : ModPowerTemplate
             await PowerCmd.Remove<CompanionAtkPower>(Owner);
         }
     }
+    
+    public override Task AfterModifyingHpLostAfterOsty()
+    {
+        this.Flash();
+        return Task.CompletedTask;
+    }
 }
