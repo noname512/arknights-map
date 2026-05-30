@@ -8,7 +8,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Encounters;
 
 [RegisterActEncounter(typeof(Wilds))]
-public class ComingFire : MyAbstractEncounter
+public class ComingFire : AbstractWildsEncounter
 {
     public override bool isBurningAtStart => false;
     // 所有可能出现的怪物

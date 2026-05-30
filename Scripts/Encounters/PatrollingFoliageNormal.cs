@@ -8,7 +8,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Encounters;
 
 [RegisterActEncounter(typeof(Wilds))]
-public class PatrollingFoliageNormal : MyAbstractEncounter
+public class PatrollingFoliageNormal : AbstractWildsEncounter
 {
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<PatrollingFoliage>()];
 

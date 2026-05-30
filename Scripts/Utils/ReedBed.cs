@@ -22,7 +22,7 @@ public sealed class ReedBed : ILifecycleObserver
         if (evt is CombatStartingEvent cse)
         {
             EncounterModel encounter = cse.CombatState.Encounter;
-            if (encounter is MyAbstractEncounter myEncounter)
+            if (encounter is AbstractWildsEncounter myEncounter)
             {
                 Control control = NCombatRoom.Instance?.Background ?? throw new InvalidOperationException();
                 Foreground = control.GetNodeOrNull("Foreground");

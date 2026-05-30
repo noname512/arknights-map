@@ -8,7 +8,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Encounters;
 
 [RegisterActEncounter(typeof(Wilds))]
-public class DublinnCompanion : MyAbstractEncounter
+public class DublinnCompanion : AbstractWildsEncounter
 {
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [
         ModelDb.Monster<DublinnCompanionGuard>(),
