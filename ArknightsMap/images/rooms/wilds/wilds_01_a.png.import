@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://wch47ddxaqjq"
-path="res://.godot/imported/wilds_01_a.png-8e0e4b37e81da0f3519aecf4874ac008.ctex"
+path="res://.godot/imported/wilds_01_a.png-ef1091aa451d94c64f3629b027c8841a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/room/wilds/wilds_01_a.png"
-dest_files=["res://.godot/imported/wilds_01_a.png-8e0e4b37e81da0f3519aecf4874ac008.ctex"]
+source_file="res://ArknightsMap/images/rooms/wilds/wilds_01_a.png"
+dest_files=["res://.godot/imported/wilds_01_a.png-ef1091aa451d94c64f3629b027c8841a.ctex"]
 
 [params]
 
