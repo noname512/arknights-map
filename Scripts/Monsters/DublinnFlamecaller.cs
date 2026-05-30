@@ -35,7 +35,7 @@ public class DublinnFlamecaller : ModMonsterTemplate
             "FIRE",
             async targets =>
             {
-                await Entry.reedBed.SetBurningDurningCombat(true, Creature.CombatState);
+                await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
             },
             new BuffIntent()
         );
@@ -49,7 +49,7 @@ public class DublinnFlamecaller : ModMonsterTemplate
                 {
                     await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(),  Creature, StrengthGain, Creature, null);
                 }
-                await Entry.reedBed.SetBurningDurningCombat(true, Creature.CombatState);
+                await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
             },
             new SingleAttackIntent(AttackDamage), new BuffIntent()
         );

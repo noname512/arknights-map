@@ -52,5 +52,8 @@
     "ARKNIGHTS_MAP_POWER_DAMAGE_OUT_POWER.title": "坚硬",
     "ARKNIGHTS_MAP_POWER_REBORN_POWER.description": "当[gold]该怪物[/gold]将要被击败时，它会复活并变得更加强大。",
     "ARKNIGHTS_MAP_POWER_REBORN_POWER.smartDescription": "当[gold]{OwnerName}[/gold]将要被击败时，它会复活并变得更加强大。",
-    "ARKNIGHTS_MAP_POWER_REBORN_POWER.title": "复活"
+    "ARKNIGHTS_MAP_POWER_REBORN_POWER.title": "复活",
+    "ARKNIGHTS_MAP_POWER_FLAME_BATH_POWER.description": "如果[gold]芦苇丛[/gold]处于[gold]燃烧[/gold]状态，受到的伤害降低。",
+    "ARKNIGHTS_MAP_POWER_FLAME_BATH_POWER.smartDescription": "如果[gold]芦苇丛[/gold]处于[gold]燃烧[/gold]状态，受到的伤害减少[blue]{Amount}%[/blue]。",
+    "ARKNIGHTS_MAP_POWER_FLAME_BATH_POWER.title": "归来"
 }

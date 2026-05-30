@@ -50,7 +50,11 @@ public class RebornPower : ModPowerTemplate
             GetInternalData<Data>().isReviving = true;
             if (creature.Monster is TombkeeperGrotesque tombkeeperGrotesque)
             {
-                await tombkeeperGrotesque.TriggerDeadState();
+                tombkeeperGrotesque.TriggerDeadState();
+            }
+            if (creature.Monster is AllFlamesReturned allFlamesReturned)
+            {
+                await allFlamesReturned.TriggerDeadState();
             }
         }
     }
@@ -80,6 +84,15 @@ public class RebornPower : ModPowerTemplate
 
     public override bool ShouldPowerBeRemovedAfterOwnerDeath()
     {
+        return false;
+    }
+    
+    public override bool ShouldPowerBeRemovedOnDeath(PowerModel power)
+    {
+        if (power.Type == PowerType.Debuff)
+        {
+            return true;
+        }
         return false;
     }
 }

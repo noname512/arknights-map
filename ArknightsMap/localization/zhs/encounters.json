@@ -20,5 +20,7 @@
     "ARKNIGHTS_MAP_ENCOUNTER_COMING_FIRE.title": "火光将至",
     "ARKNIGHTS_MAP_ENCOUNTER_COMING_FIRE.loss": "{character}被火光吞噬了",
     "ARKNIGHTS_MAP_ENCOUNTER_END_OF_THE_NIGHT.title": "夜尽之时",
-    "ARKNIGHTS_MAP_ENCOUNTER_END_OF_THE_NIGHT.loss": "{character}被“襁褓”中破壳而出的“幼兽”吞食"
+    "ARKNIGHTS_MAP_ENCOUNTER_END_OF_THE_NIGHT.loss": "{character}被“襁褓”中破壳而出的“幼兽”吞食",
+    "ARKNIGHTS_MAP_ENCOUNTER_AFR_BOSS.title": "“万火归一”",
+    "ARKNIGHTS_MAP_ENCOUNTER_AFR_BOSS.loss": "{character}无法摆脱[purple]紫色的火焰[/purple]"
 }

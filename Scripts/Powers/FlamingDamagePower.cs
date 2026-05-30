@@ -45,9 +45,15 @@ public class FlamingDamagePower : ModPowerTemplate, IHealthBarForecastSource
                 {
                     await PowerCmd.Apply<VulnerablePower>(choiceContext, Owner, 2, Owner, null, false);
                 }
+                else if (Owner.HasPower<VulnerablePower>())
+                {
+                    await PowerCmd.Apply<VulnerablePower>(choiceContext, Owner, 1, Owner, null, false);
+                }
                 else
                 {
                     await PowerCmd.Apply<VulnerablePower>(choiceContext, Owner, 1, Owner, null, false);
+                    PowerModel power = Owner.GetPower<VulnerablePower>();
+                    if (power != null) await PowerCmd.TickDownDuration(power);
                 }
                 await PowerCmd.Remove(this);
             }

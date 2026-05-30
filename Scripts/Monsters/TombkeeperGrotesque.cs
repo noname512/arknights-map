@@ -122,7 +122,7 @@ public class TombkeeperGrotesque : ModMonsterTemplate
         }
     }
 
-    public async Task TriggerDeadState()
+    public void TriggerDeadState()
     {
         SetMoveImmediate(DeadState, forceTransition: true);
     }
