@@ -1,28 +1,35 @@
-using System.Runtime.CompilerServices;
-using ArknightsMap.Scripts;
 using ArknightsMap.Scripts.Cards;
 using ArknightsMap.Scripts.Powers;
+using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
 using STS2RitsuLib;
 
 public sealed class ReedBed : ILifecycleObserver
 {
     public static bool Burning;
+    public static Node? Foreground;
 
-    public ReedBed() { }
+    public ReedBed()
+    { }
 
     public async void OnEvent(IFrameworkLifecycleEvent evt)
     {
         if (evt is CombatStartingEvent cse)
         {
             EncounterModel encounter = cse.CombatState.Encounter;
-            if (encounter is MyAbstractEncounter myEncounter && myEncounter.isBurningAtStart)
+            if (encounter is MyAbstractEncounter myEncounter)
             {
-                await SetBurningDurningCombat(true, cse.CombatState);
+                Control control = NCombatRoom.Instance?.Background ?? throw new InvalidOperationException();
+                Foreground = control.GetNodeOrNull("Foreground");
+                if (myEncounter.isBurningAtStart)
+                {
+                    await SetBurningDurningCombat(true, cse.CombatState);
+                }
             }
         }
         else if (evt is SideTurnStartingEvent stse)
@@ -47,14 +54,28 @@ public sealed class ReedBed : ILifecycleObserver
         if (burning != Burning)
         {
             Burning = burning;
+            string texturePath = "res://ArknightsMap/images/rooms/wilds/";
             if (Burning)
             {
                 await PowerCmd.Apply<DealFlamingDamagePower>(new ThrowingPlayerChoiceContext(), combatState.Enemies, 1m, null, null);
+                texturePath += "wilds_01_b.png";
             }
             else
             {
                 foreach (var m in combatState.Enemies)
                     await PowerCmd.Remove<DealFlamingDamagePower>(m);
+                texturePath += "wilds_01_a.png";
+            }
+
+            // Change foreground picture
+            if (Foreground != null && Foreground.GetChildCount() > 0)
+            {
+                Node textureNode = Foreground.GetChild(0);
+                if (textureNode is TextureRect textureRect)
+                {
+                    Texture2D newTexture = GD.Load<Texture2D>(texturePath);
+                    textureRect.Texture = newTexture;
+                }
             }
         }
     }
