@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://c7grpihw36am3"
+path="res://.godot/imported/enemy_10066_ftxjl_fix.skel-e259688f4f35888c3ffad4ba6244efaf.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Nest/enemy_10066_ftxjl_fix.skel"
+dest_files=["res://.godot/imported/enemy_10066_ftxjl_fix.skel-e259688f4f35888c3ffad4ba6244efaf.spskel"]
+
+[params]
+

@@ -1,7 +1,7 @@
 [gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://cg5kwxjickheg"]
 
 [ext_resource type="SpineAtlasResource" uid="uid://0h4ua0bj0sm4" path="res://ArknightsMap/images/monsters/Nest/enemy_10066_ftxjl.atlas" id="1_f7171"]
-[ext_resource type="SpineSkeletonFileResource" uid="uid://dwb6hynd0fuob" path="res://ArknightsMap/images/monsters/Nest/enemy_10066_ftxjl_424.skel" id="2_721r1"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://c7grpihw36am3" path="res://ArknightsMap/images/monsters/Nest/enemy_10066_ftxjl_fix.skel" id="2_721r1"]
 
 [resource]
 atlas_res = ExtResource("1_f7171")

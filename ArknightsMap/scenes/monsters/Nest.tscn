@@ -1,8 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://bd042ed5guwf0"]
 
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_v77x8"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://cg5kwxjickheg" path="res://ArknightsMap/images/monsters/Nest/Nest.tres" id="ssdr"]
 
 [node name="Nest" type="Node2D"]
+script = ExtResource("1_v77x8")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 

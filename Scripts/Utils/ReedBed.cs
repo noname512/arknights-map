@@ -21,6 +21,7 @@ public sealed class ReedBed : ILifecycleObserver
     {
         if (evt is CombatStartingEvent cse)
         {
+            Burning = false;
             EncounterModel encounter = cse.CombatState.Encounter;
             if (encounter is AbstractWildsEncounter myEncounter)
             {
