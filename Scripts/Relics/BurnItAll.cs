@@ -22,7 +22,7 @@ public class BurnItAll : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(55), new IntVar("CardsPick", 20)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(50), new IntVar("CardsPick", 25)];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromCard<Dirge>()];
 
     public override RelicAssetProfile AssetProfile => new(

@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -26,6 +27,7 @@ public class ChaseFlamePower : ModPowerTemplate
     public int MaxHp = 0;
     public int DecreaseHp = 0;
     MoveState NextMove = null!;
+    private ChaseFlamePowerRes res = new ChaseFlamePowerRes();
 
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
@@ -43,7 +45,19 @@ public class ChaseFlamePower : ModPowerTemplate
         BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png"
     );
 
+    public override LocString Title => new LocString("powers", CurState == 0 ? "ARKNIGHTS_MAP_POWER_CHASE_FLAME_POWER.title" : "ARKNIGHTS_MAP_POWER_CHASE_FLAME_RES.title");
     public override LocString Description => new LocString("powers", CurState == 0 ? "ARKNIGHTS_MAP_POWER_CHASE_FLAME_POWER.description" : "ARKNIGHTS_MAP_POWER_CHASE_FLAME_RES.description");
+
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips
+    {
+        get
+        {
+            res.CurState = 1 - CurState;
+            return res.HoverTips;
+        }
+    }
+
+
     protected override string SmartDescriptionLocKey => CurState == 0 ? "ARKNIGHTS_MAP_POWER_CHASE_FLAME_POWER.smartDescription" : "ARKNIGHTS_MAP_POWER_CHASE_FLAME_RES.smartDescription";
 
     private static Task SleepMove(IReadOnlyList<Creature> targets) => Task.CompletedTask;

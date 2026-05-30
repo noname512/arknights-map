@@ -35,9 +35,9 @@ public class CollapsePower : ModPowerTemplate
         {
             MoveState curState = partner.Monster.NextMove;
             MoveState newState;
-            if (partner is Mandragora)
+            if (partner.Monster is Mandragora)
             {
-                newState = ((Mandragora)partner.Monster).GetSummonState();
+                newState = ((Mandragora)(partner.Monster)).GetSummonState();
             }
             else
             {
