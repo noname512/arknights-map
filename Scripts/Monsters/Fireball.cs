@@ -4,9 +4,12 @@ using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -50,5 +53,22 @@ public class Fireball : ModMonsterTemplate
         list.Add(explode);
 
         return new MonsterMoveStateMachine(list, explode);
+    }
+    
+    public override async Task AfterDamageReceivedLate(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
+    {
+        if (target == Creature)
+        {
+            int remainAttack = ExplodeDamage + Creature.GetPowerAmount<StrengthPower>();
+            if (remainAttack <= 0)
+            {
+                NCombatRoom.Instance?.GetCreatureNode(Creature)?.ScaleTo(0f, 0.35);
+                await CreatureCmd.Kill(base.Creature);
+            }
+
+            float percent = 1.0f * (ExplodeDamage - remainAttack) / ExplodeDamage;
+            //percent = percent * percent;
+            NCombatRoom.Instance?.GetCreatureNode(Creature)?.ScaleTo(1.0f - percent * 0.7f, 0.35);
+        }
     }
 }

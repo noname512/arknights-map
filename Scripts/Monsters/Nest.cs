@@ -11,6 +11,7 @@ using STS2RitsuLib.Scaffolding.Content;
 using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
 
 namespace ArknightsMap.Scripts.Monsters;
 
@@ -21,8 +22,10 @@ public class Nest : ModMonsterTemplate
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 10, 10);
     private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 3, 2);
     private int StrengthAdd => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 3, 2);
-    private int HpAdd => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 15, 12);
+    private int HpAdd => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 15, 12);
     private int growthTimes = 0;
+    private int FirstGrow = 1;
+    private int SecondGrow = AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 4, 5);
 
     public override MonsterAssetProfile AssetProfile => new(
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
@@ -44,11 +47,19 @@ public class Nest : ModMonsterTemplate
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthAdd, Creature, null);
                 await CreatureCmd.GainMaxHp(Creature, HpAdd);
                 growthTimes++;
-                if (growthTimes == 1) await CreatureCmd.TriggerAnim(Creature, "Bigger", 0);
-                if (growthTimes == 2) await CreatureCmd.TriggerAnim(Creature, "Crack", 0);
+                if (growthTimes == FirstGrow)
+                {
+                    NCombatRoom.Instance?.GetCreatureNode(Creature)?.ScaleTo(0.5f, 0);
+                    await CreatureCmd.TriggerAnim(Creature, "Bigger", 0);
+                }
+                if (growthTimes == SecondGrow) await CreatureCmd.TriggerAnim(Creature, "Crack", 0);
+                if ((growthTimes < SecondGrow) && (growthTimes > FirstGrow))
+                {
+                    NCombatRoom.Instance?.GetCreatureNode(Creature)?.ScaleTo(0.5f + 0.5f * (growthTimes - FirstGrow) / (SecondGrow - FirstGrow - 1), 0.75);
+                }
             },
             new SingleAttackIntent(Damage),
-            new BuffIntent()
+            new BuffIntent(), new HealIntent()
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
@@ -95,12 +106,12 @@ public class Nest : ModMonsterTemplate
         biggerState.NextState = idleState2;
         crackState.NextState = idleState3;
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
-        creatureAnimator.AddAnyState("Attack", attackState, () => growthTimes == 0);
-        creatureAnimator.AddAnyState("Attack", attackState2, () => growthTimes == 1);
-        creatureAnimator.AddAnyState("Attack", attackState3, () => growthTimes >= 2);
-        creatureAnimator.AddAnyState("Dead", dieState, () => growthTimes == 0);
-        creatureAnimator.AddAnyState("Dead", dieState2, () => growthTimes == 1);
-        creatureAnimator.AddAnyState("Dead", dieState3, () => growthTimes >= 2);
+        creatureAnimator.AddAnyState("Attack", attackState, () => growthTimes < FirstGrow);
+        creatureAnimator.AddAnyState("Attack", attackState2, () => growthTimes >= FirstGrow && growthTimes < SecondGrow);
+        creatureAnimator.AddAnyState("Attack", attackState3, () => growthTimes >= SecondGrow);
+        creatureAnimator.AddAnyState("Dead", dieState, () => growthTimes < FirstGrow);
+        creatureAnimator.AddAnyState("Dead", dieState2, () => growthTimes >= FirstGrow && growthTimes < SecondGrow);
+        creatureAnimator.AddAnyState("Dead", dieState3, () => growthTimes >= SecondGrow);
         creatureAnimator.AddAnyState("Bigger", biggerState);
         creatureAnimator.AddAnyState("Crack", crackState);
         return creatureAnimator;
