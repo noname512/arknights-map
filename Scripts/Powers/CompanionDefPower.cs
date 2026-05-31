@@ -27,19 +27,18 @@ public class CompanionDefPower : ModPowerTemplate
     public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         if (base.Owner != target) return 0;
-        if (base.CombatState.Enemies.Count(e => e.IsAlive && e.IsMonster && e.Monster is DublinnCompanionShadowblade) > 0) return -Amount;
-        return 0;
+        return -Amount;
     }
 
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
     {
-        if (creature.IsMonster && creature.Monster is DublinnCompanionShadowblade)
+        if (creature.IsMonster && creature.Monster is DublinnCompanionShadowblade && CombatState.Enemies.Count(e => e.IsAlive && e.Monster is DublinnCompanionShadowblade) == 0)
         {
             await CreatureCmd.Stun(Owner, "SINGLE_ATTACK");
             await PowerCmd.Remove<CompanionAtkPower>(Owner);
         }
     }
-    
+
     public override Task AfterModifyingHpLostAfterOsty()
     {
         this.Flash();

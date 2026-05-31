@@ -24,7 +24,7 @@ public class CompanionAtkPower : ModPowerTemplate
 
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
     {
-        if (creature.IsMonster && creature.Monster is DublinnCompanionGuard)
+        if (creature.IsMonster && creature.Monster is DublinnCompanionGuard && CombatState.Enemies.Count(e => e.IsAlive && e.Monster is DublinnCompanionGuard) == 0)
         {
             await CreatureCmd.Stun(Owner, "SINGLE_ATTACK");
             await PowerCmd.Remove<CompanionAtkPower>(Owner);
