@@ -30,7 +30,8 @@ public class CollapsePower : ModPowerTemplate
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature target, bool wasRemovalPrevented, float deathAnimLength)
     {
         if (wasRemovalPrevented || target != base.Owner) return;
-        Creature partner = base.CombatState.Enemies.First(m => !(m.Monster is TatteredPillar));
+        Creature partner = base.CombatState.Enemies.FirstOrDefault(m => !(m.Monster is TatteredPillar), null);
+        if (partner == null) return;
         if (partner.IsAlive)
         {
             MoveState curState = partner.Monster.NextMove;
