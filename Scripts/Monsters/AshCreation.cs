@@ -45,12 +45,19 @@ public class AshCreation : ModMonsterTemplate
             async targets => { },
             new StunIntent()
         );
+        MoveState wait = new MoveState(
+            "WAIT",
+            async targets => { },
+            new UnknownIntent()
+        );
 
         attack.FollowUpState = attack;
         stun.FollowUpState = stun;
+        wait.FollowUpState = attack;
 
         list.Add(attack);
         list.Add(stun);
+        list.Add(wait);
 
         return new MonsterMoveStateMachine(list, stun);
     }
@@ -72,7 +79,7 @@ public class AshCreation : ModMonsterTemplate
         if (creature.Monster is TreeShield)
         {
             await CreatureCmd.TriggerAnim(Creature, "Idle", 0);
-            SetMoveImmediate((MoveState)MoveStateMachine.States["ATTACK"]);
+            SetMoveImmediate((MoveState)MoveStateMachine.States["WAIT"]);
         }
     }
 
