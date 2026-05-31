@@ -22,5 +22,7 @@
     "ARKNIGHTS_MAP_ENCOUNTER_END_OF_THE_NIGHT.title": "夜尽之时",
     "ARKNIGHTS_MAP_ENCOUNTER_END_OF_THE_NIGHT.loss": "{character}被“襁褓”中破壳而出的“幼兽”吞食",
     "ARKNIGHTS_MAP_ENCOUNTER_AFR_BOSS.title": "“万火归一”",
-    "ARKNIGHTS_MAP_ENCOUNTER_AFR_BOSS.loss": "{character}无法摆脱[purple]紫色的火焰[/purple]"
+    "ARKNIGHTS_MAP_ENCOUNTER_AFR_BOSS.loss": "{character}无法摆脱[purple]紫色的火焰[/purple]",
+    "ARKNIGHTS_MAP_ENCOUNTER_FLORAL_GARLAND.title": "花环",
+    "ARKNIGHTS_MAP_ENCOUNTER_FLORAL_GARLAND.loss": "“恐怖”的灰烬造物吓死了{character}"
 }

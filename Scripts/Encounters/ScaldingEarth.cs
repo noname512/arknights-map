@@ -18,7 +18,7 @@ public class ScaldingEarth : AbstractWildsEncounter
 
     // 遭遇场景（用来指定每个怪物站哪）
     public override EncounterAssetProfile AssetProfile => new(
-        EncounterScenePath: $"res://ArknightsMap/scenes/encounters/ScaldingEarth.tscn"
+        EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
     );
 
     // 怪物槽位的名字

@@ -8,23 +8,23 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Encounters;
 
 [RegisterActEncounter(typeof(Wilds))]
-public class ApparitionalWaves : AbstractWildsEncounter
+public class FloralGarland : AbstractWildsEncounter
 {
     // 所有可能出现的怪物
-    public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<TombkeeperGrotesque>(), ModelDb.Monster<TatteredPillar>()];
+    public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<GuidingSprout>(), ModelDb.Monster<AshCreation>(), ModelDb.Monster<TreeShield>()];
 
     // 这个遭遇是否是弱怪池
     public override bool IsWeak => false;
 
     // 遭遇场景（用来指定每个怪物站哪）
     public override EncounterAssetProfile AssetProfile => new(
-        EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
+        EncounterScenePath: $"res://ArknightsMap/scenes/encounters/ScaldingEarth.tscn"
     );
 
     // 怪物槽位的名字
     public override IReadOnlyList<string> Slots => [
         "first",
-        "second",
+        "second"
     ];
 
     public override RoomType RoomType => RoomType.Monster; // 这个遭遇的房间类型，这里是普通怪物
@@ -34,7 +34,7 @@ public class ApparitionalWaves : AbstractWildsEncounter
 
     // 生成怪物列表
     protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<TombkeeperGrotesque>().ToMutable(), "second"),
-        (ModelDb.Monster<TatteredPillar>().ToMutable(), "first")
+        (ModelDb.Monster<GuidingSprout>().ToMutable(), "first"),
+        (ModelDb.Monster<AshCreation>().ToMutable(), "second")
     ];
 }
