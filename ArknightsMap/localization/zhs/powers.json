@@ -32,7 +32,7 @@
     "ARKNIGHTS_MAP_POWER_STONESHIELD_POWER.description": "这个敌人受到的伤害降低。",
     "ARKNIGHTS_MAP_POWER_STONESHIELD_POWER.smartDescription": "[gold]{OwnerName}[/gold]受到的伤害降低[blue]50%[/blue]。",
     "ARKNIGHTS_MAP_POWER_STONESHIELD_POWER.title": "石之盾",
-    "ARKNIGHTS_MAP_POWER_COLLAPSE_POWER.description": "这个敌人死亡时，扣除所有敌方单位一定最大生命值，改变[gold]蔓德拉[/gold]的意图并移除她的[gold]石之盾[/gold]。",
+    "ARKNIGHTS_MAP_POWER_COLLAPSE_POWER.description": "这个敌人死亡时，扣除所有敌方单位一定最大生命值，并[gold]改变[/gold]它们的意图。如果原本的意图是攻击，将其[gold]永久移除[/gold]。移除[gold]蔓德拉[/gold]的[gold]石之盾[/gold]。",
     "ARKNIGHTS_MAP_POWER_COLLAPSE_POWER.smartDescription": "[gold]{OwnerName}[/gold]死亡时，扣除所有敌方单位[blue]{Amount}[/blue]点最大生命值，并[gold]改变[/gold]它们的意图。如果原本的意图是攻击，将其[gold]永久移除[/gold]。移除[gold]蔓德拉[/gold]的[gold]石之盾[/gold]。",
     "ARKNIGHTS_MAP_POWER_COLLAPSE_POWER.title": "崩塌",
     "ARKNIGHTS_MAP_POWER_COMPANION_ATK_POWER.description": "若[gold]深池伙友卫队[/gold]在场，这个敌人的攻击变为多段连击。",

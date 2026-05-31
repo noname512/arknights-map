@@ -1,7 +1,7 @@
-using ArknightsMap.Scripts.Powers;
+using MegaCrit.Sts2.Core.Animation;
+using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -20,13 +20,9 @@ public class DublinnFlamecaller : ModMonsterTemplate
     public override MonsterAssetProfile AssetProfile => new(
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
     );
-    
+
     private int AttackDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 14, 16);
     private int StrengthGain => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 2, 2);
-
-    public override async Task AfterAddedToRoom()
-    {
-    }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
@@ -47,7 +43,7 @@ public class DublinnFlamecaller : ModMonsterTemplate
                     .Execute(null);
                 if (ReedBed.Burning)
                 {
-                    await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(),  Creature, StrengthGain, Creature, null);
+                    await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthGain, Creature, null);
                 }
                 await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
             },
@@ -61,5 +57,17 @@ public class DublinnFlamecaller : ModMonsterTemplate
         list.Add(attack);
 
         return new MonsterMoveStateMachine(list, fire);
+    }
+
+    public override CreatureAnimator GenerateAnimator(MegaSprite controller)
+    {
+        AnimState idleState = new AnimState("Idle", isLooping: true);
+        AnimState attackState = new AnimState("Attack");
+        AnimState dieState = new AnimState("Die");
+        attackState.NextState = idleState;
+        CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
+        creatureAnimator.AddAnyState("Attack", attackState);
+        creatureAnimator.AddAnyState("Dead", dieState);
+        return creatureAnimator;
     }
 }
