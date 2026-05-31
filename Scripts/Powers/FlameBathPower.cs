@@ -25,6 +25,6 @@ public class FlameBathPower : ModPowerTemplate
     {
         if (Owner != target || props != ValueProp.Move) return 1;
         if (!ReedBed.Burning) return 1;
-        return 1 - 0.01m * amount;
+        return 1 - 0.01m * Amount;
     }
 }

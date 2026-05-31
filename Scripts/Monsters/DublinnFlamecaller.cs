@@ -18,7 +18,7 @@ public class DublinnFlamecaller : ModMonsterTemplate
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 120, 108);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 127, 115);
     public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
+        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}ERROR.tscn"
     );
     
     private int AttackDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 14, 16);
