@@ -30,6 +30,7 @@ public class TreeShield : ModMonsterTemplate
 
     public override async Task AfterAddedToRoom()
     {
+        await CreatureCmd.TriggerAnim(Creature, "Start", 0);
         await PowerCmd.Apply<TauntPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
         await PowerCmd.Apply<PlatingPower>(new ThrowingPlayerChoiceContext(), Creature, 7m, Creature, null);
     }
@@ -83,6 +84,7 @@ public class TreeShield : ModMonsterTemplate
         AnimState dieState = new AnimState("Die");
         AnimState startState = new AnimState("Start");
         attackState.NextState = idleState;
+        startState.NextState = idleState;
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
         creatureAnimator.AddAnyState("Attack", attackState);
         creatureAnimator.AddAnyState("Dead", dieState);

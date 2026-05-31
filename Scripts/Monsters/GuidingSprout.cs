@@ -1,15 +1,11 @@
-using ArknightsMap.Scripts.Powers;
+using MegaCrit.Sts2.Core.Animation;
+using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
-using MegaCrit.Sts2.Core.Nodes.Rooms;
-using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -23,7 +19,7 @@ public class GuidingSprout : ModMonsterTemplate
     public override MonsterAssetProfile AssetProfile => new(
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
     );
-    
+
     private int AttackDamage = AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 8, 7);
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -67,5 +63,17 @@ public class GuidingSprout : ModMonsterTemplate
         list.Add(summon);
 
         return new MonsterMoveStateMachine(list, attack1);
+    }
+
+    public override CreatureAnimator GenerateAnimator(MegaSprite controller)
+    {
+        AnimState idleState = new AnimState("Idle", isLooping: true);
+        AnimState attackState = new AnimState("Attack");
+        AnimState dieState = new AnimState("Die");
+        attackState.NextState = idleState;
+        CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
+        creatureAnimator.AddAnyState("Attack", attackState);
+        creatureAnimator.AddAnyState("Dead", dieState);
+        return creatureAnimator;
     }
 }
