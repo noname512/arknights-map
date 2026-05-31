@@ -83,7 +83,7 @@ public class Nest : ModMonsterTemplate
 
     public override Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
     {
-        if (creature.Monster is TreeShield) SwitchIntent();
+        if (creature.Monster is TreeShield && CombatState.Enemies.Count(e => e.IsAlive && e.Monster is TreeShield) == 0) SwitchIntent();
         return Task.CompletedTask;
     }
 

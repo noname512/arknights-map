@@ -1,4 +1,5 @@
 using ArknightsMap.Scripts.Cards;
+using ArknightsMap.Scripts.Encounters;
 using ArknightsMap.Scripts.Powers;
 using Godot;
 using MegaCrit.Sts2.Core.Combat;
@@ -59,7 +60,8 @@ public sealed class ReedBed : ILifecycleObserver
             if (Burning)
             {
                 await PowerCmd.Apply<DealFlamingDamagePower>(new ThrowingPlayerChoiceContext(), combatState.Enemies, 1m, null, null);
-                texturePath += "wilds_01_b.png";
+                if (combatState.Encounter is AFRBoss) texturePath += "wilds_01_c.png";
+                else texturePath += "wilds_01_b.png";
             }
             else
             {
