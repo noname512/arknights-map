@@ -18,10 +18,10 @@ metadata/_edit_lock_ = true
 
 [node name="background" type="TextureRect" parent="."]
 layout_mode = 1
-offset_left = -189.0
-offset_top = -163.0
-offset_right = 2155.889
-offset_bottom = 1156.0
+offset_left = -202.0
+offset_top = -619.0
+offset_right = 2261.934
+offset_bottom = 1844.0
 texture = ExtResource("1_giscl")
 
 [node name="stars" type="CPUParticles2D" parent="."]
