@@ -24,5 +24,7 @@
     "ARKNIGHTS_MAP_ENCOUNTER_AFR_BOSS.title": "“万火归一”",
     "ARKNIGHTS_MAP_ENCOUNTER_AFR_BOSS.loss": "{character}无法摆脱[purple]紫色的火焰[/purple]",
     "ARKNIGHTS_MAP_ENCOUNTER_FLORAL_GARLAND.title": "花环",
-    "ARKNIGHTS_MAP_ENCOUNTER_FLORAL_GARLAND.loss": "“恐怖”的灰烬造物吓死了{character}"
+    "ARKNIGHTS_MAP_ENCOUNTER_FLORAL_GARLAND.loss": "“恐怖”的灰烬造物吓死了{character}",
+    "ARKNIGHTS_MAP_ENCOUNTER_LAMP_BURNER.title": "烧灯者",
+    "ARKNIGHTS_MAP_ENCOUNTER_LAMP_BURNER.loss": "{character}被灼藤烧死了"
 }

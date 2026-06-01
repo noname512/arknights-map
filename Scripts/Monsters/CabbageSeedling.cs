@@ -28,15 +28,10 @@ public class CabbageSeedling : ModMonsterTemplate
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
     );
 
-    private bool IsBurningVineInCombat()
-    {
-        return false;
-        // return base.CombatState.Enemies.Any(e => e.IsAlive && e.IsMonster && e.Monster is BurningVine);
-    }
+    private bool IsBurningVineInCombat() => CombatState.Enemies.Any(e => e.IsAlive && e.IsMonster && e.Monster is BurningVine);
 
     public override async Task AfterAddedToRoom()
     {
-        // TODO: 如果灼藤在场
         IsBurning = IsBurningVineInCombat();
         if (IsBurning)
         {
