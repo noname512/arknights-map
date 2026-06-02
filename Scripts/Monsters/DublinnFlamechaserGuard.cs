@@ -99,10 +99,21 @@ public class DublinnFlamechaserGuard : ModMonsterTemplate
         AnimState idleState = new AnimState("Idle", isLooping: true);
         AnimState attackState = new AnimState("Attack");
         AnimState dieState = new AnimState("Die");
+        AnimState startState = new AnimState("Start");
+        AnimState idleState2 = new AnimState("Idle_2", isLooping: true);
+        AnimState dieState2 = new AnimState("Die_2");
+        AnimState preReviveState = new AnimState("Die_2");
+        AnimState reviveState = new AnimState("Revive");
         attackState.NextState = idleState;
+        dieState.NextState = startState;
+        startState.NextState = idleState2;
+        preReviveState.NextState = reviveState;
+        reviveState.NextState = idleState;
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
+        creatureAnimator.AddAnyState("Revive", dieState);
+        creatureAnimator.AddAnyState("Revive2", preReviveState);
+        creatureAnimator.AddAnyState("Dead", dieState2);
         creatureAnimator.AddAnyState("Attack", attackState);
-        creatureAnimator.AddAnyState("Dead", dieState);
         return creatureAnimator;
     }
 }

@@ -142,6 +142,7 @@ public class AllFlamesReturned : ModMonsterTemplate
         }
         else
         {
+            _isStage2 = true;
             await CreatureCmd.TriggerAnim(Creature, "Revive2", 0);
             NextMove.FollowUpState = p2Attack;
             await PowerCmd.Remove<RebornPower>(Creature);
