@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Monsters;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -5,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
@@ -22,10 +24,12 @@ public class ChaseFlamePower : ModPowerTemplate
     public override PowerType Type => PowerType.Buff;
     // 叠加类型，Counter表示可叠加，Single表示不可叠加
     public override PowerStackType StackType => PowerStackType.Counter;
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("DecreaseHp", 0), new IntVar("ReviveTurn", 0)];
     public int CurState = 0; // 0: 初始状态，1: 余烬
     public int InitialHp = 0;
     public int MaxHp = 0;
     public int DecreaseHp = 0;
+    public int ReviveTurn = 0;
     MoveState NextMove = null!;
     private ChaseFlamePowerRes res = new ChaseFlamePowerRes();
 
@@ -34,6 +38,17 @@ public class ChaseFlamePower : ModPowerTemplate
         InitialHp = Amount;
         MaxHp = Owner.MaxHp;
         DecreaseHp = MaxHp / Amount;
+        if (Owner.Monster is DublinnFlamechaserGuard)
+        {
+            ReviveTurn = 2;
+        }
+        else
+        {
+            ReviveTurn = 3;
+        }
+
+        DynamicVars["DecreaseHp"].BaseValue = DecreaseHp;
+        DynamicVars["ReviveTurn"].BaseValue = ReviveTurn;
         return base.AfterApplied(applier, cardSource);
     }
 
@@ -79,7 +94,7 @@ public class ChaseFlamePower : ModPowerTemplate
             MoveState stun = (MoveState)Owner.Monster.MoveStateMachine.States["STUN1"];
             creature.Monster.SetMoveImmediate(stun, true);
             ((MoveState)Owner.Monster.MoveStateMachine.States["STUN3"]).FollowUpState = NextMove;
-            SetAmount(3);
+            SetAmount(ReviveTurn);
         }
     }
 
@@ -94,6 +109,14 @@ public class ChaseFlamePower : ModPowerTemplate
         Owner.GetCreatureNode().SetAnimationTrigger("Revive2");
         await CreatureCmd.SetMaxAndCurrentHp(Owner, MaxHp);
         Owner.Monster.SetMoveImmediate(NextMove, true);
+        List<PowerModel> debuffs = Owner.Powers.Where(p => p.Type ==  PowerType.Debuff).ToList();
+        foreach (PowerModel power in debuffs)
+        {
+            if (power.Type == PowerType.Debuff)
+            {
+                await PowerCmd.Remove(power);
+            }
+        }
         InitialHp--;
         SetAmount(InitialHp);
         CurState = 0;
@@ -148,4 +171,12 @@ public class ChaseFlamePower : ModPowerTemplate
         return Task.CompletedTask;
     }
 
+    public override bool ShouldPowerBeRemovedOnDeath(PowerModel power)
+    {
+        if (power.Type == PowerType.Debuff)
+        {
+            return true;
+        }
+        return false;
+    }
 }
