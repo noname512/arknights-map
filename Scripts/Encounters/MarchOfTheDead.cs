@@ -8,7 +8,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Encounters;
 
 [RegisterActEncounter(typeof(Wilds))]
-public class MarchOfTheDeath : AbstractWildsEncounter
+public class MarchOfTheDead : AbstractWildsEncounter
 {
     public override bool isBurningAtStart => true;
 
