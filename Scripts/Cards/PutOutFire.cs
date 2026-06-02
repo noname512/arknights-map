@@ -1,22 +1,17 @@
 ﻿using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
-using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
-using MegaCrit.Sts2.Core.Rooms;
-using MegaCrit.Sts2.Core.ValueProps;
-using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Keywords;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Cards;
@@ -43,11 +38,18 @@ public class PutOutFire : ModCardTemplate
     // BannerTexturePath: "" // 横幅（不同类型）
     );
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CalculatedVar("PutOutDmg").WithMultiplier((cardModel, creature) => {
-        int baseDamage = 10;
-        foreach (var m in CombatState.Enemies) baseDamage += m.GetPower<ScorchingLight>()?.Amount ?? 0;
-        return baseDamage;
-    })];
+    static Func<CardModel, Creature?, decimal> CalculateDamage = (cardModel, creature) =>
+    {
+        int damage = 0;
+        foreach (var m in creature?.CombatState?.Enemies ?? []) damage += m.GetPower<ScorchingLightPower>()?.Amount ?? 0;
+        return damage;
+    };
+
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new CalculationBaseVar(10m),
+        new CalculationExtraVar(1m),
+        new CalculatedVar("PutOutDmg").WithMultiplier(CalculateDamage)
+    ];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal, CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromKeyword(CardKeyword.Retain), HoverTipFactory.FromKeyword(CardKeyword.Exhaust), HoverTipFactory.FromPower<FlamingDamagePower>(), HoverTipFactory.FromPower<VulnerablePower>()];
 
@@ -59,8 +61,9 @@ public class PutOutFire : ModCardTemplate
     {
         NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(base.Owner.Creature));
         SfxCmd.Play("event:/sfx/characters/attack_fire");
-        await CreatureCmd.Damage(choiceContext, Owner.Creature, DynamicVars.Damage, this);
-        await PowerCmd.Apply<FlamingDamagePower>(choiceContext, Owner.Creature, DynamicVars.Damage.IntValue, Owner.Creature, this);
+        decimal amount = ((CalculatedVar)DynamicVars["PutOutDmg"]).Calculate(Owner.Creature);
+        await CreatureCmd.Damage(choiceContext, Owner.Creature, amount, this);
+        await PowerCmd.Apply<FlamingDamagePower>(choiceContext, Owner.Creature, amount, Owner.Creature, this);
         await Entry.reedBed.SetBurningDurningCombat(false, CombatState);
     }
 

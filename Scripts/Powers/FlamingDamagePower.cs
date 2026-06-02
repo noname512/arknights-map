@@ -1,4 +1,3 @@
-using ArknightsMap.Scripts.Enchantments;
 using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -55,10 +54,19 @@ public class FlamingDamagePower : ModPowerTemplate, IHealthBarForecastSource
                     PowerModel power = Owner.GetPower<VulnerablePower>();
                     if (power != null) await PowerCmd.TickDownDuration(power);
                 }
+
+                if (Owner.IsPlayer)
+                {
+                    foreach (var e in Owner.CombatState.Enemies)
+                        if (e.HasPower<GiveAndTakePower>())
+                            await PowerCmd.Apply<GiveAndTakePower>(choiceContext, e, Amount - DynamicVars["Bound"].IntValue, e, null, false);
+                }
+
                 await PowerCmd.Remove(this);
             }
         }
     }
+
     public IEnumerable<HealthBarForecastSegment> GetHealthBarForecastSegments(HealthBarForecastContext context)
     {
         if (Amount < DynamicVars["Bound"].IntValue)

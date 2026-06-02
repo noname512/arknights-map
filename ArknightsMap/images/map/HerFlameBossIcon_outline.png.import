@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0cp0ga7628w2"
-path="res://.godot/imported/TheLeaderBossIcon.png-68f594bd3a4a7fe382220fe110cd3373.ctex"
+uid="uid://dpdmsmg1o1bpq"
+path="res://.godot/imported/HerFlameBossIcon_outline.png-27b2bb2369ec912ce4d842a7640ad51f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/map/TheLeaderBossIcon.png"
-dest_files=["res://.godot/imported/TheLeaderBossIcon.png-68f594bd3a4a7fe382220fe110cd3373.ctex"]
+source_file="res://ArknightsMap/images/map/HerFlameBossIcon_outline.png"
+dest_files=["res://.godot/imported/HerFlameBossIcon_outline.png-27b2bb2369ec912ce4d842a7640ad51f.ctex"]
 
 [params]
 

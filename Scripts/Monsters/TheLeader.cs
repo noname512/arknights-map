@@ -35,8 +35,8 @@ public class TheLeader : ModMonsterTemplate
 
     public override async Task AfterAddedToRoom()
     {
-        await PowerCmd.Apply<ScorchingLight>(new ThrowingPlayerChoiceContext(), Creature, 0m, Creature, null);
-        await PowerCmd.Apply<GiveAndTake>(new ThrowingPlayerChoiceContext(), Creature, 0m, Creature, null);
+        await PowerCmd.Apply<ScorchingLightPower>(new ThrowingPlayerChoiceContext(), Creature, 0m, Creature, null);
+        await PowerCmd.Apply<GiveAndTakePower>(new ThrowingPlayerChoiceContext(), Creature, 0m, Creature, null);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -48,7 +48,7 @@ public class TheLeader : ModMonsterTemplate
             {
                 await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
                 await CreatureCmd.TriggerAnim(Creature, "Ignite1", 0);
-                if (!_isstage2) await PowerCmd.Apply<ScorchingLight>(new ThrowingPlayerChoiceContext(), Creature, 2m, Creature, null);
+                if (!_isstage2) await PowerCmd.Apply<ScorchingLightPower>(new ThrowingPlayerChoiceContext(), Creature, 2m, Creature, null);
             },
             new DebuffIntent()
         );
@@ -58,7 +58,7 @@ public class TheLeader : ModMonsterTemplate
             {
                 await DamageCmd.Attack(Damage1_1).FromMonster(this).Execute(null);
                 await CreatureCmd.TriggerAnim(Creature, "CommonAttack1", 0);
-                if (!_isstage2) await PowerCmd.Apply<ScorchingLight>(new ThrowingPlayerChoiceContext(), Creature, 2m, Creature, null);
+                if (!_isstage2) await PowerCmd.Apply<ScorchingLightPower>(new ThrowingPlayerChoiceContext(), Creature, 2m, Creature, null);
             },
             new SingleAttackIntent(Damage1_1)
         );
@@ -68,7 +68,7 @@ public class TheLeader : ModMonsterTemplate
             {
                 await DamageCmd.Attack(Damage1_2).WithHitCount(Times1).FromMonster(this).Execute(null);
                 await CreatureCmd.TriggerAnim(Creature, "CommonAttack1", 0);
-                if (!_isstage2) await PowerCmd.Apply<ScorchingLight>(new ThrowingPlayerChoiceContext(), Creature, 2m, Creature, null);
+                if (!_isstage2) await PowerCmd.Apply<ScorchingLightPower>(new ThrowingPlayerChoiceContext(), Creature, 2m, Creature, null);
             },
             new MultiAttackIntent(Damage1_2, Times1)
         );
@@ -79,23 +79,23 @@ public class TheLeader : ModMonsterTemplate
                 await DamageCmd.Attack(Damage1_3).FromMonster(this).Execute(null);
                 await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
                 await CreatureCmd.TriggerAnim(Creature, "Ignite1", 0);
-                if (!_isstage2) await PowerCmd.Apply<ScorchingLight>(new ThrowingPlayerChoiceContext(), Creature, 2m, Creature, null);
+                if (!_isstage2) await PowerCmd.Apply<ScorchingLightPower>(new ThrowingPlayerChoiceContext(), Creature, 2m, Creature, null);
             },
             new SingleAttackIntent(Damage1_3),
             new DebuffIntent()
         );
-        int GTAmt() => Creature.GetPower<GiveAndTake>()?.Amount ?? 0;
+        int GTAmt() => Creature.GetPower<GiveAndTakePower>()?.Amount ?? 0;
         MoveState fire1 = new MoveState(
             "RETURN_FIRE1",
             async targets =>
             {
                 int amount = GTAmt();
                 await DamageCmd.Attack(amount / 2).FromMonster(this).Execute(null);
-                Creature.GetPower<GiveAndTake>()?.SetAmount(amount - amount / 2);
+                Creature.GetPower<GiveAndTakePower>()?.SetAmount(amount - amount / 2);
                 await CreatureCmd.TriggerAnim(Creature, "ReturnFire1", 0);
-                if (!_isstage2) await PowerCmd.Apply<ScorchingLight>(new ThrowingPlayerChoiceContext(), Creature, 2m, Creature, null);
+                if (!_isstage2) await PowerCmd.Apply<ScorchingLightPower>(new ThrowingPlayerChoiceContext(), Creature, 2m, Creature, null);
             },
-            new SingleAttackIntent(GTAmt())
+            new SingleAttackIntent(/*TODO: GTAmt()*/0)
         );
 
         MoveState attack2_1 = new MoveState(
@@ -133,7 +133,7 @@ public class TheLeader : ModMonsterTemplate
             {
                 int amount = GTAmt();
                 await DamageCmd.Attack(amount).FromMonster(this).Execute(null);
-                Creature.GetPower<GiveAndTake>()?.SetAmount(0);
+                Creature.GetPower<GiveAndTakePower>()?.SetAmount(0);
                 if (_firstFire2)
                 {
                     await CreatureCmd.TriggerAnim(Creature, "Revive", 0);
@@ -144,7 +144,7 @@ public class TheLeader : ModMonsterTemplate
                     await CreatureCmd.TriggerAnim(Creature, "ReturnFire2", 0);
                 }
             },
-            new SingleAttackIntent(GTAmt())
+            new SingleAttackIntent(/*TODO: GTAmt()*/0)
         );
 
         ConditionalBranchState condition1 = new ConditionalBranchState("STAGE1");
