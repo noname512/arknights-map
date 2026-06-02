@@ -1,5 +1,6 @@
 using ArknightsMap.Scripts.Cards;
 using ArknightsMap.Scripts.Encounters;
+using ArknightsMap.Scripts.Monsters;
 using ArknightsMap.Scripts.Powers;
 using Godot;
 using MegaCrit.Sts2.Core.Combat;
@@ -7,6 +8,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using STS2RitsuLib;
 
@@ -66,7 +68,13 @@ public sealed class ReedBed : ILifecycleObserver
             else
             {
                 foreach (var m in combatState.Enemies)
+                {
                     await PowerCmd.Remove<DealFlamingDamagePower>(m);
+                    if (m.Monster is TheLeader leader)
+                    {
+                        leader.SetMoveImmediate((MoveState)leader.MoveStateMachine.States["IGNITE" + (leader._isstage2 ? "2" : "1")]);
+                    }
+                }
                 texturePath += "wilds_01_a.png";
             }
 

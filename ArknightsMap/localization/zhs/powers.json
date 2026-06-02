@@ -8,8 +8,8 @@
     "ARKNIGHTS_MAP_POWER_FLAMING_DAMAGE_POWER.description": "若累计到[blue]20[/blue]点，其拥有者将在回合结束时受到[blue]8[/blue]点伤害，获得一层[gold]易伤[/gold]并清除此效果。",
     "ARKNIGHTS_MAP_POWER_FLAMING_DAMAGE_POWER.smartDescription": "当前有[blue]{Amount}[/blue]点。若累计到[blue]{Bound}[/blue]点，在{OnPlayer:敌人|玩家}的回合结束时，{OwnerName}将受到[blue]{ExtraDamage}[/blue]点伤害，获得一层[gold]易伤[/gold]，并清除所有的[gold]灼燃损伤[/gold]。",
     "ARKNIGHTS_MAP_POWER_FLAMING_DAMAGE_POWER.title": "灼燃损伤",
-    "ARKNIGHTS_MAP_POWER_DEAL_FLAMING_DAMAGE_POWER.description": "这个敌人造成的[gold]攻击[/gold]伤害均附带[gold]灼燃损伤[/gold]。",
-    "ARKNIGHTS_MAP_POWER_DEAL_FLAMING_DAMAGE_POWER.smartDescription": "这个敌人造成的[gold]攻击[/gold]伤害均附带[gold]灼燃损伤[/gold]。",
+    "ARKNIGHTS_MAP_POWER_DEAL_FLAMING_DAMAGE_POWER.description": "这个敌人的[gold]攻击[/gold]造成等量的[gold]灼燃损伤[/gold]。",
+    "ARKNIGHTS_MAP_POWER_DEAL_FLAMING_DAMAGE_POWER.smartDescription": "这个敌人的[gold]攻击[/gold]造成等量的[gold]灼燃损伤[/gold]。",
     "ARKNIGHTS_MAP_POWER_DEAL_FLAMING_DAMAGE_POWER.title": "造成灼燃损伤",
     "ARKNIGHTS_MAP_POWER_PHALANX_POWER.description": "场上每有一个其他[gold]深池方阵战士[/gold]，这个怪物受到的所有伤害降低若干点。",
     "ARKNIGHTS_MAP_POWER_PHALANX_POWER.smartDescription": "场上每有一个其他同名敌人，[gold]{OwnerName}[/gold]受到的所有伤害降低[blue]2[/blue]点。（当前为[blue]{Amount}[/blue]点）",
@@ -55,5 +55,11 @@
     "ARKNIGHTS_MAP_POWER_REBORN_POWER.title": "复活",
     "ARKNIGHTS_MAP_POWER_FLAME_BATH_POWER.description": "如果[gold]芦苇丛[/gold]处于[gold]燃烧[/gold]状态，受到的伤害降低。",
     "ARKNIGHTS_MAP_POWER_FLAME_BATH_POWER.smartDescription": "如果[gold]芦苇丛[/gold]处于[gold]燃烧[/gold]状态，受到的伤害减少[blue]{Amount}%[/blue]。",
-    "ARKNIGHTS_MAP_POWER_FLAME_BATH_POWER.title": "归来"
+    "ARKNIGHTS_MAP_POWER_FLAME_BATH_POWER.title": "归来",
+    "ARKNIGHTS_MAP_POWER_SCORCHING_LIGHT_POWER.description": "打出[gold]“灭火”[/gold]受到的伤害提升。这个敌人攻击造成的[gold]灼燃损伤[/gold]翻倍。",
+    "ARKNIGHTS_MAP_POWER_SCORCHING_LIGHT_POWER.smartDescription": "打出[gold]“灭火”[/gold]受到的伤害提升[blue]{Amount}[/blue]。[gold]{OwnerName}[/gold]攻击造成的[gold]灼燃损伤[/gold]翻倍。",
+    "ARKNIGHTS_MAP_POWER_SCORCHING_LIGHT_POWER.title": "焚光",
+    "ARKNIGHTS_MAP_POWER_GIVE_AND_TAKE_POWER.description": "对方[gold]灼燃损伤[/gold]溢出时，获得等量的层数，累计到一定层数时，下回合意图改变。",
+    "ARKNIGHTS_MAP_POWER_GIVE_AND_TAKE_POWER.smartDescription": "{OnPlayer:敌人|玩家}的[gold]灼燃损伤[/gold]溢出时，获得等量的层数，累计到[blue]{Bound}[/blue]层时，下回合意图改变。",
+    "ARKNIGHTS_MAP_POWER_GIVE_AND_TAKE_POWER.title": "予取予夺"
 }

@@ -12,24 +12,16 @@ public class AFRBoss : AbstractWildsEncounter
 {
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<AllFlamesReturned>()];
 
-    /*
     public override EncounterAssetProfile AssetProfile => new(
         RunHistoryIconPath: $"res://ArknightsMap/images/map/{GetType().Name}History.png",
         RunHistoryIconOutlinePath: $"res://ArknightsMap/images/map/{GetType().Name}History_outline.png",
         EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
     );
 
-    public override string BossNodePath => $"res://ArknightsMap/images/map/{GetType().Name}Icon";
-    */
-    /**/
-    public override EncounterAssetProfile AssetProfile => new(
-        RunHistoryIconPath: $"res://ArknightsMap/images/map/MandragoraBossHistory.png",
-        RunHistoryIconOutlinePath: $"res://ArknightsMap/images/map/MandragoraBossHistory_outline.png",
-        EncounterScenePath: $"res://ArknightsMap/scenes/encounters/MandragoraBoss.tscn"
-    );
+    // public override string BossNodePath => $"res://ArknightsMap/images/map/{GetType().Name}Icon";
 
     public override string BossNodePath => $"res://ArknightsMap/images/map/MandragoraBossIcon";
-    /**/
+
     public override IReadOnlyList<string> Slots => [
         "first"
     ];

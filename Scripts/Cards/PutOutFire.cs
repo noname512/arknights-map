@@ -43,7 +43,11 @@ public class PutOutFire : ModCardTemplate
     // BannerTexturePath: "" // 横幅（不同类型）
     );
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(10, ValueProp.Unpowered)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CalculatedVar("PutOutDmg").WithMultiplier((cardModel, creature) => {
+        int baseDamage = 10;
+        foreach (var m in CombatState.Enemies) baseDamage += m.GetPower<ScorchingLight>()?.Amount ?? 0;
+        return baseDamage;
+    })];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal, CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromKeyword(CardKeyword.Retain), HoverTipFactory.FromKeyword(CardKeyword.Exhaust), HoverTipFactory.FromPower<FlamingDamagePower>(), HoverTipFactory.FromPower<VulnerablePower>()];
 
