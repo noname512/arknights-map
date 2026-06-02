@@ -62,7 +62,7 @@ public sealed class ReedBed : ILifecycleObserver
             if (Burning)
             {
                 await PowerCmd.Apply<DealFlamingDamagePower>(new ThrowingPlayerChoiceContext(), combatState.Enemies, 1m, null, null);
-                if (combatState.Encounter is AFRBoss) texturePath += "wilds_01_c.png";
+                if (combatState.Encounter is AFRBoss || combatState.Encounter is HerFlame) texturePath += "wilds_01_c.png";
                 else texturePath += "wilds_01_b.png";
             }
             else
@@ -70,10 +70,11 @@ public sealed class ReedBed : ILifecycleObserver
                 foreach (var m in combatState.Enemies)
                 {
                     await PowerCmd.Remove<DealFlamingDamagePower>(m);
+                    /*
                     if (m.Monster is TheLeader leader)
                     {
                         leader.SetMoveImmediate((MoveState)leader.MoveStateMachine.States["IGNITE" + (leader._isstage2 ? "2" : "1")]);
-                    }
+                    }*/
                 }
                 texturePath += "wilds_01_a.png";
             }

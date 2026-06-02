@@ -34,8 +34,8 @@ public class DealFlamingDamagePower : ModPowerTemplate
     {
         if (dealer == Owner)
         {
+            Flash();
             decimal dmg = amount;
-            if (Owner.HasPower<ScorchingLightPower>()) dmg *= 2;
             await PowerCmd.Apply<FlamingDamagePower>(choiceContext, target, dmg, dealer, null);
         }
     }

@@ -21,7 +21,7 @@ public class LampBurner : AbstractWildsEncounter
         "second"
     ];
 
-    public override RoomType RoomType => RoomType.Boss;
+    public override RoomType RoomType => RoomType.Monster;
 
     // 如果你的场景太大，可以调整缩放。此外还可以使用 GetCameraOffset 来调整摄像机位置
     // public override float GetCameraScaling() => 0.8f;

@@ -59,7 +59,9 @@ public class FlamingDamagePower : ModPowerTemplate, IHealthBarForecastSource
                 {
                     foreach (var e in Owner.CombatState.Enemies)
                         if (e.HasPower<GiveAndTakePower>())
-                            await PowerCmd.Apply<GiveAndTakePower>(choiceContext, e, Amount - DynamicVars["Bound"].IntValue, e, null, false);
+                        {
+                            e.GetPower<GiveAndTakePower>().Exceed(Amount - DynamicVars["Bound"].BaseValue);
+                        }
                 }
 
                 await PowerCmd.Remove(this);
