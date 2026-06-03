@@ -30,5 +30,7 @@
     "ARKNIGHTS_MAP_ENCOUNTER_MARCH_OF_THE_DEAD.title": "亡者行军",
     "ARKNIGHTS_MAP_ENCOUNTER_MARCH_OF_THE_DEAD.loss": "{character}沉入其中，和过往的时间一同被影子覆盖。",
     "ARKNIGHTS_MAP_ENCOUNTER_HER_FLAME.title": "她的火焰",
-    "ARKNIGHTS_MAP_ENCOUNTER_HER_FLAME.loss": "{character}"
+    "ARKNIGHTS_MAP_ENCOUNTER_HER_FLAME.loss": "{character}",
+    "ARKNIGHTS_MAP_ENCOUNTER_BURNING_WEEDS.title": "荒草焚荡",
+    "ARKNIGHTS_MAP_ENCOUNTER_BURNING_WEEDS.loss": "{character}死于燃烧的枯草丛。"
 }
