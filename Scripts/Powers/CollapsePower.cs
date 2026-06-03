@@ -36,13 +36,13 @@ public class CollapsePower : ModPowerTemplate
         {
             MoveState curState = partner.Monster.NextMove;
             MoveState newState;
-            if (partner.Monster is Mandragora)
+            if (partner.Monster is Mandragora mandragora)
             {
-                newState = ((Mandragora)(partner.Monster)).GetSummonState();
+                newState = mandragora.GetSummonState();
             }
             else
             {
-                newState = new MoveState("STUN", _ => { return Task.CompletedTask;}, new StunIntent());
+                newState = new MoveState("STUN", _ => { return Task.CompletedTask; }, new StunIntent());
             }
             if (curState.Intents.OfType<AttackIntent>().Any())
             {
@@ -63,7 +63,7 @@ public class CollapsePower : ModPowerTemplate
             }
             newState.RegisterStates(partner.Monster.MoveStateMachine.States);
             partner.Monster.SetMoveImmediate(newState);
-            
+
             if (partner.HasPower<StoneshieldPower>())
             {
                 await PowerCmd.Remove<StoneshieldPower>(partner);
