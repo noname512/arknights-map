@@ -56,7 +56,22 @@ public class TheLeader : ModMonsterTemplate
             await PowerCmd.Apply<ScorchingLightPower>(new ThrowingPlayerChoiceContext(), Creature, ScorchingLightNum, Creature, null);        
         }
     }
-    public int GTAmt => Creature.GetPower<GiveAndTakePower>()?.DynamicVars["Exceed"].IntValue ?? 0;
+    public int GTAmt
+    {
+        get
+        {
+            int MaxValue = 0;
+            foreach (var power in Creature.Powers)
+            {
+                if (power is GiveAndTakePower)
+                {
+                    MaxValue = Math.Max(MaxValue, power.DynamicVars["Exceed"].IntValue);
+                }
+            }
+
+            return MaxValue;
+        }
+    }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
@@ -111,9 +126,14 @@ public class TheLeader : ModMonsterTemplate
             "RETURN_FIRE1",
             async targets =>
             {
-                int amount = GTAmt;
                 await DamageCmd.Attack(0).FromMonster(this).Execute(null);
-                Creature.GetPower<GiveAndTakePower>()?.Return( amount / 2);
+                foreach (var power in Creature.Powers)
+                {
+                    if (power is GiveAndTakePower giveAndTakePower)
+                    {
+                        giveAndTakePower.Return(power.DynamicVars["Exceed"].IntValue / 2);
+                    }
+                }
                 await CreatureCmd.TriggerAnim(Creature, "ReturnFire1", 0);
                 await Stage1Move();
             },
@@ -156,7 +176,13 @@ public class TheLeader : ModMonsterTemplate
             {
                 int amount = GTAmt;
                 await DamageCmd.Attack(0).FromMonster(this).Execute(null);
-                Creature.GetPower<GiveAndTakePower>()?.Return(amount);
+                foreach (var power in Creature.Powers)
+                {
+                    if (power is GiveAndTakePower giveAndTakePower)
+                    {
+                        giveAndTakePower.Return(power.DynamicVars["Exceed"].IntValue);
+                    }
+                }
                 if (_firstFire2)
                 {
                     await CreatureCmd.TriggerAnim(Creature, "Revive", 0);
@@ -216,7 +242,7 @@ public class TheLeader : ModMonsterTemplate
     public override async Task AfterCurrentHpChanged(Creature creature, decimal _)
     {
         if (creature != base.Creature) return;
-        if (!_isstage2 && Creature.CurrentHp <= Creature.MaxHp / 2)
+        if (!_isstage2 && Creature.CurrentHp <= Creature.MaxHp - Creature.MaxHp / 2)
         {
             _isstage2 = true;
         }
