@@ -11,6 +11,7 @@ using STS2RitsuLib.Scaffolding.Content;
 using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Models;
 
 namespace ArknightsMap.Scripts.Monsters;
 
@@ -36,7 +37,12 @@ public class TheLeader : ModMonsterTemplate
 
     public override async Task AfterAddedToRoom()
     {
-        await PowerCmd.Apply<GiveAndTakePower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
+        foreach (Creature item in base.Creature.CombatState.GetOpponentsOf(base.Creature))
+        {
+            GiveAndTakePower giveAndTakePower = (GiveAndTakePower)ModelDb.Power<GiveAndTakePower>().ToMutable();
+            giveAndTakePower.Target = item;
+            await PowerCmd.Apply(new ThrowingPlayerChoiceContext(), giveAndTakePower, base.Creature, 1, base.Creature, null);
+        }    
     }
 
     public async Task Stage1Move()

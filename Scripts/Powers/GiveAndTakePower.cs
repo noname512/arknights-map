@@ -38,6 +38,12 @@ public class GiveAndTakePower : ModPowerTemplate
         {
             return 0;
         }
+
+        if (target != Target)
+        {
+            return 0;
+        }
+        
         if (!props.IsPoweredAttack())
         {
             return 0;
