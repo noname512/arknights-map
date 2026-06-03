@@ -9,8 +9,10 @@ using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 using ArknightsMap.Scripts.Powers;
+using Godot;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Models.Singleton;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 
 namespace ArknightsMap.Scripts.Monsters;
@@ -45,7 +47,7 @@ public class Nest : ModMonsterTemplate
             {
                 await DamageCmd.Attack(Damage).FromMonster(this).Execute(null);
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthAdd, Creature, null);
-                await CreatureCmd.GainMaxHp(Creature, HpAdd);
+                await CreatureCmd.GainMaxHp(Creature, HpAdd * CombatState.Players.Count * MultiplayerScalingModel.GetMultiplayerScaling(CombatState.Encounter, CombatState.RunState.CurrentActIndex));
                 growthTimes++;
                 if (growthTimes == FirstGrow)
                 {
