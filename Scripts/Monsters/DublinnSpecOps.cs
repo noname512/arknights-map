@@ -22,7 +22,7 @@ public class DublinnSpecOps : AbstractWildsMonster
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 17, 15);
     private int Damage3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 18, 16);
     private int Damage4 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 0, 0);
-    private int StrengthGain => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 2, 1);
+    private int StrengthGain => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 1, 1);
     public override MonsterAssetProfile AssetProfile => new(
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
     );

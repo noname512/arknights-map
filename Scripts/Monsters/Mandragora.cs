@@ -17,8 +17,8 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class Mandragora : AbstractWildsMonster
 {
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 335, 320);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 335, 320);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 365, 350);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 365, 350);
     private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 45, 40);
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 4, 4);
     private int HitCount2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 5);

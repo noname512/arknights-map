@@ -17,8 +17,8 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class DublinnFlamechaserGuard : AbstractWildsMonster
 {
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 140, 130);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 140, 130);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 110, 100);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 110, 100);
     public override MonsterAssetProfile AssetProfile => new(
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
     );

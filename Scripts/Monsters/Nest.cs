@@ -23,10 +23,10 @@ public class Nest : AbstractWildsMonster
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 10, 10);
     private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 3, 2);
     private int StrengthAdd => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 3, 2);
-    private int HpAdd => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 15, 12);
+    private int HpAdd => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 12, 9);
     private int growthTimes = 0;
     private int FirstGrow = 1;
-    private int SecondGrow = AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 4, 5);
+    private int SecondGrow = 1 + AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 8);
 
     public override MonsterAssetProfile AssetProfile => new(
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
