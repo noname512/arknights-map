@@ -27,20 +27,12 @@ public class GuidingSprout : AbstractWildsMonster
         List<MonsterState> list = new List<MonsterState>();
         MoveState attack1 = new MoveState(
             "ATTACK1",
-            async targets =>
-            {
-                await DamageCmd.Attack(AttackDamage).FromMonster(this)
-                    .Execute(null);
-            },
+            async targets => await DamageCmd.Attack(AttackDamage).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null),
             new SingleAttackIntent(AttackDamage)
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
-            async targets =>
-            {
-                await DamageCmd.Attack(AttackDamage).FromMonster(this)
-                    .Execute(null);
-            },
+            async targets => await DamageCmd.Attack(AttackDamage).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null),
             new SingleAttackIntent(AttackDamage)
         );
         MoveState summon = new MoveState(

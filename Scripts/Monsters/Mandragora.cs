@@ -25,7 +25,7 @@ public class Mandragora : AbstractWildsMonster
     private int Damage3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 6);
     private int HitCount3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 5);
     private int Damage4 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 27, 25);
-    public bool IsHovering { get; set; } = true;
+    public bool IsHovering => Creature.HasPower<StoneshieldPower>();
     private int SummonTimes { get; set; } = 0;
     public override MonsterAssetProfile AssetProfile => new(
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
@@ -36,14 +36,14 @@ public class Mandragora : AbstractWildsMonster
         List<MonsterState> list = new List<MonsterState>();
         MoveState attack1 = new MoveState(
             "ATTACK1",
-            async targets => await DamageCmd.Attack(Damage1).FromMonster(this).Execute(null),
+            async targets => await DamageCmd.Attack(Damage1).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null),
             new SingleAttackIntent(Damage1)
         );
         MoveState attack2 = new MoveState(
             "GAZE",
             async targets =>
             {
-                await DamageCmd.Attack(Damage2).WithHitCount(HitCount2).FromMonster(this).Execute(null);
+                await DamageCmd.Attack(Damage2).WithHitCount(HitCount2).FromMonster(this).WithAttackerAnim("Skill1", 0.5f).OnlyPlayAnimOnce().Execute(null);
                 await PowerCmd.Apply<MandragoraGazePower>(new ThrowingPlayerChoiceContext(), targets, 4m, Creature, null);
             },
             new MultiAttackIntent(Damage2, HitCount2),
@@ -51,14 +51,14 @@ public class Mandragora : AbstractWildsMonster
         );
         MoveState attack3 = new MoveState(
             "ATTACK2",
-            async targets => await DamageCmd.Attack(Damage3).WithHitCount(HitCount3).FromMonster(this).Execute(null),
+            async targets => await DamageCmd.Attack(Damage3).WithHitCount(HitCount3).FromMonster(this).WithAttackerAnim("Attack", 0.5f).OnlyPlayAnimOnce().Execute(null),
             new MultiAttackIntent(Damage3, HitCount3)
         );
         MoveState attack4 = new MoveState(
             "ATTACK_DEBUFF",
             async targets =>
             {
-                await DamageCmd.Attack(Damage4).FromMonster(this).Execute(null);
+                await DamageCmd.Attack(Damage4).FromMonster(this).WithAttackerAnim("Skill3", 0.5f).Execute(null);
                 await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), targets, 4m, Creature, null);
             },
             new SingleAttackIntent(Damage4),
@@ -102,6 +102,7 @@ public class Mandragora : AbstractWildsMonster
 
     public async Task ShieldAndSummon(IReadOnlyList<Creature> targets)
     {
+        await CreatureCmd.TriggerAnim(Creature, "Skill2", 0);
         if (SummonTimes < 3)
         {
             Creature m = await CreatureCmd.Add<TatteredPillar>(CombatState, "second");
@@ -117,15 +118,28 @@ public class Mandragora : AbstractWildsMonster
         AnimState attackState = new AnimState("C2_Attack_1");
         AnimState dieState = new AnimState("C2_Die_1");
         AnimState idleState2 = new AnimState("C2_Idle_2", isLooping: true);
-        AnimState attackState2 = new AnimState("C2_Attack_2");
         AnimState dieState2 = new AnimState("C2_Die_2");
         AnimState stunState = new AnimState("C2_Stun");
+        AnimState skill2State = new AnimState("C2_Skill_2");
+        AnimState skill1Start = new AnimState("C2_Skill_1_Begin");
+        AnimState skill1Loop = new AnimState("C2_Skill_1_Loop");
+        AnimState skill1End = new AnimState("C2_Skill_1_End");
+        AnimState skill3State = new AnimState("C2_Skill_3");
         attackState.NextState = idleState;
-        CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
-        creatureAnimator.AddAnyState("Attack", attackState, () => IsHovering);
-        creatureAnimator.AddAnyState("Attack", attackState2, () => !IsHovering);
+        stunState.NextState = idleState2;
+        skill1Start.NextState = skill1Loop;
+        skill1Loop.NextState = skill1End;
+        skill1End.NextState = idleState;
+        skill2State.NextState = idleState;
+        skill3State.NextState = idleState;
+        CreatureAnimator creatureAnimator = new CreatureAnimator(idleState2, controller);
+        creatureAnimator.AddAnyState("Attack", attackState);
         creatureAnimator.AddAnyState("Dead", dieState, () => IsHovering);
         creatureAnimator.AddAnyState("Dead", dieState2, () => !IsHovering);
+        creatureAnimator.AddAnyState("C2_Stun", stunState);
+        creatureAnimator.AddAnyState("Skill1", skill1Start);
+        creatureAnimator.AddAnyState("Skill2", skill2State);
+        creatureAnimator.AddAnyState("Skill3", skill3State);
         return creatureAnimator;
     }
 }

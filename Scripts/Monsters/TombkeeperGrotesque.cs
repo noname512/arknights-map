@@ -70,14 +70,14 @@ public class TombkeeperGrotesque : AbstractWildsMonster
         }, new BuffIntent());
         MoveState attack1 = new MoveState(
             "ATTACK1",
-            async targets => await DamageCmd.Attack(Damage1).FromMonster(this).Execute(null),
+            async targets => await DamageCmd.Attack(Damage1).FromMonster(this).WithAttackerAnim("Attack", 0.8f).Execute(null),
             new SingleAttackIntent(Damage1)
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
             async targets =>
             {
-                await DamageCmd.Attack(Damage2).FromMonster(this).Execute(null);
+                await DamageCmd.Attack(Damage2).FromMonster(this).WithAttackerAnim("Attack", 0.8f).Execute(null);
                 await CardPileCmd.AddToCombatAndPreview<Dazed>(targets, PileType.Discard, Status2, null);
             },
             new SingleAttackIntent(Damage2),
@@ -85,7 +85,7 @@ public class TombkeeperGrotesque : AbstractWildsMonster
         );
         MoveState attack3 = new MoveState(
             "ATTACK3",
-            async targets => await DamageCmd.Attack(Damage3).WithHitCount(HitCount3).FromMonster(this).Execute(null),
+            async targets => await DamageCmd.Attack(Damage3).WithHitCount(HitCount3).FromMonster(this).WithAttackerAnim("Attack", 0.8f).OnlyPlayAnimOnce().Execute(null),
             new MultiAttackIntent(Damage3, HitCount3)
         );
         attack1.FollowUpState = attack2;

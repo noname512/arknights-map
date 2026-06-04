@@ -45,7 +45,7 @@ public class DublinnHeavyDefender : AbstractWildsMonster
         {
             return new MoveState(
                 "ATTACK" + i,
-                async targets => await DamageCmd.Attack(Damage[i]).FromMonster(this).Execute(null),
+                async targets => await DamageCmd.Attack(Damage[i]).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null),
                 new SingleAttackIntent(Damage[i])
             );
         };

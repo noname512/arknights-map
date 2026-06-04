@@ -50,7 +50,7 @@ public class AllFlamesReturned : AbstractWildsMonster
 
         p1Attack = new MoveState("ATTACK_P1", async targets =>
         {
-            await DamageCmd.Attack(P1AttackDamage).FromMonster(this).Execute(null);
+            await DamageCmd.Attack(P1AttackDamage).FromMonster(this).WithAttackerAnim("Attack", 0.8f).Execute(null);
             await CardPileCmd.AddToCombatAndPreview<PurpleFlame>(targets, PileType.Hand, P1PurpleFlame, null);
             await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthGain, Creature, null);
         }, new SingleAttackIntent(P1AttackDamage), new CardDebuffIntent(), new BuffIntent());
@@ -66,7 +66,7 @@ public class AllFlamesReturned : AbstractWildsMonster
 
         p2Attack = new MoveState("ATTACK_P2", async targets =>
         {
-            await DamageCmd.Attack(P2AttackDamage).FromMonster(this).Execute(null);
+            await DamageCmd.Attack(P2AttackDamage).FromMonster(this).WithAttackerAnim("Attack", 0.8f).Execute(null);
             await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
         }, new SingleAttackIntent(P2AttackDamage), new IgniteIntent());
         MoveState breeth = new MoveState("BREETH", async targets =>

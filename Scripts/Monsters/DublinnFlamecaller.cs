@@ -41,7 +41,7 @@ public class DublinnFlamecaller : AbstractWildsMonster
             "ATTACK_B",
             async targets =>
             {
-                await DamageCmd.Attack(AttackDamage).FromMonster(this).Execute(null);
+                await DamageCmd.Attack(AttackDamage).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null);
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthGain, Creature, null);
             },
             new SingleAttackIntent(AttackDamage), new BuffIntent()
@@ -50,7 +50,7 @@ public class DublinnFlamecaller : AbstractWildsMonster
             "ATTACK_N",
             async targets =>
             {
-                await DamageCmd.Attack(AttackDamage).FromMonster(this).Execute(null);
+                await DamageCmd.Attack(AttackDamage).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null);
                 await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
             },
             new SingleAttackIntent(AttackDamage), new IgniteIntent()

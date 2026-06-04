@@ -55,12 +55,12 @@ public class DublinnCompanionShadowblade : AbstractWildsMonster
         int repeatCount() => Creature.HasPower<CompanionAtkPower>() ? Creature.GetPower<CompanionAtkPower>()!.Amount : 2;
         MoveState attack1 = new MoveState(
             "ATTACK1",
-            async targets => await DamageCmd.Attack(Damage1).WithHitCount(repeatCount()).FromMonster(this).Execute(null),
+            async targets => await DamageCmd.Attack(Damage1).WithHitCount(repeatCount()).FromMonster(this).WithAttackerAnim("Attack", 0.6f).OnlyPlayAnimOnce().Execute(null),
             new MultiAttackIntent(Damage1, repeatCount)
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
-            async targets => await DamageCmd.Attack(Damage2).WithHitCount(repeatCount()).FromMonster(this).Execute(null),
+            async targets => await DamageCmd.Attack(Damage2).WithHitCount(repeatCount()).FromMonster(this).WithAttackerAnim("Attack", 0.6f).OnlyPlayAnimOnce().Execute(null),
             new MultiAttackIntent(Damage2, repeatCount)
         );
         MoveState buff = new MoveState(
@@ -75,7 +75,7 @@ public class DublinnCompanionShadowblade : AbstractWildsMonster
 
         MoveState singleAttack = new MoveState(
             "SINGLE_ATTACK",
-            async targets => await DamageCmd.Attack(Damage3).FromMonster(this).Execute(null),
+            async targets => await DamageCmd.Attack(Damage3).FromMonster(this).WithAttackerAnim("Attack", 0.6f).Execute(null),
             new SingleAttackIntent(Damage3)
         );
 

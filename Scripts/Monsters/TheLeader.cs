@@ -91,8 +91,7 @@ public class TheLeader : AbstractWildsMonster
             "ATTACK1_1",
             async targets =>
             {
-                await DamageCmd.Attack(Damage1_1).FromMonster(this).Execute(null);
-                await CreatureCmd.TriggerAnim(Creature, "CommonAttack1", 0);
+                await DamageCmd.Attack(Damage1_1).FromMonster(this).WithAttackerAnim("Attack1", 0.5f).Execute(null);
                 await Stage1Move();
             },
             new SingleAttackIntent(Damage1_1),
@@ -102,8 +101,7 @@ public class TheLeader : AbstractWildsMonster
             "ATTACK1_2",
             async targets =>
             {
-                await DamageCmd.Attack(Damage1_2).WithHitCount(Times1).FromMonster(this).Execute(null);
-                await CreatureCmd.TriggerAnim(Creature, "CommonAttack1", 0);
+                await DamageCmd.Attack(Damage1_2).WithHitCount(Times1).FromMonster(this).WithAttackerAnim("Attack1", 0.5f).OnlyPlayAnimOnce().Execute(null);
                 await Stage1Move();
             },
             new MultiAttackIntent(Damage1_2, Times1),
@@ -113,9 +111,8 @@ public class TheLeader : AbstractWildsMonster
             "IGNITE1",
             async targets =>
             {
-                await DamageCmd.Attack(Damage1_3).FromMonster(this).Execute(null);
+                await DamageCmd.Attack(Damage1_3).FromMonster(this).WithAttackerAnim("Ignite1", 0.5f).Execute(null);
                 await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
-                await CreatureCmd.TriggerAnim(Creature, "Ignite1", 0);
                 await Stage1Move();
             },
             new SingleAttackIntent(Damage1_3),
@@ -126,7 +123,7 @@ public class TheLeader : AbstractWildsMonster
             "RETURN_FIRE1",
             async targets =>
             {
-                await DamageCmd.Attack(0).FromMonster(this).Execute(null);
+                await DamageCmd.Attack(0).FromMonster(this).WithAttackerAnim("ReturnFire1", 0.5f).Execute(null);
                 foreach (var power in Creature.Powers)
                 {
                     if (power is GiveAndTakePower giveAndTakePower)
@@ -134,7 +131,6 @@ public class TheLeader : AbstractWildsMonster
                         giveAndTakePower.Return(power.DynamicVars["Exceed"].IntValue / 2);
                     }
                 }
-                await CreatureCmd.TriggerAnim(Creature, "ReturnFire1", 0);
                 await Stage1Move();
             },
             new SingleAttackIntent(0),
@@ -143,29 +139,20 @@ public class TheLeader : AbstractWildsMonster
 
         MoveState attack2_1 = new MoveState(
             "ATTACK2_1",
-            async targets =>
-            {
-                await DamageCmd.Attack(Damage2_1).FromMonster(this).Execute(null);
-                await CreatureCmd.TriggerAnim(Creature, "CommonAttack2", 0);
-            },
+            async targets => await DamageCmd.Attack(Damage2_1).FromMonster(this).WithAttackerAnim("Attack2", 0.5f).Execute(null),
             new SingleAttackIntent(Damage2_1)
         );
         MoveState attack2_2 = new MoveState(
             "ATTACK2_2",
-            async targets =>
-            {
-                await DamageCmd.Attack(Damage2_2).WithHitCount(Times2).FromMonster(this).Execute(null);
-                await CreatureCmd.TriggerAnim(Creature, "CommonAttack2", 0);
-            },
+            async targets => await DamageCmd.Attack(Damage2_2).WithHitCount(Times2).FromMonster(this).WithAttackerAnim("Attack2", 0.5f).OnlyPlayAnimOnce().Execute(null),
             new MultiAttackIntent(Damage2_2, Times2)
         );
         MoveState ignite2 = new MoveState(
             "IGNITE2",
             async targets =>
             {
-                await DamageCmd.Attack(Damage2_3).FromMonster(this).Execute(null);
+                await DamageCmd.Attack(Damage2_3).FromMonster(this).WithAttackerAnim("Ignite2", 0.5f).Execute(null);
                 await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
-                await CreatureCmd.TriggerAnim(Creature, "Ignite2", 0);
             },
             new SingleAttackIntent(Damage2_3),
             new IgniteIntent()
@@ -174,15 +161,6 @@ public class TheLeader : AbstractWildsMonster
             "RETURN_FIRE2",
             async targets =>
             {
-                int amount = GTAmt;
-                await DamageCmd.Attack(0).FromMonster(this).Execute(null);
-                foreach (var power in Creature.Powers)
-                {
-                    if (power is GiveAndTakePower giveAndTakePower)
-                    {
-                        giveAndTakePower.Return(power.DynamicVars["Exceed"].IntValue);
-                    }
-                }
                 if (_firstFire2)
                 {
                     await CreatureCmd.TriggerAnim(Creature, "Revive", 0);
@@ -191,6 +169,15 @@ public class TheLeader : AbstractWildsMonster
                 else
                 {
                     await CreatureCmd.TriggerAnim(Creature, "ReturnFire2", 0);
+                }
+                int amount = GTAmt;
+                await DamageCmd.Attack(0).FromMonster(this).WithNoAttackerAnim().Execute(null);
+                foreach (var power in Creature.Powers)
+                {
+                    if (power is GiveAndTakePower giveAndTakePower)
+                    {
+                        giveAndTakePower.Return(power.DynamicVars["Exceed"].IntValue);
+                    }
                 }
             },
             new SingleAttackIntent(0)
@@ -273,8 +260,8 @@ public class TheLeader : AbstractWildsMonster
         reviveFireState.NextState = idleState2;
         dieState1.NextState = dieLoopState;
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState1, controller);
-        creatureAnimator.AddAnyState("CommonAttack1", attackState1);
-        creatureAnimator.AddAnyState("CommonAttack2", attackState2);
+        creatureAnimator.AddAnyState("Attack1", attackState1);
+        creatureAnimator.AddAnyState("Attack2", attackState2);
         creatureAnimator.AddAnyState("Ignite1", igniteState1);
         creatureAnimator.AddAnyState("Ignite2", igniteState2);
         creatureAnimator.AddAnyState("ReturnFire1", fireState1);

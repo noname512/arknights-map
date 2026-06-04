@@ -37,7 +37,7 @@ public class AshCreation : AbstractWildsMonster
         List<MonsterState> list = new List<MonsterState>();
         MoveState attack = new MoveState(
             "ATTACK",
-            async targets => await DamageCmd.Attack(Damage1).FromMonster(this).WithHitCount(2).Execute(null),
+            async targets => await DamageCmd.Attack(Damage1).FromMonster(this).WithHitCount(2).WithAttackerAnim("Attack", 0.5f).OnlyPlayAnimOnce().Execute(null),
             new MultiAttackIntent(Damage1, 2)
         );
         MoveState stun = new MoveState(

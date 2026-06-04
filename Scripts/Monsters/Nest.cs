@@ -44,7 +44,7 @@ public class Nest : AbstractWildsMonster
             "ATTACK1",
             async targets =>
             {
-                await DamageCmd.Attack(Damage).FromMonster(this).Execute(null);
+                await DamageCmd.Attack(Damage).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null);
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthAdd, Creature, null);
                 await CreatureCmd.GainMaxHp(Creature, HpAdd * CombatState.Players.Count * MultiplayerScalingModel.GetMultiplayerScaling(CombatState.Encounter, CombatState.RunState.CurrentActIndex));
                 growthTimes++;
@@ -64,7 +64,7 @@ public class Nest : AbstractWildsMonster
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
-            async targets => await DamageCmd.Attack(Damage).FromMonster(this).Execute(null),
+            async targets => await DamageCmd.Attack(Damage).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null),
             new SingleAttackIntent(Damage)
         );
 

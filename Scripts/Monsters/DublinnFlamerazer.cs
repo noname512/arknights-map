@@ -32,19 +32,14 @@ public class DublinnFlamerazer : AbstractWildsMonster
         List<MonsterState> list = new List<MonsterState>();
         attack1_burning = new MoveState(
             "ATTACK1_B",
-            async targets =>
-            {
-                await CreatureCmd.TriggerAnim(Creature, "Skill", 0);
-                await DamageCmd.Attack(Damage1).WithHitCount(Times2).WithNoAttackerAnim().FromMonster(this).Execute(null);
-            },
+            async targets => await DamageCmd.Attack(Damage1).WithHitCount(Times2).WithNoAttackerAnim().FromMonster(this).WithAttackerAnim("Skill", 0.5f).OnlyPlayAnimOnce().Execute(null),
             new MultiAttackIntent(Damage1, Times2)
         );
         attack1_not_burning = new MoveState(
             "ATTACK1_N",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Skill", 0);
-                await DamageCmd.Attack(Damage1).WithHitCount(Times1).WithNoAttackerAnim().FromMonster(this).Execute(null);
+                await DamageCmd.Attack(Damage1).WithHitCount(Times1).WithNoAttackerAnim().FromMonster(this).WithAttackerAnim("Skill", 0.5f).OnlyPlayAnimOnce().Execute(null);
                 await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
             },
             new MultiAttackIntent(Damage1, Times1),
@@ -55,18 +50,18 @@ public class DublinnFlamerazer : AbstractWildsMonster
             async targets =>
             {
                 await CreatureCmd.TriggerAnim(Creature, "Skill", 0);
-                await DamageCmd.Attack(Damage1).WithHitCount(Times2).WithNoAttackerAnim().FromMonster(this).Execute(null);
+                await DamageCmd.Attack(Damage1).WithHitCount(Times2).WithNoAttackerAnim().FromMonster(this).WithAttackerAnim("Skill", 0.5f).OnlyPlayAnimOnce().Execute(null);
             },
             new MultiAttackIntent(Damage1, Times2)
         );
         MoveState attack3 = new MoveState(
             "ATTACK3",
-            async targets => await DamageCmd.Attack(Damage2).FromMonster(this).Execute(null),
+            async targets => await DamageCmd.Attack(Damage2).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null),
             new SingleAttackIntent(Damage2)
         );
         MoveState attack4 = new MoveState(
             "ATTACK4",
-            async targets => await DamageCmd.Attack(Damage2).FromMonster(this).Execute(null),
+            async targets => await DamageCmd.Attack(Damage2).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null),
             new SingleAttackIntent(Damage2)
         );
 

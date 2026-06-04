@@ -42,7 +42,7 @@ public class TreeShield : AbstractWildsMonster
             "ATTACK1",
             async targets =>
             {
-                await DamageCmd.Attack(Damage1).FromMonster(this).Execute(null);
+                await DamageCmd.Attack(Damage1).FromMonster(this).WithAttackerAnim("Attack", 0.7f).Execute(null);
                 await PowerCmd.Apply<PlatingPower>(new ThrowingPlayerChoiceContext(), Creature, 4m, Creature, null);
             },
             new SingleAttackIntent(Damage1),
@@ -50,7 +50,7 @@ public class TreeShield : AbstractWildsMonster
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
-            async targets => await DamageCmd.Attack(Damage2).FromMonster(this).Execute(null),
+            async targets => await DamageCmd.Attack(Damage2).FromMonster(this).WithAttackerAnim("Attack", 0.7f).Execute(null),
             new SingleAttackIntent(Damage2)
         );
         MoveState block1 = new MoveState(
@@ -60,7 +60,7 @@ public class TreeShield : AbstractWildsMonster
         );
         MoveState attack3 = new MoveState(
             "ATTACK3",
-            async targets => await DamageCmd.Attack(Damage3).FromMonster(this).Execute(null),
+            async targets => await DamageCmd.Attack(Damage3).FromMonster(this).WithAttackerAnim("Attack", 0.7f).Execute(null),
             new SingleAttackIntent(Damage3)
         );
 

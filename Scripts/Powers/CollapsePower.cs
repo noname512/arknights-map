@@ -39,6 +39,7 @@ public class CollapsePower : ModPowerTemplate
             if (partner.Monster is Mandragora mandragora)
             {
                 newState = mandragora.GetSummonState();
+                await CreatureCmd.TriggerAnim(mandragora.Creature, "C2_Stun", 0);
             }
             else
             {

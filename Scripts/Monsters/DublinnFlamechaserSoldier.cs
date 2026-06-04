@@ -36,27 +36,17 @@ public class DublinnFlamechaserSoldier : AbstractWildsMonster
         List<MonsterState> list = new List<MonsterState>();
         MoveState attack1 = new MoveState(
             "ATTACK1",
-            async targets => await DamageCmd
-                .Attack(Damage1)
-                .FromMonster(this)
-                // .WithAttackerAnim("Attack", 0.5f) // 如果有攻击动画，可以取消注释并替换成实际动画名称和延迟
-                .Execute(null),
+            async targets => await DamageCmd.Attack(Damage1).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null),
             new SingleAttackIntent(Damage1)
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
-            async targets => await DamageCmd
-                .Attack(Damage2)
-                .FromMonster(this)
-                .Execute(null),
+            async targets => await DamageCmd.Attack(Damage2).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null),
             new SingleAttackIntent(Damage2)
         );
         MoveState attack3 = new MoveState(
             "ATTACK3",
-            async targets => await DamageCmd
-                .Attack(Damage1)
-                .FromMonster(this)
-                .Execute(null),
+            async targets => await DamageCmd.Attack(Damage1).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null),
             new SingleAttackIntent(Damage1)
         );
         MoveState stun1 = new MoveState("STUN1", _ => { return Task.CompletedTask; }, new StunIntent());

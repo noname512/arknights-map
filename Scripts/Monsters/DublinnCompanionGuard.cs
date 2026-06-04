@@ -62,7 +62,7 @@ public class DublinnCompanionGuard : AbstractWildsMonster
             "ATTACK",
             async targets =>
             {
-                await DamageCmd.Attack(Damage1).FromMonster(this).Execute(null);
+                await DamageCmd.Attack(Damage1).FromMonster(this).WithAttackerAnim("Attack", 0.6f).Execute(null);
                 await CreatureCmd.GainBlock(Creature, Block3, ValueProp.Move, null);
             },
             new SingleAttackIntent(Damage1),
@@ -71,7 +71,7 @@ public class DublinnCompanionGuard : AbstractWildsMonster
 
         MoveState singleAttack = new MoveState(
             "SINGLE_ATTACK",
-            async targets => await DamageCmd.Attack(Damage2).FromMonster(this).Execute(null),
+            async targets => await DamageCmd.Attack(Damage2).FromMonster(this).WithAttackerAnim("Attack", 0.6f).Execute(null),
             new SingleAttackIntent(Damage2)
         );
 
