@@ -67,15 +67,16 @@ public class DublinnSpecOps : ModMonsterTemplate
         "SPECIAL_MOVE" + SpecialMoveCounter++,
         SpecialMove,
         new MultiAttackIntent(Damage4, 5),
-        new BuffIntent()
+        new BuffIntent(),
+        new IgniteIntent()
     );
 
     public async Task SpecialMove(IEnumerable<Creature> targets)
     {
+        await CreatureCmd.TriggerAnim(Creature, "Skill", 0);
         await DamageCmd.Attack(Damage4).WithHitCount(5).WithNoAttackerAnim().FromMonster(this).Execute(null);
         await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthGain, Creature, null);
         await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
-        await CreatureCmd.TriggerAnim(Creature, "Skill", 0);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

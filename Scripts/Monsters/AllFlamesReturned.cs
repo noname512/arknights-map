@@ -62,13 +62,13 @@ public class AllFlamesReturned : ModMonsterTemplate
 
         MoveState DeadState2 = new MoveState("RESPAWN_MOVE2", async _ => { await CreatureCmd.Heal(Creature, Creature.MaxHp / 3); }, new StunIntent());
 
-        DeadState3 = new MoveState("RESPAWN_MOVE3", RespawnMove, new HealIntent(), new BuffIntent());
+        DeadState3 = new MoveState("RESPAWN_MOVE3", RespawnMove, new HealIntent(), new BuffIntent(), new IgniteIntent());
 
         p2Attack = new MoveState("ATTACK_P2", async targets =>
         {
             await DamageCmd.Attack(P2AttackDamage).FromMonster(this).Execute(null);
             await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
-        }, new SingleAttackIntent(P2AttackDamage), new BuffIntent());
+        }, new SingleAttackIntent(P2AttackDamage), new IgniteIntent());
         MoveState breeth = new MoveState("BREETH", async targets =>
         {
             await CreatureCmd.TriggerAnim(Creature, "Skill", 0);

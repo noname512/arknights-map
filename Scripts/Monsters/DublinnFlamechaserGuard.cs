@@ -69,14 +69,14 @@ public class DublinnFlamechaserGuard : ModMonsterTemplate
                     await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
                 }
             },
-            new BuffIntent()
+            new BuffIntent(), new IgniteIntent()
         );
         MoveState stun1 = new MoveState("STUN1", _ => { return Task.CompletedTask; }, new StunIntent());
         MoveState stun3 = new MoveState("STUN3", async _ =>
         {
             await Creature.GetPower<ChaseFlamePower>()?.Revive();
             await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
-        }, new HealIntent(), new BuffIntent());
+        }, new HealIntent(), new IgniteIntent());
         // 不要改，复活的意图就是STUN3，改了可能会炸
 
         attack1.FollowUpState = attack2;

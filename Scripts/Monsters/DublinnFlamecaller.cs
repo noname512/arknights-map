@@ -33,7 +33,7 @@ public class DublinnFlamecaller : ModMonsterTemplate
             {
                 await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
             },
-            new BuffIntent()
+            new IgniteIntent()
         );
         MoveState attack = new MoveState(
             "ATTACK",
@@ -47,7 +47,7 @@ public class DublinnFlamecaller : ModMonsterTemplate
                 }
                 await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
             },
-            new SingleAttackIntent(AttackDamage), new BuffIntent()
+            new SingleAttackIntent(AttackDamage), new BuffIntent(), new IgniteIntent()
         );
 
         fire.FollowUpState = attack;
