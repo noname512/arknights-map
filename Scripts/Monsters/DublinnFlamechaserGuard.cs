@@ -15,7 +15,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class DublinnFlamechaserGuard : ModMonsterTemplate
+public class DublinnFlamechaserGuard : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 140, 130);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 140, 130);
@@ -25,6 +25,9 @@ public class DublinnFlamechaserGuard : ModMonsterTemplate
     private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 14, 12);
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 18, 16);
     public override bool ShouldDisappearFromDoom => !Creature.HasPower<ChaseFlamePower>() || Creature.GetPower<ChaseFlamePower>()?.CurState == 1;
+
+    private MoveState buff_burning;
+    private MoveState buff_not_burning;
 
     public override async Task AfterAddedToRoom()
     {
@@ -55,43 +58,53 @@ public class DublinnFlamechaserGuard : ModMonsterTemplate
             },
             new SingleAttackIntent(Damage2)
         );
-        MoveState buff = new MoveState(
-            "ATTACK3",
+        buff_burning = new MoveState(
+            "BUFF_B",
+            async targets => await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 12, Creature, null),
+            new BuffIntent()
+        );
+        buff_not_burning = new MoveState(
+            "BUFF_N",
             async targets =>
             {
-                if (ReedBed.Burning)
-                {
-                    await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 12, Creature, null);
-                }
-                else
-                {
-                    await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 2, Creature, null);
-                    await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
-                }
+                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 2, Creature, null);
+                await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
             },
-            new BuffIntent()
+            new BuffIntent(), new IgniteIntent()
         );
         MoveState stun1 = new MoveState("STUN1", _ => { return Task.CompletedTask; }, new StunIntent());
         MoveState stun3 = new MoveState("STUN3", async _ =>
         {
             await Creature.GetPower<ChaseFlamePower>()?.Revive();
             await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
-        }, new HealIntent(), new BuffIntent());
+        }, new HealIntent(), new IgniteIntent());
         // 不要改，复活的意图就是STUN3，改了可能会炸
+
+        ConditionalBranchState buff = new ConditionalBranchState("BUFF");
+        buff.AddState(buff_burning, () => ReedBed.Burning);
+        buff.AddState(buff_not_burning, () => !ReedBed.Burning);
 
         attack1.FollowUpState = attack2;
         attack2.FollowUpState = buff;
-        buff.FollowUpState = attack1;
+        buff_burning.FollowUpState = attack1;
+        buff_not_burning.FollowUpState = attack1;
         stun1.FollowUpState = stun3;
 
         list.Add(attack1);
         list.Add(attack2);
+        list.Add(buff_burning);
+        list.Add(buff_not_burning);
         list.Add(buff);
         list.Add(stun1);
         list.Add(stun3);
 
-
         return new MonsterMoveStateMachine(list, attack1);
+    }
+
+    public override async Task OnReedBedStatusChange(bool burning)
+    {
+        if (NextMove.Id == "BUFF_B" && !burning) SetMoveImmediate(buff_not_burning);
+        else if (NextMove.Id == "BUFF_N" && burning) SetMoveImmediate(buff_burning);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

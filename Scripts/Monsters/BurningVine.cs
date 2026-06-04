@@ -13,7 +13,7 @@ using ArknightsMap.Scripts.Powers;
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class BurningVine : ModMonsterTemplate
+public class BurningVine : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 80, 72);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 80, 72);

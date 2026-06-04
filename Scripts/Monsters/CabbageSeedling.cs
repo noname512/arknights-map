@@ -14,7 +14,7 @@ using MegaCrit.Sts2.Core.MonsterMoves;
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class CabbageSeedling : ModMonsterTemplate
+public class CabbageSeedling : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 40, 38);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 44, 42);

@@ -5,10 +5,8 @@ using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
-using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
-using MegaCrit.Sts2.Core.MonsterMoves;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -16,7 +14,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class DublinnSpecOps : ModMonsterTemplate
+public class DublinnSpecOps : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 144, 140);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 144, 140);
@@ -67,15 +65,36 @@ public class DublinnSpecOps : ModMonsterTemplate
         "SPECIAL_MOVE" + SpecialMoveCounter++,
         SpecialMove,
         new MultiAttackIntent(Damage4, 5),
-        new BuffIntent()
+        new BuffIntent(),
+        new IgniteIntent()
     );
 
     public async Task SpecialMove(IEnumerable<Creature> targets)
     {
+        await CreatureCmd.TriggerAnim(Creature, "Skill", 0);
         await DamageCmd.Attack(Damage4).WithHitCount(5).WithNoAttackerAnim().FromMonster(this).Execute(null);
         await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthGain, Creature, null);
         await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
-        await CreatureCmd.TriggerAnim(Creature, "Skill", 0);
+    }
+
+    public override async Task OnReedBedStatusChange(bool burning)
+    {
+        if (!NextMove.Id.StartsWith("SPECIAL_MOVE"))
+        {
+            MoveState newState = GenerateSpecialMoveState();
+            foreach (var (k, v) in MoveStateMachine.States)
+            {
+                if (v is not MoveState) continue;
+                MoveState moveState = (MoveState)v;
+                if (moveState.FollowUpState.Id == NextMove.Id)
+                {
+                    moveState.FollowUpState = newState;
+                }
+            }
+            newState.FollowUpState = NextMove.FollowUpState;
+            newState.RegisterStates(MoveStateMachine.States);
+            SetMoveImmediate(newState);
+        }
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

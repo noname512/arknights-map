@@ -6,5 +6,5 @@
   "ARKNIGHTS_MAP_CARD_PURPLE_FLAME.title": "紫焰",
   "ARKNIGHTS_MAP_CARD_PURPLE_FLAME.description": "受到{Damage}点[purple]伤害[/purple]与[gold]灼燃损伤[/gold]。",
   "ARKNIGHTS_MAP_CARD_PUT_OUT_FIRE.title": "灭火",
-  "ARKNIGHTS_MAP_CARD_PUT_OUT_FIRE.description": "受到{PutOutDmg:diff()}点伤害与[gold]灼燃损伤[/gold]。 \n 将芦苇丛变为[gold]未燃烧[/gold]状态。"
+  "ARKNIGHTS_MAP_CARD_PUT_OUT_FIRE.description": "受到{PutOutDmg:diff()}点伤害与[gold]灼燃损伤[/gold]。 \n 将[gold]芦苇丛[/gold]变为[gold]未燃烧[/gold]状态。"
 }

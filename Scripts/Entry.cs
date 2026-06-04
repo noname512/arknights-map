@@ -1,5 +1,6 @@
 using System.Reflection;
 using ArknightsMap.Scripts.Acts;
+using HarmonyLib;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
 using STS2RitsuLib;
@@ -56,5 +57,8 @@ public class Entry
         });*/
 
         RitsuLibFramework.SubscribeLifecycle(reedBed);
+
+        var harmony = new Harmony(ModId);
+        harmony.PatchAll();
     }
 }

@@ -61,5 +61,8 @@
     "ARKNIGHTS_MAP_POWER_SCORCHING_LIGHT_POWER.title": "焚光",
     "ARKNIGHTS_MAP_POWER_GIVE_AND_TAKE_POWER.description": "对方[gold]灼燃损伤[/gold]溢出时，获得等量的层数。该层数会作为意图[gold]还火[/gold]的伤害值，且使用[gold]还火[/gold]后减少对应层数。",
     "ARKNIGHTS_MAP_POWER_GIVE_AND_TAKE_POWER.smartDescription": "{OnPlayer:敌人|玩家}的[gold]灼燃损伤[/gold]溢出时，获得等量的层数。这名敌人的意图[gold]还火[/gold]将根据当前层数造成伤害，且使用[gold]还火[/gold]后减少对应层数。（当前[blue]{Exceed}[/blue]层）",
-    "ARKNIGHTS_MAP_POWER_GIVE_AND_TAKE_POWER.title": "予取予夺"
+    "ARKNIGHTS_MAP_POWER_GIVE_AND_TAKE_POWER.title": "予取予夺",
+    "ARKNIGHTS_MAP_POWER_PERSEVERE_POWER.description": "这个敌人在玩家的回合内不再损失生命值。每回合记录其所有本该受到的伤害数值，回合开始时，流失等同于最大伤害数值的生命。",
+    "ARKNIGHTS_MAP_POWER_PERSEVERE_POWER.smartDescription": "[gold]{OwnerName}[/gold]在玩家的回合内不再损失生命值。每回合记录其所有本该受到的伤害数值，回合开始时，流失等同于最大伤害数值的生命。（当前[blue]{MaxDmg}[/blue]点）",
+    "ARKNIGHTS_MAP_POWER_PERSEVERE_POWER.title": "坚守"
 }

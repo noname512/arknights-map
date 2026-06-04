@@ -32,5 +32,11 @@
     "ARKNIGHTS_MAP_ENCOUNTER_HER_FLAME.title": "她的火焰",
     "ARKNIGHTS_MAP_ENCOUNTER_HER_FLAME.loss": "{character}",
     "ARKNIGHTS_MAP_ENCOUNTER_BURNING_WEEDS.title": "荒草焚荡",
-    "ARKNIGHTS_MAP_ENCOUNTER_BURNING_WEEDS.loss": "{character}死于燃烧的枯草丛。"
+    "ARKNIGHTS_MAP_ENCOUNTER_BURNING_WEEDS.loss": "{character}死于燃烧的枯草丛。",
+    "ARKNIGHTS_MAP_ENCOUNTER_DUBLINN_FLAMERAZER_NORMAL.title": "深池焚毁者",
+    "ARKNIGHTS_MAP_ENCOUNTER_DUBLINN_FLAMERAZER_NORMAL.loss": "{character}被深池焚毁者烤熟了",
+    "ARKNIGHTS_MAP_ENCOUNTER_ASHY_MARSH.title": "灰暗泥沼",
+    "ARKNIGHTS_MAP_ENCOUNTER_ASHY_MARSH.loss": "{character}",
+    "ARKNIGHTS_MAP_ENCOUNTER_BREAKOUT.title": "突围",
+    "ARKNIGHTS_MAP_ENCOUNTER_BREAKOUT.loss": "{character}没能突破深池重甲卫士的重围"
 }

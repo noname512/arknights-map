@@ -17,7 +17,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class DublinnCompanionShadowblade : ModMonsterTemplate
+public class DublinnCompanionShadowblade : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 62, 58);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 62, 58);

@@ -16,7 +16,7 @@ using MegaCrit.Sts2.Core.Models;
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class TheLeader : ModMonsterTemplate
+public class TheLeader : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 350, 325);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 350, 325);
@@ -30,7 +30,7 @@ public class TheLeader : ModMonsterTemplate
     private int Times2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 5, 4);
     private int Damage2_3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 18, 15);
     public bool _isstage2 = false;
-    private bool _firstFire2 = false;
+    private bool _firstFire2 = true;
     public override MonsterAssetProfile AssetProfile => new(
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
     );
@@ -42,7 +42,7 @@ public class TheLeader : ModMonsterTemplate
             GiveAndTakePower giveAndTakePower = (GiveAndTakePower)ModelDb.Power<GiveAndTakePower>().ToMutable();
             giveAndTakePower.Target = item;
             await PowerCmd.Apply(new ThrowingPlayerChoiceContext(), giveAndTakePower, base.Creature, 1, base.Creature, null);
-        }    
+        }
     }
 
     public async Task Stage1Move()
@@ -53,7 +53,7 @@ public class TheLeader : ModMonsterTemplate
         }
         else
         {
-            await PowerCmd.Apply<ScorchingLightPower>(new ThrowingPlayerChoiceContext(), Creature, ScorchingLightNum, Creature, null);        
+            await PowerCmd.Apply<ScorchingLightPower>(new ThrowingPlayerChoiceContext(), Creature, ScorchingLightNum, Creature, null);
         }
     }
     public int GTAmt
@@ -84,8 +84,8 @@ public class TheLeader : ModMonsterTemplate
                 await CreatureCmd.TriggerAnim(Creature, "Ignite1", 0);
                 await Stage1Move();
             },
-            new DebuffIntent(),
-            new BuffIntent()
+            new BuffIntent(),
+            new IgniteIntent()
         );
         MoveState attack1_1 = new MoveState(
             "ATTACK1_1",
@@ -119,8 +119,8 @@ public class TheLeader : ModMonsterTemplate
                 await Stage1Move();
             },
             new SingleAttackIntent(Damage1_3),
-            new DebuffIntent(),
-            new BuffIntent()
+            new BuffIntent(),
+            new IgniteIntent()
         );
         MoveState fire1 = new MoveState(
             "RETURN_FIRE1",
@@ -168,7 +168,7 @@ public class TheLeader : ModMonsterTemplate
                 await CreatureCmd.TriggerAnim(Creature, "Ignite2", 0);
             },
             new SingleAttackIntent(Damage2_3),
-            new DebuffIntent()
+            new IgniteIntent()
         );
         MoveState fire2 = new MoveState(
             "RETURN_FIRE2",
