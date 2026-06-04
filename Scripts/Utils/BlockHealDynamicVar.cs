@@ -52,5 +52,5 @@ public class BlockHealDynamicVar : DynamicVar
             PreviewValue = num;
         }
         PreviewValue = num;
-    }    
+    }
 }

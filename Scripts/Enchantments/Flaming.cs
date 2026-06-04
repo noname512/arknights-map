@@ -2,13 +2,9 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Enchantments;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -30,7 +26,7 @@ public class Flaming : ModEnchantmentTemplate
 
     // 图标位置。大小1:1就行，原版是64x64
     public override EnchantmentAssetProfile AssetProfile => new(
-        IconPath: "res://icon.svg"
+        IconPath: $"res://ArknightsMap/images/enchantments/{GetType().Name}"
     );
 
     public override bool CanEnchantCardType(CardType cardType)
@@ -53,5 +49,5 @@ public class Flaming : ModEnchantmentTemplate
         }
         return 2m;
     }
-    
+
 }
