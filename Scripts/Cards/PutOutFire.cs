@@ -10,8 +10,6 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Powers;
-using STS2RitsuLib.Keywords;
-using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -46,7 +44,7 @@ public class PutOutFire : ModCardTemplate
     static Func<CardModel?, Creature?, decimal> CalculateDamage = (cardModel, creature) =>
     {
         decimal damage = cardModel.DynamicVars["PutOutDmg"].BaseValue;
-        foreach (var m in cardModel.Owner.Creature?.CombatState?.Enemies ?? []) 
+        foreach (var m in cardModel.Owner.Creature?.CombatState?.Enemies ?? [])
             damage += m.GetPowerAmount<ScorchingLightPower>();
         return damage;
     };
