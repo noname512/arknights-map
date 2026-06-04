@@ -56,7 +56,7 @@
     "ARKNIGHTS_MAP_POWER_FLAME_BATH_POWER.description": "如果[gold]芦苇丛[/gold]处于[gold]燃烧[/gold]状态，受到的伤害降低。",
     "ARKNIGHTS_MAP_POWER_FLAME_BATH_POWER.smartDescription": "如果[gold]芦苇丛[/gold]处于[gold]燃烧[/gold]状态，受到的伤害减少[blue]{Amount}%[/blue]。",
     "ARKNIGHTS_MAP_POWER_FLAME_BATH_POWER.title": "归来",
-    "ARKNIGHTS_MAP_POWER_SCORCHING_LIGHT_POWER.description": "打出[gold]“灭火”[/gold]受到的伤害提升。这个敌人每次攻击额外造成[gold]灼燃损伤[/gold]。",
+    "ARKNIGHTS_MAP_POWER_SCORCHING_LIGHT_POWER.description": "打出[gold]“灭火”[/gold]受到的伤害提升。当[gold]芦苇丛[/gold]燃烧时，这个敌人每次攻击额外造成[gold]灼燃损伤[/gold]。",
     "ARKNIGHTS_MAP_POWER_SCORCHING_LIGHT_POWER.smartDescription": "打出[gold]“灭火”[/gold]受到的伤害提升[blue]{Amount}[/blue]。当[gold]芦苇丛[/gold]燃烧时，[gold]{OwnerName}[/gold]每次攻击造成[blue]{Amount}[/blue]点[gold]灼燃损伤[/gold]。",
     "ARKNIGHTS_MAP_POWER_SCORCHING_LIGHT_POWER.title": "焚光",
     "ARKNIGHTS_MAP_POWER_GIVE_AND_TAKE_POWER.description": "对方[gold]灼燃损伤[/gold]溢出时，获得等量的层数。该层数会作为意图[gold]还火[/gold]的伤害值，且使用[gold]还火[/gold]后减少对应层数。",

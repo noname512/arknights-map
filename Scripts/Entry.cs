@@ -1,6 +1,8 @@
 using System.Reflection;
 using ArknightsMap.Scripts.Acts;
 using HarmonyLib;
+using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
 using STS2RitsuLib;
@@ -46,15 +48,6 @@ public class Entry
                 defaultFactory: () => new WheatBeerCounter(),
                 autoCreateIfMissing: true);
         }
-
-        /*
-        RitsuLibFramework.SubscribeLifecycle<ProfileDataReadyEvent>(_ =>
-        {
-            var store = RitsuLibFramework.GetDataStore(ModId);
-            store.Modify<WheatBeerCounter>("wheatbeercounter", data => data.Value += 1);
-            store.Save("wheatbeercounter");
-            Logger.Info($"counter.Value = {store.Get<WheatBeerCounter>("wheatbeercounter").Value}");
-        });*/
 
         RitsuLibFramework.SubscribeLifecycle(reedBed);
 
