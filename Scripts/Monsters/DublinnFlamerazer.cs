@@ -1,0 +1,99 @@
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Animation;
+using MegaCrit.Sts2.Core.Bindings.MegaSpine;
+using MegaCrit.Sts2.Core.Entities.Ascension;
+using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.MonsterMoves.Intents;
+using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
+
+namespace ArknightsMap.Scripts.Monsters;
+
+[RegisterMonster]
+public class DublinnFlamerazer : ModMonsterTemplate
+{
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 79, 72);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 79, 72);
+    private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 2, 2);
+    private int Times1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 3, 2);
+    private int Times2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 5);
+    private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 8);
+    // 怪物场景
+    public override MonsterAssetProfile AssetProfile => new(
+        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
+    );
+
+    protected override MonsterMoveStateMachine GenerateMoveStateMachine()
+    {
+        List<MonsterState> list = new List<MonsterState>();
+        MoveState attack1 = new MoveState(
+            "ATTACK1",
+            async targets =>
+            {
+                await CreatureCmd.TriggerAnim(Creature, "Skill", 0);
+                if (!ReedBed.Burning)
+                {
+                    await DamageCmd.Attack(Damage1).WithHitCount(Times1).WithNoAttackerAnim().FromMonster(this).Execute(null);
+                    await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
+                }
+                else
+                {
+                    await DamageCmd.Attack(Damage1).WithHitCount(Times2).WithNoAttackerAnim().FromMonster(this).Execute(null);
+                }
+            },
+            new MultiAttackIntent(Damage1, Times1),
+            new IgniteIntent()
+        );
+        MoveState attack2 = new MoveState(
+            "ATTACK2",
+            async targets =>
+            {
+                await CreatureCmd.TriggerAnim(Creature, "Skill", 0);
+                await DamageCmd.Attack(Damage1).WithHitCount(Times2).WithNoAttackerAnim().FromMonster(this).Execute(null);
+            },
+            new MultiAttackIntent(Damage1, Times2)
+        );
+        MoveState attack3 = new MoveState(
+            "ATTACK3",
+            async targets => await DamageCmd.Attack(Damage2).FromMonster(this).Execute(null),
+            new SingleAttackIntent(Damage2)
+        );
+        MoveState attack4 = new MoveState(
+            "ATTACK4",
+            async targets => await DamageCmd.Attack(Damage2).FromMonster(this).Execute(null),
+            new SingleAttackIntent(Damage2)
+        );
+
+        attack1.FollowUpState = attack2;
+        attack2.FollowUpState = attack3;
+        attack3.FollowUpState = attack4;
+        attack4.FollowUpState = attack1;
+
+        list.Add(attack1);
+        list.Add(attack2);
+        list.Add(attack3);
+        list.Add(attack4);
+
+        return new MonsterMoveStateMachine(list, attack1);
+    }
+
+    public override CreatureAnimator GenerateAnimator(MegaSprite controller)
+    {
+        AnimState idleState = new AnimState("Idle", isLooping: true);
+        AnimState attackState = new AnimState("Attack");
+        AnimState dieState = new AnimState("Die");
+        AnimState skillStart = new AnimState("Skill_Front_Start");
+        AnimState skillLoop = new AnimState("Skill_Front_Loop");
+        AnimState skillEnd = new AnimState("Skill_Front_End");
+        attackState.NextState = idleState;
+        skillStart.NextState = skillLoop;
+        skillLoop.NextState = skillEnd;
+        skillEnd.NextState = idleState;
+        CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
+        creatureAnimator.AddAnyState("Attack", attackState);
+        creatureAnimator.AddAnyState("Dead", dieState);
+        creatureAnimator.AddAnyState("Skill", skillStart);
+        return creatureAnimator;
+    }
+}
