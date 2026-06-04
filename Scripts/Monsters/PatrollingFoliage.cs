@@ -15,7 +15,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class PatrollingFoliage : ModMonsterTemplate
+public class PatrollingFoliage : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 10, 10);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 10, 10);

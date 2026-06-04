@@ -15,7 +15,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class Mandragora : ModMonsterTemplate
+public class Mandragora : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 335, 320);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 335, 320);

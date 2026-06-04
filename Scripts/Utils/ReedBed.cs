@@ -70,27 +70,13 @@ public sealed class ReedBed : ILifecycleObserver
                 foreach (var m in combatState.Enemies)
                 {
                     await PowerCmd.Remove<DealFlamingDamagePower>(m);
-                    if (m.Monster is DublinnSpecOps specOps)
-                        if (!specOps.NextMove.Id.StartsWith("SPECIAL_MOVE"))
-                        {
-                            MoveState newState = specOps.GenerateSpecialMoveState();
-                            foreach (var (k, v) in specOps.MoveStateMachine.States)
-                            {
-                                if (v is not MoveState) continue;
-                                MoveState moveState = (MoveState)v;
-                                if (moveState.FollowUpState.Id == specOps.NextMove.Id)
-                                {
-                                    moveState.FollowUpState = newState;
-                                }
-                            }
-                            newState.FollowUpState = specOps.NextMove.FollowUpState;
-                            newState.RegisterStates(specOps.MoveStateMachine.States);
-                            specOps.SetMoveImmediate(newState);
-                        }
-
                 }
                 texturePath += "wilds_01_a.png";
             }
+
+            foreach (var m in combatState.Enemies)
+                if (m.Monster is AbstractWildsMonster mo)
+                    await mo.OnReedBedStatusChange(burning);
 
             // Change foreground picture
             if (Foreground != null && Foreground.GetChildCount() > 0)

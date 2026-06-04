@@ -16,7 +16,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class DublinnEvocator : ModMonsterTemplate
+public class DublinnEvocator : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 73, 67);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 81, 77);

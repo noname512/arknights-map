@@ -16,14 +16,14 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class Fireball : ModMonsterTemplate
+public class Fireball : AbstractWildsMonster
 {
     public override int MinInitialHp => 99999999;
     public override int MaxInitialHp => MinInitialHp;
     public override MonsterAssetProfile AssetProfile => new(
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
     );
-    
+
     private int ExplodeDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 25, 23);
 
     public override async Task AfterAddedToRoom()
@@ -45,7 +45,7 @@ public class Fireball : ModMonsterTemplate
                     .Execute(null);
                 await CreatureCmd.Kill(base.Creature);
             },
-            new DeathBlowIntent(() =>ExplodeDamage)
+            new DeathBlowIntent(() => ExplodeDamage)
         );
 
         explode.FollowUpState = explode;
@@ -54,7 +54,7 @@ public class Fireball : ModMonsterTemplate
 
         return new MonsterMoveStateMachine(list, explode);
     }
-    
+
     public override async Task AfterDamageReceivedLate(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         if (target == Creature)

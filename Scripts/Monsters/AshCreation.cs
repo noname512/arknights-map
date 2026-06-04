@@ -13,7 +13,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class AshCreation : ModMonsterTemplate
+public class AshCreation : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 35, 30);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 35, 30);

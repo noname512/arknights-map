@@ -11,7 +11,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class DublinnFlamerazer : ModMonsterTemplate
+public class DublinnFlamerazer : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 79, 72);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 79, 72);
@@ -24,23 +24,28 @@ public class DublinnFlamerazer : ModMonsterTemplate
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
     );
 
+    private MoveState attack1_burning;
+    private MoveState attack1_not_burning;
+
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
-        MoveState attack1 = new MoveState(
-            "ATTACK1",
+        attack1_burning = new MoveState(
+            "ATTACK1_B",
             async targets =>
             {
                 await CreatureCmd.TriggerAnim(Creature, "Skill", 0);
-                if (!ReedBed.Burning)
-                {
-                    await DamageCmd.Attack(Damage1).WithHitCount(Times1).WithNoAttackerAnim().FromMonster(this).Execute(null);
-                    await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
-                }
-                else
-                {
-                    await DamageCmd.Attack(Damage1).WithHitCount(Times2).WithNoAttackerAnim().FromMonster(this).Execute(null);
-                }
+                await DamageCmd.Attack(Damage1).WithHitCount(Times2).WithNoAttackerAnim().FromMonster(this).Execute(null);
+            },
+            new MultiAttackIntent(Damage1, Times2)
+        );
+        attack1_not_burning = new MoveState(
+            "ATTACK1_N",
+            async targets =>
+            {
+                await CreatureCmd.TriggerAnim(Creature, "Skill", 0);
+                await DamageCmd.Attack(Damage1).WithHitCount(Times1).WithNoAttackerAnim().FromMonster(this).Execute(null);
+                await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
             },
             new MultiAttackIntent(Damage1, Times1),
             new IgniteIntent()
@@ -65,17 +70,29 @@ public class DublinnFlamerazer : ModMonsterTemplate
             new SingleAttackIntent(Damage2)
         );
 
-        attack1.FollowUpState = attack2;
+        ConditionalBranchState attack1 = new ConditionalBranchState("ATTACK1");
+        attack1.AddState(attack1_burning, () => ReedBed.Burning);
+        attack1.AddState(attack1_not_burning, () => !ReedBed.Burning);
+        attack1_burning.FollowUpState = attack2;
+        attack1_not_burning.FollowUpState = attack2;
         attack2.FollowUpState = attack3;
         attack3.FollowUpState = attack4;
         attack4.FollowUpState = attack1;
 
+        list.Add(attack1_burning);
+        list.Add(attack1_not_burning);
         list.Add(attack1);
         list.Add(attack2);
         list.Add(attack3);
         list.Add(attack4);
 
         return new MonsterMoveStateMachine(list, attack1);
+    }
+
+    public override async Task OnReedBedStatusChange(bool burning)
+    {
+        if (NextMove.Id == "ATTACK1_B" && !burning) SetMoveImmediate(attack1_not_burning);
+        else if (NextMove.Id == "ATTACK1_N" && burning) SetMoveImmediate(attack1_burning);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

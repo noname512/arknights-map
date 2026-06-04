@@ -14,7 +14,7 @@ using ArknightsMap.Scripts.Powers;
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class DublinnFlamechaserSoldier : ModMonsterTemplate
+public class DublinnFlamechaserSoldier : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 35, 30);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 35, 30);

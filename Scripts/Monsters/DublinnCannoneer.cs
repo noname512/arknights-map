@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.MonsterMoves;
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class DublinnCannoneer : ModMonsterTemplate
+public class DublinnCannoneer : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 45, 42);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 45, 42);

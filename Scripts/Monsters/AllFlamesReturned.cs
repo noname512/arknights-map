@@ -18,7 +18,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class AllFlamesReturned : ModMonsterTemplate
+public class AllFlamesReturned : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 72, 66);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 72, 66);
