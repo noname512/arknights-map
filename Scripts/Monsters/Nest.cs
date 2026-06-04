@@ -26,7 +26,7 @@ public class Nest : AbstractWildsMonster
     private int HpAdd => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 12, 9);
     private int growthTimes = 0;
     private int FirstGrow = 1;
-    private int SecondGrow = 1 + AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 8);
+    private int SecondGrow = AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 8);
 
     public override MonsterAssetProfile AssetProfile => new(
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
