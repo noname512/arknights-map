@@ -8,7 +8,6 @@ using MegaCrit.Sts2.Core.Unlocks;
 using MegaCrit.Sts2.Core.Map;
 using MegaCrit.Sts2.Core.Random;
 using STS2RitsuLib.Interop.AutoRegistration;
-using MegaCrit.Sts2.Core.Models.Events;
 
 namespace ArknightsMap.Scripts.Acts;
 
@@ -40,7 +39,8 @@ public sealed class Wilds : ModActTemplate
 
     public override IEnumerable<EventModel> AllEvents => new EventModel[]
     {
-        ModelDb.Event<Amalgamator>(),
+        ModelDb.Event<TheWake>(),
+        ModelDb.Event<Campfire>(),
     };
 
     public override IEnumerable<AncientEventModel> AllAncients => new AncientEventModel[]

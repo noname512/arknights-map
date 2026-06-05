@@ -66,5 +66,8 @@
     "ARKNIGHTS_MAP_RELIC_MARTIAL_TRADITION.flavor": "这是我们军队的传统，第一回合先把敌人吓一跳！",
     "ARKNIGHTS_MAP_RELIC_OFFER_ASSISTANCE.description": "在每个回合开始时，从[blue]{Cards}[/blue]张任意颜色的多人模式卡牌中选择一张，加入你的手牌。",
     "ARKNIGHTS_MAP_RELIC_OFFER_ASSISTANCE.title": "施以援手",
-    "ARKNIGHTS_MAP_RELIC_OFFER_ASSISTANCE.flavor": "需要帮忙吗？"
+    "ARKNIGHTS_MAP_RELIC_OFFER_ASSISTANCE.flavor": "需要帮忙吗？",
+    "ARKNIGHTS_MAP_RELIC_ESSENCE_INSIGHT.description": "在第二层[gold]Boss[/gold]战中，每回合开始时获得{Energy:energyIcons()}。",
+    "ARKNIGHTS_MAP_RELIC_ESSENCE_INSIGHT.title": "洞见本源",
+    "ARKNIGHTS_MAP_RELIC_ESSENCE_INSIGHT.flavor": ""
 }
