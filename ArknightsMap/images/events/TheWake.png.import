@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0cp0ga7628w2"
-path="res://.godot/imported/HerFlameIcon.png-3e0e519c9337c2a1c5de37b28c8e5aad.ctex"
+uid="uid://d16yt8e4o1mac"
+path="res://.godot/imported/TheWake.png-ddb36507d5741dc8be4197a4834c9701.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/map/HerFlameIcon.png"
-dest_files=["res://.godot/imported/HerFlameIcon.png-3e0e519c9337c2a1c5de37b28c8e5aad.ctex"]
+source_file="res://ArknightsMap/images/events/TheWake.png"
+dest_files=["res://.godot/imported/TheWake.png-ddb36507d5741dc8be4197a4834c9701.ctex"]
 
 [params]
 

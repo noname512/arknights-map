@@ -18,7 +18,7 @@ using STS2RitsuLib.Scaffolding.Content;
 public sealed class TheWake : ModEventTemplate
 {
     public override EventAssetProfile AssetProfile => new(
-        InitialPortraitPath: "res://images/events/battleworn_dummy.png"
+        InitialPortraitPath: $"res://ArknightsMap/images/events/{GetType().Name}.png"
     );
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
