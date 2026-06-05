@@ -47,7 +47,7 @@ public sealed class Campfire : ModEventTemplate
     private async Task AttachFlaming()
     {
         await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), Owner!.Creature, DynamicVars.Damage, null, null);
-        foreach (CardModel item in await CardSelectCmd.FromDeckForRemoval(prefs: new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, 1), player: Owner!, filter: c => c.Type == CardType.Attack))
+        foreach (CardModel item in await CardSelectCmd.FromDeckForEnchantment(Owner, ModelDb.Enchantment<Flaming>(), 1, new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, 1)))
         {
             CardCmd.Enchant<Flaming>(item, 1);
             NCardEnchantVfx nCardEnchantVfx = NCardEnchantVfx.Create(item);

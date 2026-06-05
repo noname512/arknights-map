@@ -2,10 +2,13 @@ using ArknightsMap.Scripts.Enchantments;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
+using MegaCrit.Sts2.Core.Nodes;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -32,11 +35,14 @@ public class WitherAndThrive : ModRelicTemplate
     public override async Task AfterObtained()
     {
         CardSelectorPrefs prefs = new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, base.DynamicVars.Cards.IntValue);
-        BlockHeal enchantment = ModelDb.Enchantment<BlockHeal>();
-        foreach (CardModel item in await CardSelectCmd.FromDeckForEnchantment(base.Owner, enchantment, 1, prefs))
+        foreach (CardModel item in await CardSelectCmd.FromDeckForEnchantment(base.Owner, ModelDb.Enchantment<BlockHeal>(), 1, prefs))
         {
-            CardCmd.Enchant(enchantment.ToMutable(), item, 1m);
-            CardCmd.Preview(item);
+            CardCmd.Enchant<BlockHeal>(item, 1m);
+            NCardEnchantVfx nCardEnchantVfx = NCardEnchantVfx.Create(item);
+            if (nCardEnchantVfx != null)
+            {
+                NRun.Instance?.GlobalUi.CardPreviewContainer.AddChildSafely(nCardEnchantVfx);
+            }
         }
     }
 }
