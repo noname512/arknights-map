@@ -26,7 +26,7 @@ public class Flaming : ModEnchantmentTemplate
 
     // 图标位置。大小1:1就行，原版是64x64
     public override EnchantmentAssetProfile AssetProfile => new(
-        IconPath: $"res://ArknightsMap/images/enchantments/{GetType().Name}"
+        IconPath: $"res://ArknightsMap/images/enchantments/{GetType().Name}.png"
     );
 
     public override bool CanEnchantCardType(CardType cardType)
