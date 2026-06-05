@@ -27,6 +27,7 @@ public class CaughtOutPower : ModPowerTemplate
         IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png",
         BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png"
     );
+    private bool summoned = false;
 
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature target, bool wasRemovalPrevented, float deathAnimLength)
     {
@@ -45,9 +46,13 @@ public class CaughtOutPower : ModPowerTemplate
 
     public async Task SummonSeed()
     {
-        for (int i = 0; i < 3; i++)
+        if (!summoned)
         {
-            await CreatureCmd.Add<CabbageSeedling>(base.CombatState, $"seed{i + 1}");
+            for (int i = 0; i < 3; i++)
+            {
+                await CreatureCmd.Add<CabbageSeedling>(base.CombatState, $"seed{i + 1}");
+            }
+            summoned = true;
         }
         if (base.Owner.IsAlive) await CreatureCmd.Kill(base.Owner);
     }
