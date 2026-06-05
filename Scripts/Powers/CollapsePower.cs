@@ -70,13 +70,11 @@ public class CollapsePower : ModPowerTemplate
                 await PowerCmd.Remove<StoneshieldPower>(partner);
             }
         }
-        foreach (var m in CombatState.Enemies)
+        List<Creature> enemies = CombatState.Enemies.Where(m => m.IsAlive && m.Monster is not TatteredPillar).ToList();
+        foreach (var m in enemies)
         {
-            if (m.IsAlive && m.Monster is not TatteredPillar)
-            {
-                await CreatureCmd.Damage(choiceContext, m, Amount, ValueProp.Unpowered | ValueProp.Unblockable, m, null);
-                await CreatureCmd.LoseMaxHp(choiceContext, m, Amount, false);
-            }
+            await CreatureCmd.Damage(choiceContext, m, Amount, ValueProp.Unpowered | ValueProp.Unblockable, m, null);
+            await CreatureCmd.LoseMaxHp(choiceContext, m, Amount, false);
         }
     }
 }
