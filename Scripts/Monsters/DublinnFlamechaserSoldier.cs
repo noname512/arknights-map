@@ -29,6 +29,17 @@ public class DublinnFlamechaserSoldier : AbstractWildsMonster
     public override async Task AfterAddedToRoom()
     {
         await PowerCmd.Apply<ChaseFlamePower>(new ThrowingPlayerChoiceContext(), Creature, 5m, Creature, null);
+        if (Creature.SlotName == "third")
+        {
+            await CreatureCmd.TriggerAnim(Creature, "Idle_2", 0);
+            SetMoveImmediate((MoveState)MoveStateMachine.States["STUN3"]);
+            Creature.GetPower<ChaseFlamePower>().InitialHp += 1;
+            Creature.SetMaxHpInternal(Creature.GetPower<ChaseFlamePower>().InitialHp);
+            Creature.GetPower<ChaseFlamePower>().CurState = 1;
+            Creature.GetPower<ChaseFlamePower>().MaxHp += Creature.GetPower<ChaseFlamePower>().DecreaseHp;
+            Creature.GetPower<ChaseFlamePower>().NextMove = (MoveState)(MoveStateMachine.States["ATTACK1"]);
+            Creature.GetPower<ChaseFlamePower>().SetAmount(1);
+        }
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -88,6 +99,7 @@ public class DublinnFlamechaserSoldier : AbstractWildsMonster
         preReviveState.NextState = reviveState;
         reviveState.NextState = idleState;
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
+        creatureAnimator.AddAnyState("Idle_2", idleState2);
         creatureAnimator.AddAnyState("Revive", dieState);
         creatureAnimator.AddAnyState("Revive2", preReviveState);
         creatureAnimator.AddAnyState("Dead", dieState2);

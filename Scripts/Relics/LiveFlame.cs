@@ -65,7 +65,7 @@ public class LiveFlame : ModRelicTemplate
                 list.Add(combatState.CreateCard<Burn>(Owner));
             }
             CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, player, CardPilePosition.Random));
-            await Cmd.Wait(3f);
+            await Cmd.Wait(1f);
         }
     }
 

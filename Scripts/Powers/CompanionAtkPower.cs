@@ -27,7 +27,7 @@ public class CompanionAtkPower : ModPowerTemplate
         if (creature.IsMonster && creature.Monster is DublinnCompanionGuard && CombatState.Enemies.Count(e => e.IsAlive && e.Monster is DublinnCompanionGuard) == 0)
         {
             await CreatureCmd.Stun(Owner, "SINGLE_ATTACK");
-            await PowerCmd.Remove<CompanionDefPower>(Owner);
+            await PowerCmd.Remove(this);
         }
     }
 }

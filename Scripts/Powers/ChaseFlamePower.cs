@@ -30,7 +30,7 @@ public class ChaseFlamePower : ModPowerTemplate
     public int MaxHp = 0;
     public int DecreaseHp = 0;
     public int ReviveTurn = 0;
-    MoveState NextMove = null!;
+    public MoveState NextMove = null!;
     private ChaseFlamePowerRes res = new ChaseFlamePowerRes();
 
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
@@ -108,11 +108,11 @@ public class ChaseFlamePower : ModPowerTemplate
         }
         Owner.GetCreatureNode().SetAnimationTrigger("Revive2");
         await CreatureCmd.SetMaxAndCurrentHp(Owner, MaxHp);
-        Owner.Monster.SetMoveImmediate(NextMove, true);
+        Owner.Monster.NextMove.FollowUpState = NextMove;
         List<PowerModel> debuffs = Owner.Powers.Where(p => p.Type ==  PowerType.Debuff).ToList();
         foreach (PowerModel power in debuffs)
         {
-            if (power.Type == PowerType.Debuff)
+            if ((power.Type == PowerType.Debuff) && (!(power is ITemporaryPower)))
             {
                 await PowerCmd.Remove(power);
             }
@@ -122,7 +122,7 @@ public class ChaseFlamePower : ModPowerTemplate
         CurState = 0;
     }
 
-    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+    public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (side != Owner.Side)
         {
@@ -173,7 +173,7 @@ public class ChaseFlamePower : ModPowerTemplate
 
     public override bool ShouldPowerBeRemovedOnDeath(PowerModel power)
     {
-        if (power.Type == PowerType.Debuff)
+        if ((power.Type == PowerType.Debuff) && (!(power is ITemporaryPower)))
         {
             return true;
         }

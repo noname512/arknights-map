@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -15,13 +16,33 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Powers;
 
 [RegisterPower]
-public class WitherPower : ModPowerTemplate
+public class WitherPower : ModPowerTemplate, ITemporaryPower
 {
+    public AbstractModel OriginModel => null;
+    public PowerModel InternallyAppliedPower => ModelDb.Power<StrengthPower>();
+    public void IgnoreNextInstance() { }
+    /* 上面的是给ITemporary看的，避免被复活之类的清除用的 */
+    
     public override PowerType Type => PowerType.Debuff; 
     public override PowerStackType StackType => PowerStackType.Counter;
+    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
+    public override int DisplayAmount => TurnLeft;
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromPowerWithPowerHoverTips<StrengthPower>();
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("TurnLeft", 2)];
 
-    private bool _isFirstTurn = true;
+    public int TurnLeft
+    {
+        set
+        {
+            DynamicVars["TurnLeft"].BaseValue = value;
+            InvokeDisplayAmountChanged();
+        }
+        get
+        {
+            return DynamicVars["TurnLeft"].IntValue;
+        }
+    }
+
     public override PowerAssetProfile AssetProfile => new(
         IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png",
         BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png"
@@ -33,22 +54,28 @@ public class WitherPower : ModPowerTemplate
         Creature? applier,
         CardModel? cardSource)
     {
-        _isFirstTurn = true;
+        TurnLeft = 2;
         await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), target, -amount, applier, cardSource, true);
     }
-    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+
+    public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side,
+        IEnumerable<Creature> participants)
     {
         WitherPower power = this;
         if (side != power.Owner.Side)
             return;
-        if (_isFirstTurn)
+        if ((Owner.Monster != null) && (!Owner.Monster.IntendsToAttack))
         {
-            _isFirstTurn = false;
             return;
         }
+
+        TurnLeft--;
         Flash();
-        await PowerCmd.Remove(power);
-        await PowerCmd.Apply<StrengthPower>(choiceContext, power.Owner, power.Amount, power.Owner, null);
+        if (TurnLeft == 0)
+        {
+            await PowerCmd.Remove(power);
+            await PowerCmd.Apply<StrengthPower>(choiceContext, power.Owner, power.Amount, power.Owner, null);
+        }
     }
     
 }
