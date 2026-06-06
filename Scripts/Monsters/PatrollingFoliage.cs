@@ -46,7 +46,7 @@ public class PatrollingFoliage : AbstractWildsMonster
                     new ThrowingPlayerChoiceContext(),
                     targets,
                     AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 2, 1),
-                    base.Creature,
+                    Creature,
                     null);
             },
             new SingleAttackIntent(7),

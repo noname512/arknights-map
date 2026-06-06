@@ -39,7 +39,7 @@ public class TheSpear : ModRelicTemplate
         foreach (CardModel item in enumerable)
         {
             CardCmd.Enchant<Sharp>(item, DynamicVars["Sharp"].IntValue);
-            NCardEnchantVfx nCardEnchantVfx = NCardEnchantVfx.Create(item);
+            NCardEnchantVfx? nCardEnchantVfx = NCardEnchantVfx.Create(item);
             if (nCardEnchantVfx != null)
             {
                 NRun.Instance?.GlobalUi.CardPreviewContainer.AddChildSafely(nCardEnchantVfx);

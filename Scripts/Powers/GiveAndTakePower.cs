@@ -32,21 +32,15 @@ public class GiveAndTakePower : ModPowerTemplate
 
     public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (Owner != dealer)
+        if (Owner != dealer || Target != target || !Owner.IsMonster)
         {
             return 0;
         }
-
-        if (target != Target)
-        {
-            return 0;
-        }
-        
         if (!props.IsPoweredAttack())
         {
             return 0;
         }
-        if (Owner.Monster.NextMove.StateId == "RETURN_FIRE1")
+        if (Owner.Monster!.NextMove.StateId == "RETURN_FIRE1")
         {
             return DynamicVars["Exceed"].BaseValue / 2;
         }

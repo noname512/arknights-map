@@ -37,11 +37,11 @@ public class TheLeader : AbstractWildsMonster
 
     public override async Task AfterAddedToRoom()
     {
-        foreach (Creature item in base.Creature.CombatState.GetOpponentsOf(base.Creature))
+        foreach (Creature item in Creature.CombatState!.GetOpponentsOf(Creature))
         {
             GiveAndTakePower giveAndTakePower = (GiveAndTakePower)ModelDb.Power<GiveAndTakePower>().ToMutable();
             giveAndTakePower.Target = item;
-            await PowerCmd.Apply(new ThrowingPlayerChoiceContext(), giveAndTakePower, base.Creature, 1, base.Creature, null);
+            await PowerCmd.Apply(new ThrowingPlayerChoiceContext(), giveAndTakePower, Creature, 1, Creature, null);
         }
     }
 
@@ -228,7 +228,7 @@ public class TheLeader : AbstractWildsMonster
 
     public override async Task AfterCurrentHpChanged(Creature creature, decimal _)
     {
-        if (creature != base.Creature) return;
+        if (creature != Creature) return;
         if (!_isstage2 && Creature.CurrentHp <= Creature.MaxHp - Creature.MaxHp / 2)
         {
             _isstage2 = true;

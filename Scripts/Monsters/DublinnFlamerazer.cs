@@ -24,8 +24,8 @@ public class DublinnFlamerazer : AbstractWildsMonster
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
     );
 
-    private MoveState attack1_burning;
-    private MoveState attack1_not_burning;
+    private MoveState? attack1_burning;
+    private MoveState? attack1_not_burning;
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
@@ -86,8 +86,8 @@ public class DublinnFlamerazer : AbstractWildsMonster
 
     public override async Task OnReedBedStatusChange(bool burning)
     {
-        if (NextMove.Id == "ATTACK1_B" && !burning) SetMoveImmediate(attack1_not_burning);
-        else if (NextMove.Id == "ATTACK1_N" && burning) SetMoveImmediate(attack1_burning);
+        if (NextMove.Id == "ATTACK1_B" && !burning) SetMoveImmediate(attack1_not_burning!);
+        else if (NextMove.Id == "ATTACK1_N" && burning) SetMoveImmediate(attack1_burning!);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

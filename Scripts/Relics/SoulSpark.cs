@@ -43,20 +43,20 @@ public class SoulSpark : ModRelicTemplate
 	{
 		if (player == Owner)
 		{
-			ICombatState combatState = player.Creature.CombatState;
+			ICombatState combatState = player.Creature.CombatState!;
 			if (combatState.RoundNumber == 1)
 			{
 				Flash();
 				VfxCmd.PlayOnCreatureCenters(combatState.HittableEnemies, "vfx/vfx_attack_slash");
 				if (Owner.RunState.CurrentRoom == null || Owner.RunState.CurrentRoom.RoomType != RoomType.Boss || Owner.RunState.CurrentActIndex != 1)
 				{
-					await CreatureCmd.Damage(choiceContext, combatState.HittableEnemies, base.DynamicVars.Damage, base.Owner.Creature);
+					await CreatureCmd.Damage(choiceContext, combatState.HittableEnemies, DynamicVars.Damage, Owner.Creature);
 				}
 				else
 				{
 					foreach (Creature hittableEnemy in combatState.HittableEnemies)
 					{
-						await CreatureCmd.Damage(choiceContext, hittableEnemy, new DamageVar((int)Math.Ceiling((double)hittableEnemy.CurrentHp * /*DynamicVars["Percent"].IntValue*/ 50 / 100), ValueProp.Unpowered), base.Owner.Creature);
+						await CreatureCmd.Damage(choiceContext, hittableEnemy, new DamageVar((int)Math.Ceiling((double)hittableEnemy.CurrentHp * /*DynamicVars["Percent"].IntValue*/ 50 / 100), ValueProp.Unpowered), Owner.Creature);
 					}
 				}
 			}

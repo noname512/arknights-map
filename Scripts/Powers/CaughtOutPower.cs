@@ -31,14 +31,14 @@ public class CaughtOutPower : ModPowerTemplate
 
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature target, bool wasRemovalPrevented, float deathAnimLength)
     {
-        if (wasRemovalPrevented || target != base.Owner) return;
+        if (wasRemovalPrevented || target != Owner) return;
         await SummonSeed();
     }
 
     public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (side != base.Owner.Side) return;
-        if (Owner.CombatState.RoundNumber >= AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 5))
+        if (side != Owner.Side) return;
+        if (Owner.CombatState!.RoundNumber >= AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 5))
         {
             await SummonSeed();
         }
@@ -50,10 +50,10 @@ public class CaughtOutPower : ModPowerTemplate
         {
             for (int i = 0; i < 3; i++)
             {
-                await CreatureCmd.Add<CabbageSeedling>(base.CombatState, $"seed{i + 1}");
+                await CreatureCmd.Add<CabbageSeedling>(CombatState, $"seed{i + 1}");
             }
             summoned = true;
         }
-        if (base.Owner.IsAlive) await CreatureCmd.Kill(base.Owner);
+        if (Owner.IsAlive) await CreatureCmd.Kill(Owner);
     }
 }

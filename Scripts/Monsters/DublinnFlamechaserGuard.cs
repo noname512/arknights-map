@@ -26,8 +26,8 @@ public class DublinnFlamechaserGuard : AbstractWildsMonster
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 18, 16);
     public override bool ShouldDisappearFromDoom => !Creature.HasPower<ChaseFlamePower>() || Creature.GetPower<ChaseFlamePower>()?.CurState == 1;
 
-    private MoveState buff_burning;
-    private MoveState buff_not_burning;
+    private MoveState? buff_burning;
+    private MoveState? buff_not_burning;
 
     public override async Task AfterAddedToRoom()
     {
@@ -75,7 +75,7 @@ public class DublinnFlamechaserGuard : AbstractWildsMonster
         MoveState stun1 = new MoveState("STUN1", _ => { return Task.CompletedTask; }, new StunIntent());
         MoveState stun3 = new MoveState("STUN3", async _ =>
         {
-            await Creature.GetPower<ChaseFlamePower>()?.Revive();
+            await (Creature.GetPower<ChaseFlamePower>()?.Revive() ?? Task.CompletedTask);
             await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
         }, new HealIntent(), new IgniteIntent());
         // 不要改，复活的意图就是STUN3，改了可能会炸
@@ -103,8 +103,8 @@ public class DublinnFlamechaserGuard : AbstractWildsMonster
 
     public override async Task OnReedBedStatusChange(bool burning)
     {
-        if (NextMove.Id == "BUFF_B" && !burning) SetMoveImmediate(buff_not_burning);
-        else if (NextMove.Id == "BUFF_N" && burning) SetMoveImmediate(buff_burning);
+        if (NextMove.Id == "BUFF_B" && !burning) SetMoveImmediate(buff_not_burning!);
+        else if (NextMove.Id == "BUFF_N" && burning) SetMoveImmediate(buff_burning!);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

@@ -33,10 +33,10 @@ public class AllFlamesReturned : AbstractWildsMonster
     private int P2AttackDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 26, 23);
     private int P2PurpleFlame => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 4);
 
-    private MoveState p1Attack;
-    private MoveState DeadState;
-    private MoveState DeadState3;
-    private MoveState p2Attack;
+    private MoveState? p1Attack;
+    private MoveState? DeadState;
+    private MoveState? DeadState3;
+    private MoveState? p2Attack;
     private bool _isStage2 = false;
 
     public override async Task AfterAddedToRoom()
@@ -104,7 +104,7 @@ public class AllFlamesReturned : AbstractWildsMonster
             await CardPileCmd.AddToCombatAndPreview<PurpleFlame>(player.Creature, PileType.Hand, RevivePurpleFlame, null);
         }
 
-        SetMoveImmediate(DeadState, forceTransition: true);
+        SetMoveImmediate(DeadState!, forceTransition: true);
     }
 
 
@@ -123,7 +123,7 @@ public class AllFlamesReturned : AbstractWildsMonster
 
             foreach (CardModel card in player.Player.PlayerCombatState.AllCards)
             {
-                if ((card is PurpleFlame) && (card.Pile.Type != PileType.Exhaust))
+                if ((card is PurpleFlame) && (card.Pile?.Type != PileType.Exhaust))
                 {
                     hasPurpleFlameRemain = true;
                     purpleFlames.Add(card);

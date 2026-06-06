@@ -35,7 +35,7 @@ public class BurningPower : ModPowerTemplate
 
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
     {
-        if (creature != base.Owner) return;
-        await DamageCmd.Attack(Amount).FromMonster(base.Owner.Monster).Execute(choiceContext);
+        if (creature != Owner || !Owner.IsMonster) return;
+        await DamageCmd.Attack(Amount).FromMonster(Owner.Monster!).Execute(choiceContext);
     }
 }

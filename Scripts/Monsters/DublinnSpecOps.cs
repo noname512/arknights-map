@@ -81,11 +81,11 @@ public class DublinnSpecOps : AbstractWildsMonster
         if (!NextMove.Id.StartsWith("SPECIAL_MOVE"))
         {
             MoveState newState = GenerateSpecialMoveState();
-            foreach (var (k, v) in MoveStateMachine.States)
+            foreach (var (k, v) in MoveStateMachine!.States)
             {
                 if (v is not MoveState) continue;
                 MoveState moveState = (MoveState)v;
-                if (moveState.FollowUpState.Id == NextMove.Id)
+                if (moveState.FollowUpState!.Id == NextMove.Id)
                 {
                     moveState.FollowUpState = newState;
                 }

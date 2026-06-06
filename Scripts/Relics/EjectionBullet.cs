@@ -37,7 +37,7 @@ public class EjectionBullet : ModRelicTemplate
 		if (participants.Contains(Owner.Creature) && !PileType.Hand.GetPile(Owner).IsEmpty)
 		{
 			Flash();
-			List<CardModel> list = PileType.Hand.GetPile(base.Owner).Cards.ToList();
+			List<CardModel> list = PileType.Hand.GetPile(Owner).Cards.ToList();
 			foreach (CardModel item in list)
 			{
 				await CardCmd.Exhaust(choiceContext, item);

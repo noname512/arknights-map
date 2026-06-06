@@ -16,7 +16,7 @@ public class TatteredPillar : AbstractWildsMonster
 {
     private int GetExtraHp()
     {
-        Creature m = base.CombatState.Enemies.FirstOrDefault(m => m.Monster is Mandragora, null);
+        Creature? m = CombatState.Enemies.FirstOrDefault(m => m?.Monster is Mandragora, null);
         if (m == null) return 0;
         int hp = m.MaxHp - m.CurrentHp;
         return hp * AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 13, 10) / 100;

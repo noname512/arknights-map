@@ -43,7 +43,7 @@ public class PutOutFire : ModCardTemplate
 
     static Func<CardModel?, Creature?, decimal> CalculateDamage = (cardModel, creature) =>
     {
-        decimal damage = cardModel.DynamicVars["PutOutDmg"].BaseValue;
+        decimal damage = cardModel!.DynamicVars["PutOutDmg"].BaseValue;
         foreach (var m in cardModel.Owner.Creature?.CombatState?.Enemies ?? [])
             damage += m.GetPowerAmount<ScorchingLightPower>();
         return damage;
@@ -61,12 +61,12 @@ public class PutOutFire : ModCardTemplate
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(base.Owner.Creature));
+        NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(Owner.Creature));
         SfxCmd.Play("event:/sfx/characters/attack_fire");
         decimal amount = DynamicVars["PutOutDmg"].PreviewValue;
         await CreatureCmd.Damage(choiceContext, Owner.Creature, new DamageVar(amount, ValueProp.Unpowered), this);
         await PowerCmd.Apply<FlamingDamagePower>(choiceContext, Owner.Creature, amount, Owner.Creature, this);
-        await Entry.reedBed.SetBurningDurningCombat(false, CombatState);
+        await Entry.reedBed.SetBurningDurningCombat(false, CombatState!);
     }
 
     // 升级后的效果逻辑

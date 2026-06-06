@@ -37,7 +37,7 @@ public class BurnScar : ModRelicTemplate
             if (item.Rarity == CardRarity.Basic && item.Tags.Contains(CardTag.Strike) && ModelDb.Enchantment<Flaming>().CanEnchant(item))
             {
                 CardCmd.Enchant<Flaming>(item, 1m);
-                NCardEnchantVfx nCardEnchantVfx = NCardEnchantVfx.Create(item);
+                NCardEnchantVfx? nCardEnchantVfx = NCardEnchantVfx.Create(item);
                 if (nCardEnchantVfx != null)
                 {
                     NRun.Instance?.GlobalUi.CardPreviewContainer.AddChildSafely(nCardEnchantVfx);

@@ -23,7 +23,7 @@ public class PhalanxPower : ModPowerTemplate
 
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        SetAmount(base.CombatState.Enemies.Count(e => e.IsAlive && e.IsMonster && e.Monster is DublinnPhalanxInfantry) * 2 - 2);
+        SetAmount(CombatState.Enemies.Count(e => e.IsAlive && e.IsMonster && e.Monster is DublinnPhalanxInfantry) * 2 - 2);
         return Task.CompletedTask;
     }
 

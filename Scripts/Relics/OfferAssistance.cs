@@ -40,7 +40,7 @@ public class OfferAssistance : ModRelicTemplate
 												where c.MultiplayerConstraint == CardMultiplayerConstraint.MultiplayerOnly
 												select c;
 		List<CardModel> options = CardFactory.GetDistinctForCombat(Owner, customCardPool, (int)DynamicVars.Cards.BaseValue, Owner.RunState.Rng.CombatCardGeneration).ToList();
-		CardModel chosenCard = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, Owner, canSkip: true);
+		CardModel? chosenCard = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, Owner, canSkip: true);
 		if (chosenCard != null)
 		{
 			CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(chosenCard, PileType.Hand));

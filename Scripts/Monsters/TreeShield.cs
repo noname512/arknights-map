@@ -55,7 +55,7 @@ public class TreeShield : AbstractWildsMonster
         );
         MoveState block1 = new MoveState(
             "BLOCK1",
-            async targets => await CreatureCmd.GainBlock(base.Creature, Block1, ValueProp.Move, null),
+            async targets => await CreatureCmd.GainBlock(Creature, Block1, ValueProp.Move, null),
             new DefendIntent()
         );
         MoveState attack3 = new MoveState(

@@ -67,7 +67,7 @@ public class CabbageSeedling : AbstractWildsMonster
             async targets =>
             {
                 await DamageCmd.Attack(Damage4).FromMonster(this).WithAttackerAnim("Attack", 0.8f).Execute(null);
-                await CreatureCmd.Kill(base.Creature);
+                await CreatureCmd.Kill(Creature);
             },
             new SingleAttackIntent(Damage4),
             new UnknownIntent()

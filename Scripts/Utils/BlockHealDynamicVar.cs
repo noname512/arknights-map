@@ -28,7 +28,7 @@ public class BlockHealDynamicVar : DynamicVar
         card.DynamicVars.Damage.UpdateCardPreview(card, previewMode, target, runGlobalHooks);
         decimal num = card.DynamicVars.Damage.PreviewValue / 2;
         BaseValue = num;
-        EnchantmentModel enchantment = card.Enchantment;
+        EnchantmentModel? enchantment = card.Enchantment;
         if (enchantment != null)
         {
             num += enchantment.EnchantBlockAdditive(num);
@@ -40,7 +40,7 @@ public class BlockHealDynamicVar : DynamicVar
         }
         if (runGlobalHooks)
         {
-            num = Hook.ModifyBlock(card.CombatState, card.Owner.Creature, BaseValue, Props, card, null, out IEnumerable<AbstractModel> _);
+            num = Hook.ModifyBlock(card.CombatState!, card.Owner.Creature, BaseValue, Props, card, null, out IEnumerable<AbstractModel> _);
         }
         else if (!card.IsEnchantmentPreview)
         {

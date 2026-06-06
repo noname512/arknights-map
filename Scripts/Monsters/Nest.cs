@@ -79,7 +79,7 @@ public class Nest : AbstractWildsMonster
 
     public void SwitchIntent()
     {
-        SetMoveImmediate((MoveState)MoveStateMachine.States["ATTACK2"], true);
+        SetMoveImmediate((MoveState)MoveStateMachine!.States["ATTACK2"], true);
     }
 
     public override Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)

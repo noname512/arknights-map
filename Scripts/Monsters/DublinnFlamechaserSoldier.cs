@@ -9,7 +9,6 @@ using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
-using ArknightsMap.Scripts.Powers;
 
 namespace ArknightsMap.Scripts.Monsters;
 
@@ -32,13 +31,16 @@ public class DublinnFlamechaserSoldier : AbstractWildsMonster
         if (Creature.SlotName == "third")
         {
             await CreatureCmd.TriggerAnim(Creature, "Idle_2", 0);
-            SetMoveImmediate((MoveState)MoveStateMachine.States["STUN3"]);
-            Creature.GetPower<ChaseFlamePower>().InitialHp += 1;
-            Creature.SetMaxHpInternal(Creature.GetPower<ChaseFlamePower>().InitialHp);
-            Creature.GetPower<ChaseFlamePower>().CurState = 1;
-            Creature.GetPower<ChaseFlamePower>().MaxHp += Creature.GetPower<ChaseFlamePower>().DecreaseHp;
-            Creature.GetPower<ChaseFlamePower>().NextMove = (MoveState)(MoveStateMachine.States["ATTACK1"]);
-            Creature.GetPower<ChaseFlamePower>().SetAmount(1);
+            SetMoveImmediate((MoveState)MoveStateMachine!.States["STUN3"]);
+            ChaseFlamePower? chaseFlamePower = Creature.GetPower<ChaseFlamePower>();
+            if (chaseFlamePower != null)
+            {
+                Creature.SetMaxHpInternal(++chaseFlamePower.InitialHp);
+                chaseFlamePower.CurState = 1;
+                chaseFlamePower.MaxHp += chaseFlamePower.DecreaseHp;
+                chaseFlamePower.NextMove = (MoveState)MoveStateMachine.States["ATTACK1"];
+                chaseFlamePower.SetAmount(1);
+            }
         }
     }
 
@@ -64,7 +66,7 @@ public class DublinnFlamechaserSoldier : AbstractWildsMonster
         MoveState stun2 = new MoveState("STUN2", _ => { return Task.CompletedTask; }, new StunIntent());
         MoveState stun3 = new MoveState("STUN3", async _ =>
         {
-            await Creature.GetPower<ChaseFlamePower>()?.Revive();
+            await (Creature.GetPower<ChaseFlamePower>()?.Revive() ?? Task.CompletedTask);
         }, new HealIntent(), new BuffIntent());
 
         attack1.FollowUpState = attack2;

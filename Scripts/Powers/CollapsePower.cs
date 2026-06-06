@@ -29,12 +29,12 @@ public class CollapsePower : ModPowerTemplate
 
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature target, bool wasRemovalPrevented, float deathAnimLength)
     {
-        if (wasRemovalPrevented || target != base.Owner) return;
-        Creature partner = base.CombatState.Enemies.FirstOrDefault(m => !(m.Monster is TatteredPillar), null);
+        if (wasRemovalPrevented || target != Owner) return;
+        Creature? partner = CombatState.Enemies.FirstOrDefault(m => !(m?.Monster is TatteredPillar), null);
         if (partner == null) return;
-        if (partner.IsAlive)
+        if (partner.IsAlive && partner.IsMonster)
         {
-            MoveState curState = partner.Monster.NextMove;
+            MoveState curState = partner.Monster!.NextMove;
             MoveState newState;
             if (partner.Monster is Mandragora mandragora)
             {
@@ -48,11 +48,11 @@ public class CollapsePower : ModPowerTemplate
             if (curState.Intents.OfType<AttackIntent>().Any())
             {
                 newState.FollowUpState = curState.FollowUpState;
-                foreach (var (k, v) in partner.Monster.MoveStateMachine.States)
+                foreach (var (k, v) in partner.Monster.MoveStateMachine!.States)
                 {
                     if (v is not MoveState) continue;
                     MoveState moveState = (MoveState)v;
-                    if (moveState.FollowUpState.Id == curState.Id)
+                    if (moveState.FollowUpState!.Id == curState.Id)
                     {
                         moveState.FollowUpState = curState.FollowUpState;
                     }
@@ -62,7 +62,7 @@ public class CollapsePower : ModPowerTemplate
             {
                 newState.FollowUpState = curState;
             }
-            newState.RegisterStates(partner.Monster.MoveStateMachine.States);
+            newState.RegisterStates(partner.Monster.MoveStateMachine!.States);
             partner.Monster.SetMoveImmediate(newState);
 
             if (partner.HasPower<StoneshieldPower>())

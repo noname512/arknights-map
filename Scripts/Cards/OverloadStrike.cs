@@ -62,7 +62,7 @@ public class OverloadStrike : ModCardTemplate
         if (card == this)
         {
             await Cmd.Wait(0.25f);
-            await PlayerCmd.LoseEnergy(base.DynamicVars.Energy.IntValue, base.Owner);
+            await PlayerCmd.LoseEnergy(DynamicVars.Energy.IntValue, Owner);
         }
     }
     // 升级后的效果逻辑

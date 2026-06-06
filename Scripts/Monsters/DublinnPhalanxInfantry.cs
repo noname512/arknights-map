@@ -51,7 +51,7 @@ public class DublinnPhalanxInfantry : AbstractWildsMonster
             async targets =>
             {
                 await DamageCmd.Attack(Damage3).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null);
-                await CreatureCmd.GainBlock(base.Creature, Block3, ValueProp.Move, null);
+                await CreatureCmd.GainBlock(Creature, Block3, ValueProp.Move, null);
             },
             new SingleAttackIntent(Damage3),
             new DefendIntent()

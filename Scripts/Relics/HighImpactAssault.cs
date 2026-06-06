@@ -41,7 +41,7 @@ public class HighImpactAssault : ModRelicTemplate
         foreach (CardModel item in enumerable)
         {
             CardCmd.Enchant<SpiralSpecial>(item, 1m);
-            NCardEnchantVfx nCardEnchantVfx = NCardEnchantVfx.Create(item);
+            NCardEnchantVfx? nCardEnchantVfx = NCardEnchantVfx.Create(item);
             if (nCardEnchantVfx != null)
             {
                 NRun.Instance?.GlobalUi.CardPreviewContainer.AddChildSafely(nCardEnchantVfx);

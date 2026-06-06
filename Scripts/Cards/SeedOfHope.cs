@@ -41,7 +41,7 @@ public class SeedOfHope : ModCardTemplate
 
     public override async Task AfterCombatEnd(CombatRoom room)
     {
-        if (Pile.Type == PileType.Exhaust || Pile.Type == PileType.Deck)
+        if (Pile?.Type == PileType.Exhaust || Pile?.Type == PileType.Deck)
         {
             return;
         }

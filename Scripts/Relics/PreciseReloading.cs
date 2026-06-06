@@ -35,7 +35,10 @@ public class PreciseReloading : ModRelicTemplate
 
 	public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 	{
-		if (participants.Contains(base.Owner.Creature) && !CombatManager.Instance.History.CardPlaysFinished.Any((CardPlayFinishedEntry e) => e.HappenedThisTurn(base.Owner.Creature.CombatState) && e.CardPlay.Card.Type == CardType.Attack && e.CardPlay.Card.Owner == base.Owner))
+		if (participants.Contains(Owner.Creature) &&
+			!CombatManager.Instance.History.CardPlaysFinished.Any((CardPlayFinishedEntry e) => e.HappenedThisTurn(Owner.Creature.CombatState) &&
+																	e.CardPlay.Card.Type == CardType.Attack &&
+																	e.CardPlay.Card.Owner == Owner))
 		{
 			Flash();
 			Status = RelicStatus.Normal;
@@ -49,27 +52,27 @@ public class PreciseReloading : ModRelicTemplate
 		{
 			return Task.CompletedTask;
 		}
-		if (cardPlay.Card.Owner != base.Owner)
+		if (cardPlay.Card.Owner != Owner)
 		{
 			return Task.CompletedTask;
 		}
-		base.Status = RelicStatus.Normal;
+		Status = RelicStatus.Normal;
 		return Task.CompletedTask;
 	}
 
 	public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 	{
-		if (!participants.Contains(base.Owner.Creature))
+		if (!participants.Contains(Owner.Creature))
 		{
 			return Task.CompletedTask;
 		}
-		base.Status = RelicStatus.Active;
+		Status = RelicStatus.Active;
 		return Task.CompletedTask;
 	}
 
 	public override Task AfterCombatEnd(CombatRoom room)
 	{
-		base.Status = RelicStatus.Normal;
+		Status = RelicStatus.Normal;
 		return Task.CompletedTask;
 	}
 }

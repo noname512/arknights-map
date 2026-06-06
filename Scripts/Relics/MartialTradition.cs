@@ -33,7 +33,7 @@ public class MartialTradition : ModRelicTemplate
 		if (side == Owner.Creature.Side && combatState.RoundNumber <= 1)
 		{
 			Flash();
-			foreach (var enemy in Owner.Creature.CombatState.Enemies.Where(e => e.IsAlive))
+			foreach (var enemy in Owner.Creature.CombatState!.Enemies.Where(e => e.IsAlive))
 			{
 				await CreatureCmd.Stun(enemy);
 			}
@@ -42,7 +42,7 @@ public class MartialTradition : ModRelicTemplate
 
 	public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
 	{
-		if (player == Owner && Owner.PlayerCombatState.TurnNumber == 1)
+		if (player == Owner && Owner.PlayerCombatState!.TurnNumber == 1)
 		{
 			await PlayerCmd.LoseEnergy(DynamicVars.Energy.BaseValue, Owner);
 		}
@@ -51,7 +51,7 @@ public class MartialTradition : ModRelicTemplate
 	public override bool ShouldPlay(CardModel card, AutoPlayType _)
 	{
 		if (card.Owner.Creature != Owner.Creature) return true;
-		if (Owner.Creature.CombatState.RoundNumber > 1) return true;
+		if (Owner.Creature.CombatState!.RoundNumber > 1) return true;
 		if (card.Type != CardType.Attack) return true;
 		return false;
 	}

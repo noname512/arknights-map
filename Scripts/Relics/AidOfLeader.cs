@@ -30,7 +30,7 @@ public class AidOfLeader : ModRelicTemplate
 	{
 		if (player == Owner)
 		{
-			ICombatState combatState = player.Creature.CombatState;
+			ICombatState combatState = player.Creature.CombatState!;
 			if (combatState.RoundNumber == 2)
 			{
 				Flash();

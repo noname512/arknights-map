@@ -19,7 +19,7 @@ public class StarrySkyPhoto : ModRelicTemplate
 	public override RelicRarity Rarity => RelicRarity.Ancient;
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("Rooms", 5)];
-	
+
 	private int _roomsEntered;
 
 	[SavedProperty]
@@ -50,9 +50,9 @@ public class StarrySkyPhoto : ModRelicTemplate
 
 	public override async Task AfterRoomEntered(AbstractRoom _)
 	{
-		if (!base.Owner.Creature.IsDead)
+		if (!Owner.Creature.IsDead)
 		{
-			MapPoint? currentMapPoint = base.Owner.RunState.CurrentMapPoint;
+			MapPoint? currentMapPoint = Owner.RunState.CurrentMapPoint;
 			if (currentMapPoint != null && currentMapPoint.PointType != MapPointType.Monster && currentMapPoint.PointType != MapPointType.Elite && currentMapPoint.PointType != MapPointType.Boss)
 			{
 				Flash();

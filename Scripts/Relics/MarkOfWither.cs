@@ -34,7 +34,7 @@ public class MarkOfWither : ModRelicTemplate
     public override async Task BeforeCombatStart()
     {
         Flash();
-        IReadOnlyList<Creature> hittableEnemies = Owner.Creature.CombatState.HittableEnemies;
+        IReadOnlyList<Creature> hittableEnemies = Owner.Creature.CombatState!.HittableEnemies;
         await PowerCmd.Apply<WitherPower>(t, hittableEnemies, DynamicVars["StrengthPower"].IntValue, null, null);
     }
 

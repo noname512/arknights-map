@@ -18,14 +18,14 @@ namespace ArknightsMap.Scripts.Powers;
 [RegisterPower]
 public class RebornPower : ModPowerTemplate
 {
-    public override PowerType Type => PowerType.Buff; 
+    public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
 
     public override PowerAssetProfile AssetProfile => new(
         IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png",
         BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png"
     );
-    
+
     private class Data
     {
         public bool isReviving;
@@ -61,7 +61,7 @@ public class RebornPower : ModPowerTemplate
 
     public override bool ShouldAllowHitting(Creature creature)
     {
-        if (creature != base.Owner)
+        if (creature != Owner)
         {
             return true;
         }
@@ -75,7 +75,7 @@ public class RebornPower : ModPowerTemplate
 
     public override bool ShouldCreatureBeRemovedFromCombatAfterDeath(Creature creature)
     {
-        if (creature != base.Owner)
+        if (creature != Owner)
         {
             return true;
         }
@@ -86,7 +86,7 @@ public class RebornPower : ModPowerTemplate
     {
         return false;
     }
-    
+
     public override bool ShouldPowerBeRemovedOnDeath(PowerModel power)
     {
         if (power.Type == PowerType.Debuff)

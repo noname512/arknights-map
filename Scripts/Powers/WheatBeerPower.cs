@@ -30,8 +30,9 @@ public class WheatBeerPower : ModPowerTemplate
 
     public override async Task<Task> AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (target == Owner && result.UnblockedDamage > 0) {
-            await CreatureCmd.Heal(base.Owner, base.Amount);
+        if (target == Owner && result.UnblockedDamage > 0)
+        {
+            await CreatureCmd.Heal(Owner, Amount);
             await PowerCmd.Remove(this);
         }
         return base.AfterDamageReceived(choiceContext, target, result, props, dealer, cardSource);

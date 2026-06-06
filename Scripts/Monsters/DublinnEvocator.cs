@@ -41,7 +41,7 @@ public class DublinnEvocator : AbstractWildsMonster
     public async Task Summon(IReadOnlyList<Creature> targets)
     {
         await CreatureCmd.TriggerAnim(Creature, "Skill", 0.8f);
-        string position = CombatState.Encounter?.Slots.LastOrDefault<string>((s => CombatState.Enemies.All<Creature>((Func<Creature, bool>)(c => c.SlotName != s))), string.Empty);
+        string? position = CombatState.Encounter?.Slots.LastOrDefault(s => CombatState.Enemies.All(c => c.SlotName != s), string.Empty);
         if (!string.IsNullOrEmpty(position))
         {
             await CreatureCmd.Add<Fireball>(CombatState, position);

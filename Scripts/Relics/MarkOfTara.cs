@@ -43,7 +43,7 @@ public class MarkOfTara : ModRelicTemplate
 			_wasUsed = value;
 			if (IsUsedUp)
 			{
-				base.Status = RelicStatus.Disabled;
+				Status = RelicStatus.Disabled;
 			}
 		}
 	}

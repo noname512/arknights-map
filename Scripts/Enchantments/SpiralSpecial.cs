@@ -14,7 +14,7 @@ public class SpiralSpecial : ModEnchantmentTemplate
     // 是否会添加额外的卡牌描述文本
     public override bool HasExtraCardText => false;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("Times", 1)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.ReplayDynamic, base.DynamicVars["Times"])];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.ReplayDynamic, DynamicVars["Times"])];
 
     // 像卡牌、遗物、药水等一样，可以使用DynamicVars和ExtraHoverTips
     // protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardKeyword.Retain)];

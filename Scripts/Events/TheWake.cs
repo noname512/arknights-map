@@ -38,7 +38,7 @@ public sealed class TheWake : ModEventTemplate
 
     private async Task RemoveCards()
     {
-        foreach (CardModel item in await CardSelectCmd.FromDeckForRemoval(prefs: new CardSelectorPrefs(CardSelectorPrefs.RemoveSelectionPrompt, base.DynamicVars.Cards.IntValue), player: Owner!))
+        foreach (CardModel item in await CardSelectCmd.FromDeckForRemoval(prefs: new CardSelectorPrefs(CardSelectorPrefs.RemoveSelectionPrompt, DynamicVars.Cards.IntValue), player: Owner!))
         {
             await CardPileCmd.RemoveFromDeck(item);
         }

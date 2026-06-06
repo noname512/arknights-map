@@ -28,7 +28,7 @@ public class AshCreation : AbstractWildsMonster
         if (CombatState.ContainsMonster<TreeShield>())
         {
             await CreatureCmd.TriggerAnim(Creature, "Idle", 0);
-            SetMoveImmediate((MoveState)MoveStateMachine.States["ATTACK"]);
+            SetMoveImmediate((MoveState)MoveStateMachine!.States["ATTACK"]);
         }
     }
 
@@ -69,7 +69,7 @@ public class AshCreation : AbstractWildsMonster
             if (CombatState.Enemies.Count(e => e.IsAlive && e.Monster is TreeShield) == 0)
             {
                 await CreatureCmd.TriggerAnim(Creature, "Idle2", 0);
-                SetMoveImmediate((MoveState)MoveStateMachine.States["STUN"]);
+                SetMoveImmediate((MoveState)MoveStateMachine!.States["STUN"]);
             }
         }
     }
@@ -79,7 +79,7 @@ public class AshCreation : AbstractWildsMonster
         if (creature.Monster is TreeShield)
         {
             await CreatureCmd.TriggerAnim(Creature, "Idle", 0);
-            SetMoveImmediate((MoveState)MoveStateMachine.States["WAIT"]);
+            SetMoveImmediate((MoveState)MoveStateMachine!.States["WAIT"]);
         }
     }
 

@@ -1,15 +1,12 @@
 using ArknightsMap.Scripts.Cards;
 using ArknightsMap.Scripts.Encounters;
-using ArknightsMap.Scripts.Monsters;
 using ArknightsMap.Scripts.Powers;
 using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using STS2RitsuLib;
 
@@ -26,7 +23,7 @@ public sealed class ReedBed : ILifecycleObserver
         if (evt is CombatStartingEvent cse)
         {
             Burning = false;
-            EncounterModel encounter = cse.CombatState.Encounter;
+            EncounterModel? encounter = cse.CombatState!.Encounter;
             if (encounter is AbstractWildsEncounter myEncounter)
             {
                 Control control = NCombatRoom.Instance?.Background ?? throw new InvalidOperationException();

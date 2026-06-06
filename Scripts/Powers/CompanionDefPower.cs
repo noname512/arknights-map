@@ -26,7 +26,7 @@ public class CompanionDefPower : ModPowerTemplate
 
     public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (base.Owner != target) return 0;
+        if (Owner != target) return 0;
         return -Amount;
     }
 

@@ -5,10 +5,8 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -18,12 +16,12 @@ namespace ArknightsMap.Scripts.Powers;
 [RegisterPower]
 public class WitherPower : ModPowerTemplate, ITemporaryPower
 {
-    public AbstractModel OriginModel => null;
+    public AbstractModel OriginModel => ModelDb.Relic<MarkOfWither>();
     public PowerModel InternallyAppliedPower => ModelDb.Power<StrengthPower>();
     public void IgnoreNextInstance() { }
     /* 上面的是给ITemporary看的，避免被复活之类的清除用的 */
-    
-    public override PowerType Type => PowerType.Debuff; 
+
+    public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
     public override int DisplayAmount => TurnLeft;
@@ -47,7 +45,7 @@ public class WitherPower : ModPowerTemplate, ITemporaryPower
         IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png",
         BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png"
     );
-    
+
     public override async Task BeforeApplied(
         Creature target,
         Decimal amount,
@@ -77,5 +75,5 @@ public class WitherPower : ModPowerTemplate, ITemporaryPower
             await PowerCmd.Apply<StrengthPower>(choiceContext, power.Owner, power.Amount, power.Owner, null);
         }
     }
-    
+
 }

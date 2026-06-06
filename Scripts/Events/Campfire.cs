@@ -49,7 +49,7 @@ public sealed class Campfire : ModEventTemplate
         foreach (CardModel item in await CardSelectCmd.FromDeckForEnchantment(Owner, ModelDb.Enchantment<Flaming>(), 1, new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, 1)))
         {
             CardCmd.Enchant<Flaming>(item, 1);
-            NCardEnchantVfx nCardEnchantVfx = NCardEnchantVfx.Create(item);
+            NCardEnchantVfx? nCardEnchantVfx = NCardEnchantVfx.Create(item);
             if (nCardEnchantVfx != null)
             {
                 NRun.Instance?.GlobalUi.CardPreviewContainer.AddChildSafely(nCardEnchantVfx);

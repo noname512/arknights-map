@@ -29,19 +29,8 @@ public class TombkeeperGrotesque : AbstractWildsMonster
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 110, 105);
     public override bool ShouldDisappearFromDoom => _isStage2;
 
-    private MoveState _deadState;
-    private MoveState DeadState
-    {
-        get
-        {
-            return _deadState;
-        }
-        set
-        {
-            AssertMutable();
-            _deadState = value;
-        }
-    }
+    private MoveState? DeadState;
+
     public override MonsterAssetProfile AssetProfile => new(
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
     );
@@ -112,7 +101,7 @@ public class TombkeeperGrotesque : AbstractWildsMonster
         await CreatureCmd.Heal(Creature, Creature.MaxHp);
         await PowerCmd.Apply<DamageOutPower>(new ThrowingPlayerChoiceContext(), Creature, 10, Creature, null);
         await PowerCmd.Remove<RebornPower>(Creature);
-        Creature m = base.CombatState.Enemies.FirstOrDefault(m => m.Monster is TatteredPillar, null);
+        Creature? m = CombatState.Enemies.FirstOrDefault(m => m?.Monster is TatteredPillar, null);
         if (m != null)
         {
             await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), m, 1, Creature, null);
@@ -121,7 +110,7 @@ public class TombkeeperGrotesque : AbstractWildsMonster
 
     public void TriggerDeadState()
     {
-        SetMoveImmediate(DeadState, forceTransition: true);
+        SetMoveImmediate(DeadState!, forceTransition: true);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

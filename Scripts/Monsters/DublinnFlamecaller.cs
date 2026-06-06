@@ -23,8 +23,8 @@ public class DublinnFlamecaller : AbstractWildsMonster
 
     private int AttackDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 14, 16);
     private int StrengthGain => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 2, 2);
-    private MoveState attack_burning;
-    private MoveState attack_not_burning;
+    private MoveState? attack_burning;
+    private MoveState? attack_not_burning;
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
@@ -74,8 +74,8 @@ public class DublinnFlamecaller : AbstractWildsMonster
 
     public override async Task OnReedBedStatusChange(bool burning)
     {
-        if (NextMove.Id == "ATTACK_B" && !burning) SetMoveImmediate(attack_not_burning);
-        else if (NextMove.Id == "ATTACK_N" && burning) SetMoveImmediate(attack_burning);
+        if (NextMove.Id == "ATTACK_B" && !burning) SetMoveImmediate(attack_not_burning!);
+        else if (NextMove.Id == "ATTACK_N" && burning) SetMoveImmediate(attack_burning!);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

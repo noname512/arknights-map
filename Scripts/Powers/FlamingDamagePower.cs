@@ -51,13 +51,13 @@ public class FlamingDamagePower : ModPowerTemplate, IHealthBarForecastSource
                 else
                 {
                     await PowerCmd.Apply<VulnerablePower>(choiceContext, Owner, 1, Owner, null, false);
-                    PowerModel power = Owner.GetPower<VulnerablePower>();
+                    PowerModel? power = Owner.GetPower<VulnerablePower>();
                     if (power != null) await PowerCmd.TickDownDuration(power);
                 }
 
                 if (Owner.IsPlayer)
                 {
-                    foreach (var e in Owner.CombatState.Enemies)
+                    foreach (var e in Owner.CombatState!.Enemies)
                     {
                         foreach (var p in e.Powers)
                         {

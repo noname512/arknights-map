@@ -46,13 +46,13 @@ public class WildfireSpread : ModRelicTemplate
 			return Task.CompletedTask;
 		}
 		WasUsedThisCombat = false;
-		base.Status = RelicStatus.Active;
+		Status = RelicStatus.Active;
 		return Task.CompletedTask;
 	}
 
 	public override async Task AfterCardExhausted(PlayerChoiceContext choiceContext, CardModel card, bool causedByEthereal)
 	{
-		if (card.Owner == base.Owner && !WasUsedThisCombat && ((card.Type == CardType.Skill) || (card.Type == CardType.Attack)))
+		if (card.Owner == Owner && !WasUsedThisCombat && ((card.Type == CardType.Skill) || (card.Type == CardType.Attack)))
 		{
 			Flash();
 			for (int i = 0; i < DynamicVars.Cards.IntValue; i++)
@@ -68,7 +68,7 @@ public class WildfireSpread : ModRelicTemplate
 	public override Task AfterCombatEnd(CombatRoom _)
 	{
 		WasUsedThisCombat = false;
-		base.Status = RelicStatus.Normal;
+		Status = RelicStatus.Normal;
 		return Task.CompletedTask;
 	}
 }

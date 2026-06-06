@@ -19,11 +19,11 @@ public class LiveFlame : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[2]
-     {
-            new EnergyVar(1),
-            new CardsVar(2)
-     };
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new EnergyVar(1),
+        new CardsVar(2)
+    ];
 
     protected override IEnumerable<IHoverTip> AdditionalHoverTips
     {

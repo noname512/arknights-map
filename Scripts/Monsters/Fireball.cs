@@ -43,7 +43,7 @@ public class Fireball : AbstractWildsMonster
                 await DamageCmd.Attack(ExplodeDamage).FromMonster(this)
                     .WithAttackerFx(null, DeathSfx)
                     .Execute(null);
-                await CreatureCmd.Kill(base.Creature);
+                await CreatureCmd.Kill(Creature);
             },
             new DeathBlowIntent(() => ExplodeDamage)
         );
@@ -63,7 +63,7 @@ public class Fireball : AbstractWildsMonster
             if (remainAttack <= 0)
             {
                 NCombatRoom.Instance?.GetCreatureNode(Creature)?.ScaleTo(0f, 0.35);
-                await CreatureCmd.Kill(base.Creature);
+                await CreatureCmd.Kill(Creature);
             }
 
             float percent = 1.0f * (ExplodeDamage - remainAttack) / ExplodeDamage;

@@ -3,11 +3,9 @@ using ArknightsMap.Scripts.Relics;
 using Godot;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Extensions;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Runs;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
-using STS2RitsuLib.Utils;
 
 namespace ArknightsMap.Scripts.Ancients;
 
@@ -64,7 +62,7 @@ public class Bagpipe : ModAncientEventTemplate
         List<EventOption> list = SinglePlayerChoice.ToList();
         list.UnstableShuffle(Rng);
         list = list.Take(3).ToList();
-        if (Owner.RunState.Players.Count > 1)
+        if (Owner!.RunState.Players.Count > 1)
         {
             list = list.Take(2).ToList();
             list.Add(RelicOption<OfferAssistance>());

@@ -77,22 +77,22 @@ public class ChaseFlamePower : ModPowerTemplate
 
     private static Task SleepMove(IReadOnlyList<Creature> targets) => Task.CompletedTask;
 
-    public override bool ShouldCreatureBeRemovedFromCombatAfterDeath(Creature creature) => creature != base.Owner || CurState == 1 || InitialHp <= 0;
+    public override bool ShouldCreatureBeRemovedFromCombatAfterDeath(Creature creature) => creature != Owner || CurState == 1 || InitialHp <= 0;
 
     public override bool ShouldPowerBeRemovedAfterOwnerDeath() => false;
 
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
     {
-        if (creature != base.Owner) return;
+        if (creature != Owner) return;
         if (InitialHp <= 0) return;
         if (CurState == 0)
         {
-            creature.GetCreatureNode().SetAnimationTrigger("Revive");
+            Owner.GetCreatureNode()!.SetAnimationTrigger("Revive");
             CurState = 1;
-            await CreatureCmd.SetMaxAndCurrentHp(base.Owner, InitialHp);
-            NextMove = creature.Monster.NextMove;
-            MoveState stun = (MoveState)Owner.Monster.MoveStateMachine.States["STUN1"];
-            creature.Monster.SetMoveImmediate(stun, true);
+            await CreatureCmd.SetMaxAndCurrentHp(Owner, InitialHp);
+            NextMove = Owner.Monster!.NextMove;
+            MoveState stun = (MoveState)Owner.Monster.MoveStateMachine!.States["STUN1"];
+            Owner.Monster.SetMoveImmediate(stun, true);
             ((MoveState)Owner.Monster.MoveStateMachine.States["STUN3"]).FollowUpState = NextMove;
             SetAmount(ReviveTurn);
         }
@@ -106,10 +106,10 @@ public class ChaseFlamePower : ModPowerTemplate
             await CreatureCmd.Kill(Owner);
             return;
         }
-        Owner.GetCreatureNode().SetAnimationTrigger("Revive2");
+        Owner.GetCreatureNode()!.SetAnimationTrigger("Revive2");
         await CreatureCmd.SetMaxAndCurrentHp(Owner, MaxHp);
-        Owner.Monster.NextMove.FollowUpState = NextMove;
-        List<PowerModel> debuffs = Owner.Powers.Where(p => p.Type ==  PowerType.Debuff).ToList();
+        Owner.Monster!.NextMove.FollowUpState = NextMove;
+        List<PowerModel> debuffs = Owner.Powers.Where(p => p.Type == PowerType.Debuff).ToList();
         foreach (PowerModel power in debuffs)
         {
             if ((power.Type == PowerType.Debuff) && (!(power is ITemporaryPower)))
@@ -131,14 +131,14 @@ public class ChaseFlamePower : ModPowerTemplate
         if (CurState == 1)
         {
             int remainingTurns = Amount - 1;
-            base.SetAmount(remainingTurns);
+            SetAmount(remainingTurns);
             if (remainingTurns <= 0)
             {
                 await Revive();
             }
         }
     }
-    
+
     public override Decimal ModifyHpLostAfterOsty(
         Creature target,
         Decimal amount,
@@ -149,7 +149,7 @@ public class ChaseFlamePower : ModPowerTemplate
         if (CurState == 0) return amount;
         return !CombatManager.Instance.IsInProgress || target != this.Owner || amount < 1M ? amount : 1M;
     }
-    
+
     public override Task AfterModifyingHpLostAfterOsty()
     {
         if (CurState == 1) Flash();
