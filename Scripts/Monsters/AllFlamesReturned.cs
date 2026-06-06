@@ -38,6 +38,7 @@ public class AllFlamesReturned : AbstractWildsMonster
     private MoveState? DeadState3;
     private MoveState? p2Attack;
     private bool _isStage2 = false;
+    public override bool ShouldDisappearFromDoom => _isStage2;
 
     public override async Task AfterAddedToRoom()
     {
