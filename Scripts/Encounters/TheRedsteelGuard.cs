@@ -7,7 +7,6 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Encounters;
 
-[RegisterActEncounter(typeof(Wilds))]
 public class TheRedsteelGuard : AbstractWildsEncounter
 {
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<TheBrigadier>()];
