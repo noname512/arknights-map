@@ -15,8 +15,6 @@ public class Breakout : AbstractWildsEncounter
     public override bool IsWeak => false;
 
     public override EncounterAssetProfile AssetProfile => new(
-        RunHistoryIconPath: $"res://ArknightsMap/images/map/{GetType().Name}History.png",
-        RunHistoryIconOutlinePath: $"res://ArknightsMap/images/map/{GetType().Name}History_outline.png",
         EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
     );
 

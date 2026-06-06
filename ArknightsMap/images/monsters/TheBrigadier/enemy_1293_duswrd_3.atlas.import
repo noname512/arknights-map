@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://batlb8ih5lvxp"
+path="res://.godot/imported/enemy_1293_duswrd_3.atlas-3b1bc6a25a3c20fbd8c8d58494e925c3.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/TheBrigadier/enemy_1293_duswrd_3.atlas"
+dest_files=["res://.godot/imported/enemy_1293_duswrd_3.atlas-3b1bc6a25a3c20fbd8c8d58494e925c3.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

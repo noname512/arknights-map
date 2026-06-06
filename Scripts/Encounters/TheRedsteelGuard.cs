@@ -8,9 +8,9 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Encounters;
 
 [RegisterActEncounter(typeof(Wilds))]
-public class BurningWeeds : AbstractWildsEncounter
+public class TheRedsteelGuard : AbstractWildsEncounter
 {
-    public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<DublinnSpecOps>()];
+    public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<TheBrigadier>()];
 
     public override bool IsWeak => false;
 
@@ -22,12 +22,12 @@ public class BurningWeeds : AbstractWildsEncounter
         "first"
     ];
 
-    public override RoomType RoomType => RoomType.Monster;
+    public override RoomType RoomType => RoomType.Elite;
 
     // 如果你的场景太大，可以调整缩放。此外还可以使用 GetCameraOffset 来调整摄像机位置
     // public override float GetCameraScaling() => 0.8f;
 
     protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<DublinnSpecOps>().ToMutable(), "first")
+        (ModelDb.Monster<TheBrigadier>().ToMutable(), "first")
     ];
 }

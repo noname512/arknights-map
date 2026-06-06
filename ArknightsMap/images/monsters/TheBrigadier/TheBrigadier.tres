@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://bh5gmp8n7m3y0"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://batlb8ih5lvxp" path="res://ArknightsMap/images/monsters/TheBrigadier/enemy_1293_duswrd_3.atlas" id="1_4i2u1"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://b5kvnabcdvu8r" path="res://ArknightsMap/images/monsters/TheBrigadier/enemy_1293_duswrd_3_424.skel" id="2_6c4xt"]
+
+[resource]
+atlas_res = ExtResource("1_4i2u1")
+skeleton_file_res = ExtResource("2_6c4xt")

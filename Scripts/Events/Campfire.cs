@@ -3,7 +3,6 @@ using ArknightsMap.Scripts.Acts;
 using ArknightsMap.Scripts.Enchantments;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
@@ -19,7 +18,7 @@ using STS2RitsuLib.Scaffolding.Content;
 public sealed class Campfire : ModEventTemplate
 {
     public override EventAssetProfile AssetProfile => new(
-        InitialPortraitPath: "res://images/events/battleworn_dummy.png"
+        InitialPortraitPath: $"res://ArknightsMap/images/events/{GetType().Name}.png"
     );
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
