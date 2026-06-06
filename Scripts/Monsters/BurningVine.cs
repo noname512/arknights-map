@@ -51,7 +51,7 @@ public class BurningVine : AbstractWildsMonster
             "SUMMON",
             async targets =>
             {
-                await CreatureCmd.Add<CabbageSeedling>(CombatState, "second");
+                await CreatureCmd.Add<CabbageSeedling>(CombatState, "first");
                 await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), CombatState.Enemies.First(c => c.Monster is CabbageSeedling), 1m, Creature, null);
             },
             new SummonIntent()

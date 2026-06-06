@@ -67,10 +67,10 @@ public class CabbageSeedling : AbstractWildsMonster
             async targets =>
             {
                 await DamageCmd.Attack(Damage4).FromMonster(this).WithAttackerAnim("Attack", 0.8f).Execute(null);
+                await PowerCmd.Remove<BurningPower>(Creature);
                 await CreatureCmd.Kill(Creature);
             },
-            new SingleAttackIntent(Damage4),
-            new UnknownIntent()
+            new DeathBlowIntent(() => Damage4)
         );
 
         RandomBranchState randomBranchState = new RandomBranchState("RAND");

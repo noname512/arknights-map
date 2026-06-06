@@ -27,6 +27,6 @@ public class LampBurner : AbstractWildsEncounter
     // public override float GetCameraScaling() => 0.8f;
 
     protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<BurningVine>().ToMutable(), "first")
+        (ModelDb.Monster<BurningVine>().ToMutable(), "second")
     ];
 }
