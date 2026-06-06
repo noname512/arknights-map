@@ -33,6 +33,10 @@ public class Hope : ModRelicTemplate
 		{
 			return false;
 		}
+		if (room is not CombatRoom)
+		{
+			return false;
+		}
 		rewards.Add(new CardReward(CardCreationOptions.ForRoom(player, room.RoomType), 3, player));
 		return true;
 	}
