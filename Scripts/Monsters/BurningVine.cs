@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 using ArknightsMap.Scripts.Powers;
+using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace ArknightsMap.Scripts.Monsters;
 
@@ -48,7 +49,11 @@ public class BurningVine : AbstractWildsMonster
         );
         MoveState summon = new MoveState(
             "SUMMON",
-            async targets => await CreatureCmd.Add<CabbageSeedling>(CombatState, "second"),
+            async targets =>
+            {
+                await CreatureCmd.Add<CabbageSeedling>(CombatState, "second");
+                await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), CombatState.Enemies.First(c => c.Monster is CabbageSeedling), 1m, Creature, null);
+            },
             new SummonIntent()
         );
 
