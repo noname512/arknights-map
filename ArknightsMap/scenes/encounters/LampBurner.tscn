@@ -10,7 +10,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="first" type="Marker2D" parent="."]
-position = Vector2(1557, 716)
+position = Vector2(1257, 716)
 
 [node name="second" type="Marker2D" parent="."]
-position = Vector2(1257, 716)
+position = Vector2(1557, 716)
