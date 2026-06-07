@@ -13,6 +13,8 @@ using MegaCrit.Sts2.Core.MonsterMoves;
 using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Potions;
+using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace ArknightsMap.Scripts.Monsters;
 
@@ -21,6 +23,8 @@ public class DublinnHeavyDefender : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 50, 46);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 50, 46);
+
+    public int StrengthGain = 2;
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
@@ -45,8 +49,13 @@ public class DublinnHeavyDefender : AbstractWildsMonster
         {
             return new MoveState(
                 "ATTACK" + i,
-                async targets => await DamageCmd.Attack(Damage[i]).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null),
-                new SingleAttackIntent(Damage[i])
+                async targets =>
+                {
+                    await DamageCmd.Attack(Damage[i]).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null);
+                    await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthGain, Creature, null);
+                },
+                new SingleAttackIntent(Damage[i]),
+                new BuffIntent()
             );
         };
         for (int i = 0; i < 7; i++)

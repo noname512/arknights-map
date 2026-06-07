@@ -19,6 +19,7 @@ public class PerseverePower : ModPowerTemplate
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("MaxDmg", 0)];
+    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
     // 自定义图标路径。1:1即可。原版游戏大图256x256，小图64x64。
     public override PowerAssetProfile AssetProfile => new(
@@ -29,6 +30,10 @@ public class PerseverePower : ModPowerTemplate
     public override decimal ModifyHpLostAfterOstyLate(Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         if (target != Owner)
+        {
+            return amount;
+        }
+        if (dealer != Target)
         {
             return amount;
         }
@@ -52,8 +57,16 @@ public class PerseverePower : ModPowerTemplate
 
     public IEnumerable<HealthBarForecastSegment> GetHealthBarForecastSegments(HealthBarForecastContext context)
     {
+        int sumDamage = 0;
+        foreach (PowerModel power in Owner.Powers)
+        {
+            if (power is PerseverePower p)
+            {
+                sumDamage += DynamicVars["MaxDmg"].IntValue;
+            }
+        }
         return HealthBarForecasts.Single(
-            (int)DynamicVars["MaxDmg"].BaseValue,
+            sumDamage,
             new Color(0.1f, 0.11f, 0.3f),
             HealthBarForecastGrowthDirection.FromRight
         );
