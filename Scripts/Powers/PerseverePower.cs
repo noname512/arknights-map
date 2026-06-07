@@ -14,7 +14,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Powers;
 
 [RegisterPower]
-public class PerseverePower : ModPowerTemplate
+public class PerseverePower : ModPowerTemplate, IHealthBarForecastSource
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
