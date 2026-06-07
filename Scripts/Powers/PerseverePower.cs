@@ -57,14 +57,7 @@ public class PerseverePower : ModPowerTemplate, IHealthBarForecastSource
 
     public IEnumerable<HealthBarForecastSegment> GetHealthBarForecastSegments(HealthBarForecastContext context)
     {
-        int sumDamage = 0;
-        foreach (PowerModel power in Owner.Powers)
-        {
-            if (power is PerseverePower p)
-            {
-                sumDamage += DynamicVars["MaxDmg"].IntValue;
-            }
-        }
+        int sumDamage = DynamicVars["MaxDmg"].IntValue;
         return HealthBarForecasts.Single(
             sumDamage,
             new Color(0.1f, 0.11f, 0.3f),
