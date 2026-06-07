@@ -117,7 +117,7 @@ public class ChaseFlamePower : ModPowerTemplate
                 await PowerCmd.Remove(power);
             }
         }
-        InitialHp--;
+        InitialHp -= CombatState.Players.Count();
         SetAmount(InitialHp);
         CurState = 0;
     }

@@ -2,7 +2,7 @@ using ArknightsMap.Scripts.Acts;
 using ArknightsMap.Scripts.Relics;
 using Godot;
 using MegaCrit.Sts2.Core.Events;
-using MegaCrit.Sts2.Core.Runs;
+using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 using STS2RitsuLib.Utils;
@@ -65,9 +65,8 @@ public class Reed : ModAncientEventTemplate
         ];
     }
 
-    // 出现条件。这里是只能在第二幕出现（索引为1）
-    public override bool IsAllowed(IRunState runState)
+    public override bool IsValidForAct(ActModel act)
     {
-        return runState.Acts[1] is Wilds && runState.CurrentActIndex == 1;
+        return act is Wilds;
     }
 }
