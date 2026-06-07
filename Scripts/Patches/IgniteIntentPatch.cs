@@ -4,6 +4,8 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Entities.Intents;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 
+namespace ArknightsMap.Scripts.Patches;
+
 class IgniteIntentPatch
 {
     [HarmonyPatch(typeof(IntentAnimData), nameof(IntentAnimData.GetAnimationFrame))]
