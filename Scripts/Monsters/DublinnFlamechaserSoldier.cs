@@ -35,7 +35,8 @@ public class DublinnFlamechaserSoldier : AbstractWildsMonster
             ChaseFlamePower? chaseFlamePower = Creature.GetPower<ChaseFlamePower>();
             if (chaseFlamePower != null)
             {
-                Creature.SetMaxHpInternal(++chaseFlamePower.InitialHp);
+                chaseFlamePower.InitialHp += CombatState.Players.Count;
+                Creature.SetMaxHpInternal(chaseFlamePower.InitialHp);
                 chaseFlamePower.CurState = 1;
                 chaseFlamePower.MaxHp += chaseFlamePower.DecreaseHp;
                 chaseFlamePower.NextMove = (MoveState)MoveStateMachine.States["ATTACK1"];
