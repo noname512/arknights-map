@@ -22,12 +22,13 @@ public class ChaseFlamePower : ModPowerTemplate
     public override PowerType Type => PowerType.Buff;
     // 叠加类型，Counter表示可叠加，Single表示不可叠加
     public override PowerStackType StackType => PowerStackType.Counter;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("DecreaseHp", 0), new IntVar("ReviveTurn", 0)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("DecreaseHp", 0), new IntVar("ReviveTurn", 0), new IntVar("AshDecreaseHp", 0)];
     public int CurState = 0; // 0: 初始状态，1: 余烬
     public int InitialHp = 0;
     public int MaxHp = 0;
     public int DecreaseHp = 0;
     public int ReviveTurn = 0;
+    public int AshDecreaseHp = 0;
     public MoveState NextMove = null!;
     private ChaseFlamePowerRes res = new ChaseFlamePowerRes();
 
@@ -35,7 +36,8 @@ public class ChaseFlamePower : ModPowerTemplate
     {
         InitialHp = Amount;
         MaxHp = Owner.MaxHp;
-        DecreaseHp = MaxHp / Amount;
+        AshDecreaseHp = CombatState.Players.Count();
+        DecreaseHp = AshDecreaseHp * MaxHp / Amount;
         if (Owner.Monster is DublinnFlamechaserGuard)
         {
             ReviveTurn = 2;
@@ -47,6 +49,7 @@ public class ChaseFlamePower : ModPowerTemplate
 
         DynamicVars["DecreaseHp"].BaseValue = DecreaseHp;
         DynamicVars["ReviveTurn"].BaseValue = ReviveTurn;
+        DynamicVars["AshDecreaseHp"].BaseValue = AshDecreaseHp;
         return base.AfterApplied(applier, cardSource);
     }
 
@@ -115,7 +118,7 @@ public class ChaseFlamePower : ModPowerTemplate
                 await PowerCmd.Remove(power);
             }
         }
-        InitialHp -= CombatState.Players.Count();
+        InitialHp -= AshDecreaseHp;
         SetAmount(InitialHp);
         CurState = 0;
     }

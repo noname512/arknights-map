@@ -3,7 +3,7 @@
     "ARKNIGHTS_MAP_POWER_CHASE_FLAME_POWER.smartDescription": "当[gold]{OwnerName}[/gold]将要被击败时，变为一个[blue]{Amount}[/blue]点生命值的[gold]余烬[/gold]。",
     "ARKNIGHTS_MAP_POWER_CHASE_FLAME_POWER.title": "逐火",
     "ARKNIGHTS_MAP_POWER_CHASE_FLAME_RES.description": "[gold]余烬[/gold]每次最多受到[blue]1[/blue]点伤害。若[gold]余烬[/gold]在若干回合内未被击倒，则减少[gold]生命上限[/gold]并复活。",
-    "ARKNIGHTS_MAP_POWER_CHASE_FLAME_RES.smartDescription": "每次最多受到[blue]1[/blue]点伤害。若[gold]余烬[/gold]在[blue]{ReviveTurn}[/blue]回合内未被击倒，则减少[blue]1[/blue]点[gold]余烬[/gold]与[blue]{DecreaseHp}[/blue]点[gold]{OwnerName}[/gold]的[gold]生命上限[/gold]并复活为[gold]{OwnerName}[/gold]。（剩余[blue]{Amount}[/blue]回合）",
+    "ARKNIGHTS_MAP_POWER_CHASE_FLAME_RES.smartDescription": "每次最多受到[blue]1[/blue]点伤害。若[gold]余烬[/gold]在[blue]{ReviveTurn}[/blue]回合内未被击倒，则减少[blue]{AshDecreaseHp}[/blue]点[gold]余烬[/gold]与[blue]{DecreaseHp}[/blue]点[gold]{OwnerName}[/gold]的[gold]生命上限[/gold]并复活为[gold]{OwnerName}[/gold]。（剩余[blue]{Amount}[/blue]回合）",
     "ARKNIGHTS_MAP_POWER_CHASE_FLAME_RES.title": "逐火·余烬",
     "ARKNIGHTS_MAP_POWER_FLAMING_DAMAGE_POWER.description": "若累计到[blue]20[/blue]点，其拥有者将在回合结束时受到[blue]8[/blue]点伤害，获得一层[gold]易伤[/gold]并清除此效果。",
     "ARKNIGHTS_MAP_POWER_FLAMING_DAMAGE_POWER.smartDescription": "当前有[blue]{Amount}[/blue]点。若累计到[blue]{Bound}[/blue]点，在{OnPlayer:敌人|玩家}的回合结束时，{OwnerName}将受到[blue]{ExtraDamage}[/blue]点伤害，获得一层[gold]易伤[/gold]，并清除所有的[gold]灼燃损伤[/gold]。",
