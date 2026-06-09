@@ -21,6 +21,8 @@ public class ApparitionalWaves : AbstractWildsEncounter
         EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
     );
 
+    public override string CustomBgm => "event:/ArknightsMap/music/fblw_bat";
+
     // 怪物槽位的名字
     public override IReadOnlyList<string> Slots => [
         "first",

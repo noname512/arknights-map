@@ -38,19 +38,34 @@ public class DublinnPhalanxInfantry : AbstractWildsMonster
         List<MonsterState> list = new List<MonsterState>();
         MoveState attack1 = new MoveState(
             "ATTACK1",
-            async targets => await DamageCmd.Attack(Damage1).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null),
+            async targets => await DamageCmd
+                .Attack(Damage1)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.5f)
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                .Execute(null),
             new SingleAttackIntent(Damage1)
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
-            async targets => await DamageCmd.Attack(Damage2).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null),
+            async targets => await DamageCmd
+                .Attack(Damage2)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.5f)
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                .Execute(null),
             new SingleAttackIntent(Damage2)
         );
         MoveState attack3 = new MoveState(
             "ATTACK3",
             async targets =>
             {
-                await DamageCmd.Attack(Damage3).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null);
+                await DamageCmd
+                    .Attack(Damage3)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .Execute(null);
                 await CreatureCmd.GainBlock(Creature, Block3, ValueProp.Move, null);
             },
             new SingleAttackIntent(Damage3),

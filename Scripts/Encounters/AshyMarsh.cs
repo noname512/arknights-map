@@ -17,6 +17,9 @@ public class AshyMarsh : AbstractWildsEncounter
     public override EncounterAssetProfile AssetProfile => new(
         EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
     );
+
+    public override string CustomBgm => Random.Shared.Next(2) == 1 ? "event:/ArknightsMap/music/fblw_bat" : "event:/ArknightsMap/music/zwyh_bat";
+
     // 怪物槽位的名字
     public override IReadOnlyList<string> Slots => [
         "first",

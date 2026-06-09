@@ -29,12 +29,24 @@ public class DublinnCannoneer : AbstractWildsMonster
         List<MonsterState> list = new List<MonsterState>();
         MoveState attack1 = new MoveState(
             "ATTACK1",
-            async targets => await DamageCmd.Attack(Damage1).WithHitCount(Times1).FromMonster(this).WithAttackerAnim("Attack", 0f).OnlyPlayAnimOnce().Execute(null),
+            async targets => await DamageCmd
+                .Attack(Damage1)
+                .WithHitCount(Times1)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0f)
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                .OnlyPlayAnimOnce()
+                .Execute(null),
             new MultiAttackIntent(Damage1, Times1)
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
-            async targets => await DamageCmd.Attack(Damage2).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null),
+            async targets => await DamageCmd
+                .Attack(Damage2)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.5f)
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                .Execute(null),
             new SingleAttackIntent(Damage2)
         );
         MoveState sleep = new MoveState(

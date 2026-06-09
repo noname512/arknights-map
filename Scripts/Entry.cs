@@ -1,13 +1,10 @@
 using System.Reflection;
 using ArknightsMap.Scripts.Acts;
 using HarmonyLib;
-using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
-using MegaCrit.Sts2.Core.Models.Singleton;
 using STS2RitsuLib;
+using STS2RitsuLib.Audio;
 using STS2RitsuLib.Interop;
 using STS2RitsuLib.Utils.Persistence;
 
@@ -26,9 +23,8 @@ public class Entry
     public static ReedBed reedBed => new ReedBed();
     public static void Init()
     {
-        // harmony可用，但是最好用ritsu的封装patch（TODO）
-        // var harmony = new Harmony("com.example.testmod");
-        // harmony.PatchAll();
+        var harmony = new Harmony(ModId);
+        harmony.PatchAll();
         var assembly = Assembly.GetExecutingAssembly();
         RitsuLibFramework.EnsureGodotScriptsRegistered(assembly, Logger);
         // 自动注册内容
@@ -53,7 +49,8 @@ public class Entry
 
         RitsuLibFramework.SubscribeLifecycle(reedBed);
 
-        var harmony = new Harmony(ModId);
-        harmony.PatchAll();
+        FmodStudioDeferredBankRegistration.RegisterBank("res://ArknightsMap/audio/ArknightsMap.bank");
+        FmodStudioDeferredBankRegistration.RegisterStudioGuidMappings("res://ArknightsMap/audio/GUIDs.txt");
+
     }
 }

@@ -59,14 +59,24 @@ public class TombkeeperGrotesque : AbstractWildsMonster
         }, new BuffIntent());
         MoveState attack1 = new MoveState(
             "ATTACK1",
-            async targets => await DamageCmd.Attack(Damage1).FromMonster(this).WithAttackerAnim("Attack", 0.8f).Execute(null),
+            async targets => await DamageCmd
+                .Attack(Damage1)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.8f)
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                .Execute(null),
             new SingleAttackIntent(Damage1)
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
             async targets =>
             {
-                await DamageCmd.Attack(Damage2).FromMonster(this).WithAttackerAnim("Attack", 0.8f).Execute(null);
+                await DamageCmd
+                    .Attack(Damage2)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.8f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                    .Execute(null);
                 await CardPileCmd.AddToCombatAndPreview<Dazed>(targets, PileType.Discard, Status2, null);
             },
             new SingleAttackIntent(Damage2),
@@ -74,7 +84,14 @@ public class TombkeeperGrotesque : AbstractWildsMonster
         );
         MoveState attack3 = new MoveState(
             "ATTACK3",
-            async targets => await DamageCmd.Attack(Damage3).WithHitCount(HitCount3).FromMonster(this).WithAttackerAnim("Attack", 0.8f).OnlyPlayAnimOnce().Execute(null),
+            async targets => await DamageCmd
+                .Attack(Damage3)
+                .WithHitCount(HitCount3)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.8f)
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                .OnlyPlayAnimOnce()
+                .Execute(null),
             new MultiAttackIntent(Damage3, HitCount3)
         );
         attack1.FollowUpState = attack2;
@@ -97,6 +114,7 @@ public class TombkeeperGrotesque : AbstractWildsMonster
 
     private async Task RespawnMove(IReadOnlyList<Creature> targets)
     {
+        SfxCmd.Play($"event:/ArknightsMap/sfx/{GetType().Name}/reborn_end");
         Creature.GetPower<RebornPower>()?.DoRevive();
         await CreatureCmd.Heal(Creature, Creature.MaxHp);
         await PowerCmd.Apply<DamageOutPower>(new ThrowingPlayerChoiceContext(), Creature, 10, Creature, null);
@@ -110,6 +128,7 @@ public class TombkeeperGrotesque : AbstractWildsMonster
 
     public void TriggerDeadState()
     {
+        SfxCmd.Play($"event:/ArknightsMap/sfx/{GetType().Name}/reborn_start");
         SetMoveImmediate(DeadState!, forceTransition: true);
     }
 

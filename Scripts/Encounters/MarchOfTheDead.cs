@@ -20,6 +20,8 @@ public class MarchOfTheDead : AbstractWildsEncounter
         EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
     );
 
+    public override string CustomBgm => "event:/ArknightsMap/music/zwyh_bat";
+
     public override IReadOnlyList<string> Slots => [
         "first",
     ];

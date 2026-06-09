@@ -36,14 +36,26 @@ public class Mandragora : AbstractWildsMonster
         List<MonsterState> list = new List<MonsterState>();
         MoveState attack1 = new MoveState(
             "ATTACK1",
-            async targets => await DamageCmd.Attack(Damage1).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null),
+            async targets => await DamageCmd
+                .Attack(Damage1)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.5f)
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                .Execute(null),
             new SingleAttackIntent(Damage1)
         );
         MoveState attack2 = new MoveState(
             "GAZE",
             async targets =>
             {
-                await DamageCmd.Attack(Damage2).WithHitCount(HitCount2).FromMonster(this).WithAttackerAnim("Skill1", 0.5f).OnlyPlayAnimOnce().Execute(null);
+                await DamageCmd
+                    .Attack(Damage2)
+                    .WithHitCount(HitCount2)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Skill1", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/gaze")
+                    .OnlyPlayAnimOnce()
+                    .Execute(null);
                 await PowerCmd.Apply<MandragoraGazePower>(new ThrowingPlayerChoiceContext(), targets, 4m, Creature, null);
             },
             new MultiAttackIntent(Damage2, HitCount2),
@@ -51,14 +63,26 @@ public class Mandragora : AbstractWildsMonster
         );
         MoveState attack3 = new MoveState(
             "ATTACK2",
-            async targets => await DamageCmd.Attack(Damage3).WithHitCount(HitCount3).FromMonster(this).WithAttackerAnim("Attack", 0.5f).OnlyPlayAnimOnce().Execute(null),
+            async targets => await DamageCmd
+                .Attack(Damage3)
+                .WithHitCount(HitCount3)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.5f)
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                .OnlyPlayAnimOnce()
+                .Execute(null),
             new MultiAttackIntent(Damage3, HitCount3)
         );
         MoveState attack4 = new MoveState(
             "ATTACK_DEBUFF",
             async targets =>
             {
-                await DamageCmd.Attack(Damage4).FromMonster(this).WithAttackerAnim("Skill3", 0.5f).Execute(null);
+                await DamageCmd
+                    .Attack(Damage4)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Skill3", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                    .Execute(null);
                 await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), targets, 4m, Creature, null);
             },
             new SingleAttackIntent(Damage4),
@@ -102,6 +126,7 @@ public class Mandragora : AbstractWildsMonster
 
     public async Task ShieldAndSummon(IReadOnlyList<Creature> targets)
     {
+        SfxCmd.Play($"event:/ArknightsMap/sfx/{GetType().Name}/block");
         await CreatureCmd.TriggerAnim(Creature, "Skill2", 0);
         if (SummonTimes < 3)
         {

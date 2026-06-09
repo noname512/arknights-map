@@ -15,8 +15,8 @@ namespace ArknightsMap.Scripts.Acts;
 [RegisterAct]
 public sealed class Wilds : ModActTemplate
 {
-    public override string[] MusicBankPaths => new string[2] { "res://banks/desktop/act2_a1.bank", "res://banks/desktop/act2_a2.bank" };
-    public override string[] BgMusicOptions => new string[2] { "event:/music/act2_a1_v2", "event:/music/act2_a2_v2" };
+    public override string[] MusicBankPaths => ["res://ArknightsMap/audio/ArknightsMap.bank", "res://ArknightsMap/audio/ArknightsMap.bank"];
+    public override string[] BgMusicOptions => ["event:/ArknightsMap/music/wilds_bg_1", "event:/ArknightsMap/music/wilds_bg_2"];
 
     public override Color MapTraveledColor => new Color("27221C");
 

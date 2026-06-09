@@ -49,6 +49,7 @@ public class TheLeader : AbstractWildsMonster
     {
         if (_isstage2)
         {
+            SfxCmd.PlayLoop($"event:/ArknightsMap/sfx/{GetType().Name}/reborn");
             await CreatureCmd.TriggerAnim(Creature, "StartRevive", 0);
         }
         else
@@ -91,7 +92,12 @@ public class TheLeader : AbstractWildsMonster
             "ATTACK1_1",
             async targets =>
             {
-                await DamageCmd.Attack(Damage1_1).FromMonster(this).WithAttackerAnim("Attack1", 0.5f).Execute(null);
+                await DamageCmd
+                    .Attack(Damage1_1)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack1", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                    .Execute(null);
                 await Stage1Move();
             },
             new SingleAttackIntent(Damage1_1),
@@ -101,7 +107,14 @@ public class TheLeader : AbstractWildsMonster
             "ATTACK1_2",
             async targets =>
             {
-                await DamageCmd.Attack(Damage1_2).WithHitCount(Times1).FromMonster(this).WithAttackerAnim("Attack1", 0.5f).OnlyPlayAnimOnce().Execute(null);
+                await DamageCmd
+                    .Attack(Damage1_2)
+                    .WithHitCount(Times1)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack1", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                    .OnlyPlayAnimOnce()
+                    .Execute(null);
                 await Stage1Move();
             },
             new MultiAttackIntent(Damage1_2, Times1),
@@ -111,7 +124,12 @@ public class TheLeader : AbstractWildsMonster
             "IGNITE1",
             async targets =>
             {
-                await DamageCmd.Attack(Damage1_3).FromMonster(this).WithAttackerAnim("Ignite1", 0.5f).Execute(null);
+                await DamageCmd
+                    .Attack(Damage1_3)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Ignite1", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                    .Execute(null);
                 await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
                 await Stage1Move();
             },
@@ -123,7 +141,12 @@ public class TheLeader : AbstractWildsMonster
             "RETURN_FIRE1",
             async targets =>
             {
-                await DamageCmd.Attack(0).FromMonster(this).WithAttackerAnim("ReturnFire1", 0.5f).Execute(null);
+                await DamageCmd
+                    .Attack(0)
+                    .FromMonster(this)
+                    .WithAttackerAnim("ReturnFire1", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack_fire_1")
+                    .Execute(null);
                 foreach (var power in Creature.Powers)
                 {
                     if (power is GiveAndTakePower giveAndTakePower)
@@ -139,19 +162,36 @@ public class TheLeader : AbstractWildsMonster
 
         MoveState attack2_1 = new MoveState(
             "ATTACK2_1",
-            async targets => await DamageCmd.Attack(Damage2_1).FromMonster(this).WithAttackerAnim("Attack2", 0.5f).Execute(null),
+            async targets => await DamageCmd
+                .Attack(Damage2_1)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack2", 0.5f)
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                .Execute(null),
             new SingleAttackIntent(Damage2_1)
         );
         MoveState attack2_2 = new MoveState(
             "ATTACK2_2",
-            async targets => await DamageCmd.Attack(Damage2_2).WithHitCount(Times2).FromMonster(this).WithAttackerAnim("Attack2", 0.5f).OnlyPlayAnimOnce().Execute(null),
+            async targets => await DamageCmd
+                .Attack(Damage2_2)
+                .WithHitCount(Times2)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack2", 0.5f)
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                .OnlyPlayAnimOnce()
+                .Execute(null),
             new MultiAttackIntent(Damage2_2, Times2)
         );
         MoveState ignite2 = new MoveState(
             "IGNITE2",
             async targets =>
             {
-                await DamageCmd.Attack(Damage2_3).FromMonster(this).WithAttackerAnim("Ignite2", 0.5f).Execute(null);
+                await DamageCmd
+                    .Attack(Damage2_3)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Ignite2", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                    .Execute(null);
                 await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
             },
             new SingleAttackIntent(Damage2_3),
@@ -164,6 +204,7 @@ public class TheLeader : AbstractWildsMonster
                 if (_firstFire2)
                 {
                     await CreatureCmd.TriggerAnim(Creature, "Revive", 0);
+                    SfxCmd.StopLoop($"event:/ArknightsMap/sfx/{GetType().Name}/reborn");
                     _firstFire2 = false;
                 }
                 else
@@ -171,7 +212,12 @@ public class TheLeader : AbstractWildsMonster
                     await CreatureCmd.TriggerAnim(Creature, "ReturnFire2", 0);
                 }
                 int amount = GTAmt;
-                await DamageCmd.Attack(0).FromMonster(this).WithNoAttackerAnim().Execute(null);
+                await DamageCmd
+                    .Attack(0)
+                    .FromMonster(this)
+                    .WithNoAttackerAnim()
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack_fire_2")
+                    .Execute(null);
                 foreach (var power in Creature.Powers)
                 {
                     if (power is GiveAndTakePower giveAndTakePower)

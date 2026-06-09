@@ -16,6 +16,8 @@ public class LampBurner : AbstractWildsEncounter
         EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
     );
 
+    public override string CustomBgm => "event:/ArknightsMap/music/wgrsdj_bat";
+
     public override IReadOnlyList<string> Slots => [
         "first",
         "second"

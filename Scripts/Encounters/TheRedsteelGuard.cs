@@ -1,8 +1,6 @@
-using ArknightsMap.Scripts.Acts;
 using ArknightsMap.Scripts.Monsters;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
-using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Encounters;
@@ -16,6 +14,8 @@ public class TheRedsteelGuard : AbstractWildsEncounter
     public override EncounterAssetProfile AssetProfile => new(
         EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
     );
+
+    public override string CustomBgm => "event:/ArknightsMap/music/zwyh_bat";
 
     public override IReadOnlyList<string> Slots => [
         "first"

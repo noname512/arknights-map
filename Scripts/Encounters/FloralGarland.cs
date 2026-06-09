@@ -21,6 +21,8 @@ public class FloralGarland : AbstractWildsEncounter
         EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
     );
 
+    public override string CustomBgm => "event:/ArknightsMap/music/wgrsdj_bat";
+
     // 怪物槽位的名字
     public override IReadOnlyList<string> Slots => [
         "first",

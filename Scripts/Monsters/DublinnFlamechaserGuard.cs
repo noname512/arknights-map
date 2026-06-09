@@ -43,19 +43,17 @@ public class DublinnFlamechaserGuard : AbstractWildsMonster
             async targets => await DamageCmd
                 .Attack(Damage1)
                 .FromMonster(this)
-                // .WithAttackerAnim("Attack", 0.5f) // 如果有攻击动画，可以取消注释并替换成实际动画名称和延迟
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
                 .Execute(null),
             new SingleAttackIntent(Damage1)
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
-            async targets =>
-            {
-                await DamageCmd
-                    .Attack(Damage2)
-                    .FromMonster(this)
-                    .Execute(null);
-            },
+            async targets => await DamageCmd
+                .Attack(Damage2)
+                .FromMonster(this)
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                .Execute(null),
             new SingleAttackIntent(Damage2)
         );
         buff_burning = new MoveState(
@@ -75,6 +73,7 @@ public class DublinnFlamechaserGuard : AbstractWildsMonster
         MoveState stun1 = new MoveState("STUN1", _ => { return Task.CompletedTask; }, new StunIntent());
         MoveState stun3 = new MoveState("STUN3", async _ =>
         {
+            SfxCmd.Play($"event:/ArknightsMap/sfx/{GetType().Name}/reborn");
             await (Creature.GetPower<ChaseFlamePower>()?.Revive() ?? Task.CompletedTask);
             await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
         }, new HealIntent(), new IgniteIntent());

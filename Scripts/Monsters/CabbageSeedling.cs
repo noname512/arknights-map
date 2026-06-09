@@ -39,6 +39,8 @@ public class CabbageSeedling : AbstractWildsMonster
         }
     }
 
+    private string GetAttackSfx() => IsBurning ? $"event:/ArknightsMap/sfx/{GetType().Name}/attack" : $"event:/ArknightsMap/sfx/{GetType().Name}/attack_burning";
+
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
@@ -49,24 +51,44 @@ public class CabbageSeedling : AbstractWildsMonster
         );
         MoveState attack1 = new MoveState(
             "ATTACK1",
-            async targets => await DamageCmd.Attack(Damage1).FromMonster(this).WithAttackerAnim("Attack", 0.8f).Execute(null),
+            async targets => await DamageCmd
+                .Attack(Damage1)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.8f)
+                .WithHitFx(sfx: GetAttackSfx())
+                .Execute(null),
             new SingleAttackIntent(Damage1)
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
-            async targets => await DamageCmd.Attack(Damage2).FromMonster(this).WithAttackerAnim("Attack", 0.8f).Execute(null),
+            async targets => await DamageCmd
+            .Attack(Damage2)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.8f)
+                .WithHitFx(sfx: GetAttackSfx())
+                .Execute(null),
             new SingleAttackIntent(Damage2)
         );
         MoveState attack3 = new MoveState(
             "ATTACK3",
-            async targets => await DamageCmd.Attack(Damage3).FromMonster(this).WithAttackerAnim("Attack", 0.8f).Execute(null),
+            async targets => await DamageCmd
+                .Attack(Damage3)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.8f)
+                .WithHitFx(sfx: GetAttackSfx())
+                .Execute(null),
             new SingleAttackIntent(Damage3)
         );
         MoveState attack4 = new MoveState(
             "ATTACK_DIE",
             async targets =>
             {
-                await DamageCmd.Attack(Damage4).FromMonster(this).WithAttackerAnim("Attack", 0.8f).Execute(null);
+                await DamageCmd
+                    .Attack(Damage4)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.8f)
+                    .WithHitFx(sfx: GetAttackSfx())
+                    .Execute(null);
                 await PowerCmd.Remove<BurningPower>(Creature);
                 await CreatureCmd.Kill(Creature);
             },

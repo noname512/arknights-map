@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
+using MegaCrit.Sts2.Core.Nodes.Audio;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -51,7 +52,12 @@ public class AllFlamesReturned : AbstractWildsMonster
 
         p1Attack = new MoveState("ATTACK_P1", async targets =>
         {
-            await DamageCmd.Attack(P1AttackDamage).FromMonster(this).WithAttackerAnim("Attack", 0.8f).Execute(null);
+            await DamageCmd
+                .Attack(P1AttackDamage)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.8f)
+                .WithHitFx(sfx: "event:/ArknightsMap/sfx/AllFlamesReturned/attack_1")
+                .Execute(null);
             await CardPileCmd.AddToCombatAndPreview<PurpleFlame>(targets, PileType.Hand, P1PurpleFlame, null);
             await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthGain, Creature, null);
         }, new SingleAttackIntent(P1AttackDamage), new CardDebuffIntent(), new BuffIntent());
@@ -67,12 +73,18 @@ public class AllFlamesReturned : AbstractWildsMonster
 
         p2Attack = new MoveState("ATTACK_P2", async targets =>
         {
-            await DamageCmd.Attack(P2AttackDamage).FromMonster(this).WithAttackerAnim("Attack", 0.8f).Execute(null);
+            await DamageCmd
+                .Attack(P2AttackDamage)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.8f)
+                .WithHitFx(sfx: "event:/ArknightsMap/sfx/AllFlamesReturned/attack_2")
+                .Execute(null);
             await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
         }, new SingleAttackIntent(P2AttackDamage), new IgniteIntent());
         MoveState breeth = new MoveState("BREETH", async targets =>
         {
             await CreatureCmd.TriggerAnim(Creature, "Skill", 0);
+            SfxCmd.Play("event:/ArknightsMap/sfx/AllFlamesReturned/skill");
             await CardPileCmd.AddToCombatAndPreview<PurpleFlame>(targets, PileType.Hand, P2PurpleFlame, null);
         }, new CardDebuffIntent());
 
@@ -105,6 +117,7 @@ public class AllFlamesReturned : AbstractWildsMonster
             await CardPileCmd.AddToCombatAndPreview<PurpleFlame>(player.Creature, PileType.Hand, RevivePurpleFlame, null);
         }
 
+        SfxCmd.PlayLoop("event:/ArknightsMap/sfx/AllFlamesReturned/reborn");
         SetMoveImmediate(DeadState!, forceTransition: true);
     }
 
@@ -115,6 +128,7 @@ public class AllFlamesReturned : AbstractWildsMonster
         await CreatureCmd.Heal(Creature, Creature.MaxHp - Creature.MaxHp / 3 * 2);
         bool hasPurpleFlameRemain = false;
         List<CardModel> purpleFlames = new List<CardModel>();
+        SfxCmd.StopLoop("event:/ArknightsMap/sfx/AllFlamesReturned/reborn");
         foreach (var player in targets)
         {
             if (player.Player?.PlayerCombatState == null)
@@ -145,6 +159,7 @@ public class AllFlamesReturned : AbstractWildsMonster
         {
             _isStage2 = true;
             await CreatureCmd.TriggerAnim(Creature, "Revive2", 0);
+            NRunMusicController.Instance?.PlayCustomMusic("event:/ArknightsMap/music/all_flames_returned_bat_2");
             NextMove.FollowUpState = p2Attack;
             await PowerCmd.Remove<RebornPower>(Creature);
             await PowerCmd.Remove<StrengthPower>(Creature);

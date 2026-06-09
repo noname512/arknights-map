@@ -41,7 +41,12 @@ public class PatrollingFoliage : AbstractWildsMonster
             "ATTACK1",
             async targets =>
             {
-                await DamageCmd.Attack(7).FromMonster(this).WithAttackerAnim("Attack", 0.8f).Execute(null);
+                await DamageCmd
+                    .Attack(7)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.8f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .Execute(null);
                 await PowerCmd.Apply<WeakPower>(
                     new ThrowingPlayerChoiceContext(),
                     targets,
@@ -54,22 +59,46 @@ public class PatrollingFoliage : AbstractWildsMonster
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
-            async targets => await DamageCmd.Attack(4).WithHitCount(2).FromMonster(this).WithAttackerAnim("Attack", 0.7f).OnlyPlayAnimOnce().Execute(null),
+            async targets => await DamageCmd
+                .Attack(4)
+                .WithHitCount(2)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.7f)
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                .OnlyPlayAnimOnce()
+                .Execute(null),
             new MultiAttackIntent(4, 2)
         );
         MoveState attack3 = new MoveState(
             "ATTACK3",
-            async targets => await DamageCmd.Attack(3).WithHitCount(3).FromMonster(this).WithAttackerAnim("Attack", 0.7f).OnlyPlayAnimOnce().Execute(null),
+            async targets => await DamageCmd
+                .Attack(3)
+                .WithHitCount(3)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.7f)
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                .OnlyPlayAnimOnce()
+                .Execute(null),
             new MultiAttackIntent(3, 3)
         );
         MoveState attack4 = new MoveState(
             "ATTACK4",
-            async targets => await DamageCmd.Attack(10).FromMonster(this).WithAttackerAnim("Attack", 0.7f).Execute(null),
+            async targets => await DamageCmd
+                .Attack(10)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.7f)
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                .Execute(null),
             new SingleAttackIntent(10)
         );
         MoveState attack5 = new MoveState(
             "ATTACK5",
-            async targets => await DamageCmd.Attack(11).FromMonster(this).WithAttackerAnim("Attack", 0.7f).Execute(null),
+            async targets => await DamageCmd
+                .Attack(11)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.7f)
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                .Execute(null),
             new SingleAttackIntent(11)
         );
 

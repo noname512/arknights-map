@@ -20,6 +20,8 @@ public class HerFlame : AbstractWildsEncounter
 
     public override string BossNodePath => $"res://ArknightsMap/images/map/{GetType().Name}Icon";
 
+    public override string CustomBgm => "event:/ArknightsMap/music/the_leader_bat";
+
     public override IReadOnlyList<string> Slots => [
         "first"
     ];

@@ -51,7 +51,12 @@ public class DublinnHeavyDefender : AbstractWildsMonster
                 "ATTACK" + i,
                 async targets =>
                 {
-                    await DamageCmd.Attack(Damage[i]).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null);
+                    await DamageCmd
+                        .Attack(Damage[i])
+                        .FromMonster(this)
+                        .WithAttackerAnim("Attack", 0.5f)
+                        .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                        .Execute(null);
                     await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthGain, Creature, null);
                 },
                 new SingleAttackIntent(Damage[i]),

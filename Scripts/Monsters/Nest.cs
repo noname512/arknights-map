@@ -44,7 +44,12 @@ public class Nest : AbstractWildsMonster
             "ATTACK1",
             async targets =>
             {
-                await DamageCmd.Attack(Damage).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null);
+                await DamageCmd
+                    .Attack(Damage)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .Execute(null);
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthAdd, Creature, null);
                 decimal totalAdd = HpAdd;
                 if (CombatState.Players.Count > 1)
@@ -71,7 +76,12 @@ public class Nest : AbstractWildsMonster
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
-            async targets => await DamageCmd.Attack(Damage).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null),
+            async targets => await DamageCmd
+                .Attack(Damage)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.5f)
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                .Execute(null),
             new SingleAttackIntent(Damage)
         );
 

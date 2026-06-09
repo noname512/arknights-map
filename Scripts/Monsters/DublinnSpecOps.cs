@@ -33,17 +33,32 @@ public class DublinnSpecOps : AbstractWildsMonster
         List<MonsterState> list = new List<MonsterState>();
         MoveState attack1 = new MoveState(
             "ATTACK1",
-            async targets => await DamageCmd.Attack(Damage1).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null),
+            async targets => await DamageCmd
+                .Attack(Damage1)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.5f)
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack_fire")
+                .Execute(null),
             new SingleAttackIntent(Damage1)
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
-            async targets => await DamageCmd.Attack(Damage2).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null),
+            async targets => await DamageCmd
+                .Attack(Damage2)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.5f)
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack_fire")
+                .Execute(null),
             new SingleAttackIntent(Damage2)
         );
         MoveState attack3 = new MoveState(
             "ATTACK3",
-            async targets => await DamageCmd.Attack(Damage3).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null),
+            async targets => await DamageCmd
+                .Attack(Damage3)
+                .FromMonster(this)
+                .WithAttackerAnim("Attack", 0.5f)
+                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack_fire")
+                .Execute(null),
             new SingleAttackIntent(Damage3)
         );
         MoveState attack4 = GenerateSpecialMoveState();
@@ -71,7 +86,14 @@ public class DublinnSpecOps : AbstractWildsMonster
 
     public async Task SpecialMove(IEnumerable<Creature> targets)
     {
-        await DamageCmd.Attack(Damage4).WithHitCount(5).FromMonster(this).WithAttackerAnim("Skill", 0.5f).OnlyPlayAnimOnce().Execute(null);
+        await DamageCmd
+            .Attack(Damage4)
+            .WithHitCount(5)
+            .FromMonster(this)
+            .WithAttackerAnim("Skill", 0.5f)
+            .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+            .OnlyPlayAnimOnce()
+            .Execute(null);
         await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthGain, Creature, null);
         await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
     }

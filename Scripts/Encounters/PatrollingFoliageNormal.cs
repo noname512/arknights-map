@@ -10,13 +10,15 @@ namespace ArknightsMap.Scripts.Encounters;
 [RegisterActEncounter(typeof(Wilds))]
 public class PatrollingFoliageNormal : AbstractWildsEncounter
 {
-    public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<PatrollingFoliage>()];
+    public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<PatrollingFoliage>(), ModelDb.Monster<CabbageSeedling>()];
 
     public override bool IsWeak => true;
 
     public override EncounterAssetProfile AssetProfile => new(
         EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
     );
+
+    public override string CustomBgm => "event:/ArknightsMap/music/wgrsdj_bat";
 
     public override IReadOnlyList<string> Slots => [
         "first",

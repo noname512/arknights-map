@@ -22,6 +22,8 @@ public class ScorchingDream : AbstractWildsEncounter
         EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
     );
 
+    public override string CustomBgm => "event:/ArknightsMap/music/zwyh_bat";
+
     // 怪物槽位的名字
     public override IReadOnlyList<string> Slots => [
         "first",

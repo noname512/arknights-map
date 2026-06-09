@@ -34,6 +34,7 @@ public class CollapsePower : ModPowerTemplate
         if (partner == null) return;
         if (partner.IsAlive && partner.IsMonster)
         {
+            SfxCmd.Play("event:/ArknightsMap/sfx/TatteredPillar");
             MoveState curState = partner.Monster!.NextMove;
             MoveState newState;
             if (partner.Monster is Mandragora mandragora)

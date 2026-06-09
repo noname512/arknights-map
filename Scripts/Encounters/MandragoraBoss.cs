@@ -20,6 +20,8 @@ public class MandragoraBoss : AbstractWildsEncounter
 
     public override string BossNodePath => $"res://ArknightsMap/images/map/{GetType().Name}Icon";
 
+    public override string CustomBgm => "event:/ArknightsMap/music/mandragora_bat";
+
     public override IReadOnlyList<string> Slots => [
         "first",
         "second"

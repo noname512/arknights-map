@@ -22,6 +22,8 @@ public class AFRBoss : AbstractWildsEncounter
 
     public override string BossNodePath => $"res://ArknightsMap/images/map/MandragoraBossIcon";
 
+    public override string CustomBgm => "event:/ArknightsMap/music/all_flames_returned_bat_1";
+
     public override IReadOnlyList<string> Slots => [
         "first"
     ];
