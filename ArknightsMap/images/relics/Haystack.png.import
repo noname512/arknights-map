@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cs84b3hkr7gdd"
-path="res://.godot/imported/SoulSpark.png-993eab0c2d9a68756191507b17ad23a7.ctex"
+uid="uid://3w2go7pjxlou"
+path="res://.godot/imported/Haystack.png-1325d1ff87ca70cdec03915cb4a94cc0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/relics/SoulSpark.png"
-dest_files=["res://.godot/imported/SoulSpark.png-993eab0c2d9a68756191507b17ad23a7.ctex"]
+source_file="res://ArknightsMap/images/relics/Haystack.png"
+dest_files=["res://.godot/imported/Haystack.png-1325d1ff87ca70cdec03915cb4a94cc0.ctex"]
 
 [params]
 

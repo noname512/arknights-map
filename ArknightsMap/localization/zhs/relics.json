@@ -52,7 +52,7 @@
     "ARKNIGHTS_MAP_RELIC_EJECTION_BULLET.title": "弹射弹药",
     "ARKNIGHTS_MAP_RELIC_EJECTION_BULLET.description": "在你的回合结束时，[gold]消耗[/gold]你的所有手牌。每[gold]消耗[/gold]一张，获得[blue]{Block}[/blue]点[gold]格挡[/gold]。",
     "ARKNIGHTS_MAP_RELIC_EJECTION_BULLET.flavor": "起飞！",
-    "ARKNIGHTS_MAP_RELIC_HAYSTACK.title": "干草跺",
+    "ARKNIGHTS_MAP_RELIC_HAYSTACK.title": "干草垛",
     "ARKNIGHTS_MAP_RELIC_HAYSTACK.description": "在你的回合结束时，如果你还有多余的[gold]能量[/gold]，翻倍你的[gold]格挡[/gold]。",
     "ARKNIGHTS_MAP_RELIC_HAYSTACK.flavor": "我发现，躺在上面闭上眼睛会很舒服。",
     "ARKNIGHTS_MAP_RELIC_WHEAT_EAR.title": "麦穗",
