@@ -33,7 +33,7 @@ public class ScorchingLightPower : ModPowerTemplate
 
     public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (dealer == Owner && ReedBed.Burning)
+        if (dealer == Owner) // && ReedBed.Burning)
         {
             Flash();
             await PowerCmd.Apply<FlamingDamagePower>(choiceContext, target, Amount, dealer, null);

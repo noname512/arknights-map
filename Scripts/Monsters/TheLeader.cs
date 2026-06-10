@@ -45,7 +45,7 @@ public class TheLeader : AbstractWildsMonster
         }
     }
 
-    public async Task Stage1Move()
+    public async Task Stage1Move(int mul = 1)
     {
         if (_isstage2)
         {
@@ -54,7 +54,7 @@ public class TheLeader : AbstractWildsMonster
         }
         else
         {
-            await PowerCmd.Apply<ScorchingLightPower>(new ThrowingPlayerChoiceContext(), Creature, ScorchingLightNum, Creature, null);
+            await PowerCmd.Apply<ScorchingLightPower>(new ThrowingPlayerChoiceContext(), Creature, ScorchingLightNum * mul, Creature, null);
         }
     }
     public int GTAmt
@@ -98,7 +98,7 @@ public class TheLeader : AbstractWildsMonster
                     .WithAttackerAnim("Attack1", 0.5f)
                     .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
                     .Execute(null);
-                await Stage1Move();
+                await Stage1Move(2);
             },
             new SingleAttackIntent(Damage1_1),
             new BuffIntent()
