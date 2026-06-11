@@ -31,7 +31,7 @@ public class SeedOfHope : ModCardTemplate
     // BannerTexturePath: "" // 横幅（不同类型）
     );
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new HealVar(15)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new HealVar(25)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Unplayable];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
 
