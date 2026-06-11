@@ -58,7 +58,7 @@ public class Nest : AbstractWildsMonster
                                 MultiplayerScalingModel.GetMultiplayerScaling(CombatState.Encounter,
                                     CombatState.RunState.CurrentActIndex);
                 }
-                await CreatureCmd.GainMaxHp(Creature, totalAdd);
+                if (Creature.IsAlive) await CreatureCmd.GainMaxHp(Creature, totalAdd);
                 growthTimes++;
                 if (growthTimes == FirstGrow)
                 {

@@ -3,7 +3,9 @@ using ArknightsMap.Scripts.Relics;
 using Godot;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Extensions;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using STS2RitsuLib;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -16,6 +18,9 @@ public class Bagpipe : ModAncientEventTemplate
     public override Color ButtonColor => new(0.12f, 0.2f, 0.8f, 0.5f);
     // 对话框颜色
     public override Color DialogueColor => new(0.12f, 0.2f, 0.8f);
+
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("Beer", 0)];
+
     // 自定义场景的路径
     public override EventAssetProfile AssetProfile => new(
         BackgroundScenePath: "res://ArknightsMap/scenes/ancients/Bagpipe.tscn"
@@ -28,6 +33,12 @@ public class Bagpipe : ModAncientEventTemplate
         RunHistoryIconPath: "res://ArknightsMap/images/ancients/Bagpipe/avatar.png",
         RunHistoryIconOutlinePath: "res://ArknightsMap/images/ancients/Bagpipe/avatar.png"
     );
+    
+    public override void CalculateVars()
+    {
+        var store = RitsuLibFramework.GetDataStore(Entry.ModId);
+        DynamicVars["Beer"].BaseValue = store.Get<WheatBeerCounter>("wheatbeercounter").Value;
+    }
 
     // 所有可能的选项
     public override IEnumerable<EventOption> AllPossibleOptions => [
