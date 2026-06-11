@@ -63,10 +63,14 @@ public class StarrySkyPhoto : ModRelicTemplate
 					foreach (var type in new[] { CardType.Attack, CardType.Skill, CardType.Power })
 					{
 						List<CardModel> upgradableCards = PileType.Deck.GetPile(Owner).Cards.Where(c => c is { IsUpgradable: true } && c.Type == type).ToList();
-						if (upgradableCards.Count > 0)
+						if (upgradableCards.Count > 1)
 						{
 							int index = Owner.RunState.Rng.Niche.NextInt(0, upgradableCards.Count - 1);
 							CardCmd.Upgrade(upgradableCards[index], CardPreviewStyle.MessyLayout);
+						}
+						else if (upgradableCards.Count == 1)
+						{
+							CardCmd.Upgrade(upgradableCards[0], CardPreviewStyle.MessyLayout);
 						}
 					}
 				}
