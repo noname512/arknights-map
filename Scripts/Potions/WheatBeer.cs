@@ -32,7 +32,7 @@ public class WheatBeer : ModPotionTemplate
     );
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {
-        await PowerCmd.Apply<WheatBeerPower>(choiceContext, Owner.Creature, DynamicVars.Heal.IntValue, Owner.Creature, null);
+        await PowerCmd.Apply<WheatBeerPower>(choiceContext, target, DynamicVars.Heal.IntValue, Owner.Creature, null);
     }
 
 

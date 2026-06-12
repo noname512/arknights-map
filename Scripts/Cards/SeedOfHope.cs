@@ -47,7 +47,7 @@ public class SeedOfHope : ModCardTemplate
         }
 
         int HpLose = Owner.Creature.MaxHp - Owner.Creature.CurrentHp;
-        int HealAmount = (int)(0.15F * HpLose);
+        int HealAmount = (int)(0.01F * DynamicVars.Heal.IntValue * HpLose);
         await CreatureCmd.Heal(Owner.Creature, HealAmount);
     }
     // 升级后的效果逻辑
