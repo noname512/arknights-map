@@ -31,7 +31,7 @@
     "ARKNIGHTS_MAP_RELIC_MARK_OF_WITHER.description": "所有敌人前两个[gold]攻击意图[/gold]的回合中，失去[blue]{StrengthPower}[/blue]点[gold]力量[/gold]。",
     "ARKNIGHTS_MAP_RELIC_MARK_OF_WITHER.flavor": "停下。",
     "ARKNIGHTS_MAP_RELIC_WILDFIRE_SPREAD.title": "燎原",
-    "ARKNIGHTS_MAP_RELIC_WILDFIRE_SPREAD.description": "每场战斗中你第一次消耗攻击牌或技能牌时，将那张牌的[blue]{Cards}[/blue]张复制品加入你的手牌。",
+    "ARKNIGHTS_MAP_RELIC_WILDFIRE_SPREAD.description": "每场战斗中你第一次[gold]消耗[/gold]攻击牌或技能牌时，将那张牌的[blue]{Cards}[/blue]张复制品加入你的手牌。",
     "ARKNIGHTS_MAP_RELIC_WILDFIRE_SPREAD.flavor": "一个倒下去，两个站起来。",
     "以下是风笛遗物": "拿来当分隔符用的，好像不能空行来着。",
     "ARKNIGHTS_MAP_RELIC_HIGH_IMPACT_ASSAULT.title": "高效冲击",
