@@ -6,7 +6,7 @@
     "ARKNIGHTS_MAP_RELIC_BURN_SCAR.description": "拾起时，为你的[gold]牌组[/gold]中的所有“[gold]打击[/gold]”[gold]附魔[/gold]：[purple]灼燃[/purple]。",
     "ARKNIGHTS_MAP_RELIC_BURN_SCAR.flavor": "警告：对无实体角色效果不好。",
     "ARKNIGHTS_MAP_RELIC_AID_OF_LEADER.title": "“领袖”的援助",
-    "ARKNIGHTS_MAP_RELIC_AID_OF_LEADER.description": "在你的第二回合开始时，额外获得{Energy:energyIncons()}抽[blue]{Cards}[/blue]张牌。",
+    "ARKNIGHTS_MAP_RELIC_AID_OF_LEADER.description": "在你的第二回合开始时，额外获得{Energy:energyIcons()}抽[blue]{Cards}[/blue]张牌。",
     "ARKNIGHTS_MAP_RELIC_AID_OF_LEADER.flavor": "她说，希望一定能战胜绝望。",
     "ARKNIGHTS_MAP_RELIC_LIVE_FLAME.title": "活化火苗",
     "ARKNIGHTS_MAP_RELIC_LIVE_FLAME.description": "在每回合开始时获得{Energy:energyIcons()}。在战斗开始时，将[blue]{Cards}[/blue]张[gold]灼伤[/gold]放入你的手牌。",
