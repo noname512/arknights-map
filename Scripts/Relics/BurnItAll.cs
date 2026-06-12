@@ -63,11 +63,12 @@ public class BurnItAll : ModRelicTemplate
             cards.AddRange(CardFactory.CreateForReward(player, 1, options));
         }
 
-        // cards.Sort((a,b) => a.Card.Rarity < b.Card.Rarity ? 1 : -1);
+        cards.Sort((a, b) => a.Card.Rarity - b.Card.Rarity);
 
-        foreach (CardModel item in await CardSelectCmd.FromSimpleGridForRewards(prefs: new CardSelectorPrefs(L10NLookup("ARKNIGHTS_MAP_RELIC_BURN_IT_ALL.choose"), DynamicVars["CardsPick"].IntValue), context: new BlockingPlayerChoiceContext(), cards: cards, player: Owner))
+        foreach (CardModel item in await CardSelectCmd.FromSimpleGridForRewards(prefs: new CardSelectorPrefs(L10NLookup("ARKNIGHTS_MAP_RELIC_HER_ALLOWANCE.choose"), DynamicVars["CardsPick"].IntValue), context: new BlockingPlayerChoiceContext(), cards: cards, player: Owner))
         {
-            CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(item, PileType.Deck));
+            CardModel newCard = Owner.RunState.CreateCard(item, Owner);
+            CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(newCard, PileType.Deck));
         }
     }
 }

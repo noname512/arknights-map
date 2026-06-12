@@ -97,7 +97,7 @@ public sealed class TheLeaderOfDublinn : ModEventTemplate
     private async Task SelectCardAndAdd(Func<CardModel, bool> filter)
     {
         CardCreationOptions options = CardCreationOptions.ForNonCombatWithDefaultOdds(ModelDb.AllCharacterCardPools, filter);
-        List<CardCreationResult> cards = CardFactory.CreateForReward(Owner!, DynamicVars.Cards.IntValue, options).ToList();
+        List<CardCreationResult> cards = CardFactory.CreateForReward(Owner!, Math.Min(DynamicVars.Cards.IntValue, options.GetPossibleCards(Owner!).Count()), options).ToList();
         foreach (var item in await CardSelectCmd.FromSimpleGridForRewards(new BlockingPlayerChoiceContext(), cards, Owner!, new CardSelectorPrefs(L10NLookup($"{Id.Entry}.pages.INITIAL.selectionScreenPrompt"), 1)))
         {
             CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(item, PileType.Deck));

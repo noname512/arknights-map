@@ -1,9 +1,9 @@
-using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -11,11 +11,11 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
-public class AidOfLeader : ModRelicTemplate
+public class EreSnowBellsChime : ModRelicTemplate
 {
 	public override RelicRarity Rarity => RelicRarity.Ancient;
 
-	protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(5), new EnergyVar(2)];
+	protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(3)];
 
 	public override RelicAssetProfile AssetProfile => new(
 		// 小图标（原版85x85）
@@ -26,16 +26,14 @@ public class AidOfLeader : ModRelicTemplate
 		BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
 	);
 
-	public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+	public override async Task AfterObtained()
 	{
-		if (player == Owner)
+		foreach (CardModel item in await CardSelectCmd.FromDeckGeneric(Owner, new CardSelectorPrefs(L10NLookup("ARKNIGHTS_MAP_RELIC_ERE_SNOW_BELLS_CHIME.choose"), 1)))
 		{
-			ICombatState combatState = player.Creature.CombatState!;
-			if (combatState.RoundNumber == 2)
+			for (int i = 0; i < DynamicVars.Cards.BaseValue; i++)
 			{
-				Flash();
-				await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
-				await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner, true);
+				CardModel copy = Owner.RunState.CloneCard(item);
+				CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(copy, PileType.Deck));
 			}
 		}
 	}

@@ -34,6 +34,10 @@ public class Entry
             .ActEnterWeightedPool(1)
             .ActEnterWeightedPoolCandidate<Wilds>(1, ctx => true, weight => 99999)
             .Apply();
+        RitsuLibFramework.CreateContentPack(ModId)
+            .ActEnterWeightedPool(2)
+            .ActEnterWeightedPoolCandidate<SnowyMountain>(2, ctx => true, weight => 99999)
+            .Apply();
 
         using (RitsuLibFramework.BeginModDataRegistration(ModId))
         {

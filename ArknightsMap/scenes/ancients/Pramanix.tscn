@@ -1,8 +1,8 @@
 [gd_scene load_steps=3 format=3]
 
-[ext_resource type="Texture2D" uid="uid://cxl0yqxr33nw6" path="res://ArknightsMap/images/ancients/Bagpipe/background.png" id="1_giscl"]
+[ext_resource type="Texture2D" uid="uid://cxl0yqxr33nw6" path="res://ArknightsMap/images/ancients/Pramanix/background.png" id="1_giscl"]
 
-[node name="Reed" type="Control"]
+[node name="Pramanix" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
