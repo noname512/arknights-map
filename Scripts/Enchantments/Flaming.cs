@@ -36,7 +36,7 @@ public class Flaming : ModEnchantmentTemplate
 
     public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (cardSource == Card)
+        if ((cardSource == Card) && (amount > 0))
         {
             await PowerCmd.Apply<FlamingDamagePower>(choiceContext, target, amount, dealer, Card);
         }
