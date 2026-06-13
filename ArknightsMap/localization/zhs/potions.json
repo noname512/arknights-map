@@ -1,4 +1,6 @@
 {
   "ARKNIGHTS_MAP_POTION_WHEAT_BEER.title": "小麦酒",
-  "ARKNIGHTS_MAP_POTION_WHEAT_BEER.description": "获得[green]{Heal}[/green]层[gold]小麦酒[/gold]。"
+  "ARKNIGHTS_MAP_POTION_WHEAT_BEER.description": "获得[green]{Heal}[/green]层[gold]小麦酒[/gold]。",
+  "ARKNIGHTS_MAP_POTION_FIRE_BOMB.title": "燃烧瓶",
+  "ARKNIGHTS_MAP_POTION_FIRE_BOMB.description": "对所有角色造成相当于当前生命值[blue]90%[/blue]的伤害。"
 }
