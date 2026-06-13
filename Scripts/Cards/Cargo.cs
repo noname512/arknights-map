@@ -1,5 +1,6 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Rooms;
@@ -25,7 +26,7 @@ public class Cargo : ModCardTemplate
     // BannerTexturePath: "" // 横幅（不同类型）
     );
 
-    public static bool RemovedInCurRoom = false;
+    public static HashSet<Player> RemovedInCurRoom = new HashSet<Player>();
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new MaxHpVar(30)];
 
@@ -35,25 +36,21 @@ public class Cargo : ModCardTemplate
 
     public override Task BeforeRoomEntered(AbstractRoom room)
     {
-        RemovedInCurRoom = false;
+        RemovedInCurRoom.Clear();
         return Task.CompletedTask;
     }
 
     public override async Task AfterRoomEntered(AbstractRoom room)
     {
-        if (!(room is MerchantRoom merchantRoom))
+        if (!(room is MerchantRoom))
         {
             return;
         }
-        if (merchantRoom.GetLocalInventory().Player != Owner)
+        if (RemovedInCurRoom.Contains(Owner))
         {
             return;
         }
-        if (RemovedInCurRoom)
-        {
-            return;
-        }
-        RemovedInCurRoom = true;
+        RemovedInCurRoom.Add(Owner);
         PlayerCmd.CompleteQuest(this);
         await CardPileCmd.RemoveFromDeck(this, true);
         await CreatureCmd.GainMaxHp(Owner.Creature, DynamicVars.MaxHp.BaseValue);

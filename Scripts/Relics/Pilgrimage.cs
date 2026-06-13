@@ -1,4 +1,5 @@
 using HarmonyLib;
+using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -40,7 +41,7 @@ public class Faith : ModRelicTemplate
 	{
 		public static bool Prefix(IRunState runState, MapPoint currentPoint, ref IEnumerable<MapPoint> __result)
 		{
-			if (runState.Players.First().Relics.Any(relic => relic is Pilgrimage))
+			if (LocalContext.GetMe(runState.Players)!.Relics.Any(relic => relic is Pilgrimage))
 			{
 				if (currentPoint.Children.Count() == 0) return true;
 				List<MapPoint> list = [currentPoint.Children.MinBy(point => point.coord.col)!];
