@@ -89,5 +89,15 @@
     "-----Ratatos-----": "菈塔托丝遗物",
     "ARKNIGHTS_MAP_RELIC_BURNING_HOUSE.description": "拾起时，将一瓶[gold]燃烧瓶[/gold]加入你的药水栏。",
     "ARKNIGHTS_MAP_RELIC_BURNING_HOUSE.title": "燃烧屋",
-    "ARKNIGHTS_MAP_RELIC_BURNING_HOUSE.flavor": "烈火之中，两家领袖坦诚相见。"
+    "ARKNIGHTS_MAP_RELIC_BURNING_HOUSE.flavor": "烈火之中，两家领袖坦诚相见。",
+    "ARKNIGHTS_MAP_RELIC_COOPERATION_AGREEMENT.event_description": "拾起时，失去所有[gold]金币[/gold]。每失去[blue]{Gold}[/blue][gold]金币[/gold]，战斗开始时获得[blue]1[/blue]点[gold]力量[/gold]与[gold]敏捷[/gold]。",
+    "ARKNIGHTS_MAP_RELIC_COOPERATION_AGREEMENT.description": "拾起时，失去所有[gold]金币[/gold]。战斗开始时获得[blue]{Amount}[/blue]点[gold]力量[/gold]与[gold]敏捷[/gold]。",
+    "ARKNIGHTS_MAP_RELIC_COOPERATION_AGREEMENT.title": "合作协议",
+    "ARKNIGHTS_MAP_RELIC_COOPERATION_AGREEMENT.flavor": "",
+    "ARKNIGHTS_MAP_RELIC_TRADE_MEMBERSHIP_CARD.description": "所有商品的价格不超过[blue]{Gold}[/blue][gold]金币[/gold]！",
+    "ARKNIGHTS_MAP_RELIC_TRADE_MEMBERSHIP_CARD.title": "贸易会员卡",
+    "ARKNIGHTS_MAP_RELIC_TRADE_MEMBERSHIP_CARD.flavor": "",
+    "ARKNIGHTS_MAP_RELIC_TRADE_SHIPPING_ORDER.description": "拾起时，将[blue]{Cards}[/blue]张[gold]货物[/gold]加入你的[gold]牌组[/gold]。",
+    "ARKNIGHTS_MAP_RELIC_TRADE_SHIPPING_ORDER.title": "货运委托书",
+    "ARKNIGHTS_MAP_RELIC_TRADE_SHIPPING_ORDER.flavor": ""
 }
