@@ -3,7 +3,6 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace ArknightsMap.Scripts.Utils;
@@ -27,12 +26,12 @@ public class BlockHealDynamicVar : DynamicVar
     public override void UpdateCardPreview(CardModel card, CardPreviewMode previewMode, Creature? target, bool runGlobalHooks)
     {
         decimal num;
-        if (card.DynamicVars.TryGetValue("Damage", out DynamicVar damage))
+        if (card.DynamicVars.TryGetValue("Damage", out DynamicVar? damage))
         {
             damage.UpdateCardPreview(card, previewMode, target, runGlobalHooks);
             num = damage.PreviewValue / 2;
         }
-        else if (card.DynamicVars.TryGetValue("CalculatedDamage", out DynamicVar calcDamage))
+        else if (card.DynamicVars.TryGetValue("CalculatedDamage", out DynamicVar? calcDamage))
         {
             calcDamage.UpdateCardPreview(card, previewMode, target, runGlobalHooks);
             num = calcDamage.PreviewValue / 2;
