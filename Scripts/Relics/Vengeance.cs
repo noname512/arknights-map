@@ -9,7 +9,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Relics;
 
-[RegisterRelic(typeof(SharedRelicPool))]
+[RegisterRelic(typeof(EventRelicPool))]
 public class Vengeance : ModRelicTemplate
 {
 	public override RelicRarity Rarity => RelicRarity.Event;
@@ -25,7 +25,8 @@ public class Vengeance : ModRelicTemplate
 		BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
 	);
 
-	public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+	public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer,
+		CardModel? cardSource)
 	{
 		if (dealer != Owner.Creature)
 		{
@@ -35,6 +36,6 @@ public class Vengeance : ModRelicTemplate
 		{
 			return 0m;
 		}
-		return amount * DynamicVars["DamageIncrease"].IntValue / 100;
+		return 1 + DynamicVars["DamageIncrease"].IntValue * 0.01m;
 	}
 }

@@ -3,7 +3,7 @@
     "ARKNIGHTS_MAP_RELIC_ESSENCE_INSIGHT.description": "在第二层[gold]Boss[/gold]战中，每回合开始时获得{Energy:energyIcons()}。",
     "ARKNIGHTS_MAP_RELIC_ESSENCE_INSIGHT.title": "洞见本源",
     "ARKNIGHTS_MAP_RELIC_ESSENCE_INSIGHT.flavor": "",
-    "ARKNIGHTS_MAP_RELIC_VENGEANCE.description": "你对意图是攻击的敌人造成的伤害提高[blue]{DamageIncrease}%[/blue]。",
+    "ARKNIGHTS_MAP_RELIC_VENGEANCE.description": "你对[gold]意图[/gold]是攻击的敌人造成的伤害提高[blue]{DamageIncrease}%[/blue]。",
     "ARKNIGHTS_MAP_RELIC_VENGEANCE.title": "复仇？",
     "ARKNIGHTS_MAP_RELIC_VENGEANCE.flavor": "",
     "ARKNIGHTS_MAP_RELIC_REBIRTH.description": "战斗开始时，获得[blue]{IntangibleAmount}[/blue]层[gold]无实体[/gold]。",
