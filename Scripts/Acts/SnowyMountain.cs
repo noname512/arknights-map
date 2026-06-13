@@ -55,6 +55,7 @@ public sealed class SnowyMountain : ModActTemplate
     public override IEnumerable<EncounterModel> GenerateAllEncounters() => new EncounterModel[]
     {
         ModelDb.Encounter<BurnTheHaystacks>(),
+        ModelDb.Encounter<MandragoraBoss>(),
     };
 
     protected override void ApplyActDiscoveryOrderModifications(UnlockState unlockState) { }
