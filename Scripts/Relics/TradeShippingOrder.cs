@@ -2,6 +2,7 @@ using ArknightsMap.Scripts.Cards;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
@@ -16,6 +17,7 @@ public class TradeShippingOrder : ModRelicTemplate
 	public override RelicRarity Rarity => RelicRarity.Ancient;
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(3)];
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromCardWithCardHoverTips<Cargo>();
 
 	public override RelicAssetProfile AssetProfile => new(
 		// 小图标（原版85x85）

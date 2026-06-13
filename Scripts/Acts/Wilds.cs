@@ -6,6 +6,7 @@ using ArknightsMap.Scripts.Events;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Unlocks;
 using MegaCrit.Sts2.Core.Map;
+using MegaCrit.Sts2.Core.Models.Events;
 using MegaCrit.Sts2.Core.Random;
 using STS2RitsuLib.Scaffolding.Content;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -49,6 +50,7 @@ public sealed class Wilds : ModActTemplate
     {
         ModelDb.AncientEvent<Reed>(),
         ModelDb.AncientEvent<Bagpipe>(),
+        ModelDb.AncientEvent<Tezcatara>()
     };
 
     public override IEnumerable<EncounterModel> BossDiscoveryOrder => new EncounterModel[]

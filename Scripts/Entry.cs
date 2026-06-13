@@ -36,7 +36,7 @@ public class Entry
             .Apply();
         RitsuLibFramework.CreateContentPack(ModId)
             .ActEnterWeightedPool(2)
-            .ActEnterWeightedPoolCandidate<SnowyMountain>(2, ctx => true, weight => 99999)
+            .ActEnterWeightedPoolCandidate<SnowyMountain>(2, ctx => true, weight => 0)
             .Apply();
 
         using (RitsuLibFramework.BeginModDataRegistration(ModId))
