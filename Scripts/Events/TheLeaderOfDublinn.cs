@@ -11,9 +11,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rewards;
-using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Runs;
-using MegaCrit.Sts2.Core.Runs.History;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -48,24 +46,20 @@ public sealed class TheLeaderOfDublinn : ModEventTemplate
 
     protected override Task BeforeEventStarted(bool isPreFinished)
     {
-        foreach (var item in Owner!.RunState.MapPointHistory)
-            foreach (var item2 in item)
-                foreach (MapPointRoomHistoryEntry room in item2.Rooms)
-                    if (room.RoomType == RoomType.Event)
-                    {
-                        if (room.ModelId == ModelDb.AncientEvent<Bagpipe>().Id)
-                        {
-                            StringVar stringVar = (StringVar)DynamicVars["VouivreName"];
-                            stringVar.StringValue = L10NLookup($"{Id.Entry}.pages.INITIAL.knownVouivre").GetRawText();
-                            isBagpipe = true;
-                        }
-                        else if (room.ModelId == ModelDb.AncientEvent<Reed>().Id)
-                        {
-                            StringVar stringVar = (StringVar)DynamicVars["DracoName"];
-                            stringVar.StringValue = L10NLookup($"{Id.Entry}.pages.INITIAL.knownDraco").GetRawText();
-                            isReed = true;
-                        }
-                    }
+        switch (Owner!.RunState.Act.Ancient)
+        {
+            case Bagpipe:
+
+                StringVar vouivre = (StringVar)DynamicVars["VouivreName"];
+                vouivre.StringValue = L10NLookup($"{Id.Entry}.pages.INITIAL.knownVouivre").GetRawText();
+                isBagpipe = true;
+                break;
+            case Reed:
+                StringVar draco = (StringVar)DynamicVars["DracoName"];
+                draco.StringValue = L10NLookup($"{Id.Entry}.pages.INITIAL.knownDraco").GetRawText();
+                isReed = true;
+                break;
+        }
         return Task.CompletedTask;
     }
 
