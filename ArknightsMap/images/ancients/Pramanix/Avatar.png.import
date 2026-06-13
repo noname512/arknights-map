@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cer0ib8lif7du"
-path="res://.godot/imported/Avatar.png-a4ce697f9557c98d62968b6be46ed35a.ctex"
+uid="uid://c6flm7ah5b80u"
+path="res://.godot/imported/avatar.png-2a3b60da6a09736f944cf1ea281722b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/ancients/Pramanix/Avatar.png"
-dest_files=["res://.godot/imported/Avatar.png-a4ce697f9557c98d62968b6be46ed35a.ctex"]
+source_file="res://ArknightsMap/images/ancients/Pramanix/avatar.png"
+dest_files=["res://.godot/imported/avatar.png-2a3b60da6a09736f944cf1ea281722b5.ctex"]
 
 [params]
 

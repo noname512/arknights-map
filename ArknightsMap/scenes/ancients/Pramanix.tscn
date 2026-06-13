@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3]
 
-[ext_resource type="Texture2D" uid="uid://cxl0yqxr33nw6" path="res://ArknightsMap/images/ancients/Pramanix/background.png" id="1_giscl"]
+[ext_resource type="Texture2D" uid="uid://dj2aiohmt2ufg" path="res://ArknightsMap/images/ancients/Pramanix/background.png" id="1_giscl"]
 
 [node name="Pramanix" type="Control"]
 layout_mode = 3
@@ -14,8 +14,8 @@ metadata/_edit_lock_ = true
 
 [node name="background" type="TextureRect" parent="."]
 layout_mode = 1
-offset_left = -202.0
-offset_top = -619.0
-offset_right = 2261.934
-offset_bottom = 1844.0
+offset_left = -189.0
+offset_top = -163.0
+offset_right = 2155.889
+offset_bottom = 1156.0
 texture = ExtResource("1_giscl")
