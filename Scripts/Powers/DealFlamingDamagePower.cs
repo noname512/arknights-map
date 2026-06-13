@@ -32,7 +32,7 @@ public class DealFlamingDamagePower : ModPowerTemplate
 
     public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if ((dealer == Owner) && (props == ValueProp.Move))
+        if ((dealer == Owner) && (props == ValueProp.Move) && (amount > 0))
         {
             Flash();
             decimal dmg = amount;
