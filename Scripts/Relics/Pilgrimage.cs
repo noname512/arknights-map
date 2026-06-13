@@ -2,6 +2,7 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Map;
 using MegaCrit.Sts2.Core.Models.RelicPools;
@@ -12,11 +13,12 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
-public class Faith : ModRelicTemplate
+public class Pilgrimage : ModRelicTemplate
 {
 	public override RelicRarity Rarity => RelicRarity.Ancient;
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1)];
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.Static(StaticHoverTip.Energy)];
 
 	public override RelicAssetProfile AssetProfile => new(
 		// 小图标（原版85x85）

@@ -19,7 +19,7 @@ public class DublinnFlamechaserSoldier : AbstractWildsMonster
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 35, 30);
     private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 9, 8);
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 8, 7);
-    public override bool ShouldDisappearFromDoom => !Creature.HasPower<ChaseFlamePower>() || Creature.GetPower<ChaseFlamePower>()?.CurState == 1;
+    public override bool ShouldDisappearFromDoom => false;
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(
         VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"

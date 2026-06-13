@@ -24,7 +24,7 @@ public class DublinnFlamechaserGuard : AbstractWildsMonster
     );
     private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 14, 12);
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 18, 16);
-    public override bool ShouldDisappearFromDoom => !Creature.HasPower<ChaseFlamePower>() || Creature.GetPower<ChaseFlamePower>()?.CurState == 1;
+    public override bool ShouldDisappearFromDoom => false;
 
     private MoveState? buff_burning;
     private MoveState? buff_not_burning;

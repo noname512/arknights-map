@@ -11,7 +11,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
-public class Pilgrimage : ModRelicTemplate
+public class Faith : ModRelicTemplate
 {
 	public override RelicRarity Rarity => RelicRarity.Ancient;
 
