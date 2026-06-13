@@ -125,7 +125,7 @@ public class AllFlamesReturned : AbstractWildsMonster
     private async Task RespawnMove(IReadOnlyList<Creature> targets)
     {
         Creature.GetPower<RebornPower>()?.DoRevive();
-        await CreatureCmd.Heal(Creature, Creature.MaxHp - Creature.MaxHp / 3 * 2);
+        await CreatureCmd.Heal(Creature, Creature.MaxHp - Creature.CurrentHp);
         bool hasPurpleFlameRemain = false;
         List<CardModel> purpleFlames = new List<CardModel>();
         SfxCmd.StopLoop("event:/ArknightsMap/sfx/AllFlamesReturned/reborn");

@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -66,6 +67,29 @@ public class RebornPower : ModPowerTemplate
             return true;
         }
         return !IsReviving;
+    }
+
+    public override bool ShouldAllowTargeting(Creature target)
+    {
+        if (target != Owner)
+        {
+            return true;
+        }
+        return !IsReviving;
+    }
+
+    public override decimal ModifyHpLostAfterOstyLate(Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    {
+        if (target != Owner)
+        {
+            return amount;
+        }
+        if (!IsReviving) 
+        {
+            return amount;
+        }
+
+        return 0;
     }
 
     public override bool ShouldStopCombatFromEnding()
