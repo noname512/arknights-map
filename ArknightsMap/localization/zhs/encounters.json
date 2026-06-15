@@ -29,16 +29,16 @@
     "ARKNIGHTS_MAP_ENCOUNTER_LAMP_BURNER.loss": "{character}被灼藤烧死了",
     "ARKNIGHTS_MAP_ENCOUNTER_MARCH_OF_THE_DEAD.title": "亡者行军",
     "ARKNIGHTS_MAP_ENCOUNTER_MARCH_OF_THE_DEAD.loss": "{character}沉入其中，和过往的时间一同被影子覆盖。",
-    "ARKNIGHTS_MAP_ENCOUNTER_HER_FLAME.title": "她的火焰",
+    "ARKNIGHTS_MAP_ENCOUNTER_HER_FLAME.title": "“领袖”",
     "ARKNIGHTS_MAP_ENCOUNTER_HER_FLAME.loss": "{character}与“领袖”跳了一支舞",
     "ARKNIGHTS_MAP_ENCOUNTER_BURNING_WEEDS.title": "荒草焚荡",
     "ARKNIGHTS_MAP_ENCOUNTER_BURNING_WEEDS.loss": "{character}死于燃烧的枯草丛。",
     "ARKNIGHTS_MAP_ENCOUNTER_DUBLINN_FLAMERAZER_NORMAL.title": "深池焚毁者",
     "ARKNIGHTS_MAP_ENCOUNTER_DUBLINN_FLAMERAZER_NORMAL.loss": "{character}被深池焚毁者烤熟了",
     "ARKNIGHTS_MAP_ENCOUNTER_ASHY_MARSH.title": "灰暗泥沼",
-    "ARKNIGHTS_MAP_ENCOUNTER_ASHY_MARSH.loss": "{character}",
+    "ARKNIGHTS_MAP_ENCOUNTER_ASHY_MARSH.loss": "{character}被深池焚毁者烤熟了。",
     "ARKNIGHTS_MAP_ENCOUNTER_BREAKOUT.title": "突围",
     "ARKNIGHTS_MAP_ENCOUNTER_BREAKOUT.loss": "{character}没能突破深池重甲卫士的重围",
     "ARKNIGHTS_MAP_ENCOUNTER_THE_REDSTEEL_GUARD.title": "赤铁近卫队",
-    "ARKNIGHTS_MAP_ENCOUNTER_THE_REDSTEEL_GUARD.loss": "{character}"
+    "ARKNIGHTS_MAP_ENCOUNTER_THE_REDSTEEL_GUARD.loss": "{character}不敌校官的五连击。"
 }

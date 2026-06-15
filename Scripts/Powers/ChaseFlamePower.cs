@@ -92,6 +92,10 @@ public class ChaseFlamePower : ModPowerTemplate
             CurState = 1;
             await CreatureCmd.SetMaxAndCurrentHp(Owner, InitialHp);
             NextMove = Owner.Monster!.NextMove;
+            if (!(Owner.Monster.MoveStateMachine.States.ContainsKey(NextMove.StateId)))
+            {
+                NextMove = (MoveState)Owner.Monster.MoveStateMachine!.States["ATTACK1"];
+            }
             MoveState stun = (MoveState)Owner.Monster.MoveStateMachine!.States["STUN1"];
             Owner.Monster.SetMoveImmediate(stun, true);
             ((MoveState)Owner.Monster.MoveStateMachine.States["STUN3"]).FollowUpState = NextMove;
