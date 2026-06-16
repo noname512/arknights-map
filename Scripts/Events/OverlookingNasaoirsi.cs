@@ -29,7 +29,7 @@ public sealed class OverlookingNasaoirsi : ModEventTemplate
         new IntVar("MaxHp2", 30),
         new IntVar("MaxHp3", 30),
         new IntVar("DamageIncrease", 40),
-        new IntVar("IntangibleAmount", 1),
+        new IntVar("IntangibleAmount", 2),
         new StringVar("CardType"),
         new StringVar("ExtraDescription")
     ];

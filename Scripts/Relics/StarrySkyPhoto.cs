@@ -23,7 +23,7 @@ public class StarrySkyPhoto : ModRelicTemplate
 	private int _roomsEntered;
 
 	[SavedProperty]
-	private int RoomsEntered
+	public int RoomsEntered
 	{
 		get
 		{

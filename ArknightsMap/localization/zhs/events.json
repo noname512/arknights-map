@@ -31,10 +31,10 @@
     "ARKNIGHTS_MAP_EVENT_THE_LEADER_OF_DUBLINN.pages.INITIAL.unknownDraco": "一个德拉克",
     "ARKNIGHTS_MAP_EVENT_THE_LEADER_OF_DUBLINN.pages.INITIAL.unknownDraco2": "那个德拉克",
     "ARKNIGHTS_MAP_EVENT_THE_LEADER_OF_DUBLINN.pages.INITIAL.options.EXTRACT_THE_TRUTH.title": "追问到底",
-    "ARKNIGHTS_MAP_EVENT_THE_LEADER_OF_DUBLINN.pages.INITIAL.options.EXTRACT_THE_TRUTH.description": "从[blue]{Cards}[/blue]张任意职业的攻击大于[blue]{Damage}[/blue]的卡牌中选择一张加入到你的[gold]牌组[/gold]。",
+    "ARKNIGHTS_MAP_EVENT_THE_LEADER_OF_DUBLINN.pages.INITIAL.options.EXTRACT_THE_TRUTH.description": "从[blue]{Cards}[/blue]张任意职业的攻击至少[blue]{Damage}[/blue]的卡牌中选择一张加入到你的[gold]牌组[/gold]。",
     "ARKNIGHTS_MAP_EVENT_THE_LEADER_OF_DUBLINN.pages.INITIAL.options.FACE_THE_ANGER.title": "直面愤怒",
-    "ARKNIGHTS_MAP_EVENT_THE_LEADER_OF_DUBLINN.pages.INITIAL.options.FACE_THE_ANGER.description": "从[blue]{Cards}[/blue]张任意职业的防御大于[blue]{Block}[/blue]的卡牌中选择一张加入到你的[gold]牌组[/gold]。",
-    "ARKNIGHTS_MAP_EVENT_THE_LEADER_OF_DUBLINN.pages.INITIAL.options.LACK_OF_ABILITY.title": "追问到底",
+    "ARKNIGHTS_MAP_EVENT_THE_LEADER_OF_DUBLINN.pages.INITIAL.options.FACE_THE_ANGER.description": "从[blue]{Cards}[/blue]张任意职业的防御至少[blue]{Block}[/blue]的卡牌中选择一张加入到你的[gold]牌组[/gold]。",
+    "ARKNIGHTS_MAP_EVENT_THE_LEADER_OF_DUBLINN.pages.INITIAL.options.LACK_OF_ABILITY.title": "观望学习",
     "ARKNIGHTS_MAP_EVENT_THE_LEADER_OF_DUBLINN.pages.INITIAL.options.LACK_OF_ABILITY.description": "从[blue]{Cards}[/blue]张任意职业的耗能为[blue]{Energy}[/blue]的能力牌中选择一张加入到你的[gold]牌组[/gold]。",
     "ARKNIGHTS_MAP_EVENT_THE_LEADER_OF_DUBLINN.pages.INITIAL.selectionScreenPrompt": "选择[blue]1[/blue]张加入到你的[gold]牌组[/gold]。",
     "ARKNIGHTS_MAP_EVENT_THE_LEADER_OF_DUBLINN.pages.END.description": "许久，你听到{DracoName}低声回答\n“我是。”\n“在小丘郡的时候，我想以死永远摆脱我的身份，所以源石炮弹落下时我没有躲开。罗德岛救起我之后，我试图为自己的命运扳回什么，所以我踏上这趟旅程，试图抚平一些深池的暴力留下的伤痕。”\n“但此刻，对于你的这个问题，我只会回答，我是。”",
@@ -54,8 +54,8 @@
     "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.INITIAL.options.SALVATION.title": "拯救？",
     "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.INITIAL.options.SALVATION.description": "从你的[gold]牌组[/gold]中选择一张[gold]{CardType}牌[/gold]移除。{ExtraDescription}",
     "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.INITIAL.options.SALVATION.extra_description": "获得[blue]{MaxHp4}[/blue]点最大生命值。",
-    "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.SALVATION.description": "",
+    "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.SALVATION.description": "也许，还有机会能拯救一切。但是，又要付出什么呢？",
     "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.INITIAL.options.PROLIFERATION.title": "扩散",
     "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.INITIAL.options.PROLIFERATION.description": "将这一份[purple]“赐福”[/purple]带到第三幕。",
-    "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.PROLIFERATION.description": ""
+    "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.PROLIFERATION.description": "你知道，你无法解决。你没有注意到，你的眼中也逐渐燃起紫火。"
 }

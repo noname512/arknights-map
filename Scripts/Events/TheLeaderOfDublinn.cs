@@ -75,7 +75,10 @@ public sealed class TheLeaderOfDublinn : ModEventTemplate
 
     private async Task ExtractTheTruth()
     {
-        await SelectCardAndAdd(c => c.Type == CardType.Attack && c.DynamicVars.ContainsKey("Damage") && c.DynamicVars.Damage.BaseValue >= DynamicVars.Damage.BaseValue);
+        await SelectCardAndAdd(c => c.Type == CardType.Attack && 
+                 ((c.DynamicVars.ContainsKey("Damage") && c.DynamicVars.Damage.BaseValue >= DynamicVars.Damage.BaseValue) 
+              || (c.DynamicVars.ContainsKey("CalculatedDamage") && c.DynamicVars.ContainsKey("CalculationBase") 
+              && c.DynamicVars.CalculationBase.BaseValue >= DynamicVars.Damage.BaseValue)));
     }
 
     private async Task FaceTheAnger()

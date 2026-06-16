@@ -28,7 +28,7 @@ public class CooperationAgreement : ModRelicTemplate
 	public override int DisplayAmount => _amount;
 
 	[SavedProperty]
-	private int Amount
+	public int Amount
 	{
 		get
 		{

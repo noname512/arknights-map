@@ -15,7 +15,7 @@ public class Rebirth : ModRelicTemplate
 {
 	public override RelicRarity Rarity => RelicRarity.Event;
 
-	protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("IntangibleAmount", 1)];
+	protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("IntangibleAmount", 2)];
 	protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromPowerWithPowerHoverTips<IntangiblePower>();
 
 	public override RelicAssetProfile AssetProfile => new(
