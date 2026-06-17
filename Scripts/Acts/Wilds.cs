@@ -44,6 +44,7 @@ public sealed class Wilds : ModActTemplate
         ModelDb.Event<TheWake>(),
         ModelDb.Event<Campfire>(),
         ModelDb.Event<TheLeaderOfDublinn>(),
+        ModelDb.Event<OverlookingNasaoirsi>(),
     };
 
     public override IEnumerable<AncientEventModel> AllAncients => new AncientEventModel[]

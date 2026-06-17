@@ -25,6 +25,7 @@ public class TombkeeperGrotesque : AbstractWildsMonster
     private int Status2 => 2;
     private int Damage3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 4, 3);
     private int HitCount3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 4, 4);
+    private int ReviveStrenth => 4;
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 105, 100);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 110, 105);
     public override bool ShouldDisappearFromDoom => _isStage2;
@@ -118,6 +119,7 @@ public class TombkeeperGrotesque : AbstractWildsMonster
         Creature.GetPower<RebornPower>()?.DoRevive();
         await CreatureCmd.Heal(Creature, Creature.MaxHp);
         await PowerCmd.Apply<DamageOutPower>(new ThrowingPlayerChoiceContext(), Creature, 10, Creature, null);
+        await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, ReviveStrenth, Creature, null);
         await PowerCmd.Remove<RebornPower>(Creature);
         Creature? m = CombatState.Enemies.FirstOrDefault(m => m?.Monster is TatteredPillar, null);
         if (m != null)

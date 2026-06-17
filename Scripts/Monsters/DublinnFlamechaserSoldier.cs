@@ -84,7 +84,7 @@ public class DublinnFlamechaserSoldier : AbstractWildsMonster
         {
             SfxCmd.Play($"event:/ArknightsMap/sfx/DublinnFlamechaserGuard/reborn");
             await (Creature.GetPower<ChaseFlamePower>()?.Revive() ?? Task.CompletedTask);
-        }, new HealIntent(), new BuffIntent());
+        }, new HealIntent());
 
         attack1.FollowUpState = attack2;
         attack2.FollowUpState = attack3;
