@@ -54,6 +54,7 @@ class MerchantEntanchmentPatch
         public static void Postfix(RunManager __instance, bool graceful)
         {
             __instance.GetEnchantSynchronizer().Dispose();
+            ModExtensions.RemoveEnchantSynchronizer(__instance);
         }
     }
 

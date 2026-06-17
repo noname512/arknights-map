@@ -67,4 +67,9 @@ public static class ModExtensions
     {
         EnchantmentDatas.Add(slot, data);
     }
+
+    public static void RemoveEnchantSynchronizer(RunManager runManager)
+    {
+        EnchantSynchronizers.Remove(runManager);
+    }
 }
