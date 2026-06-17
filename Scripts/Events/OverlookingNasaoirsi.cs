@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -27,7 +28,7 @@ public sealed class OverlookingNasaoirsi : ModEventTemplate
     [
         new IntVar("MaxHp1", 10),
         new IntVar("MaxHp2", 30),
-        new IntVar("MaxHp3", 30),
+        new DamageVar(30, ValueProp.Unpowered),
         new IntVar("DamageIncrease", 40),
         new IntVar("IntangibleAmount", 2),
         new StringVar("CardType"),
@@ -103,7 +104,7 @@ public sealed class OverlookingNasaoirsi : ModEventTemplate
 
     private async Task Incinerate()
     {
-        await CreatureCmd.LoseMaxHp(new BlockingPlayerChoiceContext(), Owner!.Creature, DynamicVars["MaxHp3"].IntValue, false);
+        await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), Owner!.Creature, DynamicVars.Damage, Owner.Creature);
         await RelicCmd.Obtain<Incinerate>(Owner);
         SetEventFinished(L10NLookup($"{Id.Entry}.pages.INCINERATE.description"));
     }

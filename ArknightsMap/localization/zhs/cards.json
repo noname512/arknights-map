@@ -8,7 +8,7 @@
   "ARKNIGHTS_MAP_CARD_PUT_OUT_FIRE.title": "灭火",
   "ARKNIGHTS_MAP_CARD_PUT_OUT_FIRE.description": "受到{PutOutDmg:diff()}点伤害与[gold]灼燃损伤[/gold]。 \n 将[gold]芦苇丛[/gold]变为[gold]未燃烧[/gold]状态。",
   "ARKNIGHTS_MAP_CARD_PROLIFERATION.title": "“赐福”",
-  "ARKNIGHTS_MAP_CARD_PROLIFERATION.description": "在第三幕中，会解锁额外的战斗事件。",
+  "ARKNIGHTS_MAP_CARD_PROLIFERATION.description": "在下一阶段，解锁一个特殊且[red]艰难[/red]的战斗事件。",
   "ARKNIGHTS_MAP_CARD_CARGO.title": "货物",
   "ARKNIGHTS_MAP_CARD_CARGO.description": "你每进入一个商店，将一张[gold]货物[/gold]变化为[blue]{MaxHp}[/blue]点最大生命值。"
 }

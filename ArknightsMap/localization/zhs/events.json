@@ -49,7 +49,7 @@
     "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.INITIAL.options.REBIRTH.description": "失去[blue]{MaxHp2}[/blue]点最大生命值。战斗开始时，获得[blue]{IntangibleAmount}[/blue]层[gold]无实体[/gold]。",
     "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.REBIRTH.description": "你知道，紫色的火焰意为重生。但是，这真的是祝福吗？还是诅咒呢？",
     "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.INITIAL.options.INCINERATE.title": "焚毁？",
-    "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.INITIAL.options.INCINERATE.description": "失去[blue]{MaxHp3}[/blue]点最大生命值。[gold]打击[/gold]和[gold]防御[/gold]获得[gold]消耗[/gold]。",
+    "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.INITIAL.options.INCINERATE.description": "失去[blue]{Damage}[/blue]点生命值。[gold]打击[/gold]和[gold]防御[/gold]获得[gold]消耗[/gold]。",
     "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.INCINERATE.description": "她想要焚毁这座城市，以阻止紫焰的蔓延。以这一城为代价，当然，也包括她自己。",
     "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.INITIAL.options.SALVATION.title": "拯救？",
     "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.INITIAL.options.SALVATION.description": "从你的[gold]牌组[/gold]中选择一张[gold]{CardType}牌[/gold]移除。{ExtraDescription}",
