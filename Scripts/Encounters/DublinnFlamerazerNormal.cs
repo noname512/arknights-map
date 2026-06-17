@@ -10,20 +10,15 @@ namespace ArknightsMap.Scripts.Encounters;
 [RegisterActEncounter(typeof(Wilds))]
 public class DublinnFlamerazerNormal : AbstractWildsEncounter
 {
-
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<DublinnFlamerazer>()];
 
     public override bool IsWeak => true;
 
-    public override EncounterAssetProfile AssetProfile => new(
-        EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
-    );
+    public override EncounterAssetProfile AssetProfile => new(EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn");
 
     public override string CustomBgm => "event:/ArknightsMap/music/fblw_bat";
 
-    public override IReadOnlyList<string> Slots => [
-        "first",
-    ];
+    public override IReadOnlyList<string> Slots => ["first"];
 
     public override RoomType RoomType => RoomType.Monster;
 
@@ -31,7 +26,5 @@ public class DublinnFlamerazerNormal : AbstractWildsEncounter
     // public override float GetCameraScaling() => 0.8f;
 
     // 生成怪物列表
-    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<DublinnFlamerazer>().ToMutable(), "first"),
-    ];
+    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [(ModelDb.Monster<DublinnFlamerazer>().ToMutable(), "first")];
 }

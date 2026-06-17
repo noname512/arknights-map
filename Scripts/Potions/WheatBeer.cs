@@ -26,14 +26,10 @@ public class WheatBeer : ModPotionTemplate
 
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromPowerWithPowerHoverTips<WheatBeerPower>();
 
-    public override PotionAssetProfile AssetProfile => new(
-        ImagePath: "res://icon.svg",
-        OutlinePath: "res://icon.svg"
-    );
+    public override PotionAssetProfile AssetProfile => new(ImagePath: "res://icon.svg", OutlinePath: "res://icon.svg");
+
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {
         await PowerCmd.Apply<WheatBeerPower>(choiceContext, target!, DynamicVars.Heal.IntValue, Owner.Creature, null);
     }
-
-
 }

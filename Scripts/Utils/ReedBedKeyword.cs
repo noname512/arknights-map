@@ -5,7 +5,6 @@ using STS2RitsuLib.Keywords;
 
 namespace ArknightsMap.Scripts.Utils;
 
-
 [RegisterOwnedCardKeyword(nameof(ReedBedKeyword))]
 public class ReedBedKeyword
 {

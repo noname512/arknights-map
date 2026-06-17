@@ -1,6 +1,7 @@
-using MegaCrit.Sts2.Core.Commands;
+using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
@@ -19,10 +20,9 @@ public class DublinnFlamerazer : AbstractWildsMonster
     private int Times1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 3, 2);
     private int Times2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 5);
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 8);
+
     // 怪物场景
-    public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
-    );
+    public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
     private MoveState? attack1_burning;
     private MoveState? attack1_not_burning;
@@ -32,15 +32,16 @@ public class DublinnFlamerazer : AbstractWildsMonster
         List<MonsterState> list = new List<MonsterState>();
         attack1_burning = new MoveState(
             "ATTACK1_B",
-            async targets => await DamageCmd
-                .Attack(Damage1)
-                .WithHitCount(Times2)
-                .WithNoAttackerAnim()
-                .FromMonster(this)
-                .WithAttackerAnim("Skill", 0.5f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
-                .OnlyPlayAnimOnce()
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(Damage1)
+                    .WithHitCount(Times2)
+                    .WithNoAttackerAnim()
+                    .FromMonster(this)
+                    .WithAttackerAnim("Skill", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .OnlyPlayAnimOnce()
+                    .Execute(null),
             new MultiAttackIntent(Damage1, Times2)
         );
         attack1_not_burning = new MoveState(
@@ -80,22 +81,24 @@ public class DublinnFlamerazer : AbstractWildsMonster
         );
         MoveState attack3 = new MoveState(
             "ATTACK3",
-            async targets => await DamageCmd
-                .Attack(Damage2)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.5f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(Damage2)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .Execute(null),
             new SingleAttackIntent(Damage2)
         );
         MoveState attack4 = new MoveState(
             "ATTACK4",
-            async targets => await DamageCmd
-                .Attack(Damage2)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.5f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(Damage2)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .Execute(null),
             new SingleAttackIntent(Damage2)
         );
 
@@ -120,8 +123,10 @@ public class DublinnFlamerazer : AbstractWildsMonster
 
     public override async Task OnReedBedStatusChange(bool burning)
     {
-        if (NextMove.Id == "ATTACK1_B" && !burning) SetMoveImmediate(attack1_not_burning!);
-        else if (NextMove.Id == "ATTACK1_N" && burning) SetMoveImmediate(attack1_burning!);
+        if (NextMove.Id == "ATTACK1_B" && !burning)
+            SetMoveImmediate(attack1_not_burning!);
+        else if (NextMove.Id == "ATTACK1_N" && burning)
+            SetMoveImmediate(attack1_burning!);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

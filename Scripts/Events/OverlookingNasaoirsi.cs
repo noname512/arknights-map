@@ -1,4 +1,3 @@
-
 using ArknightsMap.Scripts.Acts;
 using ArknightsMap.Scripts.Cards;
 using ArknightsMap.Scripts.Encounters;
@@ -20,20 +19,18 @@ namespace ArknightsMap.Scripts.Events;
 [RegisterActEvent(typeof(Wilds))]
 public sealed class OverlookingNasaoirsi : ModEventTemplate
 {
-    public override EventAssetProfile AssetProfile => new(
-        InitialPortraitPath: $"res://ArknightsMap/images/events/{GetType().Name}.png"
-    );
+    public override EventAssetProfile AssetProfile => new(InitialPortraitPath: $"res://ArknightsMap/images/events/{GetType().Name}.png");
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new IntVar("MaxHp1", 10),
-        new IntVar("MaxHp2", 30),
-        new DamageVar(30, ValueProp.Unpowered),
-        new IntVar("DamageIncrease", 40),
-        new IntVar("IntangibleAmount", 2),
-        new StringVar("CardType"),
-        new StringVar("ExtraDescription")
-    ];
+        [
+            new IntVar("MaxHp1", 10),
+            new IntVar("MaxHp2", 30),
+            new DamageVar(30, ValueProp.Unpowered),
+            new IntVar("DamageIncrease", 40),
+            new IntVar("IntangibleAmount", 2),
+            new StringVar("CardType"),
+            new StringVar("ExtraDescription"),
+        ];
 
     CardRarity maxRarity;
 
@@ -83,7 +80,8 @@ public sealed class OverlookingNasaoirsi : ModEventTemplate
                 list.Add(new EventOption(this, Incinerate, InitialOptionKey("INCINERATE")));
                 break;
         }
-        if (maxRarity >= CardRarity.Common) list.Add(new EventOption(this, Salvation, InitialOptionKey("SALVATION")));
+        if (maxRarity >= CardRarity.Common)
+            list.Add(new EventOption(this, Salvation, InitialOptionKey("SALVATION")));
         list.Add(new EventOption(this, Proliferation, InitialOptionKey("PROLIFERATION")));
         return list;
     }
@@ -111,16 +109,20 @@ public sealed class OverlookingNasaoirsi : ModEventTemplate
 
     private async Task Salvation()
     {
-        foreach (CardModel item in await CardSelectCmd.FromDeckForRemoval(
-            Owner!,
-            new CardSelectorPrefs(CardSelectorPrefs.RemoveSelectionPrompt, 1) { RequireManualConfirmation = true },
-            c => c.Rarity == maxRarity
-        ))
+        foreach (
+            CardModel item in await CardSelectCmd.FromDeckForRemoval(
+                Owner!,
+                new CardSelectorPrefs(CardSelectorPrefs.RemoveSelectionPrompt, 1) { RequireManualConfirmation = true },
+                c => c.Rarity == maxRarity
+            )
+        )
         {
             await CardPileCmd.RemoveFromDeck(item);
         }
-        if (maxRarity == CardRarity.Rare) await CreatureCmd.GainMaxHp(Owner!.Creature, 20);
-        else if (maxRarity == CardRarity.Uncommon) await CreatureCmd.GainMaxHp(Owner!.Creature, 10);
+        if (maxRarity == CardRarity.Rare)
+            await CreatureCmd.GainMaxHp(Owner!.Creature, 20);
+        else if (maxRarity == CardRarity.Uncommon)
+            await CreatureCmd.GainMaxHp(Owner!.Creature, 10);
         SetEventFinished(L10NLookup($"{Id.Entry}.pages.SALVATION.description"));
     }
 

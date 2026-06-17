@@ -1,18 +1,18 @@
-using MegaCrit.Sts2.Core.Commands;
+using Godot;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Models.Singleton;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
-using Godot;
-using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Models.Singleton;
-using MegaCrit.Sts2.Core.Nodes.Rooms;
 
 namespace ArknightsMap.Scripts.Monsters;
 
@@ -28,13 +28,12 @@ public class Nest : AbstractWildsMonster
     private int FirstGrow = 1;
     private int SecondGrow = AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 8);
 
-    public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
-    );
+    public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
     public override async Task AfterAddedToRoom()
     {
-        if (!CombatState.ContainsMonster<TreeShield>()) SwitchIntent();
+        if (!CombatState.ContainsMonster<TreeShield>())
+            SwitchIntent();
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -54,34 +53,37 @@ public class Nest : AbstractWildsMonster
                 decimal totalAdd = HpAdd;
                 if (CombatState.Players.Count > 1)
                 {
-                    totalAdd *= CombatState.Players.Count *
-                                MultiplayerScalingModel.GetMultiplayerScaling(CombatState.Encounter,
-                                    CombatState.RunState.CurrentActIndex);
+                    totalAdd *=
+                        CombatState.Players.Count * MultiplayerScalingModel.GetMultiplayerScaling(CombatState.Encounter, CombatState.RunState.CurrentActIndex);
                 }
-                if (Creature.IsAlive) await CreatureCmd.GainMaxHp(Creature, totalAdd);
+                if (Creature.IsAlive)
+                    await CreatureCmd.GainMaxHp(Creature, totalAdd);
                 growthTimes++;
                 if (growthTimes == FirstGrow)
                 {
                     NCombatRoom.Instance?.GetCreatureNode(Creature)?.ScaleTo(0.5f, 0);
                     await CreatureCmd.TriggerAnim(Creature, "Bigger", 0);
                 }
-                if (growthTimes == SecondGrow) await CreatureCmd.TriggerAnim(Creature, "Crack", 0);
+                if (growthTimes == SecondGrow)
+                    await CreatureCmd.TriggerAnim(Creature, "Crack", 0);
                 if ((growthTimes < SecondGrow) && (growthTimes > FirstGrow))
                 {
                     NCombatRoom.Instance?.GetCreatureNode(Creature)?.ScaleTo(0.5f + 0.5f * (growthTimes - FirstGrow) / (SecondGrow - FirstGrow - 1), 0.75);
                 }
             },
             new SingleAttackIntent(Damage),
-            new BuffIntent(), new HealIntent()
+            new BuffIntent(),
+            new HealIntent()
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
-            async targets => await DamageCmd
-                .Attack(Damage)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.5f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(Damage)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .Execute(null),
             new SingleAttackIntent(Damage)
         );
 
@@ -101,7 +103,8 @@ public class Nest : AbstractWildsMonster
 
     public override Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
     {
-        if (creature.Monster is TreeShield && CombatState.Enemies.Count(e => e.IsAlive && e.Monster is TreeShield) == 0) SwitchIntent();
+        if (creature.Monster is TreeShield && CombatState.Enemies.Count(e => e.IsAlive && e.Monster is TreeShield) == 0)
+            SwitchIntent();
         return Task.CompletedTask;
     }
 

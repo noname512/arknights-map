@@ -1,4 +1,3 @@
-
 using ArknightsMap.Scripts.Acts;
 using ArknightsMap.Scripts.Ancients;
 using ArknightsMap.Scripts.Encounters;
@@ -22,19 +21,17 @@ namespace ArknightsMap.Scripts.Events;
 public sealed class TheLeaderOfDublinn : ModEventTemplate
 {
     public override bool IsShared => true;
-    public override EventAssetProfile AssetProfile => new(
-        InitialPortraitPath: $"res://ArknightsMap/images/events/{GetType().Name}.png"
-    );
+    public override EventAssetProfile AssetProfile => new(InitialPortraitPath: $"res://ArknightsMap/images/events/{GetType().Name}.png");
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new StringVar("VouivreName", L10NLookup($"{Id.Entry}.pages.INITIAL.unknownVouivre").GetRawText()),
-        new StringVar("DracoName", L10NLookup($"{Id.Entry}.pages.INITIAL.unknownDraco").GetRawText()),
-        new DamageVar(20, ValueProp.Unpowered | ValueProp.Unblockable),
-        new BlockVar(15, ValueProp.Unpowered),
-        new EnergyVar(3),
-        new CardsVar(3)
-    ];
+        [
+            new StringVar("VouivreName", L10NLookup($"{Id.Entry}.pages.INITIAL.unknownVouivre").GetRawText()),
+            new StringVar("DracoName", L10NLookup($"{Id.Entry}.pages.INITIAL.unknownDraco").GetRawText()),
+            new DamageVar(20, ValueProp.Unpowered | ValueProp.Unblockable),
+            new BlockVar(15, ValueProp.Unpowered),
+            new EnergyVar(3),
+            new CardsVar(3),
+        ];
 
     private bool isBagpipe = false;
     private bool isReed = false;
@@ -66,19 +63,29 @@ public sealed class TheLeaderOfDublinn : ModEventTemplate
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
         List<EventOption> options = new List<EventOption>();
-        if (isBagpipe) options.Add(new EventOption(this, ExtractTheTruth, InitialOptionKey("EXTRACT_THE_TRUTH")));
-        else if (isReed) options.Add(new EventOption(this, FaceTheAnger, InitialOptionKey("FACE_THE_ANGER")));
-        else options.Add(new EventOption(this, LackOfAbility, InitialOptionKey("LACK_OF_ABILITY")));
+        if (isBagpipe)
+            options.Add(new EventOption(this, ExtractTheTruth, InitialOptionKey("EXTRACT_THE_TRUTH")));
+        else if (isReed)
+            options.Add(new EventOption(this, FaceTheAnger, InitialOptionKey("FACE_THE_ANGER")));
+        else
+            options.Add(new EventOption(this, LackOfAbility, InitialOptionKey("LACK_OF_ABILITY")));
         options.Add(new EventOption(this, FindCommonGround, InitialOptionKey("FIND_COMMON_GROUND")));
         return options;
     }
 
     private async Task ExtractTheTruth()
     {
-        await SelectCardAndAdd(c => c.Type == CardType.Attack && 
-                 ((c.DynamicVars.ContainsKey("Damage") && c.DynamicVars.Damage.BaseValue >= DynamicVars.Damage.BaseValue) 
-              || (c.DynamicVars.ContainsKey("CalculatedDamage") && c.DynamicVars.ContainsKey("CalculationBase") 
-              && c.DynamicVars.CalculationBase.BaseValue >= DynamicVars.Damage.BaseValue)));
+        await SelectCardAndAdd(c =>
+            c.Type == CardType.Attack
+            && (
+                (c.DynamicVars.ContainsKey("Damage") && c.DynamicVars.Damage.BaseValue >= DynamicVars.Damage.BaseValue)
+                || (
+                    c.DynamicVars.ContainsKey("CalculatedDamage")
+                    && c.DynamicVars.ContainsKey("CalculationBase")
+                    && c.DynamicVars.CalculationBase.BaseValue >= DynamicVars.Damage.BaseValue
+                )
+            )
+        );
     }
 
     private async Task FaceTheAnger()
@@ -94,8 +101,17 @@ public sealed class TheLeaderOfDublinn : ModEventTemplate
     private async Task SelectCardAndAdd(Func<CardModel, bool> filter)
     {
         CardCreationOptions options = CardCreationOptions.ForNonCombatWithDefaultOdds(ModelDb.AllCharacterCardPools, filter);
-        List<CardCreationResult> cards = CardFactory.CreateForReward(Owner!, Math.Min(DynamicVars.Cards.IntValue, options.GetPossibleCards(Owner!).Count()), options).ToList();
-        foreach (var item in await CardSelectCmd.FromSimpleGridForRewards(new BlockingPlayerChoiceContext(), cards, Owner!, new CardSelectorPrefs(L10NLookup($"{Id.Entry}.pages.INITIAL.selectionScreenPrompt"), 1)))
+        List<CardCreationResult> cards = CardFactory
+            .CreateForReward(Owner!, Math.Min(DynamicVars.Cards.IntValue, options.GetPossibleCards(Owner!).Count()), options)
+            .ToList();
+        foreach (
+            var item in await CardSelectCmd.FromSimpleGridForRewards(
+                new BlockingPlayerChoiceContext(),
+                cards,
+                Owner!,
+                new CardSelectorPrefs(L10NLookup($"{Id.Entry}.pages.INITIAL.selectionScreenPrompt"), 1)
+            )
+        )
         {
             CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(item, PileType.Deck));
         }

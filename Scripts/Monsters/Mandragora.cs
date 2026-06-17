@@ -1,16 +1,16 @@
-using MegaCrit.Sts2.Core.Commands;
+using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
-using ArknightsMap.Scripts.Powers;
-using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 
 namespace ArknightsMap.Scripts.Monsters;
 
@@ -27,21 +27,20 @@ public class Mandragora : AbstractWildsMonster
     private int Damage4 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 27, 25);
     public bool IsHovering => Creature.HasPower<StoneshieldPower>();
     private int SummonTimes { get; set; } = 0;
-    public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
-    );
+    public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
         MoveState attack1 = new MoveState(
             "ATTACK1",
-            async targets => await DamageCmd
-                .Attack(Damage1)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.5f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(Damage1)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                    .Execute(null),
             new SingleAttackIntent(Damage1)
         );
         MoveState attack2 = new MoveState(
@@ -63,14 +62,15 @@ public class Mandragora : AbstractWildsMonster
         );
         MoveState attack3 = new MoveState(
             "ATTACK2",
-            async targets => await DamageCmd
-                .Attack(Damage3)
-                .WithHitCount(HitCount3)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.5f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
-                .OnlyPlayAnimOnce()
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(Damage3)
+                    .WithHitCount(HitCount3)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                    .OnlyPlayAnimOnce()
+                    .Execute(null),
             new MultiAttackIntent(Damage3, HitCount3)
         );
         MoveState attack4 = new MoveState(
@@ -109,19 +109,9 @@ public class Mandragora : AbstractWildsMonster
     {
         if (SummonTimes >= 3)
         {
-            return new MoveState(
-                "SUMMON" + SummonTimes,
-                ShieldAndSummon,
-                new StunIntent(),
-                new BuffIntent()
-            );
+            return new MoveState("SUMMON" + SummonTimes, ShieldAndSummon, new StunIntent(), new BuffIntent());
         }
-        return new MoveState(
-            "SUMMON" + SummonTimes,
-            ShieldAndSummon,
-            new SummonIntent(),
-            new BuffIntent()
-        );
+        return new MoveState("SUMMON" + SummonTimes, ShieldAndSummon, new SummonIntent(), new BuffIntent());
     }
 
     public async Task ShieldAndSummon(IReadOnlyList<Creature> targets)

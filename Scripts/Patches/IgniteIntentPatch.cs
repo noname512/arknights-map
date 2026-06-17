@@ -41,9 +41,11 @@ class IgniteIntentPatch
                 }
             }
         }
+
         public static int NewGetCount(string animation)
         {
-            if (animation == "arknights_map_intent_ignite") return 1;
+            if (animation == "arknights_map_intent_ignite")
+                return 1;
             return IntentAnimData.GetAnimationFrameCount(animation);
         }
     }

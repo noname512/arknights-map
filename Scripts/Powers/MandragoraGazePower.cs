@@ -5,7 +5,6 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -20,19 +19,18 @@ public class MandragoraGazePower : ModPowerTemplate
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
     // 自定义图标路径。1:1即可。原版游戏大图256x256，小图64x64。
-    public override PowerAssetProfile AssetProfile => new(
-        IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png",
-        BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png"
-    );
+    public override PowerAssetProfile AssetProfile =>
+        new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-         if ((cardPlay.Card.Type == CardType.Skill) && (cardPlay.Card.Owner.Creature == Owner))
-         {
-             // TODO：写卡上
-             await CreatureCmd.Damage(choiceContext, Owner, Amount, ValueProp.Unpowered , Owner, null);
-         }
+        if ((cardPlay.Card.Type == CardType.Skill) && (cardPlay.Card.Owner.Creature == Owner))
+        {
+            // TODO：写卡上
+            await CreatureCmd.Damage(choiceContext, Owner, Amount, ValueProp.Unpowered, Owner, null);
+        }
     }
+
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (participants.Contains(Owner))
@@ -41,5 +39,4 @@ public class MandragoraGazePower : ModPowerTemplate
             await PowerCmd.Remove(this);
         }
     }
-    
 }

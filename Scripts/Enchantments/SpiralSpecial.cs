@@ -20,9 +20,7 @@ public class SpiralSpecial : ModEnchantmentTemplate
     // protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardKeyword.Retain)];
 
     // 图标位置。大小1:1就行，原版是64x64
-    public override EnchantmentAssetProfile AssetProfile => new(
-        IconPath: "res://images/enchantments/spiral.png"
-    );
+    public override EnchantmentAssetProfile AssetProfile => new(IconPath: "res://images/enchantments/spiral.png");
 
     public override int EnchantPlayCount(int originalPlayCount)
     {

@@ -22,10 +22,8 @@ public class PerseverePower : ModPowerTemplate, IHealthBarForecastSource
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
     // 自定义图标路径。1:1即可。原版游戏大图256x256，小图64x64。
-    public override PowerAssetProfile AssetProfile => new(
-        IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png",
-        BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png"
-    );
+    public override PowerAssetProfile AssetProfile =>
+        new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
     public override decimal ModifyHpLostAfterOstyLate(Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
@@ -51,17 +49,20 @@ public class PerseverePower : ModPowerTemplate, IHealthBarForecastSource
         {
             return;
         }
-        await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), Owner, DynamicVars["MaxDmg"].BaseValue, ValueProp.Unblockable | ValueProp.Unpowered, null, null);
+        await CreatureCmd.Damage(
+            new ThrowingPlayerChoiceContext(),
+            Owner,
+            DynamicVars["MaxDmg"].BaseValue,
+            ValueProp.Unblockable | ValueProp.Unpowered,
+            null,
+            null
+        );
         DynamicVars["MaxDmg"].BaseValue = 0;
     }
 
     public IEnumerable<HealthBarForecastSegment> GetHealthBarForecastSegments(HealthBarForecastContext context)
     {
         int sumDamage = DynamicVars["MaxDmg"].IntValue;
-        return HealthBarForecasts.Single(
-            sumDamage,
-            new Color(0.1f, 0.11f, 0.3f),
-            HealthBarForecastGrowthDirection.FromRight
-        );
+        return HealthBarForecasts.Single(sumDamage, new Color(0.1f, 0.11f, 0.3f), HealthBarForecastGrowthDirection.FromRight);
     }
 }

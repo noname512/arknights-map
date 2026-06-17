@@ -1,3 +1,13 @@
 {
-    "godotTools.editorPath.godot4": "d:\\SlayTheSpire\\sts2 resourse\\Godot_v4.5.1-stable_mono_win64\\Godot_v4.5.1-stable_mono_win64.exe"
+    "godotTools.editorPath.godot4": "d:\\SlayTheSpire\\sts2 resourse\\Godot_v4.5.1-stable_mono_win64\\Godot_v4.5.1-stable_mono_win64.exe",
+    "editor.rulers": [
+        160
+    ],
+    "[csharp]": {
+        "editor.defaultFormatter": "csharpier.csharpier-vscode",
+        "editor.formatOnSave": true,
+        "editor.wordWrap": "wordWrapColumn",
+        "editor.wordWrapColumn": 160,
+        "editor.wrappingIndent": "indent"
+    },
 }

@@ -1,15 +1,14 @@
-
-using Godot;
 using ArknightsMap.Scripts.Ancients;
 using ArknightsMap.Scripts.Encounters;
 using ArknightsMap.Scripts.Events;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Unlocks;
+using Godot;
 using MegaCrit.Sts2.Core.Map;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Events;
 using MegaCrit.Sts2.Core.Random;
-using STS2RitsuLib.Scaffolding.Content;
+using MegaCrit.Sts2.Core.Unlocks;
 using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Acts;
 
@@ -39,50 +38,38 @@ public sealed class Wilds : ModActTemplate
     public override string? CustomMapBotBgPath => "res://images/packed/map/map_bgs/hive/map_bottom_hive.png";
     public override string? CustomRestSiteBackgroundPath => "res://scenes/rest_site/hive_rest_site.tscn";
 
-    public override IEnumerable<EventModel> AllEvents => new EventModel[]
-    {
-        ModelDb.Event<TheWake>(),
-        ModelDb.Event<Campfire>(),
-        ModelDb.Event<TheLeaderOfDublinn>(),
-        ModelDb.Event<OverlookingNasaoirsi>(),
-    };
+    public override IEnumerable<EventModel> AllEvents =>
+        new EventModel[] { ModelDb.Event<TheWake>(), ModelDb.Event<Campfire>(), ModelDb.Event<TheLeaderOfDublinn>(), ModelDb.Event<OverlookingNasaoirsi>() };
 
-    public override IEnumerable<AncientEventModel> AllAncients => new AncientEventModel[]
-    {
-        ModelDb.AncientEvent<Reed>(),
-        ModelDb.AncientEvent<Bagpipe>(),
-        ModelDb.AncientEvent<Tezcatara>()
-    };
+    public override IEnumerable<AncientEventModel> AllAncients =>
+        new AncientEventModel[] { ModelDb.AncientEvent<Reed>(), ModelDb.AncientEvent<Bagpipe>(), ModelDb.AncientEvent<Tezcatara>() };
 
-    public override IEnumerable<EncounterModel> BossDiscoveryOrder => new EncounterModel[]
-    {
-        ModelDb.Encounter<MandragoraBoss>(),
-        ModelDb.Encounter<AFRBoss>(),
-        ModelDb.Encounter<HerFlame>(),
-    };
+    public override IEnumerable<EncounterModel> BossDiscoveryOrder =>
+        new EncounterModel[] { ModelDb.Encounter<MandragoraBoss>(), ModelDb.Encounter<AFRBoss>(), ModelDb.Encounter<HerFlame>() };
 
-    public override IEnumerable<EncounterModel> GenerateAllEncounters() => new EncounterModel[]
-    {
-        ModelDb.Encounter<BurnTheHaystacks>(),
-        ModelDb.Encounter<ScorchingDream>(),
-        ModelDb.Encounter<DublinnPhalanx>(),
-        ModelDb.Encounter<DublinnPhalanxWeak>(),
-        ModelDb.Encounter<PatrollingFoliageNormal>(),
-        ModelDb.Encounter<DublinnCompanion>(),
-        ModelDb.Encounter<MandragoraBoss>(),
-        ModelDb.Encounter<ScaldingEarth>(),
-        ModelDb.Encounter<ApparitionalWaves>(),
-        ModelDb.Encounter<ComingFire>(),
-        ModelDb.Encounter<EndOfTheNight>(),
-        ModelDb.Encounter<AFRBoss>(),
-        ModelDb.Encounter<FloralGarland>(),
-        ModelDb.Encounter<LampBurner>(),
-        ModelDb.Encounter<HerFlame>(),
-        ModelDb.Encounter<MarchOfTheDead>(),
-        ModelDb.Encounter<BurningWeeds>(),
-        ModelDb.Encounter<DublinnFlamerazerNormal>(),
-        ModelDb.Encounter<AshyMarsh>(),
-    };
+    public override IEnumerable<EncounterModel> GenerateAllEncounters() =>
+        new EncounterModel[]
+        {
+            ModelDb.Encounter<BurnTheHaystacks>(),
+            ModelDb.Encounter<ScorchingDream>(),
+            ModelDb.Encounter<DublinnPhalanx>(),
+            ModelDb.Encounter<DublinnPhalanxWeak>(),
+            ModelDb.Encounter<PatrollingFoliageNormal>(),
+            ModelDb.Encounter<DublinnCompanion>(),
+            ModelDb.Encounter<MandragoraBoss>(),
+            ModelDb.Encounter<ScaldingEarth>(),
+            ModelDb.Encounter<ApparitionalWaves>(),
+            ModelDb.Encounter<ComingFire>(),
+            ModelDb.Encounter<EndOfTheNight>(),
+            ModelDb.Encounter<AFRBoss>(),
+            ModelDb.Encounter<FloralGarland>(),
+            ModelDb.Encounter<LampBurner>(),
+            ModelDb.Encounter<HerFlame>(),
+            ModelDb.Encounter<MarchOfTheDead>(),
+            ModelDb.Encounter<BurningWeeds>(),
+            ModelDb.Encounter<DublinnFlamerazerNormal>(),
+            ModelDb.Encounter<AshyMarsh>(),
+        };
 
     protected override void ApplyActDiscoveryOrderModifications(UnlockState unlockState) { }
 

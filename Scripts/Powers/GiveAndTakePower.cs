@@ -19,10 +19,8 @@ public class GiveAndTakePower : ModPowerTemplate
     public override int DisplayAmount => DynamicVars["Exceed"].IntValue;
 
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
-    public override PowerAssetProfile AssetProfile => new(
-        IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png",
-        BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png"
-    );
+    public override PowerAssetProfile AssetProfile =>
+        new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
     public void Exceed(decimal amount)
     {

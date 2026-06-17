@@ -11,22 +11,16 @@ public class TheRedsteelGuard : AbstractWildsEncounter
 
     public override bool IsWeak => false;
 
-    public override EncounterAssetProfile AssetProfile => new(
-        EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
-    );
+    public override EncounterAssetProfile AssetProfile => new(EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn");
 
     public override string CustomBgm => "event:/ArknightsMap/music/zwyh_bat";
 
-    public override IReadOnlyList<string> Slots => [
-        "first"
-    ];
+    public override IReadOnlyList<string> Slots => ["first"];
 
     public override RoomType RoomType => RoomType.Elite;
 
     // 如果你的场景太大，可以调整缩放。此外还可以使用 GetCameraOffset 来调整摄像机位置
     // public override float GetCameraScaling() => 0.8f;
 
-    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<TheBrigadier>().ToMutable(), "first")
-    ];
+    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [(ModelDb.Monster<TheBrigadier>().ToMutable(), "first")];
 }

@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
@@ -17,9 +18,7 @@ public class DublinnFlamecaller : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 120, 108);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 127, 115);
-    public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
-    );
+    public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
     private int AttackDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 14, 16);
     private int StrengthGain => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 2, 2);
@@ -49,7 +48,8 @@ public class DublinnFlamecaller : AbstractWildsMonster
                     .Execute(null);
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthGain, Creature, null);
             },
-            new SingleAttackIntent(AttackDamage), new BuffIntent()
+            new SingleAttackIntent(AttackDamage),
+            new BuffIntent()
         );
         attack_not_burning = new MoveState(
             "ATTACK_N",
@@ -63,7 +63,8 @@ public class DublinnFlamecaller : AbstractWildsMonster
                     .Execute(null);
                 await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
             },
-            new SingleAttackIntent(AttackDamage), new IgniteIntent()
+            new SingleAttackIntent(AttackDamage),
+            new IgniteIntent()
         );
 
         ConditionalBranchState attack = new ConditionalBranchState("ATTACK");
@@ -84,8 +85,10 @@ public class DublinnFlamecaller : AbstractWildsMonster
 
     public override async Task OnReedBedStatusChange(bool burning)
     {
-        if (NextMove.Id == "ATTACK_B" && !burning) SetMoveImmediate(attack_not_burning!);
-        else if (NextMove.Id == "ATTACK_N" && burning) SetMoveImmediate(attack_burning!);
+        if (NextMove.Id == "ATTACK_B" && !burning)
+            SetMoveImmediate(attack_not_burning!);
+        else if (NextMove.Id == "ATTACK_N" && burning)
+            SetMoveImmediate(attack_burning!);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

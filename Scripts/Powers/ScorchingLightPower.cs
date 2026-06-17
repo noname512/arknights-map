@@ -20,18 +20,19 @@ public class ScorchingLightPower : ModPowerTemplate
     public override PowerStackType StackType => PowerStackType.Counter;
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-    [
-        HoverTipFactory.FromKeyword(ReedBedKeyword.Keyword), 
-        HoverTipFactory.FromPower<FlamingDamagePower>(),
-        HoverTipFactory.FromPower<VulnerablePower>()
-    ];
+        [HoverTipFactory.FromKeyword(ReedBedKeyword.Keyword), HoverTipFactory.FromPower<FlamingDamagePower>(), HoverTipFactory.FromPower<VulnerablePower>()];
 
-    public override PowerAssetProfile AssetProfile => new(
-        IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png",
-        BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png"
-    );
+    public override PowerAssetProfile AssetProfile =>
+        new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
-    public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override async Task BeforeDamageReceived(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        decimal amount,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource
+    )
     {
         if (dealer == Owner) // && ReedBed.Burning)
         {

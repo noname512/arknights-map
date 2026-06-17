@@ -14,24 +14,17 @@ public class DublinnPhalanxWeak : AbstractWildsEncounter
 
     public override bool IsWeak => true;
 
-    public override EncounterAssetProfile AssetProfile => new(
-        EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
-    );
+    public override EncounterAssetProfile AssetProfile => new(EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn");
 
     public override string CustomBgm => "event:/ArknightsMap/music/fblw_bat";
 
-    public override IReadOnlyList<string> Slots => [
-        "first",
-        "second"
-    ];
+    public override IReadOnlyList<string> Slots => ["first", "second"];
 
     public override RoomType RoomType => RoomType.Monster;
 
     // 如果你的场景太大，可以调整缩放。此外还可以使用 GetCameraOffset 来调整摄像机位置
     // public override float GetCameraScaling() => 0.8f;
 
-    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<DublinnPhalanxInfantry>().ToMutable(), "first"),
-        (ModelDb.Monster<DublinnPhalanxInfantry>().ToMutable(), "second")
-    ];
+    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() =>
+        [(ModelDb.Monster<DublinnPhalanxInfantry>().ToMutable(), "first"), (ModelDb.Monster<DublinnPhalanxInfantry>().ToMutable(), "second")];
 }

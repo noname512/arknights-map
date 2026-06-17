@@ -17,19 +17,12 @@ public class ScaldingEarth : AbstractWildsEncounter
     public override bool IsWeak => false;
 
     // 遭遇场景（用来指定每个怪物站哪）
-    public override EncounterAssetProfile AssetProfile => new(
-        EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
-    );
+    public override EncounterAssetProfile AssetProfile => new(EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn");
 
     public override string CustomBgm => "event:/ArknightsMap/music/zwyh_bat";
 
     // 怪物槽位的名字
-    public override IReadOnlyList<string> Slots => [
-        "fire1",
-        "fire2",
-        "fire3",
-        "evocator"
-    ];
+    public override IReadOnlyList<string> Slots => ["fire1", "fire2", "fire3", "evocator"];
 
     public override RoomType RoomType => RoomType.Monster; // 这个遭遇的房间类型，这里是普通怪物
 
@@ -37,7 +30,5 @@ public class ScaldingEarth : AbstractWildsEncounter
     // public override float GetCameraScaling() => 0.8f;
 
     // 生成怪物列表
-    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<DublinnEvocator>().ToMutable(), "evocator")
-    ];
+    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [(ModelDb.Monster<DublinnEvocator>().ToMutable(), "evocator")];
 }

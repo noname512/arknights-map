@@ -1,16 +1,16 @@
-using MegaCrit.Sts2.Core.Commands;
+using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.MonsterMoves;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
-using ArknightsMap.Scripts.Powers;
-using MegaCrit.Sts2.Core.MonsterMoves;
-using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace ArknightsMap.Scripts.Monsters;
 
@@ -19,10 +19,9 @@ public class PatrollingFoliage : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 10, 10);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 10, 10);
+
     // 怪物场景
-    public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
-    );
+    public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
     public override async Task AfterAddedToRoom()
     {
@@ -32,11 +31,7 @@ public class PatrollingFoliage : AbstractWildsMonster
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
-        MoveState stun = new MoveState(
-            "STUN",
-            async targets => { },
-            new StunIntent()
-        );
+        MoveState stun = new MoveState("STUN", async targets => { }, new StunIntent());
         MoveState attack1 = new MoveState(
             "ATTACK1",
             async targets =>
@@ -52,53 +47,58 @@ public class PatrollingFoliage : AbstractWildsMonster
                     targets,
                     AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 2, 1),
                     Creature,
-                    null);
+                    null
+                );
             },
             new SingleAttackIntent(7),
             new DebuffIntent()
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
-            async targets => await DamageCmd
-                .Attack(4)
-                .WithHitCount(2)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.7f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
-                .OnlyPlayAnimOnce()
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(4)
+                    .WithHitCount(2)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.7f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .OnlyPlayAnimOnce()
+                    .Execute(null),
             new MultiAttackIntent(4, 2)
         );
         MoveState attack3 = new MoveState(
             "ATTACK3",
-            async targets => await DamageCmd
-                .Attack(3)
-                .WithHitCount(3)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.7f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
-                .OnlyPlayAnimOnce()
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(3)
+                    .WithHitCount(3)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.7f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .OnlyPlayAnimOnce()
+                    .Execute(null),
             new MultiAttackIntent(3, 3)
         );
         MoveState attack4 = new MoveState(
             "ATTACK4",
-            async targets => await DamageCmd
-                .Attack(10)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.7f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(10)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.7f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .Execute(null),
             new SingleAttackIntent(10)
         );
         MoveState attack5 = new MoveState(
             "ATTACK5",
-            async targets => await DamageCmd
-                .Attack(11)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.7f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(11)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.7f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .Execute(null),
             new SingleAttackIntent(11)
         );
 

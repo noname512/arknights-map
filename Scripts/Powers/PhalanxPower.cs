@@ -16,10 +16,8 @@ public class PhalanxPower : ModPowerTemplate
     public override PowerStackType StackType => PowerStackType.Counter;
 
     // 自定义图标路径。1:1即可。原版游戏大图256x256，小图64x64。
-    public override PowerAssetProfile AssetProfile => new(
-        IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png",
-        BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png"
-    );
+    public override PowerAssetProfile AssetProfile =>
+        new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
@@ -55,7 +53,8 @@ public class PhalanxPower : ModPowerTemplate
 
     public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (Owner != target) return 0;
+        if (Owner != target)
+            return 0;
         return -Amount;
     }
 }

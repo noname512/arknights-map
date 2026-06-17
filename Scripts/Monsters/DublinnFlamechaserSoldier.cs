@@ -1,7 +1,7 @@
 using ArknightsMap.Scripts.Powers;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
@@ -20,10 +20,9 @@ public class DublinnFlamechaserSoldier : AbstractWildsMonster
     private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 9, 8);
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 8, 7);
     public override bool ShouldDisappearFromDoom => false;
+
     // 怪物场景
-    public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
-    );
+    public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
     public override async Task AfterAddedToRoom()
     {
@@ -50,41 +49,62 @@ public class DublinnFlamechaserSoldier : AbstractWildsMonster
         List<MonsterState> list = new List<MonsterState>();
         MoveState attack1 = new MoveState(
             "ATTACK1",
-            async targets => await DamageCmd
-                .Attack(Damage1)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.5f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(Damage1)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .Execute(null),
             new SingleAttackIntent(Damage1)
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
-            async targets => await DamageCmd
-                .Attack(Damage2)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.5f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(Damage2)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .Execute(null),
             new SingleAttackIntent(Damage2)
         );
         MoveState attack3 = new MoveState(
             "ATTACK3",
-            async targets => await DamageCmd
-                .Attack(Damage1)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.5f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(Damage1)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .Execute(null),
             new SingleAttackIntent(Damage1)
         );
-        MoveState stun1 = new MoveState("STUN1", _ => { return Task.CompletedTask; }, new StunIntent());
-        MoveState stun2 = new MoveState("STUN2", _ => { return Task.CompletedTask; }, new StunIntent());
-        MoveState stun3 = new MoveState("STUN3", async _ =>
-        {
-            SfxCmd.Play($"event:/ArknightsMap/sfx/DublinnFlamechaserGuard/reborn");
-            await (Creature.GetPower<ChaseFlamePower>()?.Revive() ?? Task.CompletedTask);
-        }, new HealIntent());
+        MoveState stun1 = new MoveState(
+            "STUN1",
+            _ =>
+            {
+                return Task.CompletedTask;
+            },
+            new StunIntent()
+        );
+        MoveState stun2 = new MoveState(
+            "STUN2",
+            _ =>
+            {
+                return Task.CompletedTask;
+            },
+            new StunIntent()
+        );
+        MoveState stun3 = new MoveState(
+            "STUN3",
+            async _ =>
+            {
+                SfxCmd.Play($"event:/ArknightsMap/sfx/DublinnFlamechaserGuard/reborn");
+                await (Creature.GetPower<ChaseFlamePower>()?.Revive() ?? Task.CompletedTask);
+            },
+            new HealIntent()
+        );
 
         attack1.FollowUpState = attack2;
         attack2.FollowUpState = attack3;

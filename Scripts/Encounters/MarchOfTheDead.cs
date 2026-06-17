@@ -12,19 +12,13 @@ public class MarchOfTheDead : AbstractWildsEncounter
 {
     public override bool isBurningAtStart => true;
 
-    public override IEnumerable<MonsterModel> AllPossibleMonsters => [
-        ModelDb.Monster<DublinnFlamechaserGuard>()
-    ];
+    public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<DublinnFlamechaserGuard>()];
 
-    public override EncounterAssetProfile AssetProfile => new(
-        EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
-    );
+    public override EncounterAssetProfile AssetProfile => new(EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn");
 
     public override string CustomBgm => "event:/ArknightsMap/music/zwyh_bat";
 
-    public override IReadOnlyList<string> Slots => [
-        "first",
-    ];
+    public override IReadOnlyList<string> Slots => ["first"];
 
     public override RoomType RoomType => RoomType.Elite;
 
@@ -32,7 +26,5 @@ public class MarchOfTheDead : AbstractWildsEncounter
     // public override float GetCameraScaling() => 0.8f;
 
     // 生成怪物列表
-    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<DublinnFlamechaserGuard>().ToMutable(), "first"),
-    ];
+    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [(ModelDb.Monster<DublinnFlamechaserGuard>().ToMutable(), "first")];
 }

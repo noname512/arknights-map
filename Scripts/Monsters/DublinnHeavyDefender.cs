@@ -1,20 +1,19 @@
-using MegaCrit.Sts2.Core.Commands;
+using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.MonsterMoves;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
+using MegaCrit.Sts2.Core.Runs;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
-using ArknightsMap.Scripts.Powers;
-using MegaCrit.Sts2.Core.MonsterMoves;
-using MegaCrit.Sts2.Core.Runs;
-using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Potions;
-using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace ArknightsMap.Scripts.Monsters;
 
@@ -25,10 +24,9 @@ public class DublinnHeavyDefender : AbstractWildsMonster
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 50, 46);
 
     public int StrengthGain = 2;
+
     // 怪物场景
-    public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
-    );
+    public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
     public override async Task AfterAddedToRoom()
     {
@@ -80,14 +78,16 @@ public class DublinnHeavyDefender : AbstractWildsMonster
 
         if (RunManager.Instance.HasAscension(AscensionLevel.ToughEnemies))
         {
-            for (int i = 0; i < 5; i++) attacks[i].FollowUpState = randomStates[i + 1];
-            for (int i = 5; i < 7; i++) attacks[i].FollowUpState = randomStates[0];
+            for (int i = 0; i < 5; i++)
+                attacks[i].FollowUpState = randomStates[i + 1];
+            for (int i = 5; i < 7; i++)
+                attacks[i].FollowUpState = randomStates[0];
         }
         else
         {
-            for (int i = 0; i < 7; i++) attacks[i].FollowUpState = randomStates[0];
+            for (int i = 0; i < 7; i++)
+                attacks[i].FollowUpState = randomStates[0];
         }
-
 
         return new MonsterMoveStateMachine(list, randomStates[0]);
     }

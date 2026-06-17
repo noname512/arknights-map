@@ -23,21 +23,21 @@ public class CaughtOutPower : ModPowerTemplate
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromPowerWithPowerHoverTips<FlamingDamagePower>();
 
     // 自定义图标路径。1:1即可。原版游戏大图256x256，小图64x64。
-    public override PowerAssetProfile AssetProfile => new(
-        IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png",
-        BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png"
-    );
+    public override PowerAssetProfile AssetProfile =>
+        new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
     private bool summoned = false;
 
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature target, bool wasRemovalPrevented, float deathAnimLength)
     {
-        if (wasRemovalPrevented || target != Owner) return;
+        if (wasRemovalPrevented || target != Owner)
+            return;
         await SummonSeed();
     }
 
     public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (side != Owner.Side) return;
+        if (side != Owner.Side)
+            return;
         if (Owner.CombatState!.RoundNumber >= AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 5))
         {
             await SummonSeed();
@@ -54,6 +54,7 @@ public class CaughtOutPower : ModPowerTemplate
             }
             summoned = true;
         }
-        if (Owner.IsAlive) await CreatureCmd.Kill(Owner);
+        if (Owner.IsAlive)
+            await CreatureCmd.Kill(Owner);
     }
 }

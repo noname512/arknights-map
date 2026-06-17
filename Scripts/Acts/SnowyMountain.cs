@@ -1,13 +1,12 @@
-
-using Godot;
 using ArknightsMap.Scripts.Ancients;
 using ArknightsMap.Scripts.Encounters;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Unlocks;
+using Godot;
 using MegaCrit.Sts2.Core.Map;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Random;
-using STS2RitsuLib.Scaffolding.Content;
+using MegaCrit.Sts2.Core.Unlocks;
 using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Acts;
 
@@ -37,26 +36,18 @@ public sealed class SnowyMountain : ModActTemplate
     public override string? CustomMapBotBgPath => "res://images/packed/map/map_bgs/hive/map_bottom_hive.png";
     public override string? CustomRestSiteBackgroundPath => "res://scenes/rest_site/hive_rest_site.tscn";
 
-    public override IEnumerable<EventModel> AllEvents => new EventModel[]
-    {
-        // ModelDb.Event<TheWake>(),
-    };
+    public override IEnumerable<EventModel> AllEvents =>
+        new EventModel[]
+        {
+            // ModelDb.Event<TheWake>(),
+        };
 
-    public override IEnumerable<AncientEventModel> AllAncients => new AncientEventModel[]
-    {
-        ModelDb.AncientEvent<Pramanix>(),
-    };
+    public override IEnumerable<AncientEventModel> AllAncients => new AncientEventModel[] { ModelDb.AncientEvent<Pramanix>() };
 
-    public override IEnumerable<EncounterModel> BossDiscoveryOrder => new EncounterModel[]
-    {
-        ModelDb.Encounter<MandragoraBoss>(),
-    };
+    public override IEnumerable<EncounterModel> BossDiscoveryOrder => new EncounterModel[] { ModelDb.Encounter<MandragoraBoss>() };
 
-    public override IEnumerable<EncounterModel> GenerateAllEncounters() => new EncounterModel[]
-    {
-        ModelDb.Encounter<BurnTheHaystacks>(),
-        ModelDb.Encounter<MandragoraBoss>(),
-    };
+    public override IEnumerable<EncounterModel> GenerateAllEncounters() =>
+        new EncounterModel[] { ModelDb.Encounter<BurnTheHaystacks>(), ModelDb.Encounter<MandragoraBoss>() };
 
     protected override void ApplyActDiscoveryOrderModifications(UnlockState unlockState) { }
 

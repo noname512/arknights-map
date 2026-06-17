@@ -11,6 +11,7 @@ namespace ArknightsMap.Scripts.Encounters;
 public class BurnTheHaystacks : AbstractWildsEncounter
 {
     public override bool isBurningAtStart => true;
+
     // 所有可能出现的怪物
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<DublinnFlamechaserSoldier>()];
 
@@ -18,17 +19,12 @@ public class BurnTheHaystacks : AbstractWildsEncounter
     public override bool IsWeak => true;
 
     // 遭遇场景（用来指定每个怪物站哪）
-    public override EncounterAssetProfile AssetProfile => new(
-        EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
-    );
+    public override EncounterAssetProfile AssetProfile => new(EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn");
 
     public override string CustomBgm => "event:/ArknightsMap/music/zwyh_bat";
 
     // 怪物槽位的名字
-    public override IReadOnlyList<string> Slots => [
-        "first",
-        "second"
-    ];
+    public override IReadOnlyList<string> Slots => ["first", "second"];
 
     public override RoomType RoomType => RoomType.Monster; // 这个遭遇的房间类型，这里是普通怪物
 
@@ -36,8 +32,6 @@ public class BurnTheHaystacks : AbstractWildsEncounter
     // public override float GetCameraScaling() => 0.8f;
 
     // 生成怪物列表
-    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<DublinnFlamechaserSoldier>().ToMutable(), "first"),
-        (ModelDb.Monster<DublinnFlamechaserSoldier>().ToMutable(), "second")
-    ];
+    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() =>
+        [(ModelDb.Monster<DublinnFlamechaserSoldier>().ToMutable(), "first"), (ModelDb.Monster<DublinnFlamechaserSoldier>().ToMutable(), "second")];
 }

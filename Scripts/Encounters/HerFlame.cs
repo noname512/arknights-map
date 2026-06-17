@@ -12,26 +12,23 @@ public class HerFlame : AbstractWildsEncounter
 {
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<TheLeader>()];
 
-    public override EncounterAssetProfile AssetProfile => new(
-        RunHistoryIconPath: $"res://ArknightsMap/images/map/{GetType().Name}History.png",
-        RunHistoryIconOutlinePath: $"res://ArknightsMap/images/map/{GetType().Name}History_outline.png",
-        EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
-    );
+    public override EncounterAssetProfile AssetProfile =>
+        new(
+            RunHistoryIconPath: $"res://ArknightsMap/images/map/{GetType().Name}History.png",
+            RunHistoryIconOutlinePath: $"res://ArknightsMap/images/map/{GetType().Name}History_outline.png",
+            EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
+        );
 
     public override string BossNodePath => $"res://ArknightsMap/images/map/{GetType().Name}Icon";
 
     public override string CustomBgm => "event:/ArknightsMap/music/the_leader_bat";
 
-    public override IReadOnlyList<string> Slots => [
-        "first"
-    ];
+    public override IReadOnlyList<string> Slots => ["first"];
 
     public override RoomType RoomType => RoomType.Boss;
 
     // 如果你的场景太大，可以调整缩放。此外还可以使用 GetCameraOffset 来调整摄像机位置
     // public override float GetCameraScaling() => 0.8f;
 
-    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<TheLeader>().ToMutable(), "first")
-    ];
+    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [(ModelDb.Monster<TheLeader>().ToMutable(), "first")];
 }

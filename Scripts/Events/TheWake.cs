@@ -1,4 +1,3 @@
-
 using ArknightsMap.Scripts.Acts;
 using ArknightsMap.Scripts.Relics;
 using MegaCrit.Sts2.Core.CardSelection;
@@ -19,28 +18,26 @@ namespace ArknightsMap.Scripts.Events;
 [RegisterActEvent(typeof(Wilds))]
 public sealed class TheWake : ModEventTemplate
 {
-    public override EventAssetProfile AssetProfile => new(
-        InitialPortraitPath: $"res://ArknightsMap/images/events/{GetType().Name}.png"
-    );
+    public override EventAssetProfile AssetProfile => new(InitialPortraitPath: $"res://ArknightsMap/images/events/{GetType().Name}.png");
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new DamageVar(13m, ValueProp.Unblockable | ValueProp.Unpowered),
-        new CardsVar(2),
-        new HealVar(13),
-        new EnergyVar(1)
-    ];
+        [new DamageVar(13m, ValueProp.Unblockable | ValueProp.Unpowered), new CardsVar(2), new HealVar(13), new EnergyVar(1)];
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions() =>
-    [
-        new EventOption(this, RemoveCards, InitialOptionKey("REMOVE_CARDS")),
-        new EventOption(this, HealAndCardReward, InitialOptionKey("HEAL_AND_CARD_REWARD")),
-        new EventOption(this, GainRelic, InitialOptionKey("GAIN_RELIC")),
-    ];
+        [
+            new EventOption(this, RemoveCards, InitialOptionKey("REMOVE_CARDS")),
+            new EventOption(this, HealAndCardReward, InitialOptionKey("HEAL_AND_CARD_REWARD")),
+            new EventOption(this, GainRelic, InitialOptionKey("GAIN_RELIC")),
+        ];
 
     private async Task RemoveCards()
     {
-        foreach (CardModel item in await CardSelectCmd.FromDeckForRemoval(prefs: new CardSelectorPrefs(CardSelectorPrefs.RemoveSelectionPrompt, DynamicVars.Cards.IntValue), player: Owner!))
+        foreach (
+            CardModel item in await CardSelectCmd.FromDeckForRemoval(
+                prefs: new CardSelectorPrefs(CardSelectorPrefs.RemoveSelectionPrompt, DynamicVars.Cards.IntValue),
+                player: Owner!
+            )
+        )
         {
             await CardPileCmd.RemoveFromDeck(item);
         }
@@ -51,7 +48,9 @@ public sealed class TheWake : ModEventTemplate
     private async Task HealAndCardReward()
     {
         await CreatureCmd.Heal(Owner!.Creature, DynamicVars.Heal.IntValue, true);
-        CardCreationOptions options = CardCreationOptions.ForNonCombatWithUniformOdds([Owner!.Character.CardPool], c => c.Rarity == CardRarity.Uncommon).WithFlags(CardCreationFlags.NoRarityModification);
+        CardCreationOptions options = CardCreationOptions
+            .ForNonCombatWithUniformOdds([Owner!.Character.CardPool], c => c.Rarity == CardRarity.Uncommon)
+            .WithFlags(CardCreationFlags.NoRarityModification);
         await RewardsCmd.OfferCustom(Owner!, [new CardReward(options, 3, Owner)]);
         SetEventFinished(L10NLookup($"{Id.Entry}.pages.HEAL_AND_CARD_REWARD.description"));
     }

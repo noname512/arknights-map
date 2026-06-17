@@ -11,14 +11,13 @@ public class TauntPower : ModPowerTemplate
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
 
-    public override PowerAssetProfile AssetProfile => new(
-        IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png",
-        BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png"
-    );
+    public override PowerAssetProfile AssetProfile =>
+        new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
     public override bool ShouldAllowTargeting(Creature target)
     {
-        if ((target.CombatState?.Enemies.Contains(target) ?? false) && !target.HasPower<TauntPower>()) return false;
+        if ((target.CombatState?.Enemies.Contains(target) ?? false) && !target.HasPower<TauntPower>())
+            return false;
         return true;
     }
 }

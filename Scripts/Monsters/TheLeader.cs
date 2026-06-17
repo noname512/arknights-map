@@ -1,17 +1,18 @@
-using MegaCrit.Sts2.Core.Commands;
+using ArknightsMap.Scripts.Powers;
+using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.MonsterMoves;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
-using ArknightsMap.Scripts.Powers;
-using MegaCrit.Sts2.Core.MonsterMoves;
-using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Models;
 
 namespace ArknightsMap.Scripts.Monsters;
 
@@ -31,9 +32,7 @@ public class TheLeader : AbstractWildsMonster
     private int Damage2_3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 18, 15);
     public bool _isstage2 = false;
     private bool _firstFire2 = true;
-    public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
-    );
+    public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
     public override async Task AfterAddedToRoom()
     {
@@ -57,6 +56,7 @@ public class TheLeader : AbstractWildsMonster
             await PowerCmd.Apply<ScorchingLightPower>(new ThrowingPlayerChoiceContext(), Creature, ScorchingLightNum * mul, Creature, null);
         }
     }
+
     public int GTAmt
     {
         get
@@ -162,24 +162,26 @@ public class TheLeader : AbstractWildsMonster
 
         MoveState attack2_1 = new MoveState(
             "ATTACK2_1",
-            async targets => await DamageCmd
-                .Attack(Damage2_1)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack2", 0.5f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(Damage2_1)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack2", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                    .Execute(null),
             new SingleAttackIntent(Damage2_1)
         );
         MoveState attack2_2 = new MoveState(
             "ATTACK2_2",
-            async targets => await DamageCmd
-                .Attack(Damage2_2)
-                .WithHitCount(Times2)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack2", 0.5f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
-                .OnlyPlayAnimOnce()
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(Damage2_2)
+                    .WithHitCount(Times2)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack2", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                    .OnlyPlayAnimOnce()
+                    .Execute(null),
             new MultiAttackIntent(Damage2_2, Times2)
         );
         MoveState ignite2 = new MoveState(
@@ -274,7 +276,8 @@ public class TheLeader : AbstractWildsMonster
 
     public override async Task AfterCurrentHpChanged(Creature creature, decimal _)
     {
-        if (creature != Creature) return;
+        if (creature != Creature)
+            return;
         if (!_isstage2 && Creature.CurrentHp <= Creature.MaxHp - Creature.MaxHp / 2)
         {
             _isstage2 = true;

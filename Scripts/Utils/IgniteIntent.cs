@@ -4,6 +4,8 @@ using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 
+namespace ArknightsMap.Scripts.Utils;
+
 public class IgniteIntent : AbstractIntent
 {
     public override IntentType IntentType => IntentType.Unknown;

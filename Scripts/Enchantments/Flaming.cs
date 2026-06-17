@@ -25,22 +25,28 @@ public class Flaming : ModEnchantmentTemplate
     // protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardKeyword.Retain)];
 
     // 图标位置。大小1:1就行，原版是64x64
-    public override EnchantmentAssetProfile AssetProfile => new(
-        IconPath: $"res://ArknightsMap/images/enchantments/{GetType().Name}.png"
-    );
+    public override EnchantmentAssetProfile AssetProfile => new(IconPath: $"res://ArknightsMap/images/enchantments/{GetType().Name}.png");
 
     public override bool CanEnchantCardType(CardType cardType)
     {
         return cardType == CardType.Attack;
     }
 
-    public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override async Task BeforeDamageReceived(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        decimal amount,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource
+    )
     {
         if ((cardSource == Card) && (amount > 0))
         {
             await PowerCmd.Apply<FlamingDamagePower>(choiceContext, target, amount, dealer, Card);
         }
     }
+
     public override decimal EnchantDamageMultiplicative(decimal originalDamage, ValueProp props)
     {
         if (!props.IsPoweredAttack())
@@ -49,5 +55,4 @@ public class Flaming : ModEnchantmentTemplate
         }
         return 2m;
     }
-
 }

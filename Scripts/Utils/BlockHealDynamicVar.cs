@@ -38,7 +38,7 @@ public class BlockHealDynamicVar : DynamicVar
         }
         else
         {
-            num = 0;        // 放弃思考，显示bug就显示bug吧
+            num = 0; // 放弃思考，显示bug就显示bug吧
         }
 
         BaseValue = num;

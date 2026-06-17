@@ -1,16 +1,16 @@
-using MegaCrit.Sts2.Core.Commands;
+using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
-using ArknightsMap.Scripts.Powers;
-using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace ArknightsMap.Scripts.Monsters;
 
@@ -23,10 +23,9 @@ public class TreeShield : AbstractWildsMonster
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 9);
     private int Damage3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 12, 10);
     private int Block1 => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 25, 20);
+
     // 怪物场景
-    public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
-    );
+    public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
     public override async Task AfterAddedToRoom()
     {
@@ -55,27 +54,25 @@ public class TreeShield : AbstractWildsMonster
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
-            async targets => await DamageCmd
-                .Attack(Damage2)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.7f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(Damage2)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.7f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .Execute(null),
             new SingleAttackIntent(Damage2)
         );
-        MoveState block1 = new MoveState(
-            "BLOCK1",
-            async targets => await CreatureCmd.GainBlock(Creature, Block1, ValueProp.Move, null),
-            new DefendIntent()
-        );
+        MoveState block1 = new MoveState("BLOCK1", async targets => await CreatureCmd.GainBlock(Creature, Block1, ValueProp.Move, null), new DefendIntent());
         MoveState attack3 = new MoveState(
             "ATTACK3",
-            async targets => await DamageCmd
-                .Attack(Damage3)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.7f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(Damage3)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.7f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .Execute(null),
             new SingleAttackIntent(Damage3)
         );
 

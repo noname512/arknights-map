@@ -1,5 +1,6 @@
 using ArknightsMap.Scripts.Cards;
 using ArknightsMap.Scripts.Powers;
+using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
@@ -23,9 +24,7 @@ public class AllFlamesReturned : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 72, 66);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 72, 66);
-    public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
-    );
+    public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
     private int P1AttackDamage => 5;
     private int P1PurpleFlame => 1;
@@ -50,43 +49,72 @@ public class AllFlamesReturned : AbstractWildsMonster
     {
         List<MonsterState> list = new List<MonsterState>();
 
-        p1Attack = new MoveState("ATTACK_P1", async targets =>
-        {
-            await DamageCmd
-                .Attack(P1AttackDamage)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.8f)
-                .WithHitFx(sfx: "event:/ArknightsMap/sfx/AllFlamesReturned/attack_1")
-                .Execute(null);
-            await CardPileCmd.AddToCombatAndPreview<PurpleFlame>(targets, PileType.Hand, P1PurpleFlame, null);
-            await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthGain, Creature, null);
-        }, new SingleAttackIntent(P1AttackDamage), new CardDebuffIntent(), new BuffIntent());
+        p1Attack = new MoveState(
+            "ATTACK_P1",
+            async targets =>
+            {
+                await DamageCmd
+                    .Attack(P1AttackDamage)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.8f)
+                    .WithHitFx(sfx: "event:/ArknightsMap/sfx/AllFlamesReturned/attack_1")
+                    .Execute(null);
+                await CardPileCmd.AddToCombatAndPreview<PurpleFlame>(targets, PileType.Hand, P1PurpleFlame, null);
+                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthGain, Creature, null);
+            },
+            new SingleAttackIntent(P1AttackDamage),
+            new CardDebuffIntent(),
+            new BuffIntent()
+        );
 
-        DeadState = new MoveState("RESPAWN_MOVE1", async _ => { await CreatureCmd.Heal(Creature, Creature.MaxHp / 3); }, new StunIntent())
+        DeadState = new MoveState(
+            "RESPAWN_MOVE1",
+            async _ =>
+            {
+                await CreatureCmd.Heal(Creature, Creature.MaxHp / 3);
+            },
+            new StunIntent()
+        )
         {
-            MustPerformOnceBeforeTransitioning = true
+            MustPerformOnceBeforeTransitioning = true,
         };
 
-        MoveState DeadState2 = new MoveState("RESPAWN_MOVE2", async _ => { await CreatureCmd.Heal(Creature, Creature.MaxHp / 3); }, new StunIntent());
+        MoveState DeadState2 = new MoveState(
+            "RESPAWN_MOVE2",
+            async _ =>
+            {
+                await CreatureCmd.Heal(Creature, Creature.MaxHp / 3);
+            },
+            new StunIntent()
+        );
 
         DeadState3 = new MoveState("RESPAWN_MOVE3", RespawnMove, new HealIntent(), new BuffIntent(), new IgniteIntent());
 
-        p2Attack = new MoveState("ATTACK_P2", async targets =>
-        {
-            await DamageCmd
-                .Attack(P2AttackDamage)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.8f)
-                .WithHitFx(sfx: "event:/ArknightsMap/sfx/AllFlamesReturned/attack_2")
-                .Execute(null);
-            await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
-        }, new SingleAttackIntent(P2AttackDamage), new IgniteIntent());
-        MoveState breeth = new MoveState("BREETH", async targets =>
-        {
-            await CreatureCmd.TriggerAnim(Creature, "Skill", 0);
-            SfxCmd.Play("event:/ArknightsMap/sfx/AllFlamesReturned/skill");
-            await CardPileCmd.AddToCombatAndPreview<PurpleFlame>(targets, PileType.Hand, P2PurpleFlame, null);
-        }, new CardDebuffIntent());
+        p2Attack = new MoveState(
+            "ATTACK_P2",
+            async targets =>
+            {
+                await DamageCmd
+                    .Attack(P2AttackDamage)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.8f)
+                    .WithHitFx(sfx: "event:/ArknightsMap/sfx/AllFlamesReturned/attack_2")
+                    .Execute(null);
+                await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
+            },
+            new SingleAttackIntent(P2AttackDamage),
+            new IgniteIntent()
+        );
+        MoveState breeth = new MoveState(
+            "BREETH",
+            async targets =>
+            {
+                await CreatureCmd.TriggerAnim(Creature, "Skill", 0);
+                SfxCmd.Play("event:/ArknightsMap/sfx/AllFlamesReturned/skill");
+                await CardPileCmd.AddToCombatAndPreview<PurpleFlame>(targets, PileType.Hand, P2PurpleFlame, null);
+            },
+            new CardDebuffIntent()
+        );
 
         p1Attack.FollowUpState = p1Attack;
         DeadState.FollowUpState = DeadState2;
@@ -120,7 +148,6 @@ public class AllFlamesReturned : AbstractWildsMonster
         SfxCmd.PlayLoop("event:/ArknightsMap/sfx/AllFlamesReturned/reborn");
         SetMoveImmediate(DeadState!, forceTransition: true);
     }
-
 
     private async Task RespawnMove(IReadOnlyList<Creature> targets)
     {
@@ -166,7 +193,6 @@ public class AllFlamesReturned : AbstractWildsMonster
             await PowerCmd.Apply<FlameBathPower>(new ThrowingPlayerChoiceContext(), Creature, 50, Creature, null);
             await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
         }
-
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

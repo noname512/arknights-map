@@ -20,9 +20,7 @@ public class Fireball : AbstractWildsMonster
 {
     public override int MinInitialHp => 99999999;
     public override int MaxInitialHp => MinInitialHp;
-    public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
-    );
+    public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
     private int ExplodeDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 25, 23);
 
@@ -40,9 +38,7 @@ public class Fireball : AbstractWildsMonster
             "EXPLODE",
             async targets =>
             {
-                await DamageCmd.Attack(ExplodeDamage).FromMonster(this)
-                    .WithAttackerFx(null, DeathSfx)
-                    .Execute(null);
+                await DamageCmd.Attack(ExplodeDamage).FromMonster(this).WithAttackerFx(null, DeathSfx).Execute(null);
                 await CreatureCmd.Kill(Creature);
             },
             new DeathBlowIntent(() => ExplodeDamage)
@@ -55,7 +51,14 @@ public class Fireball : AbstractWildsMonster
         return new MonsterMoveStateMachine(list, explode);
     }
 
-    public override async Task AfterDamageReceivedLate(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override async Task AfterDamageReceivedLate(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        DamageResult result,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource
+    )
     {
         if (target == Creature)
         {

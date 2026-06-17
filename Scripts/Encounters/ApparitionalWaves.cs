@@ -17,17 +17,12 @@ public class ApparitionalWaves : AbstractWildsEncounter
     public override bool IsWeak => false;
 
     // 遭遇场景（用来指定每个怪物站哪）
-    public override EncounterAssetProfile AssetProfile => new(
-        EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
-    );
+    public override EncounterAssetProfile AssetProfile => new(EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn");
 
     public override string CustomBgm => "event:/ArknightsMap/music/fblw_bat";
 
     // 怪物槽位的名字
-    public override IReadOnlyList<string> Slots => [
-        "first",
-        "second",
-    ];
+    public override IReadOnlyList<string> Slots => ["first", "second"];
 
     public override RoomType RoomType => RoomType.Monster; // 这个遭遇的房间类型，这里是普通怪物
 
@@ -35,8 +30,6 @@ public class ApparitionalWaves : AbstractWildsEncounter
     // public override float GetCameraScaling() => 0.8f;
 
     // 生成怪物列表
-    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<TombkeeperGrotesque>().ToMutable(), "second"),
-        (ModelDb.Monster<TatteredPillar>().ToMutable(), "first")
-    ];
+    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() =>
+        [(ModelDb.Monster<TombkeeperGrotesque>().ToMutable(), "second"), (ModelDb.Monster<TatteredPillar>().ToMutable(), "first")];
 }

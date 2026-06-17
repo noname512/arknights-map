@@ -10,13 +10,14 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using STS2RitsuLib;
 
+namespace ArknightsMap.Scripts.Utils;
+
 public sealed class ReedBed : ILifecycleObserver
 {
     public static bool Burning;
     public static Node? Foreground;
 
-    public ReedBed()
-    { }
+    public ReedBed() { }
 
     public async void OnEvent(IFrameworkLifecycleEvent evt)
     {
@@ -36,7 +37,8 @@ public sealed class ReedBed : ILifecycleObserver
         }
         else if (evt is SideTurnStartingEvent stse)
         {
-            if (stse.Side == CombatSide.Enemy) return;
+            if (stse.Side == CombatSide.Enemy)
+                return;
             if (Burning)
             {
                 foreach (var player in stse.CombatState.Players)
@@ -60,8 +62,10 @@ public sealed class ReedBed : ILifecycleObserver
             if (Burning)
             {
                 await PowerCmd.Apply<DealFlamingDamagePower>(new ThrowingPlayerChoiceContext(), combatState.Enemies, 1m, null, null);
-                if (combatState.Encounter is AFRBoss || combatState.Encounter is HerFlame) texturePath += "wilds_01_c.png";
-                else texturePath += "wilds_01_b.png";
+                if (combatState.Encounter is AFRBoss || combatState.Encounter is HerFlame)
+                    texturePath += "wilds_01_c.png";
+                else
+                    texturePath += "wilds_01_b.png";
             }
             else
             {

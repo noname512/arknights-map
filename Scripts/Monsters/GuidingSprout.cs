@@ -16,9 +16,7 @@ public class GuidingSprout : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 55, 50);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 55, 50);
-    public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
-    );
+    public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
     private int AttackDamage = AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 8, 7);
 
@@ -27,22 +25,24 @@ public class GuidingSprout : AbstractWildsMonster
         List<MonsterState> list = new List<MonsterState>();
         MoveState attack1 = new MoveState(
             "ATTACK1",
-            async targets => await DamageCmd
-                .Attack(AttackDamage)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.5f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(AttackDamage)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .Execute(null),
             new SingleAttackIntent(AttackDamage)
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
-            async targets => await DamageCmd
-                .Attack(AttackDamage)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.5f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(AttackDamage)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .Execute(null),
             new SingleAttackIntent(AttackDamage)
         );
         MoveState summon = new MoveState(

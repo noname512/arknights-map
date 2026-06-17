@@ -32,9 +32,7 @@ public class TombkeeperGrotesque : AbstractWildsMonster
 
     private MoveState? DeadState;
 
-    public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
-    );
+    public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
     public override async Task AfterAddedToRoom()
     {
@@ -44,28 +42,44 @@ public class TombkeeperGrotesque : AbstractWildsMonster
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
-        DeadState = new MoveState("RESPAWN_MOVE", RespawnMove, new HealIntent(), new BuffIntent())
-        {
-            MustPerformOnceBeforeTransitioning = true
-        };
-        MoveState Respawn2 = new MoveState("RESPAWN_2", _ => { return Task.CompletedTask; }, new StunIntent());
-        MoveState Respawn3 = new MoveState("RESPAWN_3", _ => { return Task.CompletedTask; }, new StunIntent());
-        MoveState Respawn4 = new MoveState("RESPAWN_4", async _ =>
-        {
-            await CreatureCmd.TriggerAnim(Creature, "Start", 0);
-            await PowerCmd.Remove<DamageOutPower>(Creature);
-            await PowerCmd.Apply<SoarPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
-            await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 4m, Creature, null);
-            _isStage2 = true;
-        }, new BuffIntent());
+        DeadState = new MoveState("RESPAWN_MOVE", RespawnMove, new HealIntent(), new BuffIntent()) { MustPerformOnceBeforeTransitioning = true };
+        MoveState Respawn2 = new MoveState(
+            "RESPAWN_2",
+            _ =>
+            {
+                return Task.CompletedTask;
+            },
+            new StunIntent()
+        );
+        MoveState Respawn3 = new MoveState(
+            "RESPAWN_3",
+            _ =>
+            {
+                return Task.CompletedTask;
+            },
+            new StunIntent()
+        );
+        MoveState Respawn4 = new MoveState(
+            "RESPAWN_4",
+            async _ =>
+            {
+                await CreatureCmd.TriggerAnim(Creature, "Start", 0);
+                await PowerCmd.Remove<DamageOutPower>(Creature);
+                await PowerCmd.Apply<SoarPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
+                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 4m, Creature, null);
+                _isStage2 = true;
+            },
+            new BuffIntent()
+        );
         MoveState attack1 = new MoveState(
             "ATTACK1",
-            async targets => await DamageCmd
-                .Attack(Damage1)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.8f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(Damage1)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.8f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                    .Execute(null),
             new SingleAttackIntent(Damage1)
         );
         MoveState attack2 = new MoveState(
@@ -85,14 +99,15 @@ public class TombkeeperGrotesque : AbstractWildsMonster
         );
         MoveState attack3 = new MoveState(
             "ATTACK3",
-            async targets => await DamageCmd
-                .Attack(Damage3)
-                .WithHitCount(HitCount3)
-                .FromMonster(this)
-                .WithAttackerAnim("Attack", 0.8f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
-                .OnlyPlayAnimOnce()
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(Damage3)
+                    .WithHitCount(HitCount3)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.8f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                    .OnlyPlayAnimOnce()
+                    .Execute(null),
             new MultiAttackIntent(Damage3, HitCount3)
         );
         attack1.FollowUpState = attack2;

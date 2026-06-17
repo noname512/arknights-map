@@ -20,12 +20,17 @@ public class BurningPower : ModPowerTemplate
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromPowerWithPowerHoverTips<FlamingDamagePower>();
 
     // 自定义图标路径。1:1即可。原版游戏大图256x256，小图64x64。
-    public override PowerAssetProfile AssetProfile => new(
-        IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png",
-        BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png"
-    );
+    public override PowerAssetProfile AssetProfile =>
+        new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
-    public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override async Task BeforeDamageReceived(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        decimal amount,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource
+    )
     {
         if (dealer == Owner)
         {
@@ -35,7 +40,8 @@ public class BurningPower : ModPowerTemplate
 
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
     {
-        if (creature != Owner || !Owner.IsMonster) return;
+        if (creature != Owner || !Owner.IsMonster)
+            return;
         await DamageCmd.Attack(Amount).FromMonster(Owner.Monster!).Execute(choiceContext);
     }
 }

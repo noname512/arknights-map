@@ -14,22 +14,13 @@ public class PatrollingFoliageNormal : AbstractWildsEncounter
 
     public override bool IsWeak => true;
 
-    public override EncounterAssetProfile AssetProfile => new(
-        EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
-    );
+    public override EncounterAssetProfile AssetProfile => new(EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn");
 
     public override string CustomBgm => "event:/ArknightsMap/music/wgrsdj_bat";
 
-    public override IReadOnlyList<string> Slots => [
-        "first",
-        "seed1",
-        "seed2",
-        "seed3"
-    ];
+    public override IReadOnlyList<string> Slots => ["first", "seed1", "seed2", "seed3"];
 
     public override RoomType RoomType => RoomType.Monster;
 
-    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<PatrollingFoliage>().ToMutable(), "first")
-    ];
+    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [(ModelDb.Monster<PatrollingFoliage>().ToMutable(), "first")];
 }

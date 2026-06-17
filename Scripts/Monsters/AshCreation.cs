@@ -1,14 +1,14 @@
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 
 namespace ArknightsMap.Scripts.Monsters;
 
@@ -19,9 +19,7 @@ public class AshCreation : AbstractWildsMonster
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 45, 40);
     private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 15, 13);
 
-    public override MonsterAssetProfile AssetProfile => new(
-        VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn"
-    );
+    public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
     public override async Task AfterAddedToRoom()
     {
@@ -37,26 +35,19 @@ public class AshCreation : AbstractWildsMonster
         List<MonsterState> list = new List<MonsterState>();
         MoveState attack = new MoveState(
             "ATTACK",
-            async targets => await DamageCmd
-                .Attack(Damage1)
-                .FromMonster(this)
-                .WithHitCount(2)
-                .WithAttackerAnim("Attack", 0.5f)
-                .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
-                .OnlyPlayAnimOnce()
-                .Execute(null),
+            async targets =>
+                await DamageCmd
+                    .Attack(Damage1)
+                    .FromMonster(this)
+                    .WithHitCount(2)
+                    .WithAttackerAnim("Attack", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .OnlyPlayAnimOnce()
+                    .Execute(null),
             new MultiAttackIntent(Damage1, 2)
         );
-        MoveState stun = new MoveState(
-            "STUN",
-            async targets => { },
-            new StunIntent()
-        );
-        MoveState wait = new MoveState(
-            "WAIT",
-            async targets => { },
-            new UnknownIntent()
-        );
+        MoveState stun = new MoveState("STUN", async targets => { }, new StunIntent());
+        MoveState wait = new MoveState("WAIT", async targets => { }, new UnknownIntent());
 
         attack.FollowUpState = attack;
         stun.FollowUpState = stun;
