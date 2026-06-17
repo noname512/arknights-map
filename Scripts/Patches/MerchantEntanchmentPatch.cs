@@ -186,8 +186,7 @@ class MerchantEntanchmentPatch
         };
         entry.PurchaseCompleted += (status, entry) =>
         {
-            var method = slot.GetType()
-                .GetMethod("OnSuccessfulPurchase", BindingFlags.Instance | BindingFlags.NonPublic, null, [typeof(PurchaseStatus), typeof(MerchantEntry)], null);
+            var method = typeof(NMerchantSlot).GetMethod("OnSuccessfulPurchase", BindingFlags.Instance | BindingFlags.NonPublic);
             method?.Invoke(slot, [status, entry]);
         };
         EnchantmentData data = new EnchantmentData()
@@ -301,22 +300,6 @@ class MerchantEntanchmentPatch
         }
     }
 
-    [HarmonyPatch(typeof(NMerchantRelic), "OnSuccessfulPurchase")]
-    [HarmonyPatch(typeof(NMerchantPotion), "OnSuccessfulPurchase")]
-    public static class OnSuccessfulPurchasePatch
-    {
-        [HarmonyPrefix]
-        public static bool Prefix(NMerchantSlot __instance)
-        {
-            GD.Print($"====== Start patching OnSuccessfulPurchase ======");
-            Traverse.Create(__instance).Method("TriggerMerchantHandToPointHere").GetValue();
-            Traverse.Create(__instance).Method("UpdateVisual").GetValue();
-            EnchantmentData data = __instance.GetEnchantmentDatas();
-            data.model = data.entry.Model;
-            return false;
-        }
-    }
-
     [HarmonyPatch]
     public static class CreateHoverTipDynamicPatch
     {
@@ -373,36 +356,19 @@ class MerchantEntanchmentPatch
     }
 
     [HarmonyPatch]
-    public static class ExitTreeDynamicPatch
+    public static class OnSuccessfulPurchasePatch
     {
         [HarmonyTargetMethods]
-        public static IEnumerable<MethodBase> TargetMethods() => DiscoverMethods("_ExitTree", false);
+        public static IEnumerable<MethodBase> TargetMethods() => DiscoverMethods("OnSuccessfulPurchase", false);
 
         [HarmonyPrefix]
         public static bool Prefix(NMerchantSlot __instance)
         {
-            GD.Print($"====== Start patching _ExitTree ======");
-            __instance.Disconnect(
-                NMerchantSlot.SignalName.Unhovered,
-                Callable.From<NMerchantSlot>((slot) => Traverse.Create(__instance).Method("OnMerchantHandUnhovered").GetValue([slot]))
-            );
-            var OnUnfocus = () => Traverse.Create(__instance).Method("OnUnfocus").GetValue();
-            ((NClickableControl)GetField("_hitbox", __instance)).Disconnect(SignalName.MouseExited, Callable.From(OnUnfocus));
-            __instance.Disconnect(SignalName.FocusExited, Callable.From(OnUnfocus));
-            ((Tween)GetField("_hoverTween", __instance)).Kill();
-            Player player = (Player)GetField("Player", __instance);
-            if (player != null)
-            {
-                player.GoldChanged -= () => Traverse.Create(__instance).Method("UpdateVisual").GetValue();
-            }
-            MerchantEnchantmentEntry entry = __instance.GetEnchantmentDatas().entry;
-            entry.EntryUpdated -= () => Traverse.Create(__instance).Method("UpdateVisual").GetValue();
-            entry.PurchaseFailed -= (status) =>
-            {
-                var method = typeof(NMerchantSlot).GetMethod("OnPurchaseFailed", BindingFlags.Instance | BindingFlags.NonPublic);
-                method?.Invoke(__instance, [status]);
-            };
-            entry.PurchaseCompleted -= (status, entry) => Traverse.Create(__instance).Method("OnSuccessfulPurchase").GetValue([status, entry]);
+            GD.Print($"====== Start patching OnSuccessfulPurchase ======");
+            Traverse.Create(__instance).Method("TriggerMerchantHandToPointHere").GetValue();
+            Traverse.Create(__instance).Method("UpdateVisual").GetValue();
+            EnchantmentData data = __instance.GetEnchantmentDatas();
+            data.model = data.entry.Model;
             return false;
         }
     }

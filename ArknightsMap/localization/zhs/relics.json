@@ -109,5 +109,8 @@
     "ARKNIGHTS_MAP_RELIC_TRADE_MEMBERSHIP_CARD.flavor": "",
     "ARKNIGHTS_MAP_RELIC_TRADE_SHIPPING_ORDER.description": "拾起时，将[blue]{Cards}[/blue]张[gold]货物[/gold]加入你的[gold]牌组[/gold]。",
     "ARKNIGHTS_MAP_RELIC_TRADE_SHIPPING_ORDER.title": "货运委托书",
-    "ARKNIGHTS_MAP_RELIC_TRADE_SHIPPING_ORDER.flavor": ""
+    "ARKNIGHTS_MAP_RELIC_TRADE_SHIPPING_ORDER.flavor": "",
+    "ARKNIGHTS_MAP_RELIC_SNOWY_REALM_SHOP.description": " 将你的商人替换为售卖[gold]附魔[/gold]服务的特殊商店。",
+    "ARKNIGHTS_MAP_RELIC_SNOWY_REALM_SHOP.title": "雪境专卖店",
+    "ARKNIGHTS_MAP_RELIC_SNOWY_REALM_SHOP.flavor": ""
 }
