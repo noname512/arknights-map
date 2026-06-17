@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Enchantments;
 using Godot;
 using MegaCrit.Sts2.Core.Entities.Merchant;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -15,7 +16,7 @@ public sealed class MerchantEnchantmentEntry : MerchantEntry
         ModelDb.Enchantment<Nimble>(),
         ModelDb.Enchantment<Swift>(),
         ModelDb.Enchantment<Steady>(),
-        ModelDb.Enchantment<Spiral>(),
+        ModelDb.Enchantment<SpiralSpecial>(),
         ModelDb.Enchantment<Glam>(),
         ModelDb.Enchantment<Vigorous>(),
     ];
@@ -44,7 +45,7 @@ public sealed class MerchantEnchantmentEntry : MerchantEntry
             case Steady:
                 _cost = 50;
                 break;
-            case Spiral:
+            case SpiralSpecial:
                 _cost = 200;
                 break;
             case Glam:

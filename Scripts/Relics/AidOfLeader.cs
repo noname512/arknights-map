@@ -14,31 +14,32 @@ namespace ArknightsMap.Scripts.Relics;
 [RegisterRelic(typeof(SharedRelicPool))]
 public class AidOfLeader : ModRelicTemplate
 {
-	public override RelicRarity Rarity => RelicRarity.Ancient;
+    public override RelicRarity Rarity => RelicRarity.Ancient;
 
-	protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(5), new EnergyVar(2)];
-	protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.Static(StaticHoverTip.Energy)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(5), new EnergyVar(2)];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.Static(StaticHoverTip.Energy)];
 
-	public override RelicAssetProfile AssetProfile => new(
-		// 小图标（原版85x85）
-		IconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png",
-		// 轮廓图标（原版85x85）
-		IconOutlinePath: $"res://ArknightsMap/images/relics/{GetType().Name}.png",
-		// 大图标（原版256x256）
-		BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
-	);
+    public override RelicAssetProfile AssetProfile =>
+        new(
+            // 小图标（原版85x85）
+            IconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png",
+            // 轮廓图标（原版85x85）
+            IconOutlinePath: $"res://ArknightsMap/images/relics/{GetType().Name}.png",
+            // 大图标（原版256x256）
+            BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
+        );
 
-	public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
-	{
-		if (player == Owner)
-		{
-			ICombatState combatState = player.Creature.CombatState!;
-			if (combatState.RoundNumber == 2)
-			{
-				Flash();
-				await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
-				await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner, true);
-			}
-		}
-	}
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+    {
+        if (player == Owner)
+        {
+            ICombatState combatState = player.Creature.CombatState!;
+            if (combatState.RoundNumber == 2)
+            {
+                Flash();
+                await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
+                await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner, true);
+            }
+        }
+    }
 }

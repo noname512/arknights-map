@@ -25,14 +25,15 @@ public class BurnItAll : ModRelicTemplate
     protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(55), new IntVar("CardsPick", 25)];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromCard<Dirge>()];
 
-    public override RelicAssetProfile AssetProfile => new(
-        // 小图标（原版85x85）
-        IconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png",
-        // 轮廓图标（原版85x85）
-        IconOutlinePath: $"res://ArknightsMap/images/relics/{GetType().Name}.png",
-        // 大图标（原版256x256）
-        BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
-    );
+    public override RelicAssetProfile AssetProfile =>
+        new(
+            // 小图标（原版85x85）
+            IconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png",
+            // 轮廓图标（原版85x85）
+            IconOutlinePath: $"res://ArknightsMap/images/relics/{GetType().Name}.png",
+            // 大图标（原版256x256）
+            BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
+        );
 
     public override async Task AfterObtained()
     {
@@ -50,11 +51,18 @@ public class BurnItAll : ModRelicTemplate
 
         Player player = Owner;
 
-        CardCreationOptions options = CardCreationOptions.ForNonCombatWithUniformOdds([Owner.Character.CardPool], c => c.Rarity != CardRarity.Basic && c.Rarity != CardRarity.Event && c.Rarity != CardRarity.Ancient).WithFlags(CardCreationFlags.NoRarityModification);
+        CardCreationOptions options = CardCreationOptions
+            .ForNonCombatWithUniformOdds(
+                [Owner.Character.CardPool],
+                c => c.Rarity != CardRarity.Basic && c.Rarity != CardRarity.Event && c.Rarity != CardRarity.Ancient
+            )
+            .WithFlags(CardCreationFlags.NoRarityModification);
         List<CardCreationResult> cards = [];
         if (hasDirge)
         {
-            CardCreationOptions rareOptions = CardCreationOptions.ForNonCombatWithUniformOdds([Owner.Character.CardPool], c => c.Rarity == CardRarity.Rare).WithFlags(CardCreationFlags.NoRarityModification);
+            CardCreationOptions rareOptions = CardCreationOptions
+                .ForNonCombatWithUniformOdds([Owner.Character.CardPool], c => c.Rarity == CardRarity.Rare)
+                .WithFlags(CardCreationFlags.NoRarityModification);
             cards.AddRange(CardFactory.CreateForReward(player, rareOptions.GetPossibleCards(player).Count(), rareOptions));
         }
 
@@ -65,7 +73,14 @@ public class BurnItAll : ModRelicTemplate
 
         cards.Sort((a, b) => a.Card.Rarity - b.Card.Rarity);
 
-        foreach (CardModel item in await CardSelectCmd.FromSimpleGridForRewards(prefs: new CardSelectorPrefs(L10NLookup("ARKNIGHTS_MAP_RELIC_HER_ALLOWANCE.choose"), DynamicVars["CardsPick"].IntValue), context: new BlockingPlayerChoiceContext(), cards: cards, player: Owner))
+        foreach (
+            CardModel item in await CardSelectCmd.FromSimpleGridForRewards(
+                prefs: new CardSelectorPrefs(L10NLookup("ARKNIGHTS_MAP_RELIC_HER_ALLOWANCE.choose"), DynamicVars["CardsPick"].IntValue),
+                context: new BlockingPlayerChoiceContext(),
+                cards: cards,
+                player: Owner
+            )
+        )
         {
             CardModel newCard = Owner.RunState.CreateCard(item, Owner);
             CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(newCard, PileType.Deck));

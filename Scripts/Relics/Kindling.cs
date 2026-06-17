@@ -13,23 +13,24 @@ namespace ArknightsMap.Scripts.Relics;
 [RegisterRelic(typeof(SharedRelicPool))]
 public class Kindling : ModRelicTemplate
 {
-	public override RelicRarity Rarity => RelicRarity.Ancient;
-	protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromCard<SeedOfHope>()];
+    public override RelicRarity Rarity => RelicRarity.Ancient;
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromCard<SeedOfHope>()];
 
-	public override RelicAssetProfile AssetProfile => new(
-		// 小图标（原版85x85）
-		IconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png",
-		// 轮廓图标（原版85x85）
-		IconOutlinePath: $"res://ArknightsMap/images/relics/{GetType().Name}.png",
-		// 大图标（原版256x256）
-		BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
-	);
+    public override RelicAssetProfile AssetProfile =>
+        new(
+            // 小图标（原版85x85）
+            IconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png",
+            // 轮廓图标（原版85x85）
+            IconOutlinePath: $"res://ArknightsMap/images/relics/{GetType().Name}.png",
+            // 大图标（原版256x256）
+            BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
+        );
 
-	public override async Task AfterObtained()
-	{
-		List<CardPileAddResult> results = new List<CardPileAddResult>();
-		CardModel card = Owner.RunState.CreateCard<SeedOfHope>(Owner);
-		results.Add(await CardPileCmd.Add(card, PileType.Deck));
-		CardCmd.PreviewCardPileAdd(results, 1f);
-	}
+    public override async Task AfterObtained()
+    {
+        List<CardPileAddResult> results = new List<CardPileAddResult>();
+        CardModel card = Owner.RunState.CreateCard<SeedOfHope>(Owner);
+        results.Add(await CardPileCmd.Add(card, PileType.Deck));
+        CardCmd.PreviewCardPileAdd(results, 1f);
+    }
 }
