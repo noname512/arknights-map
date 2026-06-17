@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" uid="uid://dvs65djbmoky2" path="res://Scripts/Utils/MerchantEnchantment/NEnchantment.cs" id="1_jsw7s"]
+[ext_resource type="Shader" uid="uid://bc7klpmhwkav3" path="res://shaders/relic.gdshader" id="2_typca"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_cr011"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="4_pepqq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v62ve"]
+resource_local_to_scene = true
+shader = ExtResource("2_typca")
+shader_parameter/pulse = 0.0
+shader_parameter/is_used = 0.0
+shader_parameter/is_wax = 0.0
+
+[node name="Enchantment" type="Control"]
+custom_minimum_size = Vector2(68, 68)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 68.0
+offset_bottom = 68.0
+pivot_offset = Vector2(34, 34)
+focus_mode = 2
+mouse_filter = 1
+script = ExtResource("1_jsw7s")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Icon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_v62ve")
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(30, 30)
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 4
+
+[node name="AmountLabel" type="Label" parent="Icon"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -36.0
+offset_top = -33.0
+offset_right = -4.0
+offset_bottom = -1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.188235)
+theme_override_colors/font_outline_color = Color(0.15, 0.1409, 0.111, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("4_pepqq")
+theme_override_font_sizes/font_size = 18
+text = "88"
+horizontal_alignment = 2
+vertical_alignment = 2
+script = ExtResource("4_cr011")
+AutoSizeEnabled = false
