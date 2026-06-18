@@ -1,7 +1,10 @@
 using ArknightsMap.Scripts.Acts;
+using ArknightsMap.Scripts.Relics;
 using Godot;
 using MegaCrit.Sts2.Core.Events;
+using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Runs;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -28,17 +31,37 @@ public class Pramanix : ModAncientEventTemplate
             RunHistoryIconOutlinePath: "res://ArknightsMap/images/ancients/Pramanix/avatar.png"
         );
 
-    private IReadOnlyList<EventOption> Pool1 => [];
-    private IReadOnlyList<EventOption> Pool2 => [];
-    private IReadOnlyList<EventOption> Pool3 => [];
-
+    public IEnumerable<EventOption> SinglePlayerOptions =>
+    [
+        RelicOption<HerAllowance>(), //祂的许可
+        RelicOption<EreSnowBellsChime>(), //铃音吹雪
+        RelicOption<Faith>(), //信仰
+        RelicOption<Pilgrimage>(), //圣巡
+        // RelicOption<SnowTracks>(),           //雪迹
+        RelicOption<ByKjeragandrPramanix>(), //耶拉冈德在上·初雪
+        RelicOption<PeaksCladInForest>(), //霜涛覆岭
+        RelicOption<TowardsTheMountainBow>(), //群山俯首
+        RelicOption<BlessingOfKarlan>(), //圣山的祝福
+        RelicOption<NatureDeterrent>(), //自然威慑
+    ];
     // 所有可能的选项
-    public override IEnumerable<EventOption> AllPossibleOptions => [.. Pool1, .. Pool2, .. Pool3];
+    public override IEnumerable<EventOption> AllPossibleOptions => [
+        .. SinglePlayerOptions, 
+        RelicOption<TriClanCouncil>(),          //三族议会
+        
+    ];
 
     // 生成选项
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        return [Rng.NextItem(Pool1)!, Rng.NextItem(Pool2)!, Rng.NextItem(Pool3)!];
+        List<EventOption> list = SinglePlayerOptions.ToList();
+        if (Owner!.RunState.Players.Count > 1)
+        {
+            list.Add(RelicOption<TriClanCouncil>());
+        }
+        list.UnstableShuffle(Rng);
+        list = list.Take(3).ToList();
+        return list;
     }
 
     public override bool IsValidForAct(ActModel act)

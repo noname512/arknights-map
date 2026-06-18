@@ -29,7 +29,7 @@ public class ByKjeragandrPramanix : ModRelicTemplate
 
     public override decimal ModifyHpLostAfterOstyLate(Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (target != base.Owner.Creature)
+        if ((target != Owner.Creature) || (Status == RelicStatus.Disabled) || (amount < Owner.Creature.CurrentHp))
         {
             return amount;
         }

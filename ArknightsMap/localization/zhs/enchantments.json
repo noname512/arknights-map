@@ -9,6 +9,6 @@
   "ARKNIGHTS_MAP_ENCHANTMENT_SPIRAL_SPECIAL.extraCardText": "",
   "ARKNIGHTS_MAP_ENCHANTMENT_SPIRAL_SPECIAL.description": "这张牌获得[gold]重放[/gold][blue]{Times}[/blue]。",
   "ARKNIGHTS_MAP_ENCHANTMENT_BLESSING.title": "祝福",
-  "ARKNIGHTS_MAP_ENCHANTMENT_BLESSING.extraCardText": "获得[gold]重放[/gold][blue]{Times}[/blue]。",
+  "ARKNIGHTS_MAP_ENCHANTMENT_BLESSING.extraCardText": "这张牌获得[gold]重放[/gold][blue]{Times}[/blue]。",
   "ARKNIGHTS_MAP_ENCHANTMENT_BLESSING.description": "这张牌每次被打出时，获得[gold]重放[/gold][blue]{Times}[/blue]。"
 }

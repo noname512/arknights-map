@@ -124,6 +124,10 @@ public class PeaksCladInForest : ModRelicTemplate
         {
             return false;
         }
+        if (card.Type != type)
+        {
+            return false;
+        }
         switch (card.Pile?.Type)
         {
             case PileType.Hand:

@@ -43,16 +43,7 @@ public class Bagpipe : ModAncientEventTemplate
     // 所有可能的选项
     public override IEnumerable<EventOption> AllPossibleOptions =>
         [
-            RelicOption<HighImpactAssault>(), //高效冲击
-            RelicOption<TheSpear>(), //破城矛
-            RelicOption<LockedBreechBurst>(), //闭膛连发
-            RelicOption<LandenBeer>(), //兰登佳酿
-            RelicOption<PreciseReloading>(), //精密填弹
-            RelicOption<EjectionBullet>(), //弹射弹药
-            RelicOption<Haystack>(), //干草垛
-            RelicOption<WheatEar>(), //麦穗
-            RelicOption<StarrySkyPhoto>(), //星空照片
-            RelicOption<MartialTradition>(), //军事传统
+            ..SinglePlayerChoice, 
             RelicOption<OfferAssistance>(), //施以援手
         ];
 
