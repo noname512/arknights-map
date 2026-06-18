@@ -1,9 +1,10 @@
 using ArknightsMap.Scripts.Enchantments;
+using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Nodes;
@@ -14,11 +15,12 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
-public class BurnScar : ModRelicTemplate
+public class BlessingOfKarlan : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromEnchantment<Flaming>();
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1)];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromEnchantment<Blessing>();
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -30,21 +32,17 @@ public class BurnScar : ModRelicTemplate
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
 
-    public override Task AfterObtained()
+    public override async Task AfterObtained()
     {
-        IEnumerable<CardModel> enumerable = PileType.Deck.GetPile(Owner).Cards.ToList();
-        foreach (CardModel item in enumerable)
+        CardSelectorPrefs prefs = new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, DynamicVars.Cards.IntValue);
+        foreach (CardModel item in await CardSelectCmd.FromDeckForEnchantment(Owner, ModelDb.Enchantment<Blessing>(), 1, prefs))
         {
-            if (item.Rarity == CardRarity.Basic && item.Tags.Contains(CardTag.Strike) && ModelDb.Enchantment<Flaming>().CanEnchant(item))
+            CardCmd.Enchant<Blessing>(item, 1m);
+            NCardEnchantVfx? nCardEnchantVfx = NCardEnchantVfx.Create(item);
+            if (nCardEnchantVfx != null)
             {
-                CardCmd.Enchant<Flaming>(item, 1m);
-                NCardEnchantVfx? nCardEnchantVfx = NCardEnchantVfx.Create(item);
-                if (nCardEnchantVfx != null)
-                {
-                    NRun.Instance?.GlobalUi.CardPreviewContainer.AddChildSafely(nCardEnchantVfx);
-                }
+                NRun.Instance?.GlobalUi.CardPreviewContainer.AddChildSafely(nCardEnchantVfx);
             }
         }
-        return Task.CompletedTask;
     }
 }
