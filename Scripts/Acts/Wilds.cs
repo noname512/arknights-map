@@ -23,6 +23,9 @@ public sealed class Wilds : ModActTemplate
     public override Color MapUntraveledColor => new Color("6E7750");
 
     public override Color MapBgColor => new Color("9B9562");
+    public override int Index => 1;
+    public override bool IsDefault => true;
+    public override bool IsUnlocked(UnlockState unlockState) => true;
 
     public override string ChestSpineResourcePath => "res://animations/backgrounds/treasure_room/chest_room_act_2_skel_data.tres";
     public override string ChestSpineSkinNameNormal => "act2";

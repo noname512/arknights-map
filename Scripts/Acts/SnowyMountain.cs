@@ -36,6 +36,10 @@ public sealed class SnowyMountain : ModActTemplate
     public override string? CustomMapBotBgPath => "res://images/packed/map/map_bgs/hive/map_bottom_hive.png";
     public override string? CustomRestSiteBackgroundPath => "res://scenes/rest_site/hive_rest_site.tscn";
 
+    public override int Index => 2;
+    public override bool IsDefault => true;
+    public override bool IsUnlocked(UnlockState unlockState) => true;
+
     public override IEnumerable<EventModel> AllEvents =>
         new EventModel[]
         {
