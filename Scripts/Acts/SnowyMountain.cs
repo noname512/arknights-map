@@ -37,8 +37,8 @@ public sealed class SnowyMountain : ModActTemplate
     public override string? CustomRestSiteBackgroundPath => "res://scenes/rest_site/hive_rest_site.tscn";
 
     public override int Index => 2;
-    public override bool IsDefault => true;
-    public override bool IsUnlocked(UnlockState unlockState) => true;
+    public override bool IsDefault => false;
+    public override bool IsUnlocked(UnlockState unlockState) => false;
 
     public override IEnumerable<EventModel> AllEvents =>
         new EventModel[]
@@ -51,7 +51,29 @@ public sealed class SnowyMountain : ModActTemplate
     public override IEnumerable<EncounterModel> BossDiscoveryOrder => new EncounterModel[] { ModelDb.Encounter<MandragoraBoss>() };
 
     public override IEnumerable<EncounterModel> GenerateAllEncounters() =>
-        new EncounterModel[] { ModelDb.Encounter<BurnTheHaystacks>(), ModelDb.Encounter<MandragoraBoss>() };
+        new EncounterModel[]
+        {
+            ModelDb.Encounter<BurnTheHaystacks>(),
+            ModelDb.Encounter<ScorchingDream>(),
+            ModelDb.Encounter<DublinnPhalanx>(),
+            ModelDb.Encounter<DublinnPhalanxWeak>(),
+            ModelDb.Encounter<PatrollingFoliageNormal>(),
+            ModelDb.Encounter<DublinnCompanion>(),
+            ModelDb.Encounter<MandragoraBoss>(),
+            ModelDb.Encounter<ScaldingEarth>(),
+            ModelDb.Encounter<ApparitionalWaves>(),
+            ModelDb.Encounter<ComingFire>(),
+            ModelDb.Encounter<EndOfTheNight>(),
+            ModelDb.Encounter<AFRBoss>(),
+            ModelDb.Encounter<FloralGarland>(),
+            ModelDb.Encounter<LampBurner>(),
+            ModelDb.Encounter<HerFlame>(),
+            ModelDb.Encounter<MarchOfTheDead>(),
+            ModelDb.Encounter<BurningWeeds>(),
+            ModelDb.Encounter<DublinnFlamerazerNormal>(),
+            ModelDb.Encounter<AshyMarsh>(),
+            // TODO: 先让游戏能跑，好像出锅了
+        };
 
     protected override void ApplyActDiscoveryOrderModifications(UnlockState unlockState) { }
 

@@ -23,9 +23,10 @@ public sealed class Wilds : ModActTemplate
     public override Color MapUntraveledColor => new Color("6E7750");
 
     public override Color MapBgColor => new Color("9B9562");
+    protected override int NumberOfWeakEncounters => 2;
     public override int Index => 1;
-    public override bool IsDefault => true;
-    public override bool IsUnlocked(UnlockState unlockState) => true;
+    public override bool IsDefault => false;
+    public override bool IsUnlocked(UnlockState unlockState) => false;
 
     public override string ChestSpineResourcePath => "res://animations/backgrounds/treasure_room/chest_room_act_2_skel_data.tres";
     public override string ChestSpineSkinNameNormal => "act2";
@@ -42,13 +43,29 @@ public sealed class Wilds : ModActTemplate
     public override string? CustomRestSiteBackgroundPath => "res://scenes/rest_site/hive_rest_site.tscn";
 
     public override IEnumerable<EventModel> AllEvents =>
-        new EventModel[] { ModelDb.Event<TheWake>(), ModelDb.Event<Campfire>(), ModelDb.Event<TheLeaderOfDublinn>(), ModelDb.Event<OverlookingNasaoirsi>() };
+        new EventModel[]
+        {
+            ModelDb.Event<TheWake>(),               //
+            ModelDb.Event<Campfire>(),              //
+            ModelDb.Event<TheLeaderOfDublinn>(),    //
+            ModelDb.Event<OverlookingNasaoirsi>()   //
+        };
 
     public override IEnumerable<AncientEventModel> AllAncients =>
-        new AncientEventModel[] { ModelDb.AncientEvent<Reed>(), ModelDb.AncientEvent<Bagpipe>(), ModelDb.AncientEvent<Tezcatara>() };
+        new AncientEventModel[]
+        {
+            ModelDb.AncientEvent<Reed>(), //
+            ModelDb.AncientEvent<Bagpipe>(), //
+            ModelDb.AncientEvent<Tezcatara>() //
+        };
 
     public override IEnumerable<EncounterModel> BossDiscoveryOrder =>
-        new EncounterModel[] { ModelDb.Encounter<MandragoraBoss>(), ModelDb.Encounter<AFRBoss>(), ModelDb.Encounter<HerFlame>() };
+        new EncounterModel[]
+        {
+            ModelDb.Encounter<MandragoraBoss>(), //
+            ModelDb.Encounter<AFRBoss>(),       //
+            ModelDb.Encounter<HerFlame>()       //
+        };
 
     public override IEnumerable<EncounterModel> GenerateAllEncounters() =>
         new EncounterModel[]
