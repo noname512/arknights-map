@@ -75,15 +75,14 @@ public class BurnItAll : ModRelicTemplate
 
         foreach (
             CardModel item in await CardSelectCmd.FromSimpleGridForRewards(
-                prefs: new CardSelectorPrefs(L10NLookup("ARKNIGHTS_MAP_RELIC_HER_ALLOWANCE.choose"), DynamicVars["CardsPick"].IntValue),
+                prefs: new CardSelectorPrefs(L10NLookup("ARKNIGHTS_MAP_RELIC_BURN_IT_ALL.choose"), DynamicVars["CardsPick"].IntValue),
                 context: new BlockingPlayerChoiceContext(),
                 cards: cards,
                 player: Owner
             )
         )
         {
-            CardModel newCard = Owner.RunState.CreateCard(item, Owner);
-            CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(newCard, PileType.Deck));
+            CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(item, PileType.Deck));
         }
     }
 }

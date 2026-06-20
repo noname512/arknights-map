@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -45,7 +46,7 @@ public class OfferAssistance : ModRelicTemplate
         CardModel? chosenCard = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, Owner, canSkip: true);
         if (chosenCard != null)
         {
-            CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(chosenCard, PileType.Hand));
+            await CardPileCmd.AddGeneratedCardToCombat(chosenCard, PileType.Hand, Owner);
         }
     }
 }

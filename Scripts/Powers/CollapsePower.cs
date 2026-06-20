@@ -1,5 +1,6 @@
 using ArknightsMap.Scripts.Monsters;
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -75,7 +76,12 @@ public class CollapsePower : ModPowerTemplate
 
             MoveState newState2;
             if ((partner.Monster.IsPerformingMove) || 
-                (CombatManager.Instance.History.Entries.Any(_ => _.Actor == partner && _.HappenedThisTurn(Owner.CombatState))))
+                CombatManager.Instance.History.Entries.Any(
+                    enrty => enrty is MonsterPerformedMoveEntry &&
+                             enrty.Actor == partner &&
+                             enrty.HappenedThisTurn(CombatState)
+                    )
+                )
             {
                 // Should be next turn
                 newState2 = new MoveState(
