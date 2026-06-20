@@ -1,4 +1,5 @@
 using ArknightsMap.Scripts.Monsters;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -71,8 +72,30 @@ public class CollapsePower : ModPowerTemplate
             {
                 newState.FollowUpState = curState;
             }
-            newState.RegisterStates(partner.Monster.MoveStateMachine!.States);
-            partner.Monster.SetMoveImmediate(newState);
+
+            MoveState newState2;
+            if ((partner.Monster.IsPerformingMove) || 
+                (CombatManager.Instance.History.Entries.Any(_ => _.Actor == partner && _.HappenedThisTurn(Owner.CombatState))))
+            {
+                // Should be next turn
+                newState2 = new MoveState(
+                    "STUN_" + newState.StateId,
+                    _ =>
+                    {
+                        return Task.CompletedTask;
+                    },
+                    new StunIntent()
+                );
+                newState2.FollowUpState = newState;
+                newState.RegisterStates(partner.Monster.MoveStateMachine!.States);
+                newState2.RegisterStates(partner.Monster.MoveStateMachine!.States);
+                partner.Monster.SetMoveImmediate(newState2);
+            }
+            else
+            {
+                newState.RegisterStates(partner.Monster.MoveStateMachine!.States);
+                partner.Monster.SetMoveImmediate(newState);
+            }
 
             if (partner.HasPower<StoneshieldPower>())
             {

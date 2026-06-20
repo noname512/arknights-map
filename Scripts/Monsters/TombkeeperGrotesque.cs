@@ -134,7 +134,6 @@ public class TombkeeperGrotesque : AbstractWildsMonster
         Creature.GetPower<RebornPower>()?.DoRevive();
         await CreatureCmd.Heal(Creature, Creature.MaxHp);
         await PowerCmd.Apply<DamageOutPower>(new ThrowingPlayerChoiceContext(), Creature, 10, Creature, null);
-        await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, ReviveStrenth, Creature, null);
         await PowerCmd.Remove<RebornPower>(Creature);
         Creature? m = CombatState.Enemies.FirstOrDefault(m => m?.Monster is TatteredPillar, null);
         if (m != null)

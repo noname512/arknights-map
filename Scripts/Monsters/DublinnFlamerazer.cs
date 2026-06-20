@@ -118,7 +118,7 @@ public class DublinnFlamerazer : AbstractWildsMonster
         list.Add(attack3);
         list.Add(attack4);
 
-        return new MonsterMoveStateMachine(list, attack1);
+        return new MonsterMoveStateMachine(list, attack1_not_burning);
     }
 
     public override async Task OnReedBedStatusChange(bool burning)
