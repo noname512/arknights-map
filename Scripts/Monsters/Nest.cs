@@ -51,11 +51,6 @@ public class Nest : AbstractWildsMonster
                     .Execute(null);
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthAdd, Creature, null);
                 decimal totalAdd = HpAdd;
-                if (CombatState.Players.Count > 1)
-                {
-                    totalAdd *=
-                        CombatState.Players.Count * MultiplayerScalingModel.GetMultiplayerScaling(CombatState.Encounter, CombatState.RunState.CurrentActIndex);
-                }
                 if (Creature.IsAlive)
                     await CreatureCmd.GainMaxHp(Creature, totalAdd);
                 growthTimes++;
