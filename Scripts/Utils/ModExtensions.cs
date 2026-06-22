@@ -1,7 +1,6 @@
 using System.Runtime.CompilerServices;
 using ArknightsMap.Scripts.Utils.MerchantEnchantment;
-using Godot;
-using HarmonyLib;
+using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Entities.Merchant;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Screens.Shops;
@@ -25,6 +24,8 @@ public static class ModExtensions
 
     private static readonly ConditionalWeakTable<NMerchantSlot, EnchantmentData> EnchantmentDatas = new();
 
+    private static readonly HashSet<CardSelectorPrefs> BurnItAllPrefs = new();
+
     public static EnchantSynchronizer GetEnchantSynchronizer(this RunManager runManager)
     {
         EnchantSynchronizers.TryGetValue(runManager, out var data);
@@ -46,6 +47,11 @@ public static class ModExtensions
     {
         EnchantmentDatas.TryGetValue(slot, out var data);
         return data;
+    }
+
+    public static bool IsBurnItAllPrefs(CardSelectorPrefs prefs)
+    {
+        return BurnItAllPrefs.Contains(prefs);
     }
 
     public static void SetEnchantSynchronizer(RunManager runManager, EnchantSynchronizer synchronizer)
@@ -71,5 +77,10 @@ public static class ModExtensions
     public static void RemoveEnchantSynchronizer(RunManager runManager)
     {
         EnchantSynchronizers.Remove(runManager);
+    }
+
+    public static void AddBurnItAllPrefs(CardSelectorPrefs prefs)
+    {
+        BurnItAllPrefs.Add(prefs);
     }
 }

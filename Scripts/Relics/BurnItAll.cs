@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
@@ -73,9 +74,14 @@ public class BurnItAll : ModRelicTemplate
 
         cards.Sort((a, b) => a.Card.Rarity - b.Card.Rarity);
 
+        CardSelectorPrefs prefs = new CardSelectorPrefs(L10NLookup("ARKNIGHTS_MAP_RELIC_BURN_IT_ALL.choose"), DynamicVars["CardsPick"].IntValue)
+        {
+            RequireManualConfirmation = true,
+        };
+        ModExtensions.AddBurnItAllPrefs(prefs);
         foreach (
             CardModel item in await CardSelectCmd.FromSimpleGridForRewards(
-                prefs: new CardSelectorPrefs(L10NLookup("ARKNIGHTS_MAP_RELIC_BURN_IT_ALL.choose"), DynamicVars["CardsPick"].IntValue),
+                prefs: prefs,
                 context: new BlockingPlayerChoiceContext(),
                 cards: cards,
                 player: Owner
