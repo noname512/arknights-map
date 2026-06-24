@@ -37,7 +37,7 @@ public class Pramanix : ModAncientEventTemplate
         RelicOption<EreSnowBellsChime>(), //铃音吹雪
         RelicOption<Faith>(), //信仰
         RelicOption<Pilgrimage>(), //圣巡
-        // RelicOption<SnowTracks>(),           //雪迹
+        RelicOption<SnowTracks>(),           //雪迹
         RelicOption<ByKjeragandrPramanix>(), //耶拉冈德在上·初雪
         RelicOption<PeaksCladInForest>(), //霜涛覆岭
         RelicOption<TowardsTheMountainBow>(), //群山俯首
