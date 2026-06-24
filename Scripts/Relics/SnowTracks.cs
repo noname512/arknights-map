@@ -1,5 +1,6 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.Helpers;
@@ -121,18 +122,21 @@ public class SnowTracks : ModRelicTemplate
             return;
         }
         Flash();
-        IEnumerable<CardModel> enumerable = PileType
-            .Deck.GetPile(Owner)
-            .Cards.Where((CardModel c) => c?.IsUpgradable ?? false)
-            .ToList()
-            .StableShuffle(Owner.RunState.Rng.Niche)
-            .Take(DynamicVars.Cards.IntValue);
-        NRun.Instance?.GlobalUi.GridCardPreviewContainer.ForceMaxColumnsUntilEmpty(3);
-        foreach (CardModel item in enumerable)
+        foreach (Player player in Owner.RunState.Players)
         {
-            CardCmd.Upgrade(item, CardPreviewStyle.GridLayout);
+            IEnumerable<CardModel> enumerable = PileType
+                .Deck.GetPile(player)
+                .Cards.Where((CardModel c) => c?.IsUpgradable ?? false)
+                .ToList()
+                .StableShuffle(player.RunState.Rng.Niche)
+                .Take(DynamicVars.Cards.IntValue);
+            NRun.Instance?.GlobalUi.GridCardPreviewContainer.ForceMaxColumnsUntilEmpty(3);
+            foreach (CardModel item in enumerable)
+            {
+                CardCmd.Upgrade(item, CardPreviewStyle.GridLayout);
+            }
+            await CreatureCmd.Heal(player.Creature, DynamicVars.Heal.IntValue, false);
         }
-        await CreatureCmd.Heal(Owner.Creature, DynamicVars.Heal.IntValue, false);
     }
 
     public List<MapCoord> GetMarkedCoords()
