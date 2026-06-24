@@ -33,8 +33,8 @@ public sealed class MerchantEnchantmentEntry : MerchantEntry
 
     public override void CalcCost()
     {
-        _cost = EnchantmentMerchantUtils.GetBaseCost(Model!) * 2;
-        _cost = Mathf.RoundToInt(_cost * _player.PlayerRng.Shops.NextFloat(0.9f, 1.1f));
+        _cost = EnchantmentMerchantUtils.GetBaseCost(Model!);
+        _cost = Mathf.RoundToInt(_cost * 1.5 * _player.PlayerRng.Shops.NextFloat(0.9f, 1.1f));
     }
 
     protected override void ClearAfterPurchase()

@@ -430,7 +430,7 @@ class MerchantEntanchmentPatch
             }
             if (card != null && card.Enchantment != null)
             {
-                __result += EnchantmentMerchantUtils.GetBaseCost(card.Enchantment);
+                __result = (int)(__result * 0.6 + EnchantmentMerchantUtils.GetBaseCost(card.Enchantment));
             }
         }
     }

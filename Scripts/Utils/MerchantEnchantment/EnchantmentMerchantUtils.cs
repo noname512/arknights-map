@@ -53,10 +53,10 @@ class EnchantmentMerchantUtils
                 cost = 50;
                 break;
             case SpiralSpecial:
-                cost = 200;
+                cost = 130;
                 break;
             case Glam:
-                cost = 150;
+                cost = 100;
                 break;
             case Vigorous:
                 cost = model.Amount * 6;
