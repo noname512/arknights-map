@@ -26,6 +26,7 @@ public sealed class Wilds : ModActTemplate
     protected override int NumberOfWeakEncounters => 2;
     public override int Index => 1;
     public override bool IsDefault => false;
+
     public override bool IsUnlocked(UnlockState unlockState) => false;
 
     public override string ChestSpineResourcePath => "res://animations/backgrounds/treasure_room/chest_room_act_2_skel_data.tres";
@@ -45,26 +46,29 @@ public sealed class Wilds : ModActTemplate
     public override IEnumerable<EventModel> AllEvents =>
         new EventModel[]
         {
-            ModelDb.Event<TheWake>(),               //
-            ModelDb.Event<Campfire>(),              //
-            ModelDb.Event<TheLeaderOfDublinn>(),    //
-            ModelDb.Event<OverlookingNasaoirsi>()   //
+            ModelDb.Event<TheWake>(), // 守灵仪式
+            ModelDb.Event<Campfire>(), // 篝火？
+            ModelDb.Event<TheLeaderOfDublinn>(), // 深池的“领袖”
+            ModelDb.Event<OverlookingNasaoirsi>(), // 俯瞰纳斯尔纱
+            ModelDb.Event<HaystackMidnightTalks>(), // 草垛夜话
+            ModelDb.Event<IntelligenceBroker>(), // 情报贩卖商
+            ModelDb.Event<ChanceEncounterWithCannot>(), // 偶遇坎诺特
         };
 
     public override IEnumerable<AncientEventModel> AllAncients =>
         new AncientEventModel[]
         {
-            ModelDb.AncientEvent<Reed>(), //
-            ModelDb.AncientEvent<Bagpipe>(), //
-            ModelDb.AncientEvent<Tezcatara>() //
+            ModelDb.AncientEvent<Reed>(), // 苇草
+            ModelDb.AncientEvent<Bagpipe>(), // 风笛
+            ModelDb.AncientEvent<Tezcatara>(), // 稻草人
         };
 
     public override IEnumerable<EncounterModel> BossDiscoveryOrder =>
         new EncounterModel[]
         {
-            ModelDb.Encounter<MandragoraBoss>(), //
-            ModelDb.Encounter<AFRBoss>(),       //
-            ModelDb.Encounter<HerFlame>()       //
+            ModelDb.Encounter<MandragoraBoss>(), // 蔓德拉
+            ModelDb.Encounter<AFRBoss>(), // “万火归一”
+            ModelDb.Encounter<HerFlame>(), // “领袖”
         };
 
     public override IEnumerable<EncounterModel> GenerateAllEncounters() =>
