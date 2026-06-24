@@ -71,13 +71,13 @@ public sealed class OverlookingNasaoirsi : ModEventTemplate
         switch (Owner!.RunState.Act.BossEncounter)
         {
             case MandragoraBoss:
-                list.Add(new EventOption(this, Vengeance, InitialOptionKey("VENGEANCE")));
+                list.Add(new EventOption(this, Vengeance, InitialOptionKey("VENGEANCE")).ThatDecreasesMaxHp(DynamicVars["MaxHp1"].IntValue));
                 break;
             case HerFlame:
-                list.Add(new EventOption(this, Rebirth, InitialOptionKey("REBIRTH")));
+                list.Add(new EventOption(this, Rebirth, InitialOptionKey("REBIRTH")).ThatDecreasesMaxHp(DynamicVars["MaxHp2"].IntValue));
                 break;
             case AFRBoss:
-                list.Add(new EventOption(this, Incinerate, InitialOptionKey("INCINERATE")));
+                list.Add(new EventOption(this, Incinerate, InitialOptionKey("INCINERATE")).ThatDoesDamage(DynamicVars.Damage.IntValue));
                 break;
         }
         if (maxRarity >= CardRarity.Common)

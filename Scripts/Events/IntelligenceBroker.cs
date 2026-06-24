@@ -2,6 +2,7 @@ using ArknightsMap.Scripts.Acts;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Runs;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -22,6 +23,11 @@ public sealed class IntelligenceBroker : ModEventTemplate
             new EventOption(this, Fifty, InitialOptionKey("FIFTY")),
             new EventOption(this, Leave, InitialOptionKey("LEAVE")),
         ];
+
+    public override bool IsAllowed(IRunState runState)
+    {
+        return runState.Act is Wilds && runState.Players.All(player => player.Gold >= 100);
+    }
 
     private async Task Thirty()
     {
@@ -45,5 +51,11 @@ public sealed class IntelligenceBroker : ModEventTemplate
     {
         SetEventFinished(L10NLookup($"{Id.Entry}.pages.LEAVE.description"));
         return Task.CompletedTask;
+    }
+
+    private async Task SaveLoad()
+    {
+        await PlayerCmd.LoseGold(DynamicVars["gold3"].IntValue, Owner!);
+        SetEventFinished(L10NLookup($"{Id.Entry}.pages.SAVE_LOAD.description"));
     }
 }

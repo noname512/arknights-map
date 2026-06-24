@@ -25,7 +25,7 @@ public sealed class TheWake : ModEventTemplate
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions() =>
         [
-            new EventOption(this, RemoveCards, InitialOptionKey("REMOVE_CARDS")),
+            new EventOption(this, RemoveCards, InitialOptionKey("REMOVE_CARDS")).ThatDoesDamage(DynamicVars.Damage.IntValue),
             new EventOption(this, HealAndCardReward, InitialOptionKey("HEAL_AND_CARD_REWARD")),
             new EventOption(this, GainRelic, InitialOptionKey("GAIN_RELIC")),
         ];

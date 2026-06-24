@@ -2,9 +2,12 @@ using ArknightsMap.Scripts.Acts;
 using ArknightsMap.Scripts.Enchantments;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes;
@@ -35,12 +38,29 @@ public sealed class Campfire : ModEventTemplate
         return Task.CompletedTask;
     }
 
-    protected override IReadOnlyList<EventOption> GenerateInitialOptions() =>
-        [
-            new EventOption(this, AttachFlaming, InitialOptionKey("ATTACH_FLAMING")),
-            new EventOption(this, LoseMaxHpAndHeal, InitialOptionKey("LOSE_MAX_HP_AND_HEAL")),
-            new EventOption(this, GainMaxHp, InitialOptionKey("GAIN_MAX_HP")),
-        ];
+    protected override IReadOnlyList<EventOption> GenerateInitialOptions()
+    {
+        
+        List<EventOption> list = new List<EventOption>();
+        if (!HasAttackCard(Owner))
+        {
+            list.Add(new EventOption(this, null, InitialOptionKey("LOCKED")));
+        }
+        else
+        {
+            list.Add(new EventOption(this, AttachFlaming, InitialOptionKey("ATTACH_FLAMING"), HoverTipFactory.FromEnchantment<Flaming>())
+                .ThatDoesDamage(DynamicVars.Damage.IntValue));
+        }
+        list.Add(new EventOption(this, LoseMaxHpAndHeal, InitialOptionKey("LOSE_MAX_HP_AND_HEAL")));
+        list.Add(new EventOption(this, GainMaxHp, InitialOptionKey("GAIN_MAX_HP")));
+        return list;
+    }
+
+    public bool HasAttackCard(Player player)
+    {
+        EnchantmentModel enchantment = ModelDb.Enchantment<Flaming>();
+        return PileType.Deck.GetPile(player).Cards.Any((CardModel c) => enchantment.CanEnchant(c));
+    }
 
     private async Task AttachFlaming()
     {

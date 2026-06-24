@@ -30,11 +30,19 @@ public class Vengeance : ModRelicTemplate
     {
         if (dealer != Owner.Creature)
         {
-            return 0m;
+            return 1m;
+        }
+        if (target == null || target.Monster == null)
+        {
+            return 1m;
+        }
+        if (!target.Monster.IntendsToAttack)
+        {
+            return 1m;
         }
         if (!props.IsPoweredAttack())
         {
-            return 0m;
+            return 1m;
         }
         return 1 + DynamicVars["DamageIncrease"].IntValue * 0.01m;
     }
