@@ -2,7 +2,7 @@
   "id": "ArknightsMap",
   "name": "明日方舟地图",
   "author": "_noname, absi2011",
-  "description": "新增一张第二幕地图。",
+  "description": "新增一张第二幕地图“原野”、第三幕地图“雪山”，包括相关的先古之民、事件、敌人。",
   "version": "0.1",
   "has_pck": true,
   "has_dll": true,

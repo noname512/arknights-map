@@ -1,20 +1,19 @@
 using System.Reflection;
-using System.Reflection.Emit;
 using ArknightsMap.Scripts.Relics;
 using ArknightsMap.Scripts.Utils;
 using ArknightsMap.Scripts.Utils.MerchantEnchantment;
 using Godot;
-using Godot.Collections;
 using HarmonyLib;
 using MegaCrit.Sts2.addons.mega_text;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Merchant;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Multiplayer.Game;
 using MegaCrit.Sts2.Core.Multiplayer.Game.PeerInput;
-using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.Nodes.HoverTips;
 using MegaCrit.Sts2.Core.Nodes.Screens.Shops;
 using MegaCrit.Sts2.Core.Runs;
@@ -40,9 +39,9 @@ class MerchantEntanchmentPatch
             int numReloads
         )
         {
-            var propInfo = typeof(RunManager).GetProperty("State", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var propInfo = typeof(RunManager).GetProperty("State", BindingFlags.NonPublic | BindingFlags.Instance);
             RunState? currentState = propInfo?.GetValue(__instance) as RunState;
-            EnchantSynchronizer synchronizer = new EnchantSynchronizer(__instance.RunLocationTargetedBuffer, netService, currentState, netService.NetId);
+            EnchantSynchronizer synchronizer = new EnchantSynchronizer(__instance.RunLocationTargetedBuffer, netService, currentState!, netService.NetId);
             ModExtensions.SetEnchantSynchronizer(__instance, synchronizer);
         }
     }
@@ -101,19 +100,12 @@ class MerchantEntanchmentPatch
             {
                 return true;
             }
-            IEnumerable<MerchantEntry>[] obj = { __instance.CardEntries, __instance.GetEnchantmentEntries(), null };
-            IEnumerable<MerchantEntry> enumerable2;
-            if (__instance.CardRemovalEntry == null)
+            IEnumerable<MerchantEntry>[] obj =
             {
-                IEnumerable<MerchantEntry> enumerable = [];
-                enumerable2 = enumerable;
-            }
-            else
-            {
-                IEnumerable<MerchantEntry> enumerable = [__instance.CardRemovalEntry];
-                enumerable2 = enumerable;
-            }
-            obj[2] = enumerable2;
+                __instance.CardEntries,
+                __instance.GetEnchantmentEntries(),
+                __instance.CardRemovalEntry == null ? [] : [__instance.CardRemovalEntry],
+            };
             __result = obj.SelectMany((IEnumerable<MerchantEntry> e) => e);
             return false;
         }
@@ -165,12 +157,11 @@ class MerchantEntanchmentPatch
         [HarmonyPrefix]
         public static bool Prefix(NMerchantSlot __instance, ref MerchantEntry __result)
         {
-            Player player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
-            if (!player.Relics.Any(r => r is SnowyRealmShop))
+            Player? player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
+            if (player == null || !player.Relics.Any(r => r is SnowyRealmShop))
             {
                 return true;
             }
-            GD.Print($"====== 动态拦截 Entry 成功！格子真实运行时类型: {__instance.GetType().Name} ======");
 
             if (__instance is NMerchantRelic || __instance is NMerchantPotion)
             {
@@ -188,9 +179,8 @@ class MerchantEntanchmentPatch
 
     public static void EnchantmentFillSlot(NMerchantSlot slot)
     {
-        GD.Print($"====== Start patching FillSlot ======");
-        NMerchantInventory NInventory = (NMerchantInventory)GetField("_merchantRug", slot, typeof(NMerchantSlot));
-        MerchantInventory inventory = NInventory.Inventory;
+        NMerchantInventory NInventory = (NMerchantInventory)GetField("_merchantRug", slot, typeof(NMerchantSlot))!;
+        MerchantInventory inventory = NInventory.Inventory!;
         int id = ModExtensions.GetEntriesBindCount(inventory);
         List<MerchantEnchantmentEntry> list = inventory.GetEnchantmentEntries();
         MerchantEnchantmentEntry entry = list[id];
@@ -208,13 +198,12 @@ class MerchantEntanchmentPatch
         EnchantmentData data = new EnchantmentData()
         {
             entry = entry,
-            model = entry.Model,
+            model = entry.Model!,
             node = null,
         };
         ModExtensions.SetEnchantmentDatas(slot, data);
         ModExtensions.SetEntrisBindCount(inventory, id + 1);
         Traverse.Create(slot).Method("UpdateVisual").GetValue();
-        GD.Print($"====== Successfully patched FillSlot, Enchantment: {entry.Model.GetType().Name}");
     }
 
     [HarmonyPatch(typeof(NMerchantRelic), "FillSlot")]
@@ -223,8 +212,8 @@ class MerchantEntanchmentPatch
         [HarmonyPrefix]
         public static bool Prefix(NMerchantRelic __instance, MerchantRelicEntry relicEntry)
         {
-            Player player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
-            if (!player.Relics.Any(r => r is SnowyRealmShop))
+            Player? player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
+            if (player == null || !player.Relics.Any(r => r is SnowyRealmShop))
             {
                 return true;
             }
@@ -239,8 +228,8 @@ class MerchantEntanchmentPatch
         [HarmonyPrefix]
         public static bool Prefix(NMerchantPotion __instance, MerchantPotionEntry potionEntry)
         {
-            Player player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
-            if (!player.Relics.Any(r => r is SnowyRealmShop))
+            Player? player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
+            if (player == null || !player.Relics.Any(r => r is SnowyRealmShop))
             {
                 return true;
             }
@@ -258,20 +247,19 @@ class MerchantEntanchmentPatch
         [HarmonyPrefix]
         public static bool Prefix(NMerchantSlot __instance)
         {
-            Player player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
-            if (!player.Relics.Any(r => r is SnowyRealmShop))
+            Player? player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
+            if (player == null || !player.Relics.Any(r => r is SnowyRealmShop))
             {
                 return true;
             }
-            GD.Print($"====== Start patching UpdateVisual ======");
             EnchantmentData data = __instance.GetEnchantmentDatas();
-            MegaLabel costLabel = (MegaLabel)GetField("_costLabel", __instance, typeof(NMerchantSlot));
+            MegaLabel costLabel = (MegaLabel)GetField("_costLabel", __instance, typeof(NMerchantSlot))!;
             if (__instance.Entry.IsStocked)
             {
                 costLabel.SetTextAutoSize(__instance.Entry.Cost.ToString());
             }
 
-            if (data.entry.Model == null)
+            if (data.entry!.Model == null)
             {
                 __instance.Visible = false;
                 __instance.MouseFilter = MouseFilterEnum.Ignore;
@@ -291,7 +279,7 @@ class MerchantEntanchmentPatch
             if (data.node == null)
             {
                 data.node = NEnchantment.Create(data.entry.Model);
-                Control holder = (Control)GetField(__instance is NMerchantRelic ? "_relicHolder" : "_potionHolder", __instance);
+                Control holder = (Control)GetField(__instance is NMerchantRelic ? "_relicHolder" : "_potionHolder", __instance)!;
                 holder.AddChildSafely(data.node);
                 // Holder args copied from PotionHolder
                 holder.Scale = new Vector2(1.5f, 1.5f);
@@ -325,13 +313,12 @@ class MerchantEntanchmentPatch
         [HarmonyPrefix]
         public static bool Prefix(NMerchantSlot __instance, MerchantInventory? inventory, ref Task __result)
         {
-            Player player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
-            if (!player.Relics.Any(r => r is SnowyRealmShop))
+            Player? player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
+            if (player == null || !player.Relics.Any(r => r is SnowyRealmShop))
             {
                 return true;
             }
-            GD.Print($"====== Start patching OnTryPurchase ======");
-            __result = __instance.GetEnchantmentDatas().entry.OnTryPurchaseWrapper(inventory);
+            __result = __instance.GetEnchantmentDatas().entry!.OnTryPurchaseWrapper(inventory);
             return false;
         }
     }
@@ -345,20 +332,13 @@ class MerchantEntanchmentPatch
         [HarmonyPrefix]
         public static bool Prefix(NMerchantSlot __instance)
         {
-            Player player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
-            if (!player.Relics.Any(r => r is SnowyRealmShop))
+            Player? player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
+            if (player == null || !player.Relics.Any(r => r is SnowyRealmShop))
             {
                 return true;
             }
-            GD.Print($"====== Start patching CreateHoverTip ======");
             EnchantmentData? data = __instance.GetEnchantmentDatas();
-            if (data != null)
-                GD.Print("Data Found");
-            NEnchantment? node = data.node;
-            if (node != null)
-                GD.Print("Node Found");
-            GD.Print($"model: {node.Model.GetType().Name}");
-            NHoverTipSet? nHoverTipSet = NHoverTipSet.CreateAndShow(__instance, data.node.Model.HoverTips);
+            NHoverTipSet? nHoverTipSet = NHoverTipSet.CreateAndShow(__instance, data.node!.Model.HoverTips);
             nHoverTipSet?.SetGlobalPosition(__instance.GlobalPosition);
             if (nHoverTipSet != null)
             {
@@ -374,11 +354,6 @@ class MerchantEntanchmentPatch
                         Vector2.Right * __instance.Size.X * 0.5f * __instance.Scale + Vector2.Up * __instance.Size.Y * 0.5f * __instance.Scale;
                 }
             }
-            else
-            {
-                GD.Print("nHoverTipSet is null");
-            }
-            GD.Print($"====== End patching CreateHoverTip ======");
             return false;
         }
     }
@@ -392,8 +367,8 @@ class MerchantEntanchmentPatch
         [HarmonyPrefix]
         public static bool Prefix(NMerchantRelic __instance)
         {
-            Player player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
-            if (!player.Relics.Any(r => r is SnowyRealmShop))
+            Player? player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
+            if (player == null || !player.Relics.Any(r => r is SnowyRealmShop))
             {
                 return true;
             }
@@ -410,17 +385,53 @@ class MerchantEntanchmentPatch
         [HarmonyPrefix]
         public static bool Prefix(NMerchantSlot __instance)
         {
-            Player player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
-            if (!player.Relics.Any(r => r is SnowyRealmShop))
+            Player? player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
+            if (player == null || !player.Relics.Any(r => r is SnowyRealmShop))
             {
                 return true;
             }
-            GD.Print($"====== Start patching OnSuccessfulPurchase ======");
             Traverse.Create(__instance).Method("TriggerMerchantHandToPointHere").GetValue();
             Traverse.Create(__instance).Method("UpdateVisual").GetValue();
             EnchantmentData data = __instance.GetEnchantmentDatas();
-            data.model = data.entry.Model;
+            data.model = data.entry!.Model;
             return false;
+        }
+    }
+
+    [HarmonyPatch(typeof(MerchantCardEntry), "Populate")]
+    public static class PopulateCardPatch
+    {
+        [HarmonyPostfix]
+        public static void Postfix(MerchantCardEntry __instance)
+        {
+            Player? player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
+            if (player == null || !player.Relics.Any(r => r is SnowyRealmShop))
+            {
+                return;
+            }
+            CardModel card = player.RunState.CloneCard(__instance.CreationResult!.Card);
+            EnchantmentModel model = EnchantmentMerchantUtils.GenerateModel(player, card);
+            CardCmd.Enchant(model, card, model.Amount);
+            __instance.CreationResult.ModifyCard(card);
+            __instance.CalcCost();
+        }
+    }
+
+    [HarmonyPatch(typeof(MerchantCardEntry), "GetCost")]
+    public static class CardGetCostPatch
+    {
+        [HarmonyPostfix]
+        public static void Postfix(MerchantCardEntry __instance, CardModel card, ref int __result)
+        {
+            Player? player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
+            if (player == null || !player.Relics.Any(r => r is SnowyRealmShop))
+            {
+                return;
+            }
+            if (card != null && card.Enchantment != null)
+            {
+                __result += EnchantmentMerchantUtils.GetBaseCost(card.Enchantment);
+            }
         }
     }
 }

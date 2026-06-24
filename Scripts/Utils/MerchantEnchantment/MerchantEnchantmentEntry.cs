@@ -33,28 +33,7 @@ public sealed class MerchantEnchantmentEntry : MerchantEntry
 
     public override void CalcCost()
     {
-        switch (Model)
-        {
-            case Sharp:
-            case Nimble:
-                _cost = Model.Amount * 12;
-                break;
-            case Swift:
-                _cost = Model.Amount * 40;
-                break;
-            case Steady:
-                _cost = 50;
-                break;
-            case SpiralSpecial:
-                _cost = 200;
-                break;
-            case Glam:
-                _cost = 150;
-                break;
-            case Vigorous:
-                _cost = Model.Amount * 6;
-                break;
-        }
+        _cost = EnchantmentMerchantUtils.GetBaseCost(Model!) * 2;
         _cost = Mathf.RoundToInt(_cost * _player.PlayerRng.Shops.NextFloat(0.9f, 1.1f));
     }
 
@@ -78,19 +57,7 @@ public sealed class MerchantEnchantmentEntry : MerchantEntry
 
     private void FillSlot()
     {
-        Model = _player.PlayerRng.Shops.NextItem(ValidEnchantments).ToMutable();
-        if (Model is Sharp || Model is Nimble)
-        {
-            Model.Amount = _player.PlayerRng.Shops.NextInt(1, 10);
-        }
-        else if (Model is Swift)
-        {
-            Model.Amount = _player.PlayerRng.Shops.NextInt(1, 3);
-        }
-        else if (Model is Vigorous)
-        {
-            Model.Amount = _player.PlayerRng.Shops.NextInt(4, 20);
-        }
+        Model = EnchantmentMerchantUtils.GenerateModel(_player, null);
         CalcCost();
     }
 }

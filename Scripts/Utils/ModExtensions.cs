@@ -10,9 +10,9 @@ namespace ArknightsMap.Scripts.Utils;
 
 public class EnchantmentData
 {
-    public MerchantEnchantmentEntry entry;
-    public EnchantmentModel model;
-    public NEnchantment node;
+    public MerchantEnchantmentEntry? entry;
+    public EnchantmentModel? model;
+    public NEnchantment? node;
 }
 
 public static class ModExtensions
