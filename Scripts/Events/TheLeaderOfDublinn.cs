@@ -46,14 +46,13 @@ public sealed class TheLeaderOfDublinn : ModEventTemplate
         switch (Owner!.RunState.Act.Ancient)
         {
             case Bagpipe:
-
                 StringVar vouivre = (StringVar)DynamicVars["VouivreName"];
-                vouivre.StringValue = L10NLookup($"{Id.Entry}.pages.INITIAL.knownVouivre").GetRawText();
+                vouivre.StringValue = ModelDb.AncientEvent<Bagpipe>().Title.GetRawText();
                 isBagpipe = true;
                 break;
             case Reed:
                 StringVar draco = (StringVar)DynamicVars["DracoName"];
-                draco.StringValue = L10NLookup($"{Id.Entry}.pages.INITIAL.knownDraco").GetRawText();
+                draco.StringValue = ModelDb.AncientEvent<Reed>().Title.GetRawText();
                 isReed = true;
                 break;
         }
