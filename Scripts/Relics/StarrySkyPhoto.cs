@@ -46,7 +46,7 @@ public class StarrySkyPhoto : ModRelicTemplate
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
 
-    public override async Task AfterRoomEntered(AbstractRoom _)
+    public override async Task BeforeRoomEntered(AbstractRoom _)
     {
         if (!Owner.Creature.IsDead)
         {

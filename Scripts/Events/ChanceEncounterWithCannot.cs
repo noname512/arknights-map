@@ -91,7 +91,7 @@ public sealed class ChanceEncounterWithCannot : ModEventTemplate
             card2 = Rng.NextItem(list)!;
             StringVar stringVar = (StringVar)DynamicVars["Card2"];
             stringVar.StringValue = card2.Title;
-            options.Add(new EventOption(this, StrikeDefend, InitialOptionKey("STRIKE_DEFEND"), HoverTipFactory.FromCard(card2)));
+            options.Add(new EventOption(this, StrikeDefend, InitialOptionKey("STRIKE_DEFEND"), HoverTipFactory.FromCard(card2)).ThatDoesDamage(DynamicVars.Damage.IntValue));
         }
         else
         {
