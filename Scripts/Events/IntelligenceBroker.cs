@@ -1,6 +1,5 @@
 using System.Reflection;
 using ArknightsMap.Scripts.Acts;
-using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Events;
@@ -38,7 +37,7 @@ public sealed class IntelligenceBroker : ModEventTemplate
     }
 
     [SavedProperty]
-    public static int AlreadyChoose = 0;
+    public int AlreadyChoose = 0;
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
