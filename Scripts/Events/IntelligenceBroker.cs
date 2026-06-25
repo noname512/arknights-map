@@ -37,7 +37,22 @@ public sealed class IntelligenceBroker : ModEventTemplate
     }
 
     [SavedProperty]
-    public int AlreadyChoose = 0;
+    public static int[] AlreadyChoose;
+
+    protected override Task BeforeEventStarted(bool isPreFinished)
+    {
+        if (AlreadyChoose == null)
+            AlreadyChoose = new int[Owner!.RunState.Players.Count];
+        return Task.CompletedTask;
+    }
+
+    private int GetId()
+    {
+        for (int i = 0; i < Owner!.RunState.Players.Count; i++)
+            if (Owner.RunState.Players[i] == Owner)
+                return i;
+        return -1; // Should not trigger
+    }
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
@@ -48,10 +63,11 @@ public sealed class IntelligenceBroker : ModEventTemplate
             new EventOption(this, Fifty, InitialOptionKey("FIFTY")),
             new EventOption(this, Leave, InitialOptionKey("LEAVE")),
         ];
-        if (AlreadyChoose != 0)
+        int alreadyChoose = AlreadyChoose[GetId()];
+        if (alreadyChoose != 0)
         {
             for (int i = 0; i < 4; i++)
-                if (i != AlreadyChoose - 1)
+                if (i != alreadyChoose - 1)
                     options[i] = new EventOption(this, null, InitialOptionKey("LOCKED"));
             for (int i = 1; i <= 3; i++)
                 DynamicVars["gold" + i].BaseValue *= 2;
@@ -67,7 +83,7 @@ public sealed class IntelligenceBroker : ModEventTemplate
 
     private async Task Thirty()
     {
-        AlreadyChoose = 1;
+        AlreadyChoose[GetId()] = 1;
         await PlayerCmd.LoseGold(DynamicVars["gold1"].IntValue, Owner!);
         var method = typeof(RelicGrabBag).GetMethod("GetAvailableDeque", BindingFlags.Instance | BindingFlags.NonPublic)!;
         object? obj = method.Invoke(Owner!.RelicGrabBag, [RelicRarity.Shop, Owner!.RunState, (RelicModel _) => true]);
@@ -91,7 +107,7 @@ public sealed class IntelligenceBroker : ModEventTemplate
 
     private async Task Fourty()
     {
-        AlreadyChoose = 2;
+        AlreadyChoose[GetId()] = 2;
         await PlayerCmd.LoseGold(DynamicVars["gold2"].IntValue, Owner!);
         var method = typeof(RelicGrabBag).GetMethod("GetAvailableDeque", BindingFlags.Instance | BindingFlags.NonPublic)!;
         foreach (RelicRarity rarity in rarities)
@@ -114,7 +130,7 @@ public sealed class IntelligenceBroker : ModEventTemplate
 
     private async Task Fifty()
     {
-        AlreadyChoose = 3;
+        AlreadyChoose[GetId()] = 3;
         await PlayerCmd.LoseGold(DynamicVars["gold3"].IntValue, Owner!);
         SetEventFinished(L10NLookup($"{Id.Entry}.pages.FIFTY.description"));
     }
