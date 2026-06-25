@@ -118,24 +118,23 @@ public class SnowTracks : ModRelicTemplate
     public override async Task BeforeRoomEntered(AbstractRoom room)
     {
         List<MapCoord> markedCoords = GetMarkedCoords();
-        if (!markedCoords.Contains(Owner.RunState.CurrentMapPoint!.coord))
+        if (!Owner.RunState.CurrentMapPoint!.Quests.Any(q => q is SnowTracks))
         {
             return;
         }
         Flash();
-        Player player = LocalContext.GetMe(Owner.RunState.Players)!;
         IEnumerable<CardModel> enumerable = PileType
-            .Deck.GetPile(player)
+            .Deck.GetPile(Owner)
             .Cards.Where((CardModel c) => c?.IsUpgradable ?? false)
             .ToList()
-            .StableShuffle(player.RunState.Rng.Niche)
+            .StableShuffle(Owner.RunState.Rng.Niche)
             .Take(DynamicVars.Cards.IntValue);
         NRun.Instance?.GlobalUi.GridCardPreviewContainer.ForceMaxColumnsUntilEmpty(3);
         foreach (CardModel item in enumerable)
         {
             CardCmd.Upgrade(item, CardPreviewStyle.GridLayout);
         }
-        await CreatureCmd.Heal(player.Creature, DynamicVars.Heal.IntValue, false);
+        await CreatureCmd.Heal(Owner.Creature, DynamicVars.Heal.IntValue, false);
     }
 
     public List<MapCoord> GetMarkedCoords()
