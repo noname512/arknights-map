@@ -21,14 +21,23 @@ public class BlockHeal : ModEnchantmentTemplate
     // 是否会添加额外的卡牌描述文本
     public override bool HasExtraCardText => true;
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockHealDynamicVar(0, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new BlockHealDynamicVar(0, ValueProp.Move)
+    ];
 
     // 图标位置。大小1:1就行，原版是64x64
     public override EnchantmentAssetProfile AssetProfile => new(IconPath: $"res://ArknightsMap/images/enchantments/{GetType().Name}.png");
 
+    private CardPlay? cardPlay = null;
     public override bool CanEnchantCardType(CardType cardType)
     {
         return cardType == CardType.Attack;
+    }
+
+    public override Task BeforeCardPlayed(CardPlay cardPlay)
+    {
+        this.cardPlay = cardPlay;
+        return Task.CompletedTask;
     }
 
     public override async Task BeforeDamageReceived(
@@ -43,17 +52,7 @@ public class BlockHeal : ModEnchantmentTemplate
         if (cardSource == Card)
         {
             BlockVar var = new BlockVar(amount / 2, ValueProp.Move);
-            await CreatureCmd.GainBlock(Card.Owner.Creature, var, null);
+            await CreatureCmd.GainBlock(Card.Owner.Creature, var, cardPlay);
         }
     }
-
-    /*public override void RecalculateValues()
-    {
-        if (!HasCard)
-        {
-            DynamicVars.Block.BaseValue = 0;
-            return;
-        }
-        DynamicVars.Block.BaseValue = Card.DynamicVars.Damage.PreviewValue / 2;
-    }*/
 }
