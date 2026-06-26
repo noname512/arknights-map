@@ -36,6 +36,11 @@ public class BlockHealDynamicVar : DynamicVar
             calcDamage.UpdateCardPreview(card, previewMode, target, runGlobalHooks);
             num = calcDamage.PreviewValue / 2;
         }
+        else if (card.DynamicVars.TryGetValue("OstyDamage", out DynamicVar? ostyDamage))
+        {
+            ostyDamage.UpdateCardPreview(card, previewMode, target, runGlobalHooks);
+            num = ostyDamage.PreviewValue / 2;
+        }
         else
         {
             num = 0; // 放弃思考，显示bug就显示bug吧
