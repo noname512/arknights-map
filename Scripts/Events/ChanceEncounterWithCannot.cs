@@ -48,9 +48,10 @@ public sealed class ChanceEncounterWithCannot : ModEventTemplate
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
         List<EventOption> options = [];
-        if (Owner!.Relics.Count > 0)
+        List<RelicModel> relics = Owner.Relics.Where((RelicModel r) => r.IsTradable).ToList();
+        if (relics.Count > 0)
         {
-            relic = Rng.NextItem(Owner.Relics)!;
+            relic = Rng.NextItem(relics)!;
             StringVar stringVar = (StringVar)DynamicVars["Relic"];
             stringVar.StringValue = relic.Title.GetRawText();
             DynamicVars["gold1"].BaseValue = Rng.NextInt(130, 170);

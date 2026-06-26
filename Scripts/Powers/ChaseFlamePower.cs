@@ -1,6 +1,7 @@
 using ArknightsMap.Scripts.Monsters;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -104,6 +105,17 @@ public class ChaseFlamePower : ModPowerTemplate
             ((MoveState)Owner.Monster.MoveStateMachine.States["STUN3"]).FollowUpState = NextMove;
             SetAmount(ReviveTurn);
         }
+    }
+
+    public override decimal ModifyBlockMultiplicative(Creature target, decimal block, ValueProp props, CardModel? cardSource,
+        CardPlay? cardPlay)
+    {
+        if ((target != Owner) || (CurState == 0))
+        {
+            return 1;
+        }
+
+        return 0;
     }
 
     public async Task Revive()
