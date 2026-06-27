@@ -5,52 +5,64 @@ using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
-using STS2RitsuLib;
+using MegaCrit.Sts2.Core.Rooms;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Models;
 
 namespace ArknightsMap.Scripts.Utils;
 
-public sealed class ReedBed : ILifecycleObserver
+[RegisterSingleton]
+public sealed class ReedBed : HookedSingletonModel
 {
     public static bool Burning;
     public static Node? Foreground;
 
-    public ReedBed() { }
+    public ReedBed()
+        : base(HookType.Combat) { }
 
-    public async void OnEvent(IFrameworkLifecycleEvent evt)
+    public override async Task BeforeCombatStart()
     {
-        if (evt is CombatStartingEvent cse)
+        Burning = false;
+        EncounterModel? encounter = CurrentCombatState!.Encounter;
+        if (encounter is AbstractWildsEncounter myEncounter)
         {
-            Burning = false;
-            EncounterModel? encounter = cse.CombatState!.Encounter;
-            if (encounter is AbstractWildsEncounter myEncounter)
+            Control control = NCombatRoom.Instance?.Background ?? throw new InvalidOperationException();
+            Foreground = control.GetNodeOrNull("Foreground");
+            if (myEncounter.isBurningAtStart)
             {
-                Control control = NCombatRoom.Instance?.Background ?? throw new InvalidOperationException();
-                Foreground = control.GetNodeOrNull("Foreground");
-                if (myEncounter.isBurningAtStart)
-                {
-                    await SetBurningDurningCombat(true, cse.CombatState);
-                }
+                await SetBurningDurningCombat(true, CurrentCombatState);
             }
         }
-        else if (evt is SideTurnStartingEvent stse)
+    }
+
+    public override async Task BeforeSideTurnStart(
+        PlayerChoiceContext choiceContext,
+        CombatSide side,
+        IReadOnlyList<Creature> participants,
+        ICombatState combatState
+    )
+    {
+        if (side == CombatSide.Enemy)
         {
-            if (stse.Side == CombatSide.Enemy)
-                return;
-            if (Burning)
+            return;
+        }
+        if (Burning)
+        {
+            foreach (var player in CurrentCombatState!.Players)
             {
-                foreach (var player in stse.CombatState.Players)
-                {
-                    await CardPileCmd.AddGeneratedCardToCombat(stse.CombatState.CreateCard<PutOutFire>(player), PileType.Hand, null);
-                }
+                await CardPileCmd.AddGeneratedCardToCombat(CurrentCombatState.CreateCard<PutOutFire>(player), PileType.Hand, null);
             }
         }
-        else if (evt is CombatEndedEvent)
-        {
-            Burning = false;
-        }
+    }
+
+    public override Task AfterCombatEnd(CombatRoom room)
+    {
+        Burning = false;
+        return Task.CompletedTask;
     }
 
     public async Task SetBurningDurningCombat(bool burning, ICombatState combatState)

@@ -81,7 +81,7 @@ public class TheLeader : AbstractWildsMonster
             "IGNITE0",
             async targets =>
             {
-                await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
+                await ModelDb.Singleton<ReedBed>().SetBurningDurningCombat(true, CombatState);
                 await CreatureCmd.TriggerAnim(Creature, "Ignite1", 0);
                 await Stage1Move();
             },
@@ -130,7 +130,7 @@ public class TheLeader : AbstractWildsMonster
                     .WithAttackerAnim("Ignite1", 0.5f)
                     .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
                     .Execute(null);
-                await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
+                await ModelDb.Singleton<ReedBed>().SetBurningDurningCombat(true, CombatState);
                 await Stage1Move();
             },
             new SingleAttackIntent(Damage1_3),
@@ -194,7 +194,7 @@ public class TheLeader : AbstractWildsMonster
                     .WithAttackerAnim("Ignite2", 0.5f)
                     .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
                     .Execute(null);
-                await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
+                await ModelDb.Singleton<ReedBed>().SetBurningDurningCombat(true, CombatState);
             },
             new SingleAttackIntent(Damage2_3),
             new IgniteIntent()

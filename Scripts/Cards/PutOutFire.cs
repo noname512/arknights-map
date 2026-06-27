@@ -76,7 +76,7 @@ public class PutOutFire : ModCardTemplate
         decimal amount = DynamicVars["PutOutDmg"].PreviewValue;
         await CreatureCmd.Damage(choiceContext, Owner.Creature, new DamageVar(amount, ValueProp.Unpowered), this);
         await PowerCmd.Apply<FlamingDamagePower>(choiceContext, Owner.Creature, amount, Owner.Creature, this);
-        await Entry.reedBed.SetBurningDurningCombat(false, CombatState!);
+        await ModelDb.Singleton<ReedBed>().SetBurningDurningCombat(false, CombatState!);
     }
 
     // 升级后的效果逻辑

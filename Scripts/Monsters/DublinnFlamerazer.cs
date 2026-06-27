@@ -57,7 +57,7 @@ public class DublinnFlamerazer : AbstractWildsMonster
                     .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
                     .OnlyPlayAnimOnce()
                     .Execute(null);
-                await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
+                await ModelDb.Singleton<ReedBed>().SetBurningDurningCombat(true, CombatState);
             },
             new MultiAttackIntent(Damage1, Times1),
             new IgniteIntent()

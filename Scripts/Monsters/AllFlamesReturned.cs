@@ -100,7 +100,7 @@ public class AllFlamesReturned : AbstractWildsMonster
                     .WithAttackerAnim("Attack", 0.8f)
                     .WithHitFx(sfx: "event:/ArknightsMap/sfx/AllFlamesReturned/attack_2")
                     .Execute(null);
-                await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
+                await ModelDb.Singleton<ReedBed>().SetBurningDurningCombat(true, CombatState);
             },
             new SingleAttackIntent(P2AttackDamage),
             new IgniteIntent()
@@ -191,7 +191,7 @@ public class AllFlamesReturned : AbstractWildsMonster
             await PowerCmd.Remove<RebornPower>(Creature);
             await PowerCmd.Remove<StrengthPower>(Creature);
             await PowerCmd.Apply<FlameBathPower>(new ThrowingPlayerChoiceContext(), Creature, 50, Creature, null);
-            await Entry.reedBed.SetBurningDurningCombat(true, CombatState);
+            await ModelDb.Singleton<ReedBed>().SetBurningDurningCombat(true, CombatState);
         }
     }
 

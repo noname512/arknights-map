@@ -21,7 +21,6 @@ public class Entry
 {
     public const string ModId = "ArknightsMap";
     public static readonly Logger Logger = RitsuLibFramework.CreateLogger(ModId);
-    public static ReedBed reedBed => new ReedBed();
 
     public static void Init()
     {
@@ -47,8 +46,6 @@ public class Entry
                 autoCreateIfMissing: true
             );
         }
-
-        RitsuLibFramework.SubscribeLifecycle(reedBed);
 
         FmodStudioDeferredBankRegistration.RegisterBank("res://ArknightsMap/audio/ArknightsMap.bank");
         FmodStudioDeferredBankRegistration.RegisterStudioGuidMappings("res://ArknightsMap/audio/GUIDs.txt");
