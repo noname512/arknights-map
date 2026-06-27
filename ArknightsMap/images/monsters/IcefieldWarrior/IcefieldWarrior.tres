@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://w3oyh4ado05v"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bvfaxhw43tw2s" path="res://ArknightsMap/images/monsters/IcefieldWarrior/enemy_1189_krgaxe_2.atlas" id="1_atlas"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://b88isv50io85b" path="res://ArknightsMap/images/monsters/IcefieldWarrior/enemy_1189_krgaxe_2_424.skel" id="2_skel"]
+
+[resource]
+atlas_res = ExtResource("1_atlas")
+skeleton_file_res = ExtResource("2_skel")

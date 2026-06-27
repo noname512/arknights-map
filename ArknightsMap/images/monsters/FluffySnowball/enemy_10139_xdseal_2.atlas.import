@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://h3u868bugt7r"
+path="res://.godot/imported/enemy_10139_xdseal_2.atlas-147af0e32cf5ea4ec80cba51739cd772.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/FluffySnowball/enemy_10139_xdseal_2.atlas"
+dest_files=["res://.godot/imported/enemy_10139_xdseal_2.atlas-147af0e32cf5ea4ec80cba51739cd772.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

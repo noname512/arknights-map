@@ -1,0 +1,13 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://i27m7v6fgjj"
+valid=false
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SnowyMountain/DelegationRecruit/enemy_1381_winman_2.skel"
+
+[params]
+

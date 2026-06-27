@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://cf7h3mboeammp"
+path="res://.godot/imported/enemy_1549_windoc.atlas-1c093f08c633d92b3ff0e5f2272b8dae.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/HaroldCraigavon/enemy_1549_windoc.atlas"
+dest_files=["res://.godot/imported/enemy_1549_windoc.atlas-1c093f08c633d92b3ff0e5f2272b8dae.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

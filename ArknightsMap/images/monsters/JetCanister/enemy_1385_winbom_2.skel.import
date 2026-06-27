@@ -1,0 +1,13 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://dbhx0pvbpocdh"
+valid=false
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SnowyMountain/JetCanister/enemy_1385_winbom_2.skel"
+
+[params]
+

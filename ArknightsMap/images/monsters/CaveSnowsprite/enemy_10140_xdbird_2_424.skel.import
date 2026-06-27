@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bmi05gfanymk7"
+path="res://.godot/imported/enemy_10140_xdbird_2_424.skel-63659b9e03f09b3950fcdfd2efeabdab.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/CaveSnowsprite/enemy_10140_xdbird_2_424.skel"
+dest_files=["res://.godot/imported/enemy_10140_xdbird_2_424.skel-63659b9e03f09b3950fcdfd2efeabdab.spskel"]
+
+[params]
+

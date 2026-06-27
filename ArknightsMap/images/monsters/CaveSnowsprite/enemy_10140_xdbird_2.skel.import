@@ -1,0 +1,13 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://c43mgn4tf7myr"
+valid=false
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SnowyMountain/CaveSnowsprite/enemy_10140_xdbird_2.skel"
+
+[params]
+

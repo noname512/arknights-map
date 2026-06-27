@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://o6fv4rm1bacw"
+path="res://.godot/imported/enemy_1383_windog_2.atlas-1a4bc4b086d17eb536ece5ed13f49ec1.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/ClockworkPatroller/enemy_1383_windog_2.atlas"
+dest_files=["res://.godot/imported/enemy_1383_windog_2.atlas-1a4bc4b086d17eb536ece5ed13f49ec1.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

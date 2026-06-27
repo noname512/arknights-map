@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://hg5i1e3dfa4s"
+path="res://.godot/imported/enemy_10142_xdturt_2.atlas-aece45e917d0e0ad1e08f91debfff795.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Frostdillo/enemy_10142_xdturt_2.atlas"
+dest_files=["res://.godot/imported/enemy_10142_xdturt_2.atlas-aece45e917d0e0ad1e08f91debfff795.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

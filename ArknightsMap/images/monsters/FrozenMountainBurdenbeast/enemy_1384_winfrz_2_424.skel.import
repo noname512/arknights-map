@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bxq5ju4t43b4n"
+path="res://.godot/imported/enemy_1384_winfrz_2_424.skel-f97ee08fe42ffaa17e766e0ec53a470a.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/FrozenMountainBurdenbeast/enemy_1384_winfrz_2_424.skel"
+dest_files=["res://.godot/imported/enemy_1384_winfrz_2_424.skel-f97ee08fe42ffaa17e766e0ec53a470a.spskel"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://tq6h161u6t4m"
+path="res://.godot/imported/enemy_1193_krgbsk_2_424.skel-529705496ed65f9c4102e6c198203fd3.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/IcefieldBerserker/enemy_1193_krgbsk_2_424.skel"
+dest_files=["res://.godot/imported/enemy_1193_krgbsk_2_424.skel-529705496ed65f9c4102e6c198203fd3.spskel"]
+
+[params]
+

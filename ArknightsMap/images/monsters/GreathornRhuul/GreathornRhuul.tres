@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://d126ro2gskgo3"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bl8pvnq2sgwd4" path="res://ArknightsMap/images/monsters/GreathornRhuul/enemy_10144_xdelk_2.atlas" id="1_atlas"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://c8wtgq81p3ohg" path="res://ArknightsMap/images/monsters/GreathornRhuul/enemy_10144_xdelk_2_424.skel" id="2_skel"]
+
+[resource]
+atlas_res = ExtResource("1_atlas")
+skeleton_file_res = ExtResource("2_skel")

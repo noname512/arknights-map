@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://dcusrt5bcwwwx"
+path="res://.godot/imported/enemy_1190_krgbow_2_424.skel-4b151d49e7499d8f3af786714f06ee9f.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/IcefieldHunter/enemy_1190_krgbow_2_424.skel"
+dest_files=["res://.godot/imported/enemy_1190_krgbow_2_424.skel-4b151d49e7499d8f3af786714f06ee9f.spskel"]
+
+[params]
+

@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://crgvwgnc0jc8h"
+path="res://.godot/imported/enemy_10145_xdrock.atlas-43b21d35cf90bb1b740e1a087fe665b0.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Isbit/enemy_10145_xdrock.atlas"
+dest_files=["res://.godot/imported/enemy_10145_xdrock.atlas-43b21d35cf90bb1b740e1a087fe665b0.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://dx82mls72f01o"
+path="res://.godot/imported/enemy_1549_windoc_424.skel-04a756f644506de79d33d84bf5080541.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/HaroldCraigavon/enemy_1549_windoc_424.skel"
+dest_files=["res://.godot/imported/enemy_1549_windoc_424.skel-04a756f644506de79d33d84bf5080541.spskel"]
+
+[params]
+

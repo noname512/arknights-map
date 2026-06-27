@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://l3vom0qmbf80"
+path="res://.godot/imported/enemy_1187_krghd_2.atlas-3caa160d046a03b6aee159a79886e23f.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Clawbeast/enemy_1187_krghd_2.atlas"
+dest_files=["res://.godot/imported/enemy_1187_krghd_2.atlas-3caa160d046a03b6aee159a79886e23f.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

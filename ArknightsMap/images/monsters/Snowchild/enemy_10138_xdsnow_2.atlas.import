@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://dyeybp7djnn4b"
+path="res://.godot/imported/enemy_10138_xdsnow_2.atlas-3cca17e24390ea47e280380fdfc3869a.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Snowchild/enemy_10138_xdsnow_2.atlas"
+dest_files=["res://.godot/imported/enemy_10138_xdsnow_2.atlas-3cca17e24390ea47e280380fdfc3869a.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

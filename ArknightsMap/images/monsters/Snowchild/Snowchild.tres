@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://l5oa87xkb78d"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://dyeybp7djnn4b" path="res://ArknightsMap/images/monsters/Snowchild/enemy_10138_xdsnow_2.atlas" id="1_atlas"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://qq55rjrf1s0k" path="res://ArknightsMap/images/monsters/Snowchild/enemy_10138_xdsnow_2_424.skel" id="2_skel"]
+
+[resource]
+atlas_res = ExtResource("1_atlas")
+skeleton_file_res = ExtResource("2_skel")

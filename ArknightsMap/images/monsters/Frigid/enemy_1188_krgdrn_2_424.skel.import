@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://b2jj4gjsjy48h"
+path="res://.godot/imported/enemy_1188_krgdrn_2_424.skel-c980a0b9d72b1dea3a1241786df5cfbb.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Frigid/enemy_1188_krgdrn_2_424.skel"
+dest_files=["res://.godot/imported/enemy_1188_krgdrn_2_424.skel-c980a0b9d72b1dea3a1241786df5cfbb.spskel"]
+
+[params]
+

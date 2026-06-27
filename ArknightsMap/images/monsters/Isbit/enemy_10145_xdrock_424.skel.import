@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bs4e6q17kss48"
+path="res://.godot/imported/enemy_10145_xdrock_424.skel-5fa7ef0935c22ae94ec19c877fc85543.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Isbit/enemy_10145_xdrock_424.skel"
+dest_files=["res://.godot/imported/enemy_10145_xdrock_424.skel-5fa7ef0935c22ae94ec19c877fc85543.spskel"]
+
+[params]
+

@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://cubpn46r3ycnv"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://b0pwgfqiv6sxr" path="res://ArknightsMap/images/monsters/BardSeamusWilliams/enemy_1322_wdgyht.atlas" id="1_atlas"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bpbn4s46wvq67" path="res://ArknightsMap/images/monsters/BardSeamusWilliams/enemy_1322_wdgyht_424.skel" id="2_skel"]
+
+[resource]
+atlas_res = ExtResource("1_atlas")
+skeleton_file_res = ExtResource("2_skel")

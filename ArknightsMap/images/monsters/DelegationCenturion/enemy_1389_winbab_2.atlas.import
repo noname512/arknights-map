@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://dep87jkwfspjf"
+path="res://.godot/imported/enemy_1389_winbab_2.atlas-511b3f0d6ca7daf8099692bcca10a6e4.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DelegationCenturion/enemy_1389_winbab_2.atlas"
+dest_files=["res://.godot/imported/enemy_1389_winbab_2.atlas-511b3f0d6ca7daf8099692bcca10a6e4.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

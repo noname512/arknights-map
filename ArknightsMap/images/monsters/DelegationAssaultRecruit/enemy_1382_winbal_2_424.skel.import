@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://1g8v5tfw7bgo"
+path="res://.godot/imported/enemy_1382_winbal_2_424.skel-401a09f3437b7b7c0f27dd92ea9166c6.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DelegationAssaultRecruit/enemy_1382_winbal_2_424.skel"
+dest_files=["res://.godot/imported/enemy_1382_winbal_2_424.skel-401a09f3437b7b7c0f27dd92ea9166c6.spskel"]
+
+[params]
+

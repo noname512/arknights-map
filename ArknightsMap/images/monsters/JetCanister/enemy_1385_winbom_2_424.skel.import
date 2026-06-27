@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://5w7g2y6ipa14"
+path="res://.godot/imported/enemy_1385_winbom_2_424.skel-15aaeb7d7b403742e026d9bf73f5b133.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/JetCanister/enemy_1385_winbom_2_424.skel"
+dest_files=["res://.godot/imported/enemy_1385_winbom_2_424.skel-15aaeb7d7b403742e026d9bf73f5b133.spskel"]
+
+[params]
+

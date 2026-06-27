@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://c28wim0b6jh3g"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://o6fv4rm1bacw" path="res://ArknightsMap/images/monsters/ClockworkPatroller/enemy_1383_windog_2.atlas" id="1_atlas"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://djxo30075hahb" path="res://ArknightsMap/images/monsters/ClockworkPatroller/enemy_1383_windog_2_424.skel" id="2_skel"]
+
+[resource]
+atlas_res = ExtResource("1_atlas")
+skeleton_file_res = ExtResource("2_skel")

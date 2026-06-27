@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://b6hqiuawafpjq"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://camm1oaavbjl1" path="res://ArknightsMap/images/monsters/EggcradlerFowlbeast/enemy_10141_xdpeng_2.atlas" id="1_atlas"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cmy1umul00b7l" path="res://ArknightsMap/images/monsters/EggcradlerFowlbeast/enemy_10141_xdpeng_2_424.skel" id="2_skel"]
+
+[resource]
+atlas_res = ExtResource("1_atlas")
+skeleton_file_res = ExtResource("2_skel")

@@ -1,0 +1,13 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bwy5b2e0xsrpm"
+valid=false
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SnowyMountain/FluffySnowball/enemy_10139_xdseal_2.skel"
+
+[params]
+

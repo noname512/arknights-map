@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://cqipci5shejwt"
+path="res://.godot/imported/enemy_1381_winman_2_424.skel-ea9c0d1aaee8b4e9c574be766aebc898.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DelegationRecruit/enemy_1381_winman_2_424.skel"
+dest_files=["res://.godot/imported/enemy_1381_winman_2_424.skel-ea9c0d1aaee8b4e9c574be766aebc898.spskel"]
+
+[params]
+

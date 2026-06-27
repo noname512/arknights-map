@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://c3rsoqay0q7ov"
+path="res://.godot/imported/enemy_1191_krgrg_2.atlas-65e3015e6cf85633122a3a261ba9e8bb.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/IcefieldArtsFighter/enemy_1191_krgrg_2.atlas"
+dest_files=["res://.godot/imported/enemy_1191_krgrg_2.atlas-65e3015e6cf85633122a3a261ba9e8bb.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

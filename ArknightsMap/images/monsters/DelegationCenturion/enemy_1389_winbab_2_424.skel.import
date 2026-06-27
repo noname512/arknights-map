@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://cd5g8f4j1kfmq"
+path="res://.godot/imported/enemy_1389_winbab_2_424.skel-61a000f748bf99d29c4eb2cd1fa8fa52.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DelegationCenturion/enemy_1389_winbab_2_424.skel"
+dest_files=["res://.godot/imported/enemy_1389_winbab_2_424.skel-61a000f748bf99d29c4eb2cd1fa8fa52.spskel"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://cpq41omn0u1c6"
+path="res://.godot/imported/enemy_10143_xdmush_2_424.skel-5f820f6a1626549431d5613d65588688.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Snowcap/enemy_10143_xdmush_2_424.skel"
+dest_files=["res://.godot/imported/enemy_10143_xdmush_2_424.skel-5f820f6a1626549431d5613d65588688.spskel"]
+
+[params]
+

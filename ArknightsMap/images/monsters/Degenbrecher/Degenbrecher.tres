@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://bughm1k1d5owo"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bnle7tmqutvgd" path="res://ArknightsMap/images/monsters/Degenbrecher/enemy_1525_blkswb.atlas" id="1_atlas"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bjnvuq6ocust6" path="res://ArknightsMap/images/monsters/Degenbrecher/enemy_1525_blkswb_424.skel" id="2_skel"]
+
+[resource]
+atlas_res = ExtResource("1_atlas")
+skeleton_file_res = ExtResource("2_skel")

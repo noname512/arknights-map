@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://dbtkcqrplclpk"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://blkoe1mak27t8" path="res://ArknightsMap/images/monsters/Tschaggatta/enemy_1194_krgmtr_2.atlas" id="1_atlas"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://b555mxat1ofly" path="res://ArknightsMap/images/monsters/Tschaggatta/enemy_1194_krgmtr_2_424.skel" id="2_skel"]
+
+[resource]
+atlas_res = ExtResource("1_atlas")
+skeleton_file_res = ExtResource("2_skel")

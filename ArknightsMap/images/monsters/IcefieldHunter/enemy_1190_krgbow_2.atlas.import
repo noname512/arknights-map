@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://brvh5ht8rwkqw"
+path="res://.godot/imported/enemy_1190_krgbow_2.atlas-fa51b0d80f20f18c12096df4d6009534.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/IcefieldHunter/enemy_1190_krgbow_2.atlas"
+dest_files=["res://.godot/imported/enemy_1190_krgbow_2.atlas-fa51b0d80f20f18c12096df4d6009534.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

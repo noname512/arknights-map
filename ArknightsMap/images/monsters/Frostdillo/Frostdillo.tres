@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://ctwix1olqa53e"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://hg5i1e3dfa4s" path="res://ArknightsMap/images/monsters/Frostdillo/enemy_10142_xdturt_2.atlas" id="1_atlas"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://c72jxl8kn10g4" path="res://ArknightsMap/images/monsters/Frostdillo/enemy_10142_xdturt_2_424.skel" id="2_skel"]
+
+[resource]
+atlas_res = ExtResource("1_atlas")
+skeleton_file_res = ExtResource("2_skel")

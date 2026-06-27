@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://bjs7awpliuwk"
+path="res://.godot/imported/enemy_1385_winbom_2.atlas-32fe6222ac0747b746c4101208396d4e.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/JetCanister/enemy_1385_winbom_2.atlas"
+dest_files=["res://.godot/imported/enemy_1385_winbom_2.atlas-32fe6222ac0747b746c4101208396d4e.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

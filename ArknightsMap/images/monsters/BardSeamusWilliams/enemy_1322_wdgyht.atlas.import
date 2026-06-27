@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://b0pwgfqiv6sxr"
+path="res://.godot/imported/enemy_1322_wdgyht.atlas-2f3163b1e5e43018ce244aef721ab999.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/BardSeamusWilliams/enemy_1322_wdgyht.atlas"
+dest_files=["res://.godot/imported/enemy_1322_wdgyht.atlas-2f3163b1e5e43018ce244aef721ab999.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

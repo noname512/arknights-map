@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bjnvuq6ocust6"
+path="res://.godot/imported/enemy_1525_blkswb_424.skel-4e62ff7813e1bcc8f3c0a4f6e75bc935.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Degenbrecher/enemy_1525_blkswb_424.skel"
+dest_files=["res://.godot/imported/enemy_1525_blkswb_424.skel-4e62ff7813e1bcc8f3c0a4f6e75bc935.spskel"]
+
+[params]
+

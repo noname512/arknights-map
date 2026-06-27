@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://c8wtgq81p3ohg"
+path="res://.godot/imported/enemy_10144_xdelk_2_424.skel-f7b4094892e7f75e1ab65c0b757b2d8e.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/GreathornRhuul/enemy_10144_xdelk_2_424.skel"
+dest_files=["res://.godot/imported/enemy_10144_xdelk_2_424.skel-f7b4094892e7f75e1ab65c0b757b2d8e.spskel"]
+
+[params]
+

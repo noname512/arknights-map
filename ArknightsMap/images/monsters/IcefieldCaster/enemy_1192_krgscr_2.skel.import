@@ -1,0 +1,13 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://cwxu736ng3k0a"
+valid=false
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SnowyMountain/IcefieldCaster/enemy_1192_krgscr_2.skel"
+
+[params]
+

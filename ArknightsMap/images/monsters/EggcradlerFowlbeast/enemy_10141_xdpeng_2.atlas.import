@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://camm1oaavbjl1"
+path="res://.godot/imported/enemy_10141_xdpeng_2.atlas-69b128735dbebefccef93c2174fcb49f.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/EggcradlerFowlbeast/enemy_10141_xdpeng_2.atlas"
+dest_files=["res://.godot/imported/enemy_10141_xdpeng_2.atlas-69b128735dbebefccef93c2174fcb49f.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

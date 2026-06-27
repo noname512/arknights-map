@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://dui0qxdpm31dv"
+path="res://.godot/imported/enemy_1386_winmag_2_424.skel-b3ff8fb9d67ce409f6026042df3ec911.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DelegationCaster/enemy_1386_winmag_2_424.skel"
+dest_files=["res://.godot/imported/enemy_1386_winmag_2_424.skel-b3ff8fb9d67ce409f6026042df3ec911.spskel"]
+
+[params]
+

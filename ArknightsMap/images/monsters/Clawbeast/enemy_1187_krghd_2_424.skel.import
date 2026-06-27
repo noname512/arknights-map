@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://dlma7n0ewjuvl"
+path="res://.godot/imported/enemy_1187_krghd_2_424.skel-173ce1c54fce3b47dd9d9fddff99fdb1.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Clawbeast/enemy_1187_krghd_2_424.skel"
+dest_files=["res://.godot/imported/enemy_1187_krghd_2_424.skel-173ce1c54fce3b47dd9d9fddff99fdb1.spskel"]
+
+[params]
+

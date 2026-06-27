@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://dema3h46vbx0w"
+path="res://.godot/imported/enemy_10139_xdseal_2_424.skel-46f84a3c96ba4bef107c7541e532831d.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/FluffySnowball/enemy_10139_xdseal_2_424.skel"
+dest_files=["res://.godot/imported/enemy_10139_xdseal_2_424.skel-46f84a3c96ba4bef107c7541e532831d.spskel"]
+
+[params]
+

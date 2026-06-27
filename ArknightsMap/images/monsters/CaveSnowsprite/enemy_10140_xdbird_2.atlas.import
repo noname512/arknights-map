@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://cw417kixmlm21"
+path="res://.godot/imported/enemy_10140_xdbird_2.atlas-826261e659f230017152959077cd72bb.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/CaveSnowsprite/enemy_10140_xdbird_2.atlas"
+dest_files=["res://.godot/imported/enemy_10140_xdbird_2.atlas-826261e659f230017152959077cd72bb.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

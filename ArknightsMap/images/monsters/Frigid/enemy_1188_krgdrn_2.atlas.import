@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://csxk6japj6dwc"
+path="res://.godot/imported/enemy_1188_krgdrn_2.atlas-9223267a31e5d434575fa399ae8d718c.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Frigid/enemy_1188_krgdrn_2.atlas"
+dest_files=["res://.godot/imported/enemy_1188_krgdrn_2.atlas-9223267a31e5d434575fa399ae8d718c.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

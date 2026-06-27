@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://ckp8qjv6jtavt"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bjs7awpliuwk" path="res://ArknightsMap/images/monsters/JetCanister/enemy_1385_winbom_2.atlas" id="1_atlas"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://5w7g2y6ipa14" path="res://ArknightsMap/images/monsters/JetCanister/enemy_1385_winbom_2_424.skel" id="2_skel"]
+
+[resource]
+atlas_res = ExtResource("1_atlas")
+skeleton_file_res = ExtResource("2_skel")

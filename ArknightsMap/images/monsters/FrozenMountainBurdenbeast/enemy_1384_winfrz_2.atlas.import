@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://2hph6d7jp8nu"
+path="res://.godot/imported/enemy_1384_winfrz_2.atlas-b1d39cffe2c3cb940f3b88d54ee47960.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/FrozenMountainBurdenbeast/enemy_1384_winfrz_2.atlas"
+dest_files=["res://.godot/imported/enemy_1384_winfrz_2.atlas-b1d39cffe2c3cb940f3b88d54ee47960.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

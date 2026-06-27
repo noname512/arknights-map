@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://twepemd1ldf"
+path="res://.godot/imported/enemy_1192_krgscr_2.atlas-87bcd2e010801133a309af0050959851.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/IcefieldCaster/enemy_1192_krgscr_2.atlas"
+dest_files=["res://.godot/imported/enemy_1192_krgscr_2.atlas-87bcd2e010801133a309af0050959851.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://d2flr8cin5op4"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://dd4wdpl0of6v3" path="res://ArknightsMap/images/monsters/DelegationCaster/enemy_1386_winmag_2.atlas" id="1_atlas"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dui0qxdpm31dv" path="res://ArknightsMap/images/monsters/DelegationCaster/enemy_1386_winmag_2_424.skel" id="2_skel"]
+
+[resource]
+atlas_res = ExtResource("1_atlas")
+skeleton_file_res = ExtResource("2_skel")

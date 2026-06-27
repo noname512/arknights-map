@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://b555mxat1ofly"
+path="res://.godot/imported/enemy_1194_krgmtr_2_424.skel-97def20a6946c04f0c12030639c197ab.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Tschaggatta/enemy_1194_krgmtr_2_424.skel"
+dest_files=["res://.godot/imported/enemy_1194_krgmtr_2_424.skel-97def20a6946c04f0c12030639c197ab.spskel"]
+
+[params]
+

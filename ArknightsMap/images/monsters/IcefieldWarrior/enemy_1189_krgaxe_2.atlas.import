@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://bvfaxhw43tw2s"
+path="res://.godot/imported/enemy_1189_krgaxe_2.atlas-ac30af34b6d1cd1a78896cf610747149.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/IcefieldWarrior/enemy_1189_krgaxe_2.atlas"
+dest_files=["res://.godot/imported/enemy_1189_krgaxe_2.atlas-ac30af34b6d1cd1a78896cf610747149.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

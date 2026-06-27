@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://bnle7tmqutvgd"
+path="res://.godot/imported/enemy_1525_blkswb.atlas-3ea9bf7831b967a2c6192376adb41b5b.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Degenbrecher/enemy_1525_blkswb.atlas"
+dest_files=["res://.godot/imported/enemy_1525_blkswb.atlas-3ea9bf7831b967a2c6192376adb41b5b.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

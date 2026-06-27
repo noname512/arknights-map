@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://da6ldiytk7pqh"
+path="res://.godot/imported/enemy_1388_wingnt_2.atlas-f46730321a9fa241bc7971a7de9f4a3c.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Catapult/enemy_1388_wingnt_2.atlas"
+dest_files=["res://.godot/imported/enemy_1388_wingnt_2.atlas-f46730321a9fa241bc7971a7de9f4a3c.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

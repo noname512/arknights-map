@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://bcjg2ugvrqw4e"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cw417kixmlm21" path="res://ArknightsMap/images/monsters/CaveSnowsprite/enemy_10140_xdbird_2.atlas" id="1_atlas"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bmi05gfanymk7" path="res://ArknightsMap/images/monsters/CaveSnowsprite/enemy_10140_xdbird_2_424.skel" id="2_skel"]
+
+[resource]
+atlas_res = ExtResource("1_atlas")
+skeleton_file_res = ExtResource("2_skel")

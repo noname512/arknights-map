@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://cta8ucruay1fb"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://2hph6d7jp8nu" path="res://ArknightsMap/images/monsters/FrozenMountainBurdenbeast/enemy_1384_winfrz_2.atlas" id="1_atlas"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bxq5ju4t43b4n" path="res://ArknightsMap/images/monsters/FrozenMountainBurdenbeast/enemy_1384_winfrz_2_424.skel" id="2_skel"]
+
+[resource]
+atlas_res = ExtResource("1_atlas")
+skeleton_file_res = ExtResource("2_skel")

@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://djxo30075hahb"
+path="res://.godot/imported/enemy_1383_windog_2_424.skel-37489e46c02ff71cfc568879fffc9bee.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/ClockworkPatroller/enemy_1383_windog_2_424.skel"
+dest_files=["res://.godot/imported/enemy_1383_windog_2_424.skel-37489e46c02ff71cfc568879fffc9bee.spskel"]
+
+[params]
+

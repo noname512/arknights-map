@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://b4mdk3sp0kfnu"
+path="res://.godot/imported/enemy_10143_xdmush_2.atlas-c60c7e06358ad963589bddae0bb7f750.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Snowcap/enemy_10143_xdmush_2.atlas"
+dest_files=["res://.godot/imported/enemy_10143_xdmush_2.atlas-c60c7e06358ad963589bddae0bb7f750.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

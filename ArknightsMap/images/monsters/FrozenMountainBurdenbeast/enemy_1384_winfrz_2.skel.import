@@ -1,0 +1,13 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://d0j3oyopl7y0j"
+valid=false
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SnowyMountain/FrozenMountainBurdenbeast/enemy_1384_winfrz_2.skel"
+
+[params]
+

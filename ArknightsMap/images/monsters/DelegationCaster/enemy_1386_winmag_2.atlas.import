@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://dd4wdpl0of6v3"
+path="res://.godot/imported/enemy_1386_winmag_2.atlas-583de12f0d82d254ed4f21a46a08d112.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DelegationCaster/enemy_1386_winmag_2.atlas"
+dest_files=["res://.godot/imported/enemy_1386_winmag_2.atlas-583de12f0d82d254ed4f21a46a08d112.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

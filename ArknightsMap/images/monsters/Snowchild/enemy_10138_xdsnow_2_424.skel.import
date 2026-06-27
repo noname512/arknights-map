@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://qq55rjrf1s0k"
+path="res://.godot/imported/enemy_10138_xdsnow_2_424.skel-6fa94be52da43c45e21cbb9ef5d15dc1.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Snowchild/enemy_10138_xdsnow_2_424.skel"
+dest_files=["res://.godot/imported/enemy_10138_xdsnow_2_424.skel-6fa94be52da43c45e21cbb9ef5d15dc1.spskel"]
+
+[params]
+

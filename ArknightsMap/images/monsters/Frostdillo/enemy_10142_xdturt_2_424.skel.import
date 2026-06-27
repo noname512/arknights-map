@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://c72jxl8kn10g4"
+path="res://.godot/imported/enemy_10142_xdturt_2_424.skel-da8160ca864d59a1150fc42ed9a97bc0.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Frostdillo/enemy_10142_xdturt_2_424.skel"
+dest_files=["res://.godot/imported/enemy_10142_xdturt_2_424.skel-da8160ca864d59a1150fc42ed9a97bc0.spskel"]
+
+[params]
+

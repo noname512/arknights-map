@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://blkoe1mak27t8"
+path="res://.godot/imported/enemy_1194_krgmtr_2.atlas-100f82aecc52a5b726f993e054c7e8c7.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Tschaggatta/enemy_1194_krgmtr_2.atlas"
+dest_files=["res://.godot/imported/enemy_1194_krgmtr_2.atlas-100f82aecc52a5b726f993e054c7e8c7.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

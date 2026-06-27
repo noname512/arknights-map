@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://bl8pvnq2sgwd4"
+path="res://.godot/imported/enemy_10144_xdelk_2.atlas-193e73c6c640e28d004728b74bf20554.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/GreathornRhuul/enemy_10144_xdelk_2.atlas"
+dest_files=["res://.godot/imported/enemy_10144_xdelk_2.atlas-193e73c6c640e28d004728b74bf20554.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

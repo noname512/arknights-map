@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://df3041vuqomxa"
+path="res://.godot/imported/enemy_1382_winbal_2.atlas-c4d28d3de7802610c3abe2f7c0dda645.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DelegationAssaultRecruit/enemy_1382_winbal_2.atlas"
+dest_files=["res://.godot/imported/enemy_1382_winbal_2.atlas-c4d28d3de7802610c3abe2f7c0dda645.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

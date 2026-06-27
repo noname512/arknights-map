@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://djapggce8t84k"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cf7h3mboeammp" path="res://ArknightsMap/images/monsters/HaroldCraigavon/enemy_1549_windoc.atlas" id="1_atlas"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dx82mls72f01o" path="res://ArknightsMap/images/monsters/HaroldCraigavon/enemy_1549_windoc_424.skel" id="2_skel"]
+
+[resource]
+atlas_res = ExtResource("1_atlas")
+skeleton_file_res = ExtResource("2_skel")

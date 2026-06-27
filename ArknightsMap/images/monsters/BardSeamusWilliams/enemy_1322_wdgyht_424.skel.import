@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bpbn4s46wvq67"
+path="res://.godot/imported/enemy_1322_wdgyht_424.skel-7958c1d9ab3fb93a406b0116068069ec.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/BardSeamusWilliams/enemy_1322_wdgyht_424.skel"
+dest_files=["res://.godot/imported/enemy_1322_wdgyht_424.skel-7958c1d9ab3fb93a406b0116068069ec.spskel"]
+
+[params]
+

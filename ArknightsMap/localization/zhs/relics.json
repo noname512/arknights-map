@@ -146,5 +146,13 @@
     "ARKNIGHTS_MAP_RELIC_TRADE_SHIPPING_ORDER.flavor": "",
     "ARKNIGHTS_MAP_RELIC_SNOWY_REALM_SHOP.title": "雪境专卖店",
     "ARKNIGHTS_MAP_RELIC_SNOWY_REALM_SHOP.description": "将你的商人替换为售卖[gold]附魔[/gold]服务的特殊商店。",
-    "ARKNIGHTS_MAP_RELIC_SNOWY_REALM_SHOP.flavor": ""
+    "ARKNIGHTS_MAP_RELIC_SNOWY_REALM_SHOP.flavor": "",
+    "----Arctosz----": "阿克托斯遗物",
+    "ARKNIGHTS_MAP_RELIC_ANCIENT_HERITAGE.title": "古老传承",
+    "ARKNIGHTS_MAP_RELIC_ANCIENT_HERITAGE.description": "你的每回合最多打出[red]{Cards}[/red]张攻击牌，但它们造成的伤害提高[blue]{Amount}%[/blue]。",
+    "ARKNIGHTS_MAP_RELIC_ANCIENT_HERITAGE.flavor": "",
+    "ARKNIGHTS_MAP_RELIC_HUNTING_TOOLS.title": "狩猎工具",
+    "ARKNIGHTS_MAP_RELIC_HUNTING_TOOLS.event_description": "将[blue]{Cards}[/blue]张[gold]设置陷阱[/gold]加入你的[gold]牌组[/gold]",
+    "ARKNIGHTS_MAP_RELIC_HUNTING_TOOLS.description": "拾起时，将[blue]{Cards}[/blue]张[gold]设置陷阱[/gold]加入你的[gold]牌组[/gold]",
+    "ARKNIGHTS_MAP_RELIC_HUNTING_TOOLS.flavor": ""
 }

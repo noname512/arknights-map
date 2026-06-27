@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://3t58shh601uw"
+path="res://.godot/imported/enemy_1387_winshd_2.atlas-68e8f6632a6d7768df180964e8c2cd43.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/DelegationShieldbearer/enemy_1387_winshd_2.atlas"
+dest_files=["res://.godot/imported/enemy_1387_winshd_2.atlas-68e8f6632a6d7768df180964e8c2cd43.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"
