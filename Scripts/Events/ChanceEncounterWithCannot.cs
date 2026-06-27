@@ -124,7 +124,7 @@ public sealed class ChanceEncounterWithCannot : ModEventTemplate
 
     private async Task StrikeDefend()
     {
-        await CardPileCmd.RemoveFromDeck(card!);
+        await CardPileCmd.RemoveFromDeck(card2!);
         await CreatureCmd.Damage(new BlockingPlayerChoiceContext(), Owner!.Creature, DynamicVars.Damage, null, null);
         SetEventFinished(L10NLookup($"{Id.Entry}.pages.FAILURE.description"));
     }
