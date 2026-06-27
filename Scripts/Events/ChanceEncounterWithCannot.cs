@@ -86,7 +86,7 @@ public sealed class ChanceEncounterWithCannot : ModEventTemplate
         {
             options.Add(new EventOption(this, null, InitialOptionKey("CARD_LOCKED")));
         }
-        list = Owner.Deck.Cards.Where(c => c.Rarity is CardRarity.Basic && (c.Tags.Contains(CardTag.Strike) || c.Tags.Contains(CardTag.Defend))).ToList();
+        list = Owner.Deck.Cards.Where(c => c.Rarity is CardRarity.Basic && c.IsRemovable && (c.Tags.Contains(CardTag.Strike) || c.Tags.Contains(CardTag.Defend))).ToList();
         if (list.Count() > 0)
         {
             card2 = Rng.NextItem(list)!;
