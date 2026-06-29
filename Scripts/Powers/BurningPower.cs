@@ -42,6 +42,7 @@ public class BurningPower : ModPowerTemplate
     {
         if (creature != Owner || !Owner.IsMonster)
             return;
-        await DamageCmd.Attack(Amount).FromMonster(Owner.Monster!).Execute(choiceContext);
+        await CreatureCmd.Damage(choiceContext, Owner.CombatState.PlayerCreatures, base.Amount, ValueProp.Unpowered | ValueProp.SkipHurtAnim, null, null);
+        await PowerCmd.Apply<FlamingDamagePower>(choiceContext, Owner.CombatState.PlayerCreatures, base.Amount, null, null);
     }
 }
