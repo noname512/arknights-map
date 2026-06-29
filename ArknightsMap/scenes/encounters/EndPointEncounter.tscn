@@ -1,0 +1,37 @@
+[gd_scene format=3]
+
+[node name="EndPointEncounter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0P
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="seed0" type="Marker2D" parent="."]
+position = Vector2(1015, 378)
+
+[node name="seed1" type="Marker2D" parent="."]
+position = Vector2(1255, 378)
+
+[node name="seed2" type="Marker2D" parent="."]
+position = Vector2(1495, 378)
+
+[node name="PatrollingFoliage" type="Marker2D" parent="."]
+position = Vector2(1495, 378)
+
+[node name="seed3" type="Marker2D" parent="."]
+position = Vector2(1735, 378)
+
+[node name="BurningVine" type="Marker2D" parent="."]
+position = Vector2(1015, 778)
+
+[node name="TreeShield" type="Marker2D" parent="."]
+position = Vector2(1255, 778)
+
+[node name="AshCreation" type="Marker2D" parent="."]
+position = Vector2(1495, 778)
+
+[node name="EndPoint" type="Marker2D" parent="."]
+position = Vector2(1735, 778)

@@ -1,13 +1,16 @@
-﻿using MegaCrit.Sts2.Core.Entities.Cards;
+﻿using ArknightsMap.Scripts.Events;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
+using MegaCrit.Sts2.Core.Rooms;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Cards;
 
 [RegisterCard(typeof(EventCardPool))]
-public class Proliferation : ModCardTemplate
+public class Benediction : ModCardTemplate
 {
     private const int energyCost = -1;
     private const CardType type = CardType.Quest;
@@ -28,6 +31,24 @@ public class Proliferation : ModCardTemplate
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Unplayable];
 
-    public Proliferation()
+    public Benediction()
         : base(energyCost, type, rarity, targetType) { }
+
+    public override IReadOnlySet<RoomType> ModifyUnknownMapPointRoomTypes(IReadOnlySet<RoomType> roomTypes)
+    {
+        if (Owner.RunState.CurrentActIndex != 2)
+        {
+            return roomTypes;
+        }
+        return new HashSet<RoomType> { RoomType.Event };
+    }
+
+    public override EventModel ModifyNextEvent(EventModel currentEvent)
+    {
+        if (Owner.RunState.CurrentActIndex != 2)
+        {
+            return currentEvent;
+        }
+        return ModelDb.Event<Spread>();
+    }
 }

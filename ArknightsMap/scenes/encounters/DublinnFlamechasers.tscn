@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[node name="TschaggattasElite" type="Control"]
+[node name="DublinnFlamechasers" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,13 +10,13 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="first" type="Marker2D" parent="."]
-position = Vector2(1015, 705)
+position = Vector2(1015, 716)
 
 [node name="second" type="Marker2D" parent="."]
-position = Vector2(1255, 737)
+position = Vector2(1255, 716)
 
 [node name="third" type="Marker2D" parent="."]
-position = Vector2(1495, 705)
+position = Vector2(1495, 716)
 
 [node name="fourth" type="Marker2D" parent="."]
-position = Vector2(1735, 737)
+position = Vector2(1735, 716)

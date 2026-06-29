@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://dlruw3w1ic6tj"
+path="res://.godot/imported/enemy_10071_ftprg.atlas-3f84f445b99d4f2725d1753d1a950674.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/EndPoint/enemy_10071_ftprg.atlas"
+dest_files=["res://.godot/imported/enemy_10071_ftprg.atlas-3f84f445b99d4f2725d1753d1a950674.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

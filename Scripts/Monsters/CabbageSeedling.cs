@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.MonsterMoves;
@@ -92,8 +93,19 @@ public class CabbageSeedling : AbstractWildsMonster
         return new MonsterMoveStateMachine(list, stun);
     }
 
+    public override async Task AfterCreatureAddedToCombat(Creature creature)
+    {
+        if (!IsBurning && creature.Monster is BurningVine)
+        {
+            IsBurning = true;
+            await CreatureCmd.TriggerAnim(Creature, "Start", 0);
+            await PowerCmd.Apply<BurningPower>(new ThrowingPlayerChoiceContext(), Creature, 15m, Creature, null);
+        }
+    }
+
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
     {
+        IsBurning = IsBurningVineInCombat();
         if (IsBurning)
         {
             AnimState startState = new AnimState("1to2");
@@ -109,6 +121,7 @@ public class CabbageSeedling : AbstractWildsMonster
         }
         else
         {
+            AnimState startState = new AnimState("1to2");
             AnimState idleState = new AnimState("Idle", isLooping: true);
             AnimState attackState = new AnimState("Attack");
             AnimState dieState = new AnimState("Die");
@@ -116,6 +129,7 @@ public class CabbageSeedling : AbstractWildsMonster
             CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
             creatureAnimator.AddAnyState("Attack", attackState);
             creatureAnimator.AddAnyState("Dead", dieState);
+            creatureAnimator.AddAnyState("Start", startState);
             return creatureAnimator;
         }
     }

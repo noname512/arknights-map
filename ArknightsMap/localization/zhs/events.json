@@ -55,7 +55,7 @@
     "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.INITIAL.options.SALVATION.description": "从你的[gold]牌组[/gold]中选择一张[gold]{CardType}牌[/gold]移除。{ExtraDescription}",
     "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.INITIAL.options.SALVATION.extra_description": "获得[blue]{MaxHp4}[/blue]点最大生命值。",
     "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.SALVATION.description": "也许，还有机会能拯救一切。但是，又要付出什么呢？",
-    "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.INITIAL.options.PROLIFERATION.title": "扩散【警告：还没做好第三幕事件】",
+    "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.INITIAL.options.PROLIFERATION.title": "扩散",
     "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.INITIAL.options.PROLIFERATION.description": "将这一份[purple]“赐福”[/purple]带到第三幕。",
     "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.pages.PROLIFERATION.description": "你知道，你无法解决。你没有注意到，你的眼中也逐渐[sine]燃起紫火[/sine]。",
     "ARKNIGHTS_MAP_EVENT_OVERLOOKING_NASAOIRSI.loss": "{character}太过贪心了。",
@@ -108,5 +108,14 @@
     "ARKNIGHTS_MAP_EVENT_CHANCE_ENCOUNTER_WITH_CANNOT.pages.INITIAL.options.STRIKE_DEFEND_LOCKED.title": "已锁定",
     "ARKNIGHTS_MAP_EVENT_CHANCE_ENCOUNTER_WITH_CANNOT.pages.INITIAL.options.STRIKE_DEFEND_LOCKED.description": "你没有任何可以给他的打击、防御牌。",
     "ARKNIGHTS_MAP_EVENT_CHANCE_ENCOUNTER_WITH_CANNOT.pages.FAILURE.description": "“这是什么垃圾？？”\n他这么说着，揍了你一拳。",
-    "ARKNIGHTS_MAP_EVENT_CHANCE_ENCOUNTER_WITH_CANNOT.loss": "{character}被坎诺特一拳打死了。"
+    "ARKNIGHTS_MAP_EVENT_CHANCE_ENCOUNTER_WITH_CANNOT.loss": "{character}被坎诺特一拳打死了。",
+    "ARKNIGHTS_MAP_EVENT_SPREAD.title": "蔓延",
+    "ARKNIGHTS_MAP_EVENT_SPREAD.pages.INITIAL.description": "是时候面临你逃避的后果了。\n[purple][jitter]无穷无尽。[/jitter][purple]",
+    "ARKNIGHTS_MAP_EVENT_SPREAD.pages.INITIAL.options.FACE_THE_CROWD.title": "面对人海",
+    "ARKNIGHTS_MAP_EVENT_SPREAD.pages.INITIAL.options.FACE_THE_CROWD.description": "进入一场艰难的战斗，获得[blue]3[/blue]个[gold]遗物[/gold]。",
+    "ARKNIGHTS_MAP_EVENT_SPREAD.pages.INITIAL.options.FACE_THE_SOURCE.title": "面对源头",
+    "ARKNIGHTS_MAP_EVENT_SPREAD.pages.INITIAL.options.FACE_THE_SOURCE.description": "进入一场特殊的战斗，获得[blue]2[/blue]个[gold]遗物[/gold]。",
+    "ARKNIGHTS_MAP_EVENT_SPREAD.pages.INITIAL.options.ALLOW_TO_RUN_WILD.title": "放任不管",
+    "ARKNIGHTS_MAP_EVENT_SPREAD.pages.INITIAL.options.ALLOW_TO_RUN_WILD.description": "在战斗开始时，点燃[gold]芦苇丛[/gold]。",
+    "ARKNIGHTS_MAP_EVENT_SPREAD.pages.ALLOW_TO_RUN_WILD.description": "你感受到，哪里都是芦苇丛，哪里都有火焰，无处可逃。"
 }

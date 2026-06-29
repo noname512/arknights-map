@@ -67,7 +67,7 @@ public class BurningVine : AbstractWildsMonster
             "SUMMON",
             async targets =>
             {
-                await CreatureCmd.Add<CabbageSeedling>(CombatState, "first");
+                await CreatureCmd.Add<CabbageSeedling>(CombatState, "seed0");
                 await PowerCmd.Apply<MinionPower>(
                     new ThrowingPlayerChoiceContext(),
                     CombatState.Enemies.First(c => c.Monster is CabbageSeedling),
@@ -80,8 +80,8 @@ public class BurningVine : AbstractWildsMonster
         );
 
         ConditionalBranchState conditionalBranchState = new ConditionalBranchState("SUMMON?");
-        conditionalBranchState.AddState(summon, () => !CombatState.ContainsMonster<CabbageSeedling>());
-        conditionalBranchState.AddState(attack3, () => CombatState.ContainsMonster<CabbageSeedling>());
+        conditionalBranchState.AddState(summon, () => CombatState.Enemies.FirstOrDefault(c => c.Monster is CabbageSeedling && c.SlotName == "seed0") == null);
+        conditionalBranchState.AddState(attack3, () => true);
         attack1.FollowUpState = attack2;
         attack2.FollowUpState = conditionalBranchState;
         summon.FollowUpState = attack3;

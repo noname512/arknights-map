@@ -17,15 +17,14 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class Tschaggatta : AbstractSnowyMountainMonster
 {
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 65, 60);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 65, 60);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 65, 65);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 65, 54);
     private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 9);
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 17, 15);
-    private int Block1 => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 10, 10);
+    private int FrailAmount => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 2, 1);
+    private int Block1 => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 10, 8);
 
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
-
-    public override async Task AfterAddedToRoom() { }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
@@ -56,7 +55,7 @@ public class Tschaggatta : AbstractSnowyMountainMonster
                     .WithAttackerAnim("Attack", 0.5f)
                     // .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
                     .Execute(null);
-                await PowerCmd.Apply<FrailPower>(new ThrowingPlayerChoiceContext(), targets, 2, Creature, null);
+                await PowerCmd.Apply<FrailPower>(new ThrowingPlayerChoiceContext(), targets, FrailAmount, Creature, null);
             },
             new SingleAttackIntent(Damage2),
             new DebuffIntent()

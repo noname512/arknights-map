@@ -82,7 +82,7 @@ public sealed class OverlookingNasaoirsi : ModEventTemplate
         }
         if (maxRarity >= CardRarity.Common)
             list.Add(new EventOption(this, Salvation, InitialOptionKey("SALVATION")));
-        list.Add(new EventOption(this, Proliferation, InitialOptionKey("PROLIFERATION")));
+        list.Add(new EventOption(this, Proliferation, InitialOptionKey("PROLIFERATION"), ModelDb.Card<Benediction>().HoverTips));
         return list;
     }
 
@@ -128,7 +128,7 @@ public sealed class OverlookingNasaoirsi : ModEventTemplate
 
     private async Task Proliferation()
     {
-        CardModel card = Owner!.RunState.CreateCard<Proliferation>(Owner);
+        CardModel card = Owner!.RunState.CreateCard<Benediction>(Owner);
         CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(card, PileType.Deck));
         SetEventFinished(L10NLookup($"{Id.Entry}.pages.PROLIFERATION.description"));
     }

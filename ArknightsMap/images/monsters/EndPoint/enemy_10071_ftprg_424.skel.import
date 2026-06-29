@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://betpk8ccm1iit"
+path="res://.godot/imported/enemy_10071_ftprg_424.skel-8bb471e4b8a38bdc3690e953f2a1d2b7.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/EndPoint/enemy_10071_ftprg_424.skel"
+dest_files=["res://.godot/imported/enemy_10071_ftprg_424.skel-8bb471e4b8a38bdc3690e953f2a1d2b7.spskel"]
+
+[params]
+

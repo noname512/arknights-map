@@ -42,5 +42,9 @@
     "ARKNIGHTS_MAP_ENCOUNTER_THE_REDSTEEL_GUARD.title": "赤铁近卫队",
     "ARKNIGHTS_MAP_ENCOUNTER_THE_REDSTEEL_GUARD.loss": "{character}不敌校官的五连击。",
     "ARKNIGHTS_MAP_ENCOUNTER_TSCHAGGATTAS_ELITE.title": "山雪鬼小队",
-    "ARKNIGHTS_MAP_ENCOUNTER_TSCHAGGATTAS_ELITE.loss": "{character}成为了[gold]山雪鬼[/gold]的训练耗材。"
+    "ARKNIGHTS_MAP_ENCOUNTER_TSCHAGGATTAS_ELITE.loss": "{character}成为了[gold]山雪鬼[/gold]的训练耗材。",
+    "ARKNIGHTS_MAP_ENCOUNTER_END_POINT_ENCOUNTER.title": "“终点”",
+    "ARKNIGHTS_MAP_ENCOUNTER_END_POINT_ENCOUNTER.loss": "{character}迷失在了道路的[gold]{encounter}[/gold]。",
+    "ARKNIGHTS_MAP_ENCOUNTER_DUBLINN_FLAMECHASERS.title": "深池逐火卫队",
+    "ARKNIGHTS_MAP_ENCOUNTER_DUBLINN_FLAMECHASERS.loss": "{character}被[gold]{encounter}[/gold]的人海淹没了。"
 }

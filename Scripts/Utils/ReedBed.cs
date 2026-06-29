@@ -1,11 +1,13 @@
 using ArknightsMap.Scripts.Cards;
 using ArknightsMap.Scripts.Encounters;
 using ArknightsMap.Scripts.Powers;
+using ArknightsMap.Scripts.Relics;
 using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
@@ -24,9 +26,8 @@ public sealed class ReedBed : HookedSingletonModel
     public ReedBed()
         : base(HookType.Combat) { }
 
-    public override async Task BeforeCombatStart()
+    bool ShouldSetBurning()
     {
-        Burning = false;
         EncounterModel? encounter = CurrentCombatState!.Encounter;
         if (encounter is AbstractWildsEncounter myEncounter)
         {
@@ -34,8 +35,25 @@ public sealed class ReedBed : HookedSingletonModel
             Foreground = control.GetNodeOrNull("Foreground");
             if (myEncounter.isBurningAtStart)
             {
-                await SetBurningDurningCombat(true, CurrentCombatState);
+                return true;
             }
+        }
+        foreach (Player player in CurrentRunState!.Players)
+        {
+            if (player.Relics.Any(r => r is Proliferate))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public override async Task BeforeCombatStart()
+    {
+        Burning = false;
+        if (ShouldSetBurning())
+        {
+            await SetBurningDurningCombat(true, CurrentCombatState!);
         }
     }
 

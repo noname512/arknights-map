@@ -16,7 +16,7 @@ public class LampBurner : AbstractWildsEncounter
 
     public override string CustomBgm => "event:/ArknightsMap/music/wgrsdj_bat";
 
-    public override IReadOnlyList<string> Slots => ["first", "second"];
+    public override IReadOnlyList<string> Slots => ["seed0", "second"];
 
     public override RoomType RoomType => RoomType.Monster;
 
