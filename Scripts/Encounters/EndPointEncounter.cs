@@ -33,7 +33,7 @@ public class EndPointEncounter : AbstractWildsEncounter
     public override string CustomBgm => "event:/ArknightsMap/music/wgrsdj_bat";
 
     public override IReadOnlyList<string> Slots =>
-        ["EndPoint", "seed0", "seed1", "seed2", "seed3", "BurningVine", "PatrollingFoliage", "TreeShield", "AshCreation"];
+        ["seed0", "seed1", "seed2", "seed3", "PatrollingFoliage", "TreeShield", "BurningVine", "AshCreation", "EndPoint"];
 
     public override RoomType RoomType => RoomType.Elite;
 

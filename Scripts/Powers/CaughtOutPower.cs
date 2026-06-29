@@ -37,7 +37,7 @@ public class CaughtOutPower : ModPowerTemplate
 
     public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (Owner.Monster.IntendsToAttack)
+        if (side == CombatSide.Enemy && Owner.Monster.IntendsToAttack)
         {
             correctIntent++;
         }
