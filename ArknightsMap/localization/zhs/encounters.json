@@ -40,5 +40,7 @@
     "ARKNIGHTS_MAP_ENCOUNTER_BREAKOUT.title": "突围",
     "ARKNIGHTS_MAP_ENCOUNTER_BREAKOUT.loss": "{character}没能突破深池重甲卫士的重围",
     "ARKNIGHTS_MAP_ENCOUNTER_THE_REDSTEEL_GUARD.title": "赤铁近卫队",
-    "ARKNIGHTS_MAP_ENCOUNTER_THE_REDSTEEL_GUARD.loss": "{character}不敌校官的五连击。"
+    "ARKNIGHTS_MAP_ENCOUNTER_THE_REDSTEEL_GUARD.loss": "{character}不敌校官的五连击。",
+    "ARKNIGHTS_MAP_ENCOUNTER_TSCHAGGATTAS_ELITE.title": "山雪鬼小队",
+    "ARKNIGHTS_MAP_ENCOUNTER_TSCHAGGATTAS_ELITE.loss": "{character}成为了[gold]山雪鬼[/gold]的训练耗材。"
 }
