@@ -109,7 +109,7 @@ public class DublinnFlamechaserGuard : AbstractWildsMonster
 
     public override async Task OnReedBedStatusChange(bool burning)
     {
-        if (NextMove.FollowUpState.Id == "BUFF_N" && burning)
+        if (NextMove.FollowUpState != null && NextMove.FollowUpState.Id == "BUFF_N" && burning)
         {
             NextMove.FollowUpState = buff_burning;
         }
