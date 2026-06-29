@@ -27,7 +27,7 @@ offset_right = 91.0
 
 [node name="IntentPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(10, -150)
+position = Vector2(10, -160)
 
 [node name="CenterPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
