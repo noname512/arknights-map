@@ -106,31 +106,22 @@ public class CabbageSeedling : AbstractWildsMonster
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
     {
         IsBurning = IsBurningVineInCombat();
-        if (IsBurning)
-        {
-            AnimState startState = new AnimState("1to2");
-            AnimState idleState = new AnimState("2_Idle", isLooping: true);
-            AnimState attackState = new AnimState("2_Attack");
-            AnimState dieState = new AnimState("2_Die");
-            startState.NextState = idleState;
-            attackState.NextState = idleState;
-            CreatureAnimator creatureAnimator = new CreatureAnimator(startState, controller);
-            creatureAnimator.AddAnyState("Attack", attackState);
-            creatureAnimator.AddAnyState("Dead", dieState);
-            return creatureAnimator;
-        }
-        else
-        {
-            AnimState startState = new AnimState("1to2");
-            AnimState idleState = new AnimState("Idle", isLooping: true);
-            AnimState attackState = new AnimState("Attack");
-            AnimState dieState = new AnimState("Die");
-            attackState.NextState = idleState;
-            CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
-            creatureAnimator.AddAnyState("Attack", attackState);
-            creatureAnimator.AddAnyState("Dead", dieState);
-            creatureAnimator.AddAnyState("Start", startState);
-            return creatureAnimator;
-        }
+        AnimState startState = new AnimState("1to2");
+        AnimState idleState2 = new AnimState("2_Idle", isLooping: true);
+        AnimState attackState2 = new AnimState("2_Attack");
+        AnimState dieState2 = new AnimState("2_Die");
+        AnimState idleState = new AnimState("Idle", isLooping: true);
+        AnimState attackState = new AnimState("Attack");
+        AnimState dieState = new AnimState("Die");
+        startState.NextState = idleState2;
+        attackState.NextState = idleState;
+        attackState2.NextState = idleState2;
+        CreatureAnimator creatureAnimator = new CreatureAnimator(IsBurning ? startState : idleState, controller);
+        creatureAnimator.AddAnyState("Attack", attackState2, () => IsBurning);
+        creatureAnimator.AddAnyState("Attack", attackState, () => !IsBurning);
+        creatureAnimator.AddAnyState("Dead", dieState2, () => IsBurning);
+        creatureAnimator.AddAnyState("Dead", dieState, () => !IsBurning);
+        creatureAnimator.AddAnyState("Start", startState);
+        return creatureAnimator;
     }
 }
