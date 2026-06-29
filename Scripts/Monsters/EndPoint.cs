@@ -79,6 +79,7 @@ public class EndPoint : ModMonsterTemplate
                     // .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
                     .Execute(null);
 
+                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 2, Creature, null);
                 List<Creature> monsters = CombatState.Enemies.Where(e => e.IsAlive && e != Creature).ToList();
                 for (int i = 0; i < TargetNum; i++)
                 {
@@ -133,7 +134,7 @@ public class EndPoint : ModMonsterTemplate
         CardModel? cardSource
     )
     {
-        if (target != Creature || props.HasFlag(ValueProp.Unpowered))
+        if (target != Creature || props.HasFlag(ValueProp.Unpowered) || stage == 2)
         {
             return;
         }

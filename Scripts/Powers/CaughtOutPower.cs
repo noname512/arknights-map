@@ -26,6 +26,7 @@ public class CaughtOutPower : ModPowerTemplate
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
     private bool summoned = false;
+    private int correctIntent = 0;
 
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature target, bool wasRemovalPrevented, float deathAnimLength)
     {
@@ -36,9 +37,13 @@ public class CaughtOutPower : ModPowerTemplate
 
     public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
+        if (Owner.Monster.IntendsToAttack)
+        {
+            correctIntent++;
+        }
         if (side != Owner.Side)
             return;
-        if (Owner.CombatState!.RoundNumber >= AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 5))
+        if (correctIntent >= AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 5))
         {
             await SummonSeed();
         }
