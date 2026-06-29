@@ -24,6 +24,8 @@ public class DublinnFlamechaserGuard : AbstractWildsMonster
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
     private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 14, 12);
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 18, 16);
+    private int StrengthGain => 3;
+    private int FireStrengthGainAddition => 10;
     public override bool ShouldDisappearFromDoom => false;
 
     private MoveState? buff_burning;
@@ -31,7 +33,7 @@ public class DublinnFlamechaserGuard : AbstractWildsMonster
 
     public override async Task AfterAddedToRoom()
     {
-        await PowerCmd.Apply<ChaseFlamePower>(new ThrowingPlayerChoiceContext(), Creature, 10, Creature, null);
+        ChaseFlamePower power = await PowerCmd.Apply<ChaseFlamePower>(new ThrowingPlayerChoiceContext(), Creature, 10, Creature, null);
         // await PowerCmd.Apply<FlameBathPower>(new ThrowingPlayerChoiceContext(), Creature, 50, Creature, null);
     }
 
@@ -50,14 +52,14 @@ public class DublinnFlamechaserGuard : AbstractWildsMonster
         );
         buff_burning = new MoveState(
             "BUFF_B",
-            async targets => await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 12, Creature, null),
+            async targets => await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthGain + FireStrengthGainAddition, Creature, null),
             new BuffIntent()
         );
         buff_not_burning = new MoveState(
             "BUFF_N",
             async targets =>
             {
-                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 2, Creature, null);
+                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthGain, Creature, null);
                 await ModelDb.Singleton<ReedBed>().SetBurningDurningCombat(true, CombatState);
             },
             new BuffIntent(),
@@ -107,6 +109,10 @@ public class DublinnFlamechaserGuard : AbstractWildsMonster
 
     public override async Task OnReedBedStatusChange(bool burning)
     {
+        if (NextMove.FollowUpState.Id == "BUFF_N" && burning)
+        {
+            NextMove.FollowUpState = buff_burning;
+        }
         if (NextMove.Id == "BUFF_B" && !burning)
             SetMoveImmediate(buff_not_burning!);
         else if (NextMove.Id == "BUFF_N" && burning)

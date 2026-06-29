@@ -42,6 +42,8 @@ public class ChaseFlamePower : ModPowerTemplate
         DecreaseHp = AshDecreaseHp * MaxHp / Amount;
         if (Owner.Monster is DublinnFlamechaserGuard)
         {
+            AshDecreaseHp *= 2;
+            DecreaseHp *= 2;
             ReviveTurn = 2;
         }
         else
