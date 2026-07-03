@@ -74,7 +74,7 @@ public class PutOutFire : ModCardTemplate
         NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(Owner.Creature));
         SfxCmd.Play("event:/sfx/characters/attack_fire");
         decimal amount = DynamicVars["PutOutDmg"].PreviewValue;
-        await CreatureCmd.Damage(choiceContext, Owner.Creature, new DamageVar(amount, ValueProp.Unpowered), this);
+        await CreatureCmd.Damage(choiceContext, Owner.Creature, new DamageVar(amount, ValueProp.Unpowered), this, cardPlay);
         await PowerCmd.Apply<FlamingDamagePower>(choiceContext, Owner.Creature, amount, Owner.Creature, this);
         await ModelDb.Singleton<ReedBed>().SetBurningDurningCombat(false, CombatState!);
     }

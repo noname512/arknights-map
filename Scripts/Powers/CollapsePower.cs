@@ -111,7 +111,7 @@ public class CollapsePower : ModPowerTemplate
         List<Creature> enemies = CombatState.Enemies.Where(m => m.IsAlive && m.Monster is not TatteredPillar).ToList();
         foreach (var m in enemies)
         {
-            await CreatureCmd.Damage(choiceContext, m, Amount, ValueProp.Unpowered | ValueProp.Unblockable, m, null);
+            await CreatureCmd.Damage(choiceContext, m, Amount, ValueProp.Unpowered | ValueProp.Unblockable, m, null, null);
             await CreatureCmd.LoseMaxHp(choiceContext, m, Amount, false);
         }
     }

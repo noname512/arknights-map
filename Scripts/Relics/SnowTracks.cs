@@ -52,10 +52,10 @@ public class SnowTracks : ModRelicTemplate
     }
 
     [SavedProperty]
-    public int[] SnowTracksCoordCols = [];
+    public int[] SnowTracksCoordCols{get;set;} = [];
 
     [SavedProperty]
-    public int[] SnowTracksCoordRows = [];
+    public int[] SnowTracksCoordRows{get;set;} = [];
 
     public override Task AfterObtained()
     {

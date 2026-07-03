@@ -36,7 +36,6 @@ public sealed class IntelligenceBroker : ModEventTemplate
         }
     }
 
-    [SavedProperty]
     public static int[] AlreadyChoose;
 
     protected override Task BeforeEventStarted(bool isPreFinished)

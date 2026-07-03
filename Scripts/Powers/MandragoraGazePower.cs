@@ -27,7 +27,7 @@ public class MandragoraGazePower : ModPowerTemplate
         if ((cardPlay.Card.Type == CardType.Skill) && (cardPlay.Card.Owner.Creature == Owner))
         {
             // TODO：写卡上
-            await CreatureCmd.Damage(choiceContext, Owner, Amount, ValueProp.Unpowered, Owner, null);
+            await CreatureCmd.Damage(choiceContext, Owner, Amount, ValueProp.Unpowered, Owner, null, null);
         }
     }
 

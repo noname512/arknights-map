@@ -36,13 +36,13 @@ public sealed class ChanceEncounterWithCannot : ModEventTemplate
 
     protected override Task BeforeEventStarted(bool isPreFinished)
     {
-        Owner!.CanRemovePotions = false;
+        Owner!.CanUseOrRemovePotions = false;
         return Task.CompletedTask;
     }
 
     protected override void OnEventFinished()
     {
-        Owner!.CanRemovePotions = true;
+        Owner!.CanUseOrRemovePotions = true;
     }
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()

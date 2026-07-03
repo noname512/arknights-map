@@ -175,7 +175,7 @@ public class ChaseFlamePower : ModPowerTemplate
         return Task.CompletedTask;
     }
 
-    public override Decimal ModifyDamageCap(Creature? target, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override Decimal ModifyDamageCap(Creature? target, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (CurState == 0)
             return Decimal.MaxValue;

@@ -60,7 +60,7 @@ public class PurpleFlame : ModCardTemplate
     {
         NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(Owner.Creature));
         SfxCmd.Play("event:/sfx/characters/attack_fire");
-        await CreatureCmd.Damage(choiceContext, Owner.Creature, DynamicVars.Damage, this);
+        await CreatureCmd.Damage(choiceContext, Owner.Creature, DynamicVars.Damage, this, cardPlay);
         await PowerCmd.Apply<FlamingDamagePower>(choiceContext, Owner.Creature, DynamicVars.Damage.IntValue, Owner.Creature, this);
     }
 
