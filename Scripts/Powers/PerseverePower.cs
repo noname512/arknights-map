@@ -49,15 +49,19 @@ public class PerseverePower : ModPowerTemplate, IHealthBarForecastSource
         {
             return;
         }
-        await CreatureCmd.Damage(
-            new ThrowingPlayerChoiceContext(),
-            Owner,
-            DynamicVars["MaxDmg"].BaseValue,
-            ValueProp.Unblockable | ValueProp.Unpowered,
-            null,
-            null
-        );
-        DynamicVars["MaxDmg"].BaseValue = 0;
+
+        if (DynamicVars["MaxDmg"].BaseValue > 0)
+        {
+            await CreatureCmd.Damage(
+                new ThrowingPlayerChoiceContext(),
+                Owner,
+                DynamicVars["MaxDmg"].BaseValue,
+                ValueProp.Unblockable | ValueProp.Unpowered,
+                null,
+                null
+            );
+            DynamicVars["MaxDmg"].BaseValue = 0;
+        }
     }
 
     public IEnumerable<HealthBarForecastSegment> GetHealthBarForecastSegments(HealthBarForecastContext context)
