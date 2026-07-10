@@ -19,9 +19,7 @@ public class AFRBoss : AbstractWildsEncounter
             EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
         );
 
-    // public override string BossNodePath => $"res://ArknightsMap/images/map/{GetType().Name}Icon";
-
-    public override string BossNodePath => $"res://ArknightsMap/images/map/MandragoraBossIcon";
+    public override string BossNodePath => $"res://ArknightsMap/images/map/{GetType().Name}Icon";
 
     public override string CustomBgm => "event:/ArknightsMap/music/all_flames_returned_bat_1";
 

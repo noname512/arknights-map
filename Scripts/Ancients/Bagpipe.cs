@@ -28,8 +28,8 @@ public class Bagpipe : ModAncientEventTemplate
     // 自定义地图图标和轮廓的路径
     public override AncientEventPresentationAssetProfile AncientPresentationAssetProfile =>
         new(
-            MapIconPath: "res://icon.svg",
-            MapIconOutlinePath: "res://icon.svg",
+            MapIconPath: "res://ArknightsMap/images/ancients/Bagpipe/icon.png",
+            MapIconOutlinePath: "res://ArknightsMap/images/ancients/Bagpipe/icon_outline.png",
             RunHistoryIconPath: "res://ArknightsMap/images/ancients/Bagpipe/avatar.png",
             RunHistoryIconOutlinePath: "res://ArknightsMap/images/ancients/Bagpipe/avatar.png"
         );
@@ -43,7 +43,7 @@ public class Bagpipe : ModAncientEventTemplate
     // 所有可能的选项
     public override IEnumerable<EventOption> AllPossibleOptions =>
         [
-            ..SinglePlayerChoice, 
+            .. SinglePlayerChoice,
             RelicOption<OfferAssistance>(), //施以援手
         ];
 
