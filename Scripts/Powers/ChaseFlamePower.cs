@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -84,7 +85,7 @@ public class ChaseFlamePower : ModPowerTemplate
 
     public override bool ShouldCreatureBeRemovedFromCombatAfterDeath(Creature creature) => creature != Owner || CurState == 1 || InitialHp <= 0;
 
-    public override bool ShouldPowerBeRemovedAfterOwnerDeath() => false;
+    public override bool ShouldPowerBeRemovedAfterOwnerDeath() => CurState == 1;
 
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
     {
@@ -96,6 +97,10 @@ public class ChaseFlamePower : ModPowerTemplate
         {
             Owner.GetCreatureNode()!.SetAnimationTrigger("Revive");
             CurState = 1;
+            if (Owner.HasPower<DoomPower>())
+            {
+                Owner.GetPower<DoomPower>().SetAmount(0);
+            }
             await CreatureCmd.SetMaxAndCurrentHp(Owner, InitialHp);
             NextMove = Owner.Monster!.NextMove;
             if (!(Owner.Monster.MoveStateMachine.States.ContainsKey(NextMove.StateId)))
