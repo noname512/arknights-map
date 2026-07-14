@@ -50,7 +50,7 @@ public class Nest : AbstractWildsMonster
                     .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
                     .Execute(null);
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthAdd, Creature, null);
-                decimal totalAdd = HpAdd;
+                decimal totalAdd = HpAdd * Creature.CombatState.Players.Count;
                 if (Creature.IsAlive)
                     await CreatureCmd.GainMaxHp(Creature, totalAdd);
                 growthTimes++;
