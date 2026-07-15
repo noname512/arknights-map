@@ -70,7 +70,7 @@ public class DublinnCannoneer : AbstractWildsMonster
         list.Add(randomBS);
         list.Add(conditionBS);
 
-        return new MonsterMoveStateMachine(list, conditionBS);
+        return new MonsterMoveStateMachine(list, sleep);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
