@@ -1,7 +1,3 @@
-using Archetto.Scripts.Cards;
-using Archetto.Scripts.Enums;
-using Archetto.Scripts.Pools;
-using Archetto.Scripts.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Keywords;
 
@@ -13,11 +9,12 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using STS2RitsuLib.Scaffolding.Content;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.Models.CardPools;
 
 
-namespace Archetto.Scripts.Cards.Ancient
+namespace ArknightsMap.Scripts.Cards
 {
-    [RegisterCard(typeof(ArchettoCardPool))]
+    [RegisterCard(typeof(EventCardPool))]
     public class CustomMade : ModCardTemplate
     {
         private const int energyCost = 2;

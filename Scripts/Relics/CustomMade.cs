@@ -1,6 +1,4 @@
-using Archetto.Scripts.Cards.Basic;
-using Archetto.Scripts.Cards.Track;
-using Archetto.Scripts.Pools;
+
 
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Keywords;
@@ -14,7 +12,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Rooms;
 using STS2RitsuLib.Scaffolding.Content;
-using Archetto.Scripts.Powers;
+
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -22,9 +20,6 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.CardSelection;
-using Archetto.Scripts.Enchant;
-using Archetto.Scripts.Enums;
-using Archetto.Scripts.Cards.Ancient;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 
 namespace ArknightsMap.Scripts.Relics;
@@ -68,7 +63,7 @@ public sealed class CustomMade : ModRelicTemplate
 			_triggeredTypes.Add(item.CreateClone());
 		}
 
-        CardModel custom = base.Owner.RunState.CreateCard<Scripts.Cards.Ancient.CustomMade>(base.Owner);
+        CardModel custom = base.Owner.RunState.CreateCard<Scripts.Cards.CustomMade>(base.Owner);
         foreach (CardModel c in _triggeredTypes)
         {
             if (c.Type == CardType.Attack)

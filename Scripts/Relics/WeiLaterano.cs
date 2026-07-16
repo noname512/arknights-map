@@ -1,6 +1,4 @@
-    
 
-using Archetto.Scripts.Pools;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -22,7 +20,7 @@ using MegaCrit.Sts2.Core.Models.Characters;
 using MegaCrit.Sts2.Core.Unlocks;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using STS2RitsuLib.Keywords;
-using Archetto.Scripts.Enums;
+
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 

@@ -1,6 +1,3 @@
-using Archetto.Scripts.Cards.Basic;
-using Archetto.Scripts.Cards.Track;
-using Archetto.Scripts.Pools;
 
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Keywords;
@@ -14,7 +11,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Rooms;
 using STS2RitsuLib.Scaffolding.Content;
-using Archetto.Scripts.Powers;
+
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -22,9 +19,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.CardSelection;
-using Archetto.Scripts.Enchant;
-using Archetto.Scripts.Enums;
-using Archetto.Scripts.Cards.Ancient;
+
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;

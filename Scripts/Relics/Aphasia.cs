@@ -1,6 +1,4 @@
-using Archetto.Scripts.Cards.Ancient;
-using Archetto.Scripts.Enums;
-using Archetto.Scripts.Pools;
+
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -44,7 +42,7 @@ public sealed class Aphasia : ModRelicTemplate
 
     public override async Task AfterObtained()
 	{
-        await CardPileCmd.AddCurseToDeck<NoCommunication>(base.Owner);
+        await CardPileCmd.AddCurseToDeck<Scripts.Cards.NoCommunication>(base.Owner);
     }
 
     public override Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
