@@ -100,5 +100,9 @@
     "ARKNIGHTS_MAP_EVENT_RATATOS.talk.ANY.0-0r.ancient": "占位符2",
     "ARKNIGHTS_MAP_EVENT_ENCIODES.title": "恩希欧迪斯",
     "ARKNIGHTS_MAP_EVENT_ENCIODES.epithet": "希瓦艾什家的家主",
-    "ARKNIGHTS_MAP_EVENT_ENCIODES.talk.ANY.0-0r.ancient": "占位符2"
+    "ARKNIGHTS_MAP_EVENT_ENCIODES.talk.ANY.0-0r.ancient": "占位符2",
+    "以下是潘格尼尼对话": "----------------------------------------------------------",
+    "ARKNIGHTS_MAP_EVENT_PANAGNI.title": "潘格尼尼",
+    "ARKNIGHTS_MAP_EVENT_PANAGNI.epithet": "制铳师",
+    "ARKNIGHTS_MAP_EVENT_PANAGNI.talk.ANY.0-0r.ancient": "欢迎光临。"
 }
