@@ -78,7 +78,7 @@ public class SnowTracks : ModRelicTemplate
         List<MapCoord> markedCoords = GetMarkedCoords();
         if (!markedCoords.Any())
         {
-            Rng rng = new Rng((uint)((int)Owner.RunState.Rng.Seed + (int)Owner.NetId + StringHelper.GetDeterministicHashCode(GetType().Name)));
+            Rng rng = new Rng((uint)(Owner.RunState.Rng.Seed + Owner.NetId + StringHelper.GetDeterministicHashCode(GetType().Name)));
             List<MapPoint> list = map.GetAllMapPoints()
                 .Where(
                     delegate(MapPoint p)
