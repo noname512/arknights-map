@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://gckx4bg5vg7f"
+path="res://.godot/imported/enemy_10087_hlchgr_2.atlas-bde002c115e812e80bdc6aaa001021bf.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SanktaBlade/enemy_10087_hlchgr_2.atlas"
+dest_files=["res://.godot/imported/enemy_10087_hlchgr_2.atlas-bde002c115e812e80bdc6aaa001021bf.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

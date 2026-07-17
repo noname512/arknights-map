@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkq8fikn5ernr"]
+
+[ext_resource type="Texture2D" uid="uid://c71nom276oliu" path="res://ArknightsMap/images/ancients/Paganini/background.png" id="1_jnn5i"]
+
+[node name="Paganini" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -193.77771
+offset_right = 2240.0
+offset_bottom = 1369.0
+texture = ExtResource("1_jnn5i")

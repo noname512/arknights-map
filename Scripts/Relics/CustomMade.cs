@@ -32,7 +32,7 @@ public sealed class CustomMade : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
 
     protected override IEnumerable<IHoverTip> AdditionalHoverTips
  => [

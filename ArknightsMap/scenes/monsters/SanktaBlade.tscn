@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7jhf8u81edst"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://c3r484725t8wq" path="res://ArknightsMap/images/monsters/SanktaBlade/SanktaBlade.tres" id="1_6gqkj"]
+
+[node name="SanktaBlade" type="Node2D"]
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_6gqkj")
+preview_skin = "default"
+preview_animation = "Idle"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+scale = Vector2(-0.5, 0.5)
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -147.0
+offset_right = 116.0
+offset_bottom = 40.0
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true

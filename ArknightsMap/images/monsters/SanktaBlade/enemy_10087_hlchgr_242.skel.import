@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://cm01go15qeynx"
+path="res://.godot/imported/enemy_10087_hlchgr_242.skel-9626f6550622fb80b5b93c02bdcefdb4.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SanktaBlade/enemy_10087_hlchgr_242.skel"
+dest_files=["res://.godot/imported/enemy_10087_hlchgr_242.skel-9626f6550622fb80b5b93c02bdcefdb4.spskel"]
+
+[params]
+

@@ -27,7 +27,7 @@ public class Paganini : ModAncientEventTemplate
             MapIconPath: "res://ArknightsMap/images/ancients/Paganini/icon.png",
             MapIconOutlinePath: "res://ArknightsMap/images/ancients/Paganini/icon_outline.png",
             RunHistoryIconPath: "res://ArknightsMap/images/ancients/Paganini/avatar.png",
-            RunHistoryIconOutlinePath: "res://ArknightsMap/images/ancients/Paganini/avatar_outline.png"
+            RunHistoryIconOutlinePath: "res://ArknightsMap/images/ancients/Paganini/avatar.png"
         );
 
     private IReadOnlyList<EventOption> Pool1 =>

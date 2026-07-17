@@ -49,8 +49,14 @@ namespace ArknightsMap.Scripts.Cards
         {
             await PowerCmd.Apply<StrengthPower>(choiceContext,base.Owner.Creature, base.DynamicVars["StrengthPower"].BaseValue, base.Owner.Creature, this);
             await PowerCmd.Apply<DexterityPower>(choiceContext,base.Owner.Creature, base.DynamicVars["DexterityPower"].BaseValue, base.Owner.Creature, this);
-            await CardPileCmd.Draw(choiceContext, base.DynamicVars["Cards"].BaseValue, base.Owner);
-            await CreatureCmd.GainBlock(base.Owner.Creature, DynamicVars.Block, cardPlay);
+            if (base.DynamicVars["Cards"].BaseValue > 0)
+            {
+                await CardPileCmd.Draw(choiceContext, base.DynamicVars["Cards"].BaseValue, base.Owner);
+            }
+            if (base.DynamicVars.Block.BaseValue > 0)
+            {
+                await CreatureCmd.GainBlock(base.Owner.Creature, DynamicVars.Block, cardPlay);
+            }
         }
 
         protected override void OnUpgrade()
