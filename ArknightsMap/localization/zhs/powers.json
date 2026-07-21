@@ -64,5 +64,8 @@
     "ARKNIGHTS_MAP_POWER_GIVE_AND_TAKE_POWER.title": "予取予夺",
     "ARKNIGHTS_MAP_POWER_PERSEVERE_POWER.description": "这个敌人在玩家的回合内不再损失生命值。每回合记录其所有本该受到的伤害数值，回合开始时，流失等同于最大伤害数值的生命。",
     "ARKNIGHTS_MAP_POWER_PERSEVERE_POWER.smartDescription": "[gold]{OwnerName}[/gold]在玩家的回合内不再损失生命值。每回合记录其所有本该受到的伤害数值，回合开始时，流失等同于最大伤害数值的生命。（当前[blue]{MaxDmg}[/blue]点）",
-    "ARKNIGHTS_MAP_POWER_PERSEVERE_POWER.title": "坚守"
+    "ARKNIGHTS_MAP_POWER_PERSEVERE_POWER.title": "坚守",
+    "ARKNIGHTS_MAP_POWER_BULLET_POWER.title": "子弹",
+    "ARKNIGHTS_MAP_POWER_BULLET_POWER.smartDescription": "[gold]萨科塔[/gold]敌人独特的机制，它们的部分行动需要消耗弹药。",
+    "ARKNIGHTS_MAP_POWER_BULLET_POWER.description": ""
 }

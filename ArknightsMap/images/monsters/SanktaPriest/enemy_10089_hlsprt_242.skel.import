@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://cu5r2cx22ftwi"
+path="res://.godot/imported/enemy_10089_hlsprt_242.skel-5107e5ed04863306b7dd7e9b802bcedc.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SanktaPriest/enemy_10089_hlsprt_242.skel"
+dest_files=["res://.godot/imported/enemy_10089_hlsprt_242.skel-5107e5ed04863306b7dd7e9b802bcedc.spskel"]
+
+[params]
+

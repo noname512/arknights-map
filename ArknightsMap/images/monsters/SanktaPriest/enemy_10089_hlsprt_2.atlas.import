@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://vv65s3nan2t7"
+path="res://.godot/imported/enemy_10089_hlsprt_2.atlas-7de645f751502328505e73016197aa0c.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SanktaPriest/enemy_10089_hlsprt_2.atlas"
+dest_files=["res://.godot/imported/enemy_10089_hlsprt_2.atlas-7de645f751502328505e73016197aa0c.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

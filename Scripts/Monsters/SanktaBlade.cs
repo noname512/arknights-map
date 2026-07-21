@@ -18,27 +18,36 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class SanktaBlade : AbstractSankta
 {
-    public override int Bullet => 3;
     
-    public override int BulletMax => 3;
+    protected override int BulletMax => 3;
+    protected override int InitialBullet => 3;
 
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 88, 86);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 94, 92);
-    private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 8, 8);
-    public int Time { get; private set; } = AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 1, 1);
-    private int Strength => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 8);
+    private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 8);
+    public int Time = 1;
+    private int Strength => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 5, 5);
     
     private bool IsTimeIncrease = false;
 
+    private int AttackTime
+	{
+		get
+		{
+			return Time;
+		}
+		set
+		{
+			AssertMutable();
+			Time = value;
+		}
+	}
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
     private bool IsBurningVineInCombat() => CombatState.Enemies.Any(e => e.IsAlive && e.IsMonster && e.Monster is BurningVine);
 
-    public override async Task AfterAddedToRoom()
-    {
-        await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, Bullet, Creature, null);
-    }
+    
 
     private string GetAttackSfx() => "Attack";
 
@@ -49,8 +58,9 @@ public class SanktaBlade : AbstractSankta
         
         MoveState attack = new MoveState(
             "ATTACK",
-            async targets => await DamageCmd.Attack(Damage).WithHitCount(Time).FromMonster(this).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null),
-            new SingleAttackIntent(Damage)
+            async targets => await DamageCmd.Attack(Damage).WithHitCount(AttackTime).FromMonster(this).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null), 
+            
+            new MultiAttackIntent(Damage, () => AttackTime)
         );
         MoveState skill = new MoveState(
             "SKILL",
@@ -58,27 +68,27 @@ public class SanktaBlade : AbstractSankta
             {
                 if (!IsTimeIncrease)
                 {
+                    await UseBullet(1);
+                    await CreatureCmd.TriggerAnim(Creature, "Skill", 0.8f);
                     await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, Strength, Creature, null);
                     IsTimeIncrease = true;
                 }
                 else
                 {
-                    
-                    Time ++ ;
+                    await UseBullet(1);
+                    await CreatureCmd.TriggerAnim(Creature, "Skill", 0.8f);
+                    AttackTime ++ ;
                     IsTimeIncrease = false;
                 }
             },
             new BuffIntent()
         );
 
-        if (Bullet > 0)
-        {
-            attack.FollowUpState = skill;
-        }
-        else
-        {
-            attack.FollowUpState = attack;
-        }
+        ConditionalBranchState attackBranch = new ConditionalBranchState("ATTACK_BRANCH");
+    attackBranch.AddState(skill, () => Bullet > 0);
+    attackBranch.AddState(attack, () => Bullet <= 0);
+
+    attack.FollowUpState = attackBranch;
         skill.FollowUpState = attack;
         list.Add(attack);
         list.Add(skill);
@@ -99,10 +109,10 @@ public class SanktaBlade : AbstractSankta
         attackState.NextState = idleState;
         
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
-        creatureAnimator.AddAnyState("ATTACK", attackState);
-        creatureAnimator.AddAnyState("SKILL", skillState);
-        creatureAnimator.AddAnyState("DEAD", dieState);
-        creatureAnimator.AddAnyState("IDLE", idleState);
+        creatureAnimator.AddAnyState("Attack", attackState);
+        creatureAnimator.AddAnyState("Skill", skillState);
+        creatureAnimator.AddAnyState("Die", dieState);
+        
         return creatureAnimator;
     }
 }

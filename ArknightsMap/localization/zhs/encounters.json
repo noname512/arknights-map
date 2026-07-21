@@ -46,5 +46,21 @@
     "ARKNIGHTS_MAP_ENCOUNTER_END_POINT_ENCOUNTER.title": "“终点”",
     "ARKNIGHTS_MAP_ENCOUNTER_END_POINT_ENCOUNTER.loss": "{character}迷失在了道路的[gold]{encounter}[/gold]。",
     "ARKNIGHTS_MAP_ENCOUNTER_DUBLINN_FLAMECHASERS.title": "深池逐火卫队",
-    "ARKNIGHTS_MAP_ENCOUNTER_DUBLINN_FLAMECHASERS.loss": "{character}被[gold]{encounter}[/gold]的人海淹没了。"
+    "ARKNIGHTS_MAP_ENCOUNTER_DUBLINN_FLAMECHASERS.loss": "{character}被[gold]{encounter}[/gold]的人海淹没了。",
+    "ARKNIGHTS_MAP_ENCOUNTER_SANKTA_BLADE.title": "精英圣堂剑士",
+    "ARKNIGHTS_MAP_ENCOUNTER_SANKTA_BLADE.loss": "{character}被[gold]{encounter}[/gold]击败。",
+    "ARKNIGHTS_MAP_ENCOUNTER_THREE_SANKTAS.title": "护卫圣堂小队",
+    "ARKNIGHTS_MAP_ENCOUNTER_THREE_SANKTAS.loss": "{character}在[gold]{encounter}[/gold]的合力围攻下屈服。",
+    "ARKNIGHTS_MAP_ENCOUNTER_SINGLE_PATHFINDER_CANNON.title": "寻路者阵地撕裂者",
+    "ARKNIGHTS_MAP_ENCOUNTER_SINGLE_PATHFINDER_CANNON.loss": "{character}在猛烈的炮火下无处可逃。",
+    "ARKNIGHTS_MAP_ENCOUNTER_SINGLE_PATHFINDER_CAR.title": "寻路者知名甜品商",
+    "ARKNIGHTS_MAP_ENCOUNTER_SINGLE_PATHFINDER_CAR.loss": "{character}在糖果的攻势下被淹没。",
+    "ARKNIGHTS_MAP_ENCOUNTER_SINGLE_OREN.title": "“万国信使”奥伦",
+    "ARKNIGHTS_MAP_ENCOUNTER_SINGLE_OREN.loss": "{character}被万国信使”奥伦制服。",
+    "ARKNIGHTS_MAP_ENCOUNTER_FORTUNA_ELITE.title": "堕天使福尔图娜",
+    "ARKNIGHTS_MAP_ENCOUNTER_FORTUNA_ELITE.loss": "无罪之人在向{character}倾诉自己的不甘。",
+    "ARKNIGHTS_MAP_ENCOUNTER_THE_SAINT.title": "“圣徒”",
+    "ARKNIGHTS_MAP_ENCOUNTER_THE_SAINT.loss": "{character}在PCS系统的清洗下同化。"
+    
+
 }

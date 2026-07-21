@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxnrtskeeyhmy"]
+
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_8r2ji"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://d6ply2ncswjl" path="res://ArknightsMap/images/monsters/CandyCar/CandyCar.tres" id="1_ijobo"]
+
+[node name="CandyCar" type="Node2D"]
+script = ExtResource("1_8r2ji")
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_ijobo")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+scale = Vector2(-1, 1)
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -79.0
+offset_top = -103.0
+offset_right = 66.0
+offset_bottom = 40.0
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -100)
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true

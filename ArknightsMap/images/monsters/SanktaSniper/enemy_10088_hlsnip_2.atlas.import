@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://blyotpcqr20pk"
+path="res://.godot/imported/enemy_10088_hlsnip_2.atlas-c1e863454b96613eaa2c578e2b537925.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SanktaSniper/enemy_10088_hlsnip_2.atlas"
+dest_files=["res://.godot/imported/enemy_10088_hlsnip_2.atlas-c1e863454b96613eaa2c578e2b537925.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

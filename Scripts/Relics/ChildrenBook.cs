@@ -1,6 +1,7 @@
 ﻿using ArknightsMap.Scripts.Enchantments;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -15,7 +16,7 @@ namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
 
-public sealed class ChildrenBooks : ModRelicTemplate
+public sealed class ChildrenBook : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
@@ -42,7 +43,8 @@ public sealed class ChildrenBooks : ModRelicTemplate
 		foreach (CardModel item in await CardSelectCmd.FromDeckForEnchantment(prefs: new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, base.DynamicVars.Cards.IntValue), player: base.Owner, enchantment: ModelDb.Enchantment<Empathy>(), amount: 1))
 		{
 			CardCmd.Enchant<Empathy>(item, 1m);
-			
+			CardModel newCard = Owner.RunState.CreateCard(item, Owner);
+            CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(newCard, PileType.Deck));
 			
 		}
 	}    

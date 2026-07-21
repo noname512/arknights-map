@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://cy078k3bcj88o"
+path="res://.godot/imported/enemy_1342_frtuna.atlas-899f10aab87356bce20cca2f663a09dd.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Fortuna/enemy_1342_frtuna.atlas"
+dest_files=["res://.godot/imported/enemy_1342_frtuna.atlas-899f10aab87356bce20cca2f663a09dd.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

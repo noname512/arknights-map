@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://cykpu1imdqtac"
+path="res://.godot/imported/enemy_1218_bomscr_242.skel-662b2afca99c559e608558ce11cf2eed.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/CandyCar/enemy_1218_bomscr_242.skel"
+dest_files=["res://.godot/imported/enemy_1218_bomscr_242.skel-662b2afca99c559e608558ce11cf2eed.spskel"]
+
+[params]
+

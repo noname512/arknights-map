@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://d1p2dbiu3udk6"
+path="res://.godot/imported/enemy_1342_frtuna42.skel-ecbf3d122e47c32fe136fb49085f6272.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Fortuna/enemy_1342_frtuna42.skel"
+dest_files=["res://.godot/imported/enemy_1342_frtuna42.skel-ecbf3d122e47c32fe136fb49085f6272.spskel"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://b6toum525o0o1"
+path="res://.godot/imported/enemy_1219_mtrbty_242.skel-e5f01337a514bab4b94bc0ba75b78d23.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Oren/enemy_1219_mtrbty_242.skel"
+dest_files=["res://.godot/imported/enemy_1219_mtrbty_242.skel-e5f01337a514bab4b94bc0ba75b78d23.spskel"]
+
+[params]
+

@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://bb2ffurgm6u5l"
+path="res://.godot/imported/enemy_1219_mtrbty_2.atlas-cc106c34ff873d0277433d7346c7a6e6.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Oren/enemy_1219_mtrbty_2.atlas"
+dest_files=["res://.godot/imported/enemy_1219_mtrbty_2.atlas-cc106c34ff873d0277433d7346c7a6e6.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

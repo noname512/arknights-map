@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://goo6aokpkc3a"
+path="res://.godot/imported/enemy_1567_pope.atlas-86e9e136dc7b6c4a8c46a2e916740aa3.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/TheSaint/enemy_1567_pope.atlas"
+dest_files=["res://.godot/imported/enemy_1567_pope.atlas-86e9e136dc7b6c4a8c46a2e916740aa3.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://dw17elwdvw2rv"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://vv65s3nan2t7" path="res://ArknightsMap/images/monsters/SanktaPriest/enemy_10089_hlsprt_2.atlas" id="1_wautm"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cu5r2cx22ftwi" path="res://ArknightsMap/images/monsters/SanktaPriest/enemy_10089_hlsprt_242.skel" id="2_iap1g"]
+
+[resource]
+atlas_res = ExtResource("1_wautm")
+skeleton_file_res = ExtResource("2_iap1g")

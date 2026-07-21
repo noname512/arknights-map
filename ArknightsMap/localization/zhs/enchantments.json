@@ -10,5 +10,8 @@
   "ARKNIGHTS_MAP_ENCHANTMENT_SPIRAL_SPECIAL.description": "这张牌获得[gold]重放[/gold][blue]{Times}[/blue]。",
   "ARKNIGHTS_MAP_ENCHANTMENT_BLESSING.title": "祝福",
   "ARKNIGHTS_MAP_ENCHANTMENT_BLESSING.extraCardText": "这张牌获得[gold]重放[/gold][blue]{Times}[/blue]。",
-  "ARKNIGHTS_MAP_ENCHANTMENT_BLESSING.description": "这张牌每次被打出时，获得[gold]重放[/gold][blue]{Times}[/blue]。"
+  "ARKNIGHTS_MAP_ENCHANTMENT_BLESSING.description": "这张牌每次被打出时，获得[gold]重放[/gold][blue]{Times}[/blue]。",
+  "ARKNIGHTS_MAP_ENCHANTMENT_EMPATHY.title": "共感",
+  "ARKNIGHTS_MAP_ENCHANTMENT_EMPATHY.extraCardText": "这张牌首次被打出后，如果其它附魔[purple]共感[/purple]的牌在你手牌以外的牌堆中，将它们放入手牌。",
+  "ARKNIGHTS_MAP_ENCHANTMENT_EMPATHY.description": "这张牌首次被打出后，如果其它附魔[purple]共感[/purple]的牌在你手牌以外的牌堆中，将它们放入手牌。"
 }

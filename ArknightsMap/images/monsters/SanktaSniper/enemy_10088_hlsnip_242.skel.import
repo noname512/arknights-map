@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://dakitpf7pgqkm"
+path="res://.godot/imported/enemy_10088_hlsnip_242.skel-e32c354dd4e858797abf4758a88777f6.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SanktaSniper/enemy_10088_hlsnip_242.skel"
+dest_files=["res://.godot/imported/enemy_10088_hlsnip_242.skel-e32c354dd4e858797abf4758a88777f6.spskel"]
+
+[params]
+

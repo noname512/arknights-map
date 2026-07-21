@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bep0opu767qxc"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bshivoxd31026" path="res://ArknightsMap/images/monsters/Fortuna/Fortuna.tres" id="1_bbmri"]
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_k2mom"]
+
+[node name="Fortuna" type="Node2D"]
+script = ExtResource("1_k2mom")
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_bbmri")
+preview_skin = "default"
+preview_animation = "Idle"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+scale = Vector2(-1.5, 1.5)
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -109.0
+offset_top = -348.0
+offset_right = 127.0
+offset_bottom = 20.0
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -400)
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true

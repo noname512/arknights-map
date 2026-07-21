@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://dhcyjadu4er6k"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bfcovcexnxjnk" path="res://ArknightsMap/images/monsters/PathfinderCannon/enemy_1216_cansld_2.atlas" id="1_5k4yr"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dfe6qx8xcy620" path="res://ArknightsMap/images/monsters/PathfinderCannon/enemy_1216_cansld_242.skel" id="2_73rxs"]
+
+[resource]
+atlas_res = ExtResource("1_5k4yr")
+skeleton_file_res = ExtResource("2_73rxs")

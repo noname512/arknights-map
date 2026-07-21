@@ -47,6 +47,7 @@ public class Paganini : ModAncientEventTemplate
             CreateModRelicOption<Aphasia>(), // “失语”
             CreateModRelicOption<Vannini>(), // 梵妮的铳
             CreateModRelicOption<Wrap>(), // 披肩
+            CreateModRelicOption<ChildrenBook>(), 
             
         ];
 

@@ -19,7 +19,7 @@ public class Empathy : ModEnchantmentTemplate
     public override bool ShowAmount => false;
 
     // 是否会添加额外的卡牌描述文本
-    public override bool HasExtraCardText => true;
+    public override bool HasExtraCardText => false;
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [];
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         
@@ -31,22 +31,25 @@ public class Empathy : ModEnchantmentTemplate
     private CardPlay? cardPlay = null;
     
 
-    public override async Task BeforeCardPlayed(CardPlay cardPlay)
+    
+
+
+    public override Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (Status == MegaCrit.Sts2.Core.Entities.Enchantments.EnchantmentStatus.Normal && cardPlay.Card == this.Card)
         {
-            foreach (CardModel c in base.Card.Owner.PlayerCombatState.AllCards)
+            foreach (CardModel c in base.Card.Owner.PlayerCombatState.AllCards.ToList())
             {
-                if (c.Enchantment is Empathy && c.Pile.Type != PileType.Hand)
+                if (c.Enchantment is Empathy && c.Pile.Type != PileType.Hand && c != this.Card)
                 {
-                    await CardPileCmd.Add(c, PileType.Hand, CardPilePosition.Bottom);
+                    CardPileCmd.Add(c, PileType.Hand, CardPilePosition.Bottom);
                 }
 
             }
             this.Status = MegaCrit.Sts2.Core.Entities.Enchantments.EnchantmentStatus.Disabled;
             
         }
-        await Task.CompletedTask;
+        return base.AfterCardPlayedLate(choiceContext, cardPlay);
     }
 
     

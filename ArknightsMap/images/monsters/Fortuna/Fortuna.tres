@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://bshivoxd31026"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cy078k3bcj88o" path="res://ArknightsMap/images/monsters/Fortuna/enemy_1342_frtuna.atlas" id="1_artot"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://d1p2dbiu3udk6" path="res://ArknightsMap/images/monsters/Fortuna/enemy_1342_frtuna42.skel" id="2_vmdmt"]
+
+[resource]
+atlas_res = ExtResource("1_artot")
+skeleton_file_res = ExtResource("2_vmdmt")

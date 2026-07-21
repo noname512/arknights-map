@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://ik3mpwpba8g1"
+path="res://.godot/imported/enemy_1217_rescar_2.atlas-5814ce528042cc1517ab40c5d14ff80f.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/PathfinderCar/enemy_1217_rescar_2.atlas"
+dest_files=["res://.godot/imported/enemy_1217_rescar_2.atlas-5814ce528042cc1517ab40c5d14ff80f.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

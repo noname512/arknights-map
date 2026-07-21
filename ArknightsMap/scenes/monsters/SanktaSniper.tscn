@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://n0jq7ldcvocw"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cshnj07um0xx3" path="res://ArknightsMap/images/monsters/SanktaSniper/SanktaSniper.tres" id="1_32hsm"]
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="2_ordpi"]
+
+[node name="SanktaSniper" type="Node2D"]
+script = ExtResource("2_ordpi")
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_32hsm")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+scale = Vector2(-1, 1)
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -70.0
+offset_top = -209.0
+offset_right = 78.0
+offset_bottom = 40.0
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -250)
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true

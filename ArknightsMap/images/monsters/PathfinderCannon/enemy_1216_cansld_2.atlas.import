@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://bfcovcexnxjnk"
+path="res://.godot/imported/enemy_1216_cansld_2.atlas-34ecbdd13f2ed43e90808ca2ad9af004.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/PathfinderCannon/enemy_1216_cansld_2.atlas"
+dest_files=["res://.godot/imported/enemy_1216_cansld_2.atlas-34ecbdd13f2ed43e90808ca2ad9af004.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

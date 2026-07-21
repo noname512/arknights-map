@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://4fjlcgrqkdw3"
+path="res://.godot/imported/enemy_1217_rescar_242.skel-cf0b1983a623b8c97c3e52e08b80c2ca.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/PathfinderCar/enemy_1217_rescar_242.skel"
+dest_files=["res://.godot/imported/enemy_1217_rescar_242.skel-cf0b1983a623b8c97c3e52e08b80c2ca.spskel"]
+
+[params]
+

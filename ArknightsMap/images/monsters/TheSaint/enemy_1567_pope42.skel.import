@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://dvgyms56iswck"
+path="res://.godot/imported/enemy_1567_pope42.skel-e8e1d45ecfb88fd8c2fa5acd95f30329.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/TheSaint/enemy_1567_pope42.skel"
+dest_files=["res://.godot/imported/enemy_1567_pope42.skel-e8e1d45ecfb88fd8c2fa5acd95f30329.spskel"]
+
+[params]
+

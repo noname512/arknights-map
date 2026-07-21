@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://d6ply2ncswjl"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bupbk4yixybe1" path="res://ArknightsMap/images/monsters/CandyCar/enemy_1218_bomscr_2.atlas" id="1_n2wt6"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cykpu1imdqtac" path="res://ArknightsMap/images/monsters/CandyCar/enemy_1218_bomscr_242.skel" id="2_fh5m2"]
+
+[resource]
+atlas_res = ExtResource("1_n2wt6")
+skeleton_file_res = ExtResource("2_fh5m2")

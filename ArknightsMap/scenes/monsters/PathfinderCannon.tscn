@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctpwemhpe3lt"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dhcyjadu4er6k" path="res://ArknightsMap/images/monsters/PathfinderCannon/PathfinderCannon.tres" id="1_3rke4"]
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_qik3w"]
+
+[node name="PathfinderCannon" type="Node2D"]
+script = ExtResource("1_qik3w")
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_3rke4")
+preview_skin = "default"
+preview_animation = "Idle"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+scale = Vector2(-1, 1)
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -91.0
+offset_top = -259.0
+offset_right = 98.0
+offset_bottom = 40.0
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -250)
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true

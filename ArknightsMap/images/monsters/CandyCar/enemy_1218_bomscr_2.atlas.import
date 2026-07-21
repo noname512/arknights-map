@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://bupbk4yixybe1"
+path="res://.godot/imported/enemy_1218_bomscr_2.atlas-877e2671b16a90f30ccdd58f135b54d9.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/CandyCar/enemy_1218_bomscr_2.atlas"
+dest_files=["res://.godot/imported/enemy_1218_bomscr_2.atlas-877e2671b16a90f30ccdd58f135b54d9.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

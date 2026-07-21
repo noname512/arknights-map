@@ -14,5 +14,8 @@
   "ARKNIGHTS_MAP_CARD_CUSTOM_MADE.title":"定制铳械",
 	"ARKNIGHTS_MAP_CARD_CUSTOM_MADE.description": "{StrengthPower:cond:>0?获得{StrengthPower:diff()}点[gold]力量[/gold]。\n|}{DexterityPower:cond:>0?获得{DexterityPower:diff()}点[gold]敏捷[/gold]。\n|}{Cards:cond:>0?抽{Cards:diff()}张牌。\n|}{Block:cond:>0?获得{Block:diff()}点[gold]格挡[/gold]。|}",
 	"ARKNIGHTS_MAP_CARD_NO_COMMUNICATION.title":"沟通不畅",
-	"ARKNIGHTS_MAP_CARD_NO_COMMUNICATION.description": "每当抽到这张牌后，这张牌的耗能降低1。"
+	"ARKNIGHTS_MAP_CARD_NO_COMMUNICATION.description": "每当抽到这张牌后，这张牌的耗能降低1。",
+  "ARKNIGHTS_MAP_CARD_CONFUSED.title":"困惑",
+	"ARKNIGHTS_MAP_CARD_CONFUSED.description": "这张牌在你的手牌时，你对敌人造成的攻击伤害减少50%。"
+
 }

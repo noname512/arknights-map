@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://dfe6qx8xcy620"
+path="res://.godot/imported/enemy_1216_cansld_242.skel-c1522a985017f681a14bde7d019c18f9.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/PathfinderCannon/enemy_1216_cansld_242.skel"
+dest_files=["res://.godot/imported/enemy_1216_cansld_242.skel-c1522a985017f681a14bde7d019c18f9.spskel"]
+
+[params]
+

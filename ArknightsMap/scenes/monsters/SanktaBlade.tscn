@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7jhf8u81edst"]
+[gd_scene load_steps=3 format=3 uid="uid://c7jhf8u81edst"]
 
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_4a2p8"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://c3r484725t8wq" path="res://ArknightsMap/images/monsters/SanktaBlade/SanktaBlade.tres" id="1_6gqkj"]
 
 [node name="SanktaBlade" type="Node2D"]
+script = ExtResource("1_4a2p8")
 
 [node name="Visuals" type="SpineSprite" parent="."]
 skeleton_data_res = ExtResource("1_6gqkj")
@@ -17,12 +19,14 @@ scale = Vector2(-0.5, 0.5)
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
-offset_left = -147.0
-offset_right = 116.0
+offset_left = -86.0
+offset_top = -221.0
+offset_right = 83.0
 offset_bottom = 40.0
 
 [node name="IntentPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(0, -250)
 
 [node name="CenterPos" type="Marker2D" parent="."]
 unique_name_in_owner = true

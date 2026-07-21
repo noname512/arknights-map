@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://dm08cwnvot2qo"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://ik3mpwpba8g1" path="res://ArknightsMap/images/monsters/PathfinderCar/enemy_1217_rescar_2.atlas" id="1_3b5iy"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://4fjlcgrqkdw3" path="res://ArknightsMap/images/monsters/PathfinderCar/enemy_1217_rescar_242.skel" id="2_jhciw"]
+
+[resource]
+atlas_res = ExtResource("1_3b5iy")
+skeleton_file_res = ExtResource("2_jhciw")
