@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://b711hm50jok32"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://chgxbuguypw4l" path="res://ArknightsMap/images/monsters/WastelandRobber/enemy_1337_bhrknf_2.atlas" id="1_gy084"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bwe5j1okyrrmx" path="res://ArknightsMap/images/monsters/WastelandRobber/enemy_1337_bhrknf_242.skel" id="2_cvbm2"]
+
+[resource]
+atlas_res = ExtResource("1_gy084")
+skeleton_file_res = ExtResource("2_cvbm2")

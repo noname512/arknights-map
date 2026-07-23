@@ -68,7 +68,7 @@ public static class ThornsPowerBeforePatch
     [HarmonyPostfix]
     public static void Postfix(ThornsPower __instance, PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
         {
-            if (target == __instance.Owner && dealer != null && (props.IsPoweredAttack() || cardSource is Omnislice))
+            if (target.Player != null && target.Player.GetRelic<GiantGun>() != null && target == __instance.Owner && dealer != null && (props.IsPoweredAttack() || cardSource is Omnislice))
 		{
 			foreach (Creature m in __instance.CombatState.HittableEnemies)
                 {

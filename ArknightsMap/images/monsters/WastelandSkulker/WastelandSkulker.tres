@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://c0m5htqqwdkvy"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bkwfu03crcgps" path="res://ArknightsMap/images/monsters/WastelandSkulker/enemy_1338_bhrjst_2.atlas" id="1_q2ybv"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bk6ycuf33oikc" path="res://ArknightsMap/images/monsters/WastelandSkulker/enemy_1338_bhrjst_242.skel" id="2_1buph"]
+
+[resource]
+atlas_res = ExtResource("1_q2ybv")
+skeleton_file_res = ExtResource("2_1buph")

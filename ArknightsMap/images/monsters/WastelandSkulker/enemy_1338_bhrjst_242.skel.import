@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bk6ycuf33oikc"
+path="res://.godot/imported/enemy_1338_bhrjst_242.skel-f47b3f23946e92f8f4ea64a64088a6f9.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/WastelandSkulker/enemy_1338_bhrjst_242.skel"
+dest_files=["res://.godot/imported/enemy_1338_bhrjst_242.skel-f47b3f23946e92f8f4ea64a64088a6f9.spskel"]
+
+[params]
+

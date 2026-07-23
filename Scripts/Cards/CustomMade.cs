@@ -10,6 +10,7 @@ using STS2RitsuLib.Scaffolding.Content;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models.CardPools;
+using MegaCrit.Sts2.Core.Saves.Runs;
 
 
 namespace ArknightsMap.Scripts.Cards
@@ -17,13 +18,14 @@ namespace ArknightsMap.Scripts.Cards
     [RegisterCard(typeof(EventCardPool))]
     public class CustomMade : ModCardTemplate
     {
-        private const int energyCost = 2;
+        private const int energyCost = 1;
         private const CardType type = CardType.Power;
         private const CardRarity rarity = CardRarity.Event;
         private const TargetType targetType = TargetType.Self;
         private const bool shouldShowInCardLibrary = true;
 
-    
+        
+
 
         public CustomMade() : base(energyCost, type, rarity, targetType)
         {
@@ -42,20 +44,31 @@ namespace ArknightsMap.Scripts.Cards
             
         ];    
 
-        
+            [SavedProperty]
+        public int Strength => Scripts.Relics.CustomMade._strength;
+
+        [SavedProperty]
+        public int Dexterity => Scripts.Relics.CustomMade._dexterity;
+
+        [SavedProperty]
+        public int Cards => Scripts.Relics.CustomMade._cards;
+
+        [SavedProperty]
+        public int Blocks => Scripts.Relics.CustomMade._blocks;
+
 
 
         protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
         {
-            await PowerCmd.Apply<StrengthPower>(choiceContext,base.Owner.Creature, base.DynamicVars["StrengthPower"].BaseValue, base.Owner.Creature, this);
-            await PowerCmd.Apply<DexterityPower>(choiceContext,base.Owner.Creature, base.DynamicVars["DexterityPower"].BaseValue, base.Owner.Creature, this);
-            if (base.DynamicVars["Cards"].BaseValue > 0)
+            await PowerCmd.Apply<StrengthPower>(choiceContext,base.Owner.Creature, Strength, base.Owner.Creature, this);
+            await PowerCmd.Apply<DexterityPower>(choiceContext,base.Owner.Creature, Dexterity, base.Owner.Creature, this);
+            if (Cards > 0)
             {
-                await CardPileCmd.Draw(choiceContext, base.DynamicVars["Cards"].BaseValue, base.Owner);
+                await CardPileCmd.Draw(choiceContext, Cards, base.Owner);
             }
-            if (base.DynamicVars.Block.BaseValue > 0)
+            if (Blocks > 0)
             {
-                await CreatureCmd.GainBlock(base.Owner.Creature, DynamicVars.Block, cardPlay);
+                await CreatureCmd.GainBlock(base.Owner.Creature, Blocks, ValueProp.Unpowered, cardPlay);
             }
         }
 

@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bwe5j1okyrrmx"
+path="res://.godot/imported/enemy_1337_bhrknf_242.skel-654602e66f051518a6950edf13bdd22f.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/WastelandRobber/enemy_1337_bhrknf_242.skel"
+dest_files=["res://.godot/imported/enemy_1337_bhrknf_242.skel-654602e66f051518a6950edf13bdd22f.spskel"]
+
+[params]
+

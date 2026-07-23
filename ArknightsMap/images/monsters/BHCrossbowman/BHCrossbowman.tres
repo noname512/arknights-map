@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://b2v73ua5jkna0"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://csx1l82843u7c" path="res://ArknightsMap/images/monsters/BHCrossbowman/enemy_1340_bthtbw.atlas" id="1_5opn8"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bid1s2eysf36k" path="res://ArknightsMap/images/monsters/BHCrossbowman/enemy_1340_bthtbw42.skel" id="2_0lqvw"]
+
+[resource]
+atlas_res = ExtResource("1_5opn8")
+skeleton_file_res = ExtResource("2_0lqvw")

@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://csx1l82843u7c"
+path="res://.godot/imported/enemy_1340_bthtbw.atlas-d72ce7f803f740820f2ab26b311225ef.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/BHCrossbowman/enemy_1340_bthtbw.atlas"
+dest_files=["res://.godot/imported/enemy_1340_bthtbw.atlas-d72ce7f803f740820f2ab26b311225ef.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

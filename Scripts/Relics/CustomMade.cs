@@ -21,6 +21,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Models.RelicPools;
+using MegaCrit.Sts2.Core.Saves.Runs;
 
 namespace ArknightsMap.Scripts.Relics;
 
@@ -52,6 +53,14 @@ public sealed class CustomMade : ModRelicTemplate
 
     private readonly HashSet<CardModel> _triggeredTypes = new();
 
+    public static int _strength = 0;
+    public static int _dexterity = 0;
+
+    public static int _cards = 0;
+
+    public static int _blocks = 0;
+
+    
 	public override async Task AfterObtained()
 	{
         
@@ -68,19 +77,19 @@ public sealed class CustomMade : ModRelicTemplate
         {
             if (c.Type == CardType.Attack)
             {
-                custom.DynamicVars["StrengthPower"].BaseValue++;
+                _strength++;
             }
             else if (c.Type == CardType.Skill)
             {
-                custom.DynamicVars["DexterityPower"].BaseValue++;
+                _dexterity++;
             }
             else if (c.Type == CardType.Power)
             {
-                custom.DynamicVars["Cards"].BaseValue += 2;
+                _cards++;
             }
             else
             {
-                custom.DynamicVars["Block"].BaseValue += 4;
+                _blocks++;
             }
         }
         await CardPileCmd.Add(custom, PileType.Deck);

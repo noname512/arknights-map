@@ -89,6 +89,8 @@ public class SanktaPriest : AbstractSankta
             },
             new BuffIntent()
         );
+
+        
         skill_strength.FollowUpState = skill_block;
         skill_block.FollowUpState = attack;
         attack.FollowUpState = skill_strength;

@@ -67,5 +67,21 @@
     "ARKNIGHTS_MAP_POWER_PERSEVERE_POWER.title": "坚守",
     "ARKNIGHTS_MAP_POWER_BULLET_POWER.title": "子弹",
     "ARKNIGHTS_MAP_POWER_BULLET_POWER.smartDescription": "[gold]萨科塔[/gold]敌人独特的机制，它们的部分行动需要消耗弹药。",
-    "ARKNIGHTS_MAP_POWER_BULLET_POWER.description": ""
+    "ARKNIGHTS_MAP_POWER_BULLET_POWER.description": "",
+    "ARKNIGHTS_MAP_POWER_LOSE_ENERGY_NEXT_TURN_POWER.title": "失去能量",
+    "ARKNIGHTS_MAP_POWER_LOSE_ENERGY_NEXT_TURN_POWER.smartDescription": "下回合失去{energyPrefix:energyIcons({Amount})}。",
+    "ARKNIGHTS_MAP_POWER_LOSE_ENERGY_NEXT_TURN_POWER.description": "",
+    "ARKNIGHTS_MAP_POWER_EX_FOEDERE_POWER.title": "圣约",
+    "ARKNIGHTS_MAP_POWER_EX_FOEDERE_POWER.smartDescription": "每打出1张牌后，获得1点[gold]力量[/gold]。\n在你的第7张牌打出后，失去因此获得的所有[gold]力量[/gold]并重新计数。\n目前已打过[blue]{DisplayAmount}[/blue]张牌。",
+    "ARKNIGHTS_MAP_POWER_EX_FOEDERE_POWER.description": "",
+    "ARKNIGHTS_MAP_POWER_ROBBER_POWER.title": "行窃者",
+    "ARKNIGHTS_MAP_POWER_ROBBER_POWER.smartDescription": "[gold]荒原窃盗者[/gold]造成了1次未被格挡的伤害后，你下回合减少{energyPrefix:energyIcons(1)}。",
+    "ARKNIGHTS_MAP_POWER_ROBBER_POWER.description": "",
+    "ARKNIGHTS_MAP_POWER_SKULKER_POWER.title": "潜伏者",
+    "ARKNIGHTS_MAP_POWER_SKULKER_POWER.smartDescription": "[gold]荒原潜伏者[/gold]在场上存活时，你每回合的{energyPrefix:energyIcons(1)}减少1。\n其它敌人在场上时，你不能选择[gold]荒原潜伏者[/gold]为对象。",
+    "ARKNIGHTS_MAP_POWER_SKULKER_POWER.description": "",
+    "ARKNIGHTS_MAP_POWER_CROSSBOWMAN_POWER.title": "弩手",
+    "ARKNIGHTS_MAP_POWER_CROSSBOWMAN_POWER.smartDescription": "[gold]赏金猎人弩手[/gold]每行动3次，下一次将会使用强力攻击。",
+    "ARKNIGHTS_MAP_POWER_CROSSBOWMAN_POWER.description": ""
+
 }

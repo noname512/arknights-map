@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://chgxbuguypw4l"
+path="res://.godot/imported/enemy_1337_bhrknf_2.atlas-7cd97c014bee618951a86f113a4f55e7.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/WastelandRobber/enemy_1337_bhrknf_2.atlas"
+dest_files=["res://.godot/imported/enemy_1337_bhrknf_2.atlas-7cd97c014bee618951a86f113a4f55e7.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

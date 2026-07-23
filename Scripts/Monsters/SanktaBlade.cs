@@ -88,8 +88,9 @@ public class SanktaBlade : AbstractSankta
     attackBranch.AddState(skill, () => Bullet > 0);
     attackBranch.AddState(attack, () => Bullet <= 0);
 
-    attack.FollowUpState = attackBranch;
+        attack.FollowUpState = attackBranch;
         skill.FollowUpState = attack;
+        list.Add(attackBranch);
         list.Add(attack);
         list.Add(skill);
     

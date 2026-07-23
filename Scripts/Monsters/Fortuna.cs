@@ -48,7 +48,7 @@ public class Fortuna : AbstractSankta
 
     public override Task AfterDamageReceivedLate(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (dealer == Creature && result.UnblockedDamage == 0 && Rng.NextDouble() < 0.7)
+        if (dealer == Creature && result.UnblockedDamage == 0 && CombatState.RunState.Rng.CombatTargets.NextFloat(0,1) < 0.7)
         {
             AddBullet(1);
         }
@@ -86,6 +86,7 @@ public class Fortuna : AbstractSankta
             {
                 await CreatureCmd.TriggerAnim(Creature, "Skill_Begin", 0.8f);
                 await AddBullet(2);
+                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 2, Creature, null);
             },
             new BuffIntent()
         );

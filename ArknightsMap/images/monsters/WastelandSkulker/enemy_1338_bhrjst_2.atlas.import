@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://bkwfu03crcgps"
+path="res://.godot/imported/enemy_1338_bhrjst_2.atlas-da58151311614d3a64bb0bb97dad7c99.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/WastelandSkulker/enemy_1338_bhrjst_2.atlas"
+dest_files=["res://.godot/imported/enemy_1338_bhrjst_2.atlas-da58151311614d3a64bb0bb97dad7c99.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

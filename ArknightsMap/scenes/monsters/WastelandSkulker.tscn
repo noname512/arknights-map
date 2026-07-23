@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpjjkol54w02n"]
+
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_w05w2"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://c0m5htqqwdkvy" path="res://ArknightsMap/images/monsters/WastelandSkulker/WastelandSkulker.tres" id="2_quwqk"]
+
+[node name="WastelandSkulker" type="Node2D"]
+script = ExtResource("1_w05w2")
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_quwqk")
+preview_skin = "default"
+preview_animation = "Idle"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+scale = Vector2(-1, 1)
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -67.0
+offset_top = -202.0
+offset_right = 76.0
+offset_bottom = 40.0
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -250)
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true

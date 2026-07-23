@@ -8,7 +8,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace Test.Scripts;
 
-[RegisterActEncounter(typeof(Glory))]
+//[RegisterActEncounter(typeof(Glory))]
 public class TheSaintBoss : AbstractLateranoEncounter
 {
     // 所有可能出现的怪物

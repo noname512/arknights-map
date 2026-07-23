@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bid1s2eysf36k"
+path="res://.godot/imported/enemy_1340_bthtbw42.skel-f3641756ce8a15f3a4c6beede62b8d82.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/BHCrossbowman/enemy_1340_bthtbw42.skel"
+dest_files=["res://.godot/imported/enemy_1340_bthtbw42.skel-f3641756ce8a15f3a4c6beede62b8d82.spskel"]
+
+[params]
+
