@@ -16,6 +16,9 @@
 	"ARKNIGHTS_MAP_CARD_NO_COMMUNICATION.title":"沟通不畅",
 	"ARKNIGHTS_MAP_CARD_NO_COMMUNICATION.description": "每当抽到这张牌后，这张牌的耗能降低1。",
   "ARKNIGHTS_MAP_CARD_CONFUSED.title":"困惑",
-	"ARKNIGHTS_MAP_CARD_CONFUSED.description": "这张牌在你的手牌时，你对敌人造成的攻击伤害减少50%。"
+	"ARKNIGHTS_MAP_CARD_CONFUSED.description": "这张牌在你的手牌时，你对敌人造成的攻击伤害减少50%。",
+  "ARKNIGHTS_MAP_CARD_MILK.title":"奶浆",
+	"ARKNIGHTS_MAP_CARD_MILK.description": ""
+
 
 }

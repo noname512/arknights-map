@@ -26,20 +26,20 @@ public sealed class Laterano : ModActTemplate
 
     public override Color MapBgColor => new Color("9B9562");
     protected override int NumberOfWeakEncounters => 2;
-    public override int Index => 1;
+    public override int Index => 3;
     public override bool IsDefault => false;
 
     public override bool IsUnlocked(UnlockState unlockState) => false;
 
-    public override string ChestSpineResourcePath => "res://animations/backgrounds/treasure_room/chest_room_act_2_skel_data.tres";
+    public override string ChestSpineResourcePath => "res://animations/backgrounds/treasure_room/chest_room_act_3_skel_data.tres";
     public override string ChestSpineSkinNameNormal => "act3";
     public override string ChestSpineSkinNameStroke => "act3_stroke";
     public override string ChestOpenSfx => "event:/sfx/ui/treasure/treasure_act3";
     public override string AmbientSfx => "event:/sfx/ambience/act3_ambience";
     protected override int BaseNumberOfRooms => 14;
 
-    public override string? CustomBackgroundScenePath => "res://ArknightsMap/scenes/acts/Wilds/wilds_background.tscn";
-    public override string? CustomBackgroundLayersDirectoryPath => "res://ArknightsMap/scenes/acts/Wilds/layers";
+    public override string? CustomBackgroundScenePath => "res://ArknightsMap/scenes/acts/Laterano/laterano_background.tscn";
+    public override string? CustomBackgroundLayersDirectoryPath => "res://ArknightsMap/scenes/acts/Laterano/layers";
     public override string? CustomMapTopBgPath => "res://images/packed/map/map_bgs/glory/map_top_glory.png";
     public override string? CustomMapMidBgPath => "res://images/packed/map/map_bgs/glory/map_middle_glory.png";
     public override string? CustomMapBotBgPath => "res://images/packed/map/map_bgs/glory/map_bottom_glory.png";
@@ -61,18 +61,32 @@ public sealed class Laterano : ModActTemplate
     public override IEnumerable<EncounterModel> BossDiscoveryOrder =>
         new EncounterModel[]
         {
-            
+            ModelDb.Encounter<SSSBoss>(),
+            ModelDb.Encounter<TheSaintBoss>(),
         };
 
     public override IEnumerable<EncounterModel> GenerateAllEncounters() =>
         new EncounterModel[]
         {
+            ModelDb.Encounter<WasteLanders>(),
+            ModelDb.Encounter<SingleSanktaBlade>(),
             ModelDb.Encounter<SinglePathfinderCannon>(),
+            ModelDb.Encounter<ThreeWarriors>(), 
+
+
             ModelDb.Encounter<SinglePathfinderCar>(),
+            ModelDb.Encounter<TwoBHCrossbow>(),
+            ModelDb.Encounter<TwoMage>(),
+            ModelDb.Encounter<FourWarriors>(),
+            ModelDb.Encounter<ThreeEyes>(),
+            
+
 
             ModelDb.Encounter<FortunaElite>(),
             ModelDb.Encounter<OrenElite>(),
             ModelDb.Encounter<ThreeSanktas>(),
+
+            
             
             
         };

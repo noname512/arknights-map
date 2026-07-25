@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://byyi1dtoj4t5h"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://qm7k3hb8y5yv" path="res://ArknightsMap/images/monsters/SupersweetieDeliveryDrone/enemy_6017_icdrone.atlas" id="1_tfnwt"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cskls7gnuoi5y" path="res://ArknightsMap/images/monsters/SupersweetieDeliveryDrone/enemy_6017_icdrone42.skel" id="2_frpgu"]
+
+[resource]
+atlas_res = ExtResource("1_tfnwt")
+skeleton_file_res = ExtResource("2_frpgu")

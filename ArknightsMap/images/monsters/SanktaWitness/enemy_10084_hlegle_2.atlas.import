@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://tr4xbt26ec6c"
+path="res://.godot/imported/enemy_10084_hlegle_2.atlas-7e861c61ddfcc68c46034e81ff960d92.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SanktaWitness/enemy_10084_hlegle_2.atlas"
+dest_files=["res://.godot/imported/enemy_10084_hlegle_2.atlas-7e861c61ddfcc68c46034e81ff960d92.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

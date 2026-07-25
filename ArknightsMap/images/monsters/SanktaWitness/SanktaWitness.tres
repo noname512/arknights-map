@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://dxchuva6x2n0x"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://tr4xbt26ec6c" path="res://ArknightsMap/images/monsters/SanktaWitness/enemy_10084_hlegle_2.atlas" id="1_p64a7"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://demvlk5dy3141" path="res://ArknightsMap/images/monsters/SanktaWitness/enemy_10084_hlegle_242.skel" id="2_abtcv"]
+
+[resource]
+atlas_res = ExtResource("1_p64a7")
+skeleton_file_res = ExtResource("2_abtcv")

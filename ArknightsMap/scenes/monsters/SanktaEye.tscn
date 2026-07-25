@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfmef0kiwjnkh"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://be6tka61nfjx3" path="res://ArknightsMap/images/monsters/SanktaEye/SanktaEye.tres" id="1_35lqo"]
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_rilmg"]
+
+[node name="SanktaEye" type="Node2D"]
+script = ExtResource("1_rilmg")
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_35lqo")
+preview_skin = "default"
+preview_animation = "Idle"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+scale = Vector2(-1, 1)
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -69.0
+offset_top = -186.0
+offset_right = 70.0
+offset_bottom = 40.0
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -200)
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true

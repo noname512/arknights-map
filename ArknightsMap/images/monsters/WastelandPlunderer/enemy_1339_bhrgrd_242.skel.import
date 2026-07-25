@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bx760pgf8scrl"
+path="res://.godot/imported/enemy_1339_bhrgrd_242.skel-de327aa9a79f3b8163c624c044535d32.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/WastelandPlunderer/enemy_1339_bhrgrd_242.skel"
+dest_files=["res://.godot/imported/enemy_1339_bhrgrd_242.skel-de327aa9a79f3b8163c624c044535d32.spskel"]
+
+[params]
+

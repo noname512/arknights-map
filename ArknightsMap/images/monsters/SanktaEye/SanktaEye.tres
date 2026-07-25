@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://be6tka61nfjx3"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cd40utbaat67s" path="res://ArknightsMap/images/monsters/SanktaEye/enemy_10084_hlegle.atlas" id="1_wawuk"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://5gopig5vymso" path="res://ArknightsMap/images/monsters/SanktaEye/enemy_10084_hlegle42.skel" id="2_0n86l"]
+
+[resource]
+atlas_res = ExtResource("1_wawuk")
+skeleton_file_res = ExtResource("2_0n86l")

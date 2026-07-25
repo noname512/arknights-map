@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://dh6dmw0dt16ns"
+path="res://.godot/imported/enemy_1212_mtrfol.atlas-e4058d679548d8f1edc1c9b9893880dc.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/PathfinderWarrior/enemy_1212_mtrfol.atlas"
+dest_files=["res://.godot/imported/enemy_1212_mtrfol.atlas-e4058d679548d8f1edc1c9b9893880dc.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

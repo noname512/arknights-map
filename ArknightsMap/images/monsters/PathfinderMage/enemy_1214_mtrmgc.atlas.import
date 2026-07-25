@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://cbpy18tt736tx"
+path="res://.godot/imported/enemy_1214_mtrmgc.atlas-34deb9e821d39ad6ba19a80688b15148.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/PathfinderMage/enemy_1214_mtrmgc.atlas"
+dest_files=["res://.godot/imported/enemy_1214_mtrmgc.atlas-34deb9e821d39ad6ba19a80688b15148.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

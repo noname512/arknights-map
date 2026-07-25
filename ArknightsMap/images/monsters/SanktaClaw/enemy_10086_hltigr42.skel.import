@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bgur0vgncpc0m"
+path="res://.godot/imported/enemy_10086_hltigr42.skel-6a9383fc1fdaf250dc6b1a2baa63e931.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SanktaClaw/enemy_10086_hltigr42.skel"
+dest_files=["res://.godot/imported/enemy_10086_hltigr42.skel-6a9383fc1fdaf250dc6b1a2baa63e931.spskel"]
+
+[params]
+

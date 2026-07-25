@@ -80,8 +80,14 @@
     "ARKNIGHTS_MAP_POWER_SKULKER_POWER.title": "潜伏者",
     "ARKNIGHTS_MAP_POWER_SKULKER_POWER.smartDescription": "[gold]荒原潜伏者[/gold]在场上存活时，你每回合的{energyPrefix:energyIcons(1)}减少1。\n其它敌人在场上时，你不能选择[gold]荒原潜伏者[/gold]为对象。",
     "ARKNIGHTS_MAP_POWER_SKULKER_POWER.description": "",
+    "ARKNIGHTS_MAP_POWER_PLUNDER_POWER.title": "劫掠者",
+    "ARKNIGHTS_MAP_POWER_PLUNDER_POWER.smartDescription": "[gold]荒原劫掠者[/gold]每进行3次行动，使玩家下回合减少{energyPrefix:energyIcons(2)}。",
+    "ARKNIGHTS_MAP_POWER_PLUNDER_POWER.description": "",
     "ARKNIGHTS_MAP_POWER_CROSSBOWMAN_POWER.title": "弩手",
     "ARKNIGHTS_MAP_POWER_CROSSBOWMAN_POWER.smartDescription": "[gold]赏金猎人弩手[/gold]每行动3次，下一次将会使用强力攻击。",
-    "ARKNIGHTS_MAP_POWER_CROSSBOWMAN_POWER.description": ""
+    "ARKNIGHTS_MAP_POWER_CROSSBOWMAN_POWER.description": "",
+    "ARKNIGHTS_MAP_POWER_SSS_POWER.title": "奶浆",
+    "ARKNIGHTS_MAP_POWER_SSS_POWER.smartDescription": "{Time:cond:==0?“超甜微笑”目前处于休息状态|“超甜微笑”目前处于[gold]狂飙状态[/gold]，奶浆大于5时，各意图将被强化。奶浆降至0时的下一次行动后，将会休眠。\n每当你打出1张[gold]奶浆[/gold]或者“超甜微笑”行动一次后，奶浆数量减少1。}",
+    "ARKNIGHTS_MAP_POWER_SSS_POWER.description": ""
 
 }

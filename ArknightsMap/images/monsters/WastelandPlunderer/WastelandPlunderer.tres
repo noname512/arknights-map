@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://gvq3m3nr46gv"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cxclwjr5nh1f5" path="res://ArknightsMap/images/monsters/WastelandPlunderer/enemy_1339_bhrgrd_2.atlas" id="1_misyr"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bx760pgf8scrl" path="res://ArknightsMap/images/monsters/WastelandPlunderer/enemy_1339_bhrgrd_242.skel" id="2_tfxuk"]
+
+[resource]
+atlas_res = ExtResource("1_misyr")
+skeleton_file_res = ExtResource("2_tfxuk")

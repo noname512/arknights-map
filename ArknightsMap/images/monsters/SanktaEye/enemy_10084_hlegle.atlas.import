@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://cd40utbaat67s"
+path="res://.godot/imported/enemy_10084_hlegle.atlas-f5d3dd4f4cfa3eadf262ad01b5eca5bf.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SanktaEye/enemy_10084_hlegle.atlas"
+dest_files=["res://.godot/imported/enemy_10084_hlegle.atlas-f5d3dd4f4cfa3eadf262ad01b5eca5bf.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

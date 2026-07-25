@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bbj3vldwckdy6"
+path="res://.godot/imported/enemy_6015_ictruck42.skel-0089a58e6fa0d1dd6fe6a1e46ac37ea3.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SupersweetieSmiley/enemy_6015_ictruck42.skel"
+dest_files=["res://.godot/imported/enemy_6015_ictruck42.skel-0089a58e6fa0d1dd6fe6a1e46ac37ea3.spskel"]
+
+[params]
+

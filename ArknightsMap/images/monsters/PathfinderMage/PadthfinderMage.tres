@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://c2f7ejud4qyje"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cbpy18tt736tx" path="res://ArknightsMap/images/monsters/PathfinderMage/enemy_1214_mtrmgc.atlas" id="1_kepv3"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://qjdyd10o3uo4" path="res://ArknightsMap/images/monsters/PathfinderMage/enemy_1214_mtrmgc42.skel" id="2_3a5w5"]
+
+[resource]
+atlas_res = ExtResource("1_kepv3")
+skeleton_file_res = ExtResource("2_3a5w5")

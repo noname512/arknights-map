@@ -1,0 +1,125 @@
+
+enemy_10084_hlegle.png
+size: 141,463
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ACC_A
+  rotate: false
+  xy: 2, 107
+  size: 71, 90
+  orig: 71, 90
+  offset: 0, 0
+  index: -1
+ACC_B
+  rotate: false
+  xy: 2, 74
+  size: 67, 31
+  orig: 67, 31
+  offset: 0, 0
+  index: -1
+ACC_C
+  rotate: false
+  xy: 2, 378
+  size: 117, 83
+  orig: 117, 83
+  offset: 0, 0
+  index: -1
+Body_A
+  rotate: false
+  xy: 111, 33
+  size: 23, 19
+  orig: 23, 19
+  offset: 0, 0
+  index: -1
+Body_Aa
+  rotate: false
+  xy: 121, 454
+  size: 16, 7
+  orig: 16, 7
+  offset: 0, 0
+  index: -1
+Body_B
+  rotate: false
+  xy: 75, 118
+  size: 54, 68
+  orig: 54, 68
+  offset: 0, 0
+  index: -1
+Body_C
+  rotate: false
+  xy: 2, 260
+  size: 96, 116
+  orig: 96, 118
+  offset: 0, 2
+  index: -1
+Body_D
+  rotate: false
+  xy: 84, 17
+  size: 25, 35
+  orig: 25, 35
+  offset: 0, 0
+  index: -1
+Body_E
+  rotate: false
+  xy: 2, 199
+  size: 91, 59
+  orig: 91, 59
+  offset: 0, 0
+  index: -1
+Body_F
+  rotate: false
+  xy: 100, 261
+  size: 39, 115
+  orig: 39, 115
+  offset: 0, 0
+  index: -1
+Body_G
+  rotate: false
+  xy: 75, 54
+  size: 52, 62
+  orig: 52, 62
+  offset: 0, 0
+  index: -1
+Foot_A
+  rotate: false
+  xy: 100, 227
+  size: 31, 32
+  orig: 31, 32
+  offset: 0, 0
+  index: -1
+Foot_B
+  rotate: false
+  xy: 2, 23
+  size: 29, 24
+  orig: 29, 24
+  offset: 0, 0
+  index: -1
+Foot_C
+  rotate: false
+  xy: 95, 188
+  size: 41, 37
+  orig: 41, 37
+  offset: 0, 0
+  index: -1
+Foot_D
+  rotate: false
+  xy: 2, 2
+  size: 29, 19
+  orig: 29, 19
+  offset: 0, 0
+  index: -1
+Foot_E
+  rotate: false
+  xy: 53, 16
+  size: 29, 36
+  orig: 29, 36
+  offset: 0, 0
+  index: -1
+Ring
+  rotate: false
+  xy: 2, 49
+  size: 49, 23
+  orig: 49, 23
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://5gopig5vymso"
+path="res://.godot/imported/enemy_10084_hlegle42.skel-8287da7d63687f2b9915b7bdeee91f0e.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SanktaEye/enemy_10084_hlegle42.skel"
+dest_files=["res://.godot/imported/enemy_10084_hlegle42.skel-8287da7d63687f2b9915b7bdeee91f0e.spskel"]
+
+[params]
+
