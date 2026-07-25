@@ -1,8 +1,6 @@
-
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -11,7 +9,6 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Keywords;
 using STS2RitsuLib.Scaffolding.Characters;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -19,18 +16,13 @@ namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
 public sealed class NoSugarIce : ModRelicTemplate
-
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips
- => [
-            
-        ];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [];
 
-    
     public override RelicAssetProfile AssetProfile =>
         new(
             // 小图标（原版85x85）
@@ -47,12 +39,10 @@ public sealed class NoSugarIce : ModRelicTemplate
         {
             for (int i = 0; i < base.Owner.GetEnergy(); i++)
             {
-                CreatureCmd.GainBlock(base.Owner.Creature, 8, ValueProp.Unpowered,null);
+                CreatureCmd.GainBlock(base.Owner.Creature, 8, ValueProp.Unpowered, null);
                 PowerCmd.Apply<DrawCardsNextTurnPower>(choiceContext, base.Owner.Creature, 1, base.Owner.Creature, null);
             }
         }
         return base.AfterSideTurnEndLate(choiceContext, side, participants);
     }
-        
-    
-    }
+}

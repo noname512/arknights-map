@@ -81,7 +81,9 @@
     "ARKNIGHTS_MAP_POWER_SKULKER_POWER.smartDescription": "[gold]荒原潜伏者[/gold]在场上存活时，你每回合的{energyPrefix:energyIcons(1)}减少1。\n其它敌人在场上时，你不能选择[gold]荒原潜伏者[/gold]为对象。",
     "ARKNIGHTS_MAP_POWER_SKULKER_POWER.description": "",
     "ARKNIGHTS_MAP_POWER_CROSSBOWMAN_POWER.title": "弩手",
-    "ARKNIGHTS_MAP_POWER_CROSSBOWMAN_POWER.smartDescription": "[gold]赏金猎人弩手[/gold]每行动3次，下一次将会使用强力攻击。",
-    "ARKNIGHTS_MAP_POWER_CROSSBOWMAN_POWER.description": ""
-
+    "ARKNIGHTS_MAP_POWER_CROSSBOWMAN_POWER.smartDescription": "[gold]赏金猎人弩手[/gold]每行动[blue]3[/blue]次，下一次将会使用强力攻击。（当前已行动[blue]{HitTime}[/blue]次）",
+    "ARKNIGHTS_MAP_POWER_CROSSBOWMAN_POWER.description": "",
+    "ARKNIGHTS_MAP_POWER_SOMETHING_FORM.title": "{CardName}形态",
+    "ARKNIGHTS_MAP_POWER_SOMETHING_FORM.smartDescription": "每回合开始时，打出[gold]{CardName}[/gold]。",
+    "ARKNIGHTS_MAP_POWER_SOMETHING_FORM.description": "每回合开始时，打出[gold]指定的牌[/gold]。"
 }

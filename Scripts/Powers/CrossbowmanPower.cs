@@ -17,8 +17,11 @@ public class CrossbowmanPower : ModPowerTemplate
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
-
     public override int DisplayAmount => (int)DynamicVars["HitTime"].BaseValue;
 
-    
+    public void UpdateHitTime(int hitTime)
+    {
+        DynamicVars["HitTime"].BaseValue = hitTime;
+        InvokeDisplayAmountChanged();
+    }
 }

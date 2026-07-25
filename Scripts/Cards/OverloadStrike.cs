@@ -4,7 +4,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
-using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -46,7 +45,12 @@ public class OverloadStrike : ModCardTemplate
     // 打出时的效果逻辑
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).WithHitCount(DynamicVars.Repeat.IntValue).Targeting(cardPlay.Target!).Execute(choiceContext);
+        await DamageCmd
+            .Attack(DynamicVars.Damage.BaseValue)
+            .FromCard(this, cardPlay)
+            .WithHitCount(DynamicVars.Repeat.IntValue)
+            .Targeting(cardPlay.Target!)
+            .Execute(choiceContext);
     }
 
     public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)

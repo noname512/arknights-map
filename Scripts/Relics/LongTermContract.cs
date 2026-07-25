@@ -1,4 +1,4 @@
-﻿using ArknightsMap.Scripts.Enchantments;
+﻿using ArknightsMap.Scripts.Cards;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -13,11 +13,11 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
-public sealed class ChildrenBook : ModRelicTemplate
+public sealed class LongTermContract : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [];
 
@@ -34,17 +34,21 @@ public sealed class ChildrenBook : ModRelicTemplate
     public override async Task AfterObtained()
     {
         foreach (
-            CardModel item in await CardSelectCmd.FromDeckForEnchantment(
-                prefs: new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, base.DynamicVars.Cards.IntValue),
-                player: base.Owner,
-                enchantment: ModelDb.Enchantment<Empathy>(),
-                amount: 1
+            CardModel item in await CardSelectCmd.FromDeckForTransformation(
+                prefs: new CardSelectorPrefs(CardSelectorPrefs.TransformSelectionPrompt, 1),
+                player: Owner,
+                cardToTransformation: c =>
+                {
+                    SomethingForm somethingForm = ModelDb.Card<SomethingForm>();
+                    somethingForm.SetBaseCard(c);
+                    return new CardTransformation(c, somethingForm);
+                }
             )
         )
         {
-            CardCmd.Enchant<Empathy>(item, 1m);
-            CardModel newCard = Owner.RunState.CreateCard(item, Owner);
-            CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(newCard, PileType.Deck));
+            SomethingForm somethingForm = Owner.RunState.CreateCard<SomethingForm>(Owner);
+            somethingForm.SetBaseCard(item);
+            await CardCmd.Transform(item, somethingForm);
         }
     }
 }

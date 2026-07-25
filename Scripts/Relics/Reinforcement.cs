@@ -1,5 +1,4 @@
-﻿using ArknightsMap.Scripts.Enchantments;
-using MegaCrit.Sts2.Core.CardSelection;
+using ArknightsMap.Scripts.Cards;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Relics;
@@ -13,13 +12,12 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
-public sealed class ChildrenBook : ModRelicTemplate
+public class Reinforcement : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(3)];
-
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromCardWithCardHoverTips<CallForAssistance>();
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -33,18 +31,7 @@ public sealed class ChildrenBook : ModRelicTemplate
 
     public override async Task AfterObtained()
     {
-        foreach (
-            CardModel item in await CardSelectCmd.FromDeckForEnchantment(
-                prefs: new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, base.DynamicVars.Cards.IntValue),
-                player: base.Owner,
-                enchantment: ModelDb.Enchantment<Empathy>(),
-                amount: 1
-            )
-        )
-        {
-            CardCmd.Enchant<Empathy>(item, 1m);
-            CardModel newCard = Owner.RunState.CreateCard(item, Owner);
-            CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(newCard, PileType.Deck));
-        }
+        CardModel card = Owner.RunState.CreateCard<CallForAssistance>(Owner);
+        CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(card, PileType.Deck));
     }
 }
