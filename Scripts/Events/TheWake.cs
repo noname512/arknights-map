@@ -41,7 +41,7 @@ public sealed class TheWake : ModEventTemplate
         {
             await CardPileCmd.RemoveFromDeck(item);
         }
-        await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), Owner!.Creature, DynamicVars.Damage, null, null);
+        await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), Owner!.Creature, DynamicVars.Damage.BaseValue, DynamicVars.Damage.Props, null, null);
         SetEventFinished(L10NLookup($"{Id.Entry}.pages.REMOVE_CARDS.description"));
     }
 

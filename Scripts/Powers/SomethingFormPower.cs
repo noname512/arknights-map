@@ -41,7 +41,7 @@ public class SomethingFormPower : ModPowerTemplate
 
     public override async Task AfterAutoPrePlayPhaseEntered(PlayerChoiceContext choiceContext, Player player)
     {
-        if (player == base.Owner.Player)
+        if (player == Owner.Player)
         {
             await CardCmd.AutoPlay(choiceContext, baseCard!, null);
         }

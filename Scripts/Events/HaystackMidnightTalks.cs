@@ -23,7 +23,7 @@ public sealed class HaystackMidnightTalks : ModEventTemplate
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
         List<EventOption> list = [];
-        if (PossibleChange(Owner))
+        if (PossibleChange(Owner!))
         {
             list.Add(new EventOption(this, MakeAChange, InitialOptionKey("MAKE_A_CHANGE")));
         }
@@ -31,7 +31,7 @@ public sealed class HaystackMidnightTalks : ModEventTemplate
         {
             list.Add(new EventOption(this, null, InitialOptionKey("MAKE_A_CHANGE_LOCK")));
         }
-        if (PossibleBury(Owner))
+        if (PossibleBury(Owner!))
         {
             list.Add(new EventOption(this, BuryTheTruth, InitialOptionKey("BURY_THE_TRUTH")));
         }

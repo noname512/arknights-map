@@ -1,17 +1,14 @@
-using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Keywords;
-
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using STS2RitsuLib.Scaffolding.Content;
-using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models.CardPools;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Saves.Runs;
-
+using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Cards
 {
@@ -24,57 +21,43 @@ namespace ArknightsMap.Scripts.Cards
         private const TargetType targetType = TargetType.Self;
         private const bool shouldShowInCardLibrary = true;
 
-        
+        public CustomMade()
+            : base(energyCost, type, rarity, targetType) { }
 
+        protected override IEnumerable<DynamicVar> CanonicalVars =>
+            [new PowerVar<StrengthPower>(0), new PowerVar<DexterityPower>(0), new CardsVar(0), new BlockVar(0, ValueProp.Move)];
 
-        public CustomMade() : base(energyCost, type, rarity, targetType)
-        {
-        }
-
-        protected override IEnumerable<DynamicVar> CanonicalVars => [
-            new PowerVar<StrengthPower>(0),
-            new PowerVar<DexterityPower>(0),
-            new CardsVar(0),
-            new BlockVar(0, ValueProp.Move)
-            ];
-
-
-        protected override IEnumerable<IHoverTip> AdditionalHoverTips
- => [
-            
-        ];    
-
-            [SavedProperty]
-        public int Strength => Scripts.Relics.CustomMade._strength;
+        protected override IEnumerable<IHoverTip> AdditionalHoverTips => [];
 
         [SavedProperty]
-        public int Dexterity => Scripts.Relics.CustomMade._dexterity;
+        public int Strength => Relics.CustomMade._strength;
 
         [SavedProperty]
-        public int Cards => Scripts.Relics.CustomMade._cards;
+        public int Dexterity => Relics.CustomMade._dexterity;
 
         [SavedProperty]
-        public int Blocks => Scripts.Relics.CustomMade._blocks;
+        public int Cards => Relics.CustomMade._cards;
 
-
+        [SavedProperty]
+        public int Blocks => Relics.CustomMade._blocks;
 
         protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
         {
-            await PowerCmd.Apply<StrengthPower>(choiceContext,base.Owner.Creature, Strength, base.Owner.Creature, this);
-            await PowerCmd.Apply<DexterityPower>(choiceContext,base.Owner.Creature, Dexterity, base.Owner.Creature, this);
+            await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, Strength, Owner.Creature, this);
+            await PowerCmd.Apply<DexterityPower>(choiceContext, Owner.Creature, Dexterity, Owner.Creature, this);
             if (Cards > 0)
             {
-                await CardPileCmd.Draw(choiceContext, Cards, base.Owner);
+                await CardPileCmd.Draw(choiceContext, Cards, Owner);
             }
             if (Blocks > 0)
             {
-                await CreatureCmd.GainBlock(base.Owner.Creature, Blocks, ValueProp.Unpowered, cardPlay);
+                await CreatureCmd.GainBlock(Owner.Creature, Blocks, ValueProp.Unpowered, cardPlay);
             }
         }
 
         protected override void OnUpgrade()
         {
-            base.EnergyCost.UpgradeBy(-1);
+            EnergyCost.UpgradeBy(-1);
         }
     }
 }

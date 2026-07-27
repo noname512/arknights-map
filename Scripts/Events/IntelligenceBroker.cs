@@ -1,5 +1,6 @@
 using System.Reflection;
 using ArknightsMap.Scripts.Acts;
+using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Events;
@@ -36,11 +37,11 @@ public sealed class IntelligenceBroker : ModEventTemplate
         }
     }
 
-    public static int[] AlreadyChoose;
+    public static int[] AlreadyChoose = [];
 
     protected override Task BeforeEventStarted(bool isPreFinished)
     {
-        if (AlreadyChoose == null)
+        if (AlreadyChoose.IsEmpty())
             AlreadyChoose = new int[Owner!.RunState.Players.Count];
         return Task.CompletedTask;
     }

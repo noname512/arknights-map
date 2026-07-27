@@ -77,7 +77,7 @@ public sealed class WeiLaterano : ModRelicTemplate
 
     public override bool TryModifyRewards(Player player, List<Reward> rewards, AbstractRoom? room)
     {
-        if (player != base.Owner)
+        if (player != Owner)
         {
             return false;
         }
@@ -110,7 +110,7 @@ public sealed class WeiLaterano : ModRelicTemplate
 
     public override bool TryModifyCardRewardOptionsLate(Player player, List<CardCreationResult> cardRewards, CardCreationOptions options)
     {
-        if (player != base.Owner)
+        if (player != Owner)
         {
             return false;
         }
@@ -123,7 +123,7 @@ public sealed class WeiLaterano : ModRelicTemplate
             CardModel card = cardReward.Card;
             if (card.IsUpgradable)
             {
-                CardModel card2 = base.Owner.RunState.CloneCard(card);
+                CardModel card2 = Owner.RunState.CloneCard(card);
                 CardCmd.Upgrade(card2);
                 cardReward.ModifyCard(card2, this);
             }
@@ -133,7 +133,7 @@ public sealed class WeiLaterano : ModRelicTemplate
 
     public override Task BeforeCombatRewardOffered(RewardsSet rewards, CombatRoom room)
     {
-        if (rewards.Player != base.Owner)
+        if (rewards.Player != Owner)
             return Task.CompletedTask;
         if (rewards.Rewards.All((Reward r) => !(r is CardReward)))
             return Task.CompletedTask;

@@ -116,7 +116,7 @@ public class PeaksCladInForest : ModRelicTemplate
         {
             return false;
         }
-        if (card.Owner.Creature != base.Owner.Creature)
+        if (card.Owner.Creature != Owner.Creature)
         {
             return false;
         }

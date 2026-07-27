@@ -48,7 +48,7 @@ public sealed class ChanceEncounterWithCannot : ModEventTemplate
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
         List<EventOption> options = [];
-        List<RelicModel> relics = Owner.Relics.Where((RelicModel r) => r.IsTradable).ToList();
+        List<RelicModel> relics = Owner!.Relics.Where((RelicModel r) => r.IsTradable).ToList();
         if (relics.Count > 0)
         {
             relic = Rng.NextItem(relics)!;
@@ -86,13 +86,19 @@ public sealed class ChanceEncounterWithCannot : ModEventTemplate
         {
             options.Add(new EventOption(this, null, InitialOptionKey("CARD_LOCKED")));
         }
-        list = Owner.Deck.Cards.Where(c => c.Rarity is CardRarity.Basic && c.IsRemovable && (c.Tags.Contains(CardTag.Strike) || c.Tags.Contains(CardTag.Defend))).ToList();
+        list = Owner
+            .Deck.Cards.Where(c => c.Rarity is CardRarity.Basic && c.IsRemovable && (c.Tags.Contains(CardTag.Strike) || c.Tags.Contains(CardTag.Defend)))
+            .ToList();
         if (list.Count() > 0)
         {
             card2 = Rng.NextItem(list)!;
             StringVar stringVar = (StringVar)DynamicVars["Card2"];
             stringVar.StringValue = card2.Title;
-            options.Add(new EventOption(this, StrikeDefend, InitialOptionKey("STRIKE_DEFEND"), HoverTipFactory.FromCard(card2)).ThatDoesDamage(DynamicVars.Damage.IntValue));
+            options.Add(
+                new EventOption(this, StrikeDefend, InitialOptionKey("STRIKE_DEFEND"), HoverTipFactory.FromCard(card2)).ThatDoesDamage(
+                    DynamicVars.Damage.IntValue
+                )
+            );
         }
         else
         {
@@ -125,7 +131,7 @@ public sealed class ChanceEncounterWithCannot : ModEventTemplate
     private async Task StrikeDefend()
     {
         await CardPileCmd.RemoveFromDeck(card2!);
-        await CreatureCmd.Damage(new BlockingPlayerChoiceContext(), Owner!.Creature, DynamicVars.Damage, null, null);
+        await CreatureCmd.Damage(new BlockingPlayerChoiceContext(), Owner!.Creature, DynamicVars.Damage.BaseValue, DynamicVars.Damage.Props, null, null);
         SetEventFinished(L10NLookup($"{Id.Entry}.pages.FAILURE.description"));
     }
 }

@@ -45,7 +45,7 @@ public class CompanionDefPower : ModPowerTemplate
 
     public override Task AfterModifyingHpLostAfterOsty()
     {
-        this.Flash();
+        Flash();
         return Task.CompletedTask;
     }
 }

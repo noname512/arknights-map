@@ -29,7 +29,7 @@ public class EnchantSynchronizer : IDisposable
 
     private readonly List<BufferedMessage> _bufferedMessages = new List<BufferedMessage>();
 
-    private Player LocalPlayer => _playerCollection.GetPlayer(_localPlayerId);
+    private Player LocalPlayer => _playerCollection.GetPlayer(_localPlayerId)!;
 
     public EnchantSynchronizer(
         RunLocationTargetedMessageBuffer messageBuffer,
@@ -54,12 +54,12 @@ public class EnchantSynchronizer : IDisposable
 
     private void HandleEnchantMessage(EnchantMessage message, ulong senderId)
     {
-        Player player = _playerCollection.GetPlayer(senderId);
+        Player player = _playerCollection.GetPlayer(senderId)!;
         if (player == LocalPlayer)
         {
             throw new InvalidOperationException("HandleEnchantMessage should not be sent to the player removing the card!");
         }
-        TaskHelper.RunSafely(DoEnchant(player, message.goldCost, message.enchantmentModel));
+        TaskHelper.RunSafely(DoEnchant(player, message.goldCost, message.enchantmentModel!));
     }
 
     private async Task<bool> DoEnchant(Player player, int goldCost, EnchantmentModel enchantmentModel, bool cancelable = true)

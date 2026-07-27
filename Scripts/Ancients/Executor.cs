@@ -1,11 +1,7 @@
-using ArknightsMap.Scripts.Acts;
 using ArknightsMap.Scripts.Relics;
 using Godot;
 using MegaCrit.Sts2.Core.Events;
-using MegaCrit.Sts2.Core.Models;
-using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
-using STS2RitsuLib.Utils;
 
 namespace ArknightsMap.Scripts.Ancients;
 
@@ -40,15 +36,13 @@ public class Executor : ModAncientEventTemplate
         [
             CreateModRelicOption<GiantGun>(), // 铳骑的巨铳
             CreateModRelicOption<NoSugarIce>(), // 无糖冰淇淋
-            
         ];
     private IReadOnlyList<EventOption> Pool3 =>
         [
             CreateModRelicOption<Aphasia>(), // “失语”
             CreateModRelicOption<Vannini>(), // 梵妮的铳
             CreateModRelicOption<Wrap>(), // 披肩
-            CreateModRelicOption<ChildrenBook>(), 
-            
+            CreateModRelicOption<ChildrenBook>(),
         ];
 
     // 所有可能的选项
@@ -59,6 +53,4 @@ public class Executor : ModAncientEventTemplate
     {
         return [Rng.NextItem(Pool1)!, Rng.NextItem(Pool2)!, Rng.NextItem(Pool3)!];
     }
-
-    
 }

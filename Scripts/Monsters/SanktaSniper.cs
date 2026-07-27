@@ -3,11 +3,8 @@ using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.MonsterMoves;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -18,7 +15,6 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class SanktaSniper : AbstractSankta
 {
-    
     protected override int BulletMax => 1;
     protected override int InitialBullet => 0;
 
@@ -26,11 +22,9 @@ public class SanktaSniper : AbstractSankta
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 94, 92);
     private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 15, 12);
     public int Time = 1;
-    
-    
+
     private bool IsTimeIncrease = false;
 
-    
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
@@ -43,19 +37,17 @@ public class SanktaSniper : AbstractSankta
 
     private string GetAttackSfx() => "Attack";
 
-    
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
-        
+
         MoveState attack = new MoveState(
             "ATTACK",
             async targets =>
             {
                 await UseBullet(1);
                 await DamageCmd.Attack(Damage).FromMonster(this).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
-            }, 
-            
+            },
             new SingleAttackIntent(Damage)
         );
         MoveState skill = new MoveState(
@@ -76,12 +68,9 @@ public class SanktaSniper : AbstractSankta
         list.Add(attack);
         list.Add(skill);
         list.Add(attackBranch);
-    
 
         return new MonsterMoveStateMachine(list, skill);
     }
-
-    
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
     {
@@ -92,9 +81,8 @@ public class SanktaSniper : AbstractSankta
         AnimState skillloopState = new AnimState("Skill_Loop");
         AnimState skillendState = new AnimState("Skill_End");
 
-
         attackState.NextState = idleState;
-        
+
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
         creatureAnimator.AddAnyState("Attack", attackState);
         creatureAnimator.AddAnyState("Skill_Start", skillstartState);
@@ -104,7 +92,7 @@ public class SanktaSniper : AbstractSankta
         skillstartState.NextState = skillloopState;
         skillloopState.NextState = skillendState;
         skillendState.NextState = idleState;
-        
+
         return creatureAnimator;
     }
 }

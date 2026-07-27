@@ -28,18 +28,15 @@ public sealed class Vannini : ModRelicTemplate
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
 
-    public override bool ShowCounter
-    {
-        get { return true; }
-    }
+    public override bool ShowCounter => true;
 
     public override decimal ModifyMaxEnergy(Player player, decimal amount)
     {
-        if (player != base.Owner)
+        if (player != Owner)
         {
             return amount;
         }
-        return amount + (decimal)base.DynamicVars.Energy.IntValue;
+        return amount + DynamicVars.Energy.IntValue;
     }
 
     public int SameTypeCount = 0;
@@ -48,7 +45,7 @@ public sealed class Vannini : ModRelicTemplate
 
     public override Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Owner == this.Owner)
+        if (cardPlay.Card.Owner == Owner)
         {
             if (SameTypeCount == 0)
             {
@@ -66,14 +63,14 @@ public sealed class Vannini : ModRelicTemplate
             }
         }
         InvokeDisplayAmountChanged();
-        return base.AfterCardPlayedLate(choiceContext, cardPlay);
+        return Task.CompletedTask;
     }
 
     public override Task AfterCombatVictory(CombatRoom room)
     {
         SameTypeCount = 0;
         cardType = CardType.None;
-        return base.AfterCombatVictory(room);
+        return Task.CompletedTask;
     }
 
     public override int DisplayAmount
@@ -88,7 +85,7 @@ public sealed class Vannini : ModRelicTemplate
 
     public override bool ShouldPlay(CardModel card, AutoPlayType _)
     {
-        if (card.Owner != base.Owner)
+        if (card.Owner != Owner)
         {
             return true;
         }

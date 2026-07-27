@@ -43,7 +43,7 @@ public class WitherPower : ModPowerTemplate, ITemporaryPower
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
-    public override async Task BeforeApplied(Creature target, Decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task BeforeApplied(Creature target, decimal amount, Creature? applier, CardModel? cardSource)
     {
         TurnLeft = 2;
         await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), target, -amount, applier, cardSource, true);

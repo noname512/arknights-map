@@ -44,7 +44,7 @@ public class NatureDeterrent : ModRelicTemplate
         ICombatState combatState
     )
     {
-        if (participants.Contains(base.Owner.Creature))
+        if (participants.Contains(Owner.Creature))
         {
             isFirstAttack = true;
             firstAttackCard = null;

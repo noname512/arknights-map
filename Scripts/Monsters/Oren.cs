@@ -25,7 +25,6 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class Oren : AbstractSankta
 {
-    
     protected override int BulletMax => 1;
     protected override int InitialBullet => 0;
 
@@ -34,33 +33,35 @@ public class Oren : AbstractSankta
     private int Damage_Skill => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 25, 22);
 
     private int Damage_2_Hit => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 10);
-    
+
     private int Damage_1_Hit => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 18, 16);
-    
+
     private int Block => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 10);
-    
+
     private bool IsTimeIncrease = false;
 
-    
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
     private bool IsBurningVineInCombat() => CombatState.Enemies.Any(e => e.IsAlive && e.IsMonster && e.Monster is BurningVine);
 
-
-    public override Task AfterDamageReceivedLate(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override async Task AfterDamageReceivedLate(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        DamageResult result,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource
+    )
     {
         if (dealer == Creature && result.UnblockedDamage > 0)
         {
-            CardPileCmd.AddToCombatAndPreview<Dazed>(target, PileType.Draw, 1, null, CardPilePosition.Top);
+            await CardPileCmd.AddToCombatAndPreview<Dazed>(target, PileType.Draw, 1, null, CardPilePosition.Top);
         }
-        return base.AfterDamageReceivedLate(choiceContext, target, result, props, dealer, cardSource);
     }
-    
 
     private string GetAttackSfx() => "Attack";
 
-    
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
@@ -73,7 +74,6 @@ public class Oren : AbstractSankta
             },
             new BuffIntent()
         );
-        
 
         MoveState attackSkill = new MoveState(
             "ATTACK_SKILL",
@@ -83,13 +83,12 @@ public class Oren : AbstractSankta
                 await Cmd.Wait(1.0f);
                 await DamageCmd.Attack(Damage_Skill).FromMonster(this).WithNoAttackerAnim().WithHitFx(sfx: GetAttackSfx()).Execute(null);
                 await UseBullet(1);
-                foreach(Creature c in targets)
+                foreach (Creature c in targets)
                 {
                     await CardPileCmd.AddToCombatAndPreview<Dazed>(c, PileType.Draw, 5, null, CardPilePosition.Top);
                 }
             },
             [new SingleAttackIntent(Damage_Skill), new StatusIntent(5)]
-
         );
         MoveState attack2Hit = new MoveState(
             "ATTACK_2_HIT",
@@ -98,7 +97,7 @@ public class Oren : AbstractSankta
                 await CreatureCmd.TriggerAnim(Creature, "Attack_A", 0.8f);
                 await Cmd.Wait(1.0f);
                 await DamageCmd.Attack(Damage_2_Hit).WithHitCount(2).FromMonster(this).WithNoAttackerAnim().WithHitFx(sfx: GetAttackSfx()).Execute(null);
-                foreach(Creature c in targets)
+                foreach (Creature c in targets)
                 {
                     await CardPileCmd.AddToCombatAndPreview<Dazed>(c, PileType.Discard, 2, null, CardPilePosition.Top);
                 }
@@ -113,10 +112,7 @@ public class Oren : AbstractSankta
                 await CreatureCmd.TriggerAnim(Creature, "Attack_A", 0.8f);
                 await Cmd.Wait(1.0f);
                 await DamageCmd.Attack(Damage_1_Hit).FromMonster(this).WithNoAttackerAnim().WithHitFx(sfx: GetAttackSfx()).Execute(null);
-                foreach(Creature c in targets)
-                {
-                    
-                }
+                foreach (Creature c in targets) { }
             },
             [new SingleAttackIntent(Damage_1_Hit), new DebuffIntent()]
         );
@@ -129,25 +125,21 @@ public class Oren : AbstractSankta
                 await Cmd.Wait(1.0f);
                 await PowerCmd.Apply<VulnerablePower>(new ThrowingPlayerChoiceContext(), targets, 2, Creature, null);
                 await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), targets, 2, Creature, null);
-                
             },
             [new DebuffIntent()]
         );
 
-
-
         ConditionalBranchState attackBranch1 = new ConditionalBranchState("ATTACK_BRANCH1");
-    attackBranch1.AddState(attackSkill, () => Bullet > 0);
-    attackBranch1.AddState(attack2Hit, () => Bullet <= 0);
+        attackBranch1.AddState(attackSkill, () => Bullet > 0);
+        attackBranch1.AddState(attack2Hit, () => Bullet <= 0);
 
-    ConditionalBranchState attackBranch2 = new ConditionalBranchState("ATTACK_BRANCH2");
-    attackBranch2.AddState(attackSkill, () => Bullet > 0);
-    attackBranch2.AddState(attack1Hit, () => Bullet <= 0);
+        ConditionalBranchState attackBranch2 = new ConditionalBranchState("ATTACK_BRANCH2");
+        attackBranch2.AddState(attackSkill, () => Bullet > 0);
+        attackBranch2.AddState(attack1Hit, () => Bullet <= 0);
 
-    ConditionalBranchState attackBranch3 = new ConditionalBranchState("ATTACK_BRANCH3");
-    attackBranch3.AddState(attackSkill, () => Bullet > 0);
-    attackBranch3.AddState(debuff, () => Bullet <= 0);
-
+        ConditionalBranchState attackBranch3 = new ConditionalBranchState("ATTACK_BRANCH3");
+        attackBranch3.AddState(attackSkill, () => Bullet > 0);
+        attackBranch3.AddState(debuff, () => Bullet <= 0);
 
         list.Add(gainbullet);
         list.Add(attackSkill);
@@ -156,7 +148,6 @@ public class Oren : AbstractSankta
         list.Add(attack1Hit);
         list.Add(attackBranch1);
         list.Add(attackBranch2);
-        
 
         gainbullet.FollowUpState = attackSkill;
         attackSkill.FollowUpState = debuff;
@@ -165,8 +156,6 @@ public class Oren : AbstractSankta
         attack1Hit.FollowUpState = attackBranch3;
         return new MonsterMoveStateMachine(list, gainbullet);
     }
-
-    
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
     {
@@ -179,13 +168,13 @@ public class Oren : AbstractSankta
 
         attack01State.NextState = idleState;
         attack02State.NextState = idleState;
-        
+
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
         creatureAnimator.AddAnyState("Attack_B", attack01State);
         creatureAnimator.AddAnyState("Attack_A", attack02State);
         creatureAnimator.AddAnyState("Skill", skillState);
         creatureAnimator.AddAnyState("Die", dieState);
-        
+
         return creatureAnimator;
     }
 }

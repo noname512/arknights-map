@@ -28,7 +28,7 @@ public class PhalanxPower : ModPowerTemplate
 
     public override Task AfterModifyingHpLostAfterOsty()
     {
-        this.Flash();
+        Flash();
         return Task.CompletedTask;
     }
 

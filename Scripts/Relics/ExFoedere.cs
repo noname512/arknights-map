@@ -1,4 +1,3 @@
-
 using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -16,18 +15,13 @@ namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
 public sealed class ExFoedere : ModRelicTemplate
-
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips
- => [
-            
-        ];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [];
 
-    
     public override RelicAssetProfile AssetProfile =>
         new(
             // 小图标（原版85x85）
@@ -39,10 +33,10 @@ public sealed class ExFoedere : ModRelicTemplate
         );
 
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
-	{
-		if (player == base.Owner && base.Owner.PlayerCombatState.TurnNumber == 1)
+    {
+        if (player == Owner && Owner.PlayerCombatState!.TurnNumber == 1)
         {
-            await PowerCmd.Apply<ExFoederePower>(choiceContext, base.Owner.Creature, 1, base.Owner.Creature, null);
+            await PowerCmd.Apply<ExFoederePower>(choiceContext, Owner.Creature, 1, Owner.Creature, null);
         }
     }
-    }
+}

@@ -43,8 +43,8 @@ public sealed class CustomMade : ModRelicTemplate
     {
         foreach (
             CardModel item in await CardSelectCmd.FromDeckForRemoval(
-                prefs: new CardSelectorPrefs(CardSelectorPrefs.RemoveSelectionPrompt, base.DynamicVars.Cards.IntValue),
-                player: base.Owner
+                prefs: new CardSelectorPrefs(CardSelectorPrefs.RemoveSelectionPrompt, DynamicVars.Cards.IntValue),
+                player: Owner
             )
         )
         {
@@ -52,7 +52,7 @@ public sealed class CustomMade : ModRelicTemplate
             _triggeredTypes.Add(item.CreateClone());
         }
 
-        CardModel custom = base.Owner.RunState.CreateCard<Scripts.Cards.CustomMade>(base.Owner);
+        CardModel custom = Owner.RunState.CreateCard<Cards.CustomMade>(Owner);
         foreach (CardModel c in _triggeredTypes)
         {
             if (c.Type == CardType.Attack)

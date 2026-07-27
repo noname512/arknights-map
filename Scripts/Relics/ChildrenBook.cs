@@ -35,8 +35,8 @@ public sealed class ChildrenBook : ModRelicTemplate
     {
         foreach (
             CardModel item in await CardSelectCmd.FromDeckForEnchantment(
-                prefs: new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, base.DynamicVars.Cards.IntValue),
-                player: base.Owner,
+                prefs: new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, DynamicVars.Cards.IntValue),
+                player: Owner,
                 enchantment: ModelDb.Enchantment<Empathy>(),
                 amount: 1
             )

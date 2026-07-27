@@ -33,14 +33,14 @@ public sealed class Solvent : ModRelicTemplate
     {
         foreach (
             CardModel item in await CardSelectCmd.FromDeckForRemoval(
-                prefs: new CardSelectorPrefs(this.SelectionScreenPrompt, 1),
-                player: base.Owner,
+                prefs: new CardSelectorPrefs(SelectionScreenPrompt, 1),
+                player: Owner,
                 filter: c => c.IsUpgraded
             )
         )
         {
             CardCmd.Downgrade(item);
-            foreach (CardModel c in base.Owner.Deck.Cards)
+            foreach (CardModel c in Owner.Deck.Cards)
             {
                 if (c.Type == item.Type && c != item)
                 {

@@ -41,7 +41,7 @@ public sealed class Campfire : ModEventTemplate
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
         List<EventOption> list = new List<EventOption>();
-        if (!HasAttackCard(Owner))
+        if (!HasAttackCard(Owner!))
         {
             list.Add(new EventOption(this, null, InitialOptionKey("LOCKED")));
         }
@@ -66,7 +66,7 @@ public sealed class Campfire : ModEventTemplate
 
     private async Task AttachFlaming()
     {
-        await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), Owner!.Creature, DynamicVars.Damage, null, null);
+        await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), Owner!.Creature, DynamicVars.Damage.BaseValue, DynamicVars.Damage.Props, null, null);
         foreach (
             CardModel item in await CardSelectCmd.FromDeckForEnchantment(
                 Owner,

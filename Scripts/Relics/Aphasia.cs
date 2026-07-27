@@ -36,15 +36,14 @@ public sealed class Aphasia : ModRelicTemplate
 
     public override async Task AfterObtained()
     {
-        await CardPileCmd.AddCurseToDeck<Scripts.Cards.NoCommunication>(base.Owner);
+        await CardPileCmd.AddCurseToDeck<Cards.NoCommunication>(Owner);
     }
 
-    public override Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
+    public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
-        if (card.Owner == base.Owner && card.Type == CardType.Curse)
+        if (card.Owner == Owner && card.Type == CardType.Curse)
         {
-            PowerCmd.Apply<StrengthPower>(choiceContext, base.Owner.Creature, 2, base.Owner.Creature, null);
+            await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, 2, Owner.Creature, null);
         }
-        return base.AfterCardDrawn(choiceContext, card, fromHandDraw);
     }
 }

@@ -33,16 +33,15 @@ public sealed class NoSugarIce : ModRelicTemplate
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
 
-    public override Task AfterSideTurnEndLate(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+    public override async Task AfterSideTurnEndLate(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (base.Owner.GetEnergy() > 0 && side == CombatSide.Player)
+        if (Owner.GetEnergy() > 0 && side == CombatSide.Player)
         {
-            for (int i = 0; i < base.Owner.GetEnergy(); i++)
+            for (int i = 0; i < Owner.GetEnergy(); i++)
             {
-                CreatureCmd.GainBlock(base.Owner.Creature, 8, ValueProp.Unpowered, null);
-                PowerCmd.Apply<DrawCardsNextTurnPower>(choiceContext, base.Owner.Creature, 1, base.Owner.Creature, null);
+                await CreatureCmd.GainBlock(Owner.Creature, 8, ValueProp.Unpowered, null);
+                await PowerCmd.Apply<DrawCardsNextTurnPower>(choiceContext, Owner.Creature, 1, Owner.Creature, null);
             }
         }
-        return base.AfterSideTurnEndLate(choiceContext, side, participants);
     }
 }
