@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d7bqjfd2gnwb"]
 
-[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_gobwt"]
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_gobwt"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://dm08cwnvot2qo" path="res://ArknightsMap/images/monsters/PathfinderCar/PathfinderCar.tres" id="1_oaf6x"]
 
 [node name="PathfinderCar" type="Node2D"]

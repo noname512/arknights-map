@@ -18,13 +18,20 @@ public class SanktaCreaturePower : ModPowerTemplate
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
-    public override Task AfterDamageReceivedLate(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override Task AfterDamageReceivedLate(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        DamageResult result,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource
+    )
     {
-        if (target == base.Owner && 2*target._currentHp <= target._maxHp)
+        if (target == base.Owner && 2 * target.CurrentHp <= target.MaxHp)
         {
             CreatureCmd.Stun(base.Owner);
             PowerCmd.Remove(this);
         }
         return base.AfterDamageReceivedLate(choiceContext, target, result, props, dealer, cardSource);
-    }    
+    }
 }

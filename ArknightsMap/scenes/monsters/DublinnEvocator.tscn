@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dcyyn4u45xxe8"]
 
-[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_v77x8"]
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_v77x8"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://tt440bh2jbkl" path="res://ArknightsMap/images/monsters/DublinnEvocator/DublinnEvocator.tres" id="ssdr"]
 
 [node name="DublinnEvocator" type="Node2D"]

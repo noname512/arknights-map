@@ -23,7 +23,6 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class SanktaWitness : AbstractSankta
 {
-    
     protected override int BulletMax => 0;
     protected override int InitialBullet => 0;
 
@@ -34,38 +33,44 @@ public class SanktaWitness : AbstractSankta
     private int MultiDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 5, 6);
 
     public int Time = 1;
-    
-    
-    private bool HasStatusInDraw(Player p) => p.PlayerCombatState.DrawPile.Cards.Any(c => c.Type == CardType.Status);
 
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
-	{
-        if (target == null)
+    private bool HasStatusInDraw(Player p) => p.PlayerCombatState!.DrawPile.Cards.Any(c => c.Type == CardType.Status);
+
+    public override decimal ModifyDamageMultiplicative(
+        Creature? target,
+        decimal amount,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource,
+        CardPlay? cardPlay
+    )
     {
-        return 1m;
+        if (target == null)
+        {
+            return 1m;
+        }
+        if (target.Side != CombatSide.Player)
+        {
+            return 1m;
+        }
+        if (target.Player != null && HasStatusInDraw(target.Player))
+        {
+            return 1m;
+        }
+        if (!props.IsPoweredAttack())
+        {
+            return 1m;
+        }
+        if (dealer != Creature)
+        {
+            return 1m;
+        }
+        return 1.5m;
     }
-		if (target.Side != CombatSide.Player)
-		{
-			return 1m;
-		}
-		if (target.Player != null && HasStatusInDraw(target.Player))
-		{
-			return 1m;
-		}
-		if (!props.IsPoweredAttack())
-		{
-			return 1m;
-		}
-		if (dealer != Creature)
-		{
-			return 1m;
-		}
-		return 1.5m;
-	}
 
-    
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
+
     public override async Task AfterAddedToRoom()
     {
         await PowerCmd.Apply<EyePower>(new ThrowingPlayerChoiceContext(), Creature, 5, Creature, null);
@@ -74,28 +79,31 @@ public class SanktaWitness : AbstractSankta
 
     private string GetAttackSfx() => "Attack";
 
-    
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
-        
+
         MoveState attack = new MoveState(
             "ATTACK",
             async targets =>
             {
                 await DamageCmd.Attack(Damage).FromMonster(this).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
-            }, 
-            
+            },
             new SingleAttackIntent(Damage)
         );
 
-         MoveState multiattack = new MoveState(
+        MoveState multiattack = new MoveState(
             "MULTIATTACK",
             async targets =>
             {
-                await DamageCmd.Attack(MultiDamage).FromMonster(this).WithHitCount(2).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
-            }, 
-            
+                await DamageCmd
+                    .Attack(MultiDamage)
+                    .FromMonster(this)
+                    .WithHitCount(2)
+                    .WithAttackerAnim("Attack", 0.8f)
+                    .WithHitFx(sfx: GetAttackSfx())
+                    .Execute(null);
+            },
             new SingleAttackIntent(MultiDamage)
         );
 
@@ -110,9 +118,9 @@ public class SanktaWitness : AbstractSankta
         );
 
         RandomBranchState startBranch = new RandomBranchState("START_BRANCH");
-		startBranch.AddBranch(attack, MoveRepeatType.CannotRepeat);
-		startBranch.AddBranch(multiattack, MoveRepeatType.CannotRepeat);
-		startBranch.AddBranch(skill, MoveRepeatType.CannotRepeat);
+        startBranch.AddBranch(attack, MoveRepeatType.CannotRepeat);
+        startBranch.AddBranch(multiattack, MoveRepeatType.CannotRepeat);
+        startBranch.AddBranch(skill, MoveRepeatType.CannotRepeat);
 
         attack.FollowUpState = multiattack;
         multiattack.FollowUpState = skill;
@@ -120,27 +128,22 @@ public class SanktaWitness : AbstractSankta
         list.Add(attack);
         list.Add(skill);
         list.Add(multiattack);
-    
 
         return new MonsterMoveStateMachine(list, startBranch);
     }
-
-    
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
     {
         AnimState idleState = new AnimState("Idle", isLooping: true);
         AnimState attackState = new AnimState("Attack");
         AnimState dieState = new AnimState("Die");
-        
 
         attackState.NextState = idleState;
-        
+
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
         creatureAnimator.AddAnyState("Attack", attackState);
         creatureAnimator.AddAnyState("Die", dieState);
-        
-        
+
         return creatureAnimator;
     }
 }

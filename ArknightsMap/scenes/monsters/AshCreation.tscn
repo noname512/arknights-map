@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://le0fvwjpkawy"]
 
-[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_v77x8"]
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_v77x8"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://i28dmky50s5j" path="res://ArknightsMap/images/monsters/AshCreation/AshCreation.tres" id="ssdr"]
 
 [node name="AshCreation" type="Node2D"]

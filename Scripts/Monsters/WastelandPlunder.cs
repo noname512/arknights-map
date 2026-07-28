@@ -5,12 +5,9 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.MonsterMoves;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -22,9 +19,6 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class WastelandPlunder : ModMonsterTemplate
 {
-    
-    
-
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 160, 160);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 160, 160);
     private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 16, 16);
@@ -39,38 +33,27 @@ public class WastelandPlunder : ModMonsterTemplate
     {
         await PowerCmd.Apply<PlunderPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
         await PowerCmd.Apply<PlatingPower>(new ThrowingPlayerChoiceContext(), Creature, 15, Creature, null);
-        
-
     }
 
     public int MoveInt = 0;
 
-    
-
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
-
     private string GetAttackSfx() => "Attack";
 
-
-
-    
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
-        
+
         MoveState attack = new MoveState(
             "ATTACK",
             async targets =>
             {
-                
                 await DamageCmd.Attack(Damage).FromMonster(this).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
-                Creature.GetPower<PlunderPower>().DynamicVars["HitTime"].BaseValue++;
-                Creature.GetPower<PlunderPower>().InvokeDisplayAmountChanged();
-                
-            }, 
-            
+                PlunderPower power = Creature.GetPower<PlunderPower>()!;
+                power.UpdateHitTime(power.DisplayAmount + 1);
+            },
             new SingleAttackIntent(Damage)
         );
 
@@ -78,14 +61,11 @@ public class WastelandPlunder : ModMonsterTemplate
             "ATTACK_DEFEND",
             async targets =>
             {
-                
                 await DamageCmd.Attack(DamageBlock).FromMonster(this).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
                 await CreatureCmd.GainBlock(Creature, Block, ValueProp.Unpowered, null);
-                Creature.GetPower<PlunderPower>().DynamicVars["HitTime"].BaseValue++;
-                Creature.GetPower<PlunderPower>().InvokeDisplayAmountChanged();
-                
-            }, 
-            
+                PlunderPower power = Creature.GetPower<PlunderPower>()!;
+                power.UpdateHitTime(power.DisplayAmount + 1);
+            },
             [new SingleAttackIntent(DamageBlock), new DefendIntent()]
         );
 
@@ -98,19 +78,11 @@ public class WastelandPlunder : ModMonsterTemplate
                 {
                     await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), c, 2, c, null);
                 }
-                Creature.GetPower<PlunderPower>().DynamicVars["HitTime"].BaseValue++;
-                Creature.GetPower<PlunderPower>().InvokeDisplayAmountChanged();
-                
-            }, 
-            
+                PlunderPower power = Creature.GetPower<PlunderPower>()!;
+                power.UpdateHitTime(power.DisplayAmount + 1);
+            },
             [new SingleAttackIntent(Damage_Skill), new DebuffIntent()]
         );
-        
-
-        
-
-        
-        
 
         attack.FollowUpState = attack_defend;
         attack_defend.FollowUpState = attack_debuff;
@@ -128,16 +100,14 @@ public class WastelandPlunder : ModMonsterTemplate
         if (side == CombatSide.Enemy && power != null && power.DynamicVars["HitTime"].BaseValue == 3)
         {
             foreach (Creature c in CombatState.PlayerCreatures)
-                {
-                    PowerCmd.Apply<LoseEnergyNextTurnPower>(new ThrowingPlayerChoiceContext(), c, 2, c, null);
-                }
-            power.DynamicVars["HitTime"].BaseValue = 0;
-            power.InvokeDisplayAmountChanged();
+            {
+                PowerCmd.Apply<LoseEnergyNextTurnPower>(new ThrowingPlayerChoiceContext(), c, 2, c, null);
+            }
+            PlunderPower plunderPower = Creature.GetPower<PlunderPower>()!;
+            plunderPower.UpdateHitTime(0);
         }
         return base.AfterSideTurnEndLate(choiceContext, side, participants);
     }
-
-    
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
     {
@@ -145,24 +115,20 @@ public class WastelandPlunder : ModMonsterTemplate
         AnimState idleState = new AnimState("Idle", isLooping: true);
         AnimState attackState = new AnimState("Attack");
         AnimState skillState = new AnimState("Skill");
-        
 
         AnimState dieState = new AnimState("Die");
-        
-
 
         attackState.NextState = idleState;
         skillState.NextState = idleState;
-        
+
         startState.NextState = idleState;
-        
+
         CreatureAnimator creatureAnimator = new CreatureAnimator(startState, controller);
         creatureAnimator.AddAnyState("Attack", attackState);
         creatureAnimator.AddAnyState("Skill", skillState);
         creatureAnimator.AddAnyState("Start", startState);
         creatureAnimator.AddAnyState("Die", dieState);
 
-        
         return creatureAnimator;
     }
 }

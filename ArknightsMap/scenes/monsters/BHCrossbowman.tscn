@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d22kajcu32in7"]
 
-[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_erqh5"]
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_erqh5"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://b2v73ua5jkna0" path="res://ArknightsMap/images/monsters/BHCrossbowman/BHCrossbowman.tres" id="2_kujfm"]
 
 [node name="BhCrossbowman" type="Node2D"]

@@ -23,12 +23,8 @@ public class SanktaSniper : AbstractSankta
     private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 20, 18);
     public int Time = 1;
 
-    private bool IsTimeIncrease = false;
-
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
-
-    private bool IsBurningVineInCombat() => CombatState.Enemies.Any(e => e.IsAlive && e.IsMonster && e.Monster is BurningVine);
 
     public override async Task AfterAddedToRoom()
     {

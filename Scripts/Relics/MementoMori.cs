@@ -1,30 +1,24 @@
-
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Keywords;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
 public sealed class MementoMori : ModRelicTemplate
-
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(10, ValueProp.Unpowered)];
-    
+
     public override RelicAssetProfile AssetProfile =>
         new(
             // 小图标（原版85x85）
@@ -39,16 +33,12 @@ public sealed class MementoMori : ModRelicTemplate
 
     public override int DisplayAmount
     {
-        get
-        {
-            return turn;
-        }
+        get { return turn; }
     }
 
     public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
-        
-        if (side == CombatSide.Player && (base.Owner.PlayerCombatState?.TurnNumber == 1 || turn == 4))
+        if (side == CombatSide.Player && (Owner.PlayerCombatState?.TurnNumber == 1 || turn == 4))
         {
             Flash();
             await Shoot(combatState);
@@ -66,16 +56,15 @@ public sealed class MementoMori : ModRelicTemplate
         {
             turn = 0;
             InvokeDisplayAmountChanged();
-            for (int i = 0; i<8; i++)
+            for (int i = 0; i < 8; i++)
             {
-                await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), base.Owner.Creature.CombatState.HittableEnemies.TakeRandom(1,base.Owner.RunState.Rng.CombatTargets), base.DynamicVars.Damage, base.Owner.Creature);
-            
+                await CreatureCmd.Damage(
+                    new ThrowingPlayerChoiceContext(),
+                    Owner.Creature.CombatState!.HittableEnemies.TakeRandom(1, Owner.RunState.Rng.CombatTargets),
+                    DynamicVars.Damage,
+                    Owner.Creature
+                );
             }
-            
         }
     }
-
-    
-
-    
 }

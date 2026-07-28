@@ -29,7 +29,7 @@ public static class ModExtensions
     public static EnchantSynchronizer GetEnchantSynchronizer(this RunManager runManager)
     {
         EnchantSynchronizers.TryGetValue(runManager, out var data);
-        return data;
+        return data!;
     }
 
     public static List<MerchantEnchantmentEntry> GetEnchantmentEntries(this MerchantInventory inventory)
@@ -46,7 +46,7 @@ public static class ModExtensions
     public static EnchantmentData GetEnchantmentDatas(this NMerchantSlot slot)
     {
         EnchantmentDatas.TryGetValue(slot, out var data);
-        return data;
+        return data!;
     }
 
     public static bool IsBurnItAllPrefs(CardSelectorPrefs prefs)

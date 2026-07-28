@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://n0jq7ldcvocw"]
 
 [ext_resource type="SpineSkeletonDataResource" uid="uid://cshnj07um0xx3" path="res://ArknightsMap/images/monsters/SanktaSniper/SanktaSniper.tres" id="1_32hsm"]
-[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="2_ordpi"]
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="2_ordpi"]
 
 [node name="SanktaSniper" type="Node2D"]
 script = ExtResource("2_ordpi")

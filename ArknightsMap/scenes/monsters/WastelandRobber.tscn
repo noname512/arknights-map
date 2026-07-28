@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxco1helde65m"]
 
-[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_4g234"]
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_4g234"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://b711hm50jok32" path="res://ArknightsMap/images/monsters/WastelandRobber/WastelandRobber.tres" id="1_a3qn5"]
 
 [node name="WastelandRobber" type="Node2D"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c74nongm3g5eu"]
 
-[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_ixiy3"]
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_ixiy3"]
 
 [node name="SssBoss" type="Control"]
 layout_mode = 3

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bo2bvl8yw8gcf"]
 
 [ext_resource type="SpineSkeletonDataResource" uid="uid://dwgvgeumw2hiu" path="res://ArknightsMap/images/monsters/PathfinderWarrior/PathfinderWarrior.tres" id="1_fwi1o"]
-[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_ypn6e"]
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_ypn6e"]
 
 [node name="PathfinderWarrior" type="Node2D"]
 scale = Vector2(-1, 1)

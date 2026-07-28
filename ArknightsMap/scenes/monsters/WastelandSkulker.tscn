@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dpjjkol54w02n"]
 
-[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_w05w2"]
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_w05w2"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://c0m5htqqwdkvy" path="res://ArknightsMap/images/monsters/WastelandSkulker/WastelandSkulker.tres" id="2_quwqk"]
 
 [node name="WastelandSkulker" type="Node2D"]

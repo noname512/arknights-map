@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cab1una28ig47"]
 
-[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_dd473"]
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_dd473"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://c2f7ejud4qyje" path="res://ArknightsMap/images/monsters/PathfinderMage/PadthfinderMage.tres" id="2_0xph7"]
 
 [node name="PathfinderMage" type="Node2D"]

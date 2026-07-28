@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://baq76f4ig0wr7"]
+[gd_scene format=3]
 
 [node name="FourWarriors" type="Control"]
 layout_mode = 3

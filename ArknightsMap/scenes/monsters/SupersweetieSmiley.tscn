@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bd61qgsqlnv2g"]
 
-[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_6tpg1"]
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_6tpg1"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://cvrpdbmlt5yg4" path="res://ArknightsMap/images/monsters/SupersweetieSmiley/SupersweetieSmiley.tres" id="1_fhrxu"]
 
 [node name="SupersweetieSmiley" type="Node2D"]

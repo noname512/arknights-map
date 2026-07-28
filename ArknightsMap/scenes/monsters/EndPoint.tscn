@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://du3wcju2sl4id"]
 
-[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_v77x8"]
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_v77x8"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://tr7026r8ta1m" path="res://ArknightsMap/images/monsters/EndPoint/EndPoint.tres" id="ssdr"]
 [ext_resource type="Texture2D" uid="uid://c3rqsbpf7d8qy" path="res://ArknightsMap/images/monsters/EndPoint/Start.png" id="2_2qge7"]
 
