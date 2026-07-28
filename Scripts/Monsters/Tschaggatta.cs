@@ -77,6 +77,7 @@ public class Tschaggatta : AbstractSnowyMountainMonster
         conditionalBranchState.AddState(move2, () => Creature.SlotName == "second");
         conditionalBranchState.AddState(move3, () => Creature.SlotName == "third");
         conditionalBranchState.AddState(move4, () => Creature.SlotName == "fourth");
+        conditionalBranchState.AddState(move1, () => true);
         move1.FollowUpState = move2;
         move2.FollowUpState = move3;
         move3.FollowUpState = move4;

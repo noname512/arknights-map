@@ -21,7 +21,7 @@ public class Degenbrecher : AbstractWildsMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 900, 799);
     public override int MaxInitialHp => MinInitialHp;
-    public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
+    // public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
     private int BlockedVulNum => 4;
     private int UnblockedVulNum => 2;
     private int BasicDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 9, 8);
@@ -76,6 +76,7 @@ public class Degenbrecher : AbstractWildsMonster
                     await PowerCmd.Apply(new ThrowingPlayerChoiceContext(), hiddenPower, Creature, 1, Creature, null);
                 }
                 await PowerCmd.Apply<AdmitPower>(new ThrowingPlayerChoiceContext(), Creature, AdmitRequest, Creature, null);
+                await PowerCmd.Apply<MomentumMurder>(new ThrowingPlayerChoiceContext(), Creature, (int)(Creature.MaxHp * 0.75), Creature, null);
             },
             new BuffIntent()
         );
