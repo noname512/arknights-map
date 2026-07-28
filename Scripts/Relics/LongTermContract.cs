@@ -39,15 +39,15 @@ public sealed class LongTermContract : ModRelicTemplate
                 player: Owner,
                 cardToTransformation: c =>
                 {
-                    SomethingForm somethingForm = ModelDb.Card<SomethingForm>();
-                    somethingForm.SetBaseCard(c);
+                    SomethingForm somethingForm = (SomethingForm)ModelDb.Card<SomethingForm>().ToMutable();
+                    somethingForm.SetBaseCard((CardModel)c.MutableClone());
                     return new CardTransformation(c, somethingForm);
                 }
             )
         )
         {
             SomethingForm somethingForm = Owner.RunState.CreateCard<SomethingForm>(Owner);
-            somethingForm.SetBaseCard(item);
+            somethingForm.SetBaseCard((CardModel)item.MutableClone());
             await CardCmd.Transform(item, somethingForm);
         }
     }
