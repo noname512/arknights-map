@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_v77x8"]
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_v77x8"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://cta8ucruay1fb" path="res://ArknightsMap/images/monsters/FrozenMountainBurdenbeast/FrozenMountainBurdenbeast.tres" id="ssdr"]
 
 [node name="FrozenMountainBurdenbeast" type="Node2D"]

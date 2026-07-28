@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://qm7k3hb8y5yv"
+path="res://.godot/imported/enemy_6017_icdrone.atlas-6b663cbb96c19102fceb7c00ee536fd9.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SupersweetieDeliveryDrone/enemy_6017_icdrone.atlas"
+dest_files=["res://.godot/imported/enemy_6017_icdrone.atlas-6b663cbb96c19102fceb7c00ee536fd9.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

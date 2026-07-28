@@ -1,4 +1,5 @@
 using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Gold;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -13,12 +14,6 @@ namespace ArknightsMap.Scripts.Utils.MerchantEnchantment;
 
 public class EnchantSynchronizer : IDisposable
 {
-    private struct BufferedMessage
-    {
-        public ulong senderId;
-        public EnchantMessage enchantmentMessage;
-    }
-
     private readonly RunLocationTargetedMessageBuffer _messageBuffer;
 
     private readonly INetGameService _gameService;
@@ -26,8 +21,6 @@ public class EnchantSynchronizer : IDisposable
     private readonly IPlayerCollection _playerCollection;
 
     private readonly ulong _localPlayerId;
-
-    private readonly List<BufferedMessage> _bufferedMessages = new List<BufferedMessage>();
 
     private Player LocalPlayer => _playerCollection.GetPlayer(_localPlayerId)!;
 

@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://cxclwjr5nh1f5"
+path="res://.godot/imported/enemy_1339_bhrgrd_2.atlas-6c8c35612a943bb6c2d5789817996110.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/WastelandPlunderer/enemy_1339_bhrgrd_2.atlas"
+dest_files=["res://.godot/imported/enemy_1339_bhrgrd_2.atlas-6c8c35612a943bb6c2d5789817996110.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

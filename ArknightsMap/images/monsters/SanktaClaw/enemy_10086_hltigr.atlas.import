@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://l00yqc3bbxyj"
+path="res://.godot/imported/enemy_10086_hltigr.atlas-e8cc811614bf53bb7ff363dcd99622a7.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SanktaClaw/enemy_10086_hltigr.atlas"
+dest_files=["res://.godot/imported/enemy_10086_hltigr.atlas-e8cc811614bf53bb7ff363dcd99622a7.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

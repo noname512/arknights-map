@@ -48,7 +48,7 @@ def generate_tscn():
         # 使用多行 f-string 动态组装 tscn 模板内容
         tscn_content = f"""[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_v77x8"]
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_v77x8"]
 [ext_resource type="SpineSkeletonDataResource" uid="{uid}" path="res://ArknightsMap/images/monsters/{folder_a}/{file_b}.tres" id="ssdr"]
 
 [node name="{file_b}" type="Node2D"]

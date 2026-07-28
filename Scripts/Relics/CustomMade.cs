@@ -1,3 +1,5 @@
+using ArknightsMap.Scripts.Cards;
+using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -6,6 +8,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
+using MegaCrit.Sts2.Core.Saves.Runs;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -18,7 +21,7 @@ public sealed class CustomMade : ModRelicTemplate
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromKeyword(CustomKeyword.Keyword)];
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -32,19 +35,45 @@ public sealed class CustomMade : ModRelicTemplate
 
     private readonly HashSet<CardModel> _triggeredTypes = new();
 
-    public static int _strength = 0;
-    public static int _dexterity = 0;
+    private int _strength;
+    private int _dexterity;
+    private int _cards;
+    private int _block;
 
-    public static int _cards = 0;
+    [SavedProperty]
+    public int Strength
+    {
+        get => _strength;
+        set { _strength = value; }
+    }
 
-    public static int _blocks = 0;
+    [SavedProperty]
+    public int Dexterity
+    {
+        get => _dexterity;
+        set { _dexterity = value; }
+    }
+
+    [SavedProperty]
+    public int Cards
+    {
+        get => _cards;
+        set { _cards = value; }
+    }
+
+    [SavedProperty]
+    public int Block
+    {
+        get => _block;
+        set { _block = value; }
+    }
 
     public override async Task AfterObtained()
     {
         foreach (
             CardModel item in await CardSelectCmd.FromDeckForRemoval(
-                prefs: new CardSelectorPrefs(CardSelectorPrefs.RemoveSelectionPrompt, DynamicVars.Cards.IntValue),
-                player: Owner
+                prefs: new CardSelectorPrefs(CardSelectorPrefs.RemoveSelectionPrompt, base.DynamicVars.Cards.IntValue),
+                player: base.Owner
             )
         )
         {
@@ -52,26 +81,30 @@ public sealed class CustomMade : ModRelicTemplate
             _triggeredTypes.Add(item.CreateClone());
         }
 
-        CardModel custom = Owner.RunState.CreateCard<Cards.CustomMade>(Owner);
         foreach (CardModel c in _triggeredTypes)
         {
             if (c.Type == CardType.Attack)
             {
-                _strength++;
+                _strength += 2;
             }
             else if (c.Type == CardType.Skill)
             {
-                _dexterity++;
+                _dexterity += 2;
             }
             else if (c.Type == CardType.Power)
             {
-                _cards++;
+                _cards += 3;
             }
             else
             {
-                _blocks++;
+                _block += 6;
             }
         }
+
+        CardModel custom = Owner.RunState.CreateCard<CustomMadeCard>(Owner);
         await CardPileCmd.Add(custom, PileType.Deck);
+        CardCmd.Preview(custom, 1.0f);
+
+        _triggeredTypes.Clear();
     }
 }

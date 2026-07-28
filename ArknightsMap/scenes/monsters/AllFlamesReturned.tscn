@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c2rj34et6qd4p"]
 
-[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_v77x8"]
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_v77x8"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://dugr804apv24k" path="res://ArknightsMap/images/monsters/AllFlamesReturned/AllFlamesReturned.tres" id="ssdr"]
 
 [node name="AllFlamesReturned" type="Node2D"]

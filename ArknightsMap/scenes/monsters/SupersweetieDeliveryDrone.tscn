@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgcittfhba7h0"]
+
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_16wkj"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://byyi1dtoj4t5h" path="res://ArknightsMap/images/monsters/SupersweetieDeliveryDrone/SupersweetieDeliveryDrone.tres" id="2_3a1ml"]
+
+[node name="SupersweetieDeliveryDrone" type="Node2D"]
+script = ExtResource("1_16wkj")
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_3a1ml")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -38.0
+offset_top = -95.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -100)
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true

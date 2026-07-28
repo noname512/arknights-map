@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://ckblxicaj0j5o"
+path="res://.godot/imported/enemy_1212_mtrfol42.skel-2027e147122a87530c84d759e923012b.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/PathfinderWarrior/enemy_1212_mtrfol42.skel"
+dest_files=["res://.godot/imported/enemy_1212_mtrfol42.skel-2027e147122a87530c84d759e923012b.spskel"]
+
+[params]
+

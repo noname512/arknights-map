@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bep0opu767qxc"]
 
 [ext_resource type="SpineSkeletonDataResource" uid="uid://bshivoxd31026" path="res://ArknightsMap/images/monsters/Fortuna/Fortuna.tres" id="1_bbmri"]
-[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_k2mom"]
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_k2mom"]
 
 [node name="Fortuna" type="Node2D"]
 script = ExtResource("1_k2mom")

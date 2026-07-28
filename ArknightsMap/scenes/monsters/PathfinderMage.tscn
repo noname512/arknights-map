@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://cab1una28ig47"]
+
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_dd473"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://c2f7ejud4qyje" path="res://ArknightsMap/images/monsters/PathfinderMage/PadthfinderMage.tres" id="2_0xph7"]
+
+[node name="PathfinderMage" type="Node2D"]
+script = ExtResource("1_dd473")
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_0xph7")
+preview_skin = "default"
+preview_animation = "Idle"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+scale = Vector2(-1, 1)
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -70.0
+offset_top = -237.0
+offset_right = 69.0
+offset_bottom = 40.0
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -250)
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true

@@ -1,0 +1,258 @@
+
+enemy_1339_bhrgrd_2.png
+size: 475,269
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+C_Axe
+  rotate: false
+  xy: 244, 159
+  size: 102, 62
+  orig: 102, 62
+  offset: 0, 0
+  index: -1
+C_Bag
+  rotate: false
+  xy: 267, 22
+  size: 33, 33
+  orig: 33, 33
+  offset: 0, 0
+  index: -1
+C_Body
+  rotate: false
+  xy: 391, 99
+  size: 76, 69
+  orig: 76, 69
+  offset: 0, 0
+  index: -1
+C_Cloth
+  rotate: false
+  xy: 362, 170
+  size: 111, 97
+  orig: 111, 97
+  offset: 0, 0
+  index: -1
+C_Coat_B
+  rotate: false
+  xy: 2, 175
+  size: 94, 82
+  orig: 94, 82
+  offset: 0, 0
+  index: -1
+C_Glasses
+  rotate: false
+  xy: 366, 14
+  size: 43, 15
+  orig: 43, 15
+  offset: 0, 0
+  index: -1
+C_Hat
+  rotate: false
+  xy: 109, 55
+  size: 79, 37
+  orig: 79, 37
+  offset: 0, 0
+  index: -1
+C_Hat_L
+  rotate: false
+  xy: 230, 57
+  size: 47, 57
+  orig: 47, 57
+  offset: 0, 0
+  index: -1
+C_Hat_R
+  rotate: false
+  xy: 302, 3
+  size: 30, 54
+  orig: 30, 54
+  offset: 0, 0
+  index: -1
+C_Head
+  rotate: false
+  xy: 369, 31
+  size: 61, 66
+  orig: 61, 66
+  offset: 0, 0
+  index: -1
+C_L_Arm_1
+  rotate: false
+  xy: 279, 59
+  size: 45, 61
+  orig: 46, 64
+  offset: 0, 3
+  index: -1
+C_L_Arm_2
+  rotate: false
+  xy: 334, 37
+  size: 33, 28
+  orig: 33, 28
+  offset: 0, 0
+  index: -1
+C_L_Coat
+  rotate: false
+  xy: 109, 94
+  size: 79, 74
+  orig: 79, 74
+  offset: 0, 0
+  index: -1
+C_L_Ear
+  rotate: false
+  xy: 218, 154
+  size: 24, 29
+  orig: 24, 29
+  offset: 0, 0
+  index: -1
+C_L_Foot
+  rotate: false
+  xy: 344, 125
+  size: 45, 32
+  orig: 45, 32
+  offset: 0, 0
+  index: -1
+C_L_Hand
+  rotate: false
+  xy: 255, 122
+  size: 39, 35
+  orig: 39, 35
+  offset: 0, 0
+  index: -1
+C_L_Leg_1
+  rotate: false
+  xy: 326, 67
+  size: 41, 56
+  orig: 42, 56
+  offset: 1, 0
+  index: -1
+C_L_Leg_2
+  rotate: false
+  xy: 218, 7
+  size: 47, 46
+  orig: 47, 46
+  offset: 0, 0
+  index: -1
+C_L_Pauldrons
+  rotate: false
+  xy: 212, 116
+  size: 41, 36
+  orig: 41, 36
+  offset: 0, 0
+  index: -1
+C_R_Arm_1
+  rotate: false
+  xy: 44, 4
+  size: 37, 42
+  orig: 37, 42
+  offset: 0, 0
+  index: -1
+C_R_Arm_2
+  rotate: false
+  xy: 130, 6
+  size: 42, 47
+  orig: 42, 47
+  offset: 0, 0
+  index: -1
+C_R_Coat
+  rotate: false
+  xy: 98, 182
+  size: 49, 75
+  orig: 49, 75
+  offset: 0, 0
+  index: -1
+C_R_Ear
+  rotate: false
+  xy: 190, 157
+  size: 21, 26
+  orig: 21, 26
+  offset: 0, 0
+  index: -1
+C_R_Finger
+  rotate: false
+  xy: 432, 36
+  size: 28, 28
+  orig: 28, 28
+  offset: 0, 0
+  index: -1
+C_R_Foot
+  rotate: false
+  xy: 296, 125
+  size: 46, 32
+  orig: 46, 32
+  offset: 0, 0
+  index: -1
+C_R_Hand
+  rotate: false
+  xy: 432, 66
+  size: 31, 31
+  orig: 31, 31
+  offset: 0, 0
+  index: -1
+C_R_Leg_1
+  rotate: false
+  xy: 190, 55
+  size: 38, 53
+  orig: 38, 53
+  offset: 0, 0
+  index: -1
+C_R_Leg_2
+  rotate: false
+  xy: 174, 6
+  size: 42, 47
+  orig: 42, 47
+  offset: 0, 0
+  index: -1
+C_R_Pauldrons
+  rotate: false
+  xy: 83, 6
+  size: 45, 40
+  orig: 45, 40
+  offset: 0, 0
+  index: -1
+C_Rope
+  rotate: false
+  xy: 2, 2
+  size: 40, 44
+  orig: 40, 44
+  offset: 0, 0
+  index: -1
+C_Scarf
+  rotate: false
+  xy: 244, 223
+  size: 109, 34
+  orig: 109, 34
+  offset: 0, 0
+  index: -1
+C_Sheild
+  rotate: false
+  xy: 2, 48
+  size: 105, 120
+  orig: 105, 120
+  offset: 0, 0
+  index: -1
+C_Tail
+  rotate: false
+  xy: 149, 185
+  size: 93, 72
+  orig: 93, 72
+  offset: 0, 0
+  index: -1
+C_Weapon_Cloth_1
+  rotate: false
+  xy: 190, 110
+  size: 20, 45
+  orig: 20, 45
+  offset: 0, 0
+  index: -1
+C_Weapon_Cloth_2
+  rotate: false
+  xy: 334, 3
+  size: 30, 32
+  orig: 30, 32
+  offset: 0, 0
+  index: -1
+C_sheng
+  rotate: false
+  xy: 2, 259
+  size: 358, 8
+  orig: 358, 8
+  offset: 0, 0
+  index: -1

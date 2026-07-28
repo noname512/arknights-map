@@ -1,13 +1,9 @@
-using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.MonsterMoves;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
@@ -21,7 +17,6 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class PathfinderCannon : AbstractSankta
 {
-    
     protected override int BulletMax => 2;
     protected override int InitialBullet => 2;
 
@@ -30,26 +25,18 @@ public class PathfinderCannon : AbstractSankta
     private int Damage01 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 20, 18);
 
     private int Damage02 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 10);
-    
-    private int Block => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 10);
-    
-    private bool IsTimeIncrease = false;
 
-    
+    private int Block => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 10);
+
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
-    private bool IsBurningVineInCombat() => CombatState.Enemies.Any(e => e.IsAlive && e.IsMonster && e.Monster is BurningVine);
-
-    
-
     private string GetAttackSfx() => "Attack";
 
-    
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
-        
+
         MoveState attack01 = new MoveState(
             "ATTACK01",
             async targets =>
@@ -57,15 +44,14 @@ public class PathfinderCannon : AbstractSankta
                 await CreatureCmd.TriggerAnim(Creature, "Attack_B", 0.8f);
                 await Cmd.Wait(1.0f);
                 await DamageCmd.Attack(Damage01).FromMonster(this).WithNoAttackerAnim().WithHitFx(sfx: GetAttackSfx()).Execute(null);
-                
+
                 await UseBullet(1);
-                foreach(Creature c in targets)
+                foreach (Creature c in targets)
                 {
                     NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NFireSmokePuffVfx.Create(c));
                 }
             },
             [new SingleAttackIntent(Damage01)]
-
         );
         MoveState attack02 = new MoveState(
             "ATTACK02",
@@ -80,8 +66,8 @@ public class PathfinderCannon : AbstractSankta
         );
 
         ConditionalBranchState attackBranch = new ConditionalBranchState("ATTACK_BRANCH");
-    attackBranch.AddState(attack01, () => Bullet > 0);
-    attackBranch.AddState(attack02, () => Bullet <= 0);
+        attackBranch.AddState(attack01, () => Bullet > 0);
+        attackBranch.AddState(attack02, () => Bullet <= 0);
 
         list.Add(attack01);
         list.Add(attack02);
@@ -91,8 +77,6 @@ public class PathfinderCannon : AbstractSankta
         attack02.FollowUpState = attackBranch;
         return new MonsterMoveStateMachine(list, attack01);
     }
-
-    
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
     {
@@ -105,13 +89,13 @@ public class PathfinderCannon : AbstractSankta
 
         attack01State.NextState = idleState;
         attack02State.NextState = idleState;
-        
+
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
         creatureAnimator.AddAnyState("Attack_B", attack01State);
         creatureAnimator.AddAnyState("Attack_A", attack02State);
         creatureAnimator.AddAnyState("Skill", skillState);
         creatureAnimator.AddAnyState("Die", dieState);
-        
+
         return creatureAnimator;
     }
 }

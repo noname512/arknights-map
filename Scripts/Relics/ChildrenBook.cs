@@ -32,19 +32,12 @@ public sealed class ChildrenBook : ModRelicTemplate
         );
 
     public override async Task AfterObtained()
-    {
-        foreach (
-            CardModel item in await CardSelectCmd.FromDeckForEnchantment(
-                prefs: new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, DynamicVars.Cards.IntValue),
-                player: Owner,
-                enchantment: ModelDb.Enchantment<Empathy>(),
-                amount: 1
-            )
-        )
-        {
-            CardCmd.Enchant<Empathy>(item, 1m);
-            CardModel newCard = Owner.RunState.CreateCard(item, Owner);
-            CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(newCard, PileType.Deck));
-        }
-    }
+	{
+		foreach (CardModel item in await CardSelectCmd.FromDeckForEnchantment(prefs: new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, base.DynamicVars.Cards.IntValue), player: base.Owner, enchantment: ModelDb.Enchantment<Empathy>(), amount: 1))
+		{
+			CardCmd.Enchant<Empathy>(item, 1m);
+            CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(item, PileType.Deck));
+			
+		}
+	}    
 }

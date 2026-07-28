@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bxnrtskeeyhmy"]
 
-[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_8r2ji"]
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_8r2ji"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://d6ply2ncswjl" path="res://ArknightsMap/images/monsters/CandyCar/CandyCar.tres" id="1_ijobo"]
 
 [node name="CandyCar" type="Node2D"]

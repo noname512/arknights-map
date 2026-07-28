@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ctpwemhpe3lt"]
 
 [ext_resource type="SpineSkeletonDataResource" uid="uid://dhcyjadu4er6k" path="res://ArknightsMap/images/monsters/PathfinderCannon/PathfinderCannon.tres" id="1_3rke4"]
-[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_qik3w"]
+[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_qik3w"]
 
 [node name="PathfinderCannon" type="Node2D"]
 script = ExtResource("1_qik3w")

@@ -24,9 +24,9 @@ public class SanktaBlade : AbstractSankta
 
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 88, 86);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 94, 92);
-    private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 8);
+    private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 15, 15);
     public int Time = 1;
-    private int Strength => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 5, 5);
+    private int Strength => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 10);
     
     private bool IsTimeIncrease = false;
 
@@ -81,7 +81,7 @@ public class SanktaBlade : AbstractSankta
                     IsTimeIncrease = false;
                 }
             },
-            new BuffIntent()
+            [new BuffIntent(), new Scripts.Utils.UseBulletIntent()]
         );
 
         ConditionalBranchState attackBranch = new ConditionalBranchState("ATTACK_BRANCH");

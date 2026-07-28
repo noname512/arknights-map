@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://demvlk5dy3141"
+path="res://.godot/imported/enemy_10084_hlegle_242.skel-e4d0523f033d6e6a34441bf9929c7055.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SanktaWitness/enemy_10084_hlegle_242.skel"
+dest_files=["res://.godot/imported/enemy_10084_hlegle_242.skel-e4d0523f033d6e6a34441bf9929c7055.spskel"]
+
+[params]
+

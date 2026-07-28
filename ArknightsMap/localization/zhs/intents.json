@@ -1,4 +1,10 @@
 {
     "ARKNIGHTS_MAP_INTENT_IGNITE.title": "点火",
-    "ARKNIGHTS_MAP_INTENT_IGNITE.description": "这个敌人将点燃[gold]芦苇丛[/gold]，使其进入[gold]燃烧[/gold]状态。"
+    "ARKNIGHTS_MAP_INTENT_IGNITE.description": "这个敌人将点燃[gold]芦苇丛[/gold]，使其进入[gold]燃烧[/gold]状态。",
+
+    "ARKNIGHTS_MAP_INTENT_USE_BULLET.title": "使用子弹",
+    "ARKNIGHTS_MAP_INTENT_USE_BULLET.description": "这个敌人将使用[gold]弹药[/gold]。",
+
+    "ARKNIGHTS_MAP_INTENT_ADD_BULLET.title": "添加子弹",
+    "ARKNIGHTS_MAP_INTENT_ADD_BULLET.description": "这个敌人将添加[gold]弹药[/gold]。"
 }

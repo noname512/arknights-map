@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://cvrpdbmlt5yg4"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bbvd7qgyi83rq" path="res://ArknightsMap/images/monsters/SupersweetieSmiley/enemy_6015_ictruck.atlas" id="1_uhxqh"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bbj3vldwckdy6" path="res://ArknightsMap/images/monsters/SupersweetieSmiley/enemy_6015_ictruck42.skel" id="2_pupkp"]
+
+[resource]
+atlas_res = ExtResource("1_uhxqh")
+skeleton_file_res = ExtResource("2_pupkp")

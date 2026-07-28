@@ -1,4 +1,14 @@
 {
   "ARKNIGHTS_MAP_KEYWORD_REED_BED_KEYWORD.title": "芦苇丛",
-  "ARKNIGHTS_MAP_KEYWORD_REED_BED_KEYWORD.description": "当[gold]芦苇丛[/gold]点燃时，敌人造成的伤害均附带[gold]灼燃损伤[/gold]。部分敌人的意图与[gold]芦苇丛[/gold]的[gold]燃烧状态[/gold]有关。"
+  "ARKNIGHTS_MAP_KEYWORD_REED_BED_KEYWORD.description": "当[gold]芦苇丛[/gold]点燃时，敌人造成的伤害均附带[gold]灼燃损伤[/gold]。部分敌人的意图与[gold]芦苇丛[/gold]的[gold]燃烧状态[/gold]有关。",
+
+  "ARKNIGHTS_MAP_KEYWORD_CUSTOM_KEYWORD.title": "定制",
+  "ARKNIGHTS_MAP_KEYWORD_CUSTOM_KEYWORD.description": "每移除1张[red]攻击牌[/red]/[green]技能牌[/green]/[blue]能力牌[/blue]/[purple]其他种类的牌[/purple]，\n定制铳械获得[red]2点力量[/red]/[green]2点敏捷[/green]/[blue]抽3张牌[/blue]/[purple]获得6点格挡[/purple]。",
+
+  "ARKNIGHTS_MAP_KEYWORD_INTERNATIONALIS_KEYWORD.title": "追缉",
+  "ARKNIGHTS_MAP_KEYWORD_INTERNATIONALIS_KEYWORD.description": "受到的攻击伤害增加50%，在死亡后提供50金币。",
+
+  "ARKNIGHTS_MAP_KEYWORD_USE_ONCE_KEYWORD.title": "一次性",
+  "ARKNIGHTS_MAP_KEYWORD_USE_ONCE_KEYWORD.description": "这张牌使用后从牌组移除。"
+
 }

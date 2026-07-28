@@ -55,6 +55,7 @@ public sealed class GiantGun : ModRelicTemplate
     {
         [HarmonyPostfix]
         public static async Task Postfix(
+            Task __result,
             ThornsPower __instance,
             PlayerChoiceContext choiceContext,
             Creature target,
