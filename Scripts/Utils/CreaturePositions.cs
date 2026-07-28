@@ -147,15 +147,15 @@ public sealed class CreaturePositions : HookedSingletonModel
     public static class PositionPlayersAndPetsPatch
     {
         [HarmonyPostfix]
-        public static void Postfix(NCombatRoom _inst, ICombatRoomVisuals ___visuals)
+        public static void Postfix(NCombatRoom __instance, ICombatRoomVisuals ____visuals)
         {
-            if (___visuals.Encounter is AbstractSnowyMountainEncounter encounter)
+            if (____visuals.Encounter is AbstractSnowyMountainEncounter encounter)
             {
                 int diff = encounter.playerStartPosition - 3;
                 if (diff != 0)
                 {
-                    foreach (NCreature creature in _inst.CreatureNodes)
-                        if (___visuals.Allies.Contains(creature.Entity))
+                    foreach (NCreature creature in __instance.CreatureNodes)
+                        if (____visuals.Allies.Contains(creature.Entity))
                             creature.Position = new Vector2(creature.Position.X + 300 * diff, creature.Position.Y);
                 }
             }
