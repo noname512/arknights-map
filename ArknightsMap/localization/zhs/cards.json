@@ -18,7 +18,17 @@
   "ARKNIGHTS_MAP_CARD_CONFUSED.title":"困惑",
 	"ARKNIGHTS_MAP_CARD_CONFUSED.description": "这张牌在你的手牌时，你对敌人造成的攻击伤害减少50%。",
   "ARKNIGHTS_MAP_CARD_MILK.title":"奶浆",
-	"ARKNIGHTS_MAP_CARD_MILK.description": ""
-
+	"ARKNIGHTS_MAP_CARD_MILK.description": "",
+  "ARKNIGHTS_MAP_CARD_COLD.title": "寒冷",
+  "ARKNIGHTS_MAP_CARD_COLD.description": "如果这张牌在[gold]手牌[/gold]中，其他[gold]手牌[/gold]的耗能加1。",
+  "ARKNIGHTS_MAP_CARD_CALL_FOR_ASSISTANCE.title": "呼叫援助",
+  "ARKNIGHTS_MAP_CARD_CALL_FOR_ASSISTANCE.description": "花费[blue]{Gold:diff()}[/blue][gold]金币[/gold]，造成[blue]{Damage:diff()}[/blue]点伤害并给予[blue]{WeakPower:diff()}[/blue]层[gold]虚弱[/gold]和[gold]易伤[/gold]。",
+  "ARKNIGHTS_MAP_CARD_SOMETHING_FORM.title": "{CardName}形态",
+  "ARKNIGHTS_MAP_CARD_SOMETHING_FORM.description": "每回合开始时，打出[gold]{CardName}[/gold]。"
 
 }
+  
+
+
+
+

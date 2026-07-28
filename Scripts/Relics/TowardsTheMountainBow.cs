@@ -37,7 +37,7 @@ public class TowardsTheMountainBow : ModRelicTemplate
         ICombatState combatState
     )
     {
-        if (participants.Contains(base.Owner.Creature) && Owner.PlayerCombatState!.TurnNumber <= 1)
+        if (participants.Contains(Owner.Creature) && Owner.PlayerCombatState!.TurnNumber <= 1)
         {
             Flash();
             await PowerCmd.Apply<SlowPower>(choiceContext, combatState.HittableEnemies, 1, Owner.Creature, null);

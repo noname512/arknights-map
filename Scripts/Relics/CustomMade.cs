@@ -1,36 +1,18 @@
-
-
-using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Keywords;
-
-using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.Extensions;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Random;
-using MegaCrit.Sts2.Core.Rooms;
-using STS2RitsuLib.Scaffolding.Content;
-
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using ArknightsMap.Scripts.Utils;
 
 namespace ArknightsMap.Scripts.Relics;
 
-
-
 [RegisterRelic(typeof(SharedRelicPool))]
 public sealed class CustomMade : ModRelicTemplate
-
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
@@ -43,7 +25,6 @@ public sealed class CustomMade : ModRelicTemplate
             HoverTipFactory.FromKeyword(CustomKeyword.Keyword)
         ];    
 
-    
     public override RelicAssetProfile AssetProfile =>
         new(
             // 小图标（原版85x85）

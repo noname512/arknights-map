@@ -52,10 +52,10 @@ public class SnowTracks : ModRelicTemplate
     }
 
     [SavedProperty]
-    public int[] SnowTracksCoordCols{get;set;} = [];
+    public int[] SnowTracksCoordCols { get; set; } = [];
 
     [SavedProperty]
-    public int[] SnowTracksCoordRows{get;set;} = [];
+    public int[] SnowTracksCoordRows { get; set; } = [];
 
     public override Task AfterObtained()
     {
@@ -71,7 +71,7 @@ public class SnowTracks : ModRelicTemplate
 
     private ActMap AddMarkedRooms(ActMap map)
     {
-        if (base.Owner.RunState.CurrentActIndex != SnowTracksIndex)
+        if (Owner.RunState.CurrentActIndex != SnowTracksIndex)
         {
             return map;
         }

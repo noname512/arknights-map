@@ -1,6 +1,5 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -21,26 +20,21 @@ public class ExFoederePower : ModPowerTemplate
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
-
     public override int DisplayAmount => (int)DynamicVars["UseTime"].BaseValue;
 
-    public override Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (DynamicVars["UseTime"].BaseValue < 6)
         {
-            PowerCmd.Apply<StrengthPower>(choiceContext, base.Owner, 1, base.Owner, null);
+            await PowerCmd.Apply<StrengthPower>(choiceContext, Owner, 1, Owner, null);
             DynamicVars["UseTime"].BaseValue++;
             InvokeDisplayAmountChanged();
         }
         else
         {
-            PowerCmd.Apply<StrengthPower>(choiceContext, base.Owner, -7, base.Owner, null);
+            await PowerCmd.Apply<StrengthPower>(choiceContext, Owner, -7, Owner, null);
             DynamicVars["UseTime"].BaseValue = 0;
             InvokeDisplayAmountChanged();
         }
-        
-        return base.AfterCardPlayedLate(choiceContext, cardPlay);
     }
-
-    
 }

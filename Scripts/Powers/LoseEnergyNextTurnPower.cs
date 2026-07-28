@@ -1,5 +1,4 @@
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -17,14 +16,12 @@ public class LoseEnergyNextTurnPower : ModPowerTemplate
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
-
-    public override Task AfterPlayerTurnStartLate(PlayerChoiceContext choiceContext, Player player)
+    public override async Task AfterPlayerTurnStartLate(PlayerChoiceContext choiceContext, Player player)
     {
-        if (player == base.Owner.Player)
+        if (player == Owner.Player)
         {
-            PlayerCmd.LoseEnergy(Amount, player);
+            await PlayerCmd.LoseEnergy(Amount, player);
         }
-        PowerCmd.Remove(this);
-        return base.AfterPlayerTurnStartLate(choiceContext, player);
+        await PowerCmd.Remove(this);
     }
 }

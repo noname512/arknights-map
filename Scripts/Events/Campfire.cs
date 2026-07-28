@@ -40,16 +40,18 @@ public sealed class Campfire : ModEventTemplate
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        
         List<EventOption> list = new List<EventOption>();
-        if (!HasAttackCard(Owner))
+        if (!HasAttackCard(Owner!))
         {
             list.Add(new EventOption(this, null, InitialOptionKey("LOCKED")));
         }
         else
         {
-            list.Add(new EventOption(this, AttachFlaming, InitialOptionKey("ATTACH_FLAMING"), HoverTipFactory.FromEnchantment<Flaming>())
-                .ThatDoesDamage(DynamicVars.Damage.IntValue));
+            list.Add(
+                new EventOption(this, AttachFlaming, InitialOptionKey("ATTACH_FLAMING"), HoverTipFactory.FromEnchantment<Flaming>()).ThatDoesDamage(
+                    DynamicVars.Damage.IntValue
+                )
+            );
         }
         list.Add(new EventOption(this, LoseMaxHpAndHeal, InitialOptionKey("LOSE_MAX_HP_AND_HEAL")));
         list.Add(new EventOption(this, GainMaxHp, InitialOptionKey("GAIN_MAX_HP")));
@@ -59,12 +61,12 @@ public sealed class Campfire : ModEventTemplate
     public bool HasAttackCard(Player player)
     {
         EnchantmentModel enchantment = ModelDb.Enchantment<Flaming>();
-        return PileType.Deck.GetPile(player).Cards.Any((CardModel c) => enchantment.CanEnchant(c));
+        return PileType.Deck.GetPile(player).Cards.Any(enchantment.CanEnchant);
     }
 
     private async Task AttachFlaming()
     {
-        await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), Owner!.Creature, DynamicVars.Damage, null, null);
+        await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), Owner!.Creature, DynamicVars.Damage.BaseValue, DynamicVars.Damage.Props, null, null);
         foreach (
             CardModel item in await CardSelectCmd.FromDeckForEnchantment(
                 Owner,

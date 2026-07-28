@@ -33,8 +33,7 @@ public class DublinnFlamechaserGuard : AbstractWildsMonster
 
     public override async Task AfterAddedToRoom()
     {
-        ChaseFlamePower power = await PowerCmd.Apply<ChaseFlamePower>(new ThrowingPlayerChoiceContext(), Creature, 10, Creature, null);
-        // await PowerCmd.Apply<FlameBathPower>(new ThrowingPlayerChoiceContext(), Creature, 50, Creature, null);
+        await PowerCmd.Apply<ChaseFlamePower>(new ThrowingPlayerChoiceContext(), Creature, 10, Creature, null);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -52,7 +51,8 @@ public class DublinnFlamechaserGuard : AbstractWildsMonster
         );
         buff_burning = new MoveState(
             "BUFF_B",
-            async targets => await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthGain + FireStrengthGainAddition, Creature, null),
+            async targets =>
+                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthGain + FireStrengthGainAddition, Creature, null),
             new BuffIntent()
         );
         buff_not_burning = new MoveState(

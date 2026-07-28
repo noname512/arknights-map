@@ -1,15 +1,10 @@
-using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Keywords;
-
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using STS2RitsuLib.Scaffolding.Content;
-using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models.CardPools;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Models;
@@ -26,8 +21,11 @@ namespace ArknightsMap.Scripts.Cards
         private const TargetType targetType = TargetType.Self;
         private const bool shouldShowInCardLibrary = true;
 
-        
+        public CustomMade()
+            : base(energyCost, type, rarity, targetType) { }
 
+        protected override IEnumerable<DynamicVar> CanonicalVars =>
+            [new PowerVar<StrengthPower>(0), new PowerVar<DexterityPower>(0), new CardsVar(0), new BlockVar(0, ValueProp.Move)];
 
         public CustomMade() : base(energyCost, type, rarity, targetType)
         {
@@ -75,7 +73,7 @@ namespace ArknightsMap.Scripts.Cards
 
         protected override void OnUpgrade()
         {
-            base.EnergyCost.UpgradeBy(-1);
+            EnergyCost.UpgradeBy(-1);
         }
     }
 }

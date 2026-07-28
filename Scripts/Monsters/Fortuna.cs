@@ -8,7 +8,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.MonsterMoves;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -20,7 +19,6 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class Fortuna : AbstractSankta
 {
-    
     protected override int BulletMax => 6;
     protected override int InitialBullet => 6;
 
@@ -30,14 +28,9 @@ public class Fortuna : AbstractSankta
 
     private int Damage02 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 8, 8);
     public int Time = 6;
-    
-    
-    
 
-    
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
-
 
     public override async Task AfterAddedToRoom()
     {
@@ -48,11 +41,10 @@ public class Fortuna : AbstractSankta
 
     
 
-    
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
-        
+
         MoveState attack01 = new MoveState(
             "Attack01",
             async targets =>
@@ -75,10 +67,9 @@ public class Fortuna : AbstractSankta
             "Attack02",
             async targets =>
             {
-                
                 await DamageCmd.Attack(Damage02).FromMonster(this).WithAttackerAnim("Attack02", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
                 float percent = CombatState.RunState.Rng.CombatTargets.NextFloat(0,1);
-                    if (percent < 0.7)
+                    if (percent < 0.5)
                     {
                         await AddBullet(1);
                     }
@@ -98,29 +89,25 @@ public class Fortuna : AbstractSankta
         );
 
         ConditionalBranchState skillBranch = new ConditionalBranchState("SKILL_BRANCH");
-skillBranch.AddState(attack01, () => Bullet >= BulletMax);
-skillBranch.AddState(attack02, () => Bullet < BulletMax);
+        skillBranch.AddState(attack01, () => Bullet >= BulletMax);
+        skillBranch.AddState(attack02, () => Bullet < BulletMax);
 
-ConditionalBranchState attack02Branch = new ConditionalBranchState("ATTACK02_BRANCH");
-attack02Branch.AddState(attack01, () => Bullet >= BulletMax);
-attack02Branch.AddState(skill, () => Bullet < BulletMax);
+        ConditionalBranchState attack02Branch = new ConditionalBranchState("ATTACK02_BRANCH");
+        attack02Branch.AddState(attack01, () => Bullet >= BulletMax);
+        attack02Branch.AddState(skill, () => Bullet < BulletMax);
 
-attack01.FollowUpState = skill;
-skill.FollowUpState = skillBranch;
-attack02.FollowUpState = attack02Branch;
+        attack01.FollowUpState = skill;
+        skill.FollowUpState = skillBranch;
+        attack02.FollowUpState = attack02Branch;
 
-list.Add(attack01);
-list.Add(attack02);
-list.Add(skill);
-list.Add(skillBranch);      // 分支状态也要加进 list
-list.Add(attack02Branch);
+        list.Add(attack01);
+        list.Add(attack02);
+        list.Add(skill);
+        list.Add(skillBranch); // 分支状态也要加进 list
+        list.Add(attack02Branch);
 
-return new MonsterMoveStateMachine(list, attack01);
-        
-
-}
-
-    
+        return new MonsterMoveStateMachine(list, attack01);
+    }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
     {
@@ -133,10 +120,9 @@ return new MonsterMoveStateMachine(list, attack01);
         AnimState skillloopState = new AnimState("Skill_Loop");
         AnimState skillendState = new AnimState("Skill_End");
 
-
         attack01State.NextState = idleState;
         attack02State.NextState = idleState;
-        
+
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
         creatureAnimator.AddAnyState("Attack01", attack01State);
         creatureAnimator.AddAnyState("Attack02", attack02State);
@@ -147,7 +133,7 @@ return new MonsterMoveStateMachine(list, attack01);
         skillbeginState.NextState = skillloopState;
         skillloopState.NextState = skillendState;
         skillendState.NextState = idleState;
-        
+
         return creatureAnimator;
     }
 }

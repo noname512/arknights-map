@@ -55,7 +55,7 @@ public class ChaseFlamePower : ModPowerTemplate
         DynamicVars["DecreaseHp"].BaseValue = DecreaseHp;
         DynamicVars["ReviveTurn"].BaseValue = ReviveTurn;
         DynamicVars["AshDecreaseHp"].BaseValue = AshDecreaseHp;
-        return base.AfterApplied(applier, cardSource);
+        return Task.CompletedTask;
     }
 
     public override bool ShouldScaleInMultiplayer => CurState == 0;
@@ -99,11 +99,11 @@ public class ChaseFlamePower : ModPowerTemplate
             CurState = 1;
             if (Owner.HasPower<DoomPower>())
             {
-                Owner.GetPower<DoomPower>().SetAmount(0);
+                Owner.GetPower<DoomPower>()!.SetAmount(0);
             }
             await CreatureCmd.SetMaxAndCurrentHp(Owner, InitialHp);
             NextMove = Owner.Monster!.NextMove;
-            if (!(Owner.Monster.MoveStateMachine.States.ContainsKey(NextMove.StateId)))
+            if (!Owner.Monster.MoveStateMachine!.States.ContainsKey(NextMove.StateId))
             {
                 NextMove = (MoveState)Owner.Monster.MoveStateMachine!.States["ATTACK1"];
             }
@@ -114,8 +114,7 @@ public class ChaseFlamePower : ModPowerTemplate
         }
     }
 
-    public override decimal ModifyBlockMultiplicative(Creature target, decimal block, ValueProp props, CardModel? cardSource,
-        CardPlay? cardPlay)
+    public override decimal ModifyBlockMultiplicative(Creature target, decimal block, ValueProp props, CardModel? cardSource, CardPlay? cardPlay)
     {
         if ((target != Owner) || (CurState == 0))
         {
@@ -166,11 +165,11 @@ public class ChaseFlamePower : ModPowerTemplate
         }
     }
 
-    public override Decimal ModifyHpLostAfterOsty(Creature target, Decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyHpLostAfterOsty(Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         if (CurState == 0)
             return amount;
-        return !CombatManager.Instance.IsInProgress || target != this.Owner || amount < 1M ? amount : 1M;
+        return !CombatManager.Instance.IsInProgress || target != Owner || amount < 1M ? amount : 1M;
     }
 
     public override Task AfterModifyingHpLostAfterOsty()
@@ -180,11 +179,11 @@ public class ChaseFlamePower : ModPowerTemplate
         return Task.CompletedTask;
     }
 
-    public override Decimal ModifyDamageCap(Creature? target, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
+    public override decimal ModifyDamageCap(Creature? target, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (CurState == 0)
-            return Decimal.MaxValue;
-        return target != this.Owner ? Decimal.MaxValue : 1M;
+            return decimal.MaxValue;
+        return target != Owner ? decimal.MaxValue : 1M;
     }
 
     public override Task AfterModifyingDamageAmount(CardModel? cardSource)

@@ -18,11 +18,7 @@ public class Faith : ModRelicTemplate
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-    [
-        HoverTipFactory.FromPower<StrengthPower>(),
-        HoverTipFactory.FromPower<DexterityPower>(),
-    ];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromPower<StrengthPower>(), HoverTipFactory.FromPower<DexterityPower>()];
 
     public override RelicAssetProfile AssetProfile =>
         new(

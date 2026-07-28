@@ -28,7 +28,6 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class TheSaint : AbstractSankta
 {
-    
     protected override int BulletMax => 0;
     protected override int InitialBullet => 0;
 
@@ -42,15 +41,14 @@ public class TheSaint : AbstractSankta
     private int multiAttackPhase2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 4, 4);
     private int summonNumPhase1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 1, 1);
     private int summonNumPhase2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 2, 2);
-    
+
     private int debuffAttackPhase1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 10, 10);
     private int debuffAttackPhase2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 12, 12);
-    
+
     private int block => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 10, 10);
-    
+
     private int Phase = 1;
 
-    
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
@@ -60,16 +58,14 @@ public class TheSaint : AbstractSankta
     {
         foreach (Player p in CombatState.Players)
         {
-            int num = p.PlayerCombatState.DrawPile.Cards.Count;
-            foreach (var card in p.PlayerCombatState.DrawPile.Cards.TakeRandom(num/2, p.RunState.Rng.CombatCardSelection))
+            int num = p.PlayerCombatState!.DrawPile.Cards.Count;
+            foreach (var card in p.PlayerCombatState.DrawPile.Cards.TakeRandom(num / 2, p.RunState.Rng.CombatCardSelection))
             {
                 await CardCmd.Exhaust(new ThrowingPlayerChoiceContext(), card);
             }
-            
         }
     }
 
-    
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
@@ -83,11 +79,9 @@ public class TheSaint : AbstractSankta
                     await CardPileCmd.AddToCombatAndPreview<Confused>(p, PileType.Discard, 1, null, CardPilePosition.Random);
                     await CardPileCmd.AddToCombatAndPreview<Confused>(p, PileType.Hand, 1, null, CardPilePosition.Random);
                 }
-                },
+            },
             new StatusIntent(3)
         );
-
-           
 
         MoveState HeavyAttackPhase1 = new MoveState(
             "HEAVY_ATTACK_PHASE1",
@@ -96,13 +90,12 @@ public class TheSaint : AbstractSankta
                 await CreatureCmd.TriggerAnim(Creature, "A_Attack", 0.8f);
                 await Cmd.Wait(1.0f);
                 await DamageCmd.Attack(heavyAttackPhase1).FromMonster(this).WithNoAttackerAnim().Execute(null);
-                foreach(Creature c in targets)
+                foreach (Creature c in targets)
                 {
                     await CardPileCmd.AddToCombatAndPreview<Dazed>(c, PileType.Draw, 5, null, CardPilePosition.Top);
                 }
             },
             [new SingleAttackIntent(heavyAttackPhase1)]
-
         );
 
         MoveState HeavyAttackPhase2 = new MoveState(
@@ -112,15 +105,13 @@ public class TheSaint : AbstractSankta
                 await CreatureCmd.TriggerAnim(Creature, "B_Attack", 0.8f);
                 await Cmd.Wait(1.0f);
                 await DamageCmd.Attack(heavyAttackPhase2).FromMonster(this).WithNoAttackerAnim().Execute(null);
-                foreach(Creature c in targets)
+                foreach (Creature c in targets)
                 {
                     await CardPileCmd.AddToCombatAndPreview<Dazed>(c, PileType.Draw, 5, null, CardPilePosition.Top);
                 }
             },
             [new SingleAttackIntent(heavyAttackPhase2)]
-
         );
-
 
         MoveState MultiAttackPhase1 = new MoveState(
             "MULTI_ATTACK_PHASE1",
@@ -147,36 +138,29 @@ public class TheSaint : AbstractSankta
             "SUMMON_PHASE1",
             async targets =>
             {
-                if (CombatState.HittableEnemies.Count == 1 )
+                if (CombatState.HittableEnemies.Count == 1)
                 {
                     IEnumerable<MonsterModel> enemies = new List<MonsterModel>();
-                    enemies.AddItem<MonsterModel>(ModelDb.Monster<SanktaBlade>());
-                    enemies.AddItem<MonsterModel>(ModelDb.Monster<SanktaPriest>());
-                    enemies.AddItem<MonsterModel>(ModelDb.Monster<SanktaSniper>());
+                    enemies.AddItem(ModelDb.Monster<SanktaBlade>());
+                    enemies.AddItem(ModelDb.Monster<SanktaPriest>());
+                    enemies.AddItem(ModelDb.Monster<SanktaSniper>());
                     MonsterModel chosen = enemies.TakeRandom(1, CombatState.Players[0].RunState.Rng.CombatCardGeneration).First();
-                
+
                     await CreatureCmd.TriggerAnim(Creature, "A_Attack", 0.8f);
                     await Cmd.Wait(1.0f);
                     await CreatureCmd.Add(chosen, CombatState);
                     await PowerCmd.Apply<MinionPower>(
-                    new ThrowingPlayerChoiceContext(),
-                    CombatState.Enemies.First(c => c.Monster == chosen),
-                    1m,
-                    Creature,
-                    null
-                );
+                        new ThrowingPlayerChoiceContext(),
+                        CombatState.Enemies.First(c => c.Monster == chosen),
+                        1m,
+                        Creature,
+                        null
+                    );
                 }
-                foreach(Creature c in CombatState.HittableEnemies)
+                foreach (Creature c in CombatState.HittableEnemies)
                 {
-                    await PowerCmd.Apply<StrengthPower>(
-                    new ThrowingPlayerChoiceContext(),
-                    c,
-                    2m,
-                    Creature,
-                    null
-                );
+                    await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), c, 2m, Creature, null);
                 }
-                
             },
             [new SummonIntent(), new BuffIntent()]
         );
@@ -185,36 +169,29 @@ public class TheSaint : AbstractSankta
             "SUMMON_PHASE2",
             async targets =>
             {
-                if (CombatState.HittableEnemies.Count == 1 )
+                if (CombatState.HittableEnemies.Count == 1)
                 {
                     IEnumerable<MonsterModel> enemies = new List<MonsterModel>();
-                    enemies.AddItem<MonsterModel>(ModelDb.Monster<SanktaBlade>());
-                    enemies.AddItem<MonsterModel>(ModelDb.Monster<SanktaPriest>());
-                    enemies.AddItem<MonsterModel>(ModelDb.Monster<SanktaSniper>());
+                    enemies.AddItem(ModelDb.Monster<SanktaBlade>());
+                    enemies.AddItem(ModelDb.Monster<SanktaPriest>());
+                    enemies.AddItem(ModelDb.Monster<SanktaSniper>());
                     MonsterModel chosen = enemies.TakeRandom(1, CombatState.Players[0].RunState.Rng.CombatCardGeneration).First();
-                
+
                     await CreatureCmd.TriggerAnim(Creature, "B_Skill_Begin_2", 0.8f);
                     await Cmd.Wait(1.0f);
                     await CreatureCmd.Add(chosen, CombatState);
                     await PowerCmd.Apply<MinionPower>(
-                    new ThrowingPlayerChoiceContext(),
-                    CombatState.Enemies.First(c => c.Monster == chosen),
-                    1m,
-                    Creature,
-                    null
-                );
+                        new ThrowingPlayerChoiceContext(),
+                        CombatState.Enemies.First(c => c.Monster == chosen),
+                        1m,
+                        Creature,
+                        null
+                    );
                 }
-                foreach(Creature c in CombatState.HittableEnemies)
+                foreach (Creature c in CombatState.HittableEnemies)
                 {
-                    await PowerCmd.Apply<StrengthPower>(
-                    new ThrowingPlayerChoiceContext(),
-                    c,
-                    2m,
-                    Creature,
-                    null
-                );
+                    await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), c, 2m, Creature, null);
                 }
-                
             },
             [new SummonIntent(), new BuffIntent()]
         );
@@ -226,10 +203,7 @@ public class TheSaint : AbstractSankta
                 await CreatureCmd.TriggerAnim(Creature, "A_Attack", 0.8f);
                 await Cmd.Wait(1.0f);
                 await DamageCmd.Attack(debuffAttackPhase1).FromMonster(this).WithNoAttackerAnim().Execute(null);
-                foreach(Creature c in targets)
-                {
-                    
-                }
+                foreach (Creature c in targets) { }
             },
             [new SingleAttackIntent(debuffAttackPhase1), new DebuffIntent()]
         );
@@ -241,10 +215,7 @@ public class TheSaint : AbstractSankta
                 await CreatureCmd.TriggerAnim(Creature, "A_Attack", 0.8f);
                 await Cmd.Wait(1.0f);
                 await DamageCmd.Attack(debuffAttackPhase1).FromMonster(this).WithNoAttackerAnim().Execute(null);
-                foreach(Creature c in targets)
-                {
-                    
-                }
+                foreach (Creature c in targets) { }
             },
             [new SingleAttackIntent(debuffAttackPhase1), new DebuffIntent()]
         );
@@ -255,16 +226,9 @@ public class TheSaint : AbstractSankta
             {
                 await CreatureCmd.TriggerAnim(Creature, "A_Attack", 0.8f);
                 await Cmd.Wait(1.0f);
-                
-                
             },
             [new DebuffIntent()]
         );
-
-
-
-        
-
 
         list.Add(GiveConfused);
         list.Add(HeavyAttackPhase1);
@@ -276,14 +240,14 @@ public class TheSaint : AbstractSankta
         list.Add(AttackDebuffPhase1);
         list.Add(AttackDebuffPhase2);
         list.Add(fly);
-        
+
         GiveConfused.FollowUpState = HeavyAttackPhase1;
         HeavyAttackPhase1.FollowUpState = SummonPhase1;
 
         SummonPhase1.FollowUpState = MultiAttackPhase1;
         MultiAttackPhase1.FollowUpState = AttackDebuffPhase1;
         AttackDebuffPhase1.FollowUpState = SummonPhase1;
-        
+
         fly.FollowUpState = HeavyAttackPhase2;
         HeavyAttackPhase2.FollowUpState = SummonPhase2;
 
@@ -291,17 +255,13 @@ public class TheSaint : AbstractSankta
         MultiAttackPhase2.FollowUpState = AttackDebuffPhase2;
         AttackDebuffPhase2.FollowUpState = SummonPhase2;
 
-        
         return new MonsterMoveStateMachine(list, GiveConfused);
     }
-
-    
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
     {
         AnimState idleStatePhase1 = new AnimState("A_Idle", isLooping: true);
         AnimState idleStatePhase2 = new AnimState("B_Idle_2", isLooping: true);
-        
 
         AnimState Phase1AttackState = new AnimState("A_Attack");
         AnimState Phase2AttackStateBegin = new AnimState("B_Attack_Begin_2");
@@ -319,9 +279,8 @@ public class TheSaint : AbstractSankta
         Phase2AttackStateLoop.NextState = Phase2AttackStateEnd;
         Phase2AttackStateEnd.NextState = idleStatePhase1;
 
-        
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleStatePhase1, controller);
-        
+
         creatureAnimator.AddAnyState("A_Attack", Phase1AttackState);
         creatureAnimator.AddAnyState("B_Attack_Begin_2", Phase2AttackStateBegin);
         creatureAnimator.AddAnyState("B_Attack_Loop_2", Phase2AttackStateLoop);
@@ -332,7 +291,7 @@ public class TheSaint : AbstractSankta
 
         creatureAnimator.AddAnyState("Skill", skillState);
         creatureAnimator.AddAnyState("Die", dieState);
-        
+
         return creatureAnimator;
     }
 }

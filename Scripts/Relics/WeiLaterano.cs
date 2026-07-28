@@ -1,36 +1,23 @@
-
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Factories;
+using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.RelicPools;
+using MegaCrit.Sts2.Core.Rewards;
+using MegaCrit.Sts2.Core.Rooms;
+using MegaCrit.Sts2.Core.Runs;
+using MegaCrit.Sts2.Core.Saves.Runs;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
-using HarmonyLib;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Combat.History.Entries;
-using System.Collections.Immutable;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Rooms;
-using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Rewards;
-using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Runs;
-using MegaCrit.Sts2.Core.Models.Characters;
-using MegaCrit.Sts2.Core.Unlocks;
-using MegaCrit.Sts2.Core.Saves.Runs;
-using STS2RitsuLib.Keywords;
-
-using MegaCrit.Sts2.Core.Factories;
-using MegaCrit.Sts2.Core.Models.RelicPools;
 
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
 public sealed class WeiLaterano : ModRelicTemplate
-
 {
-
     public override RelicAssetProfile AssetProfile =>
         new(
             // 小图标（原版85x85）
@@ -87,24 +74,23 @@ public sealed class WeiLaterano : ModRelicTemplate
     {
         return runState.Players.Count == 1;
     }
-    
+
     public override bool TryModifyRewards(Player player, List<Reward> rewards, AbstractRoom? room)
-	{
-		if (player != base.Owner)
-		{
-			return false;
-		}
-		if (room == null || (room.RoomType != RoomType.Monster && room.RoomType != RoomType.Boss && room.RoomType != RoomType.Elite))
-		{
-			return false;
-		}
+    {
+        if (player != Owner)
+        {
+            return false;
+        }
+        if (room == null || (room.RoomType != RoomType.Monster && room.RoomType != RoomType.Boss && room.RoomType != RoomType.Elite))
+        {
+            return false;
+        }
         if (!IsInTriggeringCombat)
         {
             return false;
         }
-        
-        var options = CardCreationOptions.ForRoom(Owner, RoomType.Boss)
-            .WithFlags(CardCreationFlags.NoUpgradeRoll | CardCreationFlags.NoHookUpgrades);
+
+        var options = CardCreationOptions.ForRoom(Owner, RoomType.Boss).WithFlags(CardCreationFlags.NoUpgradeRoll | CardCreationFlags.NoHookUpgrades);
         var results = CardFactory.CreateForReward(player, 3, options).ToList();
         var cards = new List<CardModel>();
         foreach (var result in results)
@@ -115,42 +101,39 @@ public sealed class WeiLaterano : ModRelicTemplate
             cards.Add(card);
         }
 
-        var rerollOptions = CardCreationOptions.ForRoom(Owner, RoomType.Boss)
-            .WithFlags(CardCreationFlags.NoUpgradeRoll | CardCreationFlags.NoHookUpgrades);
+        var rerollOptions = CardCreationOptions.ForRoom(Owner, RoomType.Boss).WithFlags(CardCreationFlags.NoUpgradeRoll | CardCreationFlags.NoHookUpgrades);
 
         rewards.Add(new CardReward(cards, CardCreationSource.Encounter, player, rerollOptions));
-        
-		return true;
-	}
+
+        return true;
+    }
 
     public override bool TryModifyCardRewardOptionsLate(Player player, List<CardCreationResult> cardRewards, CardCreationOptions options)
-	{
-		if (player != base.Owner)
-		{
-			return false;
-		}
-		if (!options.Flags.HasFlag(CardCreationFlags.NoUpgradeRoll | CardCreationFlags.NoHookUpgrades))
-		{
-			return false;
-		}
-		foreach (CardCreationResult cardReward in cardRewards)
-		{
-			CardModel card = cardReward.Card;
-			if (card.IsUpgradable)
-			{
-				CardModel card2 = base.Owner.RunState.CloneCard(card);
-				CardCmd.Upgrade(card2);
-				cardReward.ModifyCard(card2, this);
-			}
-		}
-		return true;
-	}
-        
-    
+    {
+        if (player != Owner)
+        {
+            return false;
+        }
+        if (!options.Flags.HasFlag(CardCreationFlags.NoUpgradeRoll | CardCreationFlags.NoHookUpgrades))
+        {
+            return false;
+        }
+        foreach (CardCreationResult cardReward in cardRewards)
+        {
+            CardModel card = cardReward.Card;
+            if (card.IsUpgradable)
+            {
+                CardModel card2 = Owner.RunState.CloneCard(card);
+                CardCmd.Upgrade(card2);
+                cardReward.ModifyCard(card2, this);
+            }
+        }
+        return true;
+    }
 
     public override Task BeforeCombatRewardOffered(RewardsSet rewards, CombatRoom room)
     {
-        if (rewards.Player != base.Owner)
+        if (rewards.Player != Owner)
             return Task.CompletedTask;
         if (rewards.Rewards.All((Reward r) => !(r is CardReward)))
             return Task.CompletedTask;
@@ -184,5 +167,5 @@ public sealed class WeiLaterano : ModRelicTemplate
             return true;
         }
         return false;
-        }
+    }
 }

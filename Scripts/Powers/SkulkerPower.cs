@@ -1,4 +1,3 @@
-using ArknightsMap.Scripts.Monsters;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -15,12 +14,10 @@ public class SkulkerPower : ModPowerTemplate
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
-
     public override bool ShouldAllowTargeting(Creature target)
     {
-        if (target == base.Owner && target.CombatState.HittableEnemies.Any(x => x != base.Owner))
+        if (target == Owner && target.CombatState!.HittableEnemies.Any(x => x != Owner))
             return false;
         return true;
-    }    
-
+    }
 }

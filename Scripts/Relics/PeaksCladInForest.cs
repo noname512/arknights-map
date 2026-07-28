@@ -17,7 +17,7 @@ public class PeaksCladInForest : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(3)];
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -116,7 +116,7 @@ public class PeaksCladInForest : ModRelicTemplate
         {
             return false;
         }
-        if (card.Owner.Creature != base.Owner.Creature)
+        if (card.Owner.Creature != Owner.Creature)
         {
             return false;
         }
