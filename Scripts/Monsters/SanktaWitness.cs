@@ -68,7 +68,8 @@ public class SanktaWitness : AbstractSankta
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
     public override async Task AfterAddedToRoom()
     {
-        await PowerCmd.Apply<FlutterPower>(new ThrowingPlayerChoiceContext(), Creature, 5, Creature, null);
+        await PowerCmd.Apply<EyePower>(new ThrowingPlayerChoiceContext(), Creature, 5, Creature, null);
+        await PowerCmd.Apply<SanktaCreaturePower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
     }
 
     private string GetAttackSfx() => "Attack";

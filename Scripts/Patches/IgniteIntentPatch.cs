@@ -17,6 +17,16 @@ class IgniteIntentPatch
                 __result = "res://ArknightsMap/images/util/IgniteIntent.tres";
                 return false;
             }
+            if (animation == "arknights_map_intent_use_bullet")
+            {
+                __result = "res://ArknightsMap/images/util/UseBulletIntent.tres";
+                return false;
+            }
+            if (animation == "arknights_map_intent_add_bullet")
+            {
+                __result = "res://ArknightsMap/images/util/AddBulletIntent.tres";
+                return false;
+            }
             return true;
         }
     }
@@ -45,6 +55,10 @@ class IgniteIntentPatch
         public static int NewGetCount(string animation)
         {
             if (animation == "arknights_map_intent_ignite")
+                return 1;
+            if (animation == "arknights_map_intent_use_bullet")
+                return 1;
+            if (animation == "arknights_map_intent_add_bullet")
                 return 1;
             return IntentAnimData.GetAnimationFrameCount(animation);
         }

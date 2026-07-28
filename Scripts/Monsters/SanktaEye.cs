@@ -68,7 +68,8 @@ public class SanktaEye : AbstractSankta
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
     public override async Task AfterAddedToRoom()
     {
-        await PowerCmd.Apply<FlutterPower>(new ThrowingPlayerChoiceContext(), Creature, 5, Creature, null);
+        await PowerCmd.Apply<EyePower>(new ThrowingPlayerChoiceContext(), Creature, 5, Creature, null);
+        await PowerCmd.Apply<SanktaCreaturePower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
     }
 
     private string GetAttackSfx() => "Attack";
@@ -95,7 +96,7 @@ public class SanktaEye : AbstractSankta
                 await DamageCmd.Attack(MultiDamage).FromMonster(this).WithHitCount(2).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
             }, 
             
-            new SingleAttackIntent(MultiDamage)
+            new MultiAttackIntent(MultiDamage,2)
         );
 
         MoveState skill = new MoveState(
@@ -119,6 +120,7 @@ public class SanktaEye : AbstractSankta
         list.Add(attack);
         list.Add(skill);
         list.Add(multiattack);
+        list.Add(startBranch);
     
 
         return new MonsterMoveStateMachine(list, startBranch);

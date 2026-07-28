@@ -11,6 +11,8 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Saves.Runs;
+using ArknightsMap.Scripts.Utils;
+using MegaCrit.Sts2.Core.Models;
 
 
 namespace ArknightsMap.Scripts.Cards
@@ -31,6 +33,18 @@ namespace ArknightsMap.Scripts.Cards
         {
         }
 
+        public override Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)
+        {
+            if (card == this)
+            {
+                var relic = base.Owner.GetRelic<Scripts.Relics.CustomMade>();    
+                base.DynamicVars["StrengthPower"].BaseValue = relic?.Strength ?? 0;
+                base.DynamicVars["DexterityPower"].BaseValue = relic?.Dexterity ?? 0;
+                base.DynamicVars["Cards"].BaseValue = relic?.Cards ?? 0;
+                base.DynamicVars["Block"].BaseValue = relic?.Block ?? 0;
+            }
+            return base.AfterCardChangedPiles(card, oldPileType, clonedBy);
+        }
         protected override IEnumerable<DynamicVar> CanonicalVars => [
             new PowerVar<StrengthPower>(0),
             new PowerVar<DexterityPower>(0),
@@ -41,34 +55,21 @@ namespace ArknightsMap.Scripts.Cards
 
         protected override IEnumerable<IHoverTip> AdditionalHoverTips
  => [
-            
+            HoverTipFactory.FromKeyword(CustomKeyword.Keyword)
         ];    
-
-            [SavedProperty]
-        public int Strength => Scripts.Relics.CustomMade._strength;
-
-        [SavedProperty]
-        public int Dexterity => Scripts.Relics.CustomMade._dexterity;
-
-        [SavedProperty]
-        public int Cards => Scripts.Relics.CustomMade._cards;
-
-        [SavedProperty]
-        public int Blocks => Scripts.Relics.CustomMade._blocks;
-
 
 
         protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
         {
-            await PowerCmd.Apply<StrengthPower>(choiceContext,base.Owner.Creature, Strength, base.Owner.Creature, this);
-            await PowerCmd.Apply<DexterityPower>(choiceContext,base.Owner.Creature, Dexterity, base.Owner.Creature, this);
-            if (Cards > 0)
+            await PowerCmd.Apply<StrengthPower>(choiceContext,base.Owner.Creature, DynamicVars["StrengthPower"].BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<DexterityPower>(choiceContext,base.Owner.Creature, DynamicVars["DexterityPower"].BaseValue, base.Owner.Creature, this);
+            if (DynamicVars["Cards"].BaseValue > 0)
             {
-                await CardPileCmd.Draw(choiceContext, Cards, base.Owner);
+                await CardPileCmd.Draw(choiceContext, DynamicVars["Cards"].BaseValue, base.Owner);
             }
-            if (Blocks > 0)
+            if (DynamicVars.Block.BaseValue > 0)
             {
-                await CreatureCmd.GainBlock(base.Owner.Creature, Blocks, ValueProp.Unpowered, cardPlay);
+                await CreatureCmd.GainBlock(base.Owner.Creature, DynamicVars.Block.BaseValue, ValueProp.Unpowered, cardPlay);
             }
         }
 

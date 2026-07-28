@@ -104,5 +104,8 @@
     "以下是潘格尼尼对话": "----------------------------------------------------------",
     "ARKNIGHTS_MAP_EVENT_PAGANINI.title": "潘格尼尼",
     "ARKNIGHTS_MAP_EVENT_PAGANINI.epithet": "制铳师",
-    "ARKNIGHTS_MAP_EVENT_PAGANINI.talk.ANY.0-0r.ancient": "欢迎光临。"
+    "ARKNIGHTS_MAP_EVENT_PAGANINI.talk.ANY.0-0r.ancient": "欢迎光临。",
+    "ARKNIGHTS_MAP_EVENT_LEMUEN.title": "蕾缪安",
+    "ARKNIGHTS_MAP_EVENT_LEMUEN.epithet": "第七厅枢机",
+    "ARKNIGHTS_MAP_EVENT_LEMUEN.talk.ANY.0-0r.ancient": "占位符2"
 }

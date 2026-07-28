@@ -77,7 +77,7 @@ public sealed class Laterano : ModActTemplate
             ModelDb.Encounter<SinglePathfinderCar>(),
             ModelDb.Encounter<TwoBHCrossbow>(),
             ModelDb.Encounter<TwoMage>(),
-            ModelDb.Encounter<FourWarriors>(),
+            ModelDb.Encounter<TwoWarriors>(),
             ModelDb.Encounter<ThreeEyes>(),
             
 

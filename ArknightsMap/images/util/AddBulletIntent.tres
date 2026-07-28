@@ -1,0 +1,6 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://damdkw1i757n8"]
+
+[ext_resource type="Texture2D" uid="uid://bv4kbb6ws4hht" path="res://ArknightsMap/images/util/AddBulletIntent.png" id="1_6h5ou"]
+
+[resource]
+atlas = ExtResource("1_6h5ou")

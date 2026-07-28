@@ -46,14 +46,7 @@ public class Fortuna : AbstractSankta
 
     private string GetAttackSfx() => "Attack";
 
-    public override Task AfterDamageReceivedLate(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
-    {
-        if (dealer == Creature && result.UnblockedDamage == 0 && CombatState.RunState.Rng.CombatTargets.NextFloat(0,1) < 0.7)
-        {
-            AddBullet(1);
-        }
-        return base.AfterDamageReceivedLate(choiceContext, target, result, props, dealer, cardSource);
-    }
+    
 
     
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -66,6 +59,14 @@ public class Fortuna : AbstractSankta
             {
                 await UseBullet(6);
                 await DamageCmd.Attack(Damage01).WithHitCount(Time).FromMonster(this).WithAttackerAnim("Attack01", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
+                for (int i = 0; i < 6; i++)
+                {
+                    float percent = CombatState.RunState.Rng.CombatTargets.NextFloat(0,1);
+                    if (percent < 0.5)
+                    {
+                        await AddBullet(1);
+                    }
+                }
             }, 
             
             new MultiAttackIntent(Damage01, () => Time)
@@ -76,6 +77,11 @@ public class Fortuna : AbstractSankta
             {
                 
                 await DamageCmd.Attack(Damage02).FromMonster(this).WithAttackerAnim("Attack02", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
+                float percent = CombatState.RunState.Rng.CombatTargets.NextFloat(0,1);
+                    if (percent < 0.7)
+                    {
+                        await AddBullet(1);
+                    }
             }, 
             
             new SingleAttackIntent(Damage02)
@@ -86,7 +92,7 @@ public class Fortuna : AbstractSankta
             {
                 await CreatureCmd.TriggerAnim(Creature, "Skill_Begin", 0.8f);
                 await AddBullet(2);
-                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 2, Creature, null);
+                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 3, Creature, null);
             },
             new BuffIntent()
         );

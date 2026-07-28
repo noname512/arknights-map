@@ -40,6 +40,7 @@ public class Paganini : ModAncientEventTemplate
         [
             CreateModRelicOption<GiantGun>(), // 铳骑的巨铳
             CreateModRelicOption<NoSugarIce>(), // 无糖冰淇淋
+            CreateModRelicOption<Target>(), // 靶子
             
         ];
     private IReadOnlyList<EventOption> Pool3 =>

@@ -43,8 +43,7 @@ public sealed class ChildrenBook : ModRelicTemplate
 		foreach (CardModel item in await CardSelectCmd.FromDeckForEnchantment(prefs: new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, base.DynamicVars.Cards.IntValue), player: base.Owner, enchantment: ModelDb.Enchantment<Empathy>(), amount: 1))
 		{
 			CardCmd.Enchant<Empathy>(item, 1m);
-			CardModel newCard = Owner.RunState.CreateCard(item, Owner);
-            CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(newCard, PileType.Deck));
+            CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(item, PileType.Deck));
 			
 		}
 	}    

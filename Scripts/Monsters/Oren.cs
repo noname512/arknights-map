@@ -156,6 +156,7 @@ public class Oren : AbstractSankta
         list.Add(attack1Hit);
         list.Add(attackBranch1);
         list.Add(attackBranch2);
+        list.Add(attackBranch3);
         
 
         gainbullet.FollowUpState = attackSkill;

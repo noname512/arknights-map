@@ -8,7 +8,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace Test.Scripts;
 
-[RegisterActEncounter(typeof(Glory))]
+//[RegisterActEncounter(typeof(Glory))]
 public class SSSBoss : AbstractLateranoEncounter
 {
 
