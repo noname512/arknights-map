@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b2c8jkmldp0qp"]
 
-[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_7mmqy"]
+[ext_resource type="Script" uid="uid://ci6wcx15roiya" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_7mmqy"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://gvq3m3nr46gv" path="res://ArknightsMap/images/monsters/WastelandPlunderer/WastelandPlunderer.tres" id="2_jwuni"]
 
 [node name="WastelandPlunder" type="Node2D"]

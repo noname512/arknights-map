@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
@@ -60,8 +61,8 @@ public class Oren : AbstractSankta
             {
                 await Cmd.Wait(1.0f);
                 await AddBullet(1);
-            },
-            new BuffIntent()
+            }
+            , new AddBulletIntent()
         );
 
         MoveState attackSkill = new MoveState(
@@ -77,7 +78,7 @@ public class Oren : AbstractSankta
                     await CardPileCmd.AddToCombatAndPreview<Dazed>(c, PileType.Draw, 5, null, CardPilePosition.Top);
                 }
             },
-            [new SingleAttackIntent(Damage_Skill), new StatusIntent(5)]
+            [new SingleAttackIntent(Damage_Skill), new StatusIntent(5), new UseBulletIntent()]
         );
         MoveState attack2Hit = new MoveState(
             "ATTACK_2_HIT",

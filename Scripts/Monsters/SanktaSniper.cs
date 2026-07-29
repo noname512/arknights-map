@@ -1,4 +1,5 @@
 using ArknightsMap.Scripts.Powers;
+using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
@@ -18,18 +19,15 @@ public class SanktaSniper : AbstractSankta
     protected override int BulletMax => 1;
     protected override int InitialBullet => 0;
 
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 88, 86);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 94, 92);
-    private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 20, 18);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 118, 116);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 124, 122);
+    private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 16, 14);
     public int Time = 1;
 
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
-    public override async Task AfterAddedToRoom()
-    {
-        await PowerCmd.Apply<BulletPower>(new ThrowingPlayerChoiceContext(), Creature, Bullet, Creature, null);
-    }
+    
 
     private string GetAttackSfx() => "Attack";
 
@@ -44,7 +42,7 @@ public class SanktaSniper : AbstractSankta
                 await UseBullet(1);
                 await DamageCmd.Attack(Damage).FromMonster(this).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
             },
-            new SingleAttackIntent(Damage)
+            [new SingleAttackIntent(Damage), new UseBulletIntent()]
         );
         MoveState skill = new MoveState(
             "SKILL",
@@ -53,7 +51,7 @@ public class SanktaSniper : AbstractSankta
                 await CreatureCmd.TriggerAnim(Creature, "Skill_Start", 0.8f);
                 await PowerCmd.Apply<BulletPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
             },
-            new BuffIntent()
+            new AddBulletIntent()
         );
 
         ConditionalBranchState attackBranch = new ConditionalBranchState("ATTACK_BRANCH");

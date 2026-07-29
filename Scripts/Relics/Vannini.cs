@@ -1,4 +1,6 @@
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -66,10 +68,23 @@ public sealed class Vannini : ModRelicTemplate
         return Task.CompletedTask;
     }
 
+    public override Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+    {
+        if (side == CombatSide.Player)
+        {
+            SameTypeCount = 0;
+            cardType = CardType.None;
+            InvokeDisplayAmountChanged();
+        }
+        return base.AfterSideTurnEnd(choiceContext, side, participants);
+    }
+
+
     public override Task AfterCombatVictory(CombatRoom room)
     {
         SameTypeCount = 0;
         cardType = CardType.None;
+        InvokeDisplayAmountChanged();
         return Task.CompletedTask;
     }
 

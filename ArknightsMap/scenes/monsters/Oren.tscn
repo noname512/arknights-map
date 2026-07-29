@@ -1,9 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://dt1sb24u6gxsd"]
 
 [ext_resource type="SpineSkeletonDataResource" uid="uid://14pmsp6fs386" path="res://ArknightsMap/images/monsters/Oren/Oren.tres" id="1_hfk4o"]
-[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_xdyo1"]
+[ext_resource type="Script" uid="uid://ci6wcx15roiya" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_xdyo1"]
 
 [node name="Oren" type="Node2D"]
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_xdyo1")
 
 [node name="Visuals" type="SpineSprite" parent="."]
@@ -14,7 +15,7 @@ preview_frame = false
 preview_time = 0.0
 unique_name_in_owner = true
 rotation = -3.1415927
-scale = Vector2(1.5, -1.5)
+scale = Vector2(1, -1)
 
 [node name="Bounds" type="Control" parent="."]
 unique_name_in_owner = true
@@ -27,7 +28,7 @@ offset_bottom = 40.0
 
 [node name="IntentPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -400)
+position = Vector2(0, -250)
 
 [node name="CenterPos" type="Marker2D" parent="."]
 unique_name_in_owner = true

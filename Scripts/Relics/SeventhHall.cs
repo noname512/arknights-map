@@ -1,9 +1,11 @@
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -12,7 +14,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
-public sealed class Wrap : ModRelicTemplate
+public sealed class SeventhHall : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
@@ -30,11 +32,13 @@ public sealed class Wrap : ModRelicTemplate
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
 
-    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
     {
-        if (player == Owner && Owner.PlayerCombatState!.TurnNumber == 1)
+        if (player == Owner && combatState.RoundNumber == 2)
         {
-            await PowerCmd.Apply<PlatingPower>(choiceContext, Owner.Creature, 10, Owner.Creature, null);
+            Flash();
+            
         }
-    }
+    }    
+    
 }

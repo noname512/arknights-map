@@ -1,31 +1,26 @@
 using ArknightsMap.Scripts.Cards;
-using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
+using MegaCrit.Sts2.Core.Rooms;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Keywords;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
-public sealed class Aphasia : ModRelicTemplate
+public sealed class NotAnswered : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
-
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
-        HoverTipFactory.FromCard<NoCommunication>()
-    ];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1)];
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -37,16 +32,30 @@ public sealed class Aphasia : ModRelicTemplate
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
 
-    public override async Task AfterObtained()
+    public override bool ShowCounter => true;
+
+    public override decimal ModifyMaxEnergy(Player player, decimal amount)
     {
-        await CardPileCmd.AddCurseToDeck<Cards.NoCommunication>(Owner);
+        if (player != Owner)
+        {
+            return amount;
+        }
+        return amount + DynamicVars.Energy.IntValue;
     }
 
-    public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
     {
-        if (card.Owner == Owner && card.Type == CardType.Curse)
+        if (player == Owner && combatState.RoundNumber == 1)
         {
-            await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, 2, Owner.Creature, null);
+            Flash();
+            List<CardModel> list = new List<CardModel>();
+            
+            list.Add(combatState.CreateCard<Confused>(Owner));
+            
+            CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, player, CardPilePosition.Random));
+            await Cmd.Wait(1f);
         }
     }
+
+
 }
