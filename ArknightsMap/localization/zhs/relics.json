@@ -158,8 +158,8 @@
     "ARKNIGHTS_MAP_RELIC_EMPTY_SHELVES.description": "你每有一个空的[gold]药水栏[/gold]，回合开始额外抽一张牌。",
     "ARKNIGHTS_MAP_RELIC_EMPTY_SHELVES.flavor": "",
     "ARKNIGHTS_MAP_RELIC_LONG_TERM_CONTRACT.title": "长期契约",
-    "ARKNIGHTS_MAP_RELIC_LONG_TERM_CONTRACT.event_description": "选择[blue]1[/blue]张牌，将它变化为一张每回合会打出它的[gold]能力牌[/gold]。",
-    "ARKNIGHTS_MAP_RELIC_LONG_TERM_CONTRACT.description": "拾起时，选择[blue]1[/blue]张牌，将它变化为一张每回合会打出它的[gold]能力牌[/gold]。",
+    "ARKNIGHTS_MAP_RELIC_LONG_TERM_CONTRACT.event_description": "选择[blue]1[/blue]张牌，将它变化为一张每回合会打出它的复制的[gold]能力牌[/gold]。",
+    "ARKNIGHTS_MAP_RELIC_LONG_TERM_CONTRACT.description": "拾起时，选择[blue]1[/blue]张牌，将它变化为一张每回合会打出它的复制的[gold]能力牌[/gold]。",
     "ARKNIGHTS_MAP_RELIC_LONG_TERM_CONTRACT.flavor": "",
     "----Arctosz----": "阿克托斯遗物",
     "ARKNIGHTS_MAP_RELIC_ANCIENT_HERITAGE.title": "古老传承",
@@ -201,31 +201,24 @@
     "ARKNIGHTS_MAP_RELIC_APHASIA.title": "“失语”",
     "ARKNIGHTS_MAP_RELIC_APHASIA.description": "抽到诅咒牌时，获得2点[gold]力量[/gold]。将[gold]沟通不畅[/gold]放入牌组。",
     "ARKNIGHTS_MAP_RELIC_APHASIA.flavor": "",
-
     "ARKNIGHTS_MAP_RELIC_INTERNATIONALIS.title": "跨境追缉许可",
     "ARKNIGHTS_MAP_RELIC_INTERNATIONALIS.description": "每场战斗开始时，使一名随机敌人被[gold]追缉[/gold]。",
     "ARKNIGHTS_MAP_RELIC_INTERNATIONALIS.flavor": "",
-
     "ARKNIGHTS_MAP_RELIC_MEMENTO_MORI.title": "礼炮：强制追思",
     "ARKNIGHTS_MAP_RELIC_MEMENTO_MORI.description": "每场战斗开始时，以及这场战斗之后的每第4回合，随机造成[blue]{Damage}[/blue]点伤害8次。",
     "ARKNIGHTS_MAP_RELIC_MEMENTO_MORI.flavor": "",
-
     "ARKNIGHTS_MAP_RELIC_HAND.title": "剿袭之手",
     "ARKNIGHTS_MAP_RELIC_HAND.description": "你抽到一张基础伤害不小于15的攻击牌后，对所有敌人造成那张牌伤害数值的伤害。",
     "ARKNIGHTS_MAP_RELIC_HAND.flavor": "",
-
     "ARKNIGHTS_MAP_RELIC_SWEET_DELIVERY.title": "甜品速递",
     "ARKNIGHTS_MAP_RELIC_SWEET_DELIVERY.description": "你此后的遗物替换为[gold]甜品遗物[/gold]。",
     "ARKNIGHTS_MAP_RELIC_SWEET_DELIVERY.flavor": "",
-
     "ARKNIGHTS_MAP_RELIC_SEVENTH_HALL.title": "第七厅密令",
     "ARKNIGHTS_MAP_RELIC_SEVWNTH_HALL.description": "",
     "ARKNIGHTS_MAP_RELIC_SEVENTH_HALL.flavor": "",
-
     "ARKNIGHTS_MAP_RELIC_WHEELCHAIR.title": "轮椅",
     "ARKNIGHTS_MAP_RELIC_WHEELCHAIR.description": "你在选择下一层的房间时可以无视当前的路线。",
     "ARKNIGHTS_MAP_RELIC_WHEELCHAIR.flavor": "",
-
     "ARKNIGHTS_MAP_RELIC_EX_FOEDERE.title": "圣约",
     "ARKNIGHTS_MAP_RELIC_EX_FOEDERE.description": "你每打出1张牌，获得1点[gold]力量[/gold]。\n在你的第7张牌打出后，失去因此获得的所有[gold]力量[/gold]并重新计数。\n计数在每场战斗开始时重置。",
     "ARKNIGHTS_MAP_RELIC_EX_FOEDERE.flavor": ""

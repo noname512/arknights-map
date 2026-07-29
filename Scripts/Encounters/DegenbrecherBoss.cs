@@ -1,0 +1,43 @@
+using ArknightsMap.Scripts.Acts;
+using ArknightsMap.Scripts.Monsters;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Rooms;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
+
+namespace ArknightsMap.Scripts.Encounters;
+
+[RegisterActEncounter(typeof(SnowyMountain))]
+public class DegenbrecherBoss : AbstractSnowyMountainEncounter
+{
+    public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<Degenbrecher>(), ModelDb.Monster<Tschaggatta>()];
+
+    public override EncounterAssetProfile AssetProfile =>
+        new(
+            RunHistoryIconPath: $"res://ArknightsMap/images/map/AFRBossHistory.png",
+            RunHistoryIconOutlinePath: $"res://ArknightsMap/images/map/AFRBossHistory_outline.png",
+            EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
+            /*
+            RunHistoryIconPath: $"res://ArknightsMap/images/map/{GetType().Name}History.png",
+            RunHistoryIconOutlinePath: $"res://ArknightsMap/images/map/{GetType().Name}History_outline.png",
+            */
+        );
+
+    // public override string BossNodePath => $"res://ArknightsMap/images/map/{GetType().Name}Icon";
+    public override string BossNodePath => $"res://ArknightsMap/images/map/AFRBossIcon";
+
+    public override string CustomBgm => "event:/ArknightsMap/music/all_flames_returned_bat_1";
+
+    public override IReadOnlyList<string> Slots => ["5","6","7"];
+
+    public override RoomType RoomType => RoomType.Boss;
+
+    // 如果你的场景太大，可以调整缩放。此外还可以使用 GetCameraOffset 来调整摄像机位置
+    // public override float GetCameraScaling() => 0.8f;
+
+    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
+        (ModelDb.Monster<Degenbrecher>().ToMutable(), "5"),
+        (ModelDb.Monster<Tschaggatta>().ToMutable(), "6"),
+        (ModelDb.Monster<Tschaggatta>().ToMutable(), "7")
+    ];
+}

@@ -48,8 +48,20 @@ public sealed class CreaturePositions : HookedSingletonModel
         }
         foreach (Creature c in CurrentCombatState.Enemies)
         {
-            Positions[c] = 6;
+            if ((c.SlotName[0] <= '9') && (c.SlotName[0] >= '0'))
+            {
+                Positions[c] = c.SlotName[0] - '0';
+            }
+            else
+            {
+                Positions[c] = 6;
+            }
         }
+    }
+
+    public static async Task MoveTo(Creature c, int slot)
+    {
+        Positions[c] = slot;
     }
 
     public static bool IsBlock(Creature x, Creature y)

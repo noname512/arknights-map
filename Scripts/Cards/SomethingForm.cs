@@ -1,12 +1,16 @@
-﻿using ArknightsMap.Scripts.Powers;
+﻿using System.Reflection;
+using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
+using MegaCrit.Sts2.Core.Saves.Runs;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -15,9 +19,10 @@ namespace ArknightsMap.Scripts.Cards;
 [RegisterCard(typeof(EventCardPool))]
 public class SomethingForm : ModCardTemplate
 {
-    public override int CanonicalStarCost => baseCard?.CanonicalStarCost ?? 0;
-    public override bool HasStarCostX => baseCard?.HasStarCostX ?? false;
-    protected override bool HasEnergyCostX => baseCard?.EnergyCost.CostsX ?? false;
+    public override int CanonicalStarCost => Card?.CanonicalStarCost ?? 0;
+    public override bool HasStarCostX => Card?.HasStarCostX ?? false;
+    protected override bool HasEnergyCostX => Card?.EnergyCost.CostsX ?? false;
+    public override int MaxUpgradeLevel => Card?.MaxUpgradeLevel ?? 0;
 
     private const CardType type = CardType.Power;
     private const CardRarity rarity = CardRarity.Ancient;
@@ -32,40 +37,108 @@ public class SomethingForm : ModCardTemplate
         // BannerTexturePath: "" // 横幅（不同类型）
         );
 
-    private CardModel? baseCard;
+    private SerializableCard? _serializableCard;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar("cardName")];
+    [SavedProperty]
+    public SerializableCard? BaseCard
+    {
+        get { return _serializableCard; }
+        private set
+        {
+            AssertMutable();
+            _serializableCard = value;
+            _card = null;
+            UpdateCard();
+        }
+    }
+
+    private CardModel? _card;
+
+    public CardModel? Card
+    {
+        get
+        {
+            if (_card == null && BaseCard != null)
+            {
+                _card = FromSerializable(BaseCard);
+            }
+            return _card;
+        }
+    }
+
+    public override string Title
+    {
+        get
+        {
+            LocString title = new("cards", Id.Entry + ".title");
+            DynamicVars.AddTo(title);
+            return title.GetFormattedText();
+        }
+    }
+
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar("CardName")];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => _extraHoverTips;
+
+    private List<IHoverTip> _extraHoverTips = new List<IHoverTip>();
 
     public SomethingForm()
         : base(0, type, rarity, targetType) { }
 
     public void SetBaseCard(CardModel baseCard)
     {
-        EnergyCost.UpgradeBy(baseCard.EnergyCost.Canonical);
-        this.baseCard = baseCard;
-        StringVar stringVar = (StringVar)DynamicVars["cardName"];
-        stringVar.StringValue = baseCard.Title;
+        BaseCard = baseCard.ToSerializable();
+        ForceSetUpgradeLevel(baseCard.CurrentUpgradeLevel);
+    }
+
+    private void ForceSetUpgradeLevel(int level)
+    {
+        FieldInfo currentUpgradeLevelField = typeof(CardModel).GetField("_currentUpgradeLevel", BindingFlags.Instance | BindingFlags.NonPublic)!;
+        currentUpgradeLevelField.SetValue(this, level);
+    }
+
+    private void UpdateCard()
+    {
+        _extraHoverTips = [];
+        if (Card != null)
+        {
+            EnergyCost.SetCustomBaseCost(Card.EnergyCost.Canonical);
+            _extraHoverTips.AddRange(Card.HoverTips);
+            _extraHoverTips.Add(HoverTipFactory.FromCard(Card));
+            ((StringVar)DynamicVars["CardName"]).StringValue = Card.Title;
+        }
     }
 
     protected override void OnUpgrade()
     {
-        int costBefore = baseCard!.EnergyCost.Canonical;
-        CardCmd.Upgrade(baseCard, CardPreviewStyle.None);
-        EnergyCost.UpgradeBy(baseCard.EnergyCost.Canonical - costBefore);
+        if (BaseCard != null)
+        {
+            CardModel upgradedCard = FromSerializable(BaseCard);
+            if (upgradedCard.IsUpgradable)
+            {
+                CardCmd.Upgrade(upgradedCard, CardPreviewStyle.None);
+            }
+            SetBaseCard(upgradedCard);
+        }
     }
 
     protected override void AfterDowngraded()
     {
-        int costBefore = baseCard!.EnergyCost.Canonical;
-        CardCmd.Downgrade(baseCard);
-        EnergyCost.UpgradeBy(baseCard.EnergyCost.Canonical - costBefore);
+        if (BaseCard != null)
+        {
+            CardModel downgradedCard = FromSerializable(BaseCard);
+            if (downgradedCard.IsUpgraded)
+            {
+                CardCmd.Downgrade(downgradedCard);
+            }
+            SetBaseCard(downgradedCard);
+        }
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        SomethingFormPower power = ModelDb.Power<SomethingFormPower>();
+        SomethingFormPower power = (SomethingFormPower)ModelDb.Power<SomethingFormPower>().ToMutable();
         int amount = 1;
         if (EnergyCost.CostsX)
         {
@@ -79,7 +152,11 @@ public class SomethingForm : ModCardTemplate
             power._stackType = PowerStackType.Counter;
             power.xType = SomethingFormPower.XType.XStar;
         }
-        power.baseCard = baseCard;
+        if (Card!.Owner == null)
+        {
+            Card.Owner = Owner;
+        }
+        power.SetBaseCard(Card);
         await PowerCmd.Apply(choiceContext, power, Owner.Creature, amount, Owner.Creature, this);
     }
 }
