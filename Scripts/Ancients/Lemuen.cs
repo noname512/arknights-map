@@ -33,11 +33,12 @@ public class Lemuen : ModAncientEventTemplate
     private IReadOnlyList<EventOption> Pool1 =>
         [
             CreateModRelicOption<Internationalis>(), // 跨境追缉许可
+            CreateModRelicOption<MementoMori>(), // 礼炮：强制追思
             
         ];
     private IReadOnlyList<EventOption> Pool2 =>
         [
-            CreateModRelicOption<MementoMori>(), // 礼炮：强制追思
+            CreateModRelicOption<Hand>(), // 剿袭之手
             
             
         ];

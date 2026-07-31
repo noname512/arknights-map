@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
@@ -66,7 +67,7 @@ public class PathfinderWarrior : AbstractSankta
                 }
                 await UseBullet(1);
             },
-            [new BuffIntent()]
+            [new BuffIntent(), new UseBulletIntent()]
         );
 
         RandomBranchState startBranch = new RandomBranchState("START_BRANCH");

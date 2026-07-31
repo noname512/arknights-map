@@ -12,7 +12,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
-public sealed class Wrap : ModRelicTemplate
+public sealed class SweetDelivery : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
@@ -30,11 +30,5 @@ public sealed class Wrap : ModRelicTemplate
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
 
-    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
-    {
-        if (player == Owner && Owner.PlayerCombatState!.TurnNumber == 1)
-        {
-            await PowerCmd.Apply<PlatingPower>(choiceContext, Owner.Creature, 10, Owner.Creature, null);
-        }
-    }
+    
 }

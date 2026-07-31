@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
@@ -16,11 +17,11 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class SanktaPriest : AbstractSankta
 {
-    protected override int BulletMax => 2;
-    protected override int InitialBullet => 2;
+    protected override int BulletMax => 0;
+    protected override int InitialBullet => 0;
 
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 98, 96);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 104, 102);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 118, 116);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 124, 122);
     private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 7, 5);
 
     private int Block => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 15, 10);
@@ -50,8 +51,6 @@ public class SanktaPriest : AbstractSankta
                 await CreatureCmd.TriggerAnim(Creature, "Skill", 0.8f);
                 foreach (var monster in CombatState.Enemies.Where(m => m.IsAlive))
                 {
-                    await UseBullet(1);
-
                     await CreatureCmd.GainBlock(monster, Block, ValueProp.Move, null);
                     if (monster.Monster is AbstractSankta s)
                     {
@@ -59,14 +58,14 @@ public class SanktaPriest : AbstractSankta
                     }
                 }
             },
-            new BuffIntent()
+            [new BuffIntent(), new AddBulletIntent()]
         );
 
         MoveState skill_strength = new MoveState(
             "SKILL_STRENGTH",
             async targets =>
             {
-                await UseBullet(1);
+                
                 await CreatureCmd.TriggerAnim(Creature, "Skill", 0.8f);
                 foreach (var monster in CombatState.Enemies.Where(m => m.IsAlive))
                 {

@@ -1,4 +1,5 @@
 using ArknightsMap.Scripts.Powers;
+using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
@@ -32,10 +33,7 @@ public class Fortuna : AbstractSankta
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
-    public override async Task AfterAddedToRoom()
-    {
-        await PowerCmd.Apply<BulletPower>(new ThrowingPlayerChoiceContext(), Creature, Bullet, Creature, null);
-    }
+    
 
     private string GetAttackSfx() => "Attack";
 
@@ -61,7 +59,7 @@ public class Fortuna : AbstractSankta
                 }
             }, 
             
-            new MultiAttackIntent(Damage01, () => Time)
+            [new MultiAttackIntent(Damage01, () => Time), new UseBulletIntent()]
         );
         MoveState attack02 = new MoveState(
             "Attack02",
@@ -83,9 +81,9 @@ public class Fortuna : AbstractSankta
             {
                 await CreatureCmd.TriggerAnim(Creature, "Skill_Begin", 0.8f);
                 await AddBullet(2);
-                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 3, Creature, null);
+                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 2, Creature, null);
             },
-            new BuffIntent()
+            [new BuffIntent(), new AddBulletIntent()]
         );
 
         ConditionalBranchState skillBranch = new ConditionalBranchState("SKILL_BRANCH");

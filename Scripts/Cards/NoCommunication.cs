@@ -12,7 +12,7 @@ namespace ArknightsMap.Scripts.Cards
     [RegisterCard(typeof(EventCardPool))]
     public class NoCommunication : ModCardTemplate
     {
-        private const int energyCost = 5;
+        private const int energyCost = 4;
         private const CardType type = CardType.Curse;
         private const CardRarity rarity = CardRarity.Curse;
         private const TargetType targetType = TargetType.Self;

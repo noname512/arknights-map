@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
@@ -51,7 +52,7 @@ public class PathfinderCannon : AbstractSankta
                     NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NFireSmokePuffVfx.Create(c));
                 }
             },
-            [new SingleAttackIntent(Damage01)]
+            [new SingleAttackIntent(Damage01), new UseBulletIntent()]
         );
         MoveState attack02 = new MoveState(
             "ATTACK02",

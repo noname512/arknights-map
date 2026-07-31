@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
@@ -56,7 +57,7 @@ public class PathfinderCar : AbstractSankta
                 await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), CombatState.Enemies.First(c => c.Monster is CandyCar), 1m, Creature, null);
                 await UseBullet(1);
             },
-            [new SummonIntent()]
+            [new SummonIntent(), new UseBulletIntent()]
         );
 
         ConditionalBranchState attackBranch = new ConditionalBranchState("ATTACK_BRANCH");
