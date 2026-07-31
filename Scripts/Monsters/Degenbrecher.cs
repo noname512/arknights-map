@@ -2,6 +2,7 @@ using ArknightsMap.Scripts.Powers;
 using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
@@ -31,7 +32,18 @@ public class Degenbrecher : AbstractWildsMonster
     {
         await PowerCmd.Apply<WatchingPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
     }
-    
+
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer,
+        CardModel? cardSource, CardPlay? cardPlay)
+    {
+        if ((dealer == Creature) && (target.IsPlayer) && CreaturePositions.IsBlock(dealer, target))
+        {
+            return 1.5M;
+        }
+
+        return 1M;
+    }
+
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
@@ -80,14 +92,17 @@ public class Degenbrecher : AbstractWildsMonster
             },
             new BuffIntent()
         );
-        
-        
 
-        attack.FollowUpState = attack;
+        ConditionalBranchState condition = new ConditionalBranchState("CONDITION");
+        condition.AddState(skill, () => Creature.GetPower<MomentumMurder>()?.TurnLeft >= 1);
+        condition.AddState(attack, () => true);
+
+        attack.FollowUpState = condition;
         watch.FollowUpState = join;
         join.FollowUpState = attack;
-        skill.FollowUpState = attack;
+        skill.FollowUpState = condition;
 
+        list.Add(condition);
         list.Add(attack);
         list.Add(skill);
         list.Add(watch);

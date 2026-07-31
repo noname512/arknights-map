@@ -29,6 +29,7 @@ public class AdmitPower : ModPowerTemplate
         set
         {
             DynamicVars["Current"].BaseValue = value;
+            InvokeDisplayAmountChanged();
         }
         get
         {
@@ -41,24 +42,21 @@ public class AdmitPower : ModPowerTemplate
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
-    public override async Task AfterDamageReceived(
-        PlayerChoiceContext choiceContext,
-        Creature target,
-        DamageResult result,
-        ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource
-    )
+    public override async Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, ValueProp props, Creature target, CardModel? cardSource)
     {
-        if (target == Owner)
+        if ((dealer == Owner) && (target.IsPlayer) && (props.IsPoweredAttack()) && result.UnblockedDamage == 0)
         {
             Flash();
-            AddAdmit(DynamicVars["Hit"].IntValue);
+            await AddAdmit(DynamicVars["Hit"].IntValue);
         }
     }
 
-    public void AddAdmit(int num)
+    public async Task AddAdmit(int num)
     {
         Current += num;
+        if (Current >= Amount)
+        {
+            await CreatureCmd.Kill(Owner);
+        }
     }
 }

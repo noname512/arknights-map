@@ -105,7 +105,7 @@
     "ARKNIGHTS_MAP_POWER_WATCHING_POWER.smartDescription": "她还在观望，你是否值得作为她的对手。",
     "ARKNIGHTS_MAP_POWER_WATCHING_POWER.description": "她还在观望，你是否值得作为她的对手。",
     "ARKNIGHTS_MAP_POWER_ADMIT_POWER.title": "认可",
-    "ARKNIGHTS_MAP_POWER_ADMIT_POWER.smartDescription": "当受到{OwnerName}的攻击但未受伤时，获得[blue]{Hit}[/blue]层[gold]认可[/gold]。当前{Current}层，累计{Amount}层即可结束战斗。",
+    "ARKNIGHTS_MAP_POWER_ADMIT_POWER.smartDescription": "当受到{OwnerName}的攻击但未受伤时，获得[blue]{Hit}[/blue]层[gold]认可[/gold]。当前[blue]{Current}[/blue]层，累计[blue]{Amount}[/blue]层即可结束战斗。",
     "ARKNIGHTS_MAP_POWER_ADMIT_POWER.description": "要得到她的认可，得拿出真本事来。",
     "ARKNIGHTS_MAP_POWER_MOMENTUM_MURDER.title": "瞬息杀机",
     "ARKNIGHTS_MAP_POWER_MOMENTUM_MURDER.smartDescription": "当{OwnerName}的生命值低于[blue]{Amount}[/blue]时，在[blue]{CannotAttack}[/blue]回合内无法打出[gold]攻击牌[/gold]，并获得[blue]{Admit}[/blue]层[gold]认可[/gold]。(剩余{TurnLeft}回合）",

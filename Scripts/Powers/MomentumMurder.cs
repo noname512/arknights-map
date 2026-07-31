@@ -69,7 +69,7 @@ public class MomentumMurder : ModPowerTemplate
             {
                 Flash();
                 TurnLeft = 2;
-                Owner.GetPower<AdmitPower>().AddAdmit(Admit);
+                await Owner.GetPower<AdmitPower>().AddAdmit(Admit);
                 SetAmount((int)(Amount - Owner.MaxHp * 0.25));
             }
         }
