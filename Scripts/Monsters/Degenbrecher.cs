@@ -80,6 +80,8 @@ public class Degenbrecher : AbstractWildsMonster
             },
             new BuffIntent()
         );
+        
+        
 
         attack.FollowUpState = attack;
         watch.FollowUpState = join;

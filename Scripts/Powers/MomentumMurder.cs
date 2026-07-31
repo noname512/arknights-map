@@ -54,16 +54,25 @@ public class MomentumMurder : ModPowerTemplate
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
-    public override Task AfterModifyingHpLostAfterOsty()
+    public override async Task AfterDamageReceived(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        DamageResult result,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource
+    )
     {
-        for (;Owner.CurrentHp <= Amount;)
+        if (target == Owner)
         {
-            Flash();
-            TurnLeft = 2;
-            Owner.GetPower<AdmitPower>().AddAdmit(Admit);
-            SetAmount((int)(Amount - Owner.MaxHp * 0.25));
+            for (;Owner.CurrentHp <= Amount;)
+            {
+                Flash();
+                TurnLeft = 2;
+                Owner.GetPower<AdmitPower>().AddAdmit(Admit);
+                SetAmount((int)(Amount - Owner.MaxHp * 0.25));
+            }
         }
-        return base.AfterModifyingHpLostAfterOsty();
     }
 
     public override bool ShouldPlay(CardModel card, AutoPlayType autoPlayType)
