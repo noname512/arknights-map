@@ -26,11 +26,11 @@ public class SanktaEye : AbstractSankta
     protected override int BulletMax => 0;
     protected override int InitialBullet => 0;
 
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 60, 65);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 70, 75);
-    private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 10);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 50, 55);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 55, 60);
+    private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 8, 8);
 
-    private int MultiDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 4, 5);
+    private int MultiDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 3, 4);
 
     public int Time = 1;
 
@@ -73,7 +73,7 @@ public class SanktaEye : AbstractSankta
 
     public override async Task AfterAddedToRoom()
     {
-        await PowerCmd.Apply<EyePower>(new ThrowingPlayerChoiceContext(), Creature, 5, Creature, null);
+        await PowerCmd.Apply<EyePower>(new ThrowingPlayerChoiceContext(), Creature, 4, Creature, null);
         await PowerCmd.Apply<SanktaCreaturePower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
     }
 
