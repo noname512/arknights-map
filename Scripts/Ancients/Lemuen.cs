@@ -13,7 +13,11 @@ namespace ArknightsMap.Scripts.Ancients;
 public class Lemuen : ModAncientEventTemplate
 {
     // 选项按钮颜色
+<<<<<<< Updated upstream
     public override Color ButtonColor => new Color(0.76f, 0.46f, 0.54f, 0.5f);
+=======
+    public override Color ButtonColor => new Color(0.95f, 0.58f, 0.68f, 0.5f);
+>>>>>>> Stashed changes
 
     // 对话框颜色
     public override Color DialogueColor => new Color(0.95f, 0.58f, 0.68f);
@@ -32,6 +36,7 @@ public class Lemuen : ModAncientEventTemplate
 
     private IReadOnlyList<EventOption> Pool1 =>
         [
+<<<<<<< Updated upstream
             CreateModRelicOption<Internationalis>(), // 跨境追缉许可
             CreateModRelicOption<MementoMori>(), // 礼炮：强制追思
             
@@ -40,12 +45,30 @@ public class Lemuen : ModAncientEventTemplate
         [
             CreateModRelicOption<Hand>(), // 剿袭之手
             
+=======
+            CreateModRelicOption<CustomMade>(), // 定制铳械
+            CreateModRelicOption<Solvent>(), // 铳械清洗溶剂
+            CreateModRelicOption<WeiLaterano>(), // 盟约：拉特兰
+        ];
+    private IReadOnlyList<EventOption> Pool2 =>
+        [
+            CreateModRelicOption<GiantGun>(), // 铳骑的巨铳
+            CreateModRelicOption<NoSugarIce>(), // 无糖冰淇淋
+            CreateModRelicOption<Target>(), // 靶子
+>>>>>>> Stashed changes
             
         ];
     private IReadOnlyList<EventOption> Pool3 =>
         [
+<<<<<<< Updated upstream
             CreateModRelicOption<Wheelchair>(), // 轮椅
             
+=======
+            CreateModRelicOption<Aphasia>(), // “失语”
+            CreateModRelicOption<Vannini>(), // 梵妮的铳
+            CreateModRelicOption<Wrap>(), // 披肩
+            CreateModRelicOption<ChildrenBook>(), 
+>>>>>>> Stashed changes
             
         ];
 

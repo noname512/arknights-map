@@ -139,6 +139,10 @@ public class Oren : AbstractSankta
         list.Add(attackBranch1);
         list.Add(attackBranch2);
         list.Add(attackBranch3);
+<<<<<<< Updated upstream
+=======
+        
+>>>>>>> Stashed changes
 
         gainbullet.FollowUpState = attackSkill;
         attackSkill.FollowUpState = debuff;

@@ -19,8 +19,14 @@ public class Target : ModRelicTemplate
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [];
 
+<<<<<<< Updated upstream
     // 添加后备字段
 
+=======
+      // 添加后备字段
+
+    
+>>>>>>> Stashed changes
     public override RelicAssetProfile AssetProfile =>
         new(
             // 小图标（原版85x85）
@@ -30,6 +36,7 @@ public class Target : ModRelicTemplate
             // 大图标（原版256x256）
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
+<<<<<<< Updated upstream
 
     public override async Task AfterCombatEnd(CombatRoom room)
     {
@@ -50,3 +57,30 @@ public class Target : ModRelicTemplate
         }
     }
 }
+=======
+    
+
+    public override async Task AfterCombatEnd(CombatRoom room)
+    {
+        // 修复：this.Owner 而不是 (CardModel)this
+        
+        CardModel last = CombatManager.Instance.History.CardPlaysStarted.LastOrDefault(
+            (CardPlayStartedEntry e) => 
+                e.CardPlay.Card.Owner == this.Owner && 
+                e.CardPlay.Card.Type == CardType.Attack
+        )?.CardPlay.Card;
+
+        
+
+        if (last != null)
+        {
+            CardModel copy = base.Owner.RunState.CreateCard(last.CanonicalInstance, base.Owner);
+            
+            CardCmd.ApplyKeyword(copy, UseOnceKeyword.Keyword);
+            await CardPileCmd.Add(copy, PileType.Deck);
+        
+            CardCmd.Preview(copy, 1.0f);
+        }
+    }
+}
+>>>>>>> Stashed changes

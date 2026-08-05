@@ -73,7 +73,11 @@ public class SanktaEye : AbstractSankta
 
     public override async Task AfterAddedToRoom()
     {
+<<<<<<< Updated upstream
         await PowerCmd.Apply<EyePower>(new ThrowingPlayerChoiceContext(), Creature, 4, Creature, null);
+=======
+        await PowerCmd.Apply<EyePower>(new ThrowingPlayerChoiceContext(), Creature, 5, Creature, null);
+>>>>>>> Stashed changes
         await PowerCmd.Apply<SanktaCreaturePower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
     }
 
@@ -96,6 +100,7 @@ public class SanktaEye : AbstractSankta
             "MULTIATTACK",
             async targets =>
             {
+<<<<<<< Updated upstream
                 await DamageCmd
                     .Attack(MultiDamage)
                     .FromMonster(this)
@@ -105,6 +110,12 @@ public class SanktaEye : AbstractSankta
                     .Execute(null);
             },
             new MultiAttackIntent(MultiDamage, 2)
+=======
+                await DamageCmd.Attack(MultiDamage).FromMonster(this).WithHitCount(2).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
+            }, 
+            
+            new MultiAttackIntent(MultiDamage,2)
+>>>>>>> Stashed changes
         );
 
         MoveState skill = new MoveState(
@@ -129,6 +140,10 @@ public class SanktaEye : AbstractSankta
         list.Add(skill);
         list.Add(multiattack);
         list.Add(startBranch);
+<<<<<<< Updated upstream
+=======
+    
+>>>>>>> Stashed changes
 
         return new MonsterMoveStateMachine(list, startBranch);
     }

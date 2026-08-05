@@ -105,6 +105,7 @@
     "ARKNIGHTS_MAP_EVENT_PAGANINI.title": "潘格尼尼",
     "ARKNIGHTS_MAP_EVENT_PAGANINI.epithet": "制铳师",
     "ARKNIGHTS_MAP_EVENT_PAGANINI.talk.ANY.0-0r.ancient": "欢迎光临。",
+<<<<<<< Updated upstream
     "ARKNIGHTS_MAP_EVENT_PAGANINI.talk.IRONCLAD.0-0r.char": "杀死...建筑师...!",
     "ARKNIGHTS_MAP_EVENT_PAGANINI.talk.IRONCLAD.0-1r.ancient": "老兄，你看着不像是精神正常的样子。",
     "ARKNIGHTS_MAP_EVENT_PAGANINI.talk.IRONCLAD.1-0r.ancient":"好，好，“神圣恶魔”。\n真不知道这俩词是怎么能拼在一起的。不过用在现在的拉特兰上倒也没毛病。",
@@ -129,6 +130,8 @@
     "ARKNIGHTS_MAP_EVENT_PAGANINI.talk.DEFECT.1-1.ancient": "让我猜猜，你现在在想的是...我冰箱里的无糖冰淇淋。",
     "ARKNIGHTS_MAP_EVENT_PAGANINI.talk.DEFECT.1-2.char": "<激动的表情>",
     "以下是蕾缪安对话": "----------------------------------------------------------",
+=======
+>>>>>>> Stashed changes
     "ARKNIGHTS_MAP_EVENT_LEMUEN.title": "蕾缪安",
     "ARKNIGHTS_MAP_EVENT_LEMUEN.epithet": "第七厅枢机",
     "ARKNIGHTS_MAP_EVENT_LEMUEN.talk.ANY.0-0r.ancient": "占位符2"
