@@ -48,7 +48,7 @@ public sealed class CreaturePositions : HookedSingletonModel
         }
         foreach (Creature c in CurrentCombatState.Enemies)
         {
-            if ((c.SlotName[0] <= '9') && (c.SlotName[0] >= '0'))
+            if (c.SlotName != null && (c.SlotName[0] <= '9') && (c.SlotName[0] >= '0'))
             {
                 Positions[c] = c.SlotName[0] - '0';
             }
