@@ -1,4 +1,6 @@
 using ArknightsMap.Scripts.Powers;
+using ArknightsMap.Scripts.Utils;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -13,7 +15,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Cards;
 
-[RegisterCard(typeof(TokenCardPool))]
+[RegisterCard(typeof(CurseCardPool))]
 public class Confused : ModCardTemplate
 {
     public override int MaxUpgradeLevel => 0;
@@ -22,10 +24,10 @@ public class Confused : ModCardTemplate
     private const int energyCost = -1;
 
     // 卡牌类型
-    private const CardType type = CardType.Status;
+    private const CardType type = CardType.Curse;
 
     // 卡牌稀有度
-    private const CardRarity rarity = CardRarity.Status;
+    private const CardRarity rarity = CardRarity.Curse;
 
     // 目标类型（AnyEnemy表示任意敌人）
     private const TargetType targetType = TargetType.None;
@@ -49,9 +51,10 @@ public class Confused : ModCardTemplate
         return damage;
     };
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [ModCardVars.Computed("PutOutDmg", 10, CalculateDamage)];
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal, CardKeyword.Exhaust];
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
+        HoverTipFactory.FromKeyword(ConfusedKeyword.Keyword)
+    ];
 
     public Confused()
         : base(energyCost, type, rarity, targetType) { }
@@ -67,7 +70,7 @@ public class Confused : ModCardTemplate
         CardPlay? cardPlay
     )
     {
-        if (target != Owner.Creature)
+        if (target?.Side != CombatSide.Enemy)
         {
             return 1m;
         }

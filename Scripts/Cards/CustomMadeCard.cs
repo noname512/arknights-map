@@ -32,7 +32,7 @@ public class CustomMadeCard : ModCardTemplate
     {
         if (card == this)
         {
-            var relic = Owner.GetRelic<CustomMade>();
+            var relic = Owner.GetRelic<ArknightsMap.Scripts.Relics.CustomMade>();
             DynamicVars["StrengthPower"].BaseValue = relic?.Strength ?? 0;
             DynamicVars["DexterityPower"].BaseValue = relic?.Dexterity ?? 0;
             DynamicVars["Cards"].BaseValue = relic?.Cards ?? 0;

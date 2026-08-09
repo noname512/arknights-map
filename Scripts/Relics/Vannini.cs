@@ -83,7 +83,6 @@ public sealed class Vannini : ModRelicTemplate
     public override Task AfterCombatVictory(CombatRoom room)
     {
         SameTypeCount = 0;
-        cardType = CardType.None;
         InvokeDisplayAmountChanged();
         return Task.CompletedTask;
     }

@@ -37,11 +37,6 @@ public class Fortuna : AbstractSankta
 
     private string GetAttackSfx() => "Attack";
 
-<<<<<<< Updated upstream
-=======
-    
-
->>>>>>> Stashed changes
     
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -72,11 +67,7 @@ public class Fortuna : AbstractSankta
             {
                 await DamageCmd.Attack(Damage02).FromMonster(this).WithAttackerAnim("Attack02", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
                 float percent = CombatState.RunState.Rng.CombatTargets.NextFloat(0,1);
-<<<<<<< Updated upstream
                     if (percent < 0.5)
-=======
-                    if (percent < 0.7)
->>>>>>> Stashed changes
                     {
                         await AddBullet(1);
                     }

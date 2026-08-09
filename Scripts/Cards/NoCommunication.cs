@@ -9,7 +9,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Cards
 {
-    [RegisterCard(typeof(EventCardPool))]
+    [RegisterCard(typeof(CurseCardPool))]
     public class NoCommunication : ModCardTemplate
     {
         private const int energyCost = 4;

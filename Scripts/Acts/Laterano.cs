@@ -55,6 +55,7 @@ public sealed class Laterano : ModActTemplate
         new AncientEventModel[]
         {
             ModelDb.AncientEvent<Paganini>(), // 潘格尼尼
+            ModelDb.AncientEvent<Lemuen>(), // 蕾缪安
             
         };
 
@@ -109,4 +110,7 @@ public sealed class Laterano : ModActTemplate
         int unknownCount = MapPointTypeCounts.StandardRandomUnknownCount(mapRng) - 1;
         return new MapPointTypeCounts(unknownCount, restCount);
     }
+
+    
+
 }

@@ -1,7 +1,9 @@
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -34,11 +36,44 @@ public sealed class SeventhHall : ModRelicTemplate
 
     public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
     {
-        if (player == Owner && combatState.RoundNumber == 2)
+        if (player == Owner && combatState.RoundNumber == 1)
         {
             Flash();
+            await PlayerCmd.GainEnergy(1,Owner);
+            await DrawSpecificCard(choiceContext, CardType.Attack);
+            await DrawSpecificCard(choiceContext, CardType.Skill);
+            await DrawSpecificCard(choiceContext, CardType.Power);
+            await DrawSpecificCard(choiceContext, CardType.Status);
+            await DrawSpecificCard(choiceContext, CardType.Curse);
+            await DrawSpecificCard(choiceContext, CardType.Quest);
             
         }
     }    
     
+
+    public async Task DrawSpecificCard(PlayerChoiceContext choiceContext,CardType cardType)
+    {
+        
+            List<CardModel> cardsIn = (from c in PileType.Draw.GetPile(base.Owner).Cards
+			orderby c.Rarity, c.Id
+			select c).ToList();
+
+            List<CardModel> list = new List<CardModel>();
+
+            foreach(CardModel c in cardsIn)
+            {
+                if (c.Type == cardType)
+                {
+                    list.Add(c);
+                }
+                
+            }
+
+            if (list.Count != 0)
+            {
+                CardModel c = list.TakeRandom(1, base.Owner.RunState.Rng.CombatCardSelection).First();
+                await CardPileCmd.Add(c, PileType.Draw, CardPilePosition.Top, null, true);
+                await CardPileCmd.Draw(choiceContext,1,base.Owner);
+            }
+    }
 }

@@ -34,7 +34,7 @@ public class SanktaEye : AbstractSankta
 
     public int Time = 1;
 
-    private bool HasStatusInDraw(Player p) => p.PlayerCombatState!.DrawPile.Cards.Any(c => c.Type == CardType.Status);
+    private bool HasCurseInDraw(Player p) => p.PlayerCombatState!.DrawPile.Cards.Any(c => c.Type == CardType.Curse);
 
     public override decimal ModifyDamageMultiplicative(
         Creature? target,
@@ -53,7 +53,7 @@ public class SanktaEye : AbstractSankta
         {
             return 1m;
         }
-        if (target.Player != null && HasStatusInDraw(target.Player))
+        if (target.Player != null && HasCurseInDraw(target.Player))
         {
             return 1m;
         }
@@ -73,11 +73,8 @@ public class SanktaEye : AbstractSankta
 
     public override async Task AfterAddedToRoom()
     {
-<<<<<<< Updated upstream
         await PowerCmd.Apply<EyePower>(new ThrowingPlayerChoiceContext(), Creature, 4, Creature, null);
-=======
-        await PowerCmd.Apply<EyePower>(new ThrowingPlayerChoiceContext(), Creature, 5, Creature, null);
->>>>>>> Stashed changes
+        await PowerCmd.Apply<EyeAbilityPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
         await PowerCmd.Apply<SanktaCreaturePower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
     }
 
@@ -100,7 +97,6 @@ public class SanktaEye : AbstractSankta
             "MULTIATTACK",
             async targets =>
             {
-<<<<<<< Updated upstream
                 await DamageCmd
                     .Attack(MultiDamage)
                     .FromMonster(this)
@@ -110,12 +106,6 @@ public class SanktaEye : AbstractSankta
                     .Execute(null);
             },
             new MultiAttackIntent(MultiDamage, 2)
-=======
-                await DamageCmd.Attack(MultiDamage).FromMonster(this).WithHitCount(2).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
-            }, 
-            
-            new MultiAttackIntent(MultiDamage,2)
->>>>>>> Stashed changes
         );
 
         MoveState skill = new MoveState(
@@ -140,10 +130,6 @@ public class SanktaEye : AbstractSankta
         list.Add(skill);
         list.Add(multiattack);
         list.Add(startBranch);
-<<<<<<< Updated upstream
-=======
-    
->>>>>>> Stashed changes
 
         return new MonsterMoveStateMachine(list, startBranch);
     }

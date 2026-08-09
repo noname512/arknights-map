@@ -26,9 +26,9 @@ public class Oren : AbstractSankta
 
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 250, 250);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 250, 250);
-    private int Damage_Skill => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 25, 22);
+    private int Damage_Skill => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 30, 26);
 
-    private int Damage_2_Hit => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 10);
+    private int Damage_2_Hit => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 12, 10);
 
     private int Damage_1_Hit => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 18, 16);
 
@@ -139,10 +139,6 @@ public class Oren : AbstractSankta
         list.Add(attackBranch1);
         list.Add(attackBranch2);
         list.Add(attackBranch3);
-<<<<<<< Updated upstream
-=======
-        
->>>>>>> Stashed changes
 
         gainbullet.FollowUpState = attackSkill;
         attackSkill.FollowUpState = debuff;
