@@ -47,8 +47,8 @@ public class Gracebearer : ModAncientEventTemplate
     public IEnumerable<EventOption> SinglePlayerChoice =>
         [
             RelicOption<BloodBurst>(), //血性爆发
-            RelicOption<HighImpactAssault>(), //高效冲击
-            RelicOption<HighImpactAssault>(), //高效冲击
+            RelicOption<Lullaby>(), //安眠曲
+            RelicOption<PrayInvite>(), //祈祷邀约
         ];
 
     // 生成选项
