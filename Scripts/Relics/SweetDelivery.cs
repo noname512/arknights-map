@@ -47,7 +47,8 @@ public sealed class SweetDelivery : ModRelicTemplate
 
     public RelicModel Sweet(float chance)
     {
-        RelicModel? relic;
+        RelicModel? relic = null;
+        /*
         if (chance < 0.7f)
         {
             relic = ModelDb.Relic<LeesWaffle>().ToMutable() as RelicModel;
@@ -58,8 +59,8 @@ public sealed class SweetDelivery : ModRelicTemplate
         }
         else
         {
-            relic = ModelDb.Relic<YummyCookie>().ToMutable() as RelicModel;
-        }
+            relic = ModelDb.Get<YummyCookie>()?.MutableClone() as RelicModel;
+        }*/
 
         return relic ?? throw new InvalidOperationException("Failed to create relic reward.");
     }

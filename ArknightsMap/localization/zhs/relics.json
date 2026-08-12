@@ -227,5 +227,16 @@
     "ARKNIGHTS_MAP_RELIC_APPLE_FLOWER.flavor": "",
     "ARKNIGHTS_MAP_RELIC_EX_FOEDERE.title": "圣约",
     "ARKNIGHTS_MAP_RELIC_EX_FOEDERE.description": "你每打出1张牌，获得1点[gold]力量[/gold]。\n在你的第7张牌打出后，失去因此获得的所有[gold]力量[/gold]并重新计数。\n计数在每场战斗开始时重置。",
-    "ARKNIGHTS_MAP_RELIC_EX_FOEDERE.flavor": ""
+    "ARKNIGHTS_MAP_RELIC_EX_FOEDERE.flavor": "",
+    "----Gracebearer----": "聆音遗物",
+    "ARKNIGHTS_MAP_RELIC_BLOOD_BURST.title": "血性爆发",
+    "ARKNIGHTS_MAP_RELIC_BLOOD_BURST.description": "当你受到敌人的伤害后，抽[blue]{Cards}[/blue]张牌，然后对这名敌人打出手牌中的所有[gold]攻击牌[/gold]。",
+    "ARKNIGHTS_MAP_RELIC_BLOOD_BURST.flavor": "闭上眼睛，我不想吓到您。",
+    "ARKNIGHTS_MAP_RELIC_LULLABY.title": "安眠曲",
+    "ARKNIGHTS_MAP_RELIC_LULLABY.description": "在休息时，恢复全部生命值。",
+    "ARKNIGHTS_MAP_RELIC_LULLABY.additionalRestSiteHealText": "恢复全部生命值（安眠曲）。",
+    "ARKNIGHTS_MAP_RELIC_LULLABY.flavor": "好好睡吧。",
+    "ARKNIGHTS_MAP_RELIC_PRAY_INVITE.title": "祈祷邀约",
+    "ARKNIGHTS_MAP_RELIC_PRAY_INVITE.description": "如果你连续两回合未打出过攻击牌，则本场战斗中卡牌的伤害变为[blue]{Times}[/blue]倍。",
+    "ARKNIGHTS_MAP_RELIC_PRAY_INVITE.flavor": "若主知晓那些人的恶行，亦会赞许我的行为。"
 }

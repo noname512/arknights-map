@@ -110,4 +110,13 @@ public class Degenbrecher : AbstractWildsMonster
 
         return new MonsterMoveStateMachine(list, watch);
     }
+
+    public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature,
+        bool wasRemovalPrevented, float deathAnimLength)
+    {
+        if ((creature is Tschaggatta) && (NextMove.Id == "WATCH"))
+        {
+            SetMoveImmediate((MoveState)MoveStateMachine.States["JOIN"], true);
+        }
+    }
 }

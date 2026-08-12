@@ -118,5 +118,8 @@
     "ARKNIGHTS_MAP_POWER_ADMIT_POWER.description": "要得到她的认可，得拿出真本事来。",
     "ARKNIGHTS_MAP_POWER_MOMENTUM_MURDER.title": "瞬息杀机",
     "ARKNIGHTS_MAP_POWER_MOMENTUM_MURDER.smartDescription": "当{OwnerName}的生命值低于[blue]{Amount}[/blue]时，在[blue]{CannotAttack}[/blue]回合内无法打出[gold]攻击牌[/gold]，并获得[blue]{Admit}[/blue]层[gold]认可[/gold]。(剩余{TurnLeft}回合）",
-    "ARKNIGHTS_MAP_POWER_MOMENTUM_MURDER.description": "当这名敌人损失一定生命值后，一定回合内无法再打出[gold]攻击牌[/gold]，并获得一定的[gold]认可[/gold]。"
+    "ARKNIGHTS_MAP_POWER_MOMENTUM_MURDER.description": "当这名敌人损失一定生命值后，一定回合内无法再打出[gold]攻击牌[/gold]，并获得一定的[gold]认可[/gold]。",
+    "ARKNIGHTS_MAP_POWER_DOUBLE_DAMAGE_FOREVER_POWER.title": "愿主保佑",
+    "ARKNIGHTS_MAP_POWER_DOUBLE_DAMAGE_FOREVER_POWER.smartDescription": "你的卡牌造成的伤害翻倍。",
+    "ARKNIGHTS_MAP_POWER_DOUBLE_DAMAGE_FOREVER_POWER.description": "你的卡牌造成的伤害翻倍。"
 }

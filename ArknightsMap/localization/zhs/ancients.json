@@ -131,5 +131,9 @@
     "以下是蕾缪安对话": "----------------------------------------------------------",
     "ARKNIGHTS_MAP_EVENT_LEMUEN.title": "蕾缪安",
     "ARKNIGHTS_MAP_EVENT_LEMUEN.epithet": "第七厅枢机",
-    "ARKNIGHTS_MAP_EVENT_LEMUEN.talk.ANY.0-0r.ancient": "占位符2"
+    "ARKNIGHTS_MAP_EVENT_LEMUEN.talk.ANY.0-0r.ancient": "占位符2",
+    "以下是聆音对话": "----------------------------------------------------------",
+    "ARKNIGHTS_MAP_EVENT_GRACEBEARER.title": "聆音",
+    "ARKNIGHTS_MAP_EVENT_GRACEBEARER.epithet": "远方的修女",
+    "ARKNIGHTS_MAP_EVENT_GRACEBEARER.talk.ANY.0-0r.ancient": "愿主赐福于你……"
 }
