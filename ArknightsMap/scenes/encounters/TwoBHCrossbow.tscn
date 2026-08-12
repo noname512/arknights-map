@@ -9,7 +9,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="first" type="Marker2D" parent="."]
-position = Vector2(1250, 710)
+position = Vector2(1250, 750)
 
 [node name="second" type="Marker2D" parent="."]
-position = Vector2(1750, 710)
+position = Vector2(1750, 750)

@@ -27,7 +27,10 @@ public sealed class Hand : ModRelicTemplate
 
     public override async Task<Task> AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
-        if (card.Owner == Owner && card.Type == MegaCrit.Sts2.Core.Entities.Cards.CardType.Attack && card.DynamicVars.Damage.BaseValue >= 15)
+        if (card.Owner == Owner && card.Type == MegaCrit.Sts2.Core.Entities.Cards.CardType.Attack 
+        && card.DynamicVars.TryGetValue("Damage", out var damageVar) 
+                && damageVar != null 
+                && damageVar.BaseValue >= 15)
         {
             Flash();
             foreach (Creature c in Owner.Creature.CombatState!.HittableEnemies)

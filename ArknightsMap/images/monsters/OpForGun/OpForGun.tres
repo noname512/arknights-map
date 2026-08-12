@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://bq81klm08iyhy"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bh5oro2q0wf5l" path="res://ArknightsMap/images/monsters/OpForGun/enemy_9017_achunt.atlas" id="1_8t4xy"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cu03112bpy0t6" path="res://ArknightsMap/images/monsters/OpForGun/enemy_9017_achunt42.skel" id="2_t0ipx"]
+
+[resource]
+atlas_res = ExtResource("1_8t4xy")
+skeleton_file_res = ExtResource("2_t0ipx")

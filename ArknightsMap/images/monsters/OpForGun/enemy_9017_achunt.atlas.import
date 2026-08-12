@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://bh5oro2q0wf5l"
+path="res://.godot/imported/enemy_9017_achunt.atlas-f095ee5bb9ba0a1601d7f88d19639460.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/OpForGun/enemy_9017_achunt.atlas"
+dest_files=["res://.godot/imported/enemy_9017_achunt.atlas-f095ee5bb9ba0a1601d7f88d19639460.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

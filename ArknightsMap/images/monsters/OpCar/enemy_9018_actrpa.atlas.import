@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://eu3xdhdhw75x"
+path="res://.godot/imported/enemy_9018_actrpa.atlas-fcd240b213d72234fb1bf1263a08160d.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/OpCar/enemy_9018_actrpa.atlas"
+dest_files=["res://.godot/imported/enemy_9018_actrpa.atlas-fcd240b213d72234fb1bf1263a08160d.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

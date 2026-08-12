@@ -81,10 +81,7 @@ public class TheSaint : AbstractSankta
                 await CreatureCmd.TriggerAnim(Creature, "A_Attack", 0.8f);
                 await Cmd.Wait(1.0f);
                 await DamageCmd.Attack(heavyAttackPhase1).FromMonster(this).WithNoAttackerAnim().Execute(null);
-                foreach (Creature c in targets)
-                {
-                    await CardPileCmd.AddToCombatAndPreview<Dazed>(c, PileType.Draw, 5, null, CardPilePosition.Top);
-                }
+                
             },
             [new SingleAttackIntent(heavyAttackPhase1)]
         );
@@ -131,10 +128,12 @@ public class TheSaint : AbstractSankta
             {
                 if (CombatState.HittableEnemies.Count == 1)
                 {
-                    IEnumerable<MonsterModel> enemies = new List<MonsterModel>();
-                    enemies.AddItem(ModelDb.Monster<SanktaBlade>());
-                    enemies.AddItem(ModelDb.Monster<SanktaPriest>());
-                    enemies.AddItem(ModelDb.Monster<SanktaSniper>());
+                    List<MonsterModel> enemies = new List<MonsterModel>
+                    {
+                        ModelDb.Monster<SanktaBlade>().ToMutable(),
+                        ModelDb.Monster<SanktaPriest>().ToMutable(),
+                        ModelDb.Monster<SanktaSniper>().ToMutable()
+                    };
                     MonsterModel chosen = enemies.TakeRandom(1, CombatState.Players[0].RunState.Rng.CombatCardGeneration).First();
 
                     await CreatureCmd.TriggerAnim(Creature, "A_Attack", 0.8f);
@@ -162,15 +161,17 @@ public class TheSaint : AbstractSankta
             {
                 if (CombatState.HittableEnemies.Count == 1)
                 {
-                    IEnumerable<MonsterModel> enemies = new List<MonsterModel>();
-                    enemies.AddItem(ModelDb.Monster<SanktaBlade>());
-                    enemies.AddItem(ModelDb.Monster<SanktaPriest>());
-                    enemies.AddItem(ModelDb.Monster<SanktaSniper>());
+                    List<MonsterModel> enemies = new List<MonsterModel>
+                    {
+                        ModelDb.Monster<SanktaBlade>().ToMutable(),
+                        ModelDb.Monster<SanktaPriest>().ToMutable(),
+                        ModelDb.Monster<SanktaSniper>().ToMutable()
+                    };
                     MonsterModel chosen = enemies.TakeRandom(1, CombatState.Players[0].RunState.Rng.CombatCardGeneration).First();
 
                     await CreatureCmd.TriggerAnim(Creature, "B_Skill_Begin_2", 0.8f);
                     await Cmd.Wait(1.0f);
-                    await CreatureCmd.Add(chosen, CombatState);
+                    await CreatureCmd.Add(chosen, CombatState, MegaCrit.Sts2.Core.Combat.CombatSide.Enemy, "first");
                     await PowerCmd.Apply<MinionPower>(
                         new ThrowingPlayerChoiceContext(),
                         CombatState.Enemies.First(c => c.Monster == chosen),

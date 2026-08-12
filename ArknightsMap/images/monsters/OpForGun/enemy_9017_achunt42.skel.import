@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://cu03112bpy0t6"
+path="res://.godot/imported/enemy_9017_achunt42.skel-31d37bed565af29613456597adce5a6d.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/OpForGun/enemy_9017_achunt42.skel"
+dest_files=["res://.godot/imported/enemy_9017_achunt42.skel-31d37bed565af29613456597adce5a6d.spskel"]
+
+[params]
+

@@ -1,5 +1,6 @@
 using ArknightsMap.Scripts.Cards;
 using ArknightsMap.Scripts.Powers;
+using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Combat;
@@ -21,7 +22,7 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class SupersweetieSmiley : AbstractSankta
 {
-    protected override int BulletMax => 0;
+    protected override int BulletMax => 15 + tolerance;
     protected override int InitialBullet => 0;
 
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 450, 450);
@@ -40,21 +41,21 @@ public class SupersweetieSmiley : AbstractSankta
 
     public override async Task AfterAddedToRoom()
     {
+        await base.AfterAddedToRoom();
         await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), Creature, 2, Creature, null);
         await PowerCmd.Apply<SSSPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
     }
 
-    public override Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (side == CombatSide.Enemy)
         {
             var ssspower = Creature.GetPower<SSSPower>();
             if (ssspower != null && ssspower.DisplayAmount > 0)
             {
-                ssspower.UpdateTime(ssspower.DisplayAmount - 1);
+                await ssspower.UpdateTime(ssspower.DisplayAmount - 1);
             }
         }
-        return base.AfterSideTurnEnd(choiceContext, side, participants);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -69,10 +70,6 @@ public class SupersweetieSmiley : AbstractSankta
                 await Cmd.Wait(1.0f);
                 await DamageCmd.Attack(heavyAttack).FromMonster(this).WithAttackerAnim("Attack", 0.8f).Execute(null);
                 var ssspower = Creature.GetPower<SSSPower>();
-                if (ssspower != null)
-                {
-                    ssspower.UpdateTime(15 + tolerance);
-                }
                 foreach (Creature c in targets)
                 {
                     await CardPileCmd.AddToCombatAndPreview<Milk>(c, PileType.Draw, 2, null, CardPilePosition.Random);
@@ -117,7 +114,7 @@ public class SupersweetieSmiley : AbstractSankta
             {
                 await CreatureCmd.TriggerAnim(Creature, "Skill_2", 0.8f);
                 await Cmd.Wait(1.0f);
-                await CreatureCmd.GainBlock(Creature, 10, ValueProp.Move, null);
+                await CreatureCmd.GainBlock(Creature, 15, ValueProp.Move, null);
                 foreach (Creature c in targets)
                 {
                     await CardPileCmd.AddToCombatAndPreview<Milk>(c, PileType.Hand, 2, null, CardPilePosition.Random);
@@ -131,7 +128,7 @@ public class SupersweetieSmiley : AbstractSankta
                     tolerance += 5;
                 }
             },
-            [new DebuffIntent(), new StatusIntent(2)]
+            [new DebuffIntent(), new DefendIntent(), new StatusIntent(2)]
         );
 
         MoveState SplashEnhanced = new MoveState(
@@ -140,7 +137,7 @@ public class SupersweetieSmiley : AbstractSankta
             {
                 await CreatureCmd.TriggerAnim(Creature, "Skill_2", 0.8f);
                 await Cmd.Wait(1.0f);
-                await CreatureCmd.GainBlock(Creature, 15, ValueProp.Move, null);
+                await CreatureCmd.GainBlock(Creature, 20, ValueProp.Move, null);
                 foreach (Creature c in targets)
                 {
                     await CardPileCmd.AddToCombatAndPreview<Milk>(c, PileType.Hand, 3, null, CardPilePosition.Random);
@@ -154,7 +151,7 @@ public class SupersweetieSmiley : AbstractSankta
                     tolerance += 5;
                 }
             },
-            [new DebuffIntent(), new StatusIntent(3)]
+            [new DebuffIntent(), new DefendIntent(), new StatusIntent(3)]
         );
 
         MoveState Summon = new MoveState(
@@ -216,13 +213,14 @@ public class SupersweetieSmiley : AbstractSankta
             {
                 await CreatureCmd.TriggerAnim(Creature, "Stun_End", 0.8f);
                 await PowerCmd.Apply<SSSPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
+                await AddBullet(15 + tolerance);
                 var ssspower = Creature.GetPower<SSSPower>();
                 if (ssspower != null)
                 {
-                    ssspower.UpdateTime(15 + tolerance);
+                    await ssspower.UpdateTime(15 + tolerance);
                 }
             },
-            new SleepIntent()
+            [new SleepIntent(), new AddBulletIntent()]
         );
 
         ConditionalBranchState HeavyBranch = new ConditionalBranchState("HEAVY_BRANCH");

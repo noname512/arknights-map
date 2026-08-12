@@ -83,8 +83,10 @@
     "ARKNIGHTS_MAP_ENCOUNTER_FORTUNA_ELITE.loss": "无罪之人在向{character}倾诉自己的不甘。",
     "ARKNIGHTS_MAP_ENCOUNTER_SSS_BOSS.title": "“超甜微笑”",
     "ARKNIGHTS_MAP_ENCOUNTER_SSS_BOSS.loss": "{character}在奶浆的甜蜜地狱中沉沦。",
-    "ARKNIGHTS_MAP_ENCOUNTER_THE_SAINT.title": "“圣徒”",
-    "ARKNIGHTS_MAP_ENCOUNTER_THE_SAINT.loss": "{character}在PCS系统的清洗下同化。"
+    "ARKNIGHTS_MAP_ENCOUNTER_OP_FOR_GUN_BOSS.title": "假想敌：铳",
+    "ARKNIGHTS_MAP_ENCOUNTER_OP_FOR_GUN_BOSS.loss": "{character}被淹没于源石遍布的圣堂中。",
+    "ARKNIGHTS_MAP_ENCOUNTER_THE_SAINT_BOSS.title": "“圣徒”",
+    "ARKNIGHTS_MAP_ENCOUNTER_THE_SAINT_BOSS.loss": "{character}在PCS系统的清洗下同化。"
     
 
 }

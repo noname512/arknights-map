@@ -33,7 +33,8 @@ public class Entry
 
         RitsuLibFramework.CreateContentPack(ModId).ActEnterWeightedPool(1).ActEnterWeightedPoolCandidate<Wilds>(1, ctx => true, weight => 99999).Apply();
         RitsuLibFramework.CreateContentPack(ModId).ActEnterWeightedPool(2).ActEnterWeightedPoolCandidate<SnowyMountain>(2, ctx => true, weight => 0).Apply();
-
+        RitsuLibFramework.CreateContentPack(ModId).ActEnterWeightedPool(2).ActEnterWeightedPoolCandidate<Laterano>(2, ctx => true, weight => 99999).Apply();
+        
         using (RitsuLibFramework.BeginModDataRegistration(ModId))
         {
             var store = RitsuLibFramework.GetDataStore(ModId);

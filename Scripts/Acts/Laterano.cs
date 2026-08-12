@@ -14,7 +14,7 @@ using Test.Scripts;
 
 namespace ArknightsMap.Scripts.Acts;
 
-//[RegisterAct]
+[RegisterAct]
 public sealed class Laterano : ModActTemplate
 {
     public override string[] MusicBankPaths => ["res://ArknightsMap/audio/ArknightsMap.bank", "res://ArknightsMap/audio/ArknightsMap.bank"];

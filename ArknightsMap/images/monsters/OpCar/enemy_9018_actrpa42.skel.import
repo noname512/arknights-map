@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://mc7hiirtt54e"
+path="res://.godot/imported/enemy_9018_actrpa42.skel-4a50a21b99c9c053d8a509ca30a72e8c.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/OpCar/enemy_9018_actrpa42.skel"
+dest_files=["res://.godot/imported/enemy_9018_actrpa42.skel-4a50a21b99c9c053d8a509ca30a72e8c.spskel"]
+
+[params]
+

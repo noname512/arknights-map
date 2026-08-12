@@ -1,0 +1,223 @@
+
+enemy_9018_actrpa.png
+size: 126,350
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+C_Body
+  rotate: false
+  xy: 2, 288
+  size: 111, 33
+  orig: 111, 35
+  offset: 0, 2
+  index: -1
+C_Body_2
+  rotate: false
+  xy: 2, 166
+  size: 87, 120
+  orig: 87, 124
+  offset: 0, 4
+  index: -1
+C_Body_Square
+  rotate: false
+  xy: 115, 312
+  size: 8, 9
+  orig: 8, 9
+  offset: 0, 0
+  index: -1
+C_L_1
+  rotate: false
+  xy: 82, 117
+  size: 38, 34
+  orig: 38, 34
+  offset: 0, 0
+  index: -1
+C_L_1_IN
+  rotate: false
+  xy: 97, 28
+  size: 26, 23
+  orig: 26, 23
+  offset: 0, 0
+  index: -1
+C_L_1_IN_2
+  rotate: false
+  xy: 73, 85
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+C_L_1_Light
+  rotate: false
+  xy: 82, 159
+  size: 7, 5
+  orig: 7, 5
+  offset: 0, 0
+  index: -1
+C_L_1_Skin
+  rotate: false
+  xy: 66, 18
+  size: 29, 33
+  orig: 29, 33
+  offset: 0, 0
+  index: -1
+C_L_2
+  rotate: false
+  xy: 2, 129
+  size: 38, 35
+  orig: 38, 35
+  offset: 0, 0
+  index: -1
+C_R_2
+  rotate: false
+  xy: 2, 129
+  size: 38, 35
+  orig: 38, 35
+  offset: 0, 0
+  index: -1
+C_L_2_IN
+  rotate: false
+  xy: 97, 3
+  size: 26, 23
+  orig: 26, 23
+  offset: 0, 0
+  index: -1
+C_R_2_IN
+  rotate: false
+  xy: 97, 3
+  size: 26, 23
+  orig: 26, 23
+  offset: 0, 0
+  index: -1
+C_L_2_IN_2
+  rotate: false
+  xy: 73, 53
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+C_R_2_IN_2
+  rotate: false
+  xy: 73, 53
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+C_L_2_Light
+  rotate: false
+  xy: 115, 304
+  size: 8, 6
+  orig: 10, 6
+  offset: 1, 0
+  index: -1
+C_R_1
+  rotate: false
+  xy: 42, 129
+  size: 38, 35
+  orig: 38, 35
+  offset: 0, 0
+  index: -1
+C_R_1_IN
+  rotate: false
+  xy: 34, 5
+  size: 26, 23
+  orig: 26, 23
+  offset: 0, 0
+  index: -1
+C_R_1_IN_2
+  rotate: false
+  xy: 34, 30
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+C_R_1_Light
+  rotate: false
+  xy: 115, 296
+  size: 8, 6
+  orig: 10, 6
+  offset: 1, 0
+  index: -1
+C_R_1_Skin
+  rotate: false
+  xy: 2, 32
+  size: 30, 33
+  orig: 30, 33
+  offset: 0, 0
+  index: -1
+C_R_2_Light
+  rotate: false
+  xy: 115, 288
+  size: 8, 6
+  orig: 10, 6
+  offset: 0, 0
+  index: -1
+C_Tail
+  rotate: false
+  xy: 91, 249
+  size: 33, 16
+  orig: 33, 16
+  offset: 0, 0
+  index: -1
+C_Tail_2
+  rotate: false
+  xy: 2, 10
+  size: 30, 20
+  orig: 30, 20
+  offset: 0, 0
+  index: -1
+C_WeaponD_B
+  rotate: false
+  xy: 91, 228
+  size: 32, 19
+  orig: 32, 19
+  offset: 0, 0
+  index: -1
+C_WeaponD_F
+  rotate: false
+  xy: 91, 267
+  size: 33, 19
+  orig: 33, 19
+  offset: 0, 0
+  index: -1
+C_Weapon_Contorl
+  rotate: false
+  xy: 2, 2
+  size: 21, 6
+  orig: 21, 9
+  offset: 0, 0
+  index: -1
+C_Weapon_Gun
+  rotate: false
+  xy: 2, 323
+  size: 120, 25
+  orig: 120, 25
+  offset: 0, 0
+  index: -1
+C_Weapon_Gun_2
+  rotate: false
+  xy: 105, 96
+  size: 11, 19
+  orig: 11, 19
+  offset: 0, 0
+  index: -1
+C_Weapon_Square_B
+  rotate: false
+  xy: 40, 62
+  size: 31, 65
+  orig: 31, 65
+  offset: 0, 0
+  index: -1
+C_Weapon_Square_F
+  rotate: false
+  xy: 91, 153
+  size: 31, 73
+  orig: 31, 73
+  offset: 0, 0
+  index: -1
+C_Window_B
+  rotate: false
+  xy: 2, 67
+  size: 36, 60
+  orig: 36, 60
+  offset: 0, 0
+  index: -1

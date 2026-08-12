@@ -79,4 +79,19 @@ public abstract class AbstractSankta : ModMonsterTemplate
         if (actual > 0)
             await PowerCmd.Apply<BulletPower>(new ThrowingPlayerChoiceContext(), Creature, actual, Creature, null);
     }
+
+    public async Task SetBullet(int count)
+    {
+        int actual = Math.Min(count, BulletMax); // 只补到上限
+        int num = actual - Bullet;
+        await PowerCmd.Apply<BulletPower>(new ThrowingPlayerChoiceContext(), Creature, num, Creature, null);
+    }
+
+    public override Task BeforeDeath(Creature creature)
+    {
+        
+        return base.BeforeDeath(creature);
+    }
+
+
 }

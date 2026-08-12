@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Powers;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
@@ -47,48 +48,54 @@ public sealed class GiantGun : ModRelicTemplate
         if (player == Owner && Owner.PlayerCombatState!.TurnNumber == 1)
         {
             await PowerCmd.Apply<ThornsPower>(choiceContext, Owner.Creature, 6, Owner.Creature, null);
+            await PowerCmd.Apply<ThornsEnhancePower>(choiceContext, Owner.Creature, 1, Owner.Creature, null);
         }
     }
 
-    [HarmonyPatch(typeof(ThornsPower), "BeforeDamageReceived")]
-    public static class ThornsPowerBeforePatch
+
+    public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        [HarmonyPostfix]
-        public static async Task Postfix(
-            Task __result,
-            ThornsPower __instance,
-            PlayerChoiceContext choiceContext,
-            Creature target,
-            decimal amount,
-            ValueProp props,
-            Creature? dealer,
-            CardModel? cardSource
-        )
+        if (target != base.Owner.Creature)
         {
-            if (
-                target.Player != null
-                && target.Player.GetRelic<GiantGun>() != null
-                && target == __instance.Owner
-                && dealer != null
-                && (props.IsPoweredAttack() || cardSource is Omnislice)
-            )
-            {
-                foreach (Creature m in __instance.CombatState.HittableEnemies)
-                {
-                    if (m != dealer)
-                    {
-                        await CreatureCmd.Damage(
-                            choiceContext,
-                            m,
-                            __instance.Amount,
-                            ValueProp.Unpowered | ValueProp.SkipHurtAnim,
-                            __instance.Owner,
-                            null,
-                            null
-                        );
-                    }
-                }
-            }
+            return;
         }
-    }
+        if (target.Player?.GetRelic<GiantGun>() == null)
+        {
+            return;
+        }
+        if (dealer == null)
+        {
+            return;
+        }
+        if (!props.IsPoweredAttack() && cardSource is not Omnislice)
+        {
+            return;
+        }
+        if (target.GetPowerAmount<ThornsPower>() <= 0 || target.GetPower<ThornsEnhancePower>() == null)
+        {
+            return;
+        }
+
+        Flash();
+
+        var ownerCreature = Owner.Creature;
+        var hittableEnemies = ownerCreature?.CombatState?.HittableEnemies;
+        if (ownerCreature == null || hittableEnemies == null)
+        {
+            return;
+        }
+
+        foreach (Creature c in hittableEnemies)
+        {
+            if (c != dealer)
+            {
+                await CreatureCmd.Damage(choiceContext, c, Owner.Creature.GetPowerAmount<ThornsPower>(), ValueProp.Unpowered | ValueProp.SkipHurtAnim, Owner.Creature, null, null);
+            }
+			
+		}
+	}
 }
+        
+    
+
+

@@ -74,7 +74,7 @@ public class SanktaClaw : AbstractSankta
                 await DamageCmd.Attack(Damage_Skill).FromMonster(this).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
                 foreach (Creature c in targets)
                 {
-                    await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), c, 2, c, null);
+                    await PowerCmd.Apply<VulnerablePower>(new ThrowingPlayerChoiceContext(), c, 2, c, null);
                 }
             },
             [new SingleAttackIntent(Damage_Skill), new DebuffIntent()]
@@ -90,19 +90,7 @@ public class SanktaClaw : AbstractSankta
         return new MonsterMoveStateMachine(list, attack);
     }
 
-    public override Task AfterSideTurnEndLate(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
-    {
-        var power = Creature.GetPower<PlunderPower>();
-        if (side == CombatSide.Enemy && power != null && power.DynamicVars["HitTime"].BaseValue == 3)
-        {
-            foreach (Creature c in CombatState.PlayerCreatures)
-            {
-                PowerCmd.Apply<LoseEnergyNextTurnPower>(new ThrowingPlayerChoiceContext(), c, 2, c, null);
-            }
-            power.UpdateHitTime(0);
-        }
-        return base.AfterSideTurnEndLate(choiceContext, side, participants);
-    }
+    
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
     {
@@ -115,7 +103,6 @@ public class SanktaClaw : AbstractSankta
 
         attackState.NextState = idleState;
         skillState.NextState = idleState;
-
         startState.NextState = idleState;
 
         CreatureAnimator creatureAnimator = new CreatureAnimator(startState, controller);

@@ -50,15 +50,15 @@ public sealed class SweetDelivery : ModRelicTemplate
         RelicModel? relic;
         if (chance < 0.7f)
         {
-            relic = ModelDb.Get<LeesWaffle>()?.MutableClone() as RelicModel;
+            relic = ModelDb.Relic<LeesWaffle>().ToMutable() as RelicModel;
         }
         else if (chance < 0.9f)
         {
-            relic = ModelDb.Get<IceCream>()?.MutableClone() as RelicModel;
+            relic = ModelDb.Relic<IceCream>().ToMutable() as RelicModel;
         }
         else
         {
-            relic = ModelDb.Get<YummyCookie>()?.MutableClone() as RelicModel;
+            relic = ModelDb.Relic<YummyCookie>().ToMutable() as RelicModel;
         }
 
         return relic ?? throw new InvalidOperationException("Failed to create relic reward.");

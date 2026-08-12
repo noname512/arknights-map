@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crtrrmwt6wcf7"
-path="res://.godot/imported/TheSaintHistory.png-8236e64ee0a7d9ad28978a60c6306eff.ctex"
+uid="uid://b5x04o2l2rioa"
+path="res://.godot/imported/TheSaintBossIcon.png-eb9dab6b718fb36d80d1a31d9cecebb8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/map/TheSaintHistory.png"
-dest_files=["res://.godot/imported/TheSaintHistory.png-8236e64ee0a7d9ad28978a60c6306eff.ctex"]
+source_file="res://ArknightsMap/images/map/TheSaintBossIcon.png"
+dest_files=["res://.godot/imported/TheSaintBossIcon.png-eb9dab6b718fb36d80d1a31d9cecebb8.ctex"]
 
 [params]
 

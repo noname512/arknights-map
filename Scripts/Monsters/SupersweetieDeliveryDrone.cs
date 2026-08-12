@@ -44,7 +44,7 @@ public class SupersweetieDeliveryDrone : AbstractSankta
                     await CardPileCmd.AddToCombatAndPreview<Milk>(c, PileType.Draw, 1, null, CardPilePosition.Random);
                 }
             },
-            new SingleAttackIntent(Damage)
+            [new SingleAttackIntent(Damage), new StatusIntent(1)]
         );
 
         attack.FollowUpState = attack;
