@@ -64,6 +64,7 @@ public sealed class Laterano : ModActTemplate
         {
             ModelDb.Encounter<SSSBoss>(),
             ModelDb.Encounter<TheSaintBoss>(),
+            ModelDb.Encounter<OpForGunBoss>(),
         };
 
     public override IEnumerable<EncounterModel> GenerateAllEncounters() =>

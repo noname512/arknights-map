@@ -19,23 +19,24 @@ using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Models;
 
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
 public class OpForGun : AbstractSankta
 {
-    protected override int BulletMax => 15 + tolerance;
+    protected override int BulletMax => 15;
     protected override int InitialBullet => 0;
 
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 800, 750);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 800, 750);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 400, 400);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 400, 400);
 
     private int run => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 20, 20);
 
-    
+    private int multi_attack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 6, 6);
 
-    public static int tolerance = 0;
+    public int Attack_Time = 1;
 
     
 
@@ -79,6 +80,48 @@ public class OpForGun : AbstractSankta
         await base.AfterAddedToRoom();
         await PowerCmd.Apply<SurroundedPower>(new ThrowingPlayerChoiceContext(), base.CombatState.GetOpponentsOf(base.Creature), 1m, base.Creature, null);
         await PowerCmd.Apply<BackAttackRightPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
+        await PowerCmd.Apply<ShieldPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
+    }
+
+    public override Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+    {
+        if (side == CombatSide.Enemy && participants.Contains(Creature))
+        {
+            Attack_Time += 1;
+        }
+        return base.AfterSideTurnEnd(choiceContext, side, participants);
+    }
+
+    public override async Task AfterDamageReceivedLate(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        DamageResult result,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource
+    )
+    {
+        if (dealer == Creature)
+        {
+            foreach (Creature c in CombatState.GetOpponentsOf(Creature))
+            {
+                await PowerCmd.Apply<CorrosionDamagePower>(new ThrowingPlayerChoiceContext(), c, 1m, Creature, null);
+            }
+        }
+    }
+
+    public bool ShouldRun()
+    {
+        bool shouldRun = true;
+        foreach (Creature c in CombatState.GetTeammatesOf(Creature))
+        {
+            if (c.Monster is OpCar car && car.OnRight != OnRight)
+            {
+                shouldRun = false;
+                break;
+            }
+        }
+        return shouldRun;
     }
 
     
@@ -88,30 +131,53 @@ public class OpForGun : AbstractSankta
         List<MonsterState> list = new List<MonsterState>();
 
         MoveState Run = new MoveState(
-            "SUMMON",
+            "RUN",
             async targets =>
             {
                 await CreatureCmd.TriggerAnim(Creature, "Skill_1", 0.8f);
-                await DamageCmd.Attack(run).FromMonster(this).Execute(null);
-                Tween tween = tween = NCombatRoom.Instance.CreateTween().SetParallel().SetEase(Tween.EaseType.Out)
-						.SetTrans(Tween.TransitionType.Cubic);
+                await DamageCmd.Attack(run).FromMonster(this).Execute(null);      
                 if (OnRight)
                 {
                     GunPosition.GlobalPosition = new Vector2(550.0f, GunPosition.GlobalPosition.Y);
+                    await CreatureCmd.Add<OpCar>(CombatState, "second_left");
                 }
                 else
                 {
                     GunPosition.GlobalPosition = new Vector2(1450.0f, GunPosition.GlobalPosition.Y);
+                    await CreatureCmd.Add<OpCar>(CombatState, "second_right");
                 }
                 await UpdatePosition();
+                Attack_Time = 1;
+                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 2, Creature, null);
+                
                 
             },
-            [new SingleAttackIntent(run)]
+            [new SingleAttackIntent(run), new SummonIntent(), new BuffIntent()]
         );
 
+        MoveState MultiHit = new MoveState(
+            "MULTI_HIT",
+            async targets =>
+            {
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.8f);
+                await DamageCmd.Attack(multi_attack).WithHitCount(Attack_Time).FromMonster(this).Execute(null);
+                
+            },
+            [new MultiAttackIntent(multi_attack, () => Attack_Time)]
+        );
+
+        ConditionalBranchState RunBranch = new ConditionalBranchState(
+            "RUN_BRANCH"
+        );
+        RunBranch.AddState(Run, () => ShouldRun());
+        RunBranch.AddState(MultiHit, () => !ShouldRun());
+
         list.Add(Run);
-        Run.FollowUpState = Run;
-        return new MonsterMoveStateMachine(list, Run);
+        list.Add(MultiHit);
+        list.Add(RunBranch);
+        Run.FollowUpState = RunBranch;
+        MultiHit.FollowUpState = RunBranch;
+        return new MonsterMoveStateMachine(list, MultiHit);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

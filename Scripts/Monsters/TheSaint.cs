@@ -15,6 +15,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
+using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -42,6 +43,12 @@ public class TheSaint : AbstractSankta
 
     private int block => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 10, 10);
 
+    private int Phase = 1;
+
+    private bool ShouldPreventDamage = true;
+
+    private bool HasStun = false;
+
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
@@ -56,6 +63,50 @@ public class TheSaint : AbstractSankta
             }
         }
     }
+
+    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
+{
+    if (target != Creature) 
+    return base.ModifyDamageAdditive(target, amount, props, dealer, cardSource, cardPlay);
+    
+    // 只在 Phase 1 且还没触发转阶段时锁血
+    if (Phase != 1 || !ShouldPreventDamage)
+    {
+        return base.ModifyDamageAdditive(target, amount, props, dealer, cardSource, cardPlay);
+    }
+    
+    var threshold = Creature.MaxHp / 2;
+    
+    // 这次伤害本来就不会打到半血以下，不用管
+    if (Creature.CurrentHp - amount >= threshold)
+    {
+        return base.ModifyDamageAdditive(target, amount, props, dealer, cardSource, cardPlay);
+    }
+
+    if (Creature.CurrentHp == threshold && ShouldPreventDamage)
+    {
+        return -amount;
+    }
+    
+    // 只扣到半血为止
+    var targetDamage = Creature.CurrentHp - threshold;
+    return targetDamage - amount;
+}
+
+    
+
+    public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
+    {
+        if (target == Creature && Phase == 1 && Creature.CurrentHp == Creature.MaxHp / 2 && !HasStun)
+        {
+            await CreatureCmd.Stun(Creature, "REVIVE");
+            HasStun = true;
+            await CreatureCmd.TriggerAnim(Creature, "A_Revive_1", 0.8f);
+        }
+        
+    }
+
+
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
@@ -212,11 +263,25 @@ public class TheSaint : AbstractSankta
             [new SingleAttackIntent(debuffAttackPhase1), new DebuffIntent()]
         );
 
-        MoveState fly = new MoveState(
+        MoveState Revive = new MoveState(
+            "REVIVE",
+            async targets =>
+            {
+                
+                await CreatureCmd.TriggerAnim(Creature, "A_Revive_3", 0.8f);
+                await Cmd.Wait(1.0f);
+            },
+            [new BuffIntent()]
+        );
+
+        MoveState Fly = new MoveState(
             "FLY",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "A_Attack", 0.8f);
+                ShouldPreventDamage = false;
+                Phase = 2;
+                await CreatureCmd.TriggerAnim(Creature, "B_Leave_1", 0.8f);
+                await PowerCmd.Apply<SoarPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
                 await Cmd.Wait(1.0f);
             },
             [new DebuffIntent()]
@@ -231,7 +296,8 @@ public class TheSaint : AbstractSankta
         list.Add(SummonPhase2);
         list.Add(AttackDebuffPhase1);
         list.Add(AttackDebuffPhase2);
-        list.Add(fly);
+        list.Add(Revive);
+        list.Add(Fly);
 
         GiveConfused.FollowUpState = HeavyAttackPhase1;
         HeavyAttackPhase1.FollowUpState = SummonPhase1;
@@ -239,10 +305,10 @@ public class TheSaint : AbstractSankta
         SummonPhase1.FollowUpState = MultiAttackPhase1;
         MultiAttackPhase1.FollowUpState = AttackDebuffPhase1;
         AttackDebuffPhase1.FollowUpState = SummonPhase1;
-
-        fly.FollowUpState = HeavyAttackPhase2;
+        
+        Revive.FollowUpState = Fly;
+        Fly.FollowUpState = HeavyAttackPhase2;
         HeavyAttackPhase2.FollowUpState = SummonPhase2;
-
         SummonPhase2.FollowUpState = MultiAttackPhase2;
         MultiAttackPhase2.FollowUpState = AttackDebuffPhase2;
         AttackDebuffPhase2.FollowUpState = SummonPhase2;
@@ -253,15 +319,22 @@ public class TheSaint : AbstractSankta
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
     {
         AnimState idleStatePhase1 = new AnimState("A_Idle", isLooping: true);
+        AnimState idleStateRevivePhase1 = new AnimState("B_Idle_1", isLooping: true);
         AnimState idleStatePhase2 = new AnimState("B_Idle_2", isLooping: true);
 
         AnimState Phase1AttackState = new AnimState("A_Attack");
+        AnimState Phase2ReviveState1 = new AnimState("A_Revive_1");
+        AnimState Phase2ReviveState2 = new AnimState("A_Revive_2", isLooping: true);
+        AnimState Phase2ReviveState3 = new AnimState("A_Revive_3");
+        
+
         AnimState Phase2AttackStateBegin = new AnimState("B_Attack_Begin_2");
         AnimState Phase2AttackStateLoop = new AnimState("B_Attack_Loop_2");
         AnimState Phase2AttackStateEnd = new AnimState("B_Attack_End_2");
         AnimState Phase2SkillStateBegin = new AnimState("B_Skill_Begin_2");
         AnimState Phase2SkillStateLoop = new AnimState("B_Skill_Loop_2");
         AnimState Phase2SkillStateEnd = new AnimState("B_Skill_End_2");
+        AnimState Phase2FlyState = new AnimState("B_Leave_1");
 
         AnimState dieState = new AnimState("Die");
         AnimState skillState = new AnimState("Skill");
@@ -270,16 +343,25 @@ public class TheSaint : AbstractSankta
         Phase2AttackStateBegin.NextState = Phase2AttackStateLoop;
         Phase2AttackStateLoop.NextState = Phase2AttackStateEnd;
         Phase2AttackStateEnd.NextState = idleStatePhase1;
+        Phase2ReviveState1.NextState = Phase2ReviveState2;
+        Phase2ReviveState3.NextState = idleStateRevivePhase1;
+        Phase2FlyState.NextState = idleStatePhase2;
 
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleStatePhase1, controller);
 
         creatureAnimator.AddAnyState("A_Attack", Phase1AttackState);
+        creatureAnimator.AddAnyState("A_Revive_1", Phase2ReviveState1);
+        creatureAnimator.AddAnyState("A_Revive_2", Phase2ReviveState2);
+        creatureAnimator.AddAnyState("A_Revive_3", Phase2ReviveState3);
+
         creatureAnimator.AddAnyState("B_Attack_Begin_2", Phase2AttackStateBegin);
         creatureAnimator.AddAnyState("B_Attack_Loop_2", Phase2AttackStateLoop);
         creatureAnimator.AddAnyState("B_Attack_End_2", Phase2AttackStateEnd);
         creatureAnimator.AddAnyState("B_Skill_Begin_2", Phase2SkillStateBegin);
         creatureAnimator.AddAnyState("B_Skill_Loop_2", Phase2SkillStateLoop);
         creatureAnimator.AddAnyState("B_Skill_End_2", Phase2SkillStateEnd);
+
+        creatureAnimator.AddAnyState("B_Leave_1", Phase2FlyState);
 
         creatureAnimator.AddAnyState("Skill", skillState);
         creatureAnimator.AddAnyState("Die", dieState);
