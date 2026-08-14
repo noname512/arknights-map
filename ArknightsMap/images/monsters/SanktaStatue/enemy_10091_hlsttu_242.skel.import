@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://b2k4appkvih87"
+path="res://.godot/imported/enemy_10091_hlsttu_242.skel-3696ab94d74c29dde122820461653da4.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SanktaStatue/enemy_10091_hlsttu_242.skel"
+dest_files=["res://.godot/imported/enemy_10091_hlsttu_242.skel-3696ab94d74c29dde122820461653da4.spskel"]
+
+[params]
+

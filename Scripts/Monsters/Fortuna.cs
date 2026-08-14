@@ -37,6 +37,13 @@ public class Fortuna : AbstractSankta
 
     private string GetAttackSfx() => "Attack";
 
+    public override async Task AfterAddedToRoom()
+    {
+        await base.AfterAddedToRoom();
+        await PowerCmd.Apply<FortunaPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
+    }
+
+
     
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -81,7 +88,7 @@ public class Fortuna : AbstractSankta
             {
                 await CreatureCmd.TriggerAnim(Creature, "Skill_Begin", 0.8f);
                 await AddBullet(2);
-                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 3, Creature, null);
+                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 2, Creature, null);
             },
             [new BuffIntent(), new AddBulletIntent()]
         );

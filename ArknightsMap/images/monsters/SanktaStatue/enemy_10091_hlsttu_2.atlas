@@ -1,0 +1,223 @@
+
+enemy_10091_hlsttu_2.png
+size: 173,710
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+C_B_HeadCloth
+  rotate: false
+  xy: 2, 290
+  size: 92, 74
+  orig: 92, 74
+  offset: 0, 0
+  index: -1
+C_Chest
+  rotate: false
+  xy: 2, 2
+  size: 48, 66
+  orig: 48, 66
+  offset: 0, 0
+  index: -1
+C_L_Arm
+  rotate: false
+  xy: 53, 51
+  size: 32, 40
+  orig: 32, 40
+  offset: 0, 0
+  index: -1
+C_L_ArmCloth_A
+  rotate: false
+  xy: 2, 589
+  size: 169, 119
+  orig: 169, 119
+  offset: 0, 0
+  index: -1
+C_L_ArmCloth_B
+  rotate: false
+  xy: 2, 180
+  size: 89, 108
+  orig: 89, 108
+  offset: 0, 0
+  index: -1
+C_L_Face
+  rotate: false
+  xy: 93, 184
+  size: 73, 69
+  orig: 73, 69
+  offset: 0, 0
+  index: -1
+C_L_Fin_a
+  rotate: false
+  xy: 107, 462
+  size: 20, 12
+  orig: 20, 12
+  offset: 0, 0
+  index: -1
+C_L_Fin_b
+  rotate: false
+  xy: 107, 476
+  size: 21, 15
+  orig: 22, 15
+  offset: 1, 0
+  index: -1
+C_L_Fin_c
+  rotate: false
+  xy: 107, 409
+  size: 14, 14
+  orig: 14, 15
+  offset: 0, 1
+  index: -1
+C_L_Forearm
+  rotate: false
+  xy: 130, 457
+  size: 32, 43
+  orig: 32, 43
+  offset: 0, 0
+  index: -1
+C_L_Hair
+  rotate: false
+  xy: 135, 10
+  size: 27, 67
+  orig: 28, 67
+  offset: 0, 0
+  index: -1
+C_L_Hand
+  rotate: false
+  xy: 109, 28
+  size: 23, 19
+  orig: 24, 20
+  offset: 1, 1
+  index: -1
+C_L_Horn
+  rotate: false
+  xy: 96, 255
+  size: 74, 86
+  orig: 74, 86
+  offset: 0, 0
+  index: -1
+C_L_Wing_A
+  rotate: false
+  xy: 2, 139
+  size: 57, 39
+  orig: 62, 39
+  offset: 0, 0
+  index: -1
+C_L_Wing_B
+  rotate: false
+  xy: 2, 70
+  size: 49, 67
+  orig: 49, 69
+  offset: 0, 0
+  index: -1
+C_Leg
+  rotate: false
+  xy: 93, 79
+  size: 69, 103
+  orig: 69, 103
+  offset: 0, 0
+  index: -1
+C_R_Arm
+  rotate: false
+  xy: 130, 539
+  size: 33, 48
+  orig: 33, 48
+  offset: 0, 0
+  index: -1
+C_R_Fin_a
+  rotate: false
+  xy: 106, 12
+  size: 12, 14
+  orig: 12, 14
+  offset: 0, 0
+  index: -1
+C_R_Fin_b
+  rotate: false
+  xy: 107, 436
+  size: 16, 13
+  orig: 16, 13
+  offset: 0, 0
+  index: -1
+C_R_Fin_c
+  rotate: false
+  xy: 107, 425
+  size: 16, 9
+  orig: 16, 9
+  offset: 0, 0
+  index: -1
+C_R_Fin_d
+  rotate: false
+  xy: 107, 451
+  size: 17, 9
+  orig: 17, 9
+  offset: 0, 0
+  index: -1
+C_R_Fin_e
+  rotate: false
+  xy: 82, 21
+  size: 22, 12
+  orig: 22, 12
+  offset: 0, 0
+  index: -1
+C_R_Forearm
+  rotate: false
+  xy: 130, 502
+  size: 33, 35
+  orig: 33, 36
+  offset: 0, 1
+  index: -1
+C_R_Hair
+  rotate: false
+  xy: 2, 366
+  size: 103, 125
+  orig: 103, 125
+  offset: 0, 0
+  index: -1
+C_R_Hand
+  rotate: false
+  xy: 52, 31
+  size: 28, 18
+  orig: 29, 18
+  offset: 1, 0
+  index: -1
+C_R_Horn
+  rotate: false
+  xy: 61, 93
+  size: 28, 85
+  orig: 28, 86
+  offset: 0, 1
+  index: -1
+C_R_Wing_A
+  rotate: false
+  xy: 87, 49
+  size: 46, 28
+  orig: 47, 29
+  offset: 1, 0
+  index: -1
+C_R_Wing_Aa
+  rotate: false
+  xy: 82, 35
+  size: 25, 12
+  orig: 25, 12
+  offset: 0, 0
+  index: -1
+C_R_Wing_B
+  rotate: false
+  xy: 107, 343
+  size: 59, 61
+  orig: 59, 61
+  offset: 0, 0
+  index: -1
+C_Ring
+  rotate: false
+  xy: 2, 493
+  size: 126, 94
+  orig: 128, 94
+  offset: 0, 0
+  index: -1
+C_Waist
+  rotate: false
+  xy: 126, 406
+  size: 42, 49
+  orig: 42, 49
+  offset: 0, 0
+  index: -1

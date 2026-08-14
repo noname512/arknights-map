@@ -41,7 +41,7 @@ public class SupersweetieDeliveryDrone : AbstractSankta
                 await DamageCmd.Attack(Damage).FromMonster(this).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
                 foreach (Creature c in targets)
                 {
-                    await CardPileCmd.AddToCombatAndPreview<Milk>(c, PileType.Draw, 1, null, CardPilePosition.Random);
+                    await CardPileCmd.AddToCombatAndPreview<Milk>(c, PileType.Discard, 1, null, CardPilePosition.Random);
                 }
             },
             [new SingleAttackIntent(Damage), new StatusIntent(1)]

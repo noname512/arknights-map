@@ -89,7 +89,7 @@ public abstract class AbstractSankta : ModMonsterTemplate
 
     public override Task BeforeDeath(Creature creature)
     {
-        
+        CreatureCmd.TriggerAnim(creature, "Die", 0.5f);
         return base.BeforeDeath(creature);
     }
 

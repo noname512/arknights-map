@@ -73,24 +73,19 @@ public sealed class Laterano : ModActTemplate
             ModelDb.Encounter<WasteLanders>(),
             ModelDb.Encounter<SingleSanktaBlade>(),
             ModelDb.Encounter<SinglePathfinderCannon>(),
-            ModelDb.Encounter<ThreeWarriors>(), 
-
+            ModelDb.Encounter<ThreeWarriors>(),
+            ModelDb.Encounter<SingleSanktaClaw>(), 
 
             ModelDb.Encounter<SinglePathfinderCar>(),
             ModelDb.Encounter<TwoBHCrossbow>(),
             ModelDb.Encounter<TwoMage>(),
             ModelDb.Encounter<TwoWarriors>(),
             ModelDb.Encounter<ThreeEyes>(),
-            
-
+            ModelDb.Encounter<ClawAndStatue>(),
 
             ModelDb.Encounter<FortunaElite>(),
             ModelDb.Encounter<OrenElite>(),
-            ModelDb.Encounter<ThreeSanktas>(),
-
-            
-            
-            
+            ModelDb.Encounter<ThreeSanktas>(),            
         };
 
     protected override void ApplyActDiscoveryOrderModifications(UnlockState unlockState) { }

@@ -25,8 +25,8 @@ public class SupersweetieSmiley : AbstractSankta
     protected override int BulletMax => 15 + tolerance;
     protected override int InitialBullet => 0;
 
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 450, 450);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 450, 450);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 500, 500);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 500, 500);
 
     private int heavyAttack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 20, 20);
 
@@ -78,7 +78,7 @@ public class SupersweetieSmiley : AbstractSankta
 
                 if (ssspower != null && ssspower.DynamicVars["Time"].BaseValue == 0)
                 {
-                    await CreatureCmd.Stun(Creature, "HEAVY_ATTACK");
+                    await CreatureCmd.Stun(Creature, "WAIT");
                     tolerance += 5;
                 }
             },
@@ -101,7 +101,7 @@ public class SupersweetieSmiley : AbstractSankta
                 var ssspower = Creature.GetPower<SSSPower>();
                 if (ssspower != null && ssspower.DynamicVars["Time"].BaseValue == 0)
                 {
-                    await CreatureCmd.Stun(Creature, "HEAVY_ATTACK");
+                    await CreatureCmd.Stun(Creature, "WAIT");
                     tolerance += 5;
                 }
             },
@@ -124,7 +124,7 @@ public class SupersweetieSmiley : AbstractSankta
                 var ssspower = Creature.GetPower<SSSPower>();
                 if (ssspower != null && ssspower.DynamicVars["Time"].BaseValue == 0)
                 {
-                    await CreatureCmd.Stun(Creature, "HEAVY_ATTACK");
+                    await CreatureCmd.Stun(Creature, "WAIT");
                     tolerance += 5;
                 }
             },
@@ -147,7 +147,7 @@ public class SupersweetieSmiley : AbstractSankta
                 var ssspower = Creature.GetPower<SSSPower>();
                 if (ssspower != null && ssspower.DynamicVars["Time"].BaseValue == 0)
                 {
-                    await CreatureCmd.Stun(Creature, "HEAVY_ATTACK");
+                    await CreatureCmd.Stun(Creature, "WAIT");
                     tolerance += 5;
                 }
             },
@@ -172,7 +172,7 @@ public class SupersweetieSmiley : AbstractSankta
                 var ssspower = Creature.GetPower<SSSPower>();
                 if (ssspower != null && ssspower.DynamicVars["Time"].BaseValue == 0)
                 {
-                    await CreatureCmd.Stun(Creature, "HEAVY_ATTACK");
+                    await CreatureCmd.Stun(Creature, "WAIT");
                     tolerance += 5;
                 }
             },
@@ -200,7 +200,7 @@ public class SupersweetieSmiley : AbstractSankta
                 var ssspower = Creature.GetPower<SSSPower>();
                 if (ssspower != null && ssspower.DynamicVars["Time"].BaseValue == 0)
                 {
-                    await CreatureCmd.Stun(Creature, "HEAVY_ATTACK");
+                    await CreatureCmd.Stun(Creature, "WAIT");
                     tolerance += 5;
                 }
             },

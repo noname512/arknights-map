@@ -63,7 +63,7 @@ public class PathfinderWarrior : AbstractSankta
                 await Cmd.Wait(1.0f);
                 foreach (Creature c in CombatState.HittableEnemies)
                 {
-                    await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), c, 2, Creature, null);
+                    await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), c, 1, Creature, null);
                 }
                 await UseBullet(1);
             },

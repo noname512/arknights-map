@@ -27,8 +27,8 @@ public class TheSaint : AbstractSankta
     protected override int BulletMax => 0;
     protected override int InitialBullet => 0;
 
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 600, 600);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 600, 600);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 500, 500);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 500, 500);
 
     private int heavyAttackPhase1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 40, 40);
 
@@ -97,7 +97,7 @@ public class TheSaint : AbstractSankta
 
     public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (target == Creature && Phase == 1 && Creature.CurrentHp == Creature.MaxHp / 2 && !HasStun)
+        if (target == Creature && Phase == 1 && Creature.CurrentHp <= Creature.MaxHp / 2 && !HasStun)
         {
             await CreatureCmd.Stun(Creature, "REVIVE");
             HasStun = true;
@@ -141,13 +141,10 @@ public class TheSaint : AbstractSankta
             "HEAVY_ATTACK_PHASE2",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "B_Attack", 0.8f);
+                await CreatureCmd.TriggerAnim(Creature, "B_Attack_Begin_2", 0.8f);
                 await Cmd.Wait(1.0f);
                 await DamageCmd.Attack(heavyAttackPhase2).FromMonster(this).WithNoAttackerAnim().Execute(null);
-                foreach (Creature c in targets)
-                {
-                    await CardPileCmd.AddToCombatAndPreview<Dazed>(c, PileType.Draw, 5, null, CardPilePosition.Top);
-                }
+                
             },
             [new SingleAttackIntent(heavyAttackPhase2)]
         );
@@ -255,7 +252,7 @@ public class TheSaint : AbstractSankta
             "ATTACK_DEBUFF_PHASE2",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "A_Attack", 0.8f);
+                await CreatureCmd.TriggerAnim(Creature, "B_Attack_Begin_2", 0.8f);
                 await Cmd.Wait(1.0f);
                 await DamageCmd.Attack(debuffAttackPhase1).FromMonster(this).WithNoAttackerAnim().Execute(null);
                 foreach (Creature c in targets) { }
@@ -342,7 +339,12 @@ public class TheSaint : AbstractSankta
         Phase1AttackState.NextState = idleStatePhase1;
         Phase2AttackStateBegin.NextState = Phase2AttackStateLoop;
         Phase2AttackStateLoop.NextState = Phase2AttackStateEnd;
-        Phase2AttackStateEnd.NextState = idleStatePhase1;
+        Phase2AttackStateEnd.NextState = idleStatePhase2;
+
+        Phase2SkillStateBegin.NextState = Phase2SkillStateLoop;
+        Phase2SkillStateLoop.NextState = Phase2SkillStateEnd;
+        Phase2SkillStateEnd.NextState = idleStatePhase2;
+
         Phase2ReviveState1.NextState = Phase2ReviveState2;
         Phase2ReviveState3.NextState = idleStateRevivePhase1;
         Phase2FlyState.NextState = idleStatePhase2;

@@ -38,7 +38,7 @@ public class ShieldPower : ModPowerTemplate
         {
             return 1m;
         }
-        return 0.2m;
+        return 0.5m;
     }
 
     

@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://btm4ipw1lai5o"
+path="res://.godot/imported/enemy_10091_hlsttu_2.atlas-fff164f13664e21338fd49bf0800f47a.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SanktaStatue/enemy_10091_hlsttu_2.atlas"
+dest_files=["res://.godot/imported/enemy_10091_hlsttu_2.atlas-fff164f13664e21338fd49bf0800f47a.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

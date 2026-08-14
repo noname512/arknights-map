@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Powers;
 using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
@@ -35,6 +36,11 @@ public class Oren : AbstractSankta
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
+    public override async Task AfterAddedToRoom()
+    {
+        await base.AfterAddedToRoom();
+        await PowerCmd.Apply<OrenPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
+    }
     public override async Task AfterDamageReceivedLate(
         PlayerChoiceContext choiceContext,
         Creature target,
