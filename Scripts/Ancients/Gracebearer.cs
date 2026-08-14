@@ -62,6 +62,6 @@ public class Gracebearer : ModAncientEventTemplate
 
     public override bool IsValidForAct(ActModel act)
     {
-        return act is Glory;    //TODO: 拉特兰
+        return act is Laterano;
     }
 }
