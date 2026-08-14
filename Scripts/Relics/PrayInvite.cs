@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Nodes;
@@ -41,6 +42,7 @@ public class PrayInvite : ModRelicTemplate
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("Times",2)];
 
+    public override bool ShowCounter => CombatManager.Instance.IsInProgress;
     public override int DisplayAmount => CurrentTurns;
 
     public int CurrentTurns = 0;
@@ -96,6 +98,7 @@ public class PrayInvite : ModRelicTemplate
     public override Task AfterCombatEnd(CombatRoom room)
     {
         Status = RelicStatus.Normal;
+        CurrentTurns = 0;
         return Task.CompletedTask;
     }
 }

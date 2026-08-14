@@ -49,6 +49,7 @@ public class Gracebearer : ModAncientEventTemplate
             RelicOption<BloodBurst>(), //血性爆发
             RelicOption<Lullaby>(), //安眠曲
             RelicOption<PrayInvite>(), //祈祷邀约
+            RelicOption<ActAs>(), //“扮演”
         ];
 
     // 生成选项
