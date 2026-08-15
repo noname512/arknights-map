@@ -27,7 +27,7 @@ namespace ArknightsMap.Scripts.Relics;
 public class OpportuneMercy : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1), new EnergyVar("Energy2", 1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("Percent", 50)];
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -82,6 +82,8 @@ public class OpportuneMercy : ModRelicTemplate
                 Flash();
                 await CreatureCmd.Heal(Owner.Creature, val);
             }
+
+            Damaged[creature] = 0;
         }
     }
 }
