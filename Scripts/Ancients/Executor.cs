@@ -1,6 +1,7 @@
 using ArknightsMap.Scripts.Relics;
 using Godot;
 using MegaCrit.Sts2.Core.Events;
+using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Ancients;
@@ -15,25 +16,26 @@ public class Executor : ModAncientEventTemplate
     public override Color DialogueColor => new(0.12f, 0.2f, 0.8f);
 
     // 自定义场景的路径
-    public override EventAssetProfile AssetProfile => new(BackgroundScenePath: "res://ArknightsMap/scenes/ancients/Paganini.tscn");
+    public override EventAssetProfile AssetProfile => new(BackgroundScenePath: "res://ArknightsMap/scenes/ancients/Executor.tscn");
 
     // 自定义地图图标和轮廓的路径
     public override AncientEventPresentationAssetProfile AncientPresentationAssetProfile =>
         new(
-            MapIconPath: "res://ArknightsMap/images/ancients/Paganini/icon.png",
-            MapIconOutlinePath: "res://ArknightsMap/images/ancients/Paganini/icon_outline.png",
-            RunHistoryIconPath: "res://ArknightsMap/images/ancients/Paganini/avatar.png",
-            RunHistoryIconOutlinePath: "res://ArknightsMap/images/ancients/Paganini/avatar.png"
+            MapIconPath: "res://ArknightsMap/images/ancients/Executor/icon.png",
+            MapIconOutlinePath: "res://ArknightsMap/images/ancients/Executor/icon_outline.png",
+            RunHistoryIconPath: "res://ArknightsMap/images/ancients/Executor/avatar.png",
+            RunHistoryIconOutlinePath: "res://ArknightsMap/images/ancients/Executor/avatar.png"
         );
 
     private IReadOnlyList<EventOption> Pool1 =>
         [
             CreateModRelicOption<ExFoedere>(), // 圣约
+            CreateModRelicOption<Shotgun>(), // 近身铳斗
             
         ];
     private IReadOnlyList<EventOption> Pool2 =>
         [
-            
+            CreateModRelicOption<PreciseMachine>(), // 精密仪器
         ];
     private IReadOnlyList<EventOption> Pool3 =>
         [

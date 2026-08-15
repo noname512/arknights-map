@@ -20,6 +20,7 @@ using STS2RitsuLib.Scaffolding.Content;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.HoverTips;
 
 namespace ArknightsMap.Scripts.Monsters;
 
@@ -34,12 +35,11 @@ public class OpForGun : AbstractSankta
 
     private int run => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 20, 20);
 
-    private int multi_attack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 6, 6);
+    private int multi_attack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 4, 4);
 
     public int Attack_Time = 1;
 
     
-
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 

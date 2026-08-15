@@ -29,7 +29,7 @@ public class OpCar : AbstractSankta
 
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 30, 30);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 30, 30);
-    private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 5, 5);
+    private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 3, 3);
 
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
@@ -102,7 +102,7 @@ public class OpCar : AbstractSankta
                 await DamageCmd.Attack(Damage).FromMonster(this).WithHitFx(sfx: GetAttackSfx()).Execute(null);
                 
             },
-            [new SingleAttackIntent(Damage)]
+            [new SingleAttackIntent(Damage), new DebuffIntent()]
         );
 
         MoveState defend = new MoveState(
@@ -114,7 +114,7 @@ public class OpCar : AbstractSankta
                     await CreatureCmd.GainBlock(c, 5, ValueProp.Unpowered, null);
                 }
             },
-            []
+            [new DefendIntent()]
         );
 
         attack.FollowUpState = defend;
