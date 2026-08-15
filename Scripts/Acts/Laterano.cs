@@ -57,6 +57,7 @@ public sealed class Laterano : ModActTemplate
             ModelDb.AncientEvent<Paganini>(), // 潘格尼尼
             ModelDb.AncientEvent<Lemuen>(), // 蕾缪安
             ModelDb.AncientEvent<Gracebearer>(), //聆音
+            //ModelDb.AncientEvent<Executor>(), // 送葬人
         };
 
     public override IEnumerable<EncounterModel> BossDiscoveryOrder =>

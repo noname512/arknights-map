@@ -46,19 +46,13 @@ public sealed class NotAnswered : ModRelicTemplate
         return amount + DynamicVars.Energy.IntValue;
     }
 
-    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
+    public override Task AfterObtained()
     {
-        if (player == Owner && combatState.RoundNumber == 1)
-        {
-            Flash();
-            List<CardModel> list = new List<CardModel>();
-            
-            list.Add(combatState.CreateCard<Confused>(Owner));
-            
-            CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, player, CardPilePosition.Random));
-            await Cmd.Wait(1f);
-        }
+        Flash();
+        CardPileCmd.AddCurseToDeck<Confused>(Owner);
+        return base.AfterObtained();
     }
+
 
 
 }
