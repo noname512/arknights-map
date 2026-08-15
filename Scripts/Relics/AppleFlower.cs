@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -50,8 +51,25 @@ public sealed class AppleFlower : ModRelicTemplate
         if (cardPlay.Card?.Enchantment is { } enchantment && enchantment.Id == ModelDb.Enchantment<Sown>().Id)
         {
             await cardPlay.Card.MoveToResultPileWithoutPlaying(choiceContext);
-            await CardCmd.TransformToRandom(cardPlay.Card, Owner.RunState.Rng.CombatCardSelection);
+
+            CardModel? cardModel = CardFactory.GetDistinctForCombat(
+            Owner, from c in Owner.Character.CardPool.GetUnlockedCards(Owner.UnlockState, Owner.RunState.CardMultiplayerConstraint)
+            where c.Rarity != CardRarity.Token && c.CanBeGeneratedInCombat
+            select c, 1, Owner.RunState.Rng.CombatCardGeneration).FirstOrDefault();
+
+            if (cardModel is null)
+            {
+                return;
+            }
+
+            await CardCmd.Transform(cardPlay.Card, cardModel);
+            CardCmd.Enchant<Sown>(cardModel, 1m);
         }
+    }
+
+    public override Task AfterCardEnteredCombat(CardModel card)
+    {
+        return base.AfterCardEnteredCombat(card);
     }
 
     

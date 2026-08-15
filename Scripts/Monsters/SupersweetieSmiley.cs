@@ -191,7 +191,7 @@ public class SupersweetieSmiley : AbstractSankta
                 }
                 await PowerCmd.Apply<MinionPower>(
                     new ThrowingPlayerChoiceContext(),
-                    CombatState.Enemies.First(c => c.Monster is SupersweetieDeliveryDrone),
+                    CombatState.Enemies.Where(c => c.Monster is SupersweetieDeliveryDrone),
                     1m,
                     Creature,
                     null

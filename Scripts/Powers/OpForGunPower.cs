@@ -15,7 +15,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Powers;
 
 [RegisterPower]
-public class OpCarPower : ModPowerTemplate
+public class OpForGunPower : ModPowerTemplate
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
@@ -29,18 +29,5 @@ public class OpCarPower : ModPowerTemplate
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
-    public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
-    {
-        if (target == Owner)
-        {
-            foreach (Creature c in CombatState.HittableEnemies)
-            {
-                if (c.Monster is OpForGun gun)
-                {
-                    gun.Creature.LoseHpInternal(result.UnblockedDamage,  ValueProp.Unpowered);
-                }
-            }
-        }
-        
-    }
+    
 }

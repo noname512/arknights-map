@@ -29,8 +29,8 @@ public class OpForGun : AbstractSankta
     protected override int BulletMax => 15;
     protected override int InitialBullet => 0;
 
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 500, 500);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 500, 500);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 400, 400);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 400, 400);
 
     private int run => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 20, 20);
 
@@ -79,8 +79,11 @@ public class OpForGun : AbstractSankta
     {
         await base.AfterAddedToRoom();
         await PowerCmd.Apply<SurroundedPower>(new ThrowingPlayerChoiceContext(), base.CombatState.GetOpponentsOf(base.Creature), 1m, base.Creature, null);
-        await PowerCmd.Apply<BackAttackRightPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
+        
+        await PowerCmd.Apply<OpForGunPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
+        await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), base.Creature, 3m, base.Creature, null);
         await PowerCmd.Apply<ShieldPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
+        await PowerCmd.Apply<BackAttackRightPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
     }
 
     public override Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
@@ -140,11 +143,15 @@ public class OpForGun : AbstractSankta
                 {
                     GunPosition.GlobalPosition = new Vector2(550.0f, GunPosition.GlobalPosition.Y);
                     await CreatureCmd.Add<OpCar>(CombatState, "second_left");
+                    await PowerCmd.Remove<BackAttackRightPower>(Creature);
+                    await PowerCmd.Apply<BackAttackLeftPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
                 }
                 else
                 {
                     GunPosition.GlobalPosition = new Vector2(1450.0f, GunPosition.GlobalPosition.Y);
                     await CreatureCmd.Add<OpCar>(CombatState, "second_right");
+                    await PowerCmd.Remove<BackAttackLeftPower>(Creature);
+                    await PowerCmd.Apply<BackAttackRightPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
                 }
                 await UpdatePosition();
                 Attack_Time = 1;

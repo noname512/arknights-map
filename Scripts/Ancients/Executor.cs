@@ -28,21 +28,16 @@ public class Executor : ModAncientEventTemplate
 
     private IReadOnlyList<EventOption> Pool1 =>
         [
-            CreateModRelicOption<CustomMade>(), // 定制铳械
-            CreateModRelicOption<Solvent>(), // 铳械清洗溶剂
-            CreateModRelicOption<WeiLaterano>(), // 盟约：拉特兰
+            CreateModRelicOption<ExFoedere>(), // 圣约
+            
         ];
     private IReadOnlyList<EventOption> Pool2 =>
         [
-            CreateModRelicOption<GiantGun>(), // 铳骑的巨铳
-            CreateModRelicOption<NoSugarIce>(), // 无糖冰淇淋
+            
         ];
     private IReadOnlyList<EventOption> Pool3 =>
         [
-            CreateModRelicOption<Aphasia>(), // “失语”
-            CreateModRelicOption<Vannini>(), // 梵妮的铳
-            CreateModRelicOption<Wrap>(), // 披肩
-            CreateModRelicOption<ChildrenBook>(),
+            
         ];
 
     // 所有可能的选项

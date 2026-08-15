@@ -15,6 +15,7 @@ using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -26,8 +27,8 @@ public class OpCar : AbstractSankta
     protected override int BulletMax => 0;
     protected override int InitialBullet => 0;
 
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 50, 50);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 50, 50);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 30, 30);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 30, 30);
     private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 5, 5);
 
     // 怪物场景
@@ -71,6 +72,10 @@ public class OpCar : AbstractSankta
     public override async Task AfterAddedToRoom()
     {
         await base.AfterAddedToRoom();
+        await PowerCmd.Apply<OpCarPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
+        await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), base.Creature, 3m, base.Creature, null);
+        await PowerCmd.Apply<ShieldPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
+        await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
         if (OnRight)
         {
             await PowerCmd.Apply<BackAttackRightPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
@@ -80,9 +85,8 @@ public class OpCar : AbstractSankta
             await UpdatePosition();
             await PowerCmd.Apply<BackAttackLeftPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
         }
-        await PowerCmd.Apply<ShieldPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
-        await PowerCmd.Apply<OpCarPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
-        await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
+        
+        
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -101,9 +105,25 @@ public class OpCar : AbstractSankta
             [new SingleAttackIntent(Damage)]
         );
 
-        attack.FollowUpState = attack;
+        MoveState defend = new MoveState(
+            "DEFEND",
+            async targets =>
+            {
+                foreach (Creature c in CombatState.GetTeammatesOf(Creature))
+                {
+                    await CreatureCmd.GainBlock(c, 5, ValueProp.Unpowered, null);
+                }
+            },
+            []
+        );
+
+        attack.FollowUpState = defend;
+        defend.FollowUpState = attack;
 
         list.Add(attack);
+        list.Add(defend);
+
+        
 
         return new MonsterMoveStateMachine(list, attack);
     }
@@ -115,6 +135,7 @@ public class OpCar : AbstractSankta
         if (side == CombatSide.Enemy && Gun != null && Gun.Monster is OpForGun gun && gun.OnRight != OnRight)
         {
             await CreatureCmd.TriggerAnim(Creature, "Skill_a", 0.8f);
+            await Cmd.Wait(1.0f);
             foreach (Creature c in CombatState.GetOpponentsOf(Creature))
             {
                 await PowerCmd.Apply<CorrosionDamagePower>(new ThrowingPlayerChoiceContext(), c, 1m, Creature, null);
