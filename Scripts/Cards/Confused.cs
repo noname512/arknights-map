@@ -1,6 +1,8 @@
+using ArknightsMap.Scripts.Monsters;
 using ArknightsMap.Scripts.Powers;
 using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -32,6 +34,11 @@ public class Confused : ModCardTemplate
     // 目标类型（AnyEnemy表示任意敌人）
     private const TargetType targetType = TargetType.None;
 
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
+        HoverTipFactory.FromCard<Confused>(), 
+        HoverTipFactory.FromKeyword(ConfusedKeyword.Keyword)
+        ];
+
     // 卡图资源
     public override CardAssetProfile AssetProfile =>
         new(
@@ -51,10 +58,8 @@ public class Confused : ModCardTemplate
         return damage;
     };
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [];
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
-        HoverTipFactory.FromKeyword(ConfusedKeyword.Keyword)
-    ];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Eternal];
+    
 
     public Confused()
         : base(energyCost, type, rarity, targetType) { }
@@ -89,6 +94,23 @@ public class Confused : ModCardTemplate
         }
         return 0.5m;
     }
+
+    
+
+
+    public override bool HasTurnEndInHandEffect => true;
+
+    protected override async Task OnTurnEndInHand(PlayerChoiceContext choiceContext)
+	{
+		bool alreadyHasFrail = base.Owner.Creature.HasPower<ConfusedPower>();
+		foreach (Creature c in CombatState.HittableEnemies)
+        {
+            if (c.Monster is not SupersweetieSmiley || c.Monster is not TheSaint || c.Monster is not OpForGun)
+            {
+                await PowerCmd.Apply<ConfusedPower>(choiceContext, c, 1, null, this);
+            }
+        }
+	}
 
     protected override bool IsPlayable => false;
 

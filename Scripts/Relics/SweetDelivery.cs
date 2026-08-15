@@ -49,7 +49,7 @@ public sealed class SweetDelivery : ModRelicTemplate
     {
         RelicModel? relic = null;
         
-        if (chance < 0.7f)
+        if (chance < 0.8f)
         {
             relic = ModelDb.Relic<LeesWaffle>().ToMutable() as RelicModel;
         }

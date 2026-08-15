@@ -37,7 +37,7 @@ public class Executor : ModAncientEventTemplate
         ];
     private IReadOnlyList<EventOption> Pool3 =>
         [
-            
+            CreateModRelicOption<NotAnswered>(), // 未解答
         ];
 
     // 所有可能的选项

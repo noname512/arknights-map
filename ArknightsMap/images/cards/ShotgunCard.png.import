@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqhi0ymuqbfpp"
-path="res://.godot/imported/Shotgun.png-cb976299ecee17cc80fdbaad2df92a4c.ctex"
+uid="uid://djvd5uhvrduid"
+path="res://.godot/imported/ShotgunCard.png-366aa4866c15307a93e73260d29b4228.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/cards/Shotgun.png"
-dest_files=["res://.godot/imported/Shotgun.png-cb976299ecee17cc80fdbaad2df92a4c.ctex"]
+source_file="res://ArknightsMap/images/cards/ShotgunCard.png"
+dest_files=["res://.godot/imported/ShotgunCard.png-366aa4866c15307a93e73260d29b4228.ctex"]
 
 [params]
 

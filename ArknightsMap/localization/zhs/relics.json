@@ -229,6 +229,15 @@
     "ARKNIGHTS_MAP_RELIC_EX_FOEDERE.title": "圣约",
     "ARKNIGHTS_MAP_RELIC_EX_FOEDERE.description": "你每打出1张牌，获得1点[gold]力量[/gold]。\n在你的第7张牌打出后，失去因此获得的所有[gold]力量[/gold]并重新计数。\n计数在每场战斗开始时重置。",
     "ARKNIGHTS_MAP_RELIC_EX_FOEDERE.flavor": "",
+    "ARKNIGHTS_MAP_RELIC_NOT_ANSWERED.title": "未解答",
+    "ARKNIGHTS_MAP_RELIC_NOT_ANSWERED.description": "你的回合开始时，获得{energyPrefix:energyIcons(1)}。\n将1张[gold]困惑[/gold]放入牌组。",
+    "ARKNIGHTS_MAP_RELIC_NOT_ANSWERED.flavor": "",
+    "ARKNIGHTS_MAP_RELIC_SHOTGUN.title": "近身铳斗",
+    "ARKNIGHTS_MAP_RELIC_SHOTGUN.description": "选择牌组的7张牌变化为[gold]铳斗[/gold]。",
+    "ARKNIGHTS_MAP_RELIC_SHOTGUN.flavor": "",
+    "ARKNIGHTS_MAP_RELIC_PRECISE_MECHINE.title": "精密仪器",
+    "ARKNIGHTS_MAP_RELIC_PRECISE_MECHINE.description": "你每次按照[red]攻击[/red]，[green]技能[/green]，[blue]能力[/blue]的顺序打出牌时，获得{energyPrefix:energyIcons(2)}并抽2张牌。",
+    "ARKNIGHTS_MAP_RELIC_PRECISE_MECHINE.flavor": "",
     "----Gracebearer----": "聆音遗物",
     "ARKNIGHTS_MAP_RELIC_BLOOD_BURST.title": "血性爆发",
     "ARKNIGHTS_MAP_RELIC_BLOOD_BURST.description": "当你受到敌人的伤害后，抽[blue]{Cards}[/blue]张牌，然后对这名敌人打出手牌中的所有[gold]攻击牌[/gold]。",
@@ -241,6 +250,6 @@
     "ARKNIGHTS_MAP_RELIC_PRAY_INVITE.description": "如果你连续两回合未打出过攻击牌，则本场战斗中卡牌的伤害变为[blue]{Times}[/blue]倍。",
     "ARKNIGHTS_MAP_RELIC_PRAY_INVITE.flavor": "若主知晓那些人的恶行，亦会赞许我的行为。",
     "ARKNIGHTS_MAP_RELIC_ACT_AS.title": "“扮演”",
-    "ARKNIGHTS_MAP_RELIC_ACT_AS.description": "在每回合开始时获得{Energy:energyIcons()}。当你首次用尽所有的{Energy2:energyIcons()}后，本场战斗中受到与造成的伤害翻倍。",
+    "ARKNIGHTS_MAP_RELIC_ACT_AS.description": "在每回合开始时获得{Energy:energyIcons()}。当你首次用尽所有的{Energy:energyIcons()}后，本场战斗中受到与造成的伤害翻倍。",
     "ARKNIGHTS_MAP_RELIC_ACT_AS.flavor": "不要在孩子面前展露。"
 }
