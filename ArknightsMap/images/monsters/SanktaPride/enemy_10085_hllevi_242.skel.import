@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bj1wjxtvgt4g3"
+path="res://.godot/imported/enemy_10085_hllevi_242.skel-e537ceb4fa7c6524165a34927b70e466.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SanktaPride/enemy_10085_hllevi_242.skel"
+dest_files=["res://.godot/imported/enemy_10085_hllevi_242.skel-e537ceb4fa7c6524165a34927b70e466.spskel"]
+
+[params]
+

@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -34,9 +35,22 @@ public sealed class Internationalis : ModRelicTemplate
     {
         if (side == CombatSide.Player && Owner.PlayerCombatState?.TurnNumber == 1)
         {
+            Creature c = Owner.Creature.CombatState!.HittableEnemies.TakeRandom(1, Owner.RunState.Rng.CombatTargets).First();
+            if (c.HasPower<ArtifactPower>())
+            {
+                await PowerCmd.Remove<ArtifactPower>(c);
+                if (c.HasPower<ShieldPower>())
+                {
+                    var shield = c.GetPower<ShieldPower>();
+                    if (shield != null)
+                    {
+                        shield.InvokeDisplayAmountChanged();
+                    }
+                }
+            }
             await PowerCmd.Apply<InternationalisPower>(
                 new ThrowingPlayerChoiceContext(),
-                Owner.Creature.CombatState!.HittableEnemies.TakeRandom(1, Owner.RunState.Rng.CombatTargets),
+                c,
                 1,
                 Owner.Creature,
                 null

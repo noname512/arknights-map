@@ -24,6 +24,7 @@ namespace ArknightsMap.Scripts.Cards
         private const TargetType targetType = TargetType.Self;
         private const bool shouldShowInCardLibrary = true;
 
+        public override int MaxUpgradeLevel => 0;
     
 
         public Milk() : base(energyCost, type, rarity, targetType)

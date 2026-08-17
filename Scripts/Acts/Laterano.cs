@@ -76,13 +76,18 @@ public sealed class Laterano : ModActTemplate
             ModelDb.Encounter<SinglePathfinderCannon>(),
             ModelDb.Encounter<ThreeWarriors>(),
             ModelDb.Encounter<SingleSanktaClaw>(), 
+            ModelDb.Encounter<ThreeEyes>(),
+
 
             ModelDb.Encounter<SinglePathfinderCar>(),
+            ModelDb.Encounter<SingleWastelandPlunder>(),
             ModelDb.Encounter<TwoBHCrossbow>(),
             ModelDb.Encounter<TwoMage>(),
             ModelDb.Encounter<TwoWarriors>(),
-            ModelDb.Encounter<ThreeEyes>(),
+            ModelDb.Encounter<ThreeEyesWithPride>(),
             ModelDb.Encounter<ClawAndStatue>(),
+            ModelDb.Encounter<BladeAndStatue>(),
+
 
             ModelDb.Encounter<FortunaElite>(),
             ModelDb.Encounter<OrenElite>(),

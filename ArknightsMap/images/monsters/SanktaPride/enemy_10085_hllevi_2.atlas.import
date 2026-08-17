@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://bqcvix6sd1vvp"
+path="res://.godot/imported/enemy_10085_hllevi_2.atlas-04c03c9daba52c644c3d3e39569f2f9c.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/SanktaPride/enemy_10085_hllevi_2.atlas"
+dest_files=["res://.godot/imported/enemy_10085_hllevi_2.atlas-04c03c9daba52c644c3d3e39569f2f9c.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

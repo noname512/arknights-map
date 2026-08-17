@@ -1,6 +1,8 @@
+using ArknightsMap.Scripts.Acts;
 using ArknightsMap.Scripts.Relics;
 using Godot;
 using MegaCrit.Sts2.Core.Events;
+using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -55,5 +57,10 @@ public class Paganini : ModAncientEventTemplate
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
         return [Rng.NextItem(Pool1)!, Rng.NextItem(Pool2)!, Rng.NextItem(Pool3)!];
+    }
+
+    public override bool IsValidForAct(ActModel act)
+    {
+        return act is Laterano;
     }
 }

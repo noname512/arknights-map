@@ -32,7 +32,7 @@ public class SupersweetieSmiley : AbstractSankta
 
     private int heavyAttackEnhanced => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 30, 30);
 
-    public static int tolerance = 0;
+    public int tolerance = 0;
 
     public decimal Run => Creature?.GetPower<SSSPower>()?.DisplayAmount ?? 0;
 
@@ -117,7 +117,7 @@ public class SupersweetieSmiley : AbstractSankta
                 await CreatureCmd.GainBlock(Creature, 15, ValueProp.Move, null);
                 foreach (Creature c in targets)
                 {
-                    await CardPileCmd.AddToCombatAndPreview<Milk>(c, PileType.Hand, 2, null, CardPilePosition.Random);
+                    await CardPileCmd.AddToCombatAndPreview<Milk>(c, PileType.Hand, 1, null, CardPilePosition.Random);
                 }
                 await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), targets, 2, Creature, null);
 
@@ -140,7 +140,7 @@ public class SupersweetieSmiley : AbstractSankta
                 await CreatureCmd.GainBlock(Creature, 20, ValueProp.Move, null);
                 foreach (Creature c in targets)
                 {
-                    await CardPileCmd.AddToCombatAndPreview<Milk>(c, PileType.Hand, 3, null, CardPilePosition.Random);
+                    await CardPileCmd.AddToCombatAndPreview<Milk>(c, PileType.Hand, 2, null, CardPilePosition.Random);
                 }
                 await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), targets, 3, Creature, null);
 

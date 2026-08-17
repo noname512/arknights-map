@@ -21,7 +21,7 @@ public sealed class Aphasia : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<StrengthPower>(3)];
 
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
         HoverTipFactory.FromCard<NoCommunication>()
@@ -46,7 +46,7 @@ public sealed class Aphasia : ModRelicTemplate
     {
         if (card.Owner == Owner && card.Type == CardType.Curse)
         {
-            await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, 2, Owner.Creature, null);
+            await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, DynamicVars["StrengthPower"].BaseValue, Owner.Creature, null);
         }
     }
 }

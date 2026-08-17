@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
@@ -27,8 +28,8 @@ public class OpCar : AbstractSankta
     protected override int BulletMax => 0;
     protected override int InitialBullet => 0;
 
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 30, 30);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 30, 30);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 50, 50);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 50, 50);
     private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 3, 3);
 
     // 怪物场景
@@ -73,7 +74,7 @@ public class OpCar : AbstractSankta
     {
         await base.AfterAddedToRoom();
         await PowerCmd.Apply<OpCarPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
-        await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), base.Creature, 3m, base.Creature, null);
+        await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
         await PowerCmd.Apply<ShieldPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
         await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
         if (OnRight)
@@ -138,7 +139,10 @@ public class OpCar : AbstractSankta
             await Cmd.Wait(1.0f);
             foreach (Creature c in CombatState.GetOpponentsOf(Creature))
             {
-                await PowerCmd.Apply<CorrosionDamagePower>(new ThrowingPlayerChoiceContext(), c, 1m, Creature, null);
+                if (c.Monster is not Osty)
+                {
+                    await PowerCmd.Apply<CorrosionDamagePower>(new ThrowingPlayerChoiceContext(), c, 1m, Creature, null);
+                }
             }
         }        
     }

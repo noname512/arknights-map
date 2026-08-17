@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Acts;
 using ArknightsMap.Scripts.Encounters;
 using ArknightsMap.Scripts.Monsters;
 using MegaCrit.Sts2.Core.Models;
@@ -6,9 +7,9 @@ using MegaCrit.Sts2.Core.Rooms;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
-namespace Test.Scripts;
+namespace ArknightsMap.Scripts.Encounters;
 
-[RegisterActEncounter(typeof(Glory))]
+[RegisterActEncounter(typeof(Laterano))]
 public class ClawAndStatue : AbstractLateranoEncounter
 {
     // 所有可能出现的怪物
