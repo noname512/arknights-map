@@ -107,13 +107,7 @@ public class OpForGun : AbstractSankta
     {
         if (dealer == Creature && target.Monster is not Osty)
         {
-            foreach (Creature c in CombatState.GetOpponentsOf(Creature))
-            {
-                if (c.Monster is not Osty)
-                {
-                    await PowerCmd.Apply<CorrosionDamagePower>(new ThrowingPlayerChoiceContext(), c, 1m, Creature, null);
-                }
-            }
+            await PowerCmd.Apply<CorrosionDamagePower>(new ThrowingPlayerChoiceContext(), target, 1m, Creature, null);
         }
     }
 
