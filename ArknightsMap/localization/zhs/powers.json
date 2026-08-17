@@ -68,6 +68,9 @@
     "ARKNIGHTS_MAP_POWER_BULLET_POWER.title": "弹药",
     "ARKNIGHTS_MAP_POWER_BULLET_POWER.smartDescription": "[gold]萨科塔[/gold]敌人独特的机制，它们的部分行动需要消耗弹药。",
     "ARKNIGHTS_MAP_POWER_BULLET_POWER.description": "",
+    "ARKNIGHTS_MAP_POWER_INTERNATIONALIS_POWER.title": "跨境追缉许可",
+    "ARKNIGHTS_MAP_POWER_INTERNATIONALIS_POWER.smartDescription": "受到的攻击伤害增加50%，在死亡后提供50金币。",
+    "ARKNIGHTS_MAP_POWER_INTERNATIONALIS_POWER.description": "",
     "ARKNIGHTS_MAP_POWER_LOSE_ENERGY_NEXT_TURN_POWER.title": "失去能量",
     "ARKNIGHTS_MAP_POWER_LOSE_ENERGY_NEXT_TURN_POWER.smartDescription": "下回合失去{energyPrefix:energyIcons({Amount})}。",
     "ARKNIGHTS_MAP_POWER_LOSE_ENERGY_NEXT_TURN_POWER.description": "",
@@ -112,6 +115,7 @@
     "ARKNIGHTS_MAP_POWER_THORNS_ENHANCE_POWER.title": "荆棘加强",
     "ARKNIGHTS_MAP_POWER_THORNS_ENHANCE_POWER.smartDescription": "[gold]荆棘[/gold]现在可以对所有敌人造成伤害。",
     "ARKNIGHTS_MAP_POWER_THORNS_ENHANCE_POWER.description": "",
+
     "ARKNIGHTS_MAP_POWER_FORTUNA_POWER.title": "福尔图娜",
     "ARKNIGHTS_MAP_POWER_FORTUNA_POWER.smartDescription": "[gold]福尔图娜[/gold]造成一次伤害后，有50%的概率获得1点[gold]弹药[/gold]。",
     "ARKNIGHTS_MAP_POWER_FORTUNA_POWER.description": "",

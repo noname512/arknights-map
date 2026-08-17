@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://dpluvo7eriph7"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bqcvix6sd1vvp" path="res://ArknightsMap/images/monsters/SanktaPride/enemy_10085_hllevi_2.atlas" id="1_ps08r"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bj1wjxtvgt4g3" path="res://ArknightsMap/images/monsters/SanktaPride/enemy_10085_hllevi_242.skel" id="2_di0dl"]
+
+[resource]
+atlas_res = ExtResource("1_ps08r")
+skeleton_file_res = ExtResource("2_di0dl")

@@ -21,6 +21,7 @@ using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Models.Monsters;
 
 namespace ArknightsMap.Scripts.Monsters;
 
@@ -35,7 +36,7 @@ public class OpForGun : AbstractSankta
 
     private int run => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 20, 20);
 
-    private int multi_attack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 4, 4);
+    private int multi_attack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 6, 6);
 
     public int Attack_Time = 1;
 
@@ -104,11 +105,14 @@ public class OpForGun : AbstractSankta
         CardModel? cardSource
     )
     {
-        if (dealer == Creature)
+        if (dealer == Creature && target.Monster is not Osty)
         {
             foreach (Creature c in CombatState.GetOpponentsOf(Creature))
             {
-                await PowerCmd.Apply<CorrosionDamagePower>(new ThrowingPlayerChoiceContext(), c, 1m, Creature, null);
+                if (c.Monster is not Osty)
+                {
+                    await PowerCmd.Apply<CorrosionDamagePower>(new ThrowingPlayerChoiceContext(), c, 1m, Creature, null);
+                }
             }
         }
     }

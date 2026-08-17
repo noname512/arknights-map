@@ -18,7 +18,7 @@ namespace ArknightsMap.Scripts.Powers;
 [RegisterPower]
 public class InternationalisPower : ModPowerTemplate
 {
-    public override PowerType Type => PowerType.Buff;
+    public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Single;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("MaxDmg", 0)];
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
@@ -29,6 +29,10 @@ public class InternationalisPower : ModPowerTemplate
 
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
     {
+        if (creature != base.Owner)
+        {
+            return;
+        }
         foreach (Player p in base.CombatState.Players)
         {
             await PlayerCmd.GainGold(50,p,false);

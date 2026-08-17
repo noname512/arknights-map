@@ -102,13 +102,13 @@ public class Fortuna : AbstractSankta
         attack02Branch.AddState(skill, () => Bullet < BulletMax);
 
         attack01.FollowUpState = skill;
-        skill.FollowUpState = skillBranch;
+        skill.FollowUpState = attack02;
         attack02.FollowUpState = attack02Branch;
 
         list.Add(attack01);
         list.Add(attack02);
         list.Add(skill);
-        list.Add(skillBranch); // 分支状态也要加进 list
+        list.Add(skillBranch); 
         list.Add(attack02Branch);
 
         return new MonsterMoveStateMachine(list, attack01);

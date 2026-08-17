@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Acts;
 using ArknightsMap.Scripts.Encounters;
 using ArknightsMap.Scripts.Monsters;
 using MegaCrit.Sts2.Core.Models;
@@ -8,7 +9,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace Test.Scripts;
 
-[RegisterActEncounter(typeof(Glory))]
+[RegisterActEncounter(typeof(Laterano))]
 public class SinglePathfinderCar : AbstractLateranoEncounter
 {
     // 所有可能出现的怪物

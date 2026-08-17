@@ -57,5 +57,8 @@ public class Lemuen : ModAncientEventTemplate
         return [Rng.NextItem(Pool1)!, Rng.NextItem(Pool2)!, Rng.NextItem(Pool3)!];
     }
 
-    
+    public override bool IsValidForAct(ActModel act)
+    {
+        return act is Laterano;
+    }
 }
