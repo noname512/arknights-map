@@ -39,16 +39,6 @@ public class OpportuneMercy : ModRelicTemplate
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
     
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips
-    {
-        get
-        {
-            List<IHoverTip> list = new List<IHoverTip>();
-            list.Add(HoverTipFactory.ForEnergy(this));
-            return list;
-        }
-    }
-    
     private Dictionary<Creature, int> Damaged = new Dictionary<Creature, int>();
     
     public override Task BeforeCombatStart()

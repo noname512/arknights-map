@@ -57,22 +57,18 @@ public class BloodBurst : ModRelicTemplate
         {
             return;
         }
-        Log.Info("Hello!");
         List<CardModel> cards = new List<CardModel>();
         foreach (CardModel card in PileType.Hand.GetPile(Owner).Cards)
         {
             if (card.Type == CardType.Attack)
             {
-                Log.Info("Try Add " + card.Title);
                 cards.Add(card);
-                Log.Info("Added " + card.Title);
             }
         }
         foreach (CardModel card in cards)
         {
             await CardPileCmd.Add(card, PileType.Play);
         }
-        Log.Info("CardPileCmd.Add OK");
         foreach (CardModel card in cards)
         {
             if (!card.Owner.Creature.IsDead)
@@ -85,7 +81,6 @@ public class BloodBurst : ModRelicTemplate
                 {
                     await CardCmd.AutoPlay(choiceContext, card, null);
                 }
-                Log.Info("Play " + card.Title);
                 continue;
             }
             break;
