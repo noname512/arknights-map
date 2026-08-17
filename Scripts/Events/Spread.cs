@@ -59,12 +59,9 @@ public sealed class Spread : ModEventTemplate
     private async Task FaceTheCrowd()
     {
         List<Reward> list = new List<Reward>();
-        foreach (Player player in Owner!.RunState.Players)
+        for (int i = 0; i < 2; i++)
         {
-            for (int i = 0; i < 2; i++)
-            {
-                list.Add(new RelicReward(player));
-            }
+            list.Add(new RelicReward(Owner));
         }
         EnterCombatWithoutExitingEvent<DublinnFlamechasers>(list, shouldResumeAfterCombat: false);
     }
@@ -72,10 +69,7 @@ public sealed class Spread : ModEventTemplate
     private async Task FaceTheSource()
     {
         List<Reward> list = new List<Reward>();
-        foreach (Player player in Owner!.RunState.Players)
-        {
-            list.Add(new RelicReward(player));
-        }
+        list.Add(new RelicReward(Owner));
         EnterCombatWithoutExitingEvent<EndPointEncounter>(list, shouldResumeAfterCombat: false);
     }
 
