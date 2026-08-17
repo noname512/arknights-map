@@ -39,14 +39,6 @@ public sealed class Internationalis : ModRelicTemplate
             if (c.HasPower<ArtifactPower>())
             {
                 await PowerCmd.Remove<ArtifactPower>(c);
-                if (c.HasPower<ShieldPower>())
-                {
-                    var shield = c.GetPower<ShieldPower>();
-                    if (shield != null)
-                    {
-                        shield.InvokeDisplayAmountChanged();
-                    }
-                }
             }
             await PowerCmd.Apply<InternationalisPower>(
                 new ThrowingPlayerChoiceContext(),
