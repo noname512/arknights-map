@@ -44,7 +44,7 @@ public sealed class Internationalis : ModRelicTemplate
                     var shield = c.GetPower<ShieldPower>();
                     if (shield != null)
                     {
-                        shield.InvokeDisplayAmountChanged();
+                        // shield.InvokeDisplayAmountChanged();
                     }
                 }
             }
