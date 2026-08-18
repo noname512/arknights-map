@@ -55,7 +55,14 @@ public sealed class SweetDelivery : ModRelicTemplate
         }
         else if (chance < 0.9f)
         {
-            relic = ModelDb.Relic<IceCream>().ToMutable() as RelicModel;
+            if (Owner.GetRelic<IceCream>() == null)
+            {
+                relic = ModelDb.Relic<IceCream>().ToMutable() as RelicModel;
+            }
+            else
+            {
+                relic = ModelDb.Relic<VeryHotCocoa>().ToMutable() as RelicModel;
+            }
         }
         else
         {
