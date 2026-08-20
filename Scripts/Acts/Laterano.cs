@@ -1,12 +1,18 @@
 using ArknightsMap.Scripts.Ancients;
+using ArknightsMap.Scripts.Cards;
 using ArknightsMap.Scripts.Encounters;
 using ArknightsMap.Scripts.Events;
 using ArknightsMap.Scripts.Monsters;
 using Godot;
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Map;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Events;
 using MegaCrit.Sts2.Core.Random;
+using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.Unlocks;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -112,6 +118,21 @@ public sealed class Laterano : ModActTemplate
         int unknownCount = MapPointTypeCounts.StandardRandomUnknownCount(mapRng) - 1;
         return new MapPointTypeCounts(unknownCount, restCount);
     }
+
+    public override async Task<Task> AfterActEntered()
+    {
+        var RunState = RunManager.Instance.DebugOnlyGetState();
+        if (RunState == null)
+        {
+            return base.AfterActEntered();
+        }
+        foreach (Player p in RunState.Players)
+        {
+            await CardPileCmd.AddCurseToDeck<Confused>(p);
+        }
+        return base.AfterActEntered();
+    }
+
 
     
 

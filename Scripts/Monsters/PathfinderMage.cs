@@ -3,6 +3,7 @@ using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -45,12 +46,12 @@ public class PathfinderMage : AbstractSankta
 			{
 				await CreatureCmd.TriggerAnim(Creature, "Attack", 0.8f);
 				await Cmd.Wait(1.0f);
-				await DamageCmd.Attack(Damage01).FromMonster(this).WithNoAttackerAnim().WithHitFx(sfx: GetAttackSfx()).Execute(null);
+				AttackCommand attack = await DamageCmd.Attack(Damage01).FromMonster(this).WithNoAttackerAnim().WithHitFx(sfx: GetAttackSfx()).Execute(null);
 				await UseBullet(1);
 				foreach (Creature c in targets)
 				{
 					NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NFireSmokePuffVfx.Create(c));
-					await PowerCmd.Apply<FlamingDamagePower>(new ThrowingPlayerChoiceContext(), c, Damage01, Creature, null);
+					await PowerCmd.Apply<FlamingDamagePower>(new ThrowingPlayerChoiceContext(), c, attack.Results.SelectMany(r => r).Sum(r => r.TotalDamage), Creature, null);
 				}
 			},
 			[new SingleAttackIntent(Damage01), new DebuffIntent(), new UseBulletIntent()]
