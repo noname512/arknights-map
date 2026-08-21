@@ -31,7 +31,7 @@ public sealed class ShutUp : ModRelicTemplate
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8, ValueProp.Unpowered)];
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromCard<ShotgunCard>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [];
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -50,7 +50,8 @@ public sealed class ShutUp : ModRelicTemplate
         {
             foreach (Creature c in player.Creature.CombatState.GetOpponentsOf(player.Creature))
             {
-                if (c.Monster is not null && c.Monster.GetIntents().Any(i => i is not SingleAttackIntent && i is not MultiAttackIntent))
+                if (c.Monster is not null && c.Monster.NextMove.Intents.Any(i => i.IntentType != IntentType.Attack &&
+        i.IntentType != IntentType.DeathBlow))
                 {
                     await CreatureCmd.Damage(choiceContext, c, DynamicVars.Damage, Owner.Creature);
                     await PowerCmd.Apply<VulnerablePower>(choiceContext, c, 1, Owner.Creature, null);

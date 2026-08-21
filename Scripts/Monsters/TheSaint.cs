@@ -30,8 +30,8 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
     protected override int BulletMax => 0;
     protected override int InitialBullet => 0;
 
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 500, 500);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 500, 500);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 450, 450);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 450, 450);
 
     private int heavyAttackPhase1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 45, 45);
 
@@ -89,7 +89,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
 
     public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (target == Creature && Phase == 1 && Creature.CurrentHp <= Creature.MaxHp / 2 && !HasStun)
+        if (target == Creature && Phase == 1 && Creature.CurrentHp <= Creature.MaxHp / 3 && !HasStun)
         {
             await CreatureCmd.Stun(Creature, "FLY");
             HasStun = true;
@@ -383,7 +383,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
 
     public override bool ShouldAllowTargeting(Creature target)
     {
-        if (ShouldPreventDamage)
+        if (ShouldPreventDamage && Creature.CurrentHp == Creature.MaxHp/3)
             return false;
         return true;
     }

@@ -226,7 +226,7 @@
     "ARKNIGHTS_MAP_RELIC_CACTUS_TART.description": "你的回合开始时，获得{energyPrefix:energyIcons(1)}，战斗的前2个回合内，所有敌人获得2层[gold]荆棘[/gold]。",
     "ARKNIGHTS_MAP_RELIC_CACTUS_TART.flavor": "",
     "ARKNIGHTS_MAP_RELIC_APPLE_FLOWER.title": "苹果花",
-    "ARKNIGHTS_MAP_RELIC_APPLE_FLOWER.description": "为你[gold]牌组[/gold]中的所有“打击”和“防御”[gold]附魔[/gold]：[purple]播种[/purple]。\n你打出[gold]附魔[/gold]：[purple]播种[/purple]的牌后，将其变化并[gold]附魔[/gold]：[purple]播种[/purple]。",
+    "ARKNIGHTS_MAP_RELIC_APPLE_FLOWER.description": "为你[gold]牌组[/gold]中的所有“打击”和“防御”[gold]附魔[/gold]：[purple]播种[/purple]。你打出[gold]附魔[/gold]：[purple]播种[/purple]的牌后，将其变化并[gold]附魔[/gold]：[purple]播种[/purple]。",
     "ARKNIGHTS_MAP_RELIC_APPLE_FLOWER.flavor": "",
     "ARKNIGHTS_MAP_RELIC_IRIS.title": "紫鸢尾",
     "ARKNIGHTS_MAP_RELIC_IRIS.description": "获得3个装有[gold]紫鸢尾香水[/gold]的药水栏位。",

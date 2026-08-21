@@ -14,10 +14,10 @@ using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
-namespace Test.Scripts;
+namespace ArknightsMap.Scripts.Events;
 
 [RegisterActEvent(typeof(Laterano))] 
-[RegisterSharedEvent] 
+
 public sealed class FirstClass : ModEventTemplate
 {
     public override EventAssetProfile AssetProfile => new(InitialPortraitPath: $"res://ArknightsMap/images/events/{GetType().Name}.png");
@@ -59,6 +59,10 @@ public sealed class FirstClass : ModEventTemplate
     }
 
 
+    public override bool IsAllowed(IRunState runState)
+    {
+        return runState.Act is Laterano;
+    }
     
 
 

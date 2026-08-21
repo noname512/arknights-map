@@ -50,7 +50,7 @@ public class Oren : AbstractSankta
         CardModel? cardSource
     )
     {
-        if (dealer == Creature && result.UnblockedDamage > 0)
+        if (dealer == Creature && result.UnblockedDamage > 0 && props.IsPoweredAttack())
         {
             await CardPileCmd.AddToCombatAndPreview<Dazed>(target, PileType.Draw, 1, null, CardPilePosition.Top);
         }

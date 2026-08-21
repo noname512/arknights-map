@@ -34,7 +34,6 @@ public class Lemuen : ModAncientEventTemplate
         [
             CreateModRelicOption<Internationalis>(), // 跨境追缉许可
             CreateModRelicOption<MementoMori>(), // 礼炮：强制追思
-            
             CreateModRelicOption<Hand>(), // 剿袭之手
         ];
     private IReadOnlyList<EventOption> Pool2 =>
@@ -48,7 +47,7 @@ public class Lemuen : ModAncientEventTemplate
             CreateModRelicOption<Wheelchair>(), // 轮椅
             CreateModRelicOption<AppleFlower>(), // 苹果花
             CreateModRelicOption<Iris>(), // 紫鸢尾
-            //CreateModRelicOption<ShutUp>(), // “噤声”
+            CreateModRelicOption<ShutUp>(), // “噤声”
         ];
 
     // 所有可能的选项
