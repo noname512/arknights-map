@@ -55,6 +55,17 @@ public class OpCar : AbstractSankta
 
     public bool OnRight => PlayerPosition.Position.X < CarPosition.Position.X;
 
+    public bool OnOtherSide()
+    {
+        var combat = Creature.CombatState;
+        foreach (Creature c in combat!.GetTeammatesOf(Creature))
+        {
+            if (c.Monster is OpForGun gun && OnRight != gun.OnRight)
+                return true;
+        }
+        return false;
+    }
+
     public async Task UpdatePosition()
     {
         if (OnRight)
@@ -118,15 +129,59 @@ public class OpCar : AbstractSankta
             [new DefendIntent()]
         );
 
-        attack.FollowUpState = defend;
-        defend.FollowUpState = attack;
+        MoveState attack_defend = new MoveState(
+            "ATTACK_DEFEND",
+            async targets =>
+            {
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.8f);
+                await DamageCmd.Attack(8).FromMonster(this).WithHitFx(sfx: GetAttackSfx()).Execute(null);
+                await CreatureCmd.GainBlock(Creature, 8, ValueProp.Unpowered, null);
+                foreach (Creature c in CombatState.GetOpponentsOf(Creature))
+            {
+                if (c.Monster is not Osty)
+                {
+                    await PowerCmd.Apply<CorrosionDamagePower>(new ThrowingPlayerChoiceContext(), c, 1m, Creature, null);
+                }
+            }
+                
+            },
+            [new SingleAttackIntent(8), new DefendIntent(), new DebuffIntent()]
+        );
+
+        RandomBranchState StartBranch = new RandomBranchState(
+            "RANDOM_BRANCH"
+        );
+
+        ConditionalBranchState attackBranch = new ConditionalBranchState(
+            "ATTACK_BRANCH"
+            
+        );
+
+        ConditionalBranchState skillBranch = new ConditionalBranchState(
+            "SKILL_BRANCH"
+            
+        );
+
+        attackBranch.AddState(attack_defend, () => OnOtherSide() && Creature!.CombatState!.RunState.Rng.CombatTargets.NextFloat(0,1) < 0.3f);
+        attackBranch.AddState(defend, () => !OnOtherSide() || Creature!.CombatState!.RunState.Rng.CombatTargets.NextFloat(0,1) >= 0.3f);
+        skillBranch.AddState(attack_defend, () => OnOtherSide() && Creature!.CombatState!.RunState.Rng.CombatTargets.NextFloat(0,1) < 0.3f);
+        skillBranch.AddState(attack, () => !OnOtherSide() || Creature!.CombatState!.RunState.Rng.CombatTargets.NextFloat(0,1) >= 0.3f);
+
+        StartBranch.AddBranch(attack, 10);
+        StartBranch.AddBranch(defend, 10);
+        attack.FollowUpState = attackBranch;
+        defend.FollowUpState = skillBranch;
 
         list.Add(attack);
         list.Add(defend);
+        list.Add(attack_defend);
+        list.Add(skillBranch);
+        list.Add(attackBranch);
+        list.Add(StartBranch);
 
         
 
-        return new MonsterMoveStateMachine(list, attack);
+        return new MonsterMoveStateMachine(list, StartBranch);
     }
 
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)

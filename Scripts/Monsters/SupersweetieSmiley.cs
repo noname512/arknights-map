@@ -43,7 +43,8 @@ public class SupersweetieSmiley : AbstractSankta
     {
         await base.AfterAddedToRoom();
         await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), Creature, 2, Creature, null);
-        await PowerCmd.Apply<SSSPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
+        int playernum = CombatState.PlayerCreatures.Count;
+        await PowerCmd.Apply<SSSPower>(new ThrowingPlayerChoiceContext(), Creature, playernum, Creature, null);
     }
 
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
@@ -212,7 +213,6 @@ public class SupersweetieSmiley : AbstractSankta
             async targets =>
             {
                 await CreatureCmd.TriggerAnim(Creature, "Stun_End", 0.8f);
-                await PowerCmd.Apply<SSSPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
                 await AddBullet(15 + tolerance);
                 var ssspower = Creature.GetPower<SSSPower>();
                 if (ssspower != null)

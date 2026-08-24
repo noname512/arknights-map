@@ -64,7 +64,7 @@ public class ShieldPower : ModPowerTemplate
                 DynamicVars["Cooldown"].UpgradeValueBy(2);
                 if (Owner.Monster is OpForGun)
                 {
-                    await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), Owner, 3, Owner, null);
+                    await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), Owner, 2, Owner, null);
                 }
                 else if (Owner.Monster is OpCar)
                 {

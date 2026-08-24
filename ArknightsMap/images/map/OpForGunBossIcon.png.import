@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpb61cp27jbsv"
-path="res://.godot/imported/OpForGunBossIcon .png-eee83a77fc39002fefe222ca430cce0b.ctex"
+uid="uid://dye0jyk5xosin"
+path="res://.godot/imported/OpForGunBossIcon.png-623d8cb0f0ca6009a28dd85b38e2b4f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/map/OpForGunBossIcon .png"
-dest_files=["res://.godot/imported/OpForGunBossIcon .png-eee83a77fc39002fefe222ca430cce0b.ctex"]
+source_file="res://ArknightsMap/images/map/OpForGunBossIcon.png"
+dest_files=["res://.godot/imported/OpForGunBossIcon.png-623d8cb0f0ca6009a28dd85b38e2b4f9.ctex"]
 
 [params]
 

@@ -81,7 +81,7 @@ public sealed class WeiLaterano : ModRelicTemplate
         {
             return false;
         }
-        if (room == null || (room.RoomType != RoomType.Monster && room.RoomType != RoomType.Boss && room.RoomType != RoomType.Elite))
+        if (room == null || (room.RoomType != RoomType.Monster))
         {
             return false;
         }

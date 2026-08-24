@@ -22,6 +22,8 @@ public class SSSPower : ModPowerTemplate
 
     public override int DisplayAmount => DynamicVars["Time"].IntValue;
 
+    private int MilkCounter = 0;
+
     public int Time
     {
         get => Owner.GetPower<BulletPower>()?.Amount ?? 0;
@@ -36,11 +38,18 @@ public class SSSPower : ModPowerTemplate
     {
         if (DynamicVars["Time"].BaseValue > 0 && cardPlay.Card is Milk)
         {
-            DynamicVars["Time"].BaseValue--;
-            var bullet = Owner.GetPower<BulletPower>();
-            if (bullet != null)
-                await PowerCmd.Decrement(bullet);
-            InvokeDisplayAmountChanged();
+            MilkCounter++;
+            if (MilkCounter >= CombatState.Players.Count)
+            {
+                DynamicVars["Time"].BaseValue--;
+                var bullet = Owner.GetPower<BulletPower>();
+                if (bullet != null)
+                {
+                    await PowerCmd.Decrement(bullet);
+                }
+                InvokeDisplayAmountChanged();
+            }
+            MilkCounter = 0;
         }
     }
 
