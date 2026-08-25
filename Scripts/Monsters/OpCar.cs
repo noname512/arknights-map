@@ -28,8 +28,8 @@ public class OpCar : AbstractSankta
     protected override int BulletMax => 0;
     protected override int InitialBullet => 0;
 
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 50, 50);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 50, 50);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 60, 60);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 60, 60);
     private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 3, 3);
 
     // 怪物场景
@@ -162,10 +162,13 @@ public class OpCar : AbstractSankta
             
         );
 
-        attackBranch.AddState(attack_defend, () => OnOtherSide() && Creature!.CombatState!.RunState.Rng.CombatTargets.NextFloat(0,1) < 0.3f);
-        attackBranch.AddState(defend, () => !OnOtherSide() || Creature!.CombatState!.RunState.Rng.CombatTargets.NextFloat(0,1) >= 0.3f);
-        skillBranch.AddState(attack_defend, () => OnOtherSide() && Creature!.CombatState!.RunState.Rng.CombatTargets.NextFloat(0,1) < 0.3f);
-        skillBranch.AddState(attack, () => !OnOtherSide() || Creature!.CombatState!.RunState.Rng.CombatTargets.NextFloat(0,1) >= 0.3f);
+// attack 之后的分支：如果异侧，30% 概率用 attack_defend，否则 defend
+attackBranch.AddState(attack_defend, () => OnOtherSide() && Creature!.CombatState!.RunState.Rng.CombatTargets.NextFloat(0, 1) < 0.3f);
+attackBranch.AddState(defend, () => true); // 兜底
+
+// defend 之后的分支：如果异侧，30% 概率用 attack_defend，否则 attack
+skillBranch.AddState(attack_defend, () => OnOtherSide() && Creature!.CombatState!.RunState.Rng.CombatTargets.NextFloat(0, 1) < 0.3f);
+skillBranch.AddState(attack, () => true); // 兜底
 
         StartBranch.AddBranch(attack, 10);
         StartBranch.AddBranch(defend, 10);

@@ -19,6 +19,8 @@ public class ThreeWarriors : AbstractLateranoEncounter
     [ModelDb.Monster<PathfinderWarrior>()];
     public override RoomType RoomType => RoomType.Monster; // 这个遭遇的房间类型，这里是精英怪物
 
+    public override string CustomBgm => "event:/ArknightsMap/music/wdxl_bat";
+
     public override bool IsWeak => false;
     public override IReadOnlyList<string> Slots => ["first", "second", "third"];
 

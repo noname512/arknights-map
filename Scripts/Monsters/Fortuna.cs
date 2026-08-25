@@ -27,7 +27,7 @@ public class Fortuna : AbstractSankta
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 216, 216);
     private int Damage01 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 6);
 
-    private int Damage02 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 8, 8);
+    private int Damage02 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 15, 15);
     public int Time = 6;
 
     // 怪物场景
@@ -101,7 +101,7 @@ public class Fortuna : AbstractSankta
         attack02Branch.AddState(attack01, () => Bullet >= BulletMax);
         attack02Branch.AddState(skill, () => Bullet < BulletMax);
 
-        attack01.FollowUpState = skill;
+        attack01.FollowUpState = skillBranch;
         skill.FollowUpState = attack02;
         attack02.FollowUpState = attack02Branch;
 

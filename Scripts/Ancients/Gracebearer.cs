@@ -16,23 +16,23 @@ namespace ArknightsMap.Scripts.Ancients;
 public class Gracebearer : ModAncientEventTemplate
 {
     // 选项按钮颜色
-    public override Color ButtonColor => new(0.12f, 0.2f, 0.8f, 0.5f);
+    public override Color ButtonColor => new(0.47f, 0.24f, 0.29f, 0.5f);
 
     // 对话框颜色
-    public override Color DialogueColor => new(0.12f, 0.2f, 0.8f);
+    public override Color DialogueColor => new(0.47f, 0.24f, 0.29f);
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
     // 自定义场景的路径
-    public override EventAssetProfile AssetProfile => new(BackgroundScenePath: "res://ArknightsMap/scenes/ancients/Bagpipe.tscn");
+    public override EventAssetProfile AssetProfile => new(BackgroundScenePath: "res://ArknightsMap/scenes/ancients/Gracebearer.tscn");
 
     // 自定义地图图标和轮廓的路径
     public override AncientEventPresentationAssetProfile AncientPresentationAssetProfile =>
         new(
-            MapIconPath: "res://ArknightsMap/images/ancients/Bagpipe/icon.png",
-            MapIconOutlinePath: "res://ArknightsMap/images/ancients/Bagpipe/icon_outline.png",
-            RunHistoryIconPath: "res://ArknightsMap/images/ancients/Bagpipe/avatar.png",
-            RunHistoryIconOutlinePath: "res://ArknightsMap/images/ancients/Bagpipe/avatar.png"
+            MapIconPath: "res://ArknightsMap/images/ancients/Gracebearer/icon.png",
+            MapIconOutlinePath: "res://ArknightsMap/images/ancients/Gracebearer/icon_outline.png",
+            RunHistoryIconPath: "res://ArknightsMap/images/ancients/Gracebearer/avatar.png",
+            RunHistoryIconOutlinePath: "res://ArknightsMap/images/ancients/Gracebearer/avatar.png"
             // TODO
         );
 

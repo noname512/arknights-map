@@ -31,8 +31,8 @@ public class OpForGun : AbstractSankta
     protected override int BulletMax => 15;
     protected override int InitialBullet => 0;
 
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 400, 400);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 400, 400);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 500, 500);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 500, 500);
 
     private int run => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 20, 20);
 

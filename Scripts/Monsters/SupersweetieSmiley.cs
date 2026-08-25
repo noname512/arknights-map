@@ -28,9 +28,13 @@ public class SupersweetieSmiley : AbstractSankta
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 500, 500);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 500, 500);
 
-    private int heavyAttack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 20, 20);
+    private int heavyAttack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 25, 25);
 
-    private int heavyAttackEnhanced => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 30, 30);
+    private int heavyAttackEnhanced => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 36, 36);
+
+    private int multiAttack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 10, 10);
+
+    private int multiAttackEnhanced => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 14, 14);
 
     public int tolerance = 0;
 
@@ -113,8 +117,9 @@ public class SupersweetieSmiley : AbstractSankta
             "SPLASH",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Skill_2", 0.8f);
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.8f);
                 await Cmd.Wait(1.0f);
+                await DamageCmd.Attack(multiAttack).WithHitCount(2).FromMonster(this).WithAttackerAnim("Attack", 0.8f).Execute(null);
                 await CreatureCmd.GainBlock(Creature, 15, ValueProp.Move, null);
                 foreach (Creature c in targets)
                 {
@@ -129,7 +134,7 @@ public class SupersweetieSmiley : AbstractSankta
                     tolerance += 5;
                 }
             },
-            [new DebuffIntent(), new DefendIntent(), new StatusIntent(2)]
+            [new MultiAttackIntent(multiAttack, 2),new DebuffIntent(), new DefendIntent(), new StatusIntent(2)]
         );
 
         MoveState SplashEnhanced = new MoveState(
@@ -138,6 +143,7 @@ public class SupersweetieSmiley : AbstractSankta
             {
                 await CreatureCmd.TriggerAnim(Creature, "Skill_2", 0.8f);
                 await Cmd.Wait(1.0f);
+                await DamageCmd.Attack(multiAttackEnhanced).WithHitCount(2).FromMonster(this).WithAttackerAnim("Attack", 0.8f).Execute(null);
                 await CreatureCmd.GainBlock(Creature, 20, ValueProp.Move, null);
                 foreach (Creature c in targets)
                 {
@@ -152,7 +158,7 @@ public class SupersweetieSmiley : AbstractSankta
                     tolerance += 5;
                 }
             },
-            [new DebuffIntent(), new DefendIntent(), new StatusIntent(3)]
+            [new MultiAttackIntent(multiAttackEnhanced, 2), new DebuffIntent(), new DefendIntent(), new StatusIntent(3)]
         );
 
         MoveState Summon = new MoveState(

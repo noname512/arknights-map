@@ -19,6 +19,8 @@ public class ClawAndStatue : AbstractLateranoEncounter
     public override bool IsWeak => false;
     public override RoomType RoomType => RoomType.Monster; // 这个遭遇的房间类型，这里是普通怪物
 
+    public override string CustomBgm => "event:/ArknightsMap/music/zsxj_bat_1";
+
     public override IReadOnlyList<string> Slots => ["first", "second"];
 
     // 不要忘了这里的model需要调用ToMutable()，表示不是标准值而是战斗中的可变数据

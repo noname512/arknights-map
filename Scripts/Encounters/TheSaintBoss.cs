@@ -22,6 +22,8 @@ public class TheSaintBoss : AbstractLateranoEncounter
             EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
         );
 
+    public override string CustomBgm => "event:/ArknightsMap/music/the_saint_bat";    
+
     public override string BossNodePath => $"res://ArknightsMap/images/map/{GetType().Name}Icon";
 
     public override RoomType RoomType => RoomType.Boss; // 这个遭遇的房间类型，这里是boss怪物

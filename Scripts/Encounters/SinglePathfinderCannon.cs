@@ -15,6 +15,8 @@ public class SinglePathfinderCannon : AbstractLateranoEncounter
     // 所有可能出现的怪物
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<PathfinderCannon>()];
 
+    public override string CustomBgm => "event:/ArknightsMap/music/wdxl_bat";
+
     public override bool IsWeak => true;
     public override RoomType RoomType => RoomType.Monster; // 这个遭遇的房间类型，这里是普通怪物
 

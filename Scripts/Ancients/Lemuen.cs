@@ -19,7 +19,7 @@ public class Lemuen : ModAncientEventTemplate
     public override Color DialogueColor => new Color(0.95f, 0.58f, 0.68f);
 
     // 自定义场景的路径
-    public override EventAssetProfile AssetProfile => new(BackgroundScenePath: "res://ArknightsMap/scenes/ancients/Lemuen.tscn");
+    public override EventAssetProfile AssetProfile => new(BackgroundScenePath: $"res://ArknightsMap/scenes/ancients/{GetType().Name}.tscn");
 
     // 自定义地图图标和轮廓的路径
     public override AncientEventPresentationAssetProfile AncientPresentationAssetProfile =>

@@ -24,7 +24,7 @@ namespace ArknightsMap.Scripts.Acts;
 public sealed class Laterano : ModActTemplate
 {
     public override string[] MusicBankPaths => ["res://ArknightsMap/audio/ArknightsMap.bank", "res://ArknightsMap/audio/ArknightsMap.bank"];
-    public override string[] BgMusicOptions => ["event:/ArknightsMap/music/wilds_bg_1", "event:/ArknightsMap/music/wilds_bg_2"];
+    public override string[] BgMusicOptions => ["event:/ArknightsMap/music/laterano_bg"];
 
     public override Color MapTraveledColor => new Color("27221C");
 

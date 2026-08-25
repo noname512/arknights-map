@@ -17,6 +17,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
+using MegaCrit.Sts2.Core.Nodes.Audio;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Combat.HealthBars;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -273,6 +274,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
                 await CreatureCmd.TriggerAnim(Creature, "B_Leave_1", 0.8f);
                 await PowerCmd.Apply<SoarPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
                 await Cmd.Wait(1.0f);
+                NRunMusicController.Instance?.PlayCustomMusic("event:/ArknightsMap/music/the_saint_bat");
             },
             [new BuffIntent()]
         );
