@@ -125,6 +125,14 @@
     "ARKNIGHTS_MAP_EVENT_FIRST_CLASS.pages.INITIAL.options.GAIN_HEALTH.title": "退缩",
     "ARKNIGHTS_MAP_EVENT_FIRST_CLASS.pages.INITIAL.options.GAIN_HEALTH.description": "获得[green]{Health}[/green]点最大生命。",
     "ARKNIGHTS_MAP_EVENT_FIRST_CLASS.pages.GAIN_RELIC.description": "如果我们曾是魔鬼，如果我们曾相携着背负罪孽，那我们的联系又怎会断绝？",
-    "ARKNIGHTS_MAP_EVENT_FIRST_CLASS.pages.GAIN_HEALTH.description": "信仰的宠儿、荣光的萨科塔啊，你到底有什么好惧怕？"
+    "ARKNIGHTS_MAP_EVENT_FIRST_CLASS.pages.GAIN_HEALTH.description": "信仰的宠儿、荣光的萨科塔啊，你到底有什么好惧怕？",
+    "ARKNIGHTS_MAP_EVENT_STEPHEN_ZONE.title": "司提望区突袭",
+    "ARKNIGHTS_MAP_EVENT_STEPHEN_ZONE.pages.INITIAL.description":"见习执行者艾泽尔·帕斯托莱，你被临时征调。\n休假中止，请辅助我开展缉捕行动。",
+    "ARKNIGHTS_MAP_EVENT_STEPHEN_ZONE.pages.INITIAL.options.ICE_CREAM.title": "申请更多支援",
+    "ARKNIGHTS_MAP_EVENT_STEPHEN_ZONE.pages.INITIAL.options.ICE_CREAM.description": "获得2件随机遗物。获得[gold]敌占冰淇淋机[/gold]。",
+    "ARKNIGHTS_MAP_EVENT_STEPHEN_ZONE.pages.INITIAL.options.GAIN_RELIC.title": "普通支援", 
+    "ARKNIGHTS_MAP_EVENT_STEPHEN_ZONE.pages.INITIAL.options.GAIN_RELIC.description": "获得1件随机遗物。",
+    "ARKNIGHTS_MAP_EVENT_STEPHEN_ZONE.pages.GAIN_RELIC.description": "已知悉，目标司提望区外围，执行开始。",
+    "ARKNIGHTS_MAP_EVENT_STEPHEN_ZONE.pages.GAIN_TWO_RELIC.description": "已知悉，目标司提望区核心，需要更多支援。"
 
 }

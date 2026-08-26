@@ -54,7 +54,8 @@ public sealed class Laterano : ModActTemplate
     public override IEnumerable<EventModel> AllEvents =>
         new EventModel[]
         {
-            
+            ModelDb.Event<StephenZone>(),
+            ModelDb.Event<FirstClass>(),
         };
 
     public override IEnumerable<AncientEventModel> AllAncients =>
