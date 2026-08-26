@@ -61,7 +61,7 @@ public sealed class Spread : ModEventTemplate
         List<Reward> list = new List<Reward>();
         for (int i = 0; i < 2; i++)
         {
-            list.Add(new RelicReward(Owner));
+            list.Add(new RelicReward(Owner!));
         }
         EnterCombatWithoutExitingEvent<DublinnFlamechasers>(list, shouldResumeAfterCombat: false);
     }
@@ -69,7 +69,7 @@ public sealed class Spread : ModEventTemplate
     private async Task FaceTheSource()
     {
         List<Reward> list = new List<Reward>();
-        list.Add(new RelicReward(Owner));
+        list.Add(new RelicReward(Owner!));
         EnterCombatWithoutExitingEvent<EndPointEncounter>(list, shouldResumeAfterCombat: false);
     }
 

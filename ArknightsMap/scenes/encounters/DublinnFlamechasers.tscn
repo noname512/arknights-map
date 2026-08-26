@@ -15,7 +15,7 @@ position = Vector2(1015, 716)
 [node name="second" type="Marker2D" parent="."]
 position = Vector2(1255, 716)
 
-[node name="third" type="Marker2D" parent="."]
+[node name="third3" type="Marker2D" parent="."]
 position = Vector2(1495, 716)
 
 [node name="fourth" type="Marker2D" parent="."]

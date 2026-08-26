@@ -26,7 +26,8 @@
 {d2eff479-d650-416d-8b95-07f0382bdeab} event:/ArknightsMap/music/snowy_mountain_bg_2
 {e0db80ee-0f1b-440d-a9b7-7b390df0b06c} event:/ArknightsMap/music/snowy_mountain_bg_3
 {dab118a3-5d8f-465b-9323-0dd4875c2599} event:/ArknightsMap/music/the_leader_bat
-{a72c760d-c8a7-4400-aae7-69bf882bb480} event:/ArknightsMap/music/the_saint_bat
+{a72c760d-c8a7-4400-aae7-69bf882bb480} event:/ArknightsMap/music/the_saint_bat_1
+{2bb41ac7-3e9b-460a-bda9-a93b555b3ce0} event:/ArknightsMap/music/the_saint_bat_2
 {9b4420f8-3410-4054-8783-ba7a394c3815} event:/ArknightsMap/music/wdxl_bat
 {348f9d37-5f4d-43cf-baf1-b1757b34dae1} event:/ArknightsMap/music/wgrsdj_bat
 {85aba3e6-c9ac-4a3d-9345-e720f7c14ef0} event:/ArknightsMap/music/wilds_bg_1

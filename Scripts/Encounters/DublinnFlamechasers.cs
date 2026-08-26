@@ -33,7 +33,7 @@ public class DublinnFlamechasers : AbstractWildsEncounter
         [
             (ModelDb.Monster<DublinnFlamechaserGuard>().ToMutable(), "first"),
             (ModelDb.Monster<DublinnFlamechaserSoldier>().ToMutable(), "second"),
-            (ModelDb.Monster<DublinnFlamechaserSoldier>().ToMutable(), "third"),
+            (ModelDb.Monster<DublinnFlamechaserSoldier>().ToMutable(), "third3"),
             (ModelDb.Monster<DublinnFlamechaserSoldier>().ToMutable(), "fourth"),
         ];
 }
