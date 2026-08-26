@@ -53,11 +53,11 @@ public class Luckily : ModRelicTemplate
     public override decimal ModifyPowerAmountGivenAdditive(PowerModel power, Creature giver, decimal amount, Creature? target,
         CardModel? cardSource)
     {
-        if ((giver == Owner.Creature) && (target.Monster != null) && (power.GetTypeForAmount(amount) == PowerType.Debuff))
+        if ((giver == Owner.Creature) && (target != null) && (target.Monster != null) && (power.GetTypeForAmount(amount) == PowerType.Debuff))
         {
-            return amount + 1;
+            return 1;
         }
-        return amount;
+        return 0;
     }
     
     public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)

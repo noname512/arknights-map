@@ -54,7 +54,7 @@ public class Gracebearer : ModAncientEventTemplate
             RelicOption<BloodedDress>(), // 染血的裙子
             RelicOption<Luckily>(), // “幸运”
         ];
-
+    
     // 生成选项
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
