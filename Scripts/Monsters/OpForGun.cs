@@ -36,7 +36,7 @@ public class OpForGun : AbstractSankta
 
     private int run => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 20, 20);
 
-    private int multi_attack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 5, 5);
+    private int multi_attack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 6, 6);
 
     public int Attack_Time = 1;
 

@@ -274,7 +274,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
                 await CreatureCmd.TriggerAnim(Creature, "B_Leave_1", 0.8f);
                 await PowerCmd.Apply<SoarPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
                 await Cmd.Wait(1.0f);
-                NRunMusicController.Instance?.PlayCustomMusic("event:/ArknightsMap/music/the_saint_bat");
+                NRunMusicController.Instance?.PlayCustomMusic("event:/ArknightsMap/music/the_saint_bat_2");
             },
             [new BuffIntent()]
         );
@@ -388,5 +388,11 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
         if (ShouldPreventDamage && Creature.CurrentHp == Creature.MaxHp/3)
             return false;
         return true;
+    }
+
+    public override Task BeforeDeath(Creature creature)
+    {
+        CreatureCmd.TriggerAnim(creature, "B_Die_2", 0.5f);
+        return base.BeforeDeath(creature);
     }
 }

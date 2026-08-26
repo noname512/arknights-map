@@ -22,7 +22,7 @@ public class TheSaintBoss : AbstractLateranoEncounter
             EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
         );
 
-    public override string CustomBgm => "event:/ArknightsMap/music/the_saint_bat";    
+    public override string CustomBgm => "event:/ArknightsMap/music/the_saint_bat_1";    
 
     public override string BossNodePath => $"res://ArknightsMap/images/map/{GetType().Name}Icon";
 

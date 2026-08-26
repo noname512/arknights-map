@@ -115,6 +115,9 @@
     "ARKNIGHTS_MAP_POWER_THORNS_ENHANCE_POWER.title": "荆棘加强",
     "ARKNIGHTS_MAP_POWER_THORNS_ENHANCE_POWER.smartDescription": "[gold]荆棘[/gold]现在可以对所有敌人造成伤害。",
     "ARKNIGHTS_MAP_POWER_THORNS_ENHANCE_POWER.description": "",
+    "ARKNIGHTS_MAP_POWER_ADD_BULLET_POWER.title": "添加弹药",
+    "ARKNIGHTS_MAP_POWER_ADD_BULLET_POWER.smartDescription": "回合开始时，补充1点[gold]弹药[/gold]。",
+    "ARKNIGHTS_MAP_POWER_ADD_BULLET_POWER.description": "",
 
     "ARKNIGHTS_MAP_POWER_FORTUNA_POWER.title": "福尔图娜",
     "ARKNIGHTS_MAP_POWER_FORTUNA_POWER.smartDescription": "[gold]福尔图娜[/gold]造成一次伤害后，有50%的概率获得1点[gold]弹药[/gold]。",
