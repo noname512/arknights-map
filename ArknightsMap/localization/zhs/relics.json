@@ -266,5 +266,8 @@
     "ARKNIGHTS_MAP_RELIC_OPPORTUNE_MERCY.flavor": "不要尖叫，都已经结束了。",
     "ARKNIGHTS_MAP_RELIC_BLOODED_DRESS.title": "染血的裙子",
     "ARKNIGHTS_MAP_RELIC_BLOODED_DRESS.description": "首个回合，你的卡牌造成的伤害变为[blue]{Times}[/blue]倍。在你击杀敌人后，下个回合也如此。",
-    "ARKNIGHTS_MAP_RELIC_BLOODED_DRESS.flavor": "闭上眼睛，你不会想看到这一切。"
+    "ARKNIGHTS_MAP_RELIC_BLOODED_DRESS.flavor": "闭上眼睛，你不会想看到这一切。",
+    "ARKNIGHTS_MAP_RELIC_LUCKILY.title": "“幸运”",
+    "ARKNIGHTS_MAP_RELIC_LUCKILY.description": "当你施加负面效果时，层数提高[blue]1[/blue]且额外造成[blue]{Damage}[/blue]点伤害。",
+    "ARKNIGHTS_MAP_RELIC_LUCKILY.flavor": "很幸运，我没遇到敌人。裙角的血？可能是不小心摔倒了。"
 }
