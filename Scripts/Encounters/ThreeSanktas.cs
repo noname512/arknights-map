@@ -19,6 +19,8 @@ public class ThreeSanktas : AbstractLateranoEncounter
         [ModelDb.Monster<SanktaBlade>(), ModelDb.Monster<SanktaSniper>(), ModelDb.Monster<SanktaPriest>()];
     public override RoomType RoomType => RoomType.Elite; // 这个遭遇的房间类型，这里是精英怪物
 
+    public override string CustomBgm => "event:/ArknightsMap/music/zsxj_bat_2";
+
     public override IReadOnlyList<string> Slots => ["first", "second", "third"];
 
     // 不要忘了这里的model需要调用ToMutable()，表示不是标准值而是战斗中的可变数据

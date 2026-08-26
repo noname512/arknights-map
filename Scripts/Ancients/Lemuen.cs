@@ -19,7 +19,7 @@ public class Lemuen : ModAncientEventTemplate
     public override Color DialogueColor => new Color(0.95f, 0.58f, 0.68f);
 
     // 自定义场景的路径
-    public override EventAssetProfile AssetProfile => new(BackgroundScenePath: "res://ArknightsMap/scenes/ancients/Lemuen.tscn");
+    public override EventAssetProfile AssetProfile => new(BackgroundScenePath: $"res://ArknightsMap/scenes/ancients/{GetType().Name}.tscn");
 
     // 自定义地图图标和轮廓的路径
     public override AncientEventPresentationAssetProfile AncientPresentationAssetProfile =>
@@ -34,18 +34,20 @@ public class Lemuen : ModAncientEventTemplate
         [
             CreateModRelicOption<Internationalis>(), // 跨境追缉许可
             CreateModRelicOption<MementoMori>(), // 礼炮：强制追思
-            CreateModRelicOption<SeventhHall>(), // 第七厅密令
             CreateModRelicOption<Hand>(), // 剿袭之手
         ];
     private IReadOnlyList<EventOption> Pool2 =>
         [
             CreateModRelicOption<SweetDelivery>(), // 甜品速递
             CreateModRelicOption<CactusTart>(), // 仙人掌挞
+            CreateModRelicOption<SeventhHall>(), // 第七厅密令
         ];
     private IReadOnlyList<EventOption> Pool3 =>
         [
             CreateModRelicOption<Wheelchair>(), // 轮椅
             CreateModRelicOption<AppleFlower>(), // 苹果花
+            CreateModRelicOption<Iris>(), // 紫鸢尾
+            CreateModRelicOption<ShutUp>(), // “噤声”
         ];
 
     // 所有可能的选项

@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Enchantments;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Relics;
@@ -17,7 +18,9 @@ public sealed class Solvent : ModRelicTemplate
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
+        ..HoverTipFactory.FromEnchantment<Waste>()
+        ];
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -40,6 +43,8 @@ public sealed class Solvent : ModRelicTemplate
         )
         {
             CardCmd.Downgrade(item);
+            CardCmd.ClearEnchantment(item);
+            CardCmd.Enchant<Waste>(item, 1m);
             foreach (CardModel c in Owner.Deck.Cards)
             {
                 if (c.Type == item.Type && c != item)

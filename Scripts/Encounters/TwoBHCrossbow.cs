@@ -22,6 +22,8 @@ public class TwoBHCrossbow : AbstractLateranoEncounter
     public override bool IsWeak => false;
     public override RoomType RoomType => RoomType.Monster; // 这个遭遇的房间类型，这里是普通怪物
 
+    public override string CustomBgm => "event:/ArknightsMap/music/kxht_bat";
+
     
 
 public override IReadOnlyList<string> Slots => ["first", "second", "third"];

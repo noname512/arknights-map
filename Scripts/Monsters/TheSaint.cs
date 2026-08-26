@@ -1,7 +1,9 @@
 using ArknightsMap.Scripts.Cards;
+using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -15,24 +17,26 @@ using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
+using MegaCrit.Sts2.Core.Nodes.Audio;
 using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Combat.HealthBars;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class TheSaint : AbstractSankta
+public class TheSaint : AbstractSankta, IHealthBarForecastSource
 {
     protected override int BulletMax => 0;
     protected override int InitialBullet => 0;
 
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 600, 600);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 600, 600);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 450, 450);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 450, 450);
 
-    private int heavyAttackPhase1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 40, 40);
+    private int heavyAttackPhase1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 45, 45);
 
-    private int heavyAttackPhase2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 45, 45);
+    private int heavyAttackPhase2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 67, 67);
     private int multiAttackPhase1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 3, 3);
     private int multiAttackPhase2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 4, 4);
     private int summonNumPhase1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 1, 1);
@@ -52,17 +56,6 @@ public class TheSaint : AbstractSankta
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
-    public override async Task AfterAddedToRoom()
-    {
-        foreach (Player p in CombatState.Players)
-        {
-            int num = p.PlayerCombatState!.DrawPile.Cards.Count;
-            foreach (var card in p.PlayerCombatState.DrawPile.Cards.TakeRandom(num / 2, p.RunState.Rng.CombatCardSelection))
-            {
-                await CardCmd.Exhaust(new ThrowingPlayerChoiceContext(), card);
-            }
-        }
-    }
 
     public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
 {
@@ -75,15 +68,15 @@ public class TheSaint : AbstractSankta
         return base.ModifyDamageAdditive(target, amount, props, dealer, cardSource, cardPlay);
     }
     
-    var threshold = Creature.MaxHp / 2;
+    var threshold = Creature.MaxHp / 3;
     
-    // 这次伤害本来就不会打到半血以下，不用管
+    
     if (Creature.CurrentHp - amount >= threshold)
     {
         return base.ModifyDamageAdditive(target, amount, props, dealer, cardSource, cardPlay);
     }
 
-    if (Creature.CurrentHp == threshold && ShouldPreventDamage)
+    if (Creature.CurrentHp <= threshold && ShouldPreventDamage)
     {
         return -amount;
     }
@@ -97,11 +90,12 @@ public class TheSaint : AbstractSankta
 
     public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (target == Creature && Phase == 1 && Creature.CurrentHp <= Creature.MaxHp / 2 && !HasStun)
+        if (target == Creature && Phase == 1 && Creature.CurrentHp <= Creature.MaxHp / 3 && !HasStun)
         {
-            await CreatureCmd.Stun(Creature, "REVIVE");
+            await CreatureCmd.Stun(Creature, "FLY");
             HasStun = true;
             await CreatureCmd.TriggerAnim(Creature, "A_Revive_1", 0.8f);
+            await CreatureCmd.TriggerAnim(Creature, "A_Revive_3", 0.8f);
         }
         
     }
@@ -186,7 +180,7 @@ public class TheSaint : AbstractSankta
 
                     await CreatureCmd.TriggerAnim(Creature, "A_Attack", 0.8f);
                     await Cmd.Wait(1.0f);
-                    await CreatureCmd.Add(chosen, CombatState);
+                    await CreatureCmd.Add(chosen, CombatState, CombatSide.Enemy, CombatState.Encounter!.GetNextSlot(CombatState));
                     await PowerCmd.Apply<MinionPower>(
                         new ThrowingPlayerChoiceContext(),
                         CombatState.Enemies.First(c => c.Monster == chosen),
@@ -207,8 +201,7 @@ public class TheSaint : AbstractSankta
             "SUMMON_PHASE2",
             async targets =>
             {
-                if (CombatState.HittableEnemies.Count == 1)
-                {
+                for (int i = 0; i < 2; i++){
                     List<MonsterModel> enemies = new List<MonsterModel>
                     {
                         ModelDb.Monster<SanktaBlade>().ToMutable(),
@@ -219,7 +212,7 @@ public class TheSaint : AbstractSankta
 
                     await CreatureCmd.TriggerAnim(Creature, "B_Skill_Begin_2", 0.8f);
                     await Cmd.Wait(1.0f);
-                    await CreatureCmd.Add(chosen, CombatState, MegaCrit.Sts2.Core.Combat.CombatSide.Enemy, "first");
+                    await CreatureCmd.Add(chosen, CombatState, CombatSide.Enemy, CombatState.Encounter!.GetNextSlot(CombatState));
                     await PowerCmd.Apply<MinionPower>(
                         new ThrowingPlayerChoiceContext(),
                         CombatState.Enemies.First(c => c.Monster == chosen),
@@ -277,11 +270,13 @@ public class TheSaint : AbstractSankta
             {
                 ShouldPreventDamage = false;
                 Phase = 2;
+                
                 await CreatureCmd.TriggerAnim(Creature, "B_Leave_1", 0.8f);
                 await PowerCmd.Apply<SoarPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
                 await Cmd.Wait(1.0f);
+                NRunMusicController.Instance?.PlayCustomMusic("event:/ArknightsMap/music/the_saint_bat");
             },
-            [new DebuffIntent()]
+            [new BuffIntent()]
         );
 
         list.Add(GiveConfused);
@@ -369,5 +364,29 @@ public class TheSaint : AbstractSankta
         creatureAnimator.AddAnyState("Die", dieState);
 
         return creatureAnimator;
+    }
+
+
+    public IEnumerable<HealthBarForecastSegment> GetHealthBarForecastSegments(HealthBarForecastContext context)
+    {
+        if (ShouldPreventDamage)
+        {
+            return HealthBarForecasts.Single(
+                0, // 展示的数量（例如如果你的能力有2倍效果可以乘2）
+                new Color(1.0f, 1.0f, 1.0f), // 颜色
+                HealthBarForecastGrowthDirection.FromRight // 从左边开始延伸还是右边开始
+            // 0, // 顺序，越大越远离血条边缘，默认0
+            // PreloadManager.Cache.GetMaterial("res://xxx.tres") // 如果需要自定义材质
+            );
+        }
+
+        return Array.Empty<HealthBarForecastSegment>();
+    }
+
+    public override bool ShouldAllowTargeting(Creature target)
+    {
+        if (ShouldPreventDamage && Creature.CurrentHp == Creature.MaxHp/3)
+            return false;
+        return true;
     }
 }

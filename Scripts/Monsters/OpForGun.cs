@@ -31,12 +31,12 @@ public class OpForGun : AbstractSankta
     protected override int BulletMax => 15;
     protected override int InitialBullet => 0;
 
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 400, 400);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 400, 400);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 500, 500);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 500, 500);
 
     private int run => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 20, 20);
 
-    private int multi_attack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 6, 6);
+    private int multi_attack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 5, 5);
 
     public int Attack_Time = 1;
 
@@ -82,7 +82,7 @@ public class OpForGun : AbstractSankta
         await PowerCmd.Apply<SurroundedPower>(new ThrowingPlayerChoiceContext(), base.CombatState.GetOpponentsOf(base.Creature), 1m, base.Creature, null);
         
         await PowerCmd.Apply<OpForGunPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
-        await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), base.Creature, 3m, base.Creature, null);
+        await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), base.Creature, 2m, base.Creature, null);
         await PowerCmd.Apply<ShieldPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
         await PowerCmd.Apply<BackAttackRightPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
     }
@@ -153,7 +153,7 @@ public class OpForGun : AbstractSankta
                 }
                 await UpdatePosition();
                 Attack_Time = 1;
-                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 2, Creature, null);
+                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
                 
                 
             },
@@ -171,15 +171,28 @@ public class OpForGun : AbstractSankta
             [new MultiAttackIntent(multi_attack, () => Attack_Time)]
         );
 
+        MoveState Prepare = new MoveState(
+            "PREP",
+            async targets =>
+            {
+                
+                await CreatureCmd.GainBlock(Creature, 30, ValueProp.Unpowered, null);
+                
+            },
+            [new DefendIntent()]
+        );
+
         ConditionalBranchState RunBranch = new ConditionalBranchState(
             "RUN_BRANCH"
         );
-        RunBranch.AddState(Run, () => ShouldRun());
+        RunBranch.AddState(Prepare, () => ShouldRun());
         RunBranch.AddState(MultiHit, () => !ShouldRun());
 
+        list.Add(Prepare);
         list.Add(Run);
         list.Add(MultiHit);
         list.Add(RunBranch);
+        Prepare.FollowUpState = Run;
         Run.FollowUpState = RunBranch;
         MultiHit.FollowUpState = RunBranch;
         return new MonsterMoveStateMachine(list, MultiHit);

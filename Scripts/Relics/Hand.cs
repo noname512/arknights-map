@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
+using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -30,14 +31,23 @@ public sealed class Hand : ModRelicTemplate
         if (card.Owner == Owner && card.Type == MegaCrit.Sts2.Core.Entities.Cards.CardType.Attack 
         && card.DynamicVars.TryGetValue("Damage", out var damageVar) 
                 && damageVar != null 
-                && damageVar.BaseValue >= 15)
+                && damageVar.BaseValue >= 15
+                && this.Status == RelicStatus.Active)
         {
             Flash();
             foreach (Creature c in Owner.Creature.CombatState!.HittableEnemies)
             {
                 await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), c, card.DynamicVars.Damage.BaseValue, ValueProp.Unpowered, base.Owner.Creature);
             }
+            Status = RelicStatus.Disabled;
         }
         return base.AfterCardDrawn(choiceContext, card, fromHandDraw);
     }
+
+    public override Task AfterCombatVictory(CombatRoom room)
+    {
+        Status = RelicStatus.Active;
+        return base.AfterCombatVictory(room);
+    }
+
 }

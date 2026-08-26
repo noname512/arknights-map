@@ -28,23 +28,24 @@ public sealed class MementoMori : ModRelicTemplate
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
 
-    public int turn = 0;
+    public override bool ShowCounter => true;    
+    
 
     public override int DisplayAmount
     {
-        get { return turn; }
+        get { return (Owner.PlayerCombatState?.TurnNumber - 1) % 4 ?? 0; }
     }
 
     public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
-        if (side == CombatSide.Player && (Owner.PlayerCombatState?.TurnNumber == 1 || turn == 4))
+        if (side == CombatSide.Player && Owner.PlayerCombatState?.TurnNumber % 4 == 1 )
         {
             Flash();
             await Shoot(combatState);
+            InvokeDisplayAmountChanged();
         }
         else
         {
-            turn++;
             InvokeDisplayAmountChanged();
         }
     }
@@ -53,7 +54,6 @@ public sealed class MementoMori : ModRelicTemplate
     {
         if (combatState != null)
         {
-            turn = 0;
             InvokeDisplayAmountChanged();
             for (int i = 0; i < 8; i++)
             {

@@ -24,6 +24,8 @@ public class OpForGunBoss : AbstractLateranoEncounter
 
     public override string BossNodePath => $"res://ArknightsMap/images/map/{GetType().Name}Icon";
 
+    public override string CustomBgm => "event:/ArknightsMap/music/op_for_gun_bat";
+
     public override bool FullyCenterPlayers => true;
 
     public override RoomType RoomType => RoomType.Boss; // 这个遭遇的房间类型，这里是boss怪物

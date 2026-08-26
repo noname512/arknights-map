@@ -99,7 +99,7 @@
     "ARKNIGHTS_MAP_POWER_EYE_ABILITY_POWER.smartDescription": "这个怪物的意图会尝试将你抽牌堆中的一张[purple]诅咒牌[/purple]放至抽牌堆顶。\n如果它不能这么做，本回合造成的伤害增加50%。",
     "ARKNIGHTS_MAP_POWER_EYE_ABILITY_POWER.description": "",
     "ARKNIGHTS_MAP_POWER_SSS_POWER.title": "“超甜微笑”",
-    "ARKNIGHTS_MAP_POWER_SSS_POWER.smartDescription": "{Time:cond:==0?“超甜微笑”目前处于休息状态|“超甜微笑”目前处于[gold]狂飙状态[/gold]，[gold]弹药[/gold]大于5时，各意图将被强化。[gold]弹药[/gold]降至0时的下一次行动后，将会休眠。\n每当你打出1张[gold]奶浆[/gold]或者“超甜微笑”行动一次后，[gold]弹药[/gold]数量减少1。}",
+    "ARKNIGHTS_MAP_POWER_SSS_POWER.smartDescription": "{Time:cond:==0?“超甜微笑”目前处于休息状态|“超甜微笑”目前处于[gold]狂飙状态[/gold]，[gold]弹药[/gold]大于5时，各意图将被强化。[gold]弹药[/gold]降至0时的下一次行动后，将会休眠。\n每当[blue]{Amount}[/blue]张[gold]奶浆[/gold]被打出，或者“超甜微笑”行动一次后，[gold]弹药[/gold]数量减少1。}",
     "ARKNIGHTS_MAP_POWER_SSS_POWER.description": "",
     "ARKNIGHTS_MAP_POWER_SHIELD_POWER.title": "元素护盾",
     "ARKNIGHTS_MAP_POWER_SHIELD_POWER.smartDescription": "生效时，受到的所有伤害降低[blue]50%[/blue]。\n在该敌人的[gold]人工制品[/gold]被移除后解除减伤效果。\n减伤被移除后，在[blue]{Cooldown}[/blue]回合后恢复。",

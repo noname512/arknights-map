@@ -18,6 +18,8 @@ public class SingleSanktaBlade : AbstractLateranoEncounter
     public override bool IsWeak => true;
     public override RoomType RoomType => RoomType.Monster; // 这个遭遇的房间类型，这里是普通怪物
 
+    public override string CustomBgm => "event:/ArknightsMap/music/zsxj_bat_1";
+
     // 不要忘了这里的model需要调用ToMutable()，表示不是标准值而是战斗中的可变数据
     protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() =>
         [

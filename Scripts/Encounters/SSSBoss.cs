@@ -27,6 +27,8 @@ public class SSSBoss : AbstractLateranoEncounter
         );
 
     public override string BossNodePath => $"res://ArknightsMap/images/map/{GetType().Name}Icon";
+
+    public override string CustomBgm => "event:/ArknightsMap/music/wdxl_bat";
     
     
 
