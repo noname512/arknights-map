@@ -101,8 +101,8 @@ public class Fortuna : AbstractSankta
         attack02Branch.AddState(attack01, () => Bullet >= BulletMax);
         attack02Branch.AddState(skill, () => Bullet < BulletMax);
 
-        attack01.FollowUpState = skillBranch;
-        skill.FollowUpState = attack02;
+        attack01.FollowUpState = skill;
+        skill.FollowUpState = skillBranch;
         attack02.FollowUpState = attack02Branch;
 
         list.Add(attack01);
