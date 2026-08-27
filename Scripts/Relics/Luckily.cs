@@ -43,9 +43,18 @@ public class Luckily : ModRelicTemplate
     public override decimal ModifyPowerAmountGivenAdditive(PowerModel power, Creature giver, decimal amount, Creature? target,
         CardModel? cardSource)
     {
-        if ((giver == Owner.Creature) && (target != null) && (target.Monster != null) && (power.GetTypeForAmount(amount) == PowerType.Debuff))
+        if (power is ITemporaryPower)
+        {
+            return 0;
+        }
+        if ((giver == Owner.Creature) && (target != null) && (target.Monster != null) && (power.Type == PowerType.Debuff))
         {
             return 1;
+        }
+        if ((giver == Owner.Creature) && (target != null) && (target.Monster != null) &&
+            (power.GetTypeForAmount(amount) == PowerType.Debuff))
+        {
+            return -1;
         }
         return 0;
     }
