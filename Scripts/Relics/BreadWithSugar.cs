@@ -6,7 +6,6 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
-using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
@@ -17,6 +16,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
+using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Characters;
@@ -25,10 +25,10 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
-public class Luckily : ModRelicTemplate
+public class BreadWithSugar : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(5, ValueProp.Unpowered)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1), new EnergyVar("Energy2", 1)];
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -39,23 +39,53 @@ public class Luckily : ModRelicTemplate
             // 大图标（原版256x256）
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
-    
-    public override decimal ModifyPowerAmountGivenAdditive(PowerModel power, Creature giver, decimal amount, Creature? target,
-        CardModel? cardSource)
+
+    private int _remainTimes;
+    public override bool ShowCounter => true;
+
+    [SavedProperty]
+    public int RemainTimes
     {
-        if ((giver == Owner.Creature) && (target != null) && (target.Monster != null) && (power.GetTypeForAmount(amount) == PowerType.Debuff))
+        get
         {
-            return 1;
+            return _remainTimes;
         }
-        return 0;
+        private set
+        {
+            AssertMutable();
+            _remainTimes = value;
+            UpdateDisplay();
+        }
     }
-    
-    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    private void UpdateDisplay()
     {
-        if (!(amount == 0m) && power.GetTypeForAmount(amount) == PowerType.Debuff && power.Owner.IsEnemy && applier == Owner.Creature && !(power is ITemporaryPower))
+        if (RemainTimes > 0)
+        {
+            Status = RelicStatus.Normal;
+        }
+        else
+        {
+            Status = RelicStatus.Disabled;
+        }
+        InvokeDisplayAmountChanged();
+    }
+
+    public override int DisplayAmount => RemainTimes;
+
+    public override Task AfterObtained()
+    {
+        RemainTimes = 3;
+        return base.AfterObtained();
+    }
+
+    public override async Task AfterCurrentHpChanged(Creature creature, decimal delta)
+    {
+        if ((Owner.Creature.CurrentHp <= Owner.Creature.MaxHp * 0.5F) && (RemainTimes > 0))
         {
             Flash();
-            await CreatureCmd.Damage(choiceContext, power.Owner, DynamicVars.Damage, Owner.Creature);
+            await CreatureCmd.Heal(Owner.Creature, Owner.Creature.MaxHp);
+            RemainTimes--;
         }
-    }    
+    }
+    
 }

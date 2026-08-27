@@ -53,6 +53,7 @@ public class Gracebearer : ModAncientEventTemplate
             RelicOption<OpportuneMercy>(), // 趁势怜悯
             RelicOption<BloodedDress>(), // 染血的裙子
             RelicOption<Luckily>(), // “幸运”
+            RelicOption<BreadWithSugar>(), // 加糖面包
         ];
     
     // 生成选项
