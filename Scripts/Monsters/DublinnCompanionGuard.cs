@@ -20,8 +20,8 @@ public class DublinnCompanionGuard : AbstractWildsMonster
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 62, 58);
     private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 18, 16);
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 12, 11);
-    private int Block1 => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 15, 13);
-    private int Block2 => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 30, 27);
+    private int Block1 => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 18, 15);
+    private int Block2 => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 36, 30);
     private int Block3 => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 12, 11);
 
     // 怪物场景
