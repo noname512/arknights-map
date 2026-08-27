@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://en7jdwlc3wrc"
-path="res://.godot/imported/立绘_蕾缪安_skin1.png-4d1318f292dfee7f6e74aa23d2cc3882.ctex"
+uid="uid://c34iims31c2ou"
+path="res://.godot/imported/OpForGunPower.png-6ffef86db6f16d66eb7f8181e0adba25.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/ancients/Lemuen/立绘_蕾缪安_skin1.png"
-dest_files=["res://.godot/imported/立绘_蕾缪安_skin1.png-4d1318f292dfee7f6e74aa23d2cc3882.ctex"]
+source_file="res://ArknightsMap/images/powers/OpForGunPower.png"
+dest_files=["res://.godot/imported/OpForGunPower.png-6ffef86db6f16d66eb7f8181e0adba25.ctex"]
 
 [params]
 

@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.MonsterMoves;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.Nodes.Combat;
@@ -134,7 +135,7 @@ public class OpCar : AbstractSankta
             async targets =>
             {
                 await CreatureCmd.TriggerAnim(Creature, "Attack", 0.8f);
-                await DamageCmd.Attack(8).FromMonster(this).WithHitFx(sfx: GetAttackSfx()).Execute(null);
+                await DamageCmd.Attack(12).FromMonster(this).WithHitFx(sfx: GetAttackSfx()).Execute(null);
                 await CreatureCmd.GainBlock(Creature, 8, ValueProp.Unpowered, null);
                 foreach (Creature c in CombatState.GetOpponentsOf(Creature))
             {
@@ -145,7 +146,7 @@ public class OpCar : AbstractSankta
             }
                 
             },
-            [new SingleAttackIntent(8), new DefendIntent(), new DebuffIntent()]
+            [new SingleAttackIntent(12), new DefendIntent(), new DebuffIntent()]
         );
 
         RandomBranchState StartBranch = new RandomBranchState(
@@ -170,10 +171,21 @@ attackBranch.AddState(defend, () => true); // 兜底
 skillBranch.AddState(attack_defend, () => OnOtherSide() && Creature!.CombatState!.RunState.Rng.CombatTargets.NextFloat(0, 1) < 0.3f);
 skillBranch.AddState(attack, () => true); // 兜底
 
+RandomBranchState attack_defendBranch = new RandomBranchState(
+            "ATTACK_DEFEND_BRANCH"
+            
+        );  
+
+        
+        attack_defendBranch.AddBranch(attack, MoveRepeatType.CanRepeatForever, 0.5f); // 兜底
+        attack_defendBranch.AddBranch(defend, MoveRepeatType.CanRepeatForever, 0.5f); // 兜底
+
         StartBranch.AddBranch(attack, 10);
         StartBranch.AddBranch(defend, 10);
         attack.FollowUpState = attackBranch;
         defend.FollowUpState = skillBranch;
+        attack_defend.FollowUpState = attackBranch;
+
 
         list.Add(attack);
         list.Add(defend);

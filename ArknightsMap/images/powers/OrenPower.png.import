@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6a8wttopjlqk"
-path="res://.godot/imported/sankta_creature_power.png-895f1453d20c3fca3e5b1357e35049ef.ctex"
+uid="uid://wmlgx5qf1b71"
+path="res://.godot/imported/OrenPower.png-5a9d4921e926cddd6c63e017367c09bb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/powers/sankta_creature_power.png"
-dest_files=["res://.godot/imported/sankta_creature_power.png-895f1453d20c3fca3e5b1357e35049ef.ctex"]
+source_file="res://ArknightsMap/images/powers/OrenPower.png"
+dest_files=["res://.godot/imported/OrenPower.png-5a9d4921e926cddd6c63e017367c09bb.ctex"]
 
 [params]
 
