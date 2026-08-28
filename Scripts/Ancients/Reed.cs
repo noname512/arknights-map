@@ -48,7 +48,7 @@ public class Reed : ModAncientEventTemplate
             CreateModRelicOption<AidOfLeader>(), // “领袖”的援助
             CreateModRelicOption<Kindling>(), // 火种
             CreateModRelicOption<BurnItAll>(), // 燃烧殆尽
-            CreateModRelicOption<WildfireSpread>(), // 燃烧殆尽
+            CreateModRelicOption<WildfireSpread>(), // 燎原
         ];
 
     // 所有可能的选项

@@ -24,13 +24,13 @@ public class SanktaClaw : AbstractSankta
 
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 110, 110);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 120, 120);
-    private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 16, 16);
+    private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 18, 18);
 
-    private int DamageBlock => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 10);
+    private int DamageBlock => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 12, 12);
 
-    private int Block => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 10);
+    private int Block => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 15, 15);
 
-    private int Damage_Skill => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 8, 8);
+    private int Damage_Skill => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 10);
 
     public override async Task AfterAddedToRoom()
     {

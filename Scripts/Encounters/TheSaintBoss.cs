@@ -33,7 +33,7 @@ public class TheSaintBoss : AbstractLateranoEncounter
     // 不要忘了这里的model需要调用ToMutable()，表示不是标准值而是战斗中的可变数据
     protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() =>
         [
-            (ModelDb.Monster<TheSaint>().ToMutable(), "second"), // 如果不想指定怪物生成在哪个槽位，可以直接传null，系统会自动分配
+            (ModelDb.Monster<TheSaint>().ToMutable(), "first"), // 如果不想指定怪物生成在哪个槽位，可以直接传null，系统会自动分配
         ];
 
     // 可选的生成条件，例如只能在密林生成

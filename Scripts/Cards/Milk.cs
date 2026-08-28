@@ -25,7 +25,8 @@ namespace ArknightsMap.Scripts.Cards
         private const bool shouldShowInCardLibrary = true;
 
         public override int MaxUpgradeLevel => 0;
-    
+
+        public override bool HasTurnEndInHandEffect => true;
 
         public Milk() : base(energyCost, type, rarity, targetType)
         {
