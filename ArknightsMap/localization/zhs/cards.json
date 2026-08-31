@@ -15,6 +15,8 @@
   "ARKNIGHTS_MAP_CARD_CUSTOM_MADE_CARD.description": "{InCombat:{StrengthPower:cond:>0?获得{StrengthPower:diff()}点[gold]力量[/gold]。\n|}{DexterityPower:cond:>0?获得{DexterityPower:diff()}点[gold]敏捷[/gold]。\n|}{Cards:cond:>0?抽{Cards:diff()}张牌。\n|}{Block:cond:>0?获得{Block:diff()}点[gold]格挡[/gold]。|}|这张牌的效果根据遗物定制铳械的[gold]定制[/gold]所用卡牌具有不同效果。}",
   "ARKNIGHTS_MAP_CARD_SHOTGUN_CARD.title": "铳斗",
   "ARKNIGHTS_MAP_CARD_SHOTGUN_CARD.description": "对所有敌人造成{Damage:diff()}点伤害。\n回复{Heal:diff()}点生命。",
+  "ARKNIGHTS_MAP_CARD_WARN.title": "鸣铳示警",
+  "ARKNIGHTS_MAP_CARD_WARN.description": "所有敌人本回合失去{StrengthPower}点[gold]力量[/gold]，并获得{WeakPower}层[gold]虚弱[/gold]。\n你本回合获得等量的[gold]力量[/gold]。",
   "ARKNIGHTS_MAP_CARD_NO_COMMUNICATION.title": "沟通不畅",
   "ARKNIGHTS_MAP_CARD_NO_COMMUNICATION.description": "每当抽到这张牌后，这张牌的耗能降低1。",
   "ARKNIGHTS_MAP_CARD_CONFUSED.title": "困惑",

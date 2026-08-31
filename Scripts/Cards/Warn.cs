@@ -2,6 +2,7 @@ using ArknightsMap.Scripts.Powers;
 using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -14,13 +15,14 @@ using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
+using Test.Scripts.Powers;
 
 namespace ArknightsMap.Scripts.Cards;
 
 [RegisterCard(typeof(TokenCardPool))]
-public class ShotgunCard : ModCardTemplate
+public class Warn : ModCardTemplate
 {
-    public ShotgunCard() : base(energyCost, type, rarity, targetType, false)
+    public Warn() : base(energyCost, type, rarity, targetType, false)
     {
     }
 
@@ -28,10 +30,10 @@ public class ShotgunCard : ModCardTemplate
     public override bool CanBeGeneratedInCombat => false;
 
     // 基础耗能
-    private const int energyCost = 1;
+    private const int energyCost = 0;
 
     // 卡牌类型
-    private const CardType type = CardType.Attack;
+    private const CardType type = CardType.Skill;
 
     // 卡牌稀有度
     private const CardRarity rarity = CardRarity.Event;
@@ -39,7 +41,12 @@ public class ShotgunCard : ModCardTemplate
     // 目标类型（AnyEnemy表示任意敌人）
     private const TargetType targetType = TargetType.AllEnemies;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8, ValueProp.Move), new IntVar("Heal", 2)];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
+        CardKeyword.Retain,
+            CardKeyword.Exhaust
+        ];
+
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<WeakPower>(2), new PowerVar<StrengthPower>(2)];
 
     // 卡图资源
     public override CardAssetProfile AssetProfile =>
@@ -54,22 +61,22 @@ public class ShotgunCard : ModCardTemplate
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        foreach (Creature m in CombatState!.HittableEnemies)
+        {
+            await PowerCmd.Apply<WeakPower>(choiceContext, m, DynamicVars["WeakPower"].BaseValue, Owner.Creature, cardPlay.Card);
+            await PowerCmd.Apply<WarnPower>(choiceContext, m, -DynamicVars["StrengthPower"].BaseValue, Owner.Creature, cardPlay.Card);
+            await PowerCmd.Apply<WarnPower>(choiceContext, Owner.Creature, DynamicVars["WeakPower"].BaseValue, Owner.Creature, cardPlay.Card);
         
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .WithHitCount(1)
-            .FromCard(this, cardPlay)
-            .TargetingAllOpponents(CombatState!)
-            .Execute(choiceContext);
-
-        await CreatureCmd.Heal(Owner.Creature, DynamicVars["Heal"].BaseValue);    
+        }
+            
     }
 
 
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Damage"].BaseValue += 2;
-        DynamicVars["Heal"].BaseValue += 1;
+        DynamicVars["WeakPower"].UpgradeValueBy(1);
+        DynamicVars["StrengthPower"].UpgradeValueBy(1);
     }
 
 

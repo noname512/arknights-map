@@ -17,7 +17,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
-public sealed class NotAnswered : ModRelicTemplate
+public sealed class UnAnswered : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
@@ -34,8 +34,6 @@ public sealed class NotAnswered : ModRelicTemplate
             // 大图标（原版256x256）
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
-
-    public override bool ShowCounter => true;
 
     public override decimal ModifyMaxEnergy(Player player, decimal amount)
     {

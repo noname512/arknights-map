@@ -19,7 +19,7 @@ public sealed class ChildrenBook : ModRelicTemplate
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(3)];
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [..HoverTipFactory.FromEnchantment<Empathy>()];
 
     public override RelicAssetProfile AssetProfile =>
         new(

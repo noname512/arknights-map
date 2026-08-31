@@ -8,7 +8,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Ancients;
 
-//[RegisterSharedAncient]
+[RegisterSharedAncient]
 public class Executor : ModAncientEventTemplate
 {
     // 选项按钮颜色
@@ -33,6 +33,8 @@ public class Executor : ModAncientEventTemplate
         [
             CreateModRelicOption<ExFoedere>(), // 圣约
             CreateModRelicOption<Shotgun>(), // 近身铳斗
+            CreateModRelicOption<SaintMind>(), // 圣徒意志
+            CreateModRelicOption<Lens>(), // 精密瞄准镜
             
         ];
     private IReadOnlyList<EventOption> Pool2 =>
@@ -41,7 +43,8 @@ public class Executor : ModAncientEventTemplate
         ];
     private IReadOnlyList<EventOption> Pool3 =>
         [
-            CreateModRelicOption<NotAnswered>(), // 未解答
+            CreateModRelicOption<UnAnswered>(), // 未解答
+            CreateModRelicOption<WarnBullet>(), // 示警铳弹
         ];
 
     // 所有可能的选项
