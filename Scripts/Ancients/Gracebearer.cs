@@ -54,6 +54,7 @@ public class Gracebearer : ModAncientEventTemplate
             RelicOption<BloodedDress>(), // 染血的裙子
             RelicOption<Luckily>(), // “幸运”
             RelicOption<BreadWithSugar>(), // 加糖面包
+            RelicOption<Gospel>(), // 福音
         ];
     
     // 生成选项

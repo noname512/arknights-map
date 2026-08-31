@@ -30,7 +30,7 @@ public class AngryPower : ModPowerTemplate
         CardModel? cardSource,
         CardPlay? cardPlay)
     {
-        if (dealer == this.Owner || !this.Owner.Pets.Contains<Creature>(dealer))
+        if (dealer == Owner || Owner.Pets.Contains<Creature>(dealer))
         {
             if (props.IsPoweredAttack() && cardSource != null)
             {
