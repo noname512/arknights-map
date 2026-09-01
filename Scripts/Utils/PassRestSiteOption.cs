@@ -7,9 +7,12 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.RestSite;
 using MegaCrit.Sts2.Core.GameActions;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes;
+using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
@@ -18,6 +21,7 @@ using MegaCrit.Sts2.Core.Nodes.RestSite;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Screens.Capstones;
 using MegaCrit.Sts2.Core.Nodes.Screens.Overlays;
+using MegaCrit.Sts2.Core.Nodes.Vfx.Cards;
 using MegaCrit.Sts2.Core.Platform;
 using MegaCrit.Sts2.Core.Runs;
 
@@ -136,15 +140,50 @@ public class PassRestSiteOption : RestSiteOption
             {
                 return false;
             }
-            CardModel card = enumerable.FirstOrDefault()!;
+            foreach (CardModel item in enumerable)
+            {
+                await CardPileCmd.GiveToAnotherPlayer(item, target, PileType.Deck);
+            }
             if (LocalContext.IsMe(target))
             {
-                card.Owner = target;
-                CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(card, PileType.Deck));
+                CardModel card = enumerable.FirstOrDefault()!;
+                CardPileAddResult result = new CardPileAddResult
+                {
+                    success = true,
+                    cardAdded = card,
+                    oldPile = card.Pile,
+                    modifyingModels = null,
+                };
+                CardCmd.PreviewCardPileAdd(result);
             }
             else if (LocalContext.IsMe(Owner))
             {
-                await CardPileCmd.RemoveFromDeck(card);
+                CardModel card = enumerable.FirstOrDefault()!;
+                NCard cardNode = NCard.Create(card);
+                if (cardNode != null)
+                {
+                    NRun.Instance.GlobalUi.CardPreviewContainer.AddChildSafely(cardNode);
+                    cardNode.UpdateVisuals(PileType.None, CardPreviewMode.Normal);
+                    Tween tween = cardNode.CreateTween();
+                    tween
+                        .TweenProperty(cardNode, "scale", Vector2.One * 1f, 0.25)
+                        .From(Vector2.Zero)
+                        .SetEase(Tween.EaseType.Out)
+                        .SetTrans(Tween.TransitionType.Cubic);
+                    tween.TweenInterval(0.25);
+                    tween.TweenCallback(
+                        Callable.From(
+                            delegate
+                            {
+                                NCardRemoveVfx child = NCardRemoveVfx.Create(cardNode);
+                                NRun.Instance.GlobalUi.AboveTopBarVfxContainer.AddChildSafely(child);
+                            }
+                        )
+                    );
+                    tween.TweenInterval(0.4000000059604645);
+                    tween.TweenCallback(Callable.From(cardNode.QueueFreeSafely));
+                }
+                Owner.Deck.InvokeContentsChanged();
             }
 
             await RelicCmd.Remove(OwnerRelic);
