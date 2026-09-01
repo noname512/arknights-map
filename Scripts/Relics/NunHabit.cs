@@ -40,7 +40,7 @@ public class NunHabit : ModRelicTemplate
             // 大图标（原版256x256）
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
-    
+
     public override bool TryModifyRestSiteOptions(Player player, ICollection<RestSiteOption> options)
     {
         if (player != base.Owner)
