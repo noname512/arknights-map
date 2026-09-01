@@ -7,12 +7,8 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.MonsterMoves;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
-using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -21,7 +17,6 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class WastelandSkulker : AbstractSankta
 {
-    
     protected override int BulletMax => 0;
     protected override int InitialBullet => 0;
 
@@ -35,19 +30,18 @@ public class WastelandSkulker : AbstractSankta
     {
         await PowerCmd.Apply<SkulkerPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
     }
-    
 
     public override decimal ModifyMaxEnergy(Player player, decimal amount)
-	{
-		if (Creature.IsDead)
-		{
-			return amount;
-		}
-		return amount - 1;
-	}
+    {
+        if (Creature.IsDead)
+        {
+            return amount;
+        }
+        return amount - 1;
+    }
 
-    public bool HasOtherMonsterInCombat(){
-        
+    public bool HasOtherMonsterInCombat()
+    {
         if (CombatState.HittableEnemies.Any(e => e.IsAlive && e.IsMonster && !(e.Monster is WastelandSkulker)))
         {
             return true;
@@ -58,24 +52,20 @@ public class WastelandSkulker : AbstractSankta
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
-
     private string GetAttackSfx() => "Attack";
 
-    
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
-        
+
         MoveState attack = new MoveState(
             "ATTACK",
             async targets =>
             {
                 await DamageCmd.Attack(Damage).FromMonster(this).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
-            }, 
-            
+            },
             new SingleAttackIntent(Damage)
         );
-        
 
         MoveState block = new MoveState(
             "BLOCK",
@@ -93,42 +83,32 @@ public class WastelandSkulker : AbstractSankta
         attack.FollowUpState = block;
         block.FollowUpState = attack;
 
-        
-        
         list.Add(attackBranch);
         list.Add(attack);
         list.Add(block);
-        
-    
 
         return new MonsterMoveStateMachine(list, attack);
     }
-
-    
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
     {
         AnimState startState = new AnimState("Start");
         AnimState idleState = new AnimState("Idle", isLooping: true);
         AnimState attackState = new AnimState("Attack");
-        
 
         AnimState dieState = new AnimState("Die");
-        
-
 
         attackState.NextState = idleState;
-        
+
         startState.NextState = idleState;
-        
+
         CreatureAnimator creatureAnimator = new CreatureAnimator(startState, controller);
         creatureAnimator.AddAnyState("Attack", attackState);
-        
+
         creatureAnimator.AddAnyState("Start", startState);
-        
+
         creatureAnimator.AddAnyState("Die", dieState);
-        
-        
+
         return creatureAnimator;
     }
 }

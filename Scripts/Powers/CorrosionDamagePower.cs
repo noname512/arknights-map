@@ -23,7 +23,7 @@ public class CorrosionDamagePower : ModPowerTemplate, IHealthBarForecastSource
 
     // 叠加类型，Counter表示可叠加，Single表示不可叠加
     public override PowerStackType StackType => PowerStackType.Counter;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("Bound", 8), new IntVar("ExtraDamage", 5)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("Bound", 5), new IntVar("ExtraDamage", 5)];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromPowerWithPowerHoverTips<VulnerablePower>();
 
     // 自定义图标路径。1:1即可。原版游戏大图256x256，小图64x64。

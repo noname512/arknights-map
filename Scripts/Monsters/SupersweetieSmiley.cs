@@ -32,9 +32,9 @@ public class SupersweetieSmiley : AbstractSankta
 
     private int heavyAttackEnhanced => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 36, 36);
 
-    private int multiAttack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 10, 10);
+    private int multiAttack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 8, 8);
 
-    private int multiAttackEnhanced => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 14, 14);
+    private int multiAttackEnhanced => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 10, 10);
 
     public int tolerance = 0;
 
@@ -134,7 +134,7 @@ public class SupersweetieSmiley : AbstractSankta
                     tolerance += 5;
                 }
             },
-            [new MultiAttackIntent(multiAttack, 2),new DebuffIntent(), new DefendIntent(), new StatusIntent(2)]
+            [new MultiAttackIntent(multiAttack, 2), new DebuffIntent(), new DefendIntent(), new StatusIntent(2)]
         );
 
         MoveState SplashEnhanced = new MoveState(
@@ -170,7 +170,7 @@ public class SupersweetieSmiley : AbstractSankta
                 await CreatureCmd.Add<SupersweetieDeliveryDrone>(CombatState, CombatState.Encounter!.GetNextSlot(CombatState));
                 await PowerCmd.Apply<MinionPower>(
                     new ThrowingPlayerChoiceContext(),
-                    CombatState.Enemies.First(c => c.Monster is SupersweetieDeliveryDrone),
+                    CombatState.Enemies.Where(c => c.Monster is SupersweetieDeliveryDrone),
                     1m,
                     Creature,
                     null
@@ -230,16 +230,16 @@ public class SupersweetieSmiley : AbstractSankta
         );
 
         ConditionalBranchState HeavyBranch = new ConditionalBranchState("HEAVY_BRANCH");
-        HeavyBranch.AddState(Splash, () => Run <= 5);
-        HeavyBranch.AddState(SplashEnhanced, () => Run > 5);
+        HeavyBranch.AddState(Splash, () => Run <= 10);
+        HeavyBranch.AddState(SplashEnhanced, () => Run > 10);
 
         ConditionalBranchState SplashBranch = new ConditionalBranchState("SPLASH_BRANCH");
-        SplashBranch.AddState(Summon, () => Run <= 5);
-        SplashBranch.AddState(SummonEnhanced, () => Run > 5);
+        SplashBranch.AddState(Summon, () => Run <= 10);
+        SplashBranch.AddState(SummonEnhanced, () => Run > 10);
 
         ConditionalBranchState SummonBranch = new ConditionalBranchState("SUMMON_BRANCH");
-        SummonBranch.AddState(HeavyAttack, () => Run <= 5);
-        SummonBranch.AddState(HeavyAttackEnhanced, () => Run > 5);
+        SummonBranch.AddState(HeavyAttack, () => Run <= 10);
+        SummonBranch.AddState(HeavyAttackEnhanced, () => Run > 10);
 
         HeavyAttack.FollowUpState = HeavyBranch;
         HeavyAttackEnhanced.FollowUpState = HeavyBranch;

@@ -1,20 +1,14 @@
 using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.MonsterMoves;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
-using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -34,8 +28,8 @@ public class SanktaPride : AbstractSankta
 
     public override async Task AfterAddedToRoom()
     {
-        await PowerCmd.Apply<EyePower>(new ThrowingPlayerChoiceContext(), Creature, 4, Creature, null);
-        await PowerCmd.Apply<EyeAbilityPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
+        await PowerCmd.Apply<PridePower>(new ThrowingPlayerChoiceContext(), Creature, 4, Creature, null);
+
         await PowerCmd.Apply<SanktaCreaturePower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
     }
 
@@ -45,13 +39,7 @@ public class SanktaPride : AbstractSankta
     {
         List<MonsterState> list = new List<MonsterState>();
 
-        MoveState sleep = new MoveState(
-            "SLEEP",
-            async targets =>
-            {},
-                
-            new SleepIntent()
-        );
+        MoveState sleep = new MoveState("SLEEP", async targets => { }, new SleepIntent());
 
         MoveState pray = new MoveState(
             "PRAY",
@@ -79,8 +67,6 @@ public class SanktaPride : AbstractSankta
             },
             new BuffIntent()
         );
-
-    
 
         sleep.FollowUpState = pray;
         pray.FollowUpState = skill;

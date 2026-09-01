@@ -1,7 +1,5 @@
-using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -26,16 +24,9 @@ public class SanktaStatue : AbstractSankta
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 45, 45);
     private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 5, 5);
 
-    
-
     private int Block => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 10);
 
-    
-
-    public override async Task AfterAddedToRoom()
-    {
-        
-    }
+    public override async Task AfterAddedToRoom() { }
 
     public int MoveInt = 0;
 
@@ -47,8 +38,6 @@ public class SanktaStatue : AbstractSankta
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
-
-        
 
         MoveState attack_debuff = new MoveState(
             "DEBUFF",
@@ -75,17 +64,13 @@ public class SanktaStatue : AbstractSankta
             [new DefendIntent()]
         );
 
-        
         attack_debuff.FollowUpState = defend;
         defend.FollowUpState = attack_debuff;
 
-        
         list.Add(defend);
         list.Add(attack_debuff);
         return new MonsterMoveStateMachine(list, defend);
     }
-
-    
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
     {

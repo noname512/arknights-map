@@ -15,6 +15,10 @@ public sealed class EyePower : ModPowerTemplate
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
+    public override PowerAssetProfile AssetProfile =>
+        new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
+
+
     public override bool ShouldScaleInMultiplayer => true;
 
     public override decimal ModifyDamageMultiplicative(

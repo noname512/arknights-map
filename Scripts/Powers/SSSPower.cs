@@ -35,23 +35,23 @@ public class SSSPower : ModPowerTemplate
     }
 
     public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+{
+    if (DynamicVars["Time"].BaseValue > 0 && cardPlay.Card is Milk)
     {
-        if (DynamicVars["Time"].BaseValue > 0 && cardPlay.Card is Milk)
+        MilkCounter++;
+        if (MilkCounter >= CombatState.Players.Count)
         {
-            MilkCounter++;
-            if (MilkCounter >= CombatState.Players.Count)
+            DynamicVars["Time"].BaseValue--;
+            var bullet = Owner.GetPower<BulletPower>();
+            if (bullet != null)
             {
-                DynamicVars["Time"].BaseValue--;
-                var bullet = Owner.GetPower<BulletPower>();
-                if (bullet != null)
-                {
-                    await PowerCmd.Decrement(bullet);
-                }
-                InvokeDisplayAmountChanged();
+                await PowerCmd.Decrement(bullet);
             }
-            MilkCounter = 0;
+            InvokeDisplayAmountChanged();
+            MilkCounter = 0;  // 只有弹药真正减少后才重置
         }
     }
+}
 
     public async Task UpdateTime(int time)
     {

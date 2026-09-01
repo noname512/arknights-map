@@ -17,7 +17,7 @@ public sealed class MementoMori : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8, ValueProp.Unpowered)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6, ValueProp.Unpowered)];
     public override RelicAssetProfile AssetProfile =>
         new(
             // 小图标（原版85x85）
