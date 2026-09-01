@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.GameActions;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Localization;
+using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
@@ -141,8 +142,11 @@ public class PassRestSiteOption : RestSiteOption
 				await CardPileCmd.GiveToAnotherPlayer(item, target, PileType.Deck);
 			}
 
+			Log.Info("Success Give Card");
 			await RelicCmd.Remove(OwnerRelic);
+			Log.Info("Success Remove Relic");
 			await RelicCmd.Obtain<NunHabit>(target);
+			Log.Info("Success Give Relic");
 			return true;
 		}
 		return false;
