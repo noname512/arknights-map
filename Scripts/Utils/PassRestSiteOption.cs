@@ -9,7 +9,6 @@ using MegaCrit.Sts2.Core.Entities.RestSite;
 using MegaCrit.Sts2.Core.GameActions;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization;
-using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Cards;
@@ -63,13 +62,13 @@ public class PassRestSiteOption : RestSiteOption
     public override async Task<bool> OnSelect()
     {
         uint choiceId = RunManager.Instance.PlayerChoiceSynchronizer.ReserveChoiceId(base.Owner);
-        Player target = null;
+        Player? target = null;
         if (LocalContext.IsMe(base.Owner))
         {
-            NRestSiteRoom.Instance.AnimateDescriptionDown();
-            NRestSiteButton buttonForOption = NRestSiteRoom.Instance.GetButtonForOption(this);
+            NRestSiteRoom.Instance!.AnimateDescriptionDown();
+            NRestSiteButton buttonForOption = NRestSiteRoom.Instance.GetButtonForOption(this)!;
             Vector2 startPosition = buttonForOption.GlobalPosition + buttonForOption.Size / 2f;
-            bool usingController = NControllerManager.Instance.IsUsingDirectionalNavigation;
+            bool usingController = NControllerManager.Instance!.IsUsingDirectionalNavigation;
             NTargetManager targetManager = NTargetManager.Instance;
             targetManager.StartTargeting(
                 TargetType.AnyPlayer,
@@ -159,10 +158,10 @@ public class PassRestSiteOption : RestSiteOption
             else if (LocalContext.IsMe(Owner))
             {
                 CardModel card = enumerable.FirstOrDefault()!;
-                NCard cardNode = NCard.Create(card);
+                NCard cardNode = NCard.Create(card)!;
                 if (cardNode != null)
                 {
-                    NRun.Instance.GlobalUi.CardPreviewContainer.AddChildSafely(cardNode);
+                    NRun.Instance!.GlobalUi.CardPreviewContainer.AddChildSafely(cardNode);
                     cardNode.UpdateVisuals(PileType.None, CardPreviewMode.Normal);
                     Tween tween = cardNode.CreateTween();
                     tween
@@ -175,7 +174,7 @@ public class PassRestSiteOption : RestSiteOption
                         Callable.From(
                             delegate
                             {
-                                NCardRemoveVfx child = NCardRemoveVfx.Create(cardNode);
+                                NCardRemoveVfx child = NCardRemoveVfx.Create(cardNode)!;
                                 NRun.Instance.GlobalUi.AboveTopBarVfxContainer.AddChildSafely(child);
                             }
                         )
@@ -183,7 +182,7 @@ public class PassRestSiteOption : RestSiteOption
                     tween.TweenInterval(0.4000000059604645);
                     tween.TweenCallback(Callable.From(cardNode.QueueFreeSafely));
                 }
-                Owner.Deck.InvokeContentsChanged();
+                Owner.Deck.InvokeCardRemoveFinished();
             }
 
             await RelicCmd.Remove(OwnerRelic);
@@ -195,7 +194,7 @@ public class PassRestSiteOption : RestSiteOption
 
     private void OnNodeHovered(Node node)
     {
-        Player player = NodeToPlayer(node);
+        Player? player = NodeToPlayer(node);
         if (player != null)
         {
             Description.Add("HasTarget", variable: true);
@@ -236,9 +235,9 @@ public class PassRestSiteOption : RestSiteOption
 
     private bool ShouldCancelTargeting()
     {
-        if (NOverlayStack.Instance.ScreenCount <= 0)
+        if (NOverlayStack.Instance!.ScreenCount <= 0)
         {
-            return NCapstoneContainer.Instance.InUse;
+            return NCapstoneContainer.Instance!.InUse;
         }
         return true;
     }
