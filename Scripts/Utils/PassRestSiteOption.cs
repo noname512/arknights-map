@@ -31,7 +31,7 @@ public class PassRestSiteOption : RestSiteOption
 
     private LocString? _description;
 
-    public override string OptionId => "PASS";
+    public override string OptionId => "DIG";
 
     public RelicModel OwnerRelic;
 
