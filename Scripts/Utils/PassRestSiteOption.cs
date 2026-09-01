@@ -136,28 +136,19 @@ public class PassRestSiteOption : RestSiteOption
             {
                 return false;
             }
-            foreach (CardModel item in enumerable)
-            {
-                await CardPileCmd.GiveToAnotherPlayer(item, target, PileType.Deck);
-            }
-
-            Log.Info("Success Give Card");
-            await RelicCmd.Remove(OwnerRelic);
-            Log.Info("Success Remove Relic");
-            await RelicCmd.Obtain<NunHabit>(target);
-            Log.Info("Success Give Relic");
+            CardModel card = enumerable.FirstOrDefault()!;
             if (LocalContext.IsMe(target))
             {
-                CardModel card = enumerable.FirstOrDefault()!;
-                CardPileAddResult result = new CardPileAddResult
-                {
-                    success = true,
-                    cardAdded = card,
-                    oldPile = card.Pile,
-                    modifyingModels = null,
-                };
-                CardCmd.PreviewCardPileAdd(result);
+                card.Owner = target;
+                CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(card, PileType.Deck));
             }
+            else if (LocalContext.IsMe(Owner))
+            {
+                await CardPileCmd.RemoveFromDeck(card);
+            }
+
+            await RelicCmd.Remove(OwnerRelic);
+            await RelicCmd.Obtain<NunHabit>(target);
             return true;
         }
         return false;
