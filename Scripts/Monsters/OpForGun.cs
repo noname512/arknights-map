@@ -1,27 +1,23 @@
-using Godot;
-using ArknightsMap.Scripts.Cards;
 using ArknightsMap.Scripts.Powers;
-using ArknightsMap.Scripts.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
+using MegaCrit.Sts2.Core.Nodes.Combat;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
-using MegaCrit.Sts2.Core.Nodes.Combat;
-using MegaCrit.Sts2.Core.Nodes.Rooms;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Models.Monsters;
 
 namespace ArknightsMap.Scripts.Monsters;
 
@@ -40,11 +36,10 @@ public class OpForGun : AbstractSankta
 
     public int Attack_Time = 1;
 
-    
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
-        public NCreature GunPosition
+    public NCreature GunPosition
     {
         get
         {
@@ -74,13 +69,13 @@ public class OpForGun : AbstractSankta
         {
             GunPosition.Visuals.Scale = new Vector2(-1.5f, 1.5f);
         }
-        
     }
+
     public override async Task AfterAddedToRoom()
     {
         await base.AfterAddedToRoom();
         await PowerCmd.Apply<SurroundedPower>(new ThrowingPlayerChoiceContext(), base.CombatState.GetOpponentsOf(base.Creature), 1m, base.Creature, null);
-        
+
         await PowerCmd.Apply<OpForGunPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
         await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), base.Creature, 2m, base.Creature, null);
         await PowerCmd.Apply<ShieldPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
@@ -125,8 +120,6 @@ public class OpForGun : AbstractSankta
         return shouldRun;
     }
 
-    
-
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
@@ -136,7 +129,7 @@ public class OpForGun : AbstractSankta
             async targets =>
             {
                 await CreatureCmd.TriggerAnim(Creature, "Skill_1", 0.8f);
-                await DamageCmd.Attack(run).FromMonster(this).Execute(null);      
+                await DamageCmd.Attack(run).FromMonster(this).Execute(null);
                 if (OnRight)
                 {
                     GunPosition.GlobalPosition = new Vector2(550.0f, GunPosition.GlobalPosition.Y);
@@ -154,8 +147,6 @@ public class OpForGun : AbstractSankta
                 await UpdatePosition();
                 Attack_Time = 1;
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
-                
-                
             },
             [new SingleAttackIntent(run), new SummonIntent(), new BuffIntent()]
         );
@@ -166,7 +157,6 @@ public class OpForGun : AbstractSankta
             {
                 await CreatureCmd.TriggerAnim(Creature, "Attack", 0.8f);
                 await DamageCmd.Attack(multi_attack).WithHitCount(Attack_Time).FromMonster(this).Execute(null);
-                
             },
             [new MultiAttackIntent(multi_attack, () => Attack_Time)]
         );
@@ -175,16 +165,12 @@ public class OpForGun : AbstractSankta
             "PREP",
             async targets =>
             {
-                
                 await CreatureCmd.GainBlock(Creature, 30, ValueProp.Unpowered, null);
-                
             },
             [new DefendIntent()]
         );
 
-        ConditionalBranchState RunBranch = new ConditionalBranchState(
-            "RUN_BRANCH"
-        );
+        ConditionalBranchState RunBranch = new ConditionalBranchState("RUN_BRANCH");
         RunBranch.AddState(Prepare, () => ShouldRun());
         RunBranch.AddState(MultiHit, () => !ShouldRun());
 

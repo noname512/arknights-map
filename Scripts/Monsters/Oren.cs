@@ -41,6 +41,7 @@ public class Oren : AbstractSankta
         await base.AfterAddedToRoom();
         await PowerCmd.Apply<OrenPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
     }
+
     public override async Task AfterDamageReceivedLate(
         PlayerChoiceContext choiceContext,
         Creature target,
@@ -67,8 +68,8 @@ public class Oren : AbstractSankta
             {
                 await Cmd.Wait(1.0f);
                 await AddBullet(1);
-            }
-            , new AddBulletIntent()
+            },
+            new AddBulletIntent()
         );
 
         MoveState attackSkill = new MoveState(

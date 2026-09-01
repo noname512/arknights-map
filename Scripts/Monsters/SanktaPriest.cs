@@ -65,7 +65,6 @@ public class SanktaPriest : AbstractSankta
             "SKILL_STRENGTH",
             async targets =>
             {
-                
                 await CreatureCmd.TriggerAnim(Creature, "Skill", 0.8f);
                 foreach (var monster in CombatState.Enemies.Where(m => m.IsAlive))
                 {

@@ -134,7 +134,7 @@ public class SupersweetieSmiley : AbstractSankta
                     tolerance += 5;
                 }
             },
-            [new MultiAttackIntent(multiAttack, 2),new DebuffIntent(), new DefendIntent(), new StatusIntent(2)]
+            [new MultiAttackIntent(multiAttack, 2), new DebuffIntent(), new DefendIntent(), new StatusIntent(2)]
         );
 
         MoveState SplashEnhanced = new MoveState(

@@ -1,4 +1,3 @@
-using ArknightsMap.Scripts.Cards;
 using ArknightsMap.Scripts.Powers;
 using Godot;
 using MegaCrit.Sts2.Core.Animation;
@@ -6,7 +5,6 @@ using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
@@ -77,7 +75,6 @@ public class OpCar : AbstractSankta
         {
             CarPosition.Visuals.Scale = new Vector2(-1, 1);
         }
-        
     }
 
     private string GetAttackSfx() => "Attack";
@@ -98,8 +95,6 @@ public class OpCar : AbstractSankta
             await UpdatePosition();
             await PowerCmd.Apply<BackAttackLeftPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
         }
-        
-        
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -110,10 +105,8 @@ public class OpCar : AbstractSankta
             "ATTACK",
             async targets =>
             {
-                
                 await CreatureCmd.TriggerAnim(Creature, "Attack", 0.8f);
                 await DamageCmd.Attack(Damage).FromMonster(this).WithHitFx(sfx: GetAttackSfx()).Execute(null);
-                
             },
             [new SingleAttackIntent(Damage), new DebuffIntent()]
         );
@@ -138,45 +131,32 @@ public class OpCar : AbstractSankta
                 await DamageCmd.Attack(12).FromMonster(this).WithHitFx(sfx: GetAttackSfx()).Execute(null);
                 await CreatureCmd.GainBlock(Creature, 8, ValueProp.Unpowered, null);
                 foreach (Creature c in CombatState.GetOpponentsOf(Creature))
-            {
-                if (c.Monster is not Osty)
                 {
-                    await PowerCmd.Apply<CorrosionDamagePower>(new ThrowingPlayerChoiceContext(), c, 1m, Creature, null);
+                    if (c.Monster is not Osty)
+                    {
+                        await PowerCmd.Apply<CorrosionDamagePower>(new ThrowingPlayerChoiceContext(), c, 1m, Creature, null);
+                    }
                 }
-            }
-                
             },
             [new SingleAttackIntent(12), new DefendIntent(), new DebuffIntent()]
         );
 
-        RandomBranchState StartBranch = new RandomBranchState(
-            "RANDOM_BRANCH"
-        );
+        RandomBranchState StartBranch = new RandomBranchState("RANDOM_BRANCH");
 
-        ConditionalBranchState attackBranch = new ConditionalBranchState(
-            "ATTACK_BRANCH"
-            
-        );
+        ConditionalBranchState attackBranch = new ConditionalBranchState("ATTACK_BRANCH");
 
-        ConditionalBranchState skillBranch = new ConditionalBranchState(
-            "SKILL_BRANCH"
-            
-        );
+        ConditionalBranchState skillBranch = new ConditionalBranchState("SKILL_BRANCH");
 
-// attack 之后的分支：如果异侧，30% 概率用 attack_defend，否则 defend
-attackBranch.AddState(attack_defend, () => OnOtherSide() && Creature!.CombatState!.RunState.Rng.CombatTargets.NextFloat(0, 1) < 0.3f);
-attackBranch.AddState(defend, () => true); // 兜底
+        // attack 之后的分支：如果异侧，30% 概率用 attack_defend，否则 defend
+        attackBranch.AddState(attack_defend, () => OnOtherSide() && Creature!.CombatState!.RunState.Rng.CombatTargets.NextFloat(0, 1) < 0.3f);
+        attackBranch.AddState(defend, () => true); // 兜底
 
-// defend 之后的分支：如果异侧，30% 概率用 attack_defend，否则 attack
-skillBranch.AddState(attack_defend, () => OnOtherSide() && Creature!.CombatState!.RunState.Rng.CombatTargets.NextFloat(0, 1) < 0.3f);
-skillBranch.AddState(attack, () => true); // 兜底
+        // defend 之后的分支：如果异侧，30% 概率用 attack_defend，否则 attack
+        skillBranch.AddState(attack_defend, () => OnOtherSide() && Creature!.CombatState!.RunState.Rng.CombatTargets.NextFloat(0, 1) < 0.3f);
+        skillBranch.AddState(attack, () => true); // 兜底
 
-RandomBranchState attack_defendBranch = new RandomBranchState(
-            "ATTACK_DEFEND_BRANCH"
-            
-        );  
+        RandomBranchState attack_defendBranch = new RandomBranchState("ATTACK_DEFEND_BRANCH");
 
-        
         attack_defendBranch.AddBranch(attack, MoveRepeatType.CanRepeatForever, 0.5f); // 兜底
         attack_defendBranch.AddBranch(defend, MoveRepeatType.CanRepeatForever, 0.5f); // 兜底
 
@@ -186,15 +166,12 @@ RandomBranchState attack_defendBranch = new RandomBranchState(
         defend.FollowUpState = skillBranch;
         attack_defend.FollowUpState = attackBranch;
 
-
         list.Add(attack);
         list.Add(defend);
         list.Add(attack_defend);
         list.Add(skillBranch);
         list.Add(attackBranch);
         list.Add(StartBranch);
-
-        
 
         return new MonsterMoveStateMachine(list, StartBranch);
     }
@@ -214,7 +191,7 @@ RandomBranchState attack_defendBranch = new RandomBranchState(
                     await PowerCmd.Apply<CorrosionDamagePower>(new ThrowingPlayerChoiceContext(), c, 1m, Creature, null);
                 }
             }
-        }        
+        }
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
