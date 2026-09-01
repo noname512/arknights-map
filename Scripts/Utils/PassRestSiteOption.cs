@@ -146,6 +146,18 @@ public class PassRestSiteOption : RestSiteOption
             Log.Info("Success Remove Relic");
             await RelicCmd.Obtain<NunHabit>(target);
             Log.Info("Success Give Relic");
+            if (LocalContext.IsMe(target))
+            {
+                CardModel card = enumerable.FirstOrDefault()!;
+                CardPileAddResult result = new CardPileAddResult
+                {
+                    success = true,
+                    cardAdded = card,
+                    oldPile = card.Pile,
+                    modifyingModels = null,
+                };
+                CardCmd.PreviewCardPileAdd(result);
+            }
             return true;
         }
         return false;
