@@ -27,6 +27,6 @@ public class DoubleDamageForeverPower : ModPowerTemplate
         CardPlay? cardPlay
     )
     {
-        return dealer != Owner && !Owner.Pets.Contains<Creature>(dealer) || !props.IsPoweredAttack() || cardSource == null ? 1M : 2M;
+        return dealer != null && dealer != Owner && !Owner.Pets.Contains(dealer) || !props.IsPoweredAttack() || cardSource == null ? 1M : 2M;
     }
 }

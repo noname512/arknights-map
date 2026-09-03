@@ -1,5 +1,7 @@
 using ArknightsMap.Scripts.Powers;
 using ArknightsMap.Scripts.Utils;
+using MegaCrit.Sts2.Core.Animation;
+using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -12,6 +14,7 @@ using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Monsters;
 
@@ -21,7 +24,7 @@ public class Degenbrecher : AbstractSnowyMountainMonster
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 900, 799);
     public override int MaxInitialHp => MinInitialHp;
 
-    // public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
+    public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
     private int BlockedVulNum => 4;
     private int UnblockedVulNum => 2;
     private int BasicDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 9, 8);
@@ -41,7 +44,7 @@ public class Degenbrecher : AbstractSnowyMountainMonster
         CardPlay? cardPlay
     )
     {
-        if ((dealer == Creature) && (target.IsPlayer) && CreaturePositions.IsBlock(dealer, target))
+        if (target != null && dealer == Creature && target.IsPlayer && CreaturePositions.IsBlock(dealer, target))
         {
             return 1.5M;
         }
@@ -56,6 +59,7 @@ public class Degenbrecher : AbstractSnowyMountainMonster
             "DOUBLE_HIT",
             async targets =>
             {
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0);
                 await DamageCmd.Attack(BasicDamage).WithHitCount(2).FromMonster(this).Execute(null);
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
             },
@@ -67,6 +71,7 @@ public class Degenbrecher : AbstractSnowyMountainMonster
             "EXPOSE",
             async targets =>
             {
+                await CreatureCmd.TriggerAnim(Creature, "Skill", 0);
                 List<Creature> blockedCreatures = targets.Where(c => CreaturePositions.IsBlock(Creature, c)).ToList();
                 List<Creature> unblockedCreatures = targets.Where(c => !CreaturePositions.IsBlock(Creature, c)).ToList();
                 await PowerCmd.Apply<VulnerablePower>(new ThrowingPlayerChoiceContext(), unblockedCreatures, UnblockedVulNum, Creature, null);
@@ -89,6 +94,7 @@ public class Degenbrecher : AbstractSnowyMountainMonster
             "JOIN",
             async targets =>
             {
+                await CreatureCmd.TriggerAnim(Creature, "Revive", 0);
                 await PowerCmd.Remove<WatchingPower>(Creature);
                 foreach (Creature item in Creature.CombatState!.GetOpponentsOf(Creature))
                 {
@@ -124,7 +130,34 @@ public class Degenbrecher : AbstractSnowyMountainMonster
     {
         if ((creature.Monster is Tschaggatta) && (NextMove.Id == "WATCH"))
         {
-            SetMoveImmediate((MoveState)MoveStateMachine.States["JOIN"], true);
+            SetMoveImmediate((MoveState)MoveStateMachine!.States["JOIN"], true);
         }
+    }
+
+    public override CreatureAnimator GenerateAnimator(MegaSprite controller)
+    {
+        AnimState IdleA = new AnimState("A_Idle", isLooping: true);
+        AnimState IdleB = new AnimState("B_Idle", isLooping: true);
+        AnimState AttackB = new AnimState("B_Attack");
+        AnimState Skill2B = new AnimState("B_Skill2");
+
+        AnimState Revive1 = new AnimState("Revive1");
+        AnimState Revive2 = new AnimState("Revive2");
+        AnimState Revive3 = new AnimState("Revive3");
+        AnimState Die = new AnimState("B_Die");
+
+        AttackB.NextState = IdleB;
+        Skill2B.NextState = IdleB;
+        Revive1.NextState = Revive2;
+        Revive2.NextState = Revive3;
+        Revive3.NextState = IdleB;
+
+        CreatureAnimator creatureAnimator = new CreatureAnimator(IdleA, controller);
+
+        creatureAnimator.AddAnyState("Attack", AttackB);
+        creatureAnimator.AddAnyState("Skill", Skill2B);
+        creatureAnimator.AddAnyState("Revive", Revive1);
+
+        return creatureAnimator;
     }
 }
