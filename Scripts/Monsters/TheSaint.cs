@@ -385,7 +385,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
 
     public override bool ShouldAllowTargeting(Creature target)
     {
-        if (ShouldPreventDamage && Creature.CurrentHp == Creature.MaxHp/3)
+        if (ShouldPreventDamage && Creature.CurrentHp == Creature.MaxHp/3 && target == Creature)
             return false;
         return true;
     }

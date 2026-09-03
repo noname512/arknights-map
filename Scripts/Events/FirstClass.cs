@@ -1,4 +1,5 @@
 using ArknightsMap.Scripts.Acts;
+using ArknightsMap.Scripts.Encounters;
 using ArknightsMap.Scripts.Relics;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Gold;
@@ -61,7 +62,7 @@ public sealed class FirstClass : ModEventTemplate
 
     public override bool IsAllowed(IRunState runState)
     {
-        return runState.Act is Laterano;
+        return runState.Act is Laterano && runState.Act.AllBossEncounters.Any(encounter => encounter is TheSaintBoss);
     }
     
 
