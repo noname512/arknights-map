@@ -41,7 +41,7 @@ public class Gracebearer : ModAncientEventTemplate
     public override IEnumerable<EventOption> AllPossibleOptions =>
         [
             .. SinglePlayerChoice,
-            RelicOption<OfferAssistance>(), //施以援手
+            RelicOption<NunHabit>(), //修女服
         ];
 
     public IEnumerable<EventOption> SinglePlayerChoice =>
@@ -54,12 +54,22 @@ public class Gracebearer : ModAncientEventTemplate
             RelicOption<BloodedDress>(), // 染血的裙子
             RelicOption<Luckily>(), // “幸运”
             RelicOption<BreadWithSugar>(), // 加糖面包
+            RelicOption<Gospel>(), // 福音
+            RelicOption<SkullcrackingElegy>(), // 开颅挽歌
         ];
     
     // 生成选项
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        List<EventOption> list = SinglePlayerChoice.ToList();
+        List<EventOption> list;
+        if (Owner!.RunState.Players.Count > 1)
+        {
+            list = AllPossibleOptions.ToList();
+        }
+        else
+        {
+            list = SinglePlayerChoice.ToList();
+        }
         list.UnstableShuffle(Rng);
         list = list.Take(3).ToList();
         return list;

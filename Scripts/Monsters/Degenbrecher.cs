@@ -10,31 +10,36 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
-using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class Degenbrecher : AbstractWildsMonster
+public class Degenbrecher : AbstractSnowyMountainMonster
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 900, 799);
     public override int MaxInitialHp => MinInitialHp;
+
     // public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
     private int BlockedVulNum => 4;
     private int UnblockedVulNum => 2;
     private int BasicDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 9, 8);
     private int AdmitRequest => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 24, 20);
-    
+
     public override async Task AfterAddedToRoom()
     {
         await PowerCmd.Apply<WatchingPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
     }
 
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer,
-        CardModel? cardSource, CardPlay? cardPlay)
+    public override decimal ModifyDamageMultiplicative(
+        Creature? target,
+        decimal amount,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource,
+        CardPlay? cardPlay
+    )
     {
         if ((dealer == Creature) && (target.IsPlayer) && CreaturePositions.IsBlock(dealer, target))
         {
@@ -54,7 +59,8 @@ public class Degenbrecher : AbstractWildsMonster
                 await DamageCmd.Attack(BasicDamage).WithHitCount(2).FromMonster(this).Execute(null);
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
             },
-            new MultiAttackIntent(BasicDamage, 2), new BuffIntent()
+            new MultiAttackIntent(BasicDamage, 2),
+            new BuffIntent()
         );
 
         MoveState skill = new MoveState(
@@ -72,7 +78,10 @@ public class Degenbrecher : AbstractWildsMonster
 
         MoveState watch = new MoveState(
             "WATCH",
-            targets => { return Task.CompletedTask; },
+            targets =>
+            {
+                return Task.CompletedTask;
+            },
             new HiddenIntent()
         );
 
@@ -111,10 +120,9 @@ public class Degenbrecher : AbstractWildsMonster
         return new MonsterMoveStateMachine(list, watch);
     }
 
-    public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature,
-        bool wasRemovalPrevented, float deathAnimLength)
+    public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
     {
-        if ((creature is Tschaggatta) && (NextMove.Id == "WATCH"))
+        if ((creature.Monster is Tschaggatta) && (NextMove.Id == "WATCH"))
         {
             SetMoveImmediate((MoveState)MoveStateMachine.States["JOIN"], true);
         }

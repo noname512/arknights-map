@@ -4,14 +4,11 @@ using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
-using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -33,8 +30,6 @@ public class Fortuna : AbstractSankta
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
-    
-
     private string GetAttackSfx() => "Attack";
 
     public override async Task AfterAddedToRoom()
@@ -42,9 +37,6 @@ public class Fortuna : AbstractSankta
         await base.AfterAddedToRoom();
         await PowerCmd.Apply<FortunaPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
     }
-
-
-    
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
@@ -55,17 +47,22 @@ public class Fortuna : AbstractSankta
             async targets =>
             {
                 await UseBullet(6);
-                await DamageCmd.Attack(Damage01).WithHitCount(Time).FromMonster(this).WithAttackerAnim("Attack01", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
+                await DamageCmd
+                    .Attack(Damage01)
+                    .WithHitCount(Time)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack01", 0.8f)
+                    .WithHitFx(sfx: GetAttackSfx())
+                    .Execute(null);
                 for (int i = 0; i < 6; i++)
                 {
-                    float percent = CombatState.RunState.Rng.CombatTargets.NextFloat(0,1);
+                    float percent = CombatState.RunState.Rng.CombatTargets.NextFloat(0, 1);
                     if (percent < 0.5)
                     {
                         await AddBullet(1);
                     }
                 }
-            }, 
-            
+            },
             [new MultiAttackIntent(Damage01, () => Time), new UseBulletIntent()]
         );
         MoveState attack02 = new MoveState(
@@ -73,13 +70,12 @@ public class Fortuna : AbstractSankta
             async targets =>
             {
                 await DamageCmd.Attack(Damage02).FromMonster(this).WithAttackerAnim("Attack02", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
-                float percent = CombatState.RunState.Rng.CombatTargets.NextFloat(0,1);
-                    if (percent < 0.5)
-                    {
-                        await AddBullet(1);
-                    }
-            }, 
-            
+                float percent = CombatState.RunState.Rng.CombatTargets.NextFloat(0, 1);
+                if (percent < 0.5)
+                {
+                    await AddBullet(1);
+                }
+            },
             new SingleAttackIntent(Damage02)
         );
         MoveState skill = new MoveState(
@@ -108,7 +104,7 @@ public class Fortuna : AbstractSankta
         list.Add(attack01);
         list.Add(attack02);
         list.Add(skill);
-        list.Add(skillBranch); 
+        list.Add(skillBranch);
         list.Add(attack02Branch);
 
         return new MonsterMoveStateMachine(list, attack01);

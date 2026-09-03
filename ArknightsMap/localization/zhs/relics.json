@@ -284,6 +284,15 @@
     "ARKNIGHTS_MAP_RELIC_LUCKILY.description": "当你施加负面效果时，层数提高[blue]1[/blue]且额外造成[blue]{Damage}[/blue]点伤害。",
     "ARKNIGHTS_MAP_RELIC_LUCKILY.flavor": "很幸运，我没遇上敌人——裙角的血……应该是不小心摔倒了，一点轻伤，不要紧。",
     "ARKNIGHTS_MAP_RELIC_BREAD_WITH_SUGAR.title": "加糖面包",
-    "ARKNIGHTS_MAP_RELIC_BREAD_WITH_SUGAR.description": "当你的生命值将要降低至[blue]50%[/blue]或以下时，回复全部生命值（能生效三次）。",
-    "ARKNIGHTS_MAP_RELIC_BREAD_WITH_SUGAR.flavor": "刚刚领圣餐时，我在您的面包底下多放了一块糖，您有没有吃到？"
+    "ARKNIGHTS_MAP_RELIC_BREAD_WITH_SUGAR.description": "当你的生命值将要降低至[blue]50%[/blue]或以下时，[green]回复[/green]全部生命值（能生效三次）。",
+    "ARKNIGHTS_MAP_RELIC_BREAD_WITH_SUGAR.flavor": "刚刚领圣餐时，我在您的面包底下多放了一块糖，您有没有吃到？",
+    "ARKNIGHTS_MAP_RELIC_GOSPEL.title": "福音",
+    "ARKNIGHTS_MAP_RELIC_GOSPEL.description": "当你进入一个非战斗房间时，获得[green]{MaxHp}[/green]点最大生命，并随机升级一张牌。",
+    "ARKNIGHTS_MAP_RELIC_GOSPEL.flavor": "还没写好.jpg",
+    "ARKNIGHTS_MAP_RELIC_NUN_HABIT.title": "修女服",
+    "ARKNIGHTS_MAP_RELIC_NUN_HABIT.description": "你可以在休息处给队友传递卡牌与这个遗物。",
+    "ARKNIGHTS_MAP_RELIC_NUN_HABIT.flavor": "我去找件干净衣服给您。咦，好像没有常服，只有修女服了，您介意吗？",
+    "ARKNIGHTS_MAP_RELIC_SKULLCRACKING_ELEGY.title": "开颅挽歌",
+    "ARKNIGHTS_MAP_RELIC_SKULLCRACKING_ELEGY.description": "你可以在休息处给队友传递卡牌与这个遗物。",
+    "ARKNIGHTS_MAP_RELIC_SKULLCRACKING_ELEGY.flavor": "我去找件干净衣服给您。咦，好像没有常服，只有修女服了，您介意吗？"
 }

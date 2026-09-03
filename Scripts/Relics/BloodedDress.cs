@@ -59,7 +59,7 @@ public class BloodedDress : ModRelicTemplate
         CardModel? cardSource,
         CardPlay? cardPlay)
     {
-        if (dealer == Owner.Creature || !Owner.Creature.Pets.Contains<Creature>(dealer))
+        if (dealer == Owner.Creature || Owner.Creature.Pets.Contains<Creature>(dealer))
         {
             if (props.IsPoweredAttack() && cardSource != null && killedLastTurn)
             {

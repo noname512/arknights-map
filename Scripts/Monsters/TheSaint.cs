@@ -1,6 +1,5 @@
 using ArknightsMap.Scripts.Cards;
 using Godot;
-using HarmonyLib;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Combat;
@@ -8,12 +7,10 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
@@ -56,39 +53,42 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
-
     public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
-{
-    if (target != Creature) 
-    return base.ModifyDamageAdditive(target, amount, props, dealer, cardSource, cardPlay);
-    
-    // 只在 Phase 1 且还没触发转阶段时锁血
-    if (Phase != 1 || !ShouldPreventDamage)
     {
-        return base.ModifyDamageAdditive(target, amount, props, dealer, cardSource, cardPlay);
-    }
-    
-    var threshold = Creature.MaxHp / 3;
-    
-    
-    if (Creature.CurrentHp - amount >= threshold)
-    {
-        return base.ModifyDamageAdditive(target, amount, props, dealer, cardSource, cardPlay);
+        if (target != Creature)
+            return base.ModifyDamageAdditive(target, amount, props, dealer, cardSource, cardPlay);
+
+        // 只在 Phase 1 且还没触发转阶段时锁血
+        if (Phase != 1 || !ShouldPreventDamage)
+        {
+            return base.ModifyDamageAdditive(target, amount, props, dealer, cardSource, cardPlay);
+        }
+
+        var threshold = Creature.MaxHp / 3;
+
+        if (Creature.CurrentHp - amount >= threshold)
+        {
+            return base.ModifyDamageAdditive(target, amount, props, dealer, cardSource, cardPlay);
+        }
+
+        if (Creature.CurrentHp <= threshold && ShouldPreventDamage)
+        {
+            return -amount;
+        }
+
+        // 只扣到半血为止
+        var targetDamage = Creature.CurrentHp - threshold;
+        return targetDamage - amount;
     }
 
-    if (Creature.CurrentHp <= threshold && ShouldPreventDamage)
-    {
-        return -amount;
-    }
-    
-    // 只扣到半血为止
-    var targetDamage = Creature.CurrentHp - threshold;
-    return targetDamage - amount;
-}
-
-    
-
-    public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override async Task AfterDamageReceived(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        DamageResult result,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource
+    )
     {
         if (target == Creature && Phase == 1 && Creature.CurrentHp <= Creature.MaxHp / 3 && !HasStun)
         {
@@ -97,10 +97,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
             await CreatureCmd.TriggerAnim(Creature, "A_Revive_1", 0.8f);
             await CreatureCmd.TriggerAnim(Creature, "A_Revive_3", 0.8f);
         }
-        
     }
-
-
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
@@ -126,7 +123,6 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
                 await CreatureCmd.TriggerAnim(Creature, "A_Attack", 0.8f);
                 await Cmd.Wait(1.0f);
                 await DamageCmd.Attack(heavyAttackPhase1).FromMonster(this).WithNoAttackerAnim().Execute(null);
-                
             },
             [new SingleAttackIntent(heavyAttackPhase1)]
         );
@@ -138,7 +134,6 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
                 await CreatureCmd.TriggerAnim(Creature, "B_Attack_Begin_2", 0.8f);
                 await Cmd.Wait(1.0f);
                 await DamageCmd.Attack(heavyAttackPhase2).FromMonster(this).WithNoAttackerAnim().Execute(null);
-                
             },
             [new SingleAttackIntent(heavyAttackPhase2)]
         );
@@ -174,7 +169,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
                     {
                         ModelDb.Monster<SanktaBlade>().ToMutable(),
                         ModelDb.Monster<SanktaPriest>().ToMutable(),
-                        ModelDb.Monster<SanktaSniper>().ToMutable()
+                        ModelDb.Monster<SanktaSniper>().ToMutable(),
                     };
                     MonsterModel chosen = enemies.TakeRandom(1, CombatState.Players[0].RunState.Rng.CombatCardGeneration).First();
 
@@ -201,12 +196,13 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
             "SUMMON_PHASE2",
             async targets =>
             {
-                for (int i = 0; i < 2; i++){
+                for (int i = 0; i < 2; i++)
+                {
                     List<MonsterModel> enemies = new List<MonsterModel>
                     {
                         ModelDb.Monster<SanktaBlade>().ToMutable(),
                         ModelDb.Monster<SanktaPriest>().ToMutable(),
-                        ModelDb.Monster<SanktaSniper>().ToMutable()
+                        ModelDb.Monster<SanktaSniper>().ToMutable(),
                     };
                     MonsterModel chosen = enemies.TakeRandom(1, CombatState.Players[0].RunState.Rng.CombatCardGeneration).First();
 
@@ -257,7 +253,6 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
             "REVIVE",
             async targets =>
             {
-                
                 await CreatureCmd.TriggerAnim(Creature, "A_Revive_3", 0.8f);
                 await Cmd.Wait(1.0f);
             },
@@ -270,7 +265,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
             {
                 ShouldPreventDamage = false;
                 Phase = 2;
-                
+
                 await CreatureCmd.TriggerAnim(Creature, "B_Leave_1", 0.8f);
                 await PowerCmd.Apply<SoarPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
                 await Cmd.Wait(1.0f);
@@ -297,7 +292,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
         SummonPhase1.FollowUpState = MultiAttackPhase1;
         MultiAttackPhase1.FollowUpState = AttackDebuffPhase1;
         AttackDebuffPhase1.FollowUpState = SummonPhase1;
-        
+
         Revive.FollowUpState = Fly;
         Fly.FollowUpState = HeavyAttackPhase2;
         HeavyAttackPhase2.FollowUpState = SummonPhase2;
@@ -318,7 +313,6 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
         AnimState Phase2ReviveState1 = new AnimState("A_Revive_1");
         AnimState Phase2ReviveState2 = new AnimState("A_Revive_2", isLooping: true);
         AnimState Phase2ReviveState3 = new AnimState("A_Revive_3");
-        
 
         AnimState Phase2AttackStateBegin = new AnimState("B_Attack_Begin_2");
         AnimState Phase2AttackStateLoop = new AnimState("B_Attack_Loop_2");
@@ -365,7 +359,6 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
 
         return creatureAnimator;
     }
-
 
     public IEnumerable<HealthBarForecastSegment> GetHealthBarForecastSegments(HealthBarForecastContext context)
     {

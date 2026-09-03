@@ -1,6 +1,6 @@
+using ArknightsMap.Scripts.Powers;
 using Godot;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using ArknightsMap.Scripts.Powers;
 
 public partial class SanktaBulletBar : HBoxContainer
 {
@@ -17,7 +17,7 @@ public partial class SanktaBulletBar : HBoxContainer
             var pip = new ColorRect
             {
                 CustomMinimumSize = new Vector2(10, 4), // 每格的尺寸，按你的血条宽度调
-                Color = Colors.Gold                     // 有子弹的颜色
+                Color = Colors.Gold, // 有子弹的颜色
             };
             bar._pips.Add(pip);
             bar.AddChild(pip);
@@ -27,14 +27,14 @@ public partial class SanktaBulletBar : HBoxContainer
     }
 
     public void FitToWidth(float totalWidth, int max, int sep = 4, float height = 10f)
-{
-    AddThemeConstantOverride("separation", sep);
-    float pipWidth = (totalWidth - sep * (max - 1)) / max;
-    foreach (var pip in _pips)
     {
-        pip.CustomMinimumSize = new Vector2(pipWidth, height);
+        AddThemeConstantOverride("separation", sep);
+        float pipWidth = (totalWidth - sep * (max - 1)) / max;
+        foreach (var pip in _pips)
+        {
+            pip.CustomMinimumSize = new Vector2(pipWidth, height);
+        }
     }
-}
 
     public void Refresh()
     {
@@ -42,9 +42,7 @@ public partial class SanktaBulletBar : HBoxContainer
         for (int i = 0; i < _pips.Count; i++)
         {
             // 剩余=亮色，已用=暗色半透明（方舟的熄灭格效果）
-            _pips[i].Color = i < current
-                ? Colors.Gold
-                : new Color(0.15f, 0.15f, 0.15f, 0.5f);
+            _pips[i].Color = i < current ? Colors.Gold : new Color(0.15f, 0.15f, 0.15f, 0.5f);
         }
     }
 }

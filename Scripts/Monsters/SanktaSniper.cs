@@ -27,8 +27,6 @@ public class SanktaSniper : AbstractSankta
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
-    
-
     private string GetAttackSfx() => "Attack";
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
