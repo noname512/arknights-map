@@ -26,28 +26,29 @@ public sealed class Hand : ModRelicTemplate
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
 
-    public override async Task<Task> AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
+    public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
-        if (card.Owner == Owner && card.Type == MegaCrit.Sts2.Core.Entities.Cards.CardType.Attack 
-        && card.DynamicVars.TryGetValue("Damage", out var damageVar) 
-                && damageVar != null 
-                && damageVar.BaseValue >= 15
-                && this.Status == RelicStatus.Active)
+        if (
+            card.Owner == Owner
+            && card.Type == MegaCrit.Sts2.Core.Entities.Cards.CardType.Attack
+            && card.DynamicVars.TryGetValue("Damage", out var damageVar)
+            && damageVar != null
+            && damageVar.BaseValue >= 15
+            && Status == RelicStatus.Active
+        )
         {
             Flash();
             foreach (Creature c in Owner.Creature.CombatState!.HittableEnemies)
             {
-                await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), c, card.DynamicVars.Damage.BaseValue, ValueProp.Unpowered, base.Owner.Creature);
+                await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), c, card.DynamicVars.Damage.BaseValue, ValueProp.Unpowered, Owner.Creature);
             }
             Status = RelicStatus.Disabled;
         }
-        return base.AfterCardDrawn(choiceContext, card, fromHandDraw);
     }
 
     public override Task AfterCombatVictory(CombatRoom room)
     {
         Status = RelicStatus.Active;
-        return base.AfterCombatVictory(room);
+        return Task.CompletedTask;
     }
-
 }

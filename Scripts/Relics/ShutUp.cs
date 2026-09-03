@@ -1,25 +1,15 @@
-using ArknightsMap.Scripts.Cards;
-using MegaCrit.Sts2.Core.CardSelection;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
-using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
-using MegaCrit.Sts2.Core.Rewards;
-using MegaCrit.Sts2.Core.Rooms;
-using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Models.Capabilities;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Relics;
@@ -43,22 +33,18 @@ public sealed class ShutUp : ModRelicTemplate
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
 
-
-    public override async Task<Task> AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
         if (player == Owner && player.Creature is not null && player.Creature.CombatState is not null)
         {
             foreach (Creature c in player.Creature.CombatState.GetOpponentsOf(player.Creature))
             {
-                if (c.Monster is not null && c.Monster.NextMove.Intents.Any(i => i.IntentType != IntentType.Attack &&
-        i.IntentType != IntentType.DeathBlow))
+                if (c.Monster is not null && c.Monster.NextMove.Intents.Any(i => i.IntentType != IntentType.Attack && i.IntentType != IntentType.DeathBlow))
                 {
                     await CreatureCmd.Damage(choiceContext, c, DynamicVars.Damage, Owner.Creature);
                     await PowerCmd.Apply<VulnerablePower>(choiceContext, c, 1, Owner.Creature, null);
                 }
             }
         }
-        return base.AfterPlayerTurnStart(choiceContext, player);
     }
-    
 }

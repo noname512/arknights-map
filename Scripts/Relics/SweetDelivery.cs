@@ -1,13 +1,9 @@
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.Factories;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Rewards;
@@ -39,52 +35,52 @@ public sealed class SweetDelivery : ModRelicTemplate
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
 
-
     public override bool IsAllowed(IRunState runState)
-	{
-		return RelicModel.IsBeforeAct3TreasureChest(runState);
-	}
+    {
+        return IsBeforeAct3TreasureChest(runState);
+    }
 
     public RelicModel Sweet(float chance)
     {
-        RelicModel? relic = null;
-        
+        RelicModel? relic;
+
         if (chance < 0.8f)
         {
-            relic = ModelDb.Relic<LeesWaffle>().ToMutable() as RelicModel;
+            relic = ModelDb.Relic<LeesWaffle>().ToMutable();
         }
         else if (chance < 0.9f)
         {
             if (Owner.GetRelic<IceCream>() == null)
             {
-                relic = ModelDb.Relic<IceCream>().ToMutable() as RelicModel;
+                relic = ModelDb.Relic<IceCream>().ToMutable();
             }
             else
             {
-                relic = ModelDb.Relic<VeryHotCocoa>().ToMutable() as RelicModel;
+                relic = ModelDb.Relic<VeryHotCocoa>().ToMutable();
             }
         }
         else
         {
-            relic = ModelDb.Relic<YummyCookie>().ToMutable() as RelicModel;
+            relic = ModelDb.Relic<YummyCookie>().ToMutable();
         }
 
         return relic ?? throw new InvalidOperationException("Failed to create relic reward.");
     }
 
-	public override bool TryModifyRewards(Player player, List<Reward> rewards, AbstractRoom? room)
-	{
-		if (player != base.Owner)
-		{
-			return false;
-		}
-		if (room == null || room.RoomType != RoomType.Elite)
-		{
-			return false;
-		}
-		rewards.Add(new RelicReward(Sweet(base.Owner.RunState.Rng.CombatCardGeneration.NextFloat(0, 1)), base.Owner));
-		return true;
-	}
+    public override bool TryModifyRewards(Player player, List<Reward> rewards, AbstractRoom? room)
+    {
+        if (player != Owner)
+        {
+            return false;
+        }
+        if (room == null || room.RoomType != RoomType.Elite)
+        {
+            return false;
+        }
+        rewards.Add(new RelicReward(Sweet(Owner.RunState.Rng.CombatCardGeneration.NextFloat(0, 1)), Owner));
+        return true;
+    }
+
     private bool IsActivating
     {
         get => _isActivating;
@@ -94,7 +90,7 @@ public sealed class SweetDelivery : ModRelicTemplate
             _isActivating = value;
             InvokeDisplayAmountChanged();
         }
-    }  
+    }
 
     private async Task DoActivateVisuals()
     {
@@ -103,6 +99,4 @@ public sealed class SweetDelivery : ModRelicTemplate
         await Cmd.Wait(1f);
         IsActivating = false;
     }
-
-    
 }

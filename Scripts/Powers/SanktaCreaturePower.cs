@@ -27,11 +27,11 @@ public class SanktaCreaturePower : ModPowerTemplate
         CardModel? cardSource
     )
     {
-        if (target == base.Owner && 2 * target.CurrentHp <= target.MaxHp)
+        if (target == Owner && 2 * target.CurrentHp <= target.MaxHp)
         {
-            CreatureCmd.Stun(base.Owner);
+            CreatureCmd.Stun(Owner);
             PowerCmd.Remove(this);
         }
-        return base.AfterDamageReceivedLate(choiceContext, target, result, props, dealer, cardSource);
+        return Task.CompletedTask;
     }
 }

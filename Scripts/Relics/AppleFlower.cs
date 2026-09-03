@@ -35,16 +35,17 @@ public sealed class AppleFlower : ModRelicTemplate
         );
 
     public override async Task AfterObtained()
-	{
-		IEnumerable<CardModel> enumerable = PileType.Deck.GetPile(base.Owner).Cards.ToList();
-		foreach (CardModel item in enumerable){
+    {
+        IEnumerable<CardModel> enumerable = PileType.Deck.GetPile(Owner).Cards.ToList();
+        foreach (CardModel item in enumerable)
+        {
             if (item.IsBasicStrikeOrDefend && ModelDb.Enchantment<Sown>().CanEnchant(item))
             {
                 CardCmd.Enchant<Sown>(item, 1m);
                 CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(item, PileType.Deck));
             }
-		}
-	}
+        }
+    }
 
     public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -52,10 +53,16 @@ public sealed class AppleFlower : ModRelicTemplate
         {
             await cardPlay.Card.MoveToResultPileWithoutPlaying(choiceContext);
 
-            CardModel? cardModel = CardFactory.GetDistinctForCombat(
-            Owner, from c in Owner.Character.CardPool.GetUnlockedCards(Owner.UnlockState, Owner.RunState.CardMultiplayerConstraint)
-            where c.Rarity != CardRarity.Token && c.CanBeGeneratedInCombat
-            select c, 1, Owner.RunState.Rng.CombatCardGeneration).FirstOrDefault();
+            CardModel? cardModel = CardFactory
+                .GetDistinctForCombat(
+                    Owner,
+                    from c in Owner.Character.CardPool.GetUnlockedCards(Owner.UnlockState, Owner.RunState.CardMultiplayerConstraint)
+                    where c.Rarity != CardRarity.Token && c.CanBeGeneratedInCombat
+                    select c,
+                    1,
+                    Owner.RunState.Rng.CombatCardGeneration
+                )
+                .FirstOrDefault();
 
             if (cardModel is null)
             {
@@ -70,11 +77,4 @@ public sealed class AppleFlower : ModRelicTemplate
             }
         }
     }
-
-    public override Task AfterCardEnteredCombat(CardModel card)
-    {
-        return base.AfterCardEnteredCombat(card);
-    }
-
-    
 }

@@ -28,7 +28,8 @@ public class AngryPower : ModPowerTemplate
         ValueProp props,
         Creature? dealer,
         CardModel? cardSource,
-        CardPlay? cardPlay)
+        CardPlay? cardPlay
+    )
     {
         if (dealer == Owner || Owner.Pets.Contains<Creature>(dealer))
         {
@@ -38,7 +39,7 @@ public class AngryPower : ModPowerTemplate
             }
         }
 
-        if (target == this.Owner && props.IsPoweredAttack())
+        if (target == Owner && props.IsPoweredAttack())
         {
             return 2M;
         }

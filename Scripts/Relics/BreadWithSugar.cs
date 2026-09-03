@@ -46,10 +46,7 @@ public class BreadWithSugar : ModRelicTemplate
     [SavedProperty]
     public int RemainTimes
     {
-        get
-        {
-            return _remainTimes;
-        }
+        get { return _remainTimes; }
         private set
         {
             AssertMutable();
@@ -57,6 +54,7 @@ public class BreadWithSugar : ModRelicTemplate
             UpdateDisplay();
         }
     }
+
     private void UpdateDisplay()
     {
         if (RemainTimes > 0)
@@ -75,7 +73,7 @@ public class BreadWithSugar : ModRelicTemplate
     public override Task AfterObtained()
     {
         RemainTimes = 3;
-        return base.AfterObtained();
+        return Task.CompletedTask;
     }
 
     public override async Task AfterCurrentHpChanged(Creature creature, decimal delta)
@@ -87,5 +85,4 @@ public class BreadWithSugar : ModRelicTemplate
             RemainTimes--;
         }
     }
-    
 }

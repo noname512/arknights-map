@@ -74,12 +74,12 @@ public class OpForGun : AbstractSankta
     public override async Task AfterAddedToRoom()
     {
         await base.AfterAddedToRoom();
-        await PowerCmd.Apply<SurroundedPower>(new ThrowingPlayerChoiceContext(), base.CombatState.GetOpponentsOf(base.Creature), 1m, base.Creature, null);
+        await PowerCmd.Apply<SurroundedPower>(new ThrowingPlayerChoiceContext(), CombatState.GetOpponentsOf(Creature), 1m, Creature, null);
 
-        await PowerCmd.Apply<OpForGunPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
-        await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), base.Creature, 2m, base.Creature, null);
-        await PowerCmd.Apply<ShieldPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
-        await PowerCmd.Apply<BackAttackRightPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
+        await PowerCmd.Apply<OpForGunPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
+        await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), Creature, 2m, Creature, null);
+        await PowerCmd.Apply<ShieldPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
+        await PowerCmd.Apply<BackAttackRightPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
     }
 
     public override Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
@@ -88,7 +88,7 @@ public class OpForGun : AbstractSankta
         {
             Attack_Time += 1;
         }
-        return base.AfterSideTurnEnd(choiceContext, side, participants);
+        return Task.CompletedTask;
     }
 
     public override async Task AfterDamageReceivedLate(
@@ -135,14 +135,14 @@ public class OpForGun : AbstractSankta
                     GunPosition.GlobalPosition = new Vector2(550.0f, GunPosition.GlobalPosition.Y);
                     await CreatureCmd.Add<OpCar>(CombatState, "second_left");
                     await PowerCmd.Remove<BackAttackRightPower>(Creature);
-                    await PowerCmd.Apply<BackAttackLeftPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
+                    await PowerCmd.Apply<BackAttackLeftPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
                 }
                 else
                 {
                     GunPosition.GlobalPosition = new Vector2(1450.0f, GunPosition.GlobalPosition.Y);
                     await CreatureCmd.Add<OpCar>(CombatState, "second_right");
                     await PowerCmd.Remove<BackAttackLeftPower>(Creature);
-                    await PowerCmd.Apply<BackAttackRightPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
+                    await PowerCmd.Apply<BackAttackRightPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
                 }
                 await UpdatePosition();
                 Attack_Time = 1;

@@ -1,17 +1,9 @@
 using ArknightsMap.Scripts.Cards;
-using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
-using MegaCrit.Sts2.Core.Rooms;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 using Test.Scripts.Powers;
@@ -25,7 +17,8 @@ public sealed class WarnBullet : ModRelicTemplate
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1)];
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromCard<Warn>(), HoverTipFactory.FromPower<WarnPower>(), HoverTipFactory.FromPower<WeakPower>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
+        [HoverTipFactory.FromCard<Warn>(), HoverTipFactory.FromPower<WarnPower>(), HoverTipFactory.FromPower<WeakPower>()];
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -36,9 +29,4 @@ public sealed class WarnBullet : ModRelicTemplate
             // 大图标（原版256x256）
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
-
-    
-
-
-
 }

@@ -1,25 +1,13 @@
-using ArknightsMap.Scripts.Enchantments;
-using ArknightsMap.Scripts.Powers;
-using Godot;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
-using MegaCrit.Sts2.Core.Nodes;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Characters;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Relics;
@@ -39,9 +27,8 @@ public class Luckily : ModRelicTemplate
             // 大图标（原版256x256）
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
-    
-    public override decimal ModifyPowerAmountGivenAdditive(PowerModel power, Creature giver, decimal amount, Creature? target,
-        CardModel? cardSource)
+
+    public override decimal ModifyPowerAmountGivenAdditive(PowerModel power, Creature giver, decimal amount, Creature? target, CardModel? cardSource)
     {
         if (power is ITemporaryPower)
         {
@@ -51,20 +38,31 @@ public class Luckily : ModRelicTemplate
         {
             return 1;
         }
-        if ((giver == Owner.Creature) && (target != null) && (target.Monster != null) &&
-            (power.GetTypeForAmount(amount) == PowerType.Debuff))
+        if ((giver == Owner.Creature) && (target != null) && (target.Monster != null) && (power.GetTypeForAmount(amount) == PowerType.Debuff))
         {
             return -1;
         }
         return 0;
     }
-    
-    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+
+    public override async Task AfterPowerAmountChanged(
+        PlayerChoiceContext choiceContext,
+        PowerModel power,
+        decimal amount,
+        Creature? applier,
+        CardModel? cardSource
+    )
     {
-        if (!(amount == 0m) && power.GetTypeForAmount(amount) == PowerType.Debuff && power.Owner.IsEnemy && applier == Owner.Creature && !(power is ITemporaryPower))
+        if (
+            !(amount == 0m)
+            && power.GetTypeForAmount(amount) == PowerType.Debuff
+            && power.Owner.IsEnemy
+            && applier == Owner.Creature
+            && !(power is ITemporaryPower)
+        )
         {
             Flash();
             await CreatureCmd.Damage(choiceContext, power.Owner, DynamicVars.Damage, Owner.Creature);
         }
-    }    
+    }
 }

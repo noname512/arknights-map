@@ -61,9 +61,9 @@ public class PassRestSiteOption : RestSiteOption
 
     public override async Task<bool> OnSelect()
     {
-        uint choiceId = RunManager.Instance.PlayerChoiceSynchronizer.ReserveChoiceId(base.Owner);
+        uint choiceId = RunManager.Instance.PlayerChoiceSynchronizer.ReserveChoiceId(Owner);
         Player? target = null;
-        if (LocalContext.IsMe(base.Owner))
+        if (LocalContext.IsMe(Owner))
         {
             NRestSiteRoom.Instance!.AnimateDescriptionDown();
             NRestSiteButton buttonForOption = NRestSiteRoom.Instance.GetButtonForOption(this)!;
@@ -79,7 +79,7 @@ public class PassRestSiteOption : RestSiteOption
             );
             if (usingController)
             {
-                List<NRestSiteCharacter> list = NRestSiteRoom.Instance.characterAnims.Where((NRestSiteCharacter c) => c.Player != base.Owner).ToList();
+                List<NRestSiteCharacter> list = NRestSiteRoom.Instance.characterAnims.Where((NRestSiteCharacter c) => c.Player != Owner).ToList();
                 for (int num = 0; num < list.Count; num++)
                 {
                     list[num].Hitbox.SetFocusMode(Control.FocusModeEnum.All);
@@ -96,7 +96,7 @@ public class PassRestSiteOption : RestSiteOption
                         path = list[num - 1].Hitbox.GetPath();
                     }
                     hitbox.FocusNeighborLeft = path;
-                    list[num].Hitbox.FocusNeighborRight = ((num < list.Count - 1) ? list[num + 1].Hitbox.GetPath() : list[0].Hitbox.GetPath());
+                    list[num].Hitbox.FocusNeighborRight = (num < list.Count - 1) ? list[num + 1].Hitbox.GetPath() : list[0].Hitbox.GetPath();
                 }
                 list.FirstOrDefault()?.Hitbox.TryGrabFocus();
             }
@@ -105,7 +105,7 @@ public class PassRestSiteOption : RestSiteOption
             try
             {
                 target = NodeToPlayer(await targetManager.SelectionFinished());
-                RunManager.Instance.PlayerChoiceSynchronizer.SyncLocalChoice(base.Owner, choiceId, PlayerChoiceResult.FromPlayerId(target?.NetId));
+                RunManager.Instance.PlayerChoiceSynchronizer.SyncLocalChoice(Owner, choiceId, PlayerChoiceResult.FromPlayerId(target?.NetId));
             }
             finally
             {
@@ -122,10 +122,10 @@ public class PassRestSiteOption : RestSiteOption
         }
         else
         {
-            ulong? num2 = (await RunManager.Instance.PlayerChoiceSynchronizer.WaitForRemoteChoice(base.Owner, choiceId)).AsPlayerId();
+            ulong? num2 = (await RunManager.Instance.PlayerChoiceSynchronizer.WaitForRemoteChoice(Owner, choiceId)).AsPlayerId();
             if (num2.HasValue)
             {
-                target = base.Owner.RunState.GetPlayer(num2.Value);
+                target = Owner.RunState.GetPlayer(num2.Value);
             }
         }
         NRestSiteRoom.Instance?.AnimateDescriptionUp();
@@ -134,7 +134,7 @@ public class PassRestSiteOption : RestSiteOption
         if (target != null)
         {
             CardSelectorPrefs prefs = new CardSelectorPrefs(CardSelectorPrefs.RemoveSelectionPrompt, 1) { Cancelable = true };
-            IEnumerable<CardModel> enumerable = await CardSelectCmd.FromDeckForRemoval(base.Owner, prefs);
+            IEnumerable<CardModel> enumerable = await CardSelectCmd.FromDeckForRemoval(Owner, prefs);
             if (!enumerable.Any())
             {
                 return false;

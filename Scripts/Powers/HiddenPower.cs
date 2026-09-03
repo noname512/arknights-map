@@ -29,6 +29,7 @@ public class HiddenPower : ModPowerTemplate
 
     private bool shouldTrigger => !CreaturePositions.IsBlock(Owner, Target);
     private static readonly List<CardModel> chosenCards = [ModelDb.Card<ComeClose>(), ModelDb.Card<RunAway>()];
+
     public override bool ShouldAllowTargeting(Creature target)
     {
         if ((target != Owner) || !IsVisible)
@@ -37,7 +38,7 @@ public class HiddenPower : ModPowerTemplate
         }
         return !shouldTrigger;
     }
-    
+
     public override decimal ModifyHpLostAfterOstyLate(Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         if (target != Owner)
@@ -55,10 +56,10 @@ public class HiddenPower : ModPowerTemplate
         }
         return 0;
     }
-    
+
     public override bool TryModifyPowerAmountReceived(PowerModel canonicalPower, Creature target, decimal amount, Creature? _, out decimal modifiedAmount)
     {
-        if (target != base.Owner)
+        if (target != Owner)
         {
             modifiedAmount = amount;
             return false;
@@ -83,7 +84,6 @@ public class HiddenPower : ModPowerTemplate
         return true;
     }
 
-
     private async Task ChooseBlockOrNot()
     {
         if (Target.IsDead)
@@ -103,6 +103,7 @@ public class HiddenPower : ModPowerTemplate
             await ((KnowledgeDemon.IChoosable)cardModel).OnChosen();
         }
     }
+
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (side == CombatSide.Enemy)

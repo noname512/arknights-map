@@ -35,42 +35,48 @@ public sealed class Lens : ModRelicTemplate
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
 
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
-{
-    if (dealer != base.Owner.Creature)
+    public override decimal ModifyDamageMultiplicative(
+        Creature? target,
+        decimal amount,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource,
+        CardPlay? cardPlay
+    )
     {
-        return 1m;
-    }
-    
-    if (!props.IsPoweredAttack())
-    {
-        return 1m;
-    }
-    if (dealer == null)
-    {
-        return 1m;
-    }
+        if (dealer != Owner.Creature)
+        {
+            return 1m;
+        }
 
-    if (cardSource!.Type != CardType.Attack)
-    {
-        return 1m;
-    }
+        if (!props.IsPoweredAttack())
+        {
+            return 1m;
+        }
+        if (dealer == null)
+        {
+            return 1m;
+        }
 
-    var hand = dealer.Player!.PlayerCombatState!.Hand;
-    int countAfterPlay = hand.Cards.Count;
+        if (cardSource!.Type != CardType.Attack)
+        {
+            return 1m;
+        }
 
-    // 预览时牌还在手牌中，结算时已被移除
-    // 统一按"打出后"的手牌数计算
-    if (cardSource != null && hand.Cards.Contains(cardSource))
-    {
-        countAfterPlay--;
-    }
+        var hand = dealer.Player!.PlayerCombatState!.Hand;
+        int countAfterPlay = hand.Cards.Count;
 
-    if (countAfterPlay != 7)
-    {
-        return 1m;
+        // 预览时牌还在手牌中，结算时已被移除
+        // 统一按"打出后"的手牌数计算
+        if (cardSource != null && hand.Cards.Contains(cardSource))
+        {
+            countAfterPlay--;
+        }
+
+        if (countAfterPlay != 7)
+        {
+            return 1m;
+        }
+        return 2m;
     }
-    return 2m;
-}
-    
 }

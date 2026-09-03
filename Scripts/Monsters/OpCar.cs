@@ -82,18 +82,18 @@ public class OpCar : AbstractSankta
     public override async Task AfterAddedToRoom()
     {
         await base.AfterAddedToRoom();
-        await PowerCmd.Apply<OpCarPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
-        await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
-        await PowerCmd.Apply<ShieldPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
-        await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
+        await PowerCmd.Apply<OpCarPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
+        await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
+        await PowerCmd.Apply<ShieldPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
+        await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
         if (OnRight)
         {
-            await PowerCmd.Apply<BackAttackRightPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
+            await PowerCmd.Apply<BackAttackRightPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
         }
         else
         {
             await UpdatePosition();
-            await PowerCmd.Apply<BackAttackLeftPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
+            await PowerCmd.Apply<BackAttackLeftPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
         }
     }
 
@@ -212,10 +212,5 @@ public class OpCar : AbstractSankta
         attackState.NextState = idleState;
 
         return creatureAnimator;
-    }
-
-    public override Task BeforeDeath(Creature creature)
-    {
-        return base.BeforeDeath(creature);
     }
 }

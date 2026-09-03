@@ -4,7 +4,6 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -25,20 +24,19 @@ public class UseOnce : ModEnchantmentTemplate
     public override EnchantmentAssetProfile AssetProfile => new(IconPath: $"res://ArknightsMap/images/enchantments/{GetType().Name}.png");
 
     protected override void OnEnchant()
-	{
-		base.Card.EnergyCost.UpgradeBy(-base.Card.EnergyCost.GetWithModifiers(CostModifiers.None));
-	}
+    {
+        Card.EnergyCost.UpgradeBy(-Card.EnergyCost.GetWithModifiers(CostModifiers.None));
+    }
 
     public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (cardPlay.Card == this.Card)
+        if (cardPlay.Card == Card)
         {
             await CardPileCmd.RemoveFromCombat(cardPlay.Card);
-            if (cardPlay.Card.DeckVersion != null){
+            if (cardPlay.Card.DeckVersion != null)
+            {
                 await CardPileCmd.RemoveFromDeck(cardPlay.Card.DeckVersion);
             }
         }
-        
     }
-    
 }

@@ -1,16 +1,8 @@
-using ArknightsMap.Scripts.Powers;
-using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
-using MegaCrit.Sts2.Core.Models.Monsters;
-using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.Nodes.Rooms;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -20,11 +12,9 @@ namespace ArknightsMap.Scripts.Cards;
 [RegisterCard(typeof(TokenCardPool))]
 public class ShotgunCard : ModCardTemplate
 {
-    public ShotgunCard() : base(energyCost, type, rarity, targetType, false)
-    {
-    }
+    public ShotgunCard()
+        : base(energyCost, type, rarity, targetType, false) { }
 
-    
     public override bool CanBeGeneratedInCombat => false;
 
     // 基础耗能
@@ -54,24 +44,19 @@ public class ShotgunCard : ModCardTemplate
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
+        await DamageCmd
+            .Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(1)
             .FromCard(this, cardPlay)
             .TargetingAllOpponents(CombatState!)
             .Execute(choiceContext);
 
-        await CreatureCmd.Heal(Owner.Creature, DynamicVars["Heal"].BaseValue);    
+        await CreatureCmd.Heal(Owner.Creature, DynamicVars["Heal"].BaseValue);
     }
-
-
 
     protected override void OnUpgrade()
     {
         DynamicVars["Damage"].BaseValue += 2;
         DynamicVars["Heal"].BaseValue += 1;
     }
-
-
-    
 }
