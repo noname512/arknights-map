@@ -1,4 +1,4 @@
 {
-    "ARKNIGHTS_MAP_REST_SITE_UI_OPTION_PASS.name": "传递",
-    "ARKNIGHTS_MAP_REST_SITE_UI_OPTION_PASS.description": "将一张卡牌和本遗物传递{HasTarget:给{Name}|出去}。"
+    "OPTION_ARKNIGHTS_MAP_REST_SITE_UI_PASS.name": "传递",
+    "OPTION_ARKNIGHTS_MAP_REST_SITE_UI_PASS.description": "将一张卡牌和本遗物传递{HasTarget:给{Name}|出去}。"
 }
