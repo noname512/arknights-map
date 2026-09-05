@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dm3eaq4n8ap7c"
-path="res://.godot/imported/option_pass.png-cdb6754b511ab4dc0d50c3233b0cfad3.ctex"
+path="res://.godot/imported/option_pass.png-cc42b8ce2bcad6535dae3293a36ffe2e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/ui/option_pass.png"
-dest_files=["res://.godot/imported/option_pass.png-cdb6754b511ab4dc0d50c3233b0cfad3.ctex"]
+source_file="res://ArknightsMap/images/ui/rest_site/option_pass.png"
+dest_files=["res://.godot/imported/option_pass.png-cc42b8ce2bcad6535dae3293a36ffe2e.ctex"]
 
 [params]
 

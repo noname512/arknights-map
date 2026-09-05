@@ -1,5 +1,6 @@
 using ArknightsMap.Scripts.Relics;
 using Godot;
+using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
@@ -33,6 +34,8 @@ public class PassRestSiteOption : RestSiteOption
     private const string _playerNameKey = "Name";
 
     private LocString? _description;
+
+    // public override IEnumerable<string> AssetPaths => [$"res://ArknightsMap/images/ui/rest_site/OPTION_PASS.png"];
 
     public override string OptionId => "DIG";
 
