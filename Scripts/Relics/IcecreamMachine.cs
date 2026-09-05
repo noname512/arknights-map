@@ -2,13 +2,9 @@ using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models.RelicPools;
-using MegaCrit.Sts2.Core.Rewards;
-using MegaCrit.Sts2.Core.Rooms;
-using MegaCrit.Sts2.Core.Runs;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -33,11 +29,10 @@ public class IcecreamMachine : ModRelicTemplate
     {
         if (side == CombatSide.Player && Owner.PlayerCombatState!.TurnNumber == 1)
         {
-            foreach(Creature c in Owner.Creature.CombatState!.HittableEnemies)
+            foreach (Creature c in Owner.Creature.CombatState!.HittableEnemies)
             {
                 await PowerCmd.Apply<AddBulletPower>(new ThrowingPlayerChoiceContext(), c, 1, c, null);
             }
         }
-        
     }
 }

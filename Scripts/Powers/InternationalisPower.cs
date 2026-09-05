@@ -29,28 +29,33 @@ public class InternationalisPower : ModPowerTemplate
 
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
     {
-        if (creature != base.Owner)
+        if (creature != Owner)
         {
             return;
         }
-        foreach (Player p in base.CombatState.Players)
+        foreach (Player p in CombatState.Players)
         {
-            await PlayerCmd.GainGold(50,p,false);
+            await PlayerCmd.GainGold(50, p, false);
         }
-        
     }
 
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
-	{
-		if (target != base.Owner)
-		{
-			return 1m;
-		}
-		if (!props.IsPoweredAttack())
-		{
-			return 1m;
-		}
-		return 1.5m;
-	}
-
+    public override decimal ModifyDamageMultiplicative(
+        Creature? target,
+        decimal amount,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource,
+        CardPlay? cardPlay
+    )
+    {
+        if (target != Owner)
+        {
+            return 1m;
+        }
+        if (!props.IsPoweredAttack())
+        {
+            return 1m;
+        }
+        return 1.5m;
+    }
 }

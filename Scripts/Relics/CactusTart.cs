@@ -69,7 +69,6 @@ public sealed class CactusTart : ModRelicTemplate
                     await PowerCmd.Apply<ThornsPower>(choiceContext, c, 2, Owner.Creature, null);
                 }
             }
-            
         }
     }
 

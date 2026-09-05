@@ -1,25 +1,15 @@
-using ArknightsMap.Scripts.Enchantments;
-using ArknightsMap.Scripts.Powers;
-using Godot;
 using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
-using MegaCrit.Sts2.Core.Nodes;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Characters;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Relics;
@@ -42,7 +32,7 @@ public class BloodedDress : ModRelicTemplate
 
     private bool killedThisTurn = false;
     private bool killedLastTurn = false;
-    
+
     public override Task BeforeCombatStart()
     {
         killedThisTurn = false;
@@ -57,9 +47,10 @@ public class BloodedDress : ModRelicTemplate
         ValueProp props,
         Creature? dealer,
         CardModel? cardSource,
-        CardPlay? cardPlay)
+        CardPlay? cardPlay
+    )
     {
-        if (dealer == Owner.Creature || Owner.Creature.Pets.Contains<Creature>(dealer))
+        if (dealer != null && (dealer == Owner.Creature || Owner.Creature.Pets.Contains(dealer)))
         {
             if (props.IsPoweredAttack() && cardSource != null && killedLastTurn)
             {

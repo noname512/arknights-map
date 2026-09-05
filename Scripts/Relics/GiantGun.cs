@@ -1,13 +1,8 @@
 using ArknightsMap.Scripts.Powers;
-using HarmonyLib;
-using MegaCrit.Sts2.Core.CardSelection;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -15,11 +10,8 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
-using MegaCrit.Sts2.Core.Random;
-using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Keywords;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Relics;
@@ -52,10 +44,16 @@ public sealed class GiantGun : ModRelicTemplate
         }
     }
 
-
-    public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override async Task BeforeDamageReceived(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        decimal amount,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource
+    )
     {
-        if (target != base.Owner.Creature)
+        if (target != Owner.Creature)
         {
             return;
         }
@@ -89,13 +87,16 @@ public sealed class GiantGun : ModRelicTemplate
         {
             if (c != dealer)
             {
-                await CreatureCmd.Damage(choiceContext, c, Owner.Creature.GetPowerAmount<ThornsPower>(), ValueProp.Unpowered | ValueProp.SkipHurtAnim, Owner.Creature, null, null);
+                await CreatureCmd.Damage(
+                    choiceContext,
+                    c,
+                    Owner.Creature.GetPowerAmount<ThornsPower>(),
+                    ValueProp.Unpowered | ValueProp.SkipHurtAnim,
+                    Owner.Creature,
+                    null,
+                    null
+                );
             }
-			
-		}
-	}
+        }
+    }
 }
-        
-    
-
-

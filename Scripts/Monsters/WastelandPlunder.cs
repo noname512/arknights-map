@@ -106,7 +106,7 @@ public class WastelandPlunder : ModMonsterTemplate
             PlunderPower plunderPower = Creature.GetPower<PlunderPower>()!;
             plunderPower.UpdateHitTime(0);
         }
-        return base.AfterSideTurnEndLate(choiceContext, side, participants);
+        return Task.CompletedTask;
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

@@ -1,13 +1,7 @@
-using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
-using MegaCrit.Sts2.Core.Rooms;
 using STS2RitsuLib.Combat.HandSize;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -40,8 +34,6 @@ public sealed class SaintMind : ModRelicTemplate, IMaxHandSizeModifier
         get => Turn;
     }
 
-    
-
     public override decimal ModifyMaxEnergy(Player player, decimal amount)
     {
         if (player != Owner)
@@ -56,7 +48,7 @@ public sealed class SaintMind : ModRelicTemplate, IMaxHandSizeModifier
         // 健康的实现：需要判断是否是当前玩家
         if (player != Owner)
             return currentMaxHandSize;
-        
+
         return currentMaxHandSize - 3;
     }
 }

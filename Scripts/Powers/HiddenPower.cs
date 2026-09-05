@@ -3,14 +3,10 @@ using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Monsters;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -27,8 +23,9 @@ public class HiddenPower : ModPowerTemplate
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
-    private bool shouldTrigger => !CreaturePositions.IsBlock(Owner, Target);
+    private bool shouldTrigger => !CreaturePositions.IsBlock(Owner, Target!);
     private static readonly List<CardModel> chosenCards = [ModelDb.Card<ComeClose>(), ModelDb.Card<RunAway>()];
+
     public override bool ShouldAllowTargeting(Creature target)
     {
         if ((target != Owner) || !IsVisible)
@@ -37,7 +34,7 @@ public class HiddenPower : ModPowerTemplate
         }
         return !shouldTrigger;
     }
-    
+
     public override decimal ModifyHpLostAfterOstyLate(Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         if (target != Owner)
@@ -55,10 +52,10 @@ public class HiddenPower : ModPowerTemplate
         }
         return 0;
     }
-    
+
     public override bool TryModifyPowerAmountReceived(PowerModel canonicalPower, Creature target, decimal amount, Creature? _, out decimal modifiedAmount)
     {
-        if (target != base.Owner)
+        if (target != Owner)
         {
             modifiedAmount = amount;
             return false;
@@ -83,10 +80,9 @@ public class HiddenPower : ModPowerTemplate
         return true;
     }
 
-
     private async Task ChooseBlockOrNot()
     {
-        if (Target.IsDead)
+        if (Target!.IsDead)
         {
             return;
         }
@@ -94,15 +90,16 @@ public class HiddenPower : ModPowerTemplate
         List<CardModel> cards = [];
         foreach (CardModel card in chosenCards)
         {
-            CardModel card2 = CombatState.CreateCard(card, Target.Player);
+            CardModel card2 = CombatState.CreateCard(card, Target.Player!);
             cards.Add(card2);
         }
-        CardModel cardModel = await CardSelectCmd.FromChooseACardScreen(new BlockingPlayerChoiceContext(), cards, Target.Player);
+        CardModel? cardModel = await CardSelectCmd.FromChooseACardScreen(new BlockingPlayerChoiceContext(), cards, Target.Player!);
         if (cardModel != null)
         {
             await ((KnowledgeDemon.IChoosable)cardModel).OnChosen();
         }
     }
+
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (side == CombatSide.Enemy)

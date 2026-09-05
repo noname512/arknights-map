@@ -51,12 +51,7 @@ public sealed class Laterano : ModActTemplate
     public override string? CustomMapBotBgPath => "res://images/packed/map/map_bgs/glory/map_bottom_glory.png";
     public override string? CustomRestSiteBackgroundPath => "res://scenes/rest_site/glory_rest_site.tscn";
 
-    public override IEnumerable<EventModel> AllEvents =>
-        new EventModel[]
-        {
-            ModelDb.Event<StephenZone>(),
-            ModelDb.Event<FirstClass>(),
-        };
+    public override IEnumerable<EventModel> AllEvents => new EventModel[] { ModelDb.Event<StephenZone>(), ModelDb.Event<FirstClass>() };
 
     public override IEnumerable<AncientEventModel> AllAncients =>
         new AncientEventModel[]
@@ -68,12 +63,7 @@ public sealed class Laterano : ModActTemplate
         };
 
     public override IEnumerable<EncounterModel> BossDiscoveryOrder =>
-        new EncounterModel[]
-        {
-            ModelDb.Encounter<SSSBoss>(),
-            ModelDb.Encounter<TheSaintBoss>(),
-            ModelDb.Encounter<OpForGunBoss>(),
-        };
+        new EncounterModel[] { ModelDb.Encounter<SSSBoss>(), ModelDb.Encounter<TheSaintBoss>(), ModelDb.Encounter<OpForGunBoss>() };
 
     public override IEnumerable<EncounterModel> GenerateAllEncounters() =>
         new EncounterModel[]
@@ -82,10 +72,8 @@ public sealed class Laterano : ModActTemplate
             ModelDb.Encounter<SingleSanktaBlade>(),
             ModelDb.Encounter<SinglePathfinderCannon>(),
             ModelDb.Encounter<ThreeWarriors>(),
-            ModelDb.Encounter<SingleSanktaClaw>(), 
+            ModelDb.Encounter<SingleSanktaClaw>(),
             ModelDb.Encounter<ThreeEyes>(),
-
-
             ModelDb.Encounter<SinglePathfinderCar>(),
             ModelDb.Encounter<SingleWastelandPlunder>(),
             ModelDb.Encounter<TwoBHCrossbow>(),
@@ -94,11 +82,9 @@ public sealed class Laterano : ModActTemplate
             ModelDb.Encounter<ThreeEyesWithPride>(),
             ModelDb.Encounter<ClawAndStatue>(),
             ModelDb.Encounter<BladeAndStatue>(),
-
-
             ModelDb.Encounter<FortunaElite>(),
             ModelDb.Encounter<OrenElite>(),
-            ModelDb.Encounter<ThreeSanktas>(),            
+            ModelDb.Encounter<ThreeSanktas>(),
         };
 
     protected override void ApplyActDiscoveryOrderModifications(UnlockState unlockState) { }
@@ -120,21 +106,16 @@ public sealed class Laterano : ModActTemplate
         return new MapPointTypeCounts(unknownCount, restCount);
     }
 
-    public override async Task<Task> AfterActEntered()
+    public override async Task AfterActEntered()
     {
         var RunState = RunManager.Instance.DebugOnlyGetState();
         if (RunState == null)
         {
-            return base.AfterActEntered();
+            return;
         }
         foreach (Player p in RunState.Players)
         {
             await CardPileCmd.AddCurseToDeck<Confused>(p);
         }
-        return base.AfterActEntered();
     }
-
-
-    
-
 }

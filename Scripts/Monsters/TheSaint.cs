@@ -56,19 +56,21 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
     public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (target != Creature)
-            return base.ModifyDamageAdditive(target, amount, props, dealer, cardSource, cardPlay);
+        {
+            return 0;
+        }
 
         // 只在 Phase 1 且还没触发转阶段时锁血
         if (Phase != 1 || !ShouldPreventDamage)
         {
-            return base.ModifyDamageAdditive(target, amount, props, dealer, cardSource, cardPlay);
+            return 0;
         }
 
         var threshold = Creature.MaxHp / 3;
 
         if (Creature.CurrentHp - amount >= threshold)
         {
-            return base.ModifyDamageAdditive(target, amount, props, dealer, cardSource, cardPlay);
+            return 0;
         }
 
         if (Creature.CurrentHp <= threshold && ShouldPreventDamage)
@@ -267,7 +269,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
                 Phase = 2;
 
                 await CreatureCmd.TriggerAnim(Creature, "B_Leave_1", 0.8f);
-                await PowerCmd.Apply<SoarPower>(new ThrowingPlayerChoiceContext(), base.Creature, 1m, base.Creature, null);
+                await PowerCmd.Apply<SoarPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
                 await Cmd.Wait(1.0f);
                 NRunMusicController.Instance?.PlayCustomMusic("event:/ArknightsMap/music/the_saint_bat_2");
             },
@@ -378,7 +380,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
 
     public override bool ShouldAllowTargeting(Creature target)
     {
-        if (ShouldPreventDamage && Creature.CurrentHp == Creature.MaxHp / 3)
+        if (ShouldPreventDamage && Creature.CurrentHp == Creature.MaxHp / 3 && target == Creature)
             return false;
         return true;
     }

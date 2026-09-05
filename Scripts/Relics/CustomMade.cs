@@ -72,8 +72,8 @@ public sealed class CustomMade : ModRelicTemplate
     {
         foreach (
             CardModel item in await CardSelectCmd.FromDeckForRemoval(
-                prefs: new CardSelectorPrefs(CardSelectorPrefs.RemoveSelectionPrompt, base.DynamicVars.Cards.IntValue),
-                player: base.Owner
+                prefs: new CardSelectorPrefs(CardSelectorPrefs.RemoveSelectionPrompt, DynamicVars.Cards.IntValue),
+                player: Owner
             )
         )
         {
