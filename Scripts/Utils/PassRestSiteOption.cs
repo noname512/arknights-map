@@ -36,7 +36,7 @@ public class PassRestSiteOption : ModRestSiteOptionTemplate
 
     public override RestSiteOptionAssetProfile AssetProfile => new(IconPath: $"res://ArknightsMap/images/ui/rest_site/OPTION_PASS.png");
 
-    public override string OptionId => "DIG";
+    public override string OptionId => "PASS";
 
     public RelicModel OwnerRelic;
 
