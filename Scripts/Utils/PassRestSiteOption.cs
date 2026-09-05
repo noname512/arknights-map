@@ -1,12 +1,10 @@
 using ArknightsMap.Scripts.Relics;
 using Godot;
-using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
-using MegaCrit.Sts2.Core.Entities.RestSite;
 using MegaCrit.Sts2.Core.GameActions;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization;
@@ -24,10 +22,11 @@ using MegaCrit.Sts2.Core.Nodes.Screens.Overlays;
 using MegaCrit.Sts2.Core.Nodes.Vfx.Cards;
 using MegaCrit.Sts2.Core.Platform;
 using MegaCrit.Sts2.Core.Runs;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Utils;
 
-public class PassRestSiteOption : RestSiteOption
+public class PassRestSiteOption : ModRestSiteOptionTemplate
 {
     private const string _hasTargetKey = "HasTarget";
 
@@ -35,7 +34,7 @@ public class PassRestSiteOption : RestSiteOption
 
     private LocString? _description;
 
-    // public override IEnumerable<string> AssetPaths => [$"res://ArknightsMap/images/ui/rest_site/OPTION_PASS.png"];
+    public override RestSiteOptionAssetProfile AssetProfile => new(IconPath: $"res://ArknightsMap/images/ui/rest_site/OPTION_PASS.png");
 
     public override string OptionId => "DIG";
 
@@ -48,9 +47,8 @@ public class PassRestSiteOption : RestSiteOption
             if (_description == null)
             {
                 _description = base.Description;
-                _description.Add("HasTarget", variable: false);
-                _description.Add("Name", "");
-                // _description.Add(_healVar);
+                _description.Add(_hasTargetKey, variable: false);
+                _description.Add(_playerNameKey, "");
             }
             return _description;
         }
@@ -132,7 +130,7 @@ public class PassRestSiteOption : RestSiteOption
             }
         }
         NRestSiteRoom.Instance?.AnimateDescriptionUp();
-        Description.Add("HasTarget", variable: false);
+        Description.Add(_hasTargetKey, variable: false);
         NRestSiteRoom.Instance?.GetButtonForOption(this)?.RefreshTextState();
         if (target != null)
         {
@@ -200,8 +198,8 @@ public class PassRestSiteOption : RestSiteOption
         Player? player = NodeToPlayer(node);
         if (player != null)
         {
-            Description.Add("HasTarget", variable: true);
-            Description.Add("Name", PlatformUtil.GetPlayerName(RunManager.Instance.NetService.Platform, player.NetId));
+            Description.Add(_hasTargetKey, variable: true);
+            Description.Add(_playerNameKey, PlatformUtil.GetPlayerName(RunManager.Instance.NetService.Platform, player.NetId));
             NRestSiteRoom.Instance?.GetButtonForOption(this)?.RefreshTextState();
         }
     }
@@ -211,7 +209,7 @@ public class PassRestSiteOption : RestSiteOption
     /// </summary>
     private void OnNodeUnhovered(Node _)
     {
-        Description.Add("HasTarget", variable: false);
+        Description.Add(_hasTargetKey, variable: false);
         NRestSiteRoom.Instance?.GetButtonForOption(this)?.RefreshTextState();
     }
 
