@@ -24,12 +24,17 @@ public class ShieldPower : ModPowerTemplate
 
     public override int DisplayAmount => Owner.GetPowerAmount<ArtifactPower>();
 
-    
-
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
+    public override decimal ModifyDamageMultiplicative(
+        Creature? target,
+        decimal amount,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource,
+        CardPlay? cardPlay
+    )
     {
         if (target != Owner)
         {
@@ -42,17 +47,19 @@ public class ShieldPower : ModPowerTemplate
         return 0.5m;
     }
 
-    
-
-    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(
+        PlayerChoiceContext choiceContext,
+        PowerModel power,
+        decimal amount,
+        Creature? applier,
+        CardModel? cardSource
+    )
     {
         if (power == Owner.GetPower<ArtifactPower>() && power.Owner == Owner && amount < 0)
         {
             InvokeDisplayAmountChanged();
         }
     }
-
-    
 
     public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
