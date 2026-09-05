@@ -34,7 +34,7 @@ public class PassRestSiteOption : ModRestSiteOptionTemplate
 
     private LocString? _description;
 
-    public override RestSiteOptionAssetProfile AssetProfile => new(IconPath: $"res://ArknightsMap/images/ui/rest_site/OPTION_PASS.png");
+    public override RestSiteOptionAssetProfile AssetProfile => new(IconPath: $"res://ArknightsMap/images/ui/rest_site/option_pass.png");
 
     public override string OptionId => "PASS";
 
