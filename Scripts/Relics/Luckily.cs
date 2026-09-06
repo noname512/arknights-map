@@ -34,13 +34,16 @@ public class Luckily : ModRelicTemplate
         {
             return 0;
         }
-        if ((giver == Owner.Creature) && (target != null) && (target.Monster != null) && (power.Type == PowerType.Debuff))
+        if (giver == Owner.Creature && target != null && target.Monster != null)
         {
-            return 1;
-        }
-        if ((giver == Owner.Creature) && (target != null) && (target.Monster != null) && (power.GetTypeForAmount(amount) == PowerType.Debuff))
-        {
-            return -1;
+            if (power.Type == PowerType.Debuff)
+            {
+                return 1;
+            }
+            else if (power.GetTypeForAmount(amount) == PowerType.Debuff)
+            {
+                return -1;
+            }
         }
         return 0;
     }

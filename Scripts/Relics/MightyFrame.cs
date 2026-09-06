@@ -1,5 +1,6 @@
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -12,13 +13,10 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
-public class Faith : ModRelicTemplate
+public class MightyFrame : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
-
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
-
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromPower<StrengthPower>(), HoverTipFactory.FromPower<DexterityPower>()];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<StrengthPower>(7)];
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -30,19 +28,19 @@ public class Faith : ModRelicTemplate
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
 
-    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromPowerWithPowerHoverTips<TenderPower>();
+
+    public override async Task BeforeSideTurnStart(
+        PlayerChoiceContext choiceContext,
+        CombatSide side,
+        IReadOnlyList<Creature> participants,
+        ICombatState combatState
+    )
     {
-        if (cardPlay.Player != Owner)
+        if (participants.Contains(Owner.Creature) && Owner.PlayerCombatState!.TurnNumber == 1)
         {
-            return;
-        }
-        if (cardPlay.Card.Rarity == CardRarity.Basic && cardPlay.Card.Tags.Contains(CardTag.Strike))
-        {
-            await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, 1, Owner.Creature, null);
-        }
-        if (cardPlay.Card.Rarity == CardRarity.Basic && cardPlay.Card.Tags.Contains(CardTag.Defend))
-        {
-            await PowerCmd.Apply<DexterityPower>(choiceContext, Owner.Creature, 1, Owner.Creature, null);
+            await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, DynamicVars.Strength.IntValue, Owner.Creature, null);
+            await PowerCmd.Apply<TenderPower>(choiceContext, Owner.Creature, 1, Owner.Creature, null);
         }
     }
 }

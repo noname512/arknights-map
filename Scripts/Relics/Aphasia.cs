@@ -9,7 +9,6 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Keywords;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Relics;
@@ -35,7 +34,7 @@ public sealed class Aphasia : ModRelicTemplate
 
     public override async Task AfterObtained()
     {
-        await CardPileCmd.AddCurseToDeck<Cards.NoCommunication>(Owner);
+        await CardPileCmd.AddCurseToDeck<NoCommunication>(Owner);
     }
 
     public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)

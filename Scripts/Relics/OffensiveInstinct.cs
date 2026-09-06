@@ -4,7 +4,6 @@ using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -12,13 +11,10 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Relics;
 
 [RegisterRelic(typeof(SharedRelicPool))]
-public class Faith : ModRelicTemplate
+public class OffensiveInstinct : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
-
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
-
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromPower<StrengthPower>(), HoverTipFactory.FromPower<DexterityPower>()];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1)];
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -30,19 +26,21 @@ public class Faith : ModRelicTemplate
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
 
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.ForEnergy(this)];
+
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (cardPlay.Player != Owner)
         {
             return;
         }
-        if (cardPlay.Card.Rarity == CardRarity.Basic && cardPlay.Card.Tags.Contains(CardTag.Strike))
+        if (cardPlay.Card.Type == CardType.Attack)
         {
-            await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, 1, Owner.Creature, null);
+            await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);
         }
-        if (cardPlay.Card.Rarity == CardRarity.Basic && cardPlay.Card.Tags.Contains(CardTag.Defend))
+        else
         {
-            await PowerCmd.Apply<DexterityPower>(choiceContext, Owner.Creature, 1, Owner.Creature, null);
+            await PlayerCmd.LoseEnergy(DynamicVars.Energy.IntValue, Owner);
         }
     }
 }

@@ -36,7 +36,7 @@ public class ByKjeragandrArctosz : ModRelicTemplate
     public static class GainMaxHpPatch
     {
         [HarmonyPrefix]
-        public static void Prefix(Creature creature, ref int amount)
+        public static void Prefix(Creature creature, ref decimal amount)
         {
             if (!creature.IsPlayer)
             {

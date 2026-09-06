@@ -31,6 +31,10 @@ public class Incinerate : ModRelicTemplate
 
     public override Task AfterCardEnteredCombat(CardModel card)
     {
+        if (card.Owner != Owner)
+        {
+            return Task.CompletedTask;
+        }
         if (!CanAffect(card))
         {
             return Task.CompletedTask;

@@ -44,8 +44,12 @@ public class LoanSharking : ModRelicTemplate
 
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (side == CombatSide.Player && Owner.GetEnergy() == _restEnergy && _restEnergy > 0)
+        if (side == CombatSide.Player && _restEnergy > 0)
         {
+            if (Owner.GetEnergy() > _restEnergy)
+            {
+                _restEnergy--;
+            }
             await PlayerCmd.LoseEnergy(1, Owner);
         }
     }

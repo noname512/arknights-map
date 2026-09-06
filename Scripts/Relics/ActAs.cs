@@ -58,6 +58,10 @@ public class ActAs : ModRelicTemplate
 
     public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        if (cardPlay.Player != Owner)
+        {
+            return;
+        }
         if ((Owner.GetEnergy() == 0) && (!hasTrigger))
         {
             hasTrigger = true;

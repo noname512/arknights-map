@@ -1,5 +1,3 @@
-using ArknightsMap.Scripts.Enchantments;
-using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Relics;
@@ -47,8 +45,12 @@ public sealed class AppleFlower : ModRelicTemplate
         }
     }
 
-    public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        if (cardPlay.Player != Owner)
+        {
+            return;
+        }
         if (cardPlay.Card?.Enchantment is { } enchantment && enchantment.Id == ModelDb.Enchantment<Sown>().Id)
         {
             await cardPlay.Card.MoveToResultPileWithoutPlaying(choiceContext);
