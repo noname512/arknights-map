@@ -1,6 +1,7 @@
 using ArknightsMap.Scripts.Encounters;
 using Godot;
 using HarmonyLib;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -9,6 +10,8 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Rooms;
+using MegaCrit.Sts2.Core.Saves;
+using MegaCrit.Sts2.Core.Settings;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Models;
@@ -20,6 +23,8 @@ public sealed class CreaturePositions : HookedSingletonModel
 {
     private static Dictionary<Creature, int> Positions = new();
     private static DamageVar damage = new DamageVar(20, ValueProp.Move);
+    private static int WindBlowTurn = 0;
+    private static int WindBlowDirection = 0;
 
     public CreaturePositions()
         : base(HookType.Combat) { }
@@ -32,6 +37,8 @@ public sealed class CreaturePositions : HookedSingletonModel
     public override Task AfterRoomEntered(AbstractRoom room)
     {
         Positions.Clear();
+        WindBlowTurn = 0;
+        WindBlowDirection = 0;
         return Task.CompletedTask;
     }
 
@@ -41,6 +48,8 @@ public sealed class CreaturePositions : HookedSingletonModel
         if (CurrentCombatState!.Encounter is AbstractSnowyMountainEncounter myEncounter)
         {
             playerPos = myEncounter.playerStartPosition;
+            WindBlowTurn = myEncounter.windBlowTurn;
+            WindBlowDirection = myEncounter.windBlowDirection;
         }
         foreach (Creature c in CurrentCombatState.PlayerCreatures)
         {
@@ -56,6 +65,14 @@ public sealed class CreaturePositions : HookedSingletonModel
             {
                 Positions[c] = 6;
             }
+        }
+    }
+
+    public override async Task AfterSideTurnEndLate(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+    {
+        if (WindBlowTurn != 0 && CurrentCombatState!.PlayerCreatures.First().Player!.PlayerCombatState!.TurnNumber % WindBlowTurn == 0)
+        {
+            await BlowWind(WindBlowDirection);
         }
     }
 
@@ -153,6 +170,28 @@ public sealed class CreaturePositions : HookedSingletonModel
             NCreature creatureNode = NCombatRoom.Instance.GetCreatureNode(c)!;
             tween.TweenProperty(creatureNode, "global_position:x", creatureNode.GlobalPosition.X + 300 * direction, 0.25);
         }
+    }
+
+    public static async Task Walk(Creature c, int direction)
+    {
+        Positions[c] = Positions.GetValueOrDefault(c) + direction;
+        Tween tween = NCombatRoom.Instance!.CreateTween().SetParallel().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
+        NCreature creatureNode = NCombatRoom.Instance.GetCreatureNode(c)!;
+        float moveTime;
+        switch (SaveManager.Instance.PrefsSave.FastMode)
+        {
+            case FastModeType.Instant:
+                moveTime = 0.25f;
+                break;
+            case FastModeType.Fast:
+                moveTime = 0.5f;
+                break;
+            default:
+                moveTime = 1.25f;
+                break;
+        }
+        tween.TweenProperty(creatureNode, "global_position:x", creatureNode.GlobalPosition.X + 300 * direction, moveTime);
+        await Cmd.Wait(moveTime);
     }
 
     [HarmonyPatch(typeof(NCombatRoom), "CreateAllyNodes")]

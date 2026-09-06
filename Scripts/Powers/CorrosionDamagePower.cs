@@ -6,7 +6,6 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Combat.HealthBars;
@@ -38,7 +37,6 @@ public class CorrosionDamagePower : ModPowerTemplate, IHealthBarForecastSource
             await CreatureCmd.Damage(choiceContext, Owner, new DamageVar(DynamicVars["ExtraDamage"].IntValue, ValueProp.Unpowered), Owner);
             if (Owner.IsAlive)
             {
-                
                 await PowerCmd.Apply<DexterityPower>(choiceContext, Owner, -1, Owner, null, false);
                 await PowerCmd.Remove(this);
             }
