@@ -58,7 +58,8 @@ public class IcefieldBerserker : AbstractSnowyMountainMonster
                 await CreatureCmd.TriggerAnim(Creature, "Move", 0);
                 await CreaturePositions.Walk(Creature, -1);
             },
-            new SingleAttackIntent(Dmg3) // TODO: walk intent
+            new SingleAttackIntent(Dmg3),
+            new MoveIntent()
         );
         MoveState attack3block = new MoveState(
             "ATTACK3BLOCK",

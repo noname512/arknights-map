@@ -5,12 +5,12 @@ using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 
 namespace ArknightsMap.Scripts.Utils;
 
-public class UseBulletIntent : AbstractIntent
+public class MoveIntent : AbstractIntent
 {
     public override IntentType IntentType => IntentType.Unknown;
-    protected override string IntentPrefix => "ARKNIGHTS_MAP_INTENT_USE_BULLET";
+    protected override string IntentPrefix => "ARKNIGHTS_MAP_INTENT_MOVE";
 
-    protected override string SpritePath => "res://ArknightsMap/images/util/UseBulletIntent.tres";
+    protected override string SpritePath => "res://ArknightsMap/images/util/MoveIntent.tres";
 
     public override IEnumerable<string> AssetPaths => [SpritePath];
 

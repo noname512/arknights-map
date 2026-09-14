@@ -70,10 +70,7 @@ public class BHCrossbowman : ModMonsterTemplate
             "DEBUFF",
             async targets =>
             {
-                foreach (Creature c in targets)
-                {
-                    await PowerCmd.Apply<FrailPower>(new ThrowingPlayerChoiceContext(), c, 2, c, null);
-                }
+                await PowerCmd.Apply<FrailPower>(new ThrowingPlayerChoiceContext(), targets, 2, Creature, null);
                 CrossbowmanPower power = Creature.GetPower<CrossbowmanPower>()!;
                 power.UpdateHitTime(power.DisplayAmount + 1);
             },
@@ -86,10 +83,7 @@ public class BHCrossbowman : ModMonsterTemplate
             {
                 var crossbowmanPower = Creature.GetPower<CrossbowmanPower>();
                 await DamageCmd.Attack(Damage_Skill).FromMonster(this).WithAttackerAnim("Skill", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
-                foreach (Creature c in targets)
-                {
-                    await PowerCmd.Apply<LoseEnergyNextTurnPower>(new ThrowingPlayerChoiceContext(), c, 1, c, null);
-                }
+                await PowerCmd.Apply<LoseEnergyNextTurnPower>(new ThrowingPlayerChoiceContext(), targets, 1, Creature, null);
                 CrossbowmanPower power = Creature.GetPower<CrossbowmanPower>()!;
                 power.UpdateHitTime(0);
             },

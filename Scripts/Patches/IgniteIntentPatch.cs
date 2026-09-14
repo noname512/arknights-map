@@ -27,6 +27,10 @@ class IgniteIntentPatch
                 __result = "res://ArknightsMap/images/util/AddBulletIntent.tres";
                 return false;
             }
+            if (animation == "arknights_map_intent_move")
+            {
+                __result = "res://ArknightsMap/images/util/MoveIntent.tres";
+            }
             return true;
         }
     }
