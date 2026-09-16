@@ -8,12 +8,10 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
-using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -40,21 +38,6 @@ public class Oren : AbstractSankta
     {
         await base.AfterAddedToRoom();
         await PowerCmd.Apply<OrenPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
-    }
-
-    public override async Task AfterDamageReceivedLate(
-        PlayerChoiceContext choiceContext,
-        Creature target,
-        DamageResult result,
-        ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource
-    )
-    {
-        if (dealer == Creature && result.UnblockedDamage > 0 && props.IsPoweredAttack())
-        {
-            await CardPileCmd.AddToCombatAndPreview<Dazed>(target, PileType.Draw, 1, null, CardPilePosition.Top);
-        }
     }
 
     private string GetAttackSfx() => "Attack";

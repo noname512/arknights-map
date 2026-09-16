@@ -8,8 +8,6 @@ using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
@@ -89,21 +87,6 @@ public class OpForGun : AbstractSankta
             Attack_Time += 1;
         }
         return Task.CompletedTask;
-    }
-
-    public override async Task AfterDamageReceivedLate(
-        PlayerChoiceContext choiceContext,
-        Creature target,
-        DamageResult result,
-        ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource
-    )
-    {
-        if (dealer == Creature && target.Monster is not Osty)
-        {
-            await PowerCmd.Apply<CorrosionDamagePower>(new ThrowingPlayerChoiceContext(), target, 1m, Creature, null);
-        }
     }
 
     public bool ShouldRun()

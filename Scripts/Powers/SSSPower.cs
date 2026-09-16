@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -17,6 +18,8 @@ public class SSSPower : ModPowerTemplate
 
     protected override IEnumerable<DynamicVar> CanonicalVars => new[] { new IntVar("Time", 0) };
 
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromPower<BulletPower>()];
+
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
@@ -26,7 +29,7 @@ public class SSSPower : ModPowerTemplate
 
     public int Time
     {
-        get => Owner.GetPower<BulletPower>()?.Amount ?? 0;
+        get => Owner.GetPowerAmount<BulletPower>();
         set
         {
             DynamicVars["Time"].BaseValue = value;
@@ -35,23 +38,23 @@ public class SSSPower : ModPowerTemplate
     }
 
     public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-{
-    if (DynamicVars["Time"].BaseValue > 0 && cardPlay.Card is Milk)
     {
-        MilkCounter++;
-        if (MilkCounter >= CombatState.Players.Count)
+        if (DynamicVars["Time"].BaseValue > 0 && cardPlay.Card is Milk)
         {
-            DynamicVars["Time"].BaseValue--;
-            var bullet = Owner.GetPower<BulletPower>();
-            if (bullet != null)
+            MilkCounter++;
+            if (MilkCounter >= CombatState.Players.Count)
             {
-                await PowerCmd.Decrement(bullet);
+                DynamicVars["Time"].BaseValue--;
+                var bullet = Owner.GetPower<BulletPower>();
+                if (bullet != null)
+                {
+                    await PowerCmd.Decrement(bullet);
+                }
+                InvokeDisplayAmountChanged();
+                MilkCounter = 0; // 只有弹药真正减少后才重置
             }
-            InvokeDisplayAmountChanged();
-            MilkCounter = 0;  // 只有弹药真正减少后才重置
         }
     }
-}
 
     public async Task UpdateTime(int time)
     {

@@ -3,7 +3,6 @@ using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -27,9 +26,7 @@ public class BHCrossbowman : ModMonsterTemplate
 
     public override async Task AfterAddedToRoom()
     {
-        await PowerCmd.Apply<CrossbowmanPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
         MoveInt = CombatState.RunState.Rng.CombatTargets.NextInt(0, 2);
-        Creature.GetPower<CrossbowmanPower>()!.UpdateHitTime(MoveInt);
     }
 
     public int MoveInt = 0;
@@ -48,8 +45,7 @@ public class BHCrossbowman : ModMonsterTemplate
             async targets =>
             {
                 await DamageCmd.Attack(Damage).FromMonster(this).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
-                CrossbowmanPower power = Creature.GetPower<CrossbowmanPower>()!;
-                power.UpdateHitTime(power.DisplayAmount + 1);
+                MoveInt++;
             },
             new SingleAttackIntent(Damage)
         );
@@ -60,8 +56,7 @@ public class BHCrossbowman : ModMonsterTemplate
             {
                 await DamageCmd.Attack(Damage).FromMonster(this).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
                 await CreatureCmd.GainBlock(Creature, Block, ValueProp.Unpowered, null);
-                CrossbowmanPower power = Creature.GetPower<CrossbowmanPower>()!;
-                power.UpdateHitTime(power.DisplayAmount + 1);
+                MoveInt++;
             },
             [new SingleAttackIntent(Damage), new DefendIntent()]
         );
@@ -71,8 +66,7 @@ public class BHCrossbowman : ModMonsterTemplate
             async targets =>
             {
                 await PowerCmd.Apply<FrailPower>(new ThrowingPlayerChoiceContext(), targets, 2, Creature, null);
-                CrossbowmanPower power = Creature.GetPower<CrossbowmanPower>()!;
-                power.UpdateHitTime(power.DisplayAmount + 1);
+                MoveInt++;
             },
             new DebuffIntent()
         );
@@ -81,26 +75,24 @@ public class BHCrossbowman : ModMonsterTemplate
             "SKILL",
             async targets =>
             {
-                var crossbowmanPower = Creature.GetPower<CrossbowmanPower>();
                 await DamageCmd.Attack(Damage_Skill).FromMonster(this).WithAttackerAnim("Skill", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
                 await PowerCmd.Apply<LoseEnergyNextTurnPower>(new ThrowingPlayerChoiceContext(), targets, 1, Creature, null);
-                CrossbowmanPower power = Creature.GetPower<CrossbowmanPower>()!;
-                power.UpdateHitTime(0);
+                MoveInt = 0;
             },
             [new SingleAttackIntent(Damage_Skill), new DebuffIntent()]
         );
 
         ConditionalBranchState attackBranch = new ConditionalBranchState("ATTACK_BRANCH");
-        attackBranch.AddState(attack_defend, () => Creature.GetPower<CrossbowmanPower>()!.DisplayAmount < 3);
-        attackBranch.AddState(skill, () => Creature.GetPower<CrossbowmanPower>()!.DisplayAmount >= 3);
+        attackBranch.AddState(attack_defend, () => MoveInt < 3);
+        attackBranch.AddState(skill, () => MoveInt >= 3);
 
         ConditionalBranchState attackdefendBranch = new ConditionalBranchState("ATTACK_DEFEND_BRANCH");
-        attackdefendBranch.AddState(debuff, () => Creature.GetPower<CrossbowmanPower>()!.DisplayAmount < 3);
-        attackdefendBranch.AddState(skill, () => Creature.GetPower<CrossbowmanPower>()!.DisplayAmount >= 3);
+        attackdefendBranch.AddState(debuff, () => MoveInt < 3);
+        attackdefendBranch.AddState(skill, () => MoveInt >= 3);
 
         ConditionalBranchState debuffBranch = new ConditionalBranchState("DEBUFF_BRANCH");
-        debuffBranch.AddState(attack, () => Creature.GetPower<CrossbowmanPower>()!.DisplayAmount < 3);
-        debuffBranch.AddState(skill, () => Creature.GetPower<CrossbowmanPower>()!.DisplayAmount >= 3);
+        debuffBranch.AddState(attack, () => MoveInt < 3);
+        debuffBranch.AddState(skill, () => MoveInt >= 3);
 
         attack.FollowUpState = attackBranch;
         attack_defend.FollowUpState = attackdefendBranch;

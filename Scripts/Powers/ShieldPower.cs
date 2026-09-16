@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -19,10 +20,28 @@ public class ShieldPower : ModPowerTemplate
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromPower<ArtifactPower>()];
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("Cooldown", 3)];
+    private int GetArtifactNum()
+    {
+        if (Owner.Monster is OpForGun)
+        {
+            return 2;
+        }
+        else if (Owner.Monster is OpCar)
+        {
+            return 1;
+        }
+        else
+        {
+            return 3;
+        }
+    }
 
-    public override int DisplayAmount => Owner.GetPowerAmount<ArtifactPower>();
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new IntVar("Cooldown", 2), new IntVar("CurrentCooldown", 0), new IntVar("ArtifactNum", GetArtifactNum())];
+
+    public override int DisplayAmount => DynamicVars["CurrentCooldown"].IntValue;
 
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
@@ -57,6 +76,7 @@ public class ShieldPower : ModPowerTemplate
     {
         if (power == Owner.GetPower<ArtifactPower>() && power.Owner == Owner && amount < 0)
         {
+            DynamicVars["CurrentCooldown"].BaseValue = DynamicVars["Cooldown"].BaseValue;
             InvokeDisplayAmountChanged();
         }
     }
@@ -65,22 +85,10 @@ public class ShieldPower : ModPowerTemplate
     {
         if (side == CombatSide.Enemy && Owner.GetPowerAmount<ArtifactPower>() == 0)
         {
-            DynamicVars["Cooldown"].UpgradeValueBy(-1);
-            if ((int)DynamicVars["Cooldown"].BaseValue <= 0)
+            DynamicVars["CurrentCooldown"].UpgradeValueBy(-1);
+            if (DynamicVars["CurrentCooldown"].IntValue <= 0)
             {
-                DynamicVars["Cooldown"].UpgradeValueBy(2);
-                if (Owner.Monster is OpForGun)
-                {
-                    await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), Owner, 2, Owner, null);
-                }
-                else if (Owner.Monster is OpCar)
-                {
-                    await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), Owner, 1, Owner, null);
-                }
-                else
-                {
-                    await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), Owner, 3, Owner, null);
-                }
+                await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), Owner, GetArtifactNum(), Owner, null);
                 InvokeDisplayAmountChanged();
             }
         }

@@ -25,24 +25,6 @@ public class WastelandRobber : ModMonsterTemplate
     private int Block => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 10);
     private int DamageMulti => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 6);
 
-    public override async Task AfterDamageReceivedLate(
-        PlayerChoiceContext choiceContext,
-        Creature target,
-        DamageResult result,
-        ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource
-    )
-    {
-        if (dealer == Creature && result.UnblockedDamage > 0)
-        {
-            foreach (Creature c in CombatState.PlayerCreatures)
-            {
-                await PowerCmd.Apply<LoseEnergyNextTurnPower>(new ThrowingPlayerChoiceContext(), c, 1, c, null);
-            }
-        }
-    }
-
     public override async Task AfterAddedToRoom()
     {
         await PowerCmd.Apply<RobberPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);

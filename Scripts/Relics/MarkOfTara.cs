@@ -19,10 +19,7 @@ public class MarkOfTara : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new HealVar(10m), 
-        new IntVar("Intangible", 3), 
-        new StringVar("Special", GetString())];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new HealVar(10m), new IntVar("Intangible", 3), new StringVar("Special", GetString())];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromPowerWithPowerHoverTips<IntangiblePower>();
 
     public override RelicAssetProfile AssetProfile =>
@@ -76,7 +73,6 @@ public class MarkOfTara : ModRelicTemplate
 
         return res;
     }
-    
 
     public override int DisplayAmount
     {
@@ -98,7 +94,6 @@ public class MarkOfTara : ModRelicTemplate
 
             return cnt;
         }
-        
     }
 
     public override bool ShowCounter => true;
@@ -137,7 +132,7 @@ public class MarkOfTara : ModRelicTemplate
         {
             return true;
         }
-        if ((WasUsed & (1 << (int)Owner.RunState.CurrentRoom.RoomType)) == 0)
+        if ((WasUsed & (1 << (int)Owner.RunState.CurrentRoom!.RoomType)) == 0)
         {
             return true;
         }
@@ -149,7 +144,7 @@ public class MarkOfTara : ModRelicTemplate
         if (Owner.Creature.CombatState != null)
         {
             Flash();
-            WasUsed ^= (1 << (int)Owner.RunState.CurrentRoom.RoomType);
+            WasUsed ^= 1 << (int)Owner.RunState.CurrentRoom!.RoomType;
             InvokeDisplayAmountChanged();
             await CreatureCmd.Heal(creature, DynamicVars.Heal.BaseValue);
             PlayerChoiceContext t = new ThrowingPlayerChoiceContext();
