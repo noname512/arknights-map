@@ -48,30 +48,16 @@ public sealed class SnowyMountain : ModActTemplate
 
     public override IEnumerable<AncientEventModel> AllAncients => new AncientEventModel[] { ModelDb.AncientEvent<Pramanix>() };
 
-    public override IEnumerable<EncounterModel> BossDiscoveryOrder => new EncounterModel[] { ModelDb.Encounter<MandragoraBoss>() };
+    public override IEnumerable<EncounterModel> BossDiscoveryOrder => new EncounterModel[] { ModelDb.Encounter<DegenbrecherBoss>() };
 
     public override IEnumerable<EncounterModel> GenerateAllEncounters() =>
         new EncounterModel[]
         {
-            ModelDb.Encounter<BurnTheHaystacks>(),
-            ModelDb.Encounter<ScorchingDream>(),
-            ModelDb.Encounter<DublinnPhalanx>(),
-            ModelDb.Encounter<DublinnPhalanxWeak>(),
-            ModelDb.Encounter<PatrollingFoliageNormal>(),
-            ModelDb.Encounter<DublinnCompanion>(),
-            ModelDb.Encounter<MandragoraBoss>(),
-            ModelDb.Encounter<ScaldingEarth>(),
-            ModelDb.Encounter<ApparitionalWaves>(),
-            ModelDb.Encounter<ComingFire>(),
-            ModelDb.Encounter<EndOfTheNight>(),
-            ModelDb.Encounter<AFRBoss>(),
-            ModelDb.Encounter<FloralGarland>(),
-            ModelDb.Encounter<LampBurner>(),
-            ModelDb.Encounter<HerFlame>(),
-            ModelDb.Encounter<MarchOfTheDead>(),
-            ModelDb.Encounter<BurningWeeds>(),
-            ModelDb.Encounter<DublinnFlamerazerNormal>(),
-            ModelDb.Encounter<AshyMarsh>(),
+            ModelDb.Encounter<FluffySnowballWeak>(),
+            ModelDb.Encounter<IceFieldHunterWeak>(),
+            ModelDb.Encounter<IcefieldBerserkerNormal>(),
+            ModelDb.Encounter<TschaggattasElite>(),
+            ModelDb.Encounter<DegenbrecherBoss>(),
             // TODO: 先让游戏能跑，好像出锅了
         };
 

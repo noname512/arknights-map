@@ -56,18 +56,23 @@ public class IcefieldHunter : AbstractSnowyMountainMonster
             },
             new MultiAttackIntent(Dmg2, 2)
         );
+        ConditionalBranchState conditionalBranchState = new ConditionalBranchState("INIT");
+        
+        conditionalBranchState.AddState(attack1, () => Creature.SlotName == "6");
+        conditionalBranchState.AddState(attack2, () => true);
 
         attack1.FollowUpState = attack2;
         attack2.FollowUpState = charge;
         charge.FollowUpState = attack3;
         attack3.FollowUpState = attack1;
-
+        
         list.Add(attack1);
         list.Add(attack2);
         list.Add(charge);
         list.Add(attack3);
+        list.Add(conditionalBranchState);
 
-        return new MonsterMoveStateMachine(list, Creature.SlotName == "6" ? attack2 : attack1);
+        return new MonsterMoveStateMachine(list, conditionalBranchState);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

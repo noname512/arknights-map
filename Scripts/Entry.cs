@@ -42,7 +42,13 @@ public class Entry
         RitsuLibFramework.CreateContentPack(ModId).ActEnterWeightedPool(1).ActEnterWeightedPoolCandidate<Wilds>(1, ctx => true, weight => 99999).Apply();
         if (isDemo)
         {
-            RitsuLibFramework.CreateContentPack(ModId).ActEnterWeightedPool(2).ActEnterWeightedPoolCandidate<SnowyMountain>(2, ctx => true, weight => 0).Apply();
+            RitsuLibFramework.CreateContentPack(ModId)
+                .ActEnterForce<SnowyMountain>(
+                    2,
+                    priority: 100,
+                    eligibility: ctx => true)
+                .ActEnterWeightedPool(2).ActEnterWeightedPoolCandidate<SnowyMountain>(2, ctx => true, ctx => 1); 
+            RitsuLibFramework.CreateContentPack(ModId).ActEnterWeightedPool(2).ActEnterWeightedPoolCandidate<SnowyMountain>(2, ctx => true, weight => 999999).Apply();
             RitsuLibFramework.CreateContentPack(ModId).ActEnterWeightedPool(2).ActEnterWeightedPoolCandidate<Laterano>(2, ctx => true, weight => 99999).Apply();
         }
         

@@ -20,7 +20,7 @@ public class HiddenPower : ModPowerTemplate
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [Entry.MyHoverTip("BLOCK")];
+    // protected override IEnumerable<IHoverTip> AdditionalHoverTips => [Entry.MyHoverTip("BLOCK")];
 
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");

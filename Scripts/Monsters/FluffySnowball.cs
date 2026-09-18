@@ -37,7 +37,7 @@ public class FluffySnowball : AbstractSnowyMountainMonster
             "SUMMON",
             async targets =>
             {
-                await CreatureCmd.Add<Snowchild>(CombatState, "5");
+                await CreatureCmd.Add<Snowchild>(CombatState, "7");
             },
             new SummonIntent()
         );
