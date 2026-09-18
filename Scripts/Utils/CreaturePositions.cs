@@ -34,16 +34,11 @@ public sealed class CreaturePositions : HookedSingletonModel
         return Positions.Where(kv => kv.Value == pos).Select(kv => kv.Key).ToList();
     }
 
-    public override Task AfterRoomEntered(AbstractRoom room)
+    public override async Task BeforeCombatStart()
     {
         Positions.Clear();
         WindBlowTurn = 0;
         WindBlowDirection = 0;
-        return Task.CompletedTask;
-    }
-
-    public override async Task BeforeCombatStart()
-    {
         int playerPos = 3;
         if (CurrentCombatState!.Encounter is AbstractSnowyMountainEncounter myEncounter)
         {
