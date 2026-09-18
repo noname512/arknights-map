@@ -55,6 +55,11 @@ public class Cold : ModCardTemplate
             return false;
         }
 
+        if (card == this)
+        {
+            return false;
+        }
+
         if (this.Pile?.Type != PileType.Hand)
         {
             return false;
