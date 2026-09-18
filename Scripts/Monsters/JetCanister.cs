@@ -35,8 +35,8 @@ public class JetCanister : AbstractSnowyMountainMonster
             "ATTACK1",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Attack", 0);
-                await DamageCmd.Attack(Dmg1).FromMonster(this).Execute(null);
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
+                await DamageCmd.Attack(Dmg1).FromMonster(this).WithNoAttackerAnim().Execute(null);
             },
             new SingleAttackIntent(Dmg1)
         );
@@ -44,8 +44,8 @@ public class JetCanister : AbstractSnowyMountainMonster
             "ATTACK2",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Attack", 0);
-                await DamageCmd.Attack(Dmg2).WithHitCount(repeatCount()).FromMonster(this).Execute(null);
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
+                await DamageCmd.Attack(Dmg2).WithHitCount(repeatCount()).FromMonster(this).WithNoAttackerAnim().Execute(null);
             },
             new MultiAttackIntent(Dmg2, repeatCount)
         );

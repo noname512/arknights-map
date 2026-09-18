@@ -39,8 +39,7 @@ public class FrozenMountainBurdenbeast : AbstractSnowyMountainMonster
             "ATTACK1",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Attack", 0);
-                await DamageCmd.Attack(Dmg1).FromMonster(this).Execute(null);
+                await DamageCmd.Attack(Dmg1).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null);
             },
             new SingleAttackIntent(Dmg1)
         );
@@ -48,9 +47,9 @@ public class FrozenMountainBurdenbeast : AbstractSnowyMountainMonster
             "ATTACK2",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Attack", 0);
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
                 await CreatureCmd.TriggerAnim(Creature, "Sleep", 0);
-                await DamageCmd.Attack(Dmg2).FromMonster(this).Execute(null);
+                await DamageCmd.Attack(Dmg2).FromMonster(this).WithNoAttackerAnim().Execute(null);
                 foreach (PowerModel power in Creature.Powers.ToList())
                 {
                     if (power.Type == PowerType.Debuff)

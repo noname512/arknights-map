@@ -40,8 +40,8 @@ public class GreathornRhuul : AbstractSnowyMountainMonster
             {
                 await CreatureCmd.TriggerAnim(Creature, "Move", 0);
                 await CreaturePositions.Walk(Creature, -1);
-                await CreatureCmd.TriggerAnim(Creature, "Attack", 0);
-                await DamageCmd.Attack(Dmg1).FromMonster(this).Execute(null);
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
+                await DamageCmd.Attack(Dmg1).FromMonster(this).WithNoAttackerAnim().Execute(null);
             },
             new MoveIntent(),
             new SingleAttackIntent(Dmg1)
@@ -52,8 +52,8 @@ public class GreathornRhuul : AbstractSnowyMountainMonster
             {
                 await CreatureCmd.TriggerAnim(Creature, "Move", 0);
                 await CreaturePositions.Walk(Creature, -1);
-                await CreatureCmd.TriggerAnim(Creature, "Attack", 0);
-                await DamageCmd.Attack(Dmg2).FromMonster(this).Execute(null);
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
+                await DamageCmd.Attack(Dmg2).FromMonster(this).WithNoAttackerAnim().Execute(null);
             },
             new MoveIntent(),
             new SingleAttackIntent(Dmg2)
@@ -70,8 +70,8 @@ public class GreathornRhuul : AbstractSnowyMountainMonster
             "GORE_N_LEFT",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Skill_End", 0);
-                await DamageCmd.Attack(Dmg2).FromMonster(this).Execute(null);
+                await CreatureCmd.TriggerAnim(Creature, "Skill_End", 0.5f);
+                await DamageCmd.Attack(Dmg2).FromMonster(this).WithNoAttackerAnim().Execute(null);
                 if (leftRoom != null)
                 {
                     await RunManager.Instance.EnterMapCoord(leftRoom.coord);
@@ -83,8 +83,8 @@ public class GreathornRhuul : AbstractSnowyMountainMonster
             "GORE_LEFT",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Skill_End", 0);
-                await DamageCmd.Attack(Dmg2).FromMonster(this).Execute(null);
+                await CreatureCmd.TriggerAnim(Creature, "Skill_End", 0.5f);
+                await DamageCmd.Attack(Dmg2).FromMonster(this).WithNoAttackerAnim().Execute(null);
                 await PowerCmd.Apply<RingingPower>(new ThrowingPlayerChoiceContext(), targets, 1, Creature, null);
             },
             new SingleAttackIntent(Dmg2),
@@ -94,8 +94,8 @@ public class GreathornRhuul : AbstractSnowyMountainMonster
             "ATTACK3",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Attack", 0);
-                await DamageCmd.Attack(Dmg2).FromMonster(this).Execute(null);
+                await CreatureCmd.TriggerAnim(Creature, "Skill_End", 0.5f);
+                await DamageCmd.Attack(Dmg2).FromMonster(this).WithNoAttackerAnim().Execute(null);
             },
             new SingleAttackIntent(Dmg2)
         );

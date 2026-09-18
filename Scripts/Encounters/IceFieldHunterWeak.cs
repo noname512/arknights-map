@@ -16,7 +16,7 @@ public class IceFieldHunterWeak : AbstractSnowyMountainEncounter
         new(
             RunHistoryIconPath: $"res://ArknightsMap/images/map/{GetType().Name}History.png",
             RunHistoryIconOutlinePath: $"res://ArknightsMap/images/map/{GetType().Name}History_outline.png",
-            EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
+            EncounterScenePath: $"res://ArknightsMap/scenes/encounters/SnowyMountainEncounter.tscn"
         );
 
     public override string CustomBgm => "event:/ArknightsMap/music/all_flames_returned_bat_1";
@@ -29,8 +29,9 @@ public class IceFieldHunterWeak : AbstractSnowyMountainEncounter
     // 如果你的场景太大，可以调整缩放。此外还可以使用 GetCameraOffset 来调整摄像机位置
     // public override float GetCameraScaling() => 0.8f;
 
-    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<IcefieldHunter>().ToMutable(), "6"), // 弱智Code-Formatter别折叠了
-        (ModelDb.Monster<IcefieldHunter>().ToMutable(), "7"), // 弱智Code-Formatter别折叠了
-    ];
+    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() =>
+        [
+            (ModelDb.Monster<IcefieldHunter>().ToMutable(), "6"), // 防折叠
+            (ModelDb.Monster<IcefieldHunter>().ToMutable(), "7"),
+        ];
 }

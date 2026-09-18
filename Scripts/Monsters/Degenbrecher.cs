@@ -59,8 +59,8 @@ public class Degenbrecher : AbstractSnowyMountainMonster
             "DOUBLE_HIT",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Attack", 0);
-                await DamageCmd.Attack(BasicDamage).WithHitCount(2).FromMonster(this).Execute(null);
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
+                await DamageCmd.Attack(BasicDamage).WithHitCount(2).WithNoAttackerAnim().FromMonster(this).Execute(null);
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
             },
             new MultiAttackIntent(BasicDamage, 2),

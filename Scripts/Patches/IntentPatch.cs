@@ -5,7 +5,7 @@ using MegaCrit.Sts2.Core.Nodes.Combat;
 
 namespace ArknightsMap.Scripts.Patches;
 
-class IgniteIntentPatch
+class IntentPatch
 {
     [HarmonyPatch(typeof(IntentAnimData), nameof(IntentAnimData.GetAnimationFrame))]
     public static class GetAnimationFramePatch
@@ -63,6 +63,8 @@ class IgniteIntentPatch
             if (animation == "arknights_map_intent_use_bullet")
                 return 1;
             if (animation == "arknights_map_intent_add_bullet")
+                return 1;
+            if (animation == "arknights_map_intent_move")
                 return 1;
             return IntentAnimData.GetAnimationFrameCount(animation);
         }

@@ -33,8 +33,9 @@ public class IcefieldBerserker : AbstractSnowyMountainMonster
             "ATTACK1",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Attack", 1.5f);
-                await DamageCmd.Attack(Dmg1).FromMonster(this).Execute(null);
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
+                await Cmd.Wait(1.0f);
+                await DamageCmd.Attack(Dmg1).FromMonster(this).WithNoAttackerAnim().Execute(null);
                 await CardPileCmd.AddToCombatAndPreview<Cold>(targets, PileType.Hand, 1, null);
             },
             new SingleAttackIntent(Dmg1)
@@ -43,8 +44,9 @@ public class IcefieldBerserker : AbstractSnowyMountainMonster
             "ATTACK2",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Attack", 1.5f);
-                await DamageCmd.Attack(Dmg2).FromMonster(this).Execute(null);
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
+                await Cmd.Wait(1.0f);
+                await DamageCmd.Attack(Dmg2).FromMonster(this).WithNoAttackerAnim().Execute(null);
                 await CardPileCmd.AddToCombatAndPreview<Cold>(targets, PileType.Hand, 1, null);
             },
             new SingleAttackIntent(Dmg2)
@@ -53,8 +55,9 @@ public class IcefieldBerserker : AbstractSnowyMountainMonster
             "ATTACK3UNBLOCK",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Attack", 1.5f);
-                await DamageCmd.Attack(Dmg3).FromMonster(this).Execute(null);
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
+                await Cmd.Wait(1.0f);
+                await DamageCmd.Attack(Dmg3).FromMonster(this).WithNoAttackerAnim().Execute(null);
                 await CreatureCmd.TriggerAnim(Creature, "Move", 0);
                 await CreaturePositions.Walk(Creature, -1);
             },
@@ -65,8 +68,9 @@ public class IcefieldBerserker : AbstractSnowyMountainMonster
             "ATTACK3BLOCK",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Attack", 1.5f);
-                await DamageCmd.Attack(Dmg3).FromMonster(this).Execute(null);
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
+                await Cmd.Wait(1.0f);
+                await DamageCmd.Attack(Dmg3).FromMonster(this).WithNoAttackerAnim().Execute(null);
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 8, Creature, null);
             },
             new SingleAttackIntent(Dmg3),

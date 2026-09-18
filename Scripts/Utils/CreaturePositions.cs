@@ -70,7 +70,11 @@ public sealed class CreaturePositions : HookedSingletonModel
 
     public override async Task AfterSideTurnEndLate(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (WindBlowTurn != 0 && CurrentCombatState!.PlayerCreatures.First().Player!.PlayerCombatState!.TurnNumber % WindBlowTurn == 0)
+        if (
+            side == CombatSide.Player
+            && WindBlowTurn != 0
+            && CurrentCombatState!.PlayerCreatures.First().Player!.PlayerCombatState!.TurnNumber % WindBlowTurn == 0
+        )
         {
             await BlowWind(WindBlowDirection);
         }
@@ -96,8 +100,10 @@ public sealed class CreaturePositions : HookedSingletonModel
             if (creaturesInPos.Count > 0)
             {
                 await CreatureCmd.Damage(new BlockingPlayerChoiceContext(), creaturesInPos, damage, null, null, null);
+                GD.Print($"Damage Done");
                 foreach (Creature c in creaturesInPos)
                 {
+                    GD.Print($"Start handling creature {c.Name}");
                     if (c.IsAlive)
                     {
                         if (c.IsPlayer)
@@ -117,9 +123,11 @@ public sealed class CreaturePositions : HookedSingletonModel
             }
             for (int pos = startPos; pos <= 9; pos++)
             {
+                GD.Print($"Start handling position {pos}");
                 List<Creature> creatures = GetCreaturesInPosition(pos);
                 foreach (Creature c in creatures)
                 {
+                    GD.Print($"Start handling creature {c.Name}");
                     Positions[c] = pos - 1;
                     allAffectedCreatures.Add(c);
                     allAffectedCreatures.AddRange(c.Pets);
@@ -133,8 +141,10 @@ public sealed class CreaturePositions : HookedSingletonModel
             if (creaturesInPos.Count > 0)
             {
                 await CreatureCmd.Damage(new BlockingPlayerChoiceContext(), creaturesInPos, damage, null, null, null);
+                GD.Print($"Damage Done");
                 foreach (Creature c in creaturesInPos)
                 {
+                    GD.Print($"Start handling creature {c.Name}");
                     if (c.IsAlive)
                     {
                         if (c.IsPlayer)
@@ -154,9 +164,11 @@ public sealed class CreaturePositions : HookedSingletonModel
             }
             for (int pos = startPos; pos >= 1; pos--)
             {
+                GD.Print($"Start handling position {pos}");
                 List<Creature> creatures = GetCreaturesInPosition(pos);
                 foreach (Creature c in creatures)
                 {
+                    GD.Print($"Start handling creature {c.Name}");
                     Positions[c] = pos + 1;
                     allAffectedCreatures.Add(c);
                     allAffectedCreatures.AddRange(c.Pets);
@@ -164,11 +176,13 @@ public sealed class CreaturePositions : HookedSingletonModel
             }
         }
 
+        GD.Print($"allAffectedCreatures: {allAffectedCreatures}");
         Tween tween = NCombatRoom.Instance!.CreateTween().SetParallel().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
         foreach (Creature c in allAffectedCreatures)
         {
+            GD.Print($"Start moving creature {c.Name}");
             NCreature creatureNode = NCombatRoom.Instance.GetCreatureNode(c)!;
-            tween.TweenProperty(creatureNode, "global_position:x", creatureNode.GlobalPosition.X + 300 * direction, 0.25);
+            tween.TweenProperty(creatureNode, "global_position:x", creatureNode.GlobalPosition.X + 200 * direction, 0.25);
         }
     }
 
@@ -181,16 +195,16 @@ public sealed class CreaturePositions : HookedSingletonModel
         switch (SaveManager.Instance.PrefsSave.FastMode)
         {
             case FastModeType.Instant:
-                moveTime = 0.25f;
+                moveTime = 0.5f;
                 break;
             case FastModeType.Fast:
-                moveTime = 0.5f;
+                moveTime = 1.0f;
                 break;
             default:
                 moveTime = 1.25f;
                 break;
         }
-        tween.TweenProperty(creatureNode, "global_position:x", creatureNode.GlobalPosition.X + 300 * direction, moveTime);
+        tween.TweenProperty(creatureNode, "global_position:x", creatureNode.GlobalPosition.X + 200 * direction, moveTime);
         await Cmd.Wait(moveTime);
     }
 
