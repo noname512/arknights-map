@@ -46,7 +46,7 @@ public class Snowchild : AbstractSnowyMountainMonster
                 Creature? c = CombatState.Creatures.FirstOrDefault(cr => cr.Monster is FluffySnowball && cr.IsAlive);
                 if (c != null)
                 {
-                    await CreatureCmd.Heal(c, Creature.MaxHp);
+                    await CreatureCmd.GainMaxHp(c, Creature.MaxHp);
                     await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), c, StrengthApply, Creature, null);
                     if (c.Monster is FluffySnowball fluffy)
                     {
