@@ -43,7 +43,7 @@ public class LowStrengthPower : ModPowerTemplate
         {
             Flash();
             counter += result.UnblockedDamage;
-            await PowerCmd.Apply<TemporaryStrengthPower>(choiceContext, Owner, -(counter / Amount), Owner, null);
+            await PowerCmd.Apply<DegenbrecherTempPower>(choiceContext, Owner, (counter / Amount), Owner, null);
             counter %= Amount;
         }
     }
