@@ -68,7 +68,7 @@ public class FrozenMountainBurdenbeast : AbstractSnowyMountainMonster
             "SLEEP",
             async targets =>
             {
-                if (Creature.GetPower<SleepPower>()?.Amount == 1)
+                if (Creature.GetPowerAmount<SleepPower>() == 1)
                 {
                     await CreatureCmd.TriggerAnim(Creature, "Awake", 0);
                 }
@@ -88,7 +88,7 @@ public class FrozenMountainBurdenbeast : AbstractSnowyMountainMonster
         attack2.FollowUpState = sleep;
 
         ConditionalBranchState conditionalBranchState = new ConditionalBranchState("SLEEP_CHECK");
-        conditionalBranchState.AddState(sleep, () => (Creature.GetPower<SleepPower>()?.Amount ?? 0) > 1);
+        conditionalBranchState.AddState(sleep, () => Creature.GetPowerAmount<SleepPower>() > 1);
         conditionalBranchState.AddState(attack1, () => true);
 
         awake.FollowUpState = attack1;

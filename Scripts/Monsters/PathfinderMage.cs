@@ -79,10 +79,7 @@ public class PathfinderMage : AbstractSankta
             {
                 await CreatureCmd.TriggerAnim(Creature, "Attack", 0.8f);
                 await Cmd.Wait(1.0f);
-                foreach (Creature c in targets)
-                {
-                    await PowerCmd.Apply<FrailPower>(new ThrowingPlayerChoiceContext(), c, 2, Creature, null);
-                }
+                await PowerCmd.Apply<FrailPower>(new ThrowingPlayerChoiceContext(), targets, 2, Creature, null);
             },
             [new DebuffIntent()]
         );

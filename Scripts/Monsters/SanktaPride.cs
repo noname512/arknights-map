@@ -28,7 +28,7 @@ public class SanktaPride : AbstractSankta
 
     public override async Task AfterAddedToRoom()
     {
-        await PowerCmd.Apply<PridePower>(new ThrowingPlayerChoiceContext(), Creature, 4, Creature, null);
+        await PowerCmd.Apply<EyePower>(new ThrowingPlayerChoiceContext(), Creature, 4, Creature, null);
 
         await PowerCmd.Apply<SanktaCreaturePower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
     }
@@ -46,11 +46,8 @@ public class SanktaPride : AbstractSankta
             async targets =>
             {
                 await CreatureCmd.TriggerAnim(Creature, "Skill", 0.8f);
-                foreach (Creature c in targets)
-                {
-                    await PowerCmd.Apply<PrayPower>(new ThrowingPlayerChoiceContext(), c, -3, c, null);
-                    await PowerCmd.Apply<LoseEnergyNextTurnPower>(new ThrowingPlayerChoiceContext(), c, 1, c, null);
-                }
+                await PowerCmd.Apply<PrayPower>(new ThrowingPlayerChoiceContext(), targets, -3, Creature, null);
+                await PowerCmd.Apply<LoseEnergyNextTurnPower>(new ThrowingPlayerChoiceContext(), targets, 1, Creature, null);
             },
             new DebuffIntent()
         );

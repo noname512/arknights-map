@@ -44,10 +44,7 @@ public class SanktaStatue : AbstractSankta
             async targets =>
             {
                 await DamageCmd.Attack(Damage).FromMonster(this).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
-                foreach (Creature c in targets)
-                {
-                    await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), c, 2, c, null);
-                }
+                await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), targets, 2, Creature, null);
             },
             [new SingleAttackIntent(Damage), new DebuffIntent()]
         );

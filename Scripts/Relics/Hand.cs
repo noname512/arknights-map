@@ -40,7 +40,7 @@ public sealed class Hand : ModRelicTemplate
             Flash();
             foreach (Creature c in Owner.Creature.CombatState!.HittableEnemies)
             {
-                await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), c, card.DynamicVars.Damage.BaseValue, ValueProp.Unpowered, Owner.Creature);
+                await CreatureCmd.Damage(choiceContext, c, card.DynamicVars.Damage.BaseValue, ValueProp.Unpowered, Owner.Creature);
             }
             Status = RelicStatus.Disabled;
         }

@@ -51,7 +51,7 @@ public class DublinnCompanionShadowblade : AbstractWildsMonster
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
-        int repeatCount() => Creature.HasPower<CompanionAtkPower>() ? Creature.GetPower<CompanionAtkPower>()!.Amount : 2;
+        int repeatCount() => Creature.HasPower<CompanionAtkPower>() ? Creature.GetPowerAmount<CompanionAtkPower>() : 2;
         MoveState attack1 = new MoveState(
             "ATTACK1",
             async targets =>
