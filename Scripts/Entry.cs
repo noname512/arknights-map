@@ -21,6 +21,7 @@ public class Entry
 {
     public const string ModId = "ArknightsMap";
     public static readonly Logger Logger = RitsuLibFramework.CreateLogger(ModId);
+    public static bool isDemo = true;
 
     public static void Init()
     {
@@ -30,10 +31,20 @@ public class Entry
         RitsuLibFramework.EnsureGodotScriptsRegistered(assembly, Logger);
         // 自动注册内容
         ModTypeDiscoveryHub.RegisterModAssembly(ModId, assembly);
-
+        /* RitsuLibFramework.CreateContentPack(ModId)
+            .ActEnterForce<Wilds>(
+                1,
+                priority: 100,
+                eligibility: ctx => true)
+            .ActEnterWeightedPool(1)
+            .ActEnterWeightedPoolCandidate<Wilds>(1, ctx => true, ctx => 1) 
+            // 必定进入Wilds */
         RitsuLibFramework.CreateContentPack(ModId).ActEnterWeightedPool(1).ActEnterWeightedPoolCandidate<Wilds>(1, ctx => true, weight => 99999).Apply();
-        RitsuLibFramework.CreateContentPack(ModId).ActEnterWeightedPool(2).ActEnterWeightedPoolCandidate<SnowyMountain>(2, ctx => true, weight => 0).Apply();
-        RitsuLibFramework.CreateContentPack(ModId).ActEnterWeightedPool(2).ActEnterWeightedPoolCandidate<Laterano>(2, ctx => true, weight => 99999).Apply();
+        if (isDemo)
+        {
+            RitsuLibFramework.CreateContentPack(ModId).ActEnterWeightedPool(2).ActEnterWeightedPoolCandidate<SnowyMountain>(2, ctx => true, weight => 0).Apply();
+            RitsuLibFramework.CreateContentPack(ModId).ActEnterWeightedPool(2).ActEnterWeightedPoolCandidate<Laterano>(2, ctx => true, weight => 99999).Apply();
+        }
         
         using (RitsuLibFramework.BeginModDataRegistration(ModId))
         {

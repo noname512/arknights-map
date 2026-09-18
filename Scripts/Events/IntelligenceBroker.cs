@@ -13,7 +13,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Events;
 
-[RegisterActEvent(typeof(Wilds))]
+// [RegisterActEvent(typeof(Wilds))]
 public sealed class IntelligenceBroker : ModEventTemplate
 {
     public override EventAssetProfile AssetProfile => new(InitialPortraitPath: $"res://ArknightsMap/images/events/{GetType().Name}.png");
