@@ -16,7 +16,7 @@ public class DegenbrecherBoss : AbstractSnowyMountainEncounter
         new(
             RunHistoryIconPath: $"res://ArknightsMap/images/map/AFRBossHistory.png",
             RunHistoryIconOutlinePath: $"res://ArknightsMap/images/map/AFRBossHistory_outline.png",
-            EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn"
+            EncounterScenePath: $"res://ArknightsMap/scenes/encounters/SnowyMountainEncounter.tscn"
             /*
             RunHistoryIconPath: $"res://ArknightsMap/images/map/{GetType().Name}History.png",
             RunHistoryIconOutlinePath: $"res://ArknightsMap/images/map/{GetType().Name}History_outline.png",

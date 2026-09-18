@@ -28,6 +28,7 @@ public sealed class SnowyMountain : ModActTemplate
     public override string ChestOpenSfx => "event:/sfx/ui/treasure/treasure_act3";
     public override string AmbientSfx => "event:/sfx/ambience/act3_ambience";
     protected override int BaseNumberOfRooms => 14;
+    protected override int NumberOfWeakEncounters => 2;
 
     public override string? CustomBackgroundScenePath => "res://ArknightsMap/scenes/acts/SnowyMountain/snowy_mountain_background.tscn";
     public override string? CustomBackgroundLayersDirectoryPath => "res://ArknightsMap/scenes/acts/SnowyMountain/layers";

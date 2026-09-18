@@ -25,7 +25,7 @@ public class IcefieldHunter : AbstractSnowyMountainMonster
 
     public override async Task AfterAddedToRoom()
     {
-        await PowerCmd.Apply<PrecisionHunting>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
+        await PowerCmd.Apply<CloseQuartersCombatPower>(new ThrowingPlayerChoiceContext(), Creature, 12, Creature, null);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()

@@ -26,6 +26,11 @@ public class IcefieldBerserker : AbstractSnowyMountainMonster
     private int Dmg2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 12, 10);
     private int Dmg3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 17, 14);
 
+    public override Task BeforeCombatStart()
+    {
+        return base.BeforeCombatStart();
+    }
+
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();

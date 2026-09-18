@@ -156,5 +156,8 @@
     "ARKNIGHTS_MAP_POWER_CLOSE_QUARTERS_COMBAT_POWER.description": "当这个敌人与你[gold]阻挡[/gold]时，造成的攻击伤害增加。",
     "ARKNIGHTS_MAP_POWER_PRECISION_HUNTING.title": "精准狩猎",
     "ARKNIGHTS_MAP_POWER_PRECISION_HUNTING.smartDescription": "每次命中时，如果伤害未被完全格挡，则随机从卡组中移除一张可以获得格挡的卡牌。",
-    "ARKNIGHTS_MAP_POWER_PRECISION_HUNTING.description": "每次命中时，如果伤害未被完全格挡，则随机从卡组中移除一张可以获得格挡的卡牌。"
+    "ARKNIGHTS_MAP_POWER_PRECISION_HUNTING.description": "每次命中时，如果伤害未被完全格挡，则随机从卡组中移除一张可以获得格挡的卡牌。",
+    "ARKNIGHTS_MAP_POWER_LOW_STRENGTH_POWER.title": "脱力",
+    "ARKNIGHTS_MAP_POWER_LOW_STRENGTH_POWER.smartDescription": "[gold]{OwnerName}[/gold]每受到[blue]{Amount}[/blue]点伤害，本回合中失去[blue]1[/blue]点[gold]力量[/gold]。",
+    "ARKNIGHTS_MAP_POWER_LOW_STRENGTH_POWER.description": "这个敌人每受到一定伤害，失去[blue]1[/blue]点[gold]力量[/gold]。"
 }
