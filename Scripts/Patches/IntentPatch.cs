@@ -30,6 +30,7 @@ class IntentPatch
             if (animation == "arknights_map_intent_move")
             {
                 __result = "res://ArknightsMap/images/util/MoveIntent.tres";
+                return false;
             }
             return true;
         }
