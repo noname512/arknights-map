@@ -1,7 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://d30ffkptpgbpv"]
 
-[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_v77x8"]
 [ext_resource type="Texture2D" uid="uid://yci14ydgjl5b" path="res://ArknightsMap/images/monsters/Fireball/Fireball.png" id="1_g7phf"]
+[ext_resource type="Script" uid="uid://dwe1rbe5v4g53" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_v77x8"]
 
 [node name="Fireball" type="Node2D"]
 script = ExtResource("1_v77x8")
@@ -11,7 +11,7 @@ metadata/_edit_lock_ = true
 [node name="Visuals" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(29.999998, -70)
-scale = Vector2(0.60553746, 0.60553746)
+scale = Vector2(0.6055375, 0.6055375)
 texture = ExtResource("1_g7phf")
 
 [node name="Bounds" type="Control" parent="."]

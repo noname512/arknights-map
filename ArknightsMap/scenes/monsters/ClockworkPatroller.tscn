@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://cacpuiy05uef3"]
 
-[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_v77x8"]
+[ext_resource type="Script" uid="uid://dwe1rbe5v4g53" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_v77x8"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://c28wim0b6jh3g" path="res://ArknightsMap/images/monsters/ClockworkPatroller/ClockworkPatroller.tres" id="ssdr"]
 
 [node name="ClockworkPatroller" type="Node2D"]
@@ -32,4 +32,3 @@ position = Vector2(0, -155)
 [node name="CenterPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(0, -50)
-

@@ -29,7 +29,7 @@ public sealed class SnowyMountain : ModActTemplate
     public override string AmbientSfx => "event:/sfx/ambience/act3_ambience";
     protected override int BaseNumberOfRooms => 14;
 
-    public override string? CustomBackgroundScenePath => "res://ArknightsMap/scenes/acts/SnowyMountain/snowy_mountain.tscn";
+    public override string? CustomBackgroundScenePath => "res://ArknightsMap/scenes/acts/SnowyMountain/snowy_mountain_background.tscn";
     public override string? CustomBackgroundLayersDirectoryPath => "res://ArknightsMap/scenes/acts/SnowyMountain/layers";
     public override string? CustomMapTopBgPath => "res://images/packed/map/map_bgs/hive/map_top_hive.png";
     public override string? CustomMapMidBgPath => "res://images/packed/map/map_bgs/hive/map_middle_hive.png";
@@ -38,6 +38,7 @@ public sealed class SnowyMountain : ModActTemplate
 
     public override int Index => 2;
     public override bool IsDefault => false;
+
     public override bool IsUnlocked(UnlockState unlockState) => false;
 
     public override IEnumerable<EventModel> AllEvents =>

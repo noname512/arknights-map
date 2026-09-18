@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dfqulqqes8yor"]
 
-[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_ef3vg"]
+[ext_resource type="Script" uid="uid://dwe1rbe5v4g53" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_ef3vg"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://b1sjgrcjdl3d0" path="res://ArknightsMap/images/monsters/SanktaStatue/SanktaStatue.tres" id="1_mielb"]
 
 [node name="SanktaStatue" type="Node2D"]

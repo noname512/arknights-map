@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bep0opu767qxc"]
 
 [ext_resource type="SpineSkeletonDataResource" uid="uid://bshivoxd31026" path="res://ArknightsMap/images/monsters/Fortuna/Fortuna.tres" id="1_bbmri"]
-[ext_resource type="Script" uid="uid://ci6wcx15roiya" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_k2mom"]
+[ext_resource type="Script" uid="uid://dwe1rbe5v4g53" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_k2mom"]
 
 [node name="Fortuna" type="Node2D"]
 scale = Vector2(1.5, 1.5)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dhs7ocpeblod"]
 
-[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_vrkph"]
+[ext_resource type="Script" uid="uid://dwe1rbe5v4g53" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_vrkph"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://dpluvo7eriph7" path="res://ArknightsMap/images/monsters/SanktaPride/SanktaPride.tres" id="2_hk21m"]
 
 [node name="SanktaPride" type="Node2D"]

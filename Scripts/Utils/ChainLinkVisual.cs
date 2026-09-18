@@ -2,7 +2,7 @@ using Godot;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 
-namespace ArknightsMap.Scenes.Monsters;
+namespace ArknightsMap.Scripts.Utils;
 
 public partial class ChainLinkVisual : Node2D
 {
