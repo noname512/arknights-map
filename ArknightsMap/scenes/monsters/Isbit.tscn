@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://b7vfnj2ma0uim"]
 
-[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_v77x8"]
+[ext_resource type="Script" uid="uid://dwe1rbe5v4g53" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_v77x8"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://cysiboniwinja" path="res://ArknightsMap/images/monsters/Isbit/Isbit.tres" id="ssdr"]
 
 [node name="Isbit" type="Node2D"]
@@ -33,4 +33,3 @@ position = Vector2(0, -255)
 [node name="CenterPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(0, -100)
-

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c68c27r0iaowf"]
 
-[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_0b7r6"]
+[ext_resource type="Script" uid="uid://dwe1rbe5v4g53" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_0b7r6"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://bq81klm08iyhy" path="res://ArknightsMap/images/monsters/OpForGun/OpForGun.tres" id="1_2eko4"]
 
 [node name="OpForGun" type="Node2D"]

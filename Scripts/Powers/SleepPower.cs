@@ -14,6 +14,8 @@ public sealed class SleepPower : ModPowerTemplate
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;
+    public override PowerAssetProfile AssetProfile =>
+        new(IconPath: $"res://images/powers/asleep_power.png", BigIconPath: $"res://images/powers/asleep_power.png");
 
     public override async Task AfterDamageReceived(
         PlayerChoiceContext choiceContext,

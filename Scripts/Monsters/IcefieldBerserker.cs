@@ -1,4 +1,5 @@
 using ArknightsMap.Scripts.Cards;
+using ArknightsMap.Scripts.Powers;
 using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
@@ -26,6 +27,11 @@ public class IcefieldBerserker : AbstractSnowyMountainMonster
     private int Dmg2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 12, 10);
     private int Dmg3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 17, 14);
 
+    public override async Task AfterAddedToRoom()
+    {
+        await PowerCmd.Apply<CloseQuartersCombatPower>(new ThrowingPlayerChoiceContext(), Creature, 12, Creature, null);
+    }
+
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
@@ -33,8 +39,9 @@ public class IcefieldBerserker : AbstractSnowyMountainMonster
             "ATTACK1",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Attack", 1.5f);
-                await DamageCmd.Attack(Dmg1).FromMonster(this).Execute(null);
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
+                await Cmd.Wait(1.0f);
+                await DamageCmd.Attack(Dmg1).FromMonster(this).WithNoAttackerAnim().Execute(null);
                 await CardPileCmd.AddToCombatAndPreview<Cold>(targets, PileType.Hand, 1, null);
             },
             new SingleAttackIntent(Dmg1)
@@ -43,8 +50,9 @@ public class IcefieldBerserker : AbstractSnowyMountainMonster
             "ATTACK2",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Attack", 1.5f);
-                await DamageCmd.Attack(Dmg2).FromMonster(this).Execute(null);
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
+                await Cmd.Wait(1.0f);
+                await DamageCmd.Attack(Dmg2).FromMonster(this).WithNoAttackerAnim().Execute(null);
                 await CardPileCmd.AddToCombatAndPreview<Cold>(targets, PileType.Hand, 1, null);
             },
             new SingleAttackIntent(Dmg2)
@@ -53,8 +61,9 @@ public class IcefieldBerserker : AbstractSnowyMountainMonster
             "ATTACK3UNBLOCK",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Attack", 1.5f);
-                await DamageCmd.Attack(Dmg3).FromMonster(this).Execute(null);
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
+                await Cmd.Wait(1.0f);
+                await DamageCmd.Attack(Dmg3).FromMonster(this).WithNoAttackerAnim().Execute(null);
                 await CreatureCmd.TriggerAnim(Creature, "Move", 0);
                 await CreaturePositions.Walk(Creature, -1);
             },
@@ -65,8 +74,9 @@ public class IcefieldBerserker : AbstractSnowyMountainMonster
             "ATTACK3BLOCK",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Attack", 1.5f);
-                await DamageCmd.Attack(Dmg3).FromMonster(this).Execute(null);
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
+                await Cmd.Wait(1.0f);
+                await DamageCmd.Attack(Dmg3).FromMonster(this).WithNoAttackerAnim().Execute(null);
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 8, Creature, null);
             },
             new SingleAttackIntent(Dmg3),

@@ -17,7 +17,7 @@ public sealed class UnAnswered : ModRelicTemplate
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1)];
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromCard<Confused>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromCard<Perplexed>()];
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -41,7 +41,7 @@ public sealed class UnAnswered : ModRelicTemplate
     public override Task AfterObtained()
     {
         Flash();
-        CardPileCmd.AddCurseToDeck<Confused>(Owner);
+        CardPileCmd.AddCurseToDeck<Perplexed>(Owner);
         return Task.CompletedTask;
     }
 }

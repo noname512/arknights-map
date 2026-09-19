@@ -35,7 +35,7 @@ public class IcefieldHunter : AbstractSnowyMountainMonster
             "ATTACK1",
             async targets =>
             {
-                await DamageCmd.Attack(Dmg1).FromMonster(this).Execute(null);
+                await DamageCmd.Attack(Dmg1).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null);
             },
             new SingleAttackIntent(Dmg1)
         );
@@ -43,7 +43,7 @@ public class IcefieldHunter : AbstractSnowyMountainMonster
             "ATTACK2",
             async targets =>
             {
-                await DamageCmd.Attack(Dmg1).FromMonster(this).Execute(null);
+                await DamageCmd.Attack(Dmg1).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null);
             },
             new SingleAttackIntent(Dmg1)
         );
@@ -52,10 +52,14 @@ public class IcefieldHunter : AbstractSnowyMountainMonster
             "ATTACK3",
             async targets =>
             {
-                await DamageCmd.Attack(Dmg2).WithHitCount(2).FromMonster(this).Execute(null);
+                await DamageCmd.Attack(Dmg2).WithHitCount(2).FromMonster(this).WithAttackerAnim("Attack", 0.5f).Execute(null);
             },
             new MultiAttackIntent(Dmg2, 2)
         );
+        ConditionalBranchState conditionalBranchState = new ConditionalBranchState("INIT");
+
+        conditionalBranchState.AddState(attack1, () => Creature.SlotName == "6");
+        conditionalBranchState.AddState(attack2, () => true);
 
         attack1.FollowUpState = attack2;
         attack2.FollowUpState = charge;
@@ -66,8 +70,9 @@ public class IcefieldHunter : AbstractSnowyMountainMonster
         list.Add(attack2);
         list.Add(charge);
         list.Add(attack3);
+        list.Add(conditionalBranchState);
 
-        return new MonsterMoveStateMachine(list, Creature.SlotName == "6" ? attack2 : attack1);
+        return new MonsterMoveStateMachine(list, conditionalBranchState);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

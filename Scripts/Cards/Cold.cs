@@ -11,7 +11,7 @@ namespace ArknightsMap.Scripts.Cards;
 [RegisterCard(typeof(StatusCardPool))]
 public class Cold : ModCardTemplate
 {
-    private const int energyCost = -1;
+    private const int energyCost = 0;
     private const CardType type = CardType.Status;
     private const CardRarity rarity = CardRarity.Status;
     private const TargetType targetType = TargetType.Self;
@@ -28,7 +28,7 @@ public class Cold : ModCardTemplate
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Unplayable, CardKeyword.Ethereal];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
 
     public Cold()
         : base(energyCost, type, rarity, targetType) { }
@@ -51,6 +51,16 @@ public class Cold : ModCardTemplate
             return false;
         }
         if (card.Owner != Owner)
+        {
+            return false;
+        }
+
+        if (card == this)
+        {
+            return false;
+        }
+
+        if (this.Pile?.Type != PileType.Hand)
         {
             return false;
         }

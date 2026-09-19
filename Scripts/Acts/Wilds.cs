@@ -51,7 +51,7 @@ public sealed class Wilds : ModActTemplate
             ModelDb.Event<TheLeaderOfDublinn>(), // 深池的“领袖”
             ModelDb.Event<OverlookingNasaoirsi>(), // 俯瞰纳斯尔纱
             ModelDb.Event<HaystackMidnightTalks>(), // 草垛夜话
-            ModelDb.Event<IntelligenceBroker>(), // 情报贩卖商
+            // ModelDb.Event<IntelligenceBroker>(), // 情报贩卖商
             ModelDb.Event<ChanceEncounterWithCannot>(), // 偶遇坎诺特
         };
 

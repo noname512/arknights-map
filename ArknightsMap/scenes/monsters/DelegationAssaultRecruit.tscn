@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://dfs3s2g0r7sgc"]
 
-[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_v77x8"]
+[ext_resource type="Script" uid="uid://dwe1rbe5v4g53" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_v77x8"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://hxh8d7pkcpa1" path="res://ArknightsMap/images/monsters/DelegationAssaultRecruit/DelegationAssaultRecruit.tres" id="ssdr"]
 
 [node name="DelegationAssaultRecruit" type="Node2D"]
@@ -32,4 +32,3 @@ position = Vector2(0, -235)
 [node name="CenterPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(0, -90)
-

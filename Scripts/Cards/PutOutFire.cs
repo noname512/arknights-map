@@ -61,7 +61,7 @@ public class PutOutFire : ModCardTemplate
         [
             HoverTipFactory.FromKeyword(CardKeyword.Ethereal),
             HoverTipFactory.FromKeyword(CardKeyword.Exhaust),
-            HoverTipFactory.FromKeyword(ReedBedKeyword.Keyword),
+            Entry.MyHoverTip("REED_BED"),
             HoverTipFactory.FromPower<FlamingDamagePower>(),
             HoverTipFactory.FromPower<VulnerablePower>(),
         ];

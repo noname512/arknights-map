@@ -21,7 +21,7 @@ public sealed class CustomMade : ModRelicTemplate
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromKeyword(CustomKeyword.Keyword)];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [Entry.MyHoverTip("CUSTOM")];
 
     public override RelicAssetProfile AssetProfile =>
         new(

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://bl6wjjma0ltj5"]
 
-[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_v77x8"]
+[ext_resource type="Script" uid="uid://dwe1rbe5v4g53" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_v77x8"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://bjov6kyh4qg8q" path="res://ArknightsMap/images/monsters/TreeShield/TreeShield.tres" id="ssdr"]
 
 [node name="TreeShield" type="Node2D"]

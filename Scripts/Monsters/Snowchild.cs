@@ -16,8 +16,8 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class Snowchild : AbstractSnowyMountainMonster
 {
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 15, 13);
-    public override int MaxInitialHp => MinInitialHp;
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 22, 18);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 25, 23);
 
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
     private int Dmg => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 4, 3);
@@ -46,7 +46,7 @@ public class Snowchild : AbstractSnowyMountainMonster
                 Creature? c = CombatState.Creatures.FirstOrDefault(cr => cr.Monster is FluffySnowball && cr.IsAlive);
                 if (c != null)
                 {
-                    await CreatureCmd.Heal(c, Creature.MaxHp);
+                    await CreatureCmd.GainMaxHp(c, Creature.MaxHp);
                     await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), c, StrengthApply, Creature, null);
                     if (c.Monster is FluffySnowball fluffy)
                     {

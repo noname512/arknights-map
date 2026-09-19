@@ -45,16 +45,26 @@
     "ARKNIGHTS_MAP_ENCOUNTER_END_POINT_ENCOUNTER.loss": "{character}迷失在了道路的[gold]{encounter}[/gold]。",
     "ARKNIGHTS_MAP_ENCOUNTER_DUBLINN_FLAMECHASERS.title": "深池逐火卫队",
     "ARKNIGHTS_MAP_ENCOUNTER_DUBLINN_FLAMECHASERS.loss": "{character}被[gold]{encounter}[/gold]的人海淹没了。",
-
     "----------雪山----------": "-----------------",
-  
+    "ARKNIGHTS_MAP_ENCOUNTER_ICEFIELD_HUNTER_WEAK.title": "冰原猎人",
+    "ARKNIGHTS_MAP_ENCOUNTER_ICEFIELD_HUNTER_WEAK.loss": "",
+    "ARKNIGHTS_MAP_ENCOUNTER_FLUFFY_SNOWBALL_WEAK.title": "蓬松雪球",
+    "ARKNIGHTS_MAP_ENCOUNTER_FLUFFY_SNOWBALL_WEAK.loss": "",
+    "ARKNIGHTS_MAP_ENCOUNTER_FROZEN_MOUNTAIN_BURDENBEAST_WEAK.title": "沉眠高山驮兽",
+    "ARKNIGHTS_MAP_ENCOUNTER_FROZEN_MOUNTAIN_BURDENBEAST_WEAK.loss": "",
+    "ARKNIGHTS_MAP_ENCOUNTER_ICEFIELD_BERSERKER_NORMAL.title": "冰原狂战士",
+    "ARKNIGHTS_MAP_ENCOUNTER_ICEFIELD_BERSERKER_NORMAL.loss": "",
+    "ARKNIGHTS_MAP_ENCOUNTER_ISBIT_NORMAL.title": "伊斯贝塔",
+    "ARKNIGHTS_MAP_ENCOUNTER_ISBIT_NORMAL.loss": "",
     "ARKNIGHTS_MAP_ENCOUNTER_TSCHAGGATTAS_ELITE.title": "山雪鬼小队",
     "ARKNIGHTS_MAP_ENCOUNTER_TSCHAGGATTAS_ELITE.loss": "{character}成为了[gold]山雪鬼[/gold]的训练耗材。",
+    "ARKNIGHTS_MAP_ENCOUNTER_GREATHORN_RHUUL_ELITE.title": "巨角卢鲁",
+    "ARKNIGHTS_MAP_ENCOUNTER_GREATHORN_RHUUL_ELITE.loss": "",
+    "ARKNIGHTS_MAP_ENCOUNTER_JET_CANISTER_ELITE.title": "“喷爆罐”",
+    "ARKNIGHTS_MAP_ENCOUNTER_JET_CANISTER_ELITE.loss": "",
     "ARKNIGHTS_MAP_ENCOUNTER_DEGENBRECHER_BOSS.title": "锏的训练场",
     "ARKNIGHTS_MAP_ENCOUNTER_DEGENBRECHER_BOSS.loss": "{character}未能获得[gold]锏[/gold]的认可。",
-
     "----------拉特兰---------": "-----------------",
-
     "ARKNIGHTS_MAP_ENCOUNTER_SANKTA_BLADE.title": "精英圣堂剑士",
     "ARKNIGHTS_MAP_ENCOUNTER_SANKTA_BLADE.loss": "{character}被[gold]{encounter}[/gold]击败。",
     "ARKNIGHTS_MAP_ENCOUNTER_THREE_SANKTAS.title": "护卫圣堂小队",
@@ -95,6 +105,4 @@
     "ARKNIGHTS_MAP_ENCOUNTER_OP_FOR_GUN_BOSS.loss": "{character}被淹没于源石遍布的圣堂中。",
     "ARKNIGHTS_MAP_ENCOUNTER_THE_SAINT_BOSS.title": "“圣徒”",
     "ARKNIGHTS_MAP_ENCOUNTER_THE_SAINT_BOSS.loss": "{character}在PCS系统的清洗下同化。"
-    
-
 }

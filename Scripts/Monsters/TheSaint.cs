@@ -104,15 +104,15 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
-        MoveState GiveConfused = new MoveState(
-            "GIVE_CONFUSED",
+        MoveState GivePerplexed = new MoveState(
+            "GIVE_PERPLEXED",
             async targets =>
             {
                 foreach (Creature p in targets)
                 {
-                    await CardPileCmd.AddToCombatAndPreview<Confused>(p, PileType.Draw, 1, null, CardPilePosition.Random);
-                    await CardPileCmd.AddToCombatAndPreview<Confused>(p, PileType.Discard, 1, null, CardPilePosition.Random);
-                    await CardPileCmd.AddToCombatAndPreview<Confused>(p, PileType.Hand, 1, null, CardPilePosition.Random);
+                    await CardPileCmd.AddToCombatAndPreview<Perplexed>(p, PileType.Draw, 1, null, CardPilePosition.Random);
+                    await CardPileCmd.AddToCombatAndPreview<Perplexed>(p, PileType.Discard, 1, null, CardPilePosition.Random);
+                    await CardPileCmd.AddToCombatAndPreview<Perplexed>(p, PileType.Hand, 1, null, CardPilePosition.Random);
                 }
             },
             new StatusIntent(3)
@@ -276,7 +276,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
             [new BuffIntent()]
         );
 
-        list.Add(GiveConfused);
+        list.Add(GivePerplexed);
         list.Add(HeavyAttackPhase1);
         list.Add(HeavyAttackPhase2);
         list.Add(MultiAttackPhase1);
@@ -288,7 +288,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
         list.Add(Revive);
         list.Add(Fly);
 
-        GiveConfused.FollowUpState = HeavyAttackPhase1;
+        GivePerplexed.FollowUpState = HeavyAttackPhase1;
         HeavyAttackPhase1.FollowUpState = SummonPhase1;
 
         SummonPhase1.FollowUpState = MultiAttackPhase1;
@@ -302,7 +302,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
         MultiAttackPhase2.FollowUpState = AttackDebuffPhase2;
         AttackDebuffPhase2.FollowUpState = SummonPhase2;
 
-        return new MonsterMoveStateMachine(list, GiveConfused);
+        return new MonsterMoveStateMachine(list, GivePerplexed);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

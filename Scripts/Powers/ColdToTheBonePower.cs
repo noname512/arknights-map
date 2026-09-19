@@ -31,9 +31,9 @@ public class ColdToTheBonePower : ModPowerTemplate
     {
         if (dealer == Owner && result.UnblockedDamage > 0)
         {
-            MyVigorPower power = ModelDb.Power<MyVigorPower>();
+            MyVigorPower power = (MyVigorPower)ModelDb.Power<MyVigorPower>().ToMutable();
             power.Target = target;
-            await PowerCmd.Apply(choiceContext, power, Owner, 1, Owner, null);
+            await PowerCmd.Apply(choiceContext, power, Owner, result.UnblockedDamage, Owner, null);
         }
     }
 }

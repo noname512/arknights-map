@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dt1sb24u6gxsd"]
 
 [ext_resource type="SpineSkeletonDataResource" uid="uid://14pmsp6fs386" path="res://ArknightsMap/images/monsters/Oren/Oren.tres" id="1_hfk4o"]
-[ext_resource type="Script" uid="uid://ci6wcx15roiya" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="1_xdyo1"]
+[ext_resource type="Script" uid="uid://dwe1rbe5v4g53" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_xdyo1"]
 
 [node name="Oren" type="Node2D"]
 scale = Vector2(1.5, 1.5)

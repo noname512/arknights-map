@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://3qg4m8jrrwjs"]
 
 [ext_resource type="SpineSkeletonDataResource" uid="uid://6mhtf2rb05kq" path="res://ArknightsMap/images/monsters/OpCar/OpCar.tres" id="1_hugbb"]
-[ext_resource type="Script" uid="uid://6l5neu5y2et3" path="res://Scripts/Monsters/AbstractSanktaVisuals.cs" id="2_ikxy7"]
+[ext_resource type="Script" uid="uid://dwe1rbe5v4g53" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="2_ikxy7"]
 
 [node name="OpCar" type="Node2D"]
 script = ExtResource("2_ikxy7")

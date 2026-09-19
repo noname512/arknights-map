@@ -28,8 +28,9 @@ public sealed class SnowyMountain : ModActTemplate
     public override string ChestOpenSfx => "event:/sfx/ui/treasure/treasure_act3";
     public override string AmbientSfx => "event:/sfx/ambience/act3_ambience";
     protected override int BaseNumberOfRooms => 14;
+    protected override int NumberOfWeakEncounters => 2;
 
-    public override string? CustomBackgroundScenePath => "res://ArknightsMap/scenes/acts/SnowyMountain/snowy_mountain.tscn";
+    public override string? CustomBackgroundScenePath => "res://ArknightsMap/scenes/acts/SnowyMountain/snowy_mountain_background.tscn";
     public override string? CustomBackgroundLayersDirectoryPath => "res://ArknightsMap/scenes/acts/SnowyMountain/layers";
     public override string? CustomMapTopBgPath => "res://images/packed/map/map_bgs/hive/map_top_hive.png";
     public override string? CustomMapMidBgPath => "res://images/packed/map/map_bgs/hive/map_middle_hive.png";
@@ -38,6 +39,7 @@ public sealed class SnowyMountain : ModActTemplate
 
     public override int Index => 2;
     public override bool IsDefault => false;
+
     public override bool IsUnlocked(UnlockState unlockState) => false;
 
     public override IEnumerable<EventModel> AllEvents =>
@@ -48,30 +50,22 @@ public sealed class SnowyMountain : ModActTemplate
 
     public override IEnumerable<AncientEventModel> AllAncients => new AncientEventModel[] { ModelDb.AncientEvent<Pramanix>() };
 
-    public override IEnumerable<EncounterModel> BossDiscoveryOrder => new EncounterModel[] { ModelDb.Encounter<MandragoraBoss>() };
+    public override IEnumerable<EncounterModel> BossDiscoveryOrder => new EncounterModel[] { ModelDb.Encounter<DegenbrecherBoss>() };
 
     public override IEnumerable<EncounterModel> GenerateAllEncounters() =>
         new EncounterModel[]
         {
-            ModelDb.Encounter<BurnTheHaystacks>(),
-            ModelDb.Encounter<ScorchingDream>(),
-            ModelDb.Encounter<DublinnPhalanx>(),
-            ModelDb.Encounter<DublinnPhalanxWeak>(),
-            ModelDb.Encounter<PatrollingFoliageNormal>(),
-            ModelDb.Encounter<DublinnCompanion>(),
-            ModelDb.Encounter<MandragoraBoss>(),
-            ModelDb.Encounter<ScaldingEarth>(),
-            ModelDb.Encounter<ApparitionalWaves>(),
-            ModelDb.Encounter<ComingFire>(),
-            ModelDb.Encounter<EndOfTheNight>(),
-            ModelDb.Encounter<AFRBoss>(),
-            ModelDb.Encounter<FloralGarland>(),
-            ModelDb.Encounter<LampBurner>(),
-            ModelDb.Encounter<HerFlame>(),
-            ModelDb.Encounter<MarchOfTheDead>(),
-            ModelDb.Encounter<BurningWeeds>(),
-            ModelDb.Encounter<DublinnFlamerazerNormal>(),
-            ModelDb.Encounter<AshyMarsh>(),
+            ModelDb.Encounter<FluffySnowballWeak>(),
+            ModelDb.Encounter<IceFieldHunterWeak>(),
+            ModelDb.Encounter<FrozenMountainBurdenbeastWeak>(),
+            
+            ModelDb.Encounter<IcefieldBerserkerNormal>(),
+            
+            ModelDb.Encounter<TschaggattasElite>(),
+            ModelDb.Encounter<GreathornRhuulElite>(),
+            ModelDb.Encounter<JetCanisterElite>(),
+            
+            ModelDb.Encounter<DegenbrecherBoss>(),
             // TODO: 先让游戏能跑，好像出锅了
         };
 

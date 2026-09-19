@@ -27,6 +27,7 @@ public class Degenbrecher : AbstractSnowyMountainMonster
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
     private int BlockedVulNum => 4;
     private int UnblockedVulNum => 2;
+    private int lowStrengthPower => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 8);
     private int BasicDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 9, 8);
     private int AdmitRequest => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 24, 20);
 
@@ -59,8 +60,8 @@ public class Degenbrecher : AbstractSnowyMountainMonster
             "DOUBLE_HIT",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Attack", 0);
-                await DamageCmd.Attack(BasicDamage).WithHitCount(2).FromMonster(this).Execute(null);
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
+                await DamageCmd.Attack(BasicDamage).WithHitCount(2).WithNoAttackerAnim().FromMonster(this).Execute(null);
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
             },
             new MultiAttackIntent(BasicDamage, 2),
@@ -104,6 +105,7 @@ public class Degenbrecher : AbstractSnowyMountainMonster
                 }
                 await PowerCmd.Apply<AdmitPower>(new ThrowingPlayerChoiceContext(), Creature, AdmitRequest, Creature, null);
                 await PowerCmd.Apply<MomentumMurder>(new ThrowingPlayerChoiceContext(), Creature, (int)(Creature.MaxHp * 0.75), Creature, null);
+                await PowerCmd.Apply<LowStrengthPower>(new ThrowingPlayerChoiceContext(), Creature, lowStrengthPower, Creature, null);
             },
             new BuffIntent()
         );

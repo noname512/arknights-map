@@ -35,8 +35,8 @@ public class JetCanister : AbstractSnowyMountainMonster
             "ATTACK1",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Attack", 0);
-                await DamageCmd.Attack(Dmg1).FromMonster(this).Execute(null);
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
+                await DamageCmd.Attack(Dmg1).FromMonster(this).WithNoAttackerAnim().Execute(null);
             },
             new SingleAttackIntent(Dmg1)
         );
@@ -44,8 +44,8 @@ public class JetCanister : AbstractSnowyMountainMonster
             "ATTACK2",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Attack", 0);
-                await DamageCmd.Attack(Dmg2).WithHitCount(repeatCount()).FromMonster(this).Execute(null);
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
+                await DamageCmd.Attack(Dmg2).WithHitCount(repeatCount()).FromMonster(this).WithNoAttackerAnim().Execute(null);
             },
             new MultiAttackIntent(Dmg2, repeatCount)
         );
@@ -63,12 +63,12 @@ public class JetCanister : AbstractSnowyMountainMonster
     {
         AnimState idleState = new AnimState("Idle", isLooping: true);
         AnimState attackBeginState = new AnimState("Attack_Begin");
-        AnimState attackIdleState = new AnimState("Attack_Idle");
+        AnimState attackLoopState = new AnimState("Attack_Loop");
         AnimState attackEndState = new AnimState("Attack_End");
         AnimState dieState = new AnimState("Die");
 
-        attackBeginState.NextState = attackIdleState;
-        attackIdleState.NextState = attackEndState;
+        attackBeginState.NextState = attackLoopState;
+        attackLoopState.NextState = attackEndState;
         attackEndState.NextState = idleState;
 
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
