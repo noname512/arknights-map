@@ -87,7 +87,7 @@ public class FrozenMountainBurdenbeast : AbstractSnowyMountainMonster
         attack2.FollowUpState = sleep;
 
         ConditionalBranchState conditionalBranchState = new ConditionalBranchState("SLEEP_CHECK");
-        conditionalBranchState.AddState(sleep, () => Creature.GetPowerAmount<SleepPower>() > 1);
+        conditionalBranchState.AddState(sleep, () => Creature.GetPowerAmount<SleepPower>() >= 1);
         conditionalBranchState.AddState(attack1, () => true);
 
         sleep.FollowUpState = conditionalBranchState;
