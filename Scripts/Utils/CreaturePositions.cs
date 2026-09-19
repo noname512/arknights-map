@@ -182,6 +182,10 @@ public sealed class CreaturePositions : HookedSingletonModel
         foreach (Creature c in allAffectedCreatures)
         {
             GD.Print($"Start moving creature {c.Name}");
+            if (c.IsMonster && c.Monster is AbstractSnowyMountainMonster)
+            {
+                ((AbstractSnowyMountainMonster)c.Monster).OnWindBlow();
+            }
             NCreature creatureNode = NCombatRoom.Instance.GetCreatureNode(c)!;
             tween.TweenProperty(creatureNode, "global_position:x", creatureNode.GlobalPosition.X + POS_DIFF * direction, 0.25);
         }
