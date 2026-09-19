@@ -71,11 +71,7 @@ public sealed class CreaturePositions : HookedSingletonModel
 
     public override async Task AfterSideTurnEndLate(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (
-            side == CombatSide.Player
-            && WindBlowTurn != 0
-            && CurrentCombatState!.PlayerCreatures.First().Player!.PlayerCombatState!.TurnNumber % WindBlowTurn == 0
-        )
+        if (side == CombatSide.Player && WindBlowTurn != 0 && CurrentCombatState!.RoundNumber % WindBlowTurn == 0)
         {
             await BlowWind(WindBlowDirection);
         }

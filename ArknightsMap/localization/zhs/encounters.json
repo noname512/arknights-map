@@ -64,6 +64,8 @@
     "ARKNIGHTS_MAP_ENCOUNTER_JET_CANISTER_ELITE.loss": "",
     "ARKNIGHTS_MAP_ENCOUNTER_DEGENBRECHER_BOSS.title": "锏的训练场",
     "ARKNIGHTS_MAP_ENCOUNTER_DEGENBRECHER_BOSS.loss": "{character}未能获得[gold]锏[/gold]的认可。",
+    "ARKNIGHTS_MAP_ENCOUNTER_HAROLD_CRAIGAVON_BOSS.title": "哈洛德·克雷加文",
+    "ARKNIGHTS_MAP_ENCOUNTER_HAROLD_CRAIGAVON_BOSS.loss": "{character}用尽了最后的点火石。",
     "----------拉特兰---------": "-----------------",
     "ARKNIGHTS_MAP_ENCOUNTER_SANKTA_BLADE.title": "精英圣堂剑士",
     "ARKNIGHTS_MAP_ENCOUNTER_SANKTA_BLADE.loss": "{character}被[gold]{encounter}[/gold]击败。",

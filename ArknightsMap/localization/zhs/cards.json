@@ -32,5 +32,9 @@
   "ARKNIGHTS_MAP_CARD_COME_CLOSE.title": "近身搏斗",
   "ARKNIGHTS_MAP_CARD_COME_CLOSE.description": "选择此项，下回合不受[gold]隐匿[/gold]影响，但是受到来自的[gold]锏[/gold]伤害提高至[blue]{Percent}%[/blue]。",
   "ARKNIGHTS_MAP_CARD_RUN_AWAY.title": "远离周旋",
-  "ARKNIGHTS_MAP_CARD_RUN_AWAY.description": "选择此项，下回合受到的伤害较少，但是无法命中[gold]锏[/gold]。"
+  "ARKNIGHTS_MAP_CARD_RUN_AWAY.description": "选择此项，下回合受到的伤害较少，但是无法命中[gold]锏[/gold]。",
+  "ARKNIGHTS_MAP_CARD_EMERGENCY_HEATER.title": "紧急供暖器",
+  "ARKNIGHTS_MAP_CARD_EMERGENCY_HEATER.description": "如果这张牌在你的[gold]手牌[/gold]中，敌人对你造成的伤害减少[blue]{Amount}[/blue]点。",
+  "ARKNIGHTS_MAP_CARD_ESTINGUISHED_EMERGENCY_HEATER.title": "熄灭的紧急供暖器",
+  "ARKNIGHTS_MAP_CARD_ESTINGUISHED_EMERGENCY_HEATER.description": "点燃此紧急供暖器。回合结束时耗能减少1。"
 }

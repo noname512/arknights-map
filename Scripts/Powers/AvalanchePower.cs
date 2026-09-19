@@ -36,7 +36,7 @@ public class AvalanchePower : ModPowerTemplate
         if (target == Owner && dealer != Owner)
         {
             DynamicVars["Current"].BaseValue += result.UnblockedDamage;
-            while (DynamicVars["Current"].IntValue >= DynamicVars["Threshold"].IntValue)
+            if (DynamicVars["Current"].IntValue >= DynamicVars["Threshold"].IntValue)
             {
                 int currentPos = CreaturePositions.PositionOfCreature(Owner);
                 if (currentPos == 9)
@@ -47,7 +47,7 @@ public class AvalanchePower : ModPowerTemplate
                 {
                     await CreaturePositions.MoveTo(Owner, currentPos + 1);
                 }
-                DynamicVars["Current"].BaseValue -= DynamicVars["Threshold"].IntValue;
+                DynamicVars["Current"].BaseValue = 0;
             }
             InvokeDisplayAmountChanged();
         }
