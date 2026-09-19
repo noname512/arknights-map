@@ -90,14 +90,16 @@ public class FrozenMountainBurdenbeast : AbstractSnowyMountainMonster
         conditionalBranchState.AddState(sleep, () => Creature.GetPowerAmount<SleepPower>() > 1);
         conditionalBranchState.AddState(attack1, () => true);
 
+        sleep.FollowUpState = conditionalBranchState;
         awake.FollowUpState = attack1;
 
         list.Add(attack1);
         list.Add(attack2);
+        list.Add(conditionalBranchState);
         list.Add(sleep);
         list.Add(awake);
 
-        return new MonsterMoveStateMachine(list, attack1);
+        return new MonsterMoveStateMachine(list, sleep);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

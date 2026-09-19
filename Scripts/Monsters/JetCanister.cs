@@ -63,12 +63,12 @@ public class JetCanister : AbstractSnowyMountainMonster
     {
         AnimState idleState = new AnimState("Idle", isLooping: true);
         AnimState attackBeginState = new AnimState("Attack_Begin");
-        AnimState attackIdleState = new AnimState("Attack_Idle");
+        AnimState attackLoopState = new AnimState("Attack_Loop");
         AnimState attackEndState = new AnimState("Attack_End");
         AnimState dieState = new AnimState("Die");
 
-        attackBeginState.NextState = attackIdleState;
-        attackIdleState.NextState = attackEndState;
+        attackBeginState.NextState = attackLoopState;
+        attackLoopState.NextState = attackEndState;
         attackEndState.NextState = idleState;
 
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
