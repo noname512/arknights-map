@@ -10,28 +10,28 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="1" type="Marker2D" parent="."]
-position = Vector2(150, 720)
+position = Vector2(550, 720)
 
 [node name="2" type="Marker2D" parent="."]
-position = Vector2(350, 720)
+position = Vector2(700, 720)
 
 [node name="3" type="Marker2D" parent="."]
-position = Vector2(750, 720)
+position = Vector2(850, 720)
 
 [node name="4" type="Marker2D" parent="."]
-position = Vector2(950, 720)
+position = Vector2(1000, 720)
 
 [node name="5" type="Marker2D" parent="."]
 position = Vector2(1150, 720)
 
 [node name="6" type="Marker2D" parent="."]
-position = Vector2(1350, 720)
+position = Vector2(1300, 720)
 
 [node name="7" type="Marker2D" parent="."]
-position = Vector2(1550, 720)
+position = Vector2(1450, 720)
 
 [node name="8" type="Marker2D" parent="."]
-position = Vector2(1750, 720)
+position = Vector2(1600, 720)
 
 [node name="9" type="Marker2D" parent="."]
-position = Vector2(1950, 720)
+position = Vector2(1750, 720)

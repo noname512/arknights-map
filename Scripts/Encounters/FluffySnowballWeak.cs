@@ -7,7 +7,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Encounters;
 
-[RegisterActEncounter(typeof(Wilds))]
+[RegisterActEncounter(typeof(SnowyMountain))]
 public class FluffySnowballWeak : AbstractSnowyMountainEncounter
 {
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<FluffySnowball>(), ModelDb.Monster<Snowchild>()];
@@ -29,7 +29,5 @@ public class FluffySnowballWeak : AbstractSnowyMountainEncounter
     // 如果你的场景太大，可以调整缩放。此外还可以使用 GetCameraOffset 来调整摄像机位置
     // public override float GetCameraScaling() => 0.8f;
 
-    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<FluffySnowball>().ToMutable(), "6"), 
-    ];
+    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [(ModelDb.Monster<FluffySnowball>().ToMutable(), "6")];
 }
