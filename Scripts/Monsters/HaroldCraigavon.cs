@@ -135,6 +135,7 @@ public class HaroldCraigavon : AbstractSnowyMountainMonster
         skill.FollowUpState = conditionalBranchState;
 
         list.Add(start);
+        list.Add(skill);
         list.Add(attack1);
         list.Add(attack2);
         list.Add(attackDebuff);
