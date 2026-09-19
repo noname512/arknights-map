@@ -22,21 +22,28 @@ public class ShieldPower : ModPowerTemplate
     public override PowerStackType StackType => PowerStackType.Counter;
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromPower<ArtifactPower>()];
 
-    private int GetArtifactNum()
+    private int? _cachedArtifactNum;
+
+private int GetArtifactNum()
+{
+    // 已缓存（Owner 已确定）直接返回
+    if (_cachedArtifactNum.HasValue)
+        return _cachedArtifactNum.Value;
+
+    var num = Owner?.Monster switch
     {
-        if (Owner.Monster is OpForGun)
-        {
-            return 2;
-        }
-        else if (Owner.Monster is OpCar)
-        {
-            return 1;
-        }
-        else
-        {
-            return 3;
-        }
-    }
+        OpForGun => 2,
+        OpCar    => 1,
+        _        => 3
+    };
+
+    // 关键：模板克隆阶段 Owner 还是 null，此时不能缓存，
+    // 否则 OpCar 会永远拿到默认值 3
+    if (Owner?.Monster is not null)
+        _cachedArtifactNum = num;
+
+    return num;
+}
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new IntVar("Cooldown", 2), new IntVar("CurrentCooldown", 0), new IntVar("ArtifactNum", GetArtifactNum())];

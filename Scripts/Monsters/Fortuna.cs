@@ -25,6 +25,8 @@ public class Fortuna : AbstractSankta
     private int Damage01 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 6);
 
     private int Damage02 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 15, 15);
+
+    private int Strength => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 3, 2);
     public int Time = 6;
 
     // 怪物场景
@@ -72,7 +74,7 @@ public class Fortuna : AbstractSankta
             {
                 await CreatureCmd.TriggerAnim(Creature, "Skill_Begin", 0.8f);
                 await AddBullet(2);
-                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 2, Creature, null);
+                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, Strength, Creature, null);
             },
             [new BuffIntent(), new AddBulletIntent()]
         );

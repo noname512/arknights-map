@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u0nyivm075re"
-path="res://.godot/imported/warn.png-b31225ae241c8e8e3a9b420294d75881.ctex"
+uid="uid://0dnnj3je6rua"
+path="res://.godot/imported/SkullcrackingElegy.png-abe1bc197f0f4f0ce59abf9f2b1ba38e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/cards/warn.png"
-dest_files=["res://.godot/imported/warn.png-b31225ae241c8e8e3a9b420294d75881.ctex"]
+source_file="res://ArknightsMap/images/relics/SkullcrackingElegy.png"
+dest_files=["res://.godot/imported/SkullcrackingElegy.png-abe1bc197f0f4f0ce59abf9f2b1ba38e.ctex"]
 
 [params]
 

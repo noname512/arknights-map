@@ -34,7 +34,7 @@ public class FortunaPower : ModPowerTemplate
             return;
         }
         float percent = CombatState.RunState.Rng.CombatTargets.NextFloat(0, 1);
-        if (Owner.Monster is AbstractSankta sankta && percent < 0.5)
+        if (Owner.Monster is AbstractSankta sankta && percent < 0.7)
         {
             await sankta.AddBullet(1);
         }

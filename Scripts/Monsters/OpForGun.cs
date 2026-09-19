@@ -1,4 +1,5 @@
 using ArknightsMap.Scripts.Powers;
+using ArknightsMap.Scripts.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
@@ -22,7 +23,7 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class OpForGun : AbstractSankta
 {
-    protected override int BulletMax => 15;
+    protected override int BulletMax => 1;
     protected override int InitialBullet => 0;
 
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 500, 500);
@@ -130,8 +131,9 @@ public class OpForGun : AbstractSankta
                 await UpdatePosition();
                 Attack_Time = 1;
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
+                await UseBullet(1);
             },
-            [new SingleAttackIntent(run), new SummonIntent(), new BuffIntent()]
+            [new SingleAttackIntent(run), new SummonIntent(), new BuffIntent(), new UseBulletIntent()]
         );
 
         MoveState MultiHit = new MoveState(
@@ -149,21 +151,25 @@ public class OpForGun : AbstractSankta
             async targets =>
             {
                 await CreatureCmd.GainBlock(Creature, 30, ValueProp.Unpowered, null);
+                await AddBullet(1);
             },
-            [new DefendIntent()]
+            [new DefendIntent(), new AddBulletIntent()]
         );
 
-        ConditionalBranchState RunBranch = new ConditionalBranchState("RUN_BRANCH");
-        RunBranch.AddState(Prepare, () => ShouldRun());
-        RunBranch.AddState(MultiHit, () => !ShouldRun());
+        ConditionalBranchState PrepareBranch = new ConditionalBranchState("PREP_BRANCH");
+        PrepareBranch.AddState(Prepare, () => Bullet <= 0 && ShouldRun());
+        PrepareBranch.AddState(MultiHit, () => Bullet <= 0 && !ShouldRun());
+        PrepareBranch.AddState(Run, () => Bullet > 0);
+
+        
 
         list.Add(Prepare);
         list.Add(Run);
         list.Add(MultiHit);
-        list.Add(RunBranch);
-        Prepare.FollowUpState = Run;
-        Run.FollowUpState = RunBranch;
-        MultiHit.FollowUpState = RunBranch;
+        list.Add(PrepareBranch);
+        Prepare.FollowUpState = PrepareBranch;
+        Run.FollowUpState = PrepareBranch;
+        MultiHit.FollowUpState = PrepareBranch;
         return new MonsterMoveStateMachine(list, MultiHit);
     }
 

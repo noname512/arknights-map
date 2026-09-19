@@ -33,7 +33,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
 
     private int heavyAttackPhase1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 45, 45);
 
-    private int heavyAttackPhase2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 67, 67);
+    private int heavyAttackPhase2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 60, 60);
     private int multiAttackPhase1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 3, 3);
     private int multiAttackPhase2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 4, 4);
     private int summonNumPhase1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 1, 1);

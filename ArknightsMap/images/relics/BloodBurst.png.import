@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u0nyivm075re"
-path="res://.godot/imported/warn.png-b31225ae241c8e8e3a9b420294d75881.ctex"
+uid="uid://88n8ay3b0uex"
+path="res://.godot/imported/BloodBurst.png-0fe06c469bb6d507cf19bb73e1ab500a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/cards/warn.png"
-dest_files=["res://.godot/imported/warn.png-b31225ae241c8e8e3a9b420294d75881.ctex"]
+source_file="res://ArknightsMap/images/relics/BloodBurst.png"
+dest_files=["res://.godot/imported/BloodBurst.png-0fe06c469bb6d507cf19bb73e1ab500a.ctex"]
 
 [params]
 
