@@ -57,8 +57,14 @@ public sealed class SnowyMountain : ModActTemplate
         {
             ModelDb.Encounter<FluffySnowballWeak>(),
             ModelDb.Encounter<IceFieldHunterWeak>(),
+            ModelDb.Encounter<FrozenMountainBurdenbeastWeak>(),
+            
             ModelDb.Encounter<IcefieldBerserkerNormal>(),
+            
             ModelDb.Encounter<TschaggattasElite>(),
+            ModelDb.Encounter<GreathornRhuulElite>(),
+            ModelDb.Encounter<JetCanisterElite>(),
+            
             ModelDb.Encounter<DegenbrecherBoss>(),
             // TODO: 先让游戏能跑，好像出锅了
         };

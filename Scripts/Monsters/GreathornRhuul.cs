@@ -103,9 +103,9 @@ public class GreathornRhuul : AbstractSnowyMountainMonster
         attack1.FollowUpState = attack2;
         attack2.FollowUpState = charging;
 
-        leftRoom = GetLeftRoom();
+        // leftRoom = GetLeftRoom();
         ConditionalBranchState conditionalBranchState = new ConditionalBranchState("GORE");
-        conditionalBranchState.AddState(gore_left, () => leftRoom == null);
+        conditionalBranchState.AddState(gore_left, () => (leftRoom = GetLeftRoom()) == null);
         conditionalBranchState.AddState(gore_n_left, () => true);
 
         charging.FollowUpState = conditionalBranchState;
