@@ -1,4 +1,3 @@
-using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -20,7 +19,7 @@ public class ScorchingLightPower : ModPowerTemplate
     public override PowerStackType StackType => PowerStackType.Counter;
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-        [HoverTipFactory.FromKeyword(ReedBedKeyword.Keyword), HoverTipFactory.FromPower<FlamingDamagePower>(), HoverTipFactory.FromPower<VulnerablePower>()];
+        [Entry.MyHoverTip("REED_BED"), HoverTipFactory.FromPower<FlamingDamagePower>(), HoverTipFactory.FromPower<VulnerablePower>()];
 
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");

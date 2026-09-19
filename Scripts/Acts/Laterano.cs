@@ -115,7 +115,7 @@ public sealed class Laterano : ModActTemplate
         }
         foreach (Player p in RunState.Players)
         {
-            await CardPileCmd.AddCurseToDeck<Confused>(p);
+            await CardPileCmd.AddCurseToDeck<Perplexed>(p);
         }
     }
 }

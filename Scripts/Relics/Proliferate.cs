@@ -1,5 +1,4 @@
 using ArknightsMap.Scripts.Powers;
-using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -17,7 +16,7 @@ public class Proliferate : ModRelicTemplate
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-        [HoverTipFactory.FromKeyword(ReedBedKeyword.Keyword), HoverTipFactory.FromPower<FlamingDamagePower>(), HoverTipFactory.FromPower<VulnerablePower>()];
+        [Entry.MyHoverTip("REED_BED"), HoverTipFactory.FromPower<FlamingDamagePower>(), HoverTipFactory.FromPower<VulnerablePower>()];
 
     public override RelicAssetProfile AssetProfile =>
         new(

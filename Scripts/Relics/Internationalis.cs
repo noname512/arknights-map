@@ -1,5 +1,4 @@
 using ArknightsMap.Scripts.Powers;
-using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -19,7 +18,7 @@ public sealed class Internationalis : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromKeyword(InternationalisKeyword.Keyword)];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromPower<InternationalisPower>()];
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -40,13 +39,7 @@ public sealed class Internationalis : ModRelicTemplate
             {
                 await PowerCmd.Remove<ArtifactPower>(c);
             }
-            await PowerCmd.Apply<InternationalisPower>(
-                new ThrowingPlayerChoiceContext(),
-                c,
-                1,
-                Owner.Creature,
-                null
-            );
+            await PowerCmd.Apply<InternationalisPower>(new ThrowingPlayerChoiceContext(), c, 1, Owner.Creature, null);
         }
     }
 }

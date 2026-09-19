@@ -1,6 +1,5 @@
 using ArknightsMap.Scripts.Monsters;
 using ArknightsMap.Scripts.Powers;
-using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -16,7 +15,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Cards;
 
 [RegisterCard(typeof(CurseCardPool))]
-public class Confused : ModCardTemplate
+public class Perplexed : ModCardTemplate
 {
     public override int MaxUpgradeLevel => 0;
 
@@ -32,8 +31,7 @@ public class Confused : ModCardTemplate
     // 目标类型（AnyEnemy表示任意敌人）
     private const TargetType targetType = TargetType.None;
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-        [HoverTipFactory.FromCard<Confused>(), HoverTipFactory.FromKeyword(ConfusedKeyword.Keyword)];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromCard<Perplexed>(), HoverTipFactory.FromPower<PerplexedPower>()];
 
     // 卡图资源
     public override CardAssetProfile AssetProfile =>
@@ -56,7 +54,7 @@ public class Confused : ModCardTemplate
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Eternal];
 
-    public Confused()
+    public Perplexed()
         : base(energyCost, type, rarity, targetType) { }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay) { }
@@ -94,12 +92,12 @@ public class Confused : ModCardTemplate
 
     protected override async Task OnTurnEndInHand(PlayerChoiceContext choiceContext)
     {
-        bool alreadyHasFrail = Owner.Creature.HasPower<ConfusedPower>();
+        bool alreadyHasFrail = Owner.Creature.HasPower<PerplexedPower>();
         foreach (Creature c in CombatState!.HittableEnemies)
         {
             if (c.Monster is not SupersweetieSmiley || c.Monster is not TheSaint || c.Monster is not OpForGun)
             {
-                await PowerCmd.Apply<ConfusedPower>(choiceContext, c, 1, null, this);
+                await PowerCmd.Apply<PerplexedPower>(choiceContext, c, 1, null, this);
             }
         }
     }

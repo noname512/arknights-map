@@ -20,7 +20,7 @@ public class FlameBathPower : ModPowerTemplate
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-        [HoverTipFactory.FromKeyword(ReedBedKeyword.Keyword), HoverTipFactory.FromPower<FlamingDamagePower>(), HoverTipFactory.FromPower<VulnerablePower>()];
+        [Entry.MyHoverTip("REED_BED"), HoverTipFactory.FromPower<FlamingDamagePower>(), HoverTipFactory.FromPower<VulnerablePower>()];
 
     // 自定义图标路径。1:1即可。原版游戏大图256x256，小图64x64。
     public override PowerAssetProfile AssetProfile =>

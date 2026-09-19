@@ -14,7 +14,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Powers;
 
 [RegisterPower]
-public class ConfusedPower : ModPowerTemplate
+public class PerplexedPower : ModPowerTemplate
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Single;

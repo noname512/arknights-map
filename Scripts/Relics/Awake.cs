@@ -19,7 +19,7 @@ public sealed class Awake : ModRelicTemplate
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<StrengthPower>(1)];
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromCard<Confused>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromCard<Perplexed>()];
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -33,7 +33,7 @@ public sealed class Awake : ModRelicTemplate
 
     public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
-        if (card.Owner == Owner && card is Confused)
+        if (card.Owner == Owner && card is Perplexed)
         {
             await CardCmd.Exhaust(choiceContext, card);
             await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, DynamicVars["StrengthPower"].BaseValue, Owner.Creature, null);
