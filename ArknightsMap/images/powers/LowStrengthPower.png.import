@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t0pb4mxkynk2"
-path="res://.godot/imported/EyePower.png-1b3173ace98792c68e7213b4135ac2c7.ctex"
+uid="uid://dedhcotpktf3n"
+path="res://.godot/imported/LowStrengthPower.png-34987c6dc00345a29b849463efd3c7ca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/powers/EyePower.png"
-dest_files=["res://.godot/imported/EyePower.png-1b3173ace98792c68e7213b4135ac2c7.ctex"]
+source_file="res://ArknightsMap/images/powers/LowStrengthPower.png"
+dest_files=["res://.godot/imported/LowStrengthPower.png-34987c6dc00345a29b849463efd3c7ca.ctex"]
 
 [params]
 

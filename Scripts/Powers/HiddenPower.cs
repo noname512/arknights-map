@@ -47,7 +47,10 @@ public class HiddenPower : ModPowerTemplate
         {
             return amount;
         }
-
+        if (dealer != null && dealer.IsPet && dealer.PetOwner!.Creature != Target)
+        {
+            return amount;
+        }
         if (!shouldTrigger)
         {
             return amount;
@@ -62,8 +65,12 @@ public class HiddenPower : ModPowerTemplate
             modifiedAmount = amount;
             return false;
         }
-
         if ((canonicalPower.Applier != Target) || (!shouldTrigger))
+        {
+            modifiedAmount = amount;
+            return false;
+        }
+        if (canonicalPower.Applier != null && canonicalPower.Applier.IsPet && canonicalPower.Applier.PetOwner!.Creature != Target)
         {
             modifiedAmount = amount;
             return false;
@@ -82,9 +89,9 @@ public class HiddenPower : ModPowerTemplate
         return true;
     }
 
-    private async Task ChooseBlockOrNot()
+    private async Task ChooseBlockOrNot(PlayerChoiceContext choiceContext)
     {
-        if (Target!.IsDead)
+        if (Target!.IsDead || !Target.IsPlayer)
         {
             return;
         }
@@ -95,7 +102,7 @@ public class HiddenPower : ModPowerTemplate
             CardModel card2 = CombatState.CreateCard(card, Target.Player!);
             cards.Add(card2);
         }
-        CardModel? cardModel = await CardSelectCmd.FromChooseACardScreen(new BlockingPlayerChoiceContext(), cards, Target.Player!);
+        CardModel? cardModel = await CardSelectCmd.FromChooseACardScreen(choiceContext, cards, Target.Player!);
         if (cardModel != null)
         {
             await ((KnowledgeDemon.IChoosable)cardModel).OnChosen();
@@ -106,7 +113,7 @@ public class HiddenPower : ModPowerTemplate
     {
         if (side == CombatSide.Enemy)
         {
-            await ChooseBlockOrNot();
+            await ChooseBlockOrNot(choiceContext);
         }
     }
 }

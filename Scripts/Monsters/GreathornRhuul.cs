@@ -137,7 +137,7 @@ public class GreathornRhuul : AbstractSnowyMountainMonster
         return previous;
     }
 
-    public override async void OnWindBlow()
+    public override async Task OnWindBlow()
     {
         if (NextMove.Intents.Any(i => i is UnknownIntent))
         {

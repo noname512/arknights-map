@@ -10,7 +10,7 @@ using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
 [RegisterPower]
-public sealed class EyePower : ModPowerTemplate
+public sealed class FlightPower : ModPowerTemplate
 {
     public override PowerType Type => PowerType.Buff;
 

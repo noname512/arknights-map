@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
@@ -37,6 +38,10 @@ public sealed class CreaturePositions : HookedSingletonModel
 
     public static int PositionOfCreature(Creature c)
     {
+        if (c.IsPet)
+        {
+            return Positions.GetValueOrDefault(c.PetOwner!.Creature);
+        }
         return Positions.GetValueOrDefault(c);
     }
 
@@ -55,6 +60,9 @@ public sealed class CreaturePositions : HookedSingletonModel
         foreach (Creature c in CurrentCombatState.PlayerCreatures)
         {
             Positions[c] = playerPos;
+            PositionPower power = (PositionPower)ModelDb.Power<PositionPower>().ToMutable();
+            power.ChangePos(playerPos);
+            await PowerCmd.Apply(new ThrowingPlayerChoiceContext(), power, c, 1, null, null);
         }
         foreach (Creature c in CurrentCombatState.Enemies)
         {
@@ -66,6 +74,9 @@ public sealed class CreaturePositions : HookedSingletonModel
             {
                 Positions[c] = 6;
             }
+            PositionPower power = (PositionPower)ModelDb.Power<PositionPower>().ToMutable();
+            power.ChangePos(Positions[c]);
+            await PowerCmd.Apply(new ThrowingPlayerChoiceContext(), power, c, 1, null, null);
         }
     }
 
@@ -77,39 +88,75 @@ public sealed class CreaturePositions : HookedSingletonModel
         }
     }
 
-    public static async Task MoveTo(Creature c, int slot)
+    private static void TriggerMove(Creature c, int slot, float time)
     {
+        GD.Print($"Creature {c.Name} move to pos {slot}");
         Tween tween = NCombatRoom.Instance!.CreateTween().SetParallel().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
         NCreature creatureNode = NCombatRoom.Instance!.GetCreatureNode(c)!;
-        tween.TweenProperty(creatureNode, "global_position:x", creatureNode.GlobalPosition.X + POS_DIFF * (slot - Positions[c]), 0.25);
+        tween.TweenProperty(creatureNode, "global_position:x", creatureNode.GlobalPosition.X + POS_DIFF * (slot - Positions[c]), time);
+        foreach (Creature p in c.Pets)
+        {
+            NCreature petNode = NCombatRoom.Instance.GetCreatureNode(p)!;
+            tween.TweenProperty(petNode, "global_position:x", petNode.GlobalPosition.X + POS_DIFF * (slot - Positions[c]), time);
+        }
         Positions[c] = slot;
-        GD.Print($"Creature {c.Name} move to pos {slot}");
+        c.GetPower<PositionPower>()!.ChangePos(slot);
+    }
+
+    public static void MoveTo(Creature c, int slot)
+    {
+        TriggerMove(c, slot, 0.25f);
+    }
+
+    public static async Task Walk(Creature c, int direction)
+    {
+        float moveTime;
+        switch (SaveManager.Instance.PrefsSave.FastMode)
+        {
+            case FastModeType.Instant:
+                moveTime = 0.5f;
+                break;
+            case FastModeType.Fast:
+                moveTime = 1.0f;
+                break;
+            default:
+                moveTime = 1.25f;
+                break;
+        }
+        TriggerMove(c, Positions[c] + direction, moveTime);
+        await Cmd.Wait(moveTime);
     }
 
     public static bool IsBlock(Creature x, Creature y)
     {
-        return Math.Abs(Positions.GetValueOrDefault(x) - Positions.GetValueOrDefault(y)) <= 1;
+        return Math.Abs(PositionOfCreature(x) - PositionOfCreature(y)) <= 1;
     }
 
     public static async Task BlowWind(int direction)
     {
-        List<Creature> allAffectedCreatures = [];
         if (direction == -1)
         {
             List<Creature> creaturesInPos = GetCreaturesInPosition(1);
             int startPos = 2;
             if (creaturesInPos.Count > 0)
             {
-                await CreatureCmd.Damage(new BlockingPlayerChoiceContext(), creaturesInPos, damage, null, null, null);
-                GD.Print($"Damage Done");
+                await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), creaturesInPos, damage, null, null, null);
                 foreach (Creature c in creaturesInPos)
                 {
-                    GD.Print($"Start handling creature {c.Name}");
+                    if (!ShouldHandleCreature(c, direction))
+                    {
+                        continue;
+                    }
+                    if (c.IsMonster && c.Monster is AbstractSnowyMountainMonster)
+                    {
+                        await ((AbstractSnowyMountainMonster)c.Monster).OnWindBlow();
+                    }
+                    GD.Print($"Creature {c.Name} hit wall.");
                     if (c.IsAlive)
                     {
                         if (c.IsPlayer)
                         {
-                            await PowerCmd.Apply<RingingPower>(new BlockingPlayerChoiceContext(), c, 1, c, null);
+                            await PowerCmd.Apply<RingingPower>(new ThrowingPlayerChoiceContext(), c, 1, c, null);
                         }
                         else
                         {
@@ -124,14 +171,18 @@ public sealed class CreaturePositions : HookedSingletonModel
             }
             for (int pos = startPos; pos <= 9; pos++)
             {
-                GD.Print($"Start handling position {pos}");
                 List<Creature> creatures = GetCreaturesInPosition(pos);
                 foreach (Creature c in creatures)
                 {
-                    GD.Print($"Start handling creature {c.Name}");
-                    Positions[c] = pos - 1;
-                    allAffectedCreatures.Add(c);
-                    allAffectedCreatures.AddRange(c.Pets);
+                    if (!ShouldHandleCreature(c, direction))
+                    {
+                        continue;
+                    }
+                    if (c.IsMonster && c.Monster is AbstractSnowyMountainMonster)
+                    {
+                        await ((AbstractSnowyMountainMonster)c.Monster).OnWindBlow();
+                    }
+                    TriggerMove(c, Positions[c] + direction, 0.25f);
                 }
             }
         }
@@ -141,16 +192,24 @@ public sealed class CreaturePositions : HookedSingletonModel
             int startPos = 8;
             if (creaturesInPos.Count > 0)
             {
-                await CreatureCmd.Damage(new BlockingPlayerChoiceContext(), creaturesInPos, damage, null, null, null);
+                await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), creaturesInPos, damage, null, null, null);
                 GD.Print($"Damage Done");
                 foreach (Creature c in creaturesInPos)
                 {
-                    GD.Print($"Start handling creature {c.Name}");
+                    if (!ShouldHandleCreature(c, direction))
+                    {
+                        continue;
+                    }
+                    if (c.IsMonster && c.Monster is AbstractSnowyMountainMonster)
+                    {
+                        await ((AbstractSnowyMountainMonster)c.Monster).OnWindBlow();
+                    }
+                    GD.Print($"Creature {c.Name} hit wall.");
                     if (c.IsAlive)
                     {
                         if (c.IsPlayer)
                         {
-                            await PowerCmd.Apply<RingingPower>(new BlockingPlayerChoiceContext(), c, 1, c, null);
+                            await PowerCmd.Apply<RingingPower>(new ThrowingPlayerChoiceContext(), c, 1, c, null);
                         }
                         else
                         {
@@ -165,53 +224,37 @@ public sealed class CreaturePositions : HookedSingletonModel
             }
             for (int pos = startPos; pos >= 1; pos--)
             {
-                GD.Print($"Start handling position {pos}");
                 List<Creature> creatures = GetCreaturesInPosition(pos);
                 foreach (Creature c in creatures)
                 {
-                    GD.Print($"Start handling creature {c.Name}");
-                    Positions[c] = pos + 1;
-                    allAffectedCreatures.Add(c);
-                    allAffectedCreatures.AddRange(c.Pets);
+                    if (!ShouldHandleCreature(c, direction))
+                    {
+                        continue;
+                    }
+                    if (c.IsMonster && c.Monster is AbstractSnowyMountainMonster)
+                    {
+                        await ((AbstractSnowyMountainMonster)c.Monster).OnWindBlow();
+                    }
+                    TriggerMove(c, Positions[c] + direction, 0.25f);
                 }
             }
         }
-
-        GD.Print($"allAffectedCreatures: {allAffectedCreatures}");
-        Tween tween = NCombatRoom.Instance!.CreateTween().SetParallel().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
-        foreach (Creature c in allAffectedCreatures)
-        {
-            GD.Print($"Start moving creature {c.Name}");
-            if (c.IsMonster && c.Monster is AbstractSnowyMountainMonster)
-            {
-                ((AbstractSnowyMountainMonster)c.Monster).OnWindBlow();
-            }
-            NCreature creatureNode = NCombatRoom.Instance.GetCreatureNode(c)!;
-            tween.TweenProperty(creatureNode, "global_position:x", creatureNode.GlobalPosition.X + POS_DIFF * direction, 0.25);
-        }
     }
 
-    public static async Task Walk(Creature c, int direction)
+    private static bool ShouldHandleCreature(Creature c, int direction)
     {
-        Positions[c] = Positions.GetValueOrDefault(c) + direction;
-        GD.Print($"Creature {c.Name} walk to pos {Positions[c]}");
-        Tween tween = NCombatRoom.Instance!.CreateTween().SetParallel().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
-        NCreature creatureNode = NCombatRoom.Instance.GetCreatureNode(c)!;
-        float moveTime;
-        switch (SaveManager.Instance.PrefsSave.FastMode)
+        for (int i = Positions[c]; i >= 1 && i <= 9; i -= direction)
         {
-            case FastModeType.Instant:
-                moveTime = 0.5f;
-                break;
-            case FastModeType.Fast:
-                moveTime = 1.0f;
-                break;
-            default:
-                moveTime = 1.25f;
-                break;
+            List<Creature> creatures = GetCreaturesInPosition(i);
+            foreach (Creature c2 in creatures)
+            {
+                if (c2.HasPower<StandStillPower>())
+                {
+                    return false;
+                }
+            }
         }
-        tween.TweenProperty(creatureNode, "global_position:x", creatureNode.GlobalPosition.X + POS_DIFF * direction, moveTime);
-        await Cmd.Wait(moveTime);
+        return true;
     }
 
     [HarmonyPatch(typeof(NCombatRoom), "CreateAllyNodes")]

@@ -45,7 +45,7 @@ public class AvalanchePower : ModPowerTemplate
                 }
                 else
                 {
-                    await CreaturePositions.MoveTo(Owner, currentPos + 1);
+                    CreaturePositions.MoveTo(Owner, currentPos + 1);
                 }
                 DynamicVars["Current"].BaseValue = 0;
             }

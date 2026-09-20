@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Extensions;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
@@ -33,7 +34,7 @@ public class HaroldCraigavon : AbstractSnowyMountainMonster
 
     public override async Task AfterAddedToRoom()
     {
-        // TODO: power 不受暴风雪影响
+        await PowerCmd.Apply<StandStillPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()

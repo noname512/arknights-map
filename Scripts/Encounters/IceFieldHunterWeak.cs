@@ -21,7 +21,7 @@ public class IceFieldHunterWeak : AbstractSnowyMountainEncounter
 
     public override string CustomBgm => "event:/ArknightsMap/music/all_flames_returned_bat_1";
 
-    public override IReadOnlyList<string> Slots => ["6", "7"];
+    public override IReadOnlyList<string> Slots => ["5", "7"];
 
     public override RoomType RoomType => RoomType.Monster;
     public override bool IsWeak => true;
@@ -31,7 +31,7 @@ public class IceFieldHunterWeak : AbstractSnowyMountainEncounter
 
     protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() =>
         [
-            (ModelDb.Monster<IcefieldHunter>().ToMutable(), "6"), // 防折叠
+            (ModelDb.Monster<IcefieldHunter>().ToMutable(), "5"), // 防折叠
             (ModelDb.Monster<IcefieldHunter>().ToMutable(), "7"),
         ];
 }

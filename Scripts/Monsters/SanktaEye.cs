@@ -73,7 +73,7 @@ public class SanktaEye : AbstractSankta
 
     public override async Task AfterAddedToRoom()
     {
-        await PowerCmd.Apply<EyePower>(new ThrowingPlayerChoiceContext(), Creature, 4, Creature, null);
+        await PowerCmd.Apply<FlightPower>(new ThrowingPlayerChoiceContext(), Creature, 4, Creature, null);
         await PowerCmd.Apply<SanktaCreaturePower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
     }
 

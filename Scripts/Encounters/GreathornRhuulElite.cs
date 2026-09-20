@@ -12,13 +12,6 @@ public class GreathornRhuulElite : AbstractSnowyMountainEncounter
 {
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<GreathornRhuul>()];
 
-    public override EncounterAssetProfile AssetProfile =>
-        new(
-            RunHistoryIconPath: $"res://ArknightsMap/images/map/{GetType().Name}History.png",
-            RunHistoryIconOutlinePath: $"res://ArknightsMap/images/map/{GetType().Name}History_outline.png",
-            EncounterScenePath: $"res://ArknightsMap/scenes/encounters/SnowyMountainEncounter.tscn"
-        );
-
     public override string CustomBgm => "event:/ArknightsMap/music/all_flames_returned_bat_1";
     public override int playerStartPosition => 3;
     public override int windBlowDirection => -1;

@@ -75,7 +75,7 @@ public class OpForGun : AbstractSankta
         await base.AfterAddedToRoom();
         await PowerCmd.Apply<SurroundedPower>(new ThrowingPlayerChoiceContext(), CombatState.GetOpponentsOf(Creature), 1m, Creature, null);
 
-        await PowerCmd.Apply<OpForGunPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
+        await PowerCmd.Apply<DealCorrosionDamagePower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
         await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), Creature, 2m, Creature, null);
         await PowerCmd.Apply<ShieldPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
         await PowerCmd.Apply<BackAttackRightPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
@@ -160,8 +160,6 @@ public class OpForGun : AbstractSankta
         PrepareBranch.AddState(Prepare, () => Bullet <= 0 && ShouldRun());
         PrepareBranch.AddState(MultiHit, () => Bullet <= 0 && !ShouldRun());
         PrepareBranch.AddState(Run, () => Bullet > 0);
-
-        
 
         list.Add(Prepare);
         list.Add(Run);

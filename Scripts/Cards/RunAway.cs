@@ -1,17 +1,8 @@
-﻿using ArknightsMap.Scripts.Powers;
-using ArknightsMap.Scripts.Utils;
-using MegaCrit.Sts2.Core.Commands;
+﻿using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Monsters;
-using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.Nodes.Rooms;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
-using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -54,8 +45,9 @@ public class RunAway : ModCardTemplate, KnowledgeDemon.IChoosable
     public RunAway()
         : base(energyCost, type, rarity, targetType) { }
 
-    public async Task OnChosen()
+    public Task OnChosen()
     {
-        await CreaturePositions.MoveTo(Owner.Creature, 2);
+        CreaturePositions.MoveTo(Owner.Creature, 2);
+        return Task.CompletedTask;
     }
 }

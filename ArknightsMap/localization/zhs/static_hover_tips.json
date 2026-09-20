@@ -4,5 +4,7 @@
     "ARKNIGHTS_MAP_STATIC_HOVER_TIPS_CUSTOM.title": "定制",
     "ARKNIGHTS_MAP_STATIC_HOVER_TIPS_CUSTOM.description": "每移除1张[red]攻击牌[/red]/[green]技能牌[/green]/[blue]能力牌[/blue]/[purple]其他种类的牌[/purple]，\n定制铳械获得[red]2点力量[/red]/[green]2点敏捷[/green]/[blue]抽3张牌[/blue]/[purple]获得6点格挡[/purple]。",
     "ARKNIGHTS_MAP_STATIC_HOVER_TIPS_BLOCK.title": "阻挡",
-    "ARKNIGHTS_MAP_STATIC_HOVER_TIPS_BLOCK.description": "处于相邻位置。"
+    "ARKNIGHTS_MAP_STATIC_HOVER_TIPS_BLOCK.description": "处于相邻位置。",
+    "ARKNIGHTS_MAP_STATIC_HOVER_TIPS_SNOW_STORM.title": "暴风雪",
+    "ARKNIGHTS_MAP_STATIC_HOVER_TIPS_SNOW_STORM.description": "若干回合出现一次，将所有单位向指定方向移动一个位置。"
 }

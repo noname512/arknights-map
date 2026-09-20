@@ -52,7 +52,7 @@ public class PrayInvite : ModRelicTemplate
             {
                 Flash();
                 CurrentTurns = 0;
-                await PowerCmd.Apply<DoubleDamageForeverPower>(choiceContext, Owner.Creature, 2, Owner.Creature, null);
+                await PowerCmd.Apply<MayTheLordBlessPower>(choiceContext, Owner.Creature, 2, Owner.Creature, null);
             }
             InvokeDisplayAmountChanged();
         }
