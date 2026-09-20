@@ -40,6 +40,17 @@ public class Tschaggatta : AbstractSnowyMountainMonster
                     .Execute(null),
             new SingleAttackIntent(Damage1)
         );
+        MoveState specialMove1 = new MoveState(
+            "ATTACK",
+            async targets =>
+                await DamageCmd
+                    .Attack(Damage1)
+                    .FromMonster(this)
+                    .WithAttackerAnim("Attack", 0.5f)
+                    // .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
+                    .Execute(null),
+            new SingleAttackIntent(Damage1)
+        );
         MoveState move2 = new MoveState(
             "DEBUFF",
             async targets => await PowerCmd.Apply<DexterityPower>(new ThrowingPlayerChoiceContext(), targets, -1, Creature, null),
@@ -71,24 +82,31 @@ public class Tschaggatta : AbstractSnowyMountainMonster
             },
             new DefendIntent()
         );
+        MoveState specialMove2 = new MoveState("SUMMON", async targets => { }, new SummonIntent());
 
-        ConditionalBranchState conditionalBranchState = new ConditionalBranchState("INIT");
-        conditionalBranchState.AddState(move1, () => Creature.SlotName == "first");
-        conditionalBranchState.AddState(move2, () => Creature.SlotName == "second");
-        conditionalBranchState.AddState(move3, () => Creature.SlotName == "third");
-        conditionalBranchState.AddState(move4, () => Creature.SlotName == "fourth");
-        conditionalBranchState.AddState(move1, () => true);
+        ConditionalBranchState startState = new ConditionalBranchState("INIT");
+        startState.AddState(move1, () => CombatState.ContainsMonster<Degenbrecher>() && Creature.SlotName == "6");
+        startState.AddState(specialMove1, () => CombatState.ContainsMonster<Degenbrecher>() && Creature.SlotName == "7");
+        startState.AddState(move1, () => Creature.SlotName == "5");
+        startState.AddState(move2, () => Creature.SlotName == "6");
+        startState.AddState(move3, () => Creature.SlotName == "7");
+        startState.AddState(move4, () => Creature.SlotName == "8");
+        startState.AddState(move1, () => true);
+        specialMove1.FollowUpState = specialMove2;
+        specialMove2.FollowUpState = move2;
         move1.FollowUpState = move2;
         move2.FollowUpState = move3;
         move3.FollowUpState = move4;
         move4.FollowUpState = move1;
+        list.Add(specialMove1);
+        list.Add(specialMove2);
         list.Add(move1);
         list.Add(move2);
         list.Add(move3);
         list.Add(move4);
-        list.Add(conditionalBranchState);
+        list.Add(startState);
 
-        return new MonsterMoveStateMachine(list, conditionalBranchState);
+        return new MonsterMoveStateMachine(list, startState);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

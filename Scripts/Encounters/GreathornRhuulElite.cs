@@ -3,7 +3,6 @@ using ArknightsMap.Scripts.Monsters;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Encounters;
 
@@ -12,7 +11,7 @@ public class GreathornRhuulElite : AbstractSnowyMountainEncounter
 {
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<GreathornRhuul>()];
 
-    public override string CustomBgm => "event:/ArknightsMap/music/all_flames_returned_bat_1";
+    public override string CustomBgm => "event:/ArknightsMap/music/xsjl_bat_2";
     public override int playerStartPosition => 3;
     public override int windBlowDirection => -1;
     public override int windBlowTurn => 3;

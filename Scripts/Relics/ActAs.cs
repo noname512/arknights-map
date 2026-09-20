@@ -31,15 +31,7 @@ public class ActAs : ModRelicTemplate
 
     bool hasTrigger = false;
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips
-    {
-        get
-        {
-            List<IHoverTip> list = new List<IHoverTip>();
-            list.Add(HoverTipFactory.ForEnergy(this));
-            return list;
-        }
-    }
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.ForEnergy(this)];
 
     public override Task BeforeCombatStart()
     {

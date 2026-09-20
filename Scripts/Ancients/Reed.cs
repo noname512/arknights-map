@@ -5,7 +5,6 @@ using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
-using STS2RitsuLib.Utils;
 
 namespace ArknightsMap.Scripts.Ancients;
 
@@ -13,21 +12,21 @@ namespace ArknightsMap.Scripts.Ancients;
 public class Reed : ModAncientEventTemplate
 {
     // 选项按钮颜色
-    public override Color ButtonColor => new(0.12f, 0.2f, 0.8f, 0.5f);
+    public override Color ButtonColor => new(0.624f, 0.58f, 0.5f, 0.5f);
 
     // 对话框颜色
-    public override Color DialogueColor => new(0.12f, 0.2f, 0.8f);
+    public override Color DialogueColor => new(0.78f, 0.72f, 0.62f);
 
     // 自定义场景的路径
-    public override EventAssetProfile AssetProfile => new(BackgroundScenePath: "res://ArknightsMap/scenes/ancients/Reed.tscn");
+    public override EventAssetProfile AssetProfile => new(BackgroundScenePath: $"res://ArknightsMap/scenes/ancients/{GetType().Name}.tscn");
 
     // 自定义地图图标和轮廓的路径
     public override AncientEventPresentationAssetProfile AncientPresentationAssetProfile =>
         new(
-            MapIconPath: "res://ArknightsMap/images/ancients/Reed/icon.png",
-            MapIconOutlinePath: "res://ArknightsMap/images/ancients/Reed/icon_outline.png",
-            RunHistoryIconPath: "res://ArknightsMap/images/ancients/Reed/avatar.png",
-            RunHistoryIconOutlinePath: "res://ArknightsMap/images/ancients/Reed/avatar.png"
+            MapIconPath: $"res://ArknightsMap/images/ancients/{GetType().Name}/icon.png",
+            MapIconOutlinePath: $"res://ArknightsMap/images/ancients/{GetType().Name}/icon_outline.png",
+            RunHistoryIconPath: $"res://ArknightsMap/images/ancients/{GetType().Name}/avatar.png",
+            RunHistoryIconOutlinePath: $"res://ArknightsMap/images/ancients/{GetType().Name}/avatar.png"
         );
 
     private IReadOnlyList<EventOption> Pool1 =>

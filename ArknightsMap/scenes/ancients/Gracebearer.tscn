@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dbu2xeibqssiv"]
 
-[ext_resource type="Texture2D" uid="uid://da3wpiflhgtll" path="res://ArknightsMap/images/ancients/Gracebearer/background.png" id="1_4k025"]
+[ext_resource type="Texture2D" uid="uid://62wphg56u0gp" path="res://ArknightsMap/images/ancients/Gracebearer/background.png" id="1_4k025"]
 
 [node name="Gracebearer" type="Control"]
 layout_mode = 3
@@ -12,8 +12,8 @@ grow_vertical = 2
 
 [node name="background" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -425.0
-offset_top = -536.0
-offset_right = 2063.0
-offset_bottom = 1952.0
+offset_left = -210.0
+offset_top = -110.0
+offset_right = 2235.0
+offset_bottom = 1265.3125
 texture = ExtResource("1_4k025")

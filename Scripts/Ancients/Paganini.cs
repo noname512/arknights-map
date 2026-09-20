@@ -18,15 +18,15 @@ public class Paganini : ModAncientEventTemplate
     public override Color DialogueColor => new(0.12f, 0.2f, 0.8f);
 
     // 自定义场景的路径
-    public override EventAssetProfile AssetProfile => new(BackgroundScenePath: "res://ArknightsMap/scenes/ancients/Paganini.tscn");
+    public override EventAssetProfile AssetProfile => new(BackgroundScenePath: $"res://ArknightsMap/scenes/ancients/{GetType().Name}.tscn");
 
     // 自定义地图图标和轮廓的路径
     public override AncientEventPresentationAssetProfile AncientPresentationAssetProfile =>
         new(
-            MapIconPath: "res://ArknightsMap/images/ancients/Paganini/icon.png",
-            MapIconOutlinePath: "res://ArknightsMap/images/ancients/Paganini/icon_outline.png",
-            RunHistoryIconPath: "res://ArknightsMap/images/ancients/Paganini/avatar.png",
-            RunHistoryIconOutlinePath: "res://ArknightsMap/images/ancients/Paganini/avatar.png"
+            MapIconPath: $"res://ArknightsMap/images/ancients/{GetType().Name}/icon.png",
+            MapIconOutlinePath: $"res://ArknightsMap/images/ancients/{GetType().Name}/icon_outline.png",
+            RunHistoryIconPath: $"res://ArknightsMap/images/ancients/{GetType().Name}/avatar.png",
+            RunHistoryIconOutlinePath: $"res://ArknightsMap/images/ancients/{GetType().Name}/avatar.png"
         );
 
     private IReadOnlyList<EventOption> Pool1 =>
@@ -40,7 +40,6 @@ public class Paganini : ModAncientEventTemplate
             CreateModRelicOption<GiantGun>(), // 铳骑的巨铳
             CreateModRelicOption<NoSugarIce>(), // 无糖冰淇淋
             CreateModRelicOption<Target>(), // 靶子
-            
         ];
     private IReadOnlyList<EventOption> Pool3 =>
         [

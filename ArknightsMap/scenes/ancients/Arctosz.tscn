@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://i23lxht5ovlg"]
+
+[ext_resource type="Texture2D" uid="uid://bhodrqcp8qn7c" path="res://ArknightsMap/images/ancients/Arctosz/background.png" id="1_bs1bo"]
+
+[node name="Arctosz" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -224.0
+offset_top = -280.0
+offset_right = 2359.111
+offset_bottom = 1173.0
+texture = ExtResource("1_bs1bo")

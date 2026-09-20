@@ -175,5 +175,8 @@
     "ARKNIGHTS_MAP_POWER_STAND_STILL_POWER.description": "这个敌人及其身后的敌人不会受到[gold]暴风雪[/gold]的影响。",
     "ARKNIGHTS_MAP_POWER_EGG_GUARDING_POWER.title": "护卵本能",
     "ARKNIGHTS_MAP_POWER_EGG_GUARDING_POWER.smartDescription": "[gold]{OwnerName}[/gold]被[gold]暴风雪[/gold]吹动后将会狂暴。",
-    "ARKNIGHTS_MAP_POWER_EGG_GUARDING_POWER.description": "这个敌人被[gold]暴风雪[/gold]吹动后将会狂暴。"
+    "ARKNIGHTS_MAP_POWER_EGG_GUARDING_POWER.description": "这个敌人被[gold]暴风雪[/gold]吹动后将会狂暴。",
+    "ARKNIGHTS_MAP_POWER_SET_TRAP_POWER.title": "设置陷阱",
+    "ARKNIGHTS_MAP_POWER_SET_TRAP_POWER.smartDescription": "若敌人攻击你并且造成伤害，在你的下回合开始时，[gold]击晕[/gold]该敌人{Upgrade:cond:==0?|并给予其[blue]{VulnerablePower}[/blue]层[gold]易伤[/gold]}。",
+    "ARKNIGHTS_MAP_POWER_SET_TRAP_POWER.description": "若敌人攻击你并且造成伤害，在你的下回合开始时，[gold]击晕[/gold]该敌人并给予其[blue]1[/blue]层[gold]易伤[/gold]。"
 }

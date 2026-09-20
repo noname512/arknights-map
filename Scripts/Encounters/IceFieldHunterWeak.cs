@@ -3,7 +3,6 @@ using ArknightsMap.Scripts.Monsters;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Encounters;
 
@@ -12,14 +11,7 @@ public class IceFieldHunterWeak : AbstractSnowyMountainEncounter
 {
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<IcefieldHunter>()];
 
-    public override EncounterAssetProfile AssetProfile =>
-        new(
-            RunHistoryIconPath: $"res://ArknightsMap/images/map/{GetType().Name}History.png",
-            RunHistoryIconOutlinePath: $"res://ArknightsMap/images/map/{GetType().Name}History_outline.png",
-            EncounterScenePath: $"res://ArknightsMap/scenes/encounters/SnowyMountainEncounter.tscn"
-        );
-
-    public override string CustomBgm => "event:/ArknightsMap/music/all_flames_returned_bat_1";
+    public override string CustomBgm => "event:/ArknightsMap/music/fxgj_bat_1";
 
     public override IReadOnlyList<string> Slots => ["5", "7"];
 

@@ -26,7 +26,7 @@ public class HaroldCraigavonBoss : AbstractSnowyMountainEncounter
     // public override string BossNodePath => $"res://ArknightsMap/images/map/{GetType().Name}Icon";
     public override string BossNodePath => $"res://ArknightsMap/images/map/AFRBossIcon";
 
-    public override string CustomBgm => "event:/ArknightsMap/music/all_flames_returned_bat_1";
+    public override string CustomBgm => "event:/ArknightsMap/music/harold_craigavon_bat";
 
     public override int windBlowDirection => 1;
     public override int windBlowTurn => 6;

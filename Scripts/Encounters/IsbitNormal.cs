@@ -11,7 +11,7 @@ public class IsbitNormal : AbstractSnowyMountainEncounter
 {
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<Isbit>()];
 
-    public override string CustomBgm => "event:/ArknightsMap/music/all_flames_returned_bat_1";
+    public override string CustomBgm => "event:/ArknightsMap/music/xsjl_bat_1";
     public override int playerStartPosition => 3;
     public override int windBlowDirection => -1;
     public override int windBlowTurn => 3;

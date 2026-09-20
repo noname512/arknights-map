@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://5nw1vres180u"]
+
+[ext_resource type="Texture2D" uid="uid://c7fpoo3tnvprw" path="res://ArknightsMap/images/ancients/Ratatos/background.png" id="1_1wnha"]
+
+[node name="Ratatos" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -265.7779
+offset_top = -65.0
+offset_right = 1334.2222
+offset_bottom = 835.0
+scale = Vector2(1.5422223, 1.5422223)
+texture = ExtResource("1_1wnha")

@@ -5,7 +5,6 @@ using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
-using STS2RitsuLib.Utils;
 
 namespace ArknightsMap.Scripts.Ancients;
 
@@ -24,10 +23,10 @@ public class Lemuen : ModAncientEventTemplate
     // 自定义地图图标和轮廓的路径
     public override AncientEventPresentationAssetProfile AncientPresentationAssetProfile =>
         new(
-            MapIconPath: "res://ArknightsMap/images/ancients/Lemuen/icon.png",
-            MapIconOutlinePath: "res://ArknightsMap/images/ancients/Lemuen/icon_outline.png",
-            RunHistoryIconPath: "res://ArknightsMap/images/ancients/Lemuen/avatar.png",
-            RunHistoryIconOutlinePath: "res://ArknightsMap/images/ancients/Lemuen/avatar.png"
+            MapIconPath: $"res://ArknightsMap/images/ancients/{GetType().Name}/icon.png",
+            MapIconOutlinePath: $"res://ArknightsMap/images/ancients/{GetType().Name}/icon_outline.png",
+            RunHistoryIconPath: $"res://ArknightsMap/images/ancients/{GetType().Name}/avatar.png",
+            RunHistoryIconOutlinePath: $"res://ArknightsMap/images/ancients/{GetType().Name}/avatar.png"
         );
 
     private IReadOnlyList<EventOption> Pool1 =>

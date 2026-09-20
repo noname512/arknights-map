@@ -5,8 +5,6 @@ using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Acts;
-using STS2RitsuLib;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -24,18 +22,16 @@ public class Gracebearer : ModAncientEventTemplate
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
     // 自定义场景的路径
-    public override EventAssetProfile AssetProfile => new(BackgroundScenePath: "res://ArknightsMap/scenes/ancients/Gracebearer.tscn");
+    public override EventAssetProfile AssetProfile => new(BackgroundScenePath: $"res://ArknightsMap/scenes/ancients/{GetType().Name}.tscn");
 
     // 自定义地图图标和轮廓的路径
     public override AncientEventPresentationAssetProfile AncientPresentationAssetProfile =>
         new(
-            MapIconPath: "res://ArknightsMap/images/ancients/Gracebearer/icon.png",
-            MapIconOutlinePath: "res://ArknightsMap/images/ancients/Gracebearer/icon_outline.png",
-            RunHistoryIconPath: "res://ArknightsMap/images/ancients/Gracebearer/avatar.png",
-            RunHistoryIconOutlinePath: "res://ArknightsMap/images/ancients/Gracebearer/avatar.png"
-            // TODO
+            MapIconPath: $"res://ArknightsMap/images/ancients/{GetType().Name}/icon.png",
+            MapIconOutlinePath: $"res://ArknightsMap/images/ancients/{GetType().Name}/icon_outline.png",
+            RunHistoryIconPath: $"res://ArknightsMap/images/ancients/{GetType().Name}/avatar.png",
+            RunHistoryIconOutlinePath: $"res://ArknightsMap/images/ancients/{GetType().Name}/avatar.png"
         );
-
 
     // 所有可能的选项
     public override IEnumerable<EventOption> AllPossibleOptions =>
@@ -57,7 +53,7 @@ public class Gracebearer : ModAncientEventTemplate
             RelicOption<Gospel>(), // 福音
             RelicOption<SkullcrackingElegy>(), // 开颅挽歌
         ];
-    
+
     // 生成选项
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {

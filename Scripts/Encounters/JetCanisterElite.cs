@@ -11,7 +11,7 @@ public class JetCanisterElite : AbstractSnowyMountainEncounter
 {
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<JetCanister>()];
 
-    public override string CustomBgm => "event:/ArknightsMap/music/all_flames_returned_bat_1";
+    public override string CustomBgm => "event:/ArknightsMap/music/yxhlc_bat";
     public override int playerStartPosition => 3;
 
     public override IReadOnlyList<string> Slots => ["6"];

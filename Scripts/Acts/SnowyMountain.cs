@@ -14,7 +14,8 @@ namespace ArknightsMap.Scripts.Acts;
 public sealed class SnowyMountain : ModActTemplate
 {
     public override string[] MusicBankPaths => ["res://ArknightsMap/audio/ArknightsMap.bank", "res://ArknightsMap/audio/ArknightsMap.bank"];
-    public override string[] BgMusicOptions => ["event:/ArknightsMap/music/wilds_bg_1", "event:/ArknightsMap/music/wilds_bg_2"];
+    public override string[] BgMusicOptions =>
+        ["event:/ArknightsMap/music/snowy_mountain_bg_1", "event:/ArknightsMap/music/snowy_mountain_bg_2", "event:/ArknightsMap/music/snowy_mountain_bg_3"];
 
     public override Color MapTraveledColor => new Color("27221C");
 
@@ -48,9 +49,10 @@ public sealed class SnowyMountain : ModActTemplate
             // ModelDb.Event<TheWake>(),
         };
 
-    public override IEnumerable<AncientEventModel> AllAncients => new AncientEventModel[] { ModelDb.AncientEvent<Pramanix>() };
+    public override IEnumerable<AncientEventModel> AllAncients =>
+        [ModelDb.AncientEvent<Pramanix>(), ModelDb.AncientEvent<Ratatos>(), ModelDb.AncientEvent<Arctosz>()];
 
-    public override IEnumerable<EncounterModel> BossDiscoveryOrder => new EncounterModel[] { ModelDb.Encounter<DegenbrecherBoss>() };
+    public override IEnumerable<EncounterModel> BossDiscoveryOrder => [ModelDb.Encounter<DegenbrecherBoss>(), ModelDb.Encounter<HaroldCraigavonBoss>()];
 
     public override IEnumerable<EncounterModel> GenerateAllEncounters() =>
         new EncounterModel[]
@@ -58,17 +60,14 @@ public sealed class SnowyMountain : ModActTemplate
             ModelDb.Encounter<FluffySnowballWeak>(),
             ModelDb.Encounter<IceFieldHunterWeak>(),
             ModelDb.Encounter<FrozenMountainBurdenbeastWeak>(),
-            
             ModelDb.Encounter<IcefieldBerserkerNormal>(),
             ModelDb.Encounter<IsbitNormal>(),
-            
+            ModelDb.Encounter<SnowcapAndFowlbeast>(),
             ModelDb.Encounter<TschaggattasElite>(),
             ModelDb.Encounter<GreathornRhuulElite>(),
             ModelDb.Encounter<JetCanisterElite>(),
-            
             ModelDb.Encounter<DegenbrecherBoss>(),
             ModelDb.Encounter<HaroldCraigavonBoss>(),
-            // TODO: 先让游戏能跑，好像出锅了
         };
 
     protected override void ApplyActDiscoveryOrderModifications(UnlockState unlockState) { }

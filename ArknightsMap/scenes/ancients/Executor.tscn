@@ -12,8 +12,9 @@ grow_vertical = 2
 
 [node name="background" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -214.0
-offset_top = -911.0
-offset_right = 2346.0
-offset_bottom = 1649.0
+offset_left = -329.0
+offset_top = -57.0
+offset_right = 4643.4443
+offset_bottom = 2740.0
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_awvct")

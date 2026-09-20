@@ -10,13 +10,13 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Ancients;
 
 [RegisterSharedAncient]
-public class Pramanix : ModAncientEventTemplate
+public class Arctosz : ModAncientEventTemplate
 {
     // 选项按钮颜色
-    public override Color ButtonColor => new(0.14f, 0.6f, 0.72f, 0.5f);
+    public override Color ButtonColor => new(0.17f, 0.13f, 0.13f, 0.5f);
 
     // 对话框颜色
-    public override Color DialogueColor => new(0.17f, 0.75f, 0.9f);
+    public override Color DialogueColor => new(0.21f, 0.17f, 0.17f);
 
     // 自定义场景的路径
     public override EventAssetProfile AssetProfile => new(BackgroundScenePath: $"res://ArknightsMap/scenes/ancients/{GetType().Name}.tscn");
@@ -32,23 +32,19 @@ public class Pramanix : ModAncientEventTemplate
 
     public IEnumerable<EventOption> SinglePlayerOptions =>
         [
-            RelicOption<HerAllowance>(), //祂的许可
-            RelicOption<EreSnowBellsChime>(), //铃音吹雪
-            RelicOption<Faith>(), //信仰
-            RelicOption<Pilgrimage>(), //圣巡
-            RelicOption<SnowTracks>(), //雪迹
-            RelicOption<ByKjeragandrPramanix>(), //耶拉冈德在上·初雪
-            RelicOption<PeaksCladInForest>(), //霜涛覆岭
-            RelicOption<TowardsTheMountainBow>(), //群山俯首
-            RelicOption<BlessingOfKarlan>(), //圣山的祝福
-            RelicOption<NatureDeterrent>(), //自然威慑
+            RelicOption<AncientHeritage>(), // 古老传承
+            RelicOption<HuntingTools>(), // 狩猎工具
+            RelicOption<ByKjeragandrArctosz>(), // 耶拉冈德在上·阿克托斯
+            RelicOption<OffensiveInstinct>(), // 进攻本能
+            RelicOption<MightyFrame>(), // 蛮力之躯
+            RelicOption<Overexertion>(), // 超负荷
         ];
 
     // 所有可能的选项
     public override IEnumerable<EventOption> AllPossibleOptions =>
         [
             .. SinglePlayerOptions,
-            RelicOption<TriClanCouncil>(), //三族议会
+            RelicOption<TriClanCouncil>(), // 三族议会
         ];
 
     // 生成选项

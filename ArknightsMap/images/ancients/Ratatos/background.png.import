@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://62wphg56u0gp"
-path="res://.godot/imported/background.png-d8ba9e451d27c8179e7a3bf0aabdb346.ctex"
+uid="uid://c7fpoo3tnvprw"
+path="res://.godot/imported/background.png-0b987fd7775afd126162c255ef10347e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/ancients/Gracebearer/background.png"
-dest_files=["res://.godot/imported/background.png-d8ba9e451d27c8179e7a3bf0aabdb346.ctex"]
+source_file="res://ArknightsMap/images/ancients/Ratatos/background.png"
+dest_files=["res://.godot/imported/background.png-0b987fd7775afd126162c255ef10347e.ctex"]
 
 [params]
 

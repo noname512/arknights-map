@@ -11,7 +11,7 @@ public class SnowcapAndFowlbeast : AbstractSnowyMountainEncounter
 {
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<Snowcap>(), ModelDb.Monster<EggcradlerFowlbeast>()];
 
-    public override string CustomBgm => "event:/ArknightsMap/music/all_flames_returned_bat_1";
+    public override string CustomBgm => "event:/ArknightsMap/music/xsjl_bat_1";
 
     public override IReadOnlyList<string> Slots => ["6", "8"];
 

@@ -36,5 +36,7 @@
   "ARKNIGHTS_MAP_CARD_EMERGENCY_HEATER.title": "紧急供暖器",
   "ARKNIGHTS_MAP_CARD_EMERGENCY_HEATER.description": "如果这张牌在你的[gold]手牌[/gold]中，敌人对你造成的伤害减少[blue]{Amount}[/blue]点。",
   "ARKNIGHTS_MAP_CARD_ESTINGUISHED_EMERGENCY_HEATER.title": "熄灭的紧急供暖器",
-  "ARKNIGHTS_MAP_CARD_ESTINGUISHED_EMERGENCY_HEATER.description": "点燃此紧急供暖器。回合结束时耗能减少1。"
+  "ARKNIGHTS_MAP_CARD_ESTINGUISHED_EMERGENCY_HEATER.description": "点燃此紧急供暖器。回合结束时耗能减少1。",
+  "ARKNIGHTS_MAP_CARD_SET_TRAP.title": "设置陷阱",
+  "ARKNIGHTS_MAP_CARD_SET_TRAP.description": "若敌人攻击你并且造成伤害，在你的下回合开始时，[gold]击晕[/gold]该敌人{IfUpgraded:show:并给予其[blue]{VulnerablePower}[/blue]层[gold]易伤[/gold]}。"
 }
