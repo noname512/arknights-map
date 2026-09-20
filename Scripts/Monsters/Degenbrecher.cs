@@ -105,6 +105,7 @@ public class Degenbrecher : AbstractSnowyMountainMonster
                 }
                 await PowerCmd.Apply<AdmitPower>(new ThrowingPlayerChoiceContext(), Creature, AdmitRequest, Creature, null);
                 await PowerCmd.Apply<MomentumMurder>(new ThrowingPlayerChoiceContext(), Creature, (int)(Creature.MaxHp * 0.75), Creature, null);
+                Creature.GetPower<MomentumMurder>()!.Admit *= CombatState.Players.Count;
                 await PowerCmd.Apply<LowStrengthPower>(new ThrowingPlayerChoiceContext(), Creature, lowStrengthPower, Creature, null);
             },
             new BuffIntent()

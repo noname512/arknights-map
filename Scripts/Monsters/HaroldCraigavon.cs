@@ -26,7 +26,7 @@ public class HaroldCraigavon : AbstractSnowyMountainMonster
 
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
     private int dmg1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 65, 53);
-    private int dmg2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 130, 112);
+    private int dmg2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 130, 106);
     private int dmg3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 55, 44);
     private int dmg4 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 80, 67);
     private int cardNum => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 5, 4);
