@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.GameActions;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Enchantments;
 using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.Combat;
@@ -147,6 +148,7 @@ public class PassRestSiteOption : ModRestSiteOptionTemplate
             if (LocalContext.IsMe(target))
             {
                 CardModel card = enumerable.FirstOrDefault()!;
+                CardCmd.Enchant<Glam>(card, 1m);
                 CardPileAddResult result = new CardPileAddResult
                 {
                     success = true,

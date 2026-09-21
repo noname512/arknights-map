@@ -318,7 +318,7 @@
     "ARKNIGHTS_MAP_RELIC_GOSPEL.description": "当你进入一个非战斗房间时，获得[green]{MaxHp}[/green]点最大生命，并随机升级一张牌。",
     "ARKNIGHTS_MAP_RELIC_GOSPEL.flavor": "她会提供无微不至的照顾。",
     "ARKNIGHTS_MAP_RELIC_NUN_HABIT.title": "修女服",
-    "ARKNIGHTS_MAP_RELIC_NUN_HABIT.description": "你可以在休息处给队友传递卡牌与这个遗物。",
+    "ARKNIGHTS_MAP_RELIC_NUN_HABIT.description": "你可以在休息处将卡牌（额外获得[yellow]附魔[/yellow]：[purple]华彩[/purple]）与这个遗物一起传递给队友。",
     "ARKNIGHTS_MAP_RELIC_NUN_HABIT.flavor": "我去找件干净衣服给您。咦，好像没有常服，只有修女服了，您介意吗？",
     "ARKNIGHTS_MAP_RELIC_SKULLCRACKING_ELEGY.title": "开颅挽歌",
     "ARKNIGHTS_MAP_RELIC_SKULLCRACKING_ELEGY.description": "你的前[blue]{Times}[/blue]次攻击牌会额外打出一次。当你受到伤害时，重置该计数。",
