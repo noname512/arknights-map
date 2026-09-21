@@ -6,7 +6,7 @@ using STS2RitsuLib.Scaffolding.Content;
 [RegisterPower]
 public sealed class PositionPower : ModPowerTemplate
 {
-    public override PowerType Type => PowerType.None;
+    public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;
 

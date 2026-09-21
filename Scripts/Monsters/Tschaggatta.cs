@@ -41,7 +41,7 @@ public class Tschaggatta : AbstractSnowyMountainMonster
             new SingleAttackIntent(Damage1)
         );
         MoveState specialMove1 = new MoveState(
-            "ATTACK",
+            "SP_ATTACK",
             async targets =>
                 await DamageCmd
                     .Attack(Damage1)

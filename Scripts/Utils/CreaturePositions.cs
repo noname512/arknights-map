@@ -57,6 +57,10 @@ public sealed class CreaturePositions : HookedSingletonModel
             WindBlowTurn = myEncounter.windBlowTurn;
             WindBlowDirection = myEncounter.windBlowDirection;
         }
+        else
+        {
+            return;
+        }
         foreach (Creature c in CurrentCombatState.PlayerCreatures)
         {
             Positions[c] = playerPos;
@@ -82,21 +86,24 @@ public sealed class CreaturePositions : HookedSingletonModel
 
     public override async Task AfterCreatureAddedToCombat(Creature c)
     {
-        if (c.IsMonster)
+        if (CurrentCombatState!.Encounter is AbstractSnowyMountainEncounter)
         {
-            if (c.SlotName != null && (c.SlotName[0] <= '9') && (c.SlotName[0] >= '0'))
+            if (c.IsMonster)
             {
-                Positions[c] = c.SlotName[0] - '0';
+                if (c.SlotName != null && (c.SlotName[0] <= '9') && (c.SlotName[0] >= '0'))
+                {
+                    Positions[c] = c.SlotName[0] - '0';
+                }
+                else
+                {
+                    Positions[c] = 6;
+                }
+                PositionPower power = (PositionPower)ModelDb.Power<PositionPower>().ToMutable();
+                power.ChangePos(Positions[c]);
+                await PowerCmd.Apply(new ThrowingPlayerChoiceContext(), power, c, 1, null, null);
             }
-            else
-            {
-                Positions[c] = 6;
-            }
-            PositionPower power = (PositionPower)ModelDb.Power<PositionPower>().ToMutable();
-            power.ChangePos(Positions[c]);
-            await PowerCmd.Apply(new ThrowingPlayerChoiceContext(), power, c, 1, null, null);
+            // 懒得考虑别的mod可能会导致的有玩家游戏中复活的情况了
         }
-        // 懒得考虑别的mod可能会导致的有玩家游戏中复活的情况了
     }
 
     public override async Task AfterSideTurnEndLate(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
