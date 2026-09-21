@@ -13,7 +13,7 @@ namespace ArknightsMap.Scripts.Acts;
 [RegisterAct]
 public sealed class SnowyMountain : ModActTemplate
 {
-    public override string[] MusicBankPaths => ["res://ArknightsMap/audio/ArknightsMap.bank", "res://ArknightsMap/audio/ArknightsMap.bank"];
+    public override string[] MusicBankPaths => Enumerable.Repeat("res://ArknightsMap/audio/ArknightsMap.bank", 3).ToArray();
     public override string[] BgMusicOptions =>
         ["event:/ArknightsMap/music/snowy_mountain_bg_1", "event:/ArknightsMap/music/snowy_mountain_bg_2", "event:/ArknightsMap/music/snowy_mountain_bg_3"];
 
