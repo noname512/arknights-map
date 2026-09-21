@@ -80,6 +80,25 @@ public sealed class CreaturePositions : HookedSingletonModel
         }
     }
 
+    public override async Task AfterCreatureAddedToCombat(Creature c)
+    {
+        if (c.IsMonster)
+        {
+            if (c.SlotName != null && (c.SlotName[0] <= '9') && (c.SlotName[0] >= '0'))
+            {
+                Positions[c] = c.SlotName[0] - '0';
+            }
+            else
+            {
+                Positions[c] = 6;
+            }
+            PositionPower power = (PositionPower)ModelDb.Power<PositionPower>().ToMutable();
+            power.ChangePos(Positions[c]);
+            await PowerCmd.Apply(new ThrowingPlayerChoiceContext(), power, c, 1, null, null);
+        }
+        // 懒得考虑别的mod可能会导致的有玩家游戏中复活的情况了
+    }
+
     public override async Task AfterSideTurnEndLate(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (side == CombatSide.Player && WindBlowTurn != 0 && CurrentCombatState!.RoundNumber % WindBlowTurn == 0)

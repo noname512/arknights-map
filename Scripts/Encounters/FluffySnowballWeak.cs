@@ -3,6 +3,7 @@ using ArknightsMap.Scripts.Monsters;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
 using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Encounters;
 
@@ -10,6 +11,7 @@ namespace ArknightsMap.Scripts.Encounters;
 public class FluffySnowballWeak : AbstractSnowyMountainEncounter
 {
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<FluffySnowball>(), ModelDb.Monster<Snowchild>()];
+    public override EncounterAssetProfile AssetProfile => new(EncounterScenePath: $"res://ArknightsMap/scenes/encounters/SnowyMountainEncounter.tscn");
 
     public override string CustomBgm => "event:/ArknightsMap/music/xsjl_bat_1";
 

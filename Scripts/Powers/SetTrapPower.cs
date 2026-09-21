@@ -69,5 +69,6 @@ public sealed class SetTrapPower : ModPowerTemplate
         {
             await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), targets, DynamicVars.Vulnerable.IntValue, Owner, null);
         }
+        targets.Clear();
     }
 }
