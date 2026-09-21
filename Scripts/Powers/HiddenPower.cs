@@ -102,7 +102,7 @@ public class HiddenPower : ModPowerTemplate
             CardModel card2 = CombatState.CreateCard(card, Target.Player!);
             cards.Add(card2);
         }
-        CardModel? cardModel = await CardSelectCmd.FromChooseACardScreen(choiceContext, cards, Target.Player!);
+        CardModel? cardModel = await CardSelectCmd.FromChooseACardScreen(new BlockingPlayerChoiceContext(), cards, Target.Player!);
         if (cardModel != null)
         {
             await ((KnowledgeDemon.IChoosable)cardModel).OnChosen();
