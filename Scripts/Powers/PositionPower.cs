@@ -20,5 +20,6 @@ public sealed class PositionPower : ModPowerTemplate
     public void ChangePos(int pos)
     {
         DynamicVars["Pos"].BaseValue = pos;
+        InvokeDisplayAmountChanged();
     }
 }

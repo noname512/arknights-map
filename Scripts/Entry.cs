@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Modding;
 using STS2RitsuLib;
 using STS2RitsuLib.Audio;
 using STS2RitsuLib.Interop;
+using STS2RitsuLib.Scaffolding.Content;
 using STS2RitsuLib.Utils.Persistence;
 
 namespace ArknightsMap.Scripts;
@@ -37,31 +38,11 @@ public class Entry
         harmony.PatchAll();
         var assembly = Assembly.GetExecutingAssembly();
         RitsuLibFramework.EnsureGodotScriptsRegistered(assembly, Logger);
+        SettingsPage.Register();
         // 自动注册内容
         ModTypeDiscoveryHub.RegisterModAssembly(ModId, assembly);
-        /* RitsuLibFramework.CreateContentPack(ModId)
-            .ActEnterForce<Wilds>(
-                1,
-                priority: 100,
-                eligibility: ctx => true)
-            .ActEnterWeightedPool(1)
-            .ActEnterWeightedPoolCandidate<Wilds>(1, ctx => true, ctx => 1)
-            // 必定进入Wilds */
-        RitsuLibFramework.CreateContentPack(ModId).ActEnterWeightedPool(1).ActEnterWeightedPoolCandidate<Wilds>(1, ctx => true, weight => 99999).Apply();
-        if (isDemo)
-        {
-            RitsuLibFramework
-                .CreateContentPack(ModId)
-                .ActEnterForce<SnowyMountain>(2, priority: 100, eligibility: ctx => true)
-                .ActEnterWeightedPool(2)
-                .ActEnterWeightedPoolCandidate<SnowyMountain>(2, ctx => true, ctx => 1);
-            RitsuLibFramework
-                .CreateContentPack(ModId)
-                .ActEnterWeightedPool(2)
-                .ActEnterWeightedPoolCandidate<SnowyMountain>(2, ctx => true, weight => 99999999)
-                .Apply();
-            RitsuLibFramework.CreateContentPack(ModId).ActEnterWeightedPool(2).ActEnterWeightedPoolCandidate<Laterano>(2, ctx => true, weight => 99999).Apply();
-        }
+
+        InitActs();
 
         using (RitsuLibFramework.BeginModDataRegistration(ModId))
         {
@@ -78,5 +59,60 @@ public class Entry
 
         FmodStudioDeferredBankRegistration.RegisterBank("res://ArknightsMap/audio/ArknightsMap.bank");
         FmodStudioDeferredBankRegistration.RegisterStudioGuidMappings("res://ArknightsMap/audio/GUIDs.txt");
+    }
+
+    private static void InitActs()
+    {
+        ModContentPackBuilder packBuilder = RitsuLibFramework.CreateContentPack(ModId);
+        // act 2
+        {
+            // 有原版地图
+            if (SettingsPage.Act2Binding.Read())
+            {
+                if (SettingsPage.WildsBinding.Read())
+                {
+                    packBuilder.ActEnterUniformPoolCandidate<Wilds>(1, ctx => true).Apply();
+                }
+            }
+            else
+            {
+                if (SettingsPage.WildsBinding.Read())
+                {
+                    packBuilder.ActEnterForce<Wilds>(1, 100, ctx => true).Apply();
+                }
+            }
+        }
+        // act 3
+        if (isDemo)
+        {
+            // 有原版地图
+            if (SettingsPage.Act2Binding.Read())
+            {
+                if (SettingsPage.SnowyMountainBinding.Read())
+                {
+                    packBuilder.ActEnterUniformPoolCandidate<SnowyMountain>(2, ctx => true).Apply();
+                }
+                if (SettingsPage.LateranoBinding.Read())
+                {
+                    packBuilder.ActEnterUniformPoolCandidate<Laterano>(2, ctx => true).Apply();
+                }
+            }
+            else
+            {
+                List<Action<int>> validActs = [];
+                if (SettingsPage.SnowyMountainBinding.Read())
+                {
+                    validActs.Add(res => packBuilder.ActEnterForce<SnowyMountain>(2, 100, ctx => ctx.Rng.NextInt(res) == 0).Apply());
+                }
+                if (SettingsPage.LateranoBinding.Read())
+                {
+                    validActs.Add(res => packBuilder.ActEnterForce<Laterano>(2, 100, ctx => ctx.Rng.NextInt(res) == 0).Apply());
+                }
+                for (int i = 0; i < validActs.Count; i++)
+                {
+                    validActs[i](validActs.Count - i);
+                }
+            }
+        }
     }
 }

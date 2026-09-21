@@ -38,6 +38,7 @@ public class Arctosz : ModAncientEventTemplate
             RelicOption<OffensiveInstinct>(), // 进攻本能
             RelicOption<MightyFrame>(), // 蛮力之躯
             RelicOption<Overexertion>(), // 超负荷
+            RelicOption<WeightedPlate>(), // 配重片
         ];
 
     // 所有可能的选项
