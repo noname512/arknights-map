@@ -269,6 +269,10 @@ public sealed class CreaturePositions : HookedSingletonModel
 
     private static bool ShouldHandleCreature(Creature c, int direction)
     {
+        if (!c.IsAlive)
+        {
+            return false;
+        }
         for (int i = Positions[c]; i >= 1 && i <= 9; i -= direction)
         {
             List<Creature> creatures = GetCreaturesInPosition(i);

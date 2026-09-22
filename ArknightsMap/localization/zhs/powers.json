@@ -162,7 +162,7 @@
     "ARKNIGHTS_MAP_POWER_LOW_STRENGTH_POWER.smartDescription": "[gold]{OwnerName}[/gold]每受到[blue]{Amount}[/blue]点伤害，本回合中失去[blue]1[/blue]点[gold]力量[/gold]。",
     "ARKNIGHTS_MAP_POWER_LOW_STRENGTH_POWER.description": "这个敌人每受到一定伤害，失去[blue]1[/blue]点[gold]力量[/gold]。",
     "ARKNIGHTS_MAP_POWER_SLEEP_POWER.title": "沉眠",
-    "ARKNIGHTS_MAP_POWER_SLEEP_POWER.smartDescription": "[gold]{Ow·nerName}[/gold]会在失去生命时或在[blue]{Amount}[/blue]回合后苏醒。",
+    "ARKNIGHTS_MAP_POWER_SLEEP_POWER.smartDescription": "[gold]{OwnerName}[/gold]会在失去生命时或在[blue]{Amount}[/blue]回合后苏醒。",
     "ARKNIGHTS_MAP_POWER_SLEEP_POWER.description": "这个敌人会在失去生命时或在若干回合后苏醒。",
     "ARKNIGHTS_MAP_POWER_AVALANCHE_POWER.title": "雪崩",
     "ARKNIGHTS_MAP_POWER_AVALANCHE_POWER.smartDescription": "[gold]{OwnerName}[/gold]每损失[blue]{Threshold}[/blue]点生命值，会被向右推动一位。若已处于最右侧的位置，则额外失去[blue]{HpLoss}[/blue]点生命值。（当前已损失[blue]{Current}[/blue]点）",
