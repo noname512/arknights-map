@@ -3,6 +3,7 @@ using Godot;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Enchantments;
+using MegaCrit.Sts2.Core.Random;
 
 namespace ArknightsMap.Scripts.Utils.MerchantEnchantment;
 
@@ -21,18 +22,23 @@ class EnchantmentMerchantUtils
 
     public static EnchantmentModel GenerateModel(Player player, CardModel? card)
     {
-        EnchantmentModel model = player.PlayerRng.Shops.NextItem(ValidEnchantments.Where(e => card == null ? true : e.CanEnchant(card)))!.ToMutable();
+        return GenerateModel(card, player.PlayerRng.Shops);
+    }
+
+    public static EnchantmentModel GenerateModel(CardModel? card, Rng rng)
+    {
+        EnchantmentModel model = rng.NextItem(ValidEnchantments.Where(e => card == null ? true : e.CanEnchant(card)))!.ToMutable();
         if (model is Sharp || model is Nimble)
         {
-            model.Amount = player.PlayerRng.Shops.NextInt(1, 10);
+            model.Amount = rng.NextInt(1, 10);
         }
         else if (model is Swift)
         {
-            model.Amount = player.PlayerRng.Shops.NextInt(1, 3);
+            model.Amount = rng.NextInt(1, 3);
         }
         else if (model is Vigorous)
         {
-            model.Amount = player.PlayerRng.Shops.NextInt(4, 20);
+            model.Amount = rng.NextInt(4, 20);
         }
         return model;
     }

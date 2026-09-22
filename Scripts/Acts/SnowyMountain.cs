@@ -50,7 +50,7 @@ public sealed class SnowyMountain : ModActTemplate
         };
 
     public override IEnumerable<AncientEventModel> AllAncients =>
-        [ModelDb.AncientEvent<Pramanix>(), ModelDb.AncientEvent<Ratatos>(), ModelDb.AncientEvent<Arctosz>()];
+        [ModelDb.AncientEvent<Pramanix>(), ModelDb.AncientEvent<Ratatos>(), ModelDb.AncientEvent<Arctosz>(), ModelDb.AncientEvent<SilverAsh>()];
 
     public override IEnumerable<EncounterModel> BossDiscoveryOrder => [ModelDb.Encounter<DegenbrecherBoss>(), ModelDb.Encounter<HaroldCraigavonBoss>()];
 

@@ -5,8 +5,8 @@ using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
+using MegaCrit.Sts2.Core.Saves.Runs;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -17,8 +17,22 @@ public class TowardsTheMountainBow : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromPower<SlowPower>()];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("Turn", 1)];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.Static(StaticHoverTip.Stun)];
+
+    [SavedProperty]
+    private int Turn
+    {
+        get { return DynamicVars["Turn"].IntValue; }
+        set
+        {
+            AssertMutable();
+            DynamicVars["Turn"].BaseValue = value;
+        }
+    }
+    private bool usedThisCombat;
+
+    public override int DisplayAmount => Turn;
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -37,10 +51,21 @@ public class TowardsTheMountainBow : ModRelicTemplate
         ICombatState combatState
     )
     {
-        if (participants.Contains(Owner.Creature) && Owner.PlayerCombatState!.TurnNumber <= 1)
+        if (side == Owner.Creature.Side && !usedThisCombat && Owner.PlayerCombatState!.TurnNumber == Turn)
         {
             Flash();
-            await PowerCmd.Apply<SlowPower>(choiceContext, combatState.HittableEnemies, 1, Owner.Creature, null);
+            foreach (var enemy in Owner.Creature.CombatState!.Enemies.Where(e => e.IsAlive))
+            {
+                await CreatureCmd.Stun(enemy);
+            }
+            usedThisCombat = true;
+            Turn++;
+            InvokeDisplayAmountChanged();
         }
+    }
+
+    public override async Task BeforeCombatStart()
+    {
+        usedThisCombat = false;
     }
 }

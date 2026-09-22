@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cv50en0hdpfnd"]
+
+[ext_resource type="Texture2D" uid="uid://df5uyuyj2pjgj" path="res://ArknightsMap/images/ancients/Enciodes/background.png" id="1_f4e62"]
+
+[node name="SilverAsh" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -147.0
+offset_top = -65.0
+offset_right = 1735.6666
+offset_bottom = 994.0
+texture = ExtResource("1_f4e62")
