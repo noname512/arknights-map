@@ -10,7 +10,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Ancients;
 
 [RegisterSharedAncient]
-public class SilverAsh : ModAncientEventTemplate
+public class Enciodes : ModAncientEventTemplate
 {
     // 选项按钮颜色
     public override Color ButtonColor => new(0.16f, 0.16f, 0.16f, 0.5f);
