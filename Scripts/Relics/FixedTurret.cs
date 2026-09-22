@@ -37,7 +37,7 @@ public class FixedTurret : ModRelicTemplate
         CardSelectorPrefs prefs = new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, DynamicVars.Cards.IntValue);
         foreach (CardModel item in await CardSelectCmd.FromDeckForEnchantment(Owner, ModelDb.Enchantment<Fire>(), 1, prefs))
         {
-            CardCmd.Enchant<Blessing>(item, 1m);
+            CardCmd.Enchant<Fire>(item, 1m);
             NCardEnchantVfx? nCardEnchantVfx = NCardEnchantVfx.Create(item);
             if (nCardEnchantVfx != null)
             {

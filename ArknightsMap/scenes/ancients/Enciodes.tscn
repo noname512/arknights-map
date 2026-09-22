@@ -14,8 +14,8 @@ metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -147.0
-offset_top = -65.0
-offset_right = 1735.6666
-offset_bottom = 994.0
+offset_left = -355.0
+offset_top = -57.0
+offset_right = 2014.7778
+offset_bottom = 1276.0
 texture = ExtResource("1_f4e62")
