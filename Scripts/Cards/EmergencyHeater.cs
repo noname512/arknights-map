@@ -14,7 +14,7 @@ namespace ArknightsMap.Scripts.Cards;
 public class EmergencyHeater : ModCardTemplate
 {
     private const int energyCost = 0;
-    private const CardType type = CardType.Skill;
+    private const CardType type = CardType.Status;
     private const CardRarity rarity = CardRarity.Token;
     private const TargetType targetType = TargetType.Self;
     public override int MaxUpgradeLevel => 0;

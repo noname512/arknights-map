@@ -57,7 +57,7 @@ public class FrozenMountainBurdenbeast : AbstractSnowyMountainMonster
                         await PowerCmd.Remove(power);
                     }
                 }
-                await PowerCmd.Apply<SleepPower>(new ThrowingPlayerChoiceContext(), Creature, 3, Creature, null);
+                await PowerCmd.Apply<SleepPower>(new ThrowingPlayerChoiceContext(), Creature, 4, Creature, null);
                 await PowerCmd.Apply<DamageOutPower>(new ThrowingPlayerChoiceContext(), Creature, 10, Creature, null);
                 await PowerCmd.Apply<PlatingPower>(new ThrowingPlayerChoiceContext(), Creature, 15, Creature, null);
             },
