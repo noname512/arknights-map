@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -29,7 +30,7 @@ public class FortunaPower : ModPowerTemplate
         CardModel? cardSource
     )
     {
-        if (dealer != Owner)
+        if (dealer != Owner || target != LocalContext.GetMe(Owner.CombatState)!.Creature)
         {
             return;
         }
