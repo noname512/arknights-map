@@ -53,35 +53,38 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
-    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
+    
+
+    public override decimal ModifyHpLostAfterOsty(Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         if (target != Creature)
         {
-            return 0;
+            return amount;
         }
 
         // 只在 Phase 1 且还没触发转阶段时锁血
         if (Phase != 1 || !ShouldPreventDamage)
         {
-            return 0;
+            return amount;
         }
 
         var threshold = Creature.MaxHp / 3;
 
         if (Creature.CurrentHp - amount >= threshold)
         {
-            return 0;
+            return amount;
         }
 
         if (Creature.CurrentHp <= threshold && ShouldPreventDamage)
         {
-            return -amount;
+            return 0;
         }
 
         // 只扣到半血为止
         var targetDamage = Creature.CurrentHp - threshold;
-        return targetDamage - amount;
+        return targetDamage;
     }
+
 
     public override async Task AfterDamageReceived(
         PlayerChoiceContext choiceContext,
@@ -245,10 +248,10 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
             {
                 await CreatureCmd.TriggerAnim(Creature, "B_Attack_Begin_2", 0.8f);
                 await Cmd.Wait(1.0f);
-                await DamageCmd.Attack(debuffAttackPhase1).FromMonster(this).WithNoAttackerAnim().Execute(null);
+                await DamageCmd.Attack(debuffAttackPhase2).FromMonster(this).WithNoAttackerAnim().Execute(null);
                 foreach (Creature c in targets) { }
             },
-            [new SingleAttackIntent(debuffAttackPhase1), new DebuffIntent()]
+            [new SingleAttackIntent(debuffAttackPhase2), new DebuffIntent()]
         );
 
         MoveState Revive = new MoveState(
