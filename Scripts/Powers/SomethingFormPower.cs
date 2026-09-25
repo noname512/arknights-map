@@ -17,7 +17,7 @@ public class SomethingFormPower : ModPowerTemplate
     public override PowerType Type => PowerType.Buff;
     public PowerStackType _stackType = PowerStackType.Single;
     public override PowerStackType StackType => _stackType;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar("CardName", "")];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar("CardName", " ")];
     public CardModel? baseCard;
 
     public enum XType
