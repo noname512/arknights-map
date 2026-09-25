@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
@@ -5,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
@@ -92,7 +94,12 @@ public class Tschaggatta : AbstractSnowyMountainMonster
         startState.AddState(move3, () => Creature.SlotName == "7");
         startState.AddState(move4, () => Creature.SlotName == "8");
         startState.AddState(move1, () => true);
-        specialMove1.FollowUpState = specialMove2;
+
+        ConditionalBranchState summonCondition = new ConditionalBranchState("SUMMON_COND");
+        summonCondition.AddState(specialMove2, () => CombatState.Enemies.FirstOrDefault(e => e.Monster is Degenbrecher)?.HasPower<WatchingPower>() ?? false);
+        summonCondition.AddState(move2, () => true);
+
+        specialMove1.FollowUpState = summonCondition;
         specialMove2.FollowUpState = move2;
         move1.FollowUpState = move2;
         move2.FollowUpState = move3;
@@ -100,6 +107,7 @@ public class Tschaggatta : AbstractSnowyMountainMonster
         move4.FollowUpState = move1;
         list.Add(specialMove1);
         list.Add(specialMove2);
+        list.Add(summonCondition);
         list.Add(move1);
         list.Add(move2);
         list.Add(move3);

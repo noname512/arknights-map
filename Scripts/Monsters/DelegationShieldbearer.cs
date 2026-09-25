@@ -30,7 +30,7 @@ public class DelegationShieldbearer : AbstractSnowyMountainMonster
         {
             CounterpartFormPower power = (CounterpartFormPower)ModelDb.Power<CounterpartFormPower>().ToMutable();
             power.Target = item;
-            await PowerCmd.Apply(new ThrowingPlayerChoiceContext(), power, item, PowerAmt, Creature, null);
+            await PowerCmd.Apply(new ThrowingPlayerChoiceContext(), power, Creature, PowerAmt, Creature, null);
         }
     }
 
