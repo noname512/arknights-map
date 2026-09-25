@@ -20,24 +20,4 @@ public class FortunaPower : ModPowerTemplate
     // 自定义图标路径。1:1即可。原版游戏大图256x256，小图64x64。
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
-
-    public override async Task AfterDamageGiven(
-        PlayerChoiceContext choiceContext,
-        Creature? dealer,
-        DamageResult result,
-        ValueProp props,
-        Creature target,
-        CardModel? cardSource
-    )
-    {
-        if (dealer != Owner || target != LocalContext.GetMe(Owner.CombatState)!.Creature)
-        {
-            return;
-        }
-        float percent = CombatState.RunState.Rng.CombatTargets.NextFloat(0, 1);
-        if (Owner.Monster is AbstractSankta sankta && percent < 0.7)
-        {
-            await sankta.AddBullet(1);
-        }
-    }
 }
