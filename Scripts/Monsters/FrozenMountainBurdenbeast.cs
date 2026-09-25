@@ -23,7 +23,7 @@ public class FrozenMountainBurdenbeast : AbstractSnowyMountainMonster
 
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
     private int Dmg1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 39, 35);
-    private int Dmg2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 52, 46);
+    private int Dmg2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 45, 40);
 
     public override async Task AfterAddedToRoom()
     {

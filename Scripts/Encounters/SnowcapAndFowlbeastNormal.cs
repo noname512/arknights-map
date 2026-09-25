@@ -8,7 +8,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Encounters;
 
 [RegisterActEncounter(typeof(SnowyMountain))]
-public class SnowcapAndFowlbeast : AbstractSnowyMountainEncounter
+public class SnowcapAndFowlbeastNormal : AbstractSnowyMountainEncounter
 {
     public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<Snowcap>(), ModelDb.Monster<EggcradlerFowlbeast>()];
     public override EncounterAssetProfile AssetProfile => new(EncounterScenePath: $"res://ArknightsMap/scenes/encounters/SnowyMountainEncounter.tscn");
