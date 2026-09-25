@@ -63,6 +63,7 @@ public sealed class SnowyMountain : ModActTemplate
             ModelDb.Encounter<IcefieldBerserkerNormal>(),
             ModelDb.Encounter<IsbitNormal>(),
             ModelDb.Encounter<SnowcapAndFowlbeastNormal>(),
+            ModelDb.Encounter<DelegationShieldbearerAndCenturionNormal>(),
             ModelDb.Encounter<TschaggattasElite>(),
             ModelDb.Encounter<GreathornRhuulElite>(),
             ModelDb.Encounter<JetCanisterElite>(),

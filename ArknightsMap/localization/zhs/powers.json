@@ -178,5 +178,8 @@
     "ARKNIGHTS_MAP_POWER_EGG_GUARDING_POWER.description": "这个敌人被[gold]暴风雪[/gold]吹动后将会狂暴。",
     "ARKNIGHTS_MAP_POWER_SET_TRAP_POWER.title": "设置陷阱",
     "ARKNIGHTS_MAP_POWER_SET_TRAP_POWER.smartDescription": "若敌人攻击你并且造成伤害，在你的下回合开始时，[gold]击晕[/gold]该敌人{Upgrade:cond:==0?|并给予其[blue]{VulnerablePower}[/blue]层[gold]易伤[/gold]}。",
-    "ARKNIGHTS_MAP_POWER_SET_TRAP_POWER.description": "若敌人攻击你并且造成伤害，在你的下回合开始时，[gold]击晕[/gold]该敌人并给予其[blue]1[/blue]层[gold]易伤[/gold]。"
+    "ARKNIGHTS_MAP_POWER_SET_TRAP_POWER.description": "若敌人攻击你并且造成伤害，在你的下回合开始时，[gold]击晕[/gold]该敌人并给予其[blue]1[/blue]层[gold]易伤[/gold]。",
+    "ARKNIGHTS_MAP_POWER_COUNTERPART_FORM_POWER.title": "相持姿态",
+    "ARKNIGHTS_MAP_POWER_COUNTERPART_FORM_POWER.smartDescription": "你的[gold]消耗堆[/gold]每有一张[gold]紧急供暖器[/gold]，[gold]{OwnerName}[/gold]受到的伤害降低[blue]{Amount}[/blue]。若至少有[gold]{Cards}[/gold]张，获得[gold]嘲讽[/gold]。当前有[blue]{CurrentCards}[/blue]张。",
+    "ARKNIGHTS_MAP_POWER_COUNTERPART_FORM_POWER.description": "你的[gold]消耗堆[/gold]每有一张[gold]紧急供暖器[/gold]，这个敌人受到的伤害降低若干点。若至少有一定张，获得[gold]嘲讽[/gold]。"
 }
