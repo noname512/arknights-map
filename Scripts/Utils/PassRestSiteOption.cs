@@ -148,7 +148,10 @@ public class PassRestSiteOption : ModRestSiteOptionTemplate
             if (LocalContext.IsMe(target))
             {
                 CardModel card = enumerable.FirstOrDefault()!;
-                CardCmd.Enchant<Glam>(card, 1m);
+                if (ModelDb.Enchantment<Glam>().CanEnchant(card))
+                {
+                    CardCmd.Enchant<Glam>(card, 1m);
+                }
                 CardPileAddResult result = new CardPileAddResult
                 {
                     success = true,

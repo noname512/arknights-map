@@ -24,7 +24,7 @@ public class Isbit : AbstractSnowyMountainMonster
     public override int MaxInitialHp => MinInitialHp;
 
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
-    private int baseDmg => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 7, 6);
+    private int baseDmg => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 5);
     private int attackCounter = 2;
 
     public override async Task AfterAddedToRoom()
@@ -63,7 +63,7 @@ public class Isbit : AbstractSnowyMountainMonster
     {
         if (dealer == Creature && props == ValueProp.Move)
         {
-            return baseDmg * attackCounter;
+            return baseDmg * attackCounter - 3;
         }
         return 0m;
     }
