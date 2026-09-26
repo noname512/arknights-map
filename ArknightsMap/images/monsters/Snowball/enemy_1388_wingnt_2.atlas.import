@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://m0wbq1jpql5i"
+path="res://.godot/imported/enemy_1388_wingnt_2.atlas-f0319761bbbabbbb8a4b35859e4a94a7.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Snowball/enemy_1388_wingnt_2.atlas"
+dest_files=["res://.godot/imported/enemy_1388_wingnt_2.atlas-f0319761bbbabbbb8a4b35859e4a94a7.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

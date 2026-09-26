@@ -1,0 +1,13 @@
+
+enemy_1388_wingnt_2.png
+size: 137,133
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+C_Weapon
+  rotate: false
+  xy: 2, 2
+  size: 133, 129
+  orig: 133, 129
+  offset: 0, 0
+  index: -1
