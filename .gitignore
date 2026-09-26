@@ -1,6 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+/windows/
 /windows/*.tmp
 ArknightsMap.csproj
 ArknightsMap.sln.DotSettings.user
