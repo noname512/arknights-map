@@ -28,7 +28,7 @@ public partial class NEnchantment : Control
     public static NEnchantment Create(EnchantmentModel enchantment)
     {
         GD.Print($"NEnchantment Create {enchantment.GetType().Name}");
-        string scenePath = "res://ArknightsMap/scenes/enchantment.tscn";
+        string scenePath = "res://ArknightsMap/scenes/ui/enchantment.tscn";
         PackedScene? packedScene = GD.Load<PackedScene>(scenePath);
         NEnchantment nEnchantment = packedScene.Instantiate<NEnchantment>();
         nEnchantment.Name = $"NEnchantment-{enchantment.Id}";

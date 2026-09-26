@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -24,9 +25,10 @@ public sealed class CreaturePositions : HookedSingletonModel
 {
     private static Dictionary<Creature, int> Positions = new();
     private static DamageVar damage = new DamageVar(20, ValueProp.Move);
-    private static int WindBlowTurn = 0;
-    private static int WindBlowDirection = 0;
+    public static int WindBlowTurn = 0;
+    public static int WindBlowDirection = 0;
     private static int POS_DIFF = 150;
+    private static NSnowStormWarning? nSnowStormWarning;
 
     public CreaturePositions()
         : base(HookType.Combat) { }
@@ -45,17 +47,32 @@ public sealed class CreaturePositions : HookedSingletonModel
         return Positions.GetValueOrDefault(c);
     }
 
+    public override Task BeforeRoomEntered(AbstractRoom room)
+    {
+        Positions.Clear();
+        WindBlowTurn = 0;
+        WindBlowDirection = 0;
+        nSnowStormWarning = null;
+        return Task.CompletedTask;
+    }
+
     public override async Task BeforeCombatStart()
     {
         Positions.Clear();
         WindBlowTurn = 0;
         WindBlowDirection = 0;
-        int playerPos = 3;
+        int playerPos;
         if (CurrentCombatState!.Encounter is AbstractSnowyMountainEncounter myEncounter)
         {
             playerPos = myEncounter.playerStartPosition;
             WindBlowTurn = myEncounter.windBlowTurn;
             WindBlowDirection = myEncounter.windBlowDirection;
+            if (WindBlowTurn != 0)
+            {
+                nSnowStormWarning = NSnowStormWarning.Create(CurrentCombatState);
+                NCombatRoom.Instance?.AddChildSafely(nSnowStormWarning);
+                nSnowStormWarning.GlobalPosition = new Vector2(900, 200);
+            }
         }
         else
         {
@@ -104,6 +121,15 @@ public sealed class CreaturePositions : HookedSingletonModel
             }
             // 懒得考虑别的mod可能会导致的有玩家游戏中复活的情况了
         }
+    }
+
+    public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
+    {
+        if (side == CombatSide.Player && WindBlowTurn != 0 && nSnowStormWarning != null)
+        {
+            nSnowStormWarning.Visible = CurrentCombatState!.RoundNumber % WindBlowTurn == 0;
+        }
+        return Task.CompletedTask;
     }
 
     public override async Task AfterSideTurnEndLate(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
