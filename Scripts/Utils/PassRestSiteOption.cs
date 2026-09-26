@@ -143,12 +143,15 @@ public class PassRestSiteOption : ModRestSiteOptionTemplate
             }
             foreach (CardModel item in enumerable)
             {
+                if (ModelDb.Enchantment<Glam>().CanEnchant(item))
+                {
+                    CardCmd.Enchant<Glam>(item, 1m);
+                }
                 await CardPileCmd.GiveToAnotherPlayer(item, target, PileType.Deck);
             }
             if (LocalContext.IsMe(target))
             {
                 CardModel card = enumerable.FirstOrDefault()!;
-                CardCmd.Enchant<Glam>(card, 1m);
                 CardPileAddResult result = new CardPileAddResult
                 {
                     success = true,

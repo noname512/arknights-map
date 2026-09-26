@@ -105,7 +105,7 @@
     "ARKNIGHTS_MAP_POWER_CORROSION_DAMAGE_POWER.smartDescription": "回合结束时，若累计到[blue]5[/blue]点，[gold]{OwnerName}[/gold]将受到[blue]5[/blue]点伤害，失去[blue]1[/blue]点[gold]敏捷[/gold]并失去此效果。",
     "ARKNIGHTS_MAP_POWER_CORROSION_DAMAGE_POWER.description": "回合结束时，若累计到[blue]5[/blue]点，这个敌人将受到[blue]5[/blue]点伤害，失去[blue]1[/blue]点[gold]敏捷[/gold]并失去此效果。",
     "ARKNIGHTS_MAP_POWER_OP_CAR_POWER.title": "共振",
-    "ARKNIGHTS_MAP_POWER_OP_CAR_POWER.smartDescription": "受到伤害后，[gold]假想敌：铳[/gold]将失去其数值一半的生命。\n[gold]{Ownername}[/gold]的回合结束时，如果和[gold]假想敌：铳[/gold]分别在玩家的两侧，则给予所有玩家[blue]1[/blue]层[gold]侵蚀损伤[/gold]。",
+    "ARKNIGHTS_MAP_POWER_OP_CAR_POWER.smartDescription": "受到伤害后，[gold]假想敌：铳[/gold]将失去其数值一半的生命。\n[gold]{OwnerName}[/gold]的回合结束时，如果和[gold]假想敌：铳[/gold]分别在玩家的两侧，则给予所有玩家[blue]1[/blue]层[gold]侵蚀损伤[/gold]。",
     "ARKNIGHTS_MAP_POWER_OP_CAR_POWER.description": "受到伤害后，[gold]假想敌：铳[/gold]将失去其数值一半的生命。\n这个敌人的回合结束时，如果和[gold]假想敌：铳[/gold]分别在玩家的两侧，则给予所有玩家[blue]1[/blue]层[gold]侵蚀损伤[/gold]。",
     "ARKNIGHTS_MAP_POWER_DEAL_CORROSION_DAMAGE_POWER.title": "造成侵蚀损伤",
     "ARKNIGHTS_MAP_POWER_DEAL_CORROSION_DAMAGE_POWER.smartDescription": "[gold]{OwnerName}[/gold]造成一次伤害时，给予1层[gold]侵蚀损伤[/gold]。",
@@ -181,5 +181,8 @@
     "ARKNIGHTS_MAP_POWER_EGG_GUARDING_POWER.description": "这个敌人被[gold]暴风雪[/gold]吹动后将会狂暴。",
     "ARKNIGHTS_MAP_POWER_SET_TRAP_POWER.title": "设置陷阱",
     "ARKNIGHTS_MAP_POWER_SET_TRAP_POWER.smartDescription": "若敌人攻击你并且造成伤害，在你的下回合开始时，[gold]击晕[/gold]该敌人{Upgrade:cond:==0?|并给予其[blue]{VulnerablePower}[/blue]层[gold]易伤[/gold]}。",
-    "ARKNIGHTS_MAP_POWER_SET_TRAP_POWER.description": "若敌人攻击你并且造成伤害，在你的下回合开始时，[gold]击晕[/gold]该敌人并给予其[blue]1[/blue]层[gold]易伤[/gold]。"
+    "ARKNIGHTS_MAP_POWER_SET_TRAP_POWER.description": "若敌人攻击你并且造成伤害，在你的下回合开始时，[gold]击晕[/gold]该敌人并给予其[blue]1[/blue]层[gold]易伤[/gold]。",
+    "ARKNIGHTS_MAP_POWER_COUNTERPART_FORM_POWER.title": "相持姿态",
+    "ARKNIGHTS_MAP_POWER_COUNTERPART_FORM_POWER.smartDescription": "你的[gold]消耗堆[/gold]每有一张[gold]紧急供暖器[/gold]，[gold]{OwnerName}[/gold]受到的伤害降低[blue]{Amount}[/blue]。若至少有[gold]{Cards}[/gold]张，获得[gold]嘲讽[/gold]。当前有[blue]{CurrentCards}[/blue]张。",
+    "ARKNIGHTS_MAP_POWER_COUNTERPART_FORM_POWER.description": "你的[gold]消耗堆[/gold]每有一张[gold]紧急供暖器[/gold]，这个敌人受到的伤害降低若干点。若至少有一定张，获得[gold]嘲讽[/gold]。"
 }

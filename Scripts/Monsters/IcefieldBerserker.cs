@@ -44,7 +44,7 @@ public class IcefieldBerserker : AbstractSnowyMountainMonster
                 await DamageCmd.Attack(Dmg1).FromMonster(this).WithNoAttackerAnim().Execute(null);
                 await CardPileCmd.AddToCombatAndPreview<Cold>(targets, PileType.Hand, 1, null);
             },
-            new SingleAttackIntent(Dmg1)
+            new SingleAttackIntent(Dmg1), new StatusIntent(1)
         );
         MoveState attack2 = new MoveState(
             "ATTACK2",
@@ -55,7 +55,7 @@ public class IcefieldBerserker : AbstractSnowyMountainMonster
                 await DamageCmd.Attack(Dmg2).FromMonster(this).WithNoAttackerAnim().Execute(null);
                 await CardPileCmd.AddToCombatAndPreview<Cold>(targets, PileType.Hand, 1, null);
             },
-            new SingleAttackIntent(Dmg2)
+            new SingleAttackIntent(Dmg2), new StatusIntent(1)
         );
         MoveState attack3 = new MoveState(
             "ATTACK3UNBLOCK",

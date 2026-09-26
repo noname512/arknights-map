@@ -56,6 +56,14 @@ public class Fortuna : AbstractSankta
                     .WithAttackerAnim("Attack01", 0.8f)
                     .WithHitFx(sfx: GetAttackSfx())
                     .Execute(null);
+                for (int i = 0; i < 6; i++)
+                {
+                    float percent = CombatState.RunState.Rng.CombatTargets.NextFloat(0, 1);
+                    if (percent < 0.7)
+                    {
+                        await AddBullet(1);
+                    }
+                }
             },
             [new MultiAttackIntent(Damage01, () => Time), new UseBulletIntent()]
         );
@@ -65,6 +73,10 @@ public class Fortuna : AbstractSankta
             {
                 await DamageCmd.Attack(Damage02).FromMonster(this).WithAttackerAnim("Attack02", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
                 float percent = CombatState.RunState.Rng.CombatTargets.NextFloat(0, 1);
+                if (percent < 0.7)
+                {
+                    await AddBullet(1);
+                }
             },
             new SingleAttackIntent(Damage02)
         );

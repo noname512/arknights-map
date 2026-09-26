@@ -76,7 +76,7 @@ public class SomethingForm : ModCardTemplate
         }
     }
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar("CardName")];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar("CardName", " ")];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => _extraHoverTips;

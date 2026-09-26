@@ -97,6 +97,11 @@ public class Degenbrecher : AbstractSnowyMountainMonster
             {
                 await CreatureCmd.TriggerAnim(Creature, "Revive", 0);
                 await PowerCmd.Remove<WatchingPower>(Creature);
+
+                PositionPower power = (PositionPower)ModelDb.Power<PositionPower>().ToMutable();
+                power.ChangePos((Creature.SlotName?[0] ?? '5') - '0');
+                await PowerCmd.Apply(new ThrowingPlayerChoiceContext(), power, Creature, 1, null, null);
+
                 foreach (Creature item in targets)
                 {
                     HiddenPower hiddenPower = (HiddenPower)ModelDb.Power<HiddenPower>().ToMutable();

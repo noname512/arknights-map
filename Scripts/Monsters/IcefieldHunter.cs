@@ -58,7 +58,7 @@ public class IcefieldHunter : AbstractSnowyMountainMonster
         );
         ConditionalBranchState conditionalBranchState = new ConditionalBranchState("INIT");
 
-        conditionalBranchState.AddState(attack1, () => Creature.SlotName == "6");
+        conditionalBranchState.AddState(attack1, () => Creature.SlotName == "5");
         conditionalBranchState.AddState(attack2, () => true);
 
         attack1.FollowUpState = attack2;

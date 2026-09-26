@@ -46,7 +46,7 @@ public class HaroldCraigavon : AbstractSnowyMountainMonster
             {
                 await CardPileCmd.AddToCombatAndPreview<EmergencyHeater>(targets, PileType.Hand, cardNum, null);
             },
-            new CardDebuffIntent()
+            new StatusIntent(cardNum)
         );
         MoveState attack1 = new MoveState(
             "ATTACK1",
