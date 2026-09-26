@@ -15,8 +15,8 @@ public class IsbitNormal : AbstractSnowyMountainEncounter
 
     public override string CustomBgm => "event:/ArknightsMap/music/xsjl_bat_1";
     public override int playerStartPosition => 3;
-    public override int windBlowDirection => -1;
-    public override int windBlowTurn => 3;
+    public override int windBlowDirection => 1;
+    public override int windBlowTurn => 2;
 
     public override IReadOnlyList<string> Slots => ["7"];
 

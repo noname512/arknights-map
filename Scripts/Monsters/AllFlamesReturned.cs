@@ -26,7 +26,7 @@ public class AllFlamesReturned : AbstractWildsMonster
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 72, 66);
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
-    private int P1AttackDamage => 5;
+    private int P1AttackDamage => 8;
     private int P1PurpleFlame => 1;
     private int StrengthGain => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 2, 1);
     private int RevivePurpleFlame => 3;
