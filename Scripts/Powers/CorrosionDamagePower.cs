@@ -49,7 +49,7 @@ public class CorrosionDamagePower : ModPowerTemplate, IHealthBarForecastSource
         {
             return HealthBarForecasts.Single(
                 0, // 展示的数量（例如如果你的能力有2倍效果可以乘2）
-                new Color(0.4f, 0.1f, 0.1f), // 颜色
+                new Color(0.1f, 0.1f, 0.4f), // 颜色
                 HealthBarForecastGrowthDirection.FromRight // 从左边开始延伸还是右边开始
             // 0, // 顺序，越大越远离血条边缘，默认0
             // PreloadManager.Cache.GetMaterial("res://xxx.tres") // 如果需要自定义材质
@@ -59,7 +59,7 @@ public class CorrosionDamagePower : ModPowerTemplate, IHealthBarForecastSource
         int value = Math.Max(0, DynamicVars["ExtraDamage"].IntValue - Owner.Block);
         return HealthBarForecasts.Single(
             value, // 展示的数量（例如如果你的能力有2倍效果可以乘2）
-            new Color(0.4f, 0.1f, 0.1f), // 颜色
+            new Color(0.1f, 0.1f, 0.4f), // 颜色
             HealthBarForecastGrowthDirection.FromRight // 从左边开始延伸还是右边开始
         // 0, // 顺序，越大越远离血条边缘，默认0
         // PreloadManager.Cache.GetMaterial("res://xxx.tres") // 如果需要自定义材质

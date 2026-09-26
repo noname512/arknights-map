@@ -31,6 +31,8 @@ public class Perplexed : ModCardTemplate
     // 目标类型（AnyEnemy表示任意敌人）
     private const TargetType targetType = TargetType.None;
 
+    public override bool CanBeGeneratedByModifiers => false;
+
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromCard<Perplexed>(), HoverTipFactory.FromPower<PerplexedPower>()];
 
     // 卡图资源

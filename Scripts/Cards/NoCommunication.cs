@@ -18,6 +18,10 @@ namespace ArknightsMap.Scripts.Cards
         private const TargetType targetType = TargetType.Self;
         private const bool shouldShowInCardLibrary = true;
 
+        public override bool CanBeGeneratedByModifiers => false;
+
+	    public override int MaxUpgradeLevel => 0;
+
         public NoCommunication()
             : base(energyCost, type, rarity, targetType) { }
 

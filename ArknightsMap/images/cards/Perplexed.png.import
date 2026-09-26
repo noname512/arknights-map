@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6rwig4p70b4p"
-path="res://.godot/imported/Confused.png-38504c8d882432b7373b1d5d4af816b6.ctex"
+uid="uid://bkeyqdwj0cyoc"
+path="res://.godot/imported/Perplexed.png-0a0e034700dd413abc5391291b857dcd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/cards/Confused.png"
-dest_files=["res://.godot/imported/Confused.png-38504c8d882432b7373b1d5d4af816b6.ctex"]
+source_file="res://ArknightsMap/images/cards/Perplexed.png"
+dest_files=["res://.godot/imported/Perplexed.png-0a0e034700dd413abc5391291b857dcd.ctex"]
 
 [params]
 
