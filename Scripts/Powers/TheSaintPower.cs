@@ -40,7 +40,7 @@ public class TheSaintPower : ModPowerTemplate
         if (!wasRemovalPrevented && creature == Owner)
         {
             GetInternalData<Data>().isReviving = true;
-            if (creature.Monster is TheSaint theSaint)
+            if (creature.Monster is TheSaint theSaint && theSaint.Phase == 1)
             {
                 await theSaint.TriggerFlyState();
             }
@@ -91,6 +91,10 @@ public class TheSaintPower : ModPowerTemplate
     public override bool ShouldCreatureBeRemovedFromCombatAfterDeath(Creature creature)
     {
         if (creature != Owner)
+        {
+            return true;
+        }
+        if (creature.Monster is TheSaint theSaint && theSaint.Phase == 2)
         {
             return true;
         }

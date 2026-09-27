@@ -34,7 +34,7 @@ private int GetArtifactNum()
     {
         OpForGun => 2,
         OpCar    => 1,
-        _        => 3
+        _        => 1
     };
 
     // 关键：模板克隆阶段 Owner 还是 null，此时不能缓存，

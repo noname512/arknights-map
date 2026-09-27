@@ -59,7 +59,7 @@ public class Fortuna : AbstractSankta
                 for (int i = 0; i < 6; i++)
                 {
                     float percent = CombatState.RunState.Rng.CombatTargets.NextFloat(0, 1);
-                    if (percent < 0.7)
+                    if (percent < 0.5)
                     {
                         await AddBullet(1);
                     }
@@ -73,7 +73,7 @@ public class Fortuna : AbstractSankta
             {
                 await DamageCmd.Attack(Damage02).FromMonster(this).WithAttackerAnim("Attack02", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
                 float percent = CombatState.RunState.Rng.CombatTargets.NextFloat(0, 1);
-                if (percent < 0.7)
+                if (percent < 0.5)
                 {
                     await AddBullet(1);
                 }

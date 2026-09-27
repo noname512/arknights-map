@@ -45,7 +45,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
 
     private int block => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 10, 10);
 
-    private int Phase = 1;
+    public int Phase = 1;
 
     private bool ShouldPreventDamage = true;
 
@@ -355,7 +355,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
 
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
     {
-        if (!wasRemovalPrevented && creature == this.Creature)
+        if (!wasRemovalPrevented && creature == this.Creature && Phase == 1)
         {
             
             SetMoveImmediate(FlyState!, forceTransition: true);
