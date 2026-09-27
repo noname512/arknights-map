@@ -38,7 +38,7 @@ public class CounterpartFormPower : ModPowerTemplate
         {
             return true;
         }
-        if ((target.CombatState?.Enemies.Contains(target) ?? false) && !target.HasPower<TauntPower>())
+        if ((target.CombatState?.Enemies.Contains(target) ?? false) && !target.HasPower<TauntPower>() && target != Owner)
         {
             return false;
         }
