@@ -1,4 +1,5 @@
 using ArknightsMap.Scripts.Cards;
+using ArknightsMap.Scripts.Powers;
 using Godot;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
@@ -28,8 +29,8 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
     protected override int BulletMax => 0;
     protected override int InitialBullet => 0;
 
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 450, 450);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 450, 450);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 200, 200);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 200, 200);
 
     private int heavyAttackPhase1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 45, 45);
 
@@ -48,61 +49,29 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
 
     private bool ShouldPreventDamage = true;
 
+    public override bool ShouldDisappearFromDoom => Phase == 2;
+
+    private MoveState? FlyState;
+
     private bool HasStun = false;
 
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
+    public async Task TriggerFlyState()
+    {
+        await CreatureCmd.TriggerAnim(Creature, "A_Revive_1", 0.5f);
+        await CreatureCmd.TriggerAnim(Creature, "A_Revive_3", 0.5f);
+        SetMoveImmediate(FlyState!, forceTransition: true);
+    }
+
+    public override async Task AfterAddedToRoom()
+    {
+        await PowerCmd.Apply<TheSaintPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
+    }
+
+
     
-
-    public override decimal ModifyHpLostAfterOsty(Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
-    {
-        if (target != Creature)
-        {
-            return amount;
-        }
-
-        // 只在 Phase 1 且还没触发转阶段时锁血
-        if (Phase != 1 || !ShouldPreventDamage)
-        {
-            return amount;
-        }
-
-        var threshold = Creature.MaxHp / 3;
-
-        if (Creature.CurrentHp - amount >= threshold)
-        {
-            return amount;
-        }
-
-        if (Creature.CurrentHp <= threshold && ShouldPreventDamage)
-        {
-            return 0;
-        }
-
-        // 只扣到半血为止
-        var targetDamage = Creature.CurrentHp - threshold;
-        return targetDamage;
-    }
-
-
-    public override async Task AfterDamageReceived(
-        PlayerChoiceContext choiceContext,
-        Creature target,
-        DamageResult result,
-        ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource
-    )
-    {
-        if (target == Creature && Phase == 1 && Creature.CurrentHp <= Creature.MaxHp / 3 && !HasStun)
-        {
-            await CreatureCmd.Stun(Creature, "FLY");
-            HasStun = true;
-            await CreatureCmd.TriggerAnim(Creature, "A_Revive_1", 0.8f);
-            await CreatureCmd.TriggerAnim(Creature, "A_Revive_3", 0.8f);
-        }
-    }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
@@ -264,16 +233,16 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
             [new BuffIntent()]
         );
 
-        MoveState Fly = new MoveState(
+        FlyState = new MoveState(
             "FLY",
             async targets =>
             {
+                Creature.GetPower<TheSaintPower>()?.DoRevive();
+                await CreatureCmd.Heal(Creature, Creature.MaxHp - Creature.CurrentHp);
                 ShouldPreventDamage = false;
                 Phase = 2;
-
                 await CreatureCmd.TriggerAnim(Creature, "B_Leave_1", 0.8f);
                 await PowerCmd.Apply<SoarPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
-                await Cmd.Wait(1.0f);
                 NRunMusicController.Instance?.PlayCustomMusic("event:/ArknightsMap/music/the_saint_bat_2");
             },
             [new BuffIntent()]
@@ -289,7 +258,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
         list.Add(AttackDebuffPhase1);
         list.Add(AttackDebuffPhase2);
         list.Add(Revive);
-        list.Add(Fly);
+        list.Add(FlyState!);
 
         GivePerplexed.FollowUpState = HeavyAttackPhase1;
         HeavyAttackPhase1.FollowUpState = SummonPhase1;
@@ -298,8 +267,8 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
         MultiAttackPhase1.FollowUpState = AttackDebuffPhase1;
         AttackDebuffPhase1.FollowUpState = SummonPhase1;
 
-        Revive.FollowUpState = Fly;
-        Fly.FollowUpState = HeavyAttackPhase2;
+        Revive.FollowUpState = FlyState!;
+        FlyState!.FollowUpState = HeavyAttackPhase2;
         HeavyAttackPhase2.FollowUpState = SummonPhase2;
         SummonPhase2.FollowUpState = MultiAttackPhase2;
         MultiAttackPhase2.FollowUpState = AttackDebuffPhase2;
@@ -327,7 +296,8 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
         AnimState Phase2SkillStateEnd = new AnimState("B_Skill_End_2");
         AnimState Phase2FlyState = new AnimState("B_Leave_1");
 
-        AnimState dieState = new AnimState("Die");
+
+        AnimState dieState = new AnimState("B_Die_2");
         AnimState skillState = new AnimState("Skill");
 
         Phase1AttackState.NextState = idleStatePhase1;
@@ -360,7 +330,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
         creatureAnimator.AddAnyState("B_Leave_1", Phase2FlyState);
 
         creatureAnimator.AddAnyState("Skill", skillState);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("B_Die_2", dieState);
 
         return creatureAnimator;
     }
@@ -381,11 +351,15 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
         return Array.Empty<HealthBarForecastSegment>();
     }
 
-    public override bool ShouldAllowTargeting(Creature target)
+    
+
+    public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
     {
-        if (ShouldPreventDamage && Creature.CurrentHp == Creature.MaxHp / 3 && target == Creature)
-            return false;
-        return true;
+        if (!wasRemovalPrevented && creature == this.Creature)
+        {
+            
+            SetMoveImmediate(FlyState!, forceTransition: true);
+        }
     }
 
     public override Task BeforeDeath(Creature creature)

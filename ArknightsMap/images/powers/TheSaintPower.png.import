@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b600jtfapp0q7"
-path="res://.godot/imported/Warn.png-b31b4553f354aa663570516cee0bcb75.ctex"
+uid="uid://c3ukhv0itci8o"
+path="res://.godot/imported/TheSaintPower.png-6c40b58e6bf4e30bb0a1ef4b866562dc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/cards/Warn.png"
-dest_files=["res://.godot/imported/Warn.png-b31b4553f354aa663570516cee0bcb75.ctex"]
+source_file="res://ArknightsMap/images/powers/TheSaintPower.png"
+dest_files=["res://.godot/imported/TheSaintPower.png-6c40b58e6bf4e30bb0a1ef4b866562dc.ctex"]
 
 [params]
 

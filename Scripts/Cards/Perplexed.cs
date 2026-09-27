@@ -97,7 +97,7 @@ public class Perplexed : ModCardTemplate
         bool alreadyHasFrail = Owner.Creature.HasPower<PerplexedPower>();
         foreach (Creature c in CombatState!.HittableEnemies)
         {
-            if (c.Monster is not SupersweetieSmiley || c.Monster is not TheSaint || c.Monster is not OpForGun)
+            if (c.Monster is not SupersweetieSmiley && c.Monster is not TheSaint && c.Monster is not OpForGun)
             {
                 await PowerCmd.Apply<PerplexedPower>(choiceContext, c, 1, null, this);
             }

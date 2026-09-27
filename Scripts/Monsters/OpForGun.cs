@@ -35,6 +35,9 @@ public class OpForGun : AbstractSankta
 
     public int Attack_Time = 1;
 
+    private bool IsSlotOccupied(string slot) =>
+    CombatState.Enemies.Any(c => c.SlotName == slot);
+
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
@@ -117,14 +120,20 @@ public class OpForGun : AbstractSankta
                 if (OnRight)
                 {
                     GunPosition.GlobalPosition = new Vector2(550.0f, GunPosition.GlobalPosition.Y);
-                    await CreatureCmd.Add<OpCar>(CombatState, "second_left");
+                    if (!IsSlotOccupied("second_left"))
+                    {
+                       await CreatureCmd.Add<OpCar>(CombatState, "second_left"); 
+                    }
                     await PowerCmd.Remove<BackAttackRightPower>(Creature);
                     await PowerCmd.Apply<BackAttackLeftPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
                 }
                 else
                 {
                     GunPosition.GlobalPosition = new Vector2(1450.0f, GunPosition.GlobalPosition.Y);
-                    await CreatureCmd.Add<OpCar>(CombatState, "second_right");
+                    if (!IsSlotOccupied("second_right"))
+                    {
+                        await CreatureCmd.Add<OpCar>(CombatState, "second_right");
+                    }
                     await PowerCmd.Remove<BackAttackLeftPower>(Creature);
                     await PowerCmd.Apply<BackAttackRightPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
                 }
