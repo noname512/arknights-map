@@ -41,7 +41,7 @@ public class CustomMadeCard : ModCardTemplate
         return Task.CompletedTask;
     }
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [Entry.MyHoverTip("CUSTOM")];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [StaticTips.Custom];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

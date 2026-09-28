@@ -26,12 +26,6 @@ public class Entry
     public static readonly Logger Logger = RitsuLibFramework.CreateLogger(ModId);
     public static bool isDemo = true;
 
-    public static IHoverTip MyHoverTip(string text)
-    {
-        string fullText = "ARKNIGHTS_MAP_STATIC_HOVER_TIPS_" + text;
-        return new HoverTip(new LocString("static_hover_tips", fullText + ".title"), new LocString("static_hover_tips", fullText + ".description"));
-    }
-
     public static void Init()
     {
         var harmony = new Harmony(ModId);

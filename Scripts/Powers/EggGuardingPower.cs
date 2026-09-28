@@ -11,7 +11,7 @@ public sealed class EggGuardingPower : ModPowerTemplate
 
     public override PowerStackType StackType => PowerStackType.Single;
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [Entry.MyHoverTip("SNOW_STORM")];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [StaticTips.SnowStorm];
 
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");

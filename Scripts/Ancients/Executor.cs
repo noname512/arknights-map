@@ -34,16 +34,18 @@ public class Executor : ModAncientEventTemplate
             CreateModRelicOption<ExFoedere>(), // 圣约
             CreateModRelicOption<Shotgun>(), // 近身铳斗
             CreateModRelicOption<SaintMind>(), // 圣徒意志
-            CreateModRelicOption<Lens>(), // 精密瞄准镜
+            
         ];
     private IReadOnlyList<EventOption> Pool2 =>
         [
-            CreateModRelicOption<PreciseMachine>(), // 精密仪器
+            CreateModRelicOption<FinalRoad>(), // 最终旅程
+            CreateModRelicOption<FinalModification>(), // 终结改装
         ];
     private IReadOnlyList<EventOption> Pool3 =>
         [
             CreateModRelicOption<UnAnswered>(), // 未解答
             CreateModRelicOption<WarnBullet>(), // 示警铳弹
+            CreateModRelicOption<PreciseMachine>(), // 精密仪器
         ];
 
     // 所有可能的选项

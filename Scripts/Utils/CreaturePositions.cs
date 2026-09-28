@@ -1,4 +1,5 @@
 using ArknightsMap.Scripts.Encounters;
+using ArknightsMap.Scripts.Powers;
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Combat;
@@ -184,110 +185,81 @@ public sealed class CreaturePositions : HookedSingletonModel
         return Math.Abs(PositionOfCreature(x) - PositionOfCreature(y)) <= 1;
     }
 
-    public static async Task BlowWind(int direction)
+    public async Task BlowWind(int direction)
     {
-        if (direction == -1)
+        List<Creature> creaturesInPos = GetCreaturesInPosition(direction == 1 ? 9 : 1);
+        int startPos = direction == 1 ? 8 : 2;
+        if (creaturesInPos.Count > 0)
         {
-            List<Creature> creaturesInPos = GetCreaturesInPosition(1);
-            int startPos = 2;
-            if (creaturesInPos.Count > 0)
+            await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), creaturesInPos, damage, null, null, null);
+            foreach (Creature c in creaturesInPos)
             {
-                await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), creaturesInPos, damage, null, null, null);
-                foreach (Creature c in creaturesInPos)
+                if (!ShouldHandleCreature(c, direction))
                 {
-                    if (!ShouldHandleCreature(c, direction))
+                    continue;
+                }
+                if (c.IsMonster && c.Monster is AbstractSnowyMountainMonster)
+                {
+                    await ((AbstractSnowyMountainMonster)c.Monster).OnWindBlow();
+                }
+                GD.Print($"Creature {c.Name} hit wall.");
+                if (c.IsAlive)
+                {
+                    if (c.IsPlayer)
                     {
-                        continue;
+                        await PowerCmd.Apply<RingingPower>(new ThrowingPlayerChoiceContext(), c, 1, c, null);
                     }
-                    if (c.IsMonster && c.Monster is AbstractSnowyMountainMonster)
+                    else
                     {
-                        await ((AbstractSnowyMountainMonster)c.Monster).OnWindBlow();
+                        await CreatureCmd.Stun(c);
                     }
-                    GD.Print($"Creature {c.Name} hit wall.");
-                    if (c.IsAlive)
-                    {
-                        if (c.IsPlayer)
+                }
+            }
+            while (startPos <= 9)
+            {
+                creaturesInPos = GetCreaturesInPosition(startPos);
+                int res = 0;
+                if (creaturesInPos.Count > 0)
+                {
+                    foreach (Creature c in creaturesInPos)
+                        if (c.HasPower<RollingPower>())
                         {
-                            await PowerCmd.Apply<RingingPower>(new ThrowingPlayerChoiceContext(), c, 1, c, null);
+                            await c.GetPower<RollingPower>()!.Explode();
                         }
                         else
                         {
-                            await CreatureCmd.Stun(c);
+                            res++;
                         }
-                    }
                 }
-                while (GetCreaturesInPosition(startPos).Count > 0)
-                {
-                    startPos++;
-                }
-            }
-            for (int pos = startPos; pos <= 9; pos++)
-            {
-                List<Creature> creatures = GetCreaturesInPosition(pos);
-                foreach (Creature c in creatures)
-                {
-                    if (!ShouldHandleCreature(c, direction))
-                    {
-                        continue;
-                    }
-                    if (c.IsMonster && c.Monster is AbstractSnowyMountainMonster)
-                    {
-                        await ((AbstractSnowyMountainMonster)c.Monster).OnWindBlow();
-                    }
-                    TriggerMove(c, Positions[c] + direction, 0.25f);
-                }
+                if (res == 0)
+                    break;
             }
         }
-        else
+        for (int pos = startPos; pos <= 9 && pos >= 1; pos -= direction)
         {
-            List<Creature> creaturesInPos = GetCreaturesInPosition(9);
-            int startPos = 8;
-            if (creaturesInPos.Count > 0)
+            List<Creature> creatures = GetCreaturesInPosition(pos);
+            foreach (Creature c in creatures)
             {
-                await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), creaturesInPos, damage, null, null, null);
-                GD.Print($"Damage Done");
-                foreach (Creature c in creaturesInPos)
+                if (!ShouldHandleCreature(c, direction))
                 {
-                    if (!ShouldHandleCreature(c, direction))
+                    continue;
+                }
+                if (c.IsMonster && c.Monster is AbstractSnowyMountainMonster)
+                {
+                    await ((AbstractSnowyMountainMonster)c.Monster).OnWindBlow();
+                }
+                if (c.HasPower<RollingPower>())
+                {
+                    if (Positions[CurrentCombatState!.PlayerCreatures.First()] == pos + direction * 2)
                     {
+                        await c.GetPower<RollingPower>()!.Explode();
                         continue;
                     }
-                    if (c.IsMonster && c.Monster is AbstractSnowyMountainMonster)
-                    {
-                        await ((AbstractSnowyMountainMonster)c.Monster).OnWindBlow();
-                    }
-                    GD.Print($"Creature {c.Name} hit wall.");
-                    if (c.IsAlive)
-                    {
-                        if (c.IsPlayer)
-                        {
-                            await PowerCmd.Apply<RingingPower>(new ThrowingPlayerChoiceContext(), c, 1, c, null);
-                        }
-                        else
-                        {
-                            await CreatureCmd.Stun(c);
-                        }
-                    }
+                    TriggerMove(c, pos + direction + 2, 0.25f);
                 }
-                while (GetCreaturesInPosition(startPos).Count > 0)
+                else
                 {
-                    startPos--;
-                }
-            }
-            for (int pos = startPos; pos >= 1; pos--)
-            {
-                List<Creature> creatures = GetCreaturesInPosition(pos);
-                foreach (Creature c in creatures)
-                {
-                    if (!ShouldHandleCreature(c, direction))
-                    {
-                        continue;
-                    }
-                    if (c.IsMonster && c.Monster is AbstractSnowyMountainMonster)
-                    {
-                        await ((AbstractSnowyMountainMonster)c.Monster).OnWindBlow();
-                    }
-                    TriggerMove(c, Positions[c] + direction, 0.25f);
+                    TriggerMove(c, pos + direction, 0.25f);
                 }
             }
         }
