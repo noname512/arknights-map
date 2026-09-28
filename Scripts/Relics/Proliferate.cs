@@ -16,7 +16,7 @@ public class Proliferate : ModRelicTemplate
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-        [Entry.MyHoverTip("REED_BED"), HoverTipFactory.FromPower<FlamingDamagePower>(), HoverTipFactory.FromPower<VulnerablePower>()];
+        [StaticTips.ReedBed, HoverTipFactory.FromPower<FlamingDamagePower>(), HoverTipFactory.FromPower<VulnerablePower>()];
 
     public override RelicAssetProfile AssetProfile =>
         new(

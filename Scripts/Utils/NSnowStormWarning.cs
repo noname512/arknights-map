@@ -14,7 +14,7 @@ public partial class NSnowStormWarning : Control
 {
     public Control Hitbox { get; private set; }
     public bool IsFocused { get; private set; }
-    public List<IHoverTip> HoverTips = [Entry.MyHoverTip("SNOW_STORM"), new HoverTip()];
+    public List<IHoverTip> HoverTips = [StaticTips.SnowStorm, new HoverTip()];
     public CombatState CurrentCombatState;
     public TextureRect Rect { get; private set; }
     public DynamicVar DirectionVar = new IntVar("direction", 0);
