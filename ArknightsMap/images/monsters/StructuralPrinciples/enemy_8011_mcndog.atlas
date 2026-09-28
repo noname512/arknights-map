@@ -1,0 +1,202 @@
+
+enemy_8011_mcndog.png
+size: 145,631
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+C_B_Body
+  rotate: false
+  xy: 2, 149
+  size: 39, 37
+  orig: 39, 37
+  offset: 0, 0
+  index: -1
+C_B_R_Leg
+  rotate: false
+  xy: 114, 112
+  size: 23, 43
+  orig: 25, 43
+  offset: 1, 0
+  index: -1
+C_Body
+  rotate: false
+  xy: 2, 544
+  size: 104, 57
+  orig: 104, 57
+  offset: 0, 0
+  index: -1
+C_Body_1
+  rotate: false
+  xy: 2, 124
+  size: 39, 23
+  orig: 39, 23
+  offset: 0, 0
+  index: -1
+C_D_Body
+  rotate: false
+  xy: 2, 603
+  size: 141, 26
+  orig: 141, 26
+  offset: 0, 0
+  index: -1
+C_DianC
+  rotate: false
+  xy: 95, 466
+  size: 45, 37
+  orig: 46, 37
+  offset: 0, 0
+  index: -1
+C_Head
+  rotate: false
+  xy: 2, 457
+  size: 91, 85
+  orig: 92, 86
+  offset: 0, 0
+  index: -1
+C_Inter
+  rotate: false
+  xy: 2, 352
+  size: 74, 40
+  orig: 74, 40
+  offset: 0, 0
+  index: -1
+C_L_Armm
+  rotate: false
+  xy: 2, 33
+  size: 36, 28
+  orig: 36, 28
+  offset: 0, 0
+  index: -1
+C_L_Arms
+  rotate: false
+  xy: 40, 7
+  size: 36, 28
+  orig: 36, 28
+  offset: 0, 0
+  index: -1
+C_L_Foot
+  rotate: false
+  xy: 108, 545
+  size: 35, 56
+  orig: 36, 56
+  offset: 1, 0
+  index: -1
+C_L_Foots
+  rotate: false
+  xy: 2, 63
+  size: 37, 59
+  orig: 39, 60
+  offset: 1, 1
+  index: -1
+C_L_Forearms
+  rotate: false
+  xy: 114, 90
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+C_L_Thigh
+  rotate: false
+  xy: 108, 505
+  size: 29, 38
+  orig: 30, 40
+  offset: 0, 1
+  index: -1
+C_L_Thighs
+  rotate: false
+  xy: 63, 37
+  size: 37, 58
+  orig: 38, 58
+  offset: 1, 0
+  index: -1
+C_L_boy
+  rotate: false
+  xy: 2, 394
+  size: 76, 61
+  orig: 76, 61
+  offset: 0, 0
+  index: -1
+C_L_leg
+  rotate: false
+  xy: 43, 103
+  size: 24, 43
+  orig: 25, 43
+  offset: 0, 0
+  index: -1
+C_R_Arm
+  rotate: false
+  xy: 2, 289
+  size: 73, 61
+  orig: 75, 61
+  offset: 2, 0
+  index: -1
+C_R_B_Foot
+  rotate: false
+  xy: 102, 32
+  size: 36, 56
+  orig: 36, 56
+  offset: 0, 0
+  index: -1
+C_R_B_Thigh
+  rotate: false
+  xy: 43, 148
+  size: 29, 38
+  orig: 30, 40
+  offset: 0, 1
+  index: -1
+C_R_Foot
+  rotate: false
+  xy: 74, 97
+  size: 38, 58
+  orig: 39, 60
+  offset: 0, 1
+  index: -1
+C_R_Forearm
+  rotate: false
+  xy: 95, 407
+  size: 44, 57
+  orig: 44, 57
+  offset: 0, 0
+  index: -1
+C_R_Leg_r
+  rotate: false
+  xy: 41, 81
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+C_R_Leg_rr
+  rotate: false
+  xy: 2, 3
+  size: 36, 28
+  orig: 36, 28
+  offset: 0, 0
+  index: -1
+C_R_Thigh_r
+  rotate: false
+  xy: 78, 2
+  size: 36, 28
+  orig: 36, 28
+  offset: 0, 0
+  index: -1
+C_Tiao
+  rotate: false
+  xy: 2, 188
+  size: 72, 99
+  orig: 72, 99
+  offset: 0, 0
+  index: -1
+C_Tiao_1
+  rotate: false
+  xy: 80, 281
+  size: 59, 124
+  orig: 59, 124
+  offset: 0, 0
+  index: -1
+C_neck
+  rotate: false
+  xy: 76, 157
+  size: 55, 122
+  orig: 55, 122
+  offset: 0, 0
+  index: -1

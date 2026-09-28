@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://dksrlyq6qaq1a"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://miuo8g0f1wpo" path="res://ArknightsMap/images/monsters/StructuralPrinciples/enemy_8011_mcndog.atlas" id="1_upf8y"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://eh81kgechdw4" path="res://ArknightsMap/images/monsters/StructuralPrinciples/enemy_8011_mcndog42.skel" id="2_ey5ib"]
+
+[resource]
+atlas_res = ExtResource("1_upf8y")
+skeleton_file_res = ExtResource("2_ey5ib")

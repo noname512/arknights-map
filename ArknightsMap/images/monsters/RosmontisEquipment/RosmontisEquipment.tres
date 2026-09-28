@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://xkvpd78yaub7"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://df3jhs40sgohp" path="res://ArknightsMap/images/monsters/RosmontisEquipment/token_10012_rosmon_shield.atlas" id="1_svr15"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://b4koq81g3v518" path="res://ArknightsMap/images/monsters/RosmontisEquipment/token_10012_rosmon_shield42.skel" id="2_gc3u0"]
+
+[resource]
+atlas_res = ExtResource("1_svr15")
+skeleton_file_res = ExtResource("2_gc3u0")

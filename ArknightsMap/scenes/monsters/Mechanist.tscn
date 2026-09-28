@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://yxwbm7yx7526"]
+
+[ext_resource type="Script" uid="uid://dwe1rbe5v4g53" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_pk7sv"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cvxwpbnf4ud1a" path="res://ArknightsMap/images/monsters/Mechanist/Mechanist.tres" id="2_ojyin"]
+
+[node name="Mechanist" type="Node2D"]
+script = ExtResource("1_pk7sv")
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_ojyin")
+preview_skin = "default"
+preview_animation = "Idle"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+scale = Vector2(-1, 1)
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -160.0
+offset_top = -392.0
+offset_right = 218.0
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -400)
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -200)

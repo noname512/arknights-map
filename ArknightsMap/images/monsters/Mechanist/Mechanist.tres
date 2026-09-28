@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://cvxwpbnf4ud1a"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://d1aava652qjyo" path="res://ArknightsMap/images/monsters/Mechanist/enemy_8010_mcnist.atlas" id="1_onj6y"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cjvs1748cojk0" path="res://ArknightsMap/images/monsters/Mechanist/enemy_8010_mcnist42.skel" id="2_sva66"]
+
+[resource]
+atlas_res = ExtResource("1_onj6y")
+skeleton_file_res = ExtResource("2_sva66")

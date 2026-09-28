@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://eh81kgechdw4"
+path="res://.godot/imported/enemy_8011_mcndog42.skel-01652dd033f7811f158ed79e069cae28.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/StructuralPrinciples/enemy_8011_mcndog42.skel"
+dest_files=["res://.godot/imported/enemy_8011_mcndog42.skel-01652dd033f7811f158ed79e069cae28.spskel"]
+
+[params]
+

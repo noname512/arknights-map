@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://cjvs1748cojk0"
+path="res://.godot/imported/enemy_8010_mcnist42.skel-399ccacd14c1e7351be8a76511eb8336.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Mechanist/enemy_8010_mcnist42.skel"
+dest_files=["res://.godot/imported/enemy_8010_mcnist42.skel-399ccacd14c1e7351be8a76511eb8336.spskel"]
+
+[params]
+

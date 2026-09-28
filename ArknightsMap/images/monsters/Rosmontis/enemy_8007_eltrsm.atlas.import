@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://c81vuq63bmnuu"
+path="res://.godot/imported/enemy_8007_eltrsm.atlas-5b681a9a725b366510cbcf1b470fcc01.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Rosmontis/enemy_8007_eltrsm.atlas"
+dest_files=["res://.godot/imported/enemy_8007_eltrsm.atlas-5b681a9a725b366510cbcf1b470fcc01.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

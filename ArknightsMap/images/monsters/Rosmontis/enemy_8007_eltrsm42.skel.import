@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://d2o7yhfab4t64"
+path="res://.godot/imported/enemy_8007_eltrsm42.skel-a7adda991fb9aee5f1a6a35afe346aa0.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Rosmontis/enemy_8007_eltrsm42.skel"
+dest_files=["res://.godot/imported/enemy_8007_eltrsm42.skel-a7adda991fb9aee5f1a6a35afe346aa0.spskel"]
+
+[params]
+

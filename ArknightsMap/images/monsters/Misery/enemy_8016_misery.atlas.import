@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://b51ce5shwvfu1"
+path="res://.godot/imported/enemy_8016_misery.atlas-bbe8fd3f389005595d400671f3ddf537.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Misery/enemy_8016_misery.atlas"
+dest_files=["res://.godot/imported/enemy_8016_misery.atlas-bbe8fd3f389005595d400671f3ddf537.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

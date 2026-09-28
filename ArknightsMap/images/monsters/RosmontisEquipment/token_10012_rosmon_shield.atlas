@@ -1,0 +1,48 @@
+
+token_10012_rosmon_shield.png
+size: 269,237
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+blur
+  rotate: false
+  xy: 216, 75
+  size: 49, 160
+  orig: 49, 160
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 2, 2
+  size: 90, 233
+  orig: 90, 233
+  offset: 0, 0
+  index: -1
+stone_1
+  rotate: false
+  xy: 164, 8
+  size: 103, 65
+  orig: 103, 65
+  offset: 0, 0
+  index: -1
+stone_2
+  rotate: false
+  xy: 94, 127
+  size: 120, 108
+  orig: 121, 111
+  offset: 1, 0
+  index: -1
+stone_3
+  rotate: false
+  xy: 94, 2
+  size: 39, 17
+  orig: 39, 17
+  offset: 0, 0
+  index: -1
+stone_4
+  rotate: false
+  xy: 94, 21
+  size: 68, 104
+  orig: 71, 111
+  offset: 3, 0
+  index: -1

@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://b4koq81g3v518"
+path="res://.godot/imported/token_10012_rosmon_shield42.skel-9595b8689a5e962a2f2a492ad1df03bb.spskel"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/RosmontisEquipment/token_10012_rosmon_shield42.skel"
+dest_files=["res://.godot/imported/token_10012_rosmon_shield42.skel-9595b8689a5e962a2f2a492ad1df03bb.spskel"]
+
+[params]
+

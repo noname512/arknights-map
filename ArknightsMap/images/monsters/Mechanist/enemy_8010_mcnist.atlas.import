@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://d1aava652qjyo"
+path="res://.godot/imported/enemy_8010_mcnist.atlas-bd7a2a53b40005ff80256101b358c2d2.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/Mechanist/enemy_8010_mcnist.atlas"
+dest_files=["res://.godot/imported/enemy_8010_mcnist.atlas-bd7a2a53b40005ff80256101b358c2d2.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

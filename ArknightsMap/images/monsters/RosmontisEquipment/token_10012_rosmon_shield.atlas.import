@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://df3jhs40sgohp"
+path="res://.godot/imported/token_10012_rosmon_shield.atlas-137c270b94b2bd2e16ed897e2b95c818.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/RosmontisEquipment/token_10012_rosmon_shield.atlas"
+dest_files=["res://.godot/imported/token_10012_rosmon_shield.atlas-137c270b94b2bd2e16ed897e2b95c818.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://cynsbesxh7dqy"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://c81vuq63bmnuu" path="res://ArknightsMap/images/monsters/Rosmontis/enemy_8007_eltrsm.atlas" id="1_dexia"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://d2o7yhfab4t64" path="res://ArknightsMap/images/monsters/Rosmontis/enemy_8007_eltrsm42.skel" id="2_wb3g7"]
+
+[resource]
+atlas_res = ExtResource("1_dexia")
+skeleton_file_res = ExtResource("2_wb3g7")

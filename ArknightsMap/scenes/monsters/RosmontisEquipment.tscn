@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkjtcw2tdvoiv"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://xkvpd78yaub7" path="res://ArknightsMap/images/monsters/RosmontisEquipment/RosmontisEquipment.tres" id="1_d1i00"]
+[ext_resource type="Script" uid="uid://dwe1rbe5v4g53" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_romsh"]
+
+[node name="RosmontisEquipment" type="Node2D"]
+script = ExtResource("1_romsh")
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_d1i00")
+preview_skin = "default"
+preview_animation = "A_Idle"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+scale = Vector2(-1.5, 1.5)
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -131.0
+offset_top = -358.0
+offset_right = 104.0
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -400)
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -200)

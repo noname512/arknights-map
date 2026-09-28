@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://miuo8g0f1wpo"
+path="res://.godot/imported/enemy_8011_mcndog.atlas-324d0b50e51e0897b1357c5ce748bb06.spatlas"
+
+[deps]
+
+source_file="res://ArknightsMap/images/monsters/StructuralPrinciples/enemy_8011_mcndog.atlas"
+dest_files=["res://.godot/imported/enemy_8011_mcndog.atlas-324d0b50e51e0897b1357c5ce748bb06.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"
