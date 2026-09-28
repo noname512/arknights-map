@@ -1,11 +1,15 @@
+using ArknightsMap.Scripts.Cards;
 using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
@@ -39,7 +43,23 @@ public class SanktaPride : AbstractSankta
     {
         List<MonsterState> list = new List<MonsterState>();
 
-        MoveState sleep = new MoveState("SLEEP", async targets => { }, new SleepIntent());
+        MoveState sleep = new MoveState(
+            "SLEEP", 
+            async targets =>
+            {
+                await CreatureCmd.TriggerAnim(Creature, "Skill", 0.8f);
+                foreach (Creature c in CombatState.GetOpponentsOf(Creature))
+                {
+                    if (c.Player != null)
+                    {
+                        CardModel perplexed = CombatState.CreateCard<Perplexed>(c.Player);
+                        await CardPileCmd.Add(perplexed, PileType.Draw, CardPilePosition.Random, null);
+                    }
+                }
+                
+            }, 
+            new StatusIntent(1)
+        );
 
         MoveState pray = new MoveState(
             "PRAY",

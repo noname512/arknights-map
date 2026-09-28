@@ -1,10 +1,13 @@
+using ArknightsMap.Scripts.Cards;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
@@ -61,11 +64,39 @@ public class SanktaStatue : AbstractSankta
             [new DefendIntent()]
         );
 
-        attack_debuff.FollowUpState = defend;
-        defend.FollowUpState = attack_debuff;
+        MoveState pray = new MoveState(
+            "PRAY", 
+            async targets =>
+            {
+                foreach (Creature c in CombatState.GetOpponentsOf(Creature))
+                {
+                    if (c.Player != null)
+                    {
+                        CardModel perplexed = CombatState.CreateCard<Perplexed>(c.Player);
+                        await CardPileCmd.Add(perplexed, PileType.Draw, CardPilePosition.Random, null);
+                    }
+                }
+                
+            }, 
+            new StatusIntent(1)
+        );
+
+        ConditionalBranchState prayBranch1 = new ConditionalBranchState("PRAY_BRANCH_1");
+        prayBranch1.AddState(pray, () => Creature.CombatState!.RoundNumber == 4);
+        prayBranch1.AddState(attack_debuff, () => Creature.CombatState!.RoundNumber != 4);
+
+        ConditionalBranchState prayBranch2 = new ConditionalBranchState("PRAY_BRANCH_2");
+        prayBranch2.AddState(pray, () => Creature.CombatState!.RoundNumber == 4);
+        prayBranch2.AddState(attack_debuff, () => Creature.CombatState!.RoundNumber != 4);
+
+        attack_debuff.FollowUpState = prayBranch1;
+        defend.FollowUpState = prayBranch2;
 
         list.Add(defend);
         list.Add(attack_debuff);
+        list.Add(pray);
+        list.Add(prayBranch1);
+        list.Add(prayBranch2);
         return new MonsterMoveStateMachine(list, defend);
     }
 
