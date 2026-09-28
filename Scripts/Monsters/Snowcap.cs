@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
@@ -29,6 +30,7 @@ public class Snowcap : AbstractSnowyMountainMonster
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
+        MoveState sleep = new MoveState("SLEEP", async targets => { }, new SleepIntent());
         MoveState attack = new MoveState(
             "ATTACK",
             async targets =>
@@ -41,11 +43,18 @@ public class Snowcap : AbstractSnowyMountainMonster
             new DebuffIntent()
         );
 
-        attack.FollowUpState = attack;
+        ConditionalBranchState conditionalBranchState = new ConditionalBranchState("COND");
+        conditionalBranchState.AddState(attack, () => CreaturePositions.IsBlock(Creature, CombatState.PlayerCreatures.First()));
+        conditionalBranchState.AddState(sleep, () => true);
+
+        attack.FollowUpState = conditionalBranchState;
+        sleep.FollowUpState = conditionalBranchState;
 
         list.Add(attack);
+        list.Add(sleep);
+        list.Add(conditionalBranchState);
 
-        return new MonsterMoveStateMachine(list, attack);
+        return new MonsterMoveStateMachine(list, conditionalBranchState);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
