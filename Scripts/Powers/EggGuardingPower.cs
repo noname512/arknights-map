@@ -1,4 +1,5 @@
 using ArknightsMap.Scripts;
+using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.HoverTips;
 using STS2RitsuLib.Interop.AutoRegistration;
