@@ -288,7 +288,7 @@
     "ARKNIGHTS_MAP_RELIC_EX_FOEDERE.description": "你每打出1张牌，获得1点[gold]力量[/gold]。在你的第7张牌打出后，失去因此获得的所有[gold]力量[/gold]并重新计数。",
     "ARKNIGHTS_MAP_RELIC_EX_FOEDERE.flavor": "",
     "ARKNIGHTS_MAP_RELIC_UN_ANSWERED.title": "未解答",
-    "ARKNIGHTS_MAP_RELIC_UN_ANSWERED.description": "你的回合开始时，获得{energyPrefix:energyIcons(1)}。将1张[gold]困惑[/gold]放入牌组。",
+    "ARKNIGHTS_MAP_RELIC_UN_ANSWERED.description": "你的回合开始时，获得{energyPrefix:energyIcons(1)}。将1张[gold]困惑[/gold]加入牌组。",
     "ARKNIGHTS_MAP_RELIC_UN_ANSWERED.flavor": "",
     "ARKNIGHTS_MAP_RELIC_SHOTGUN.title": "近身铳斗",
     "ARKNIGHTS_MAP_RELIC_SHOTGUN.description": "选择你牌组的最多7张牌变化为[gold]铳斗[/gold]。",

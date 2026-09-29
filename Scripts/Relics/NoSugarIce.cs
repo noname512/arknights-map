@@ -44,4 +44,6 @@ public sealed class NoSugarIce : ModRelicTemplate
             }
         }
     }
+
+    
 }
