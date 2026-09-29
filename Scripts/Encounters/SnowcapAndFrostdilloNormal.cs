@@ -12,7 +12,7 @@ namespace ArknightsMap.Scripts.Encounters;
 [RegisterActEncounter(typeof(SnowyMountain))]
 public class SnowcapAndFrostdilloNormal : AbstractSnowyMountainEncounter
 {
-    public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<IcefieldHunter>()];
+    public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<Snowcap>(), ModelDb.Monster<Frostdillo>()];
     public override EncounterAssetProfile AssetProfile => new(EncounterScenePath: $"res://ArknightsMap/scenes/encounters/SnowyMountainEncounter.tscn");
 
     public override string CustomBgm => "event:/ArknightsMap/music/xsjl_bat_1";
@@ -26,11 +26,11 @@ public class SnowcapAndFrostdilloNormal : AbstractSnowyMountainEncounter
     // 如果你的场景太大，可以调整缩放。此外还可以使用 GetCameraOffset 来调整摄像机位置
     // public override float GetCameraScaling() => 0.8f;
 
-    public int CatapultPosition = AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 7, 6);
+    public int SnowcapPosition = AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 7, 6);
 
     protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() =>
         [
-            (ModelDb.Monster<Catapult>().ToMutable(), "" + CatapultPosition), //
+            (ModelDb.Monster<Snowcap>().ToMutable(), "" + SnowcapPosition), //
             (ModelDb.Monster<Frostdillo>().ToMutable(), "9"),
         ];
 }

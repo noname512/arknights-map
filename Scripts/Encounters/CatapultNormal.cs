@@ -10,7 +10,7 @@ namespace ArknightsMap.Scripts.Encounters;
 [RegisterActEncounter(typeof(SnowyMountain))]
 public class CatapultNormal : AbstractSnowyMountainEncounter
 {
-    public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<IcefieldHunter>()];
+    public override IEnumerable<MonsterModel> AllPossibleMonsters => [ModelDb.Monster<Catapult>(), ModelDb.Monster<Snowball>()];
     public override EncounterAssetProfile AssetProfile => new(EncounterScenePath: $"res://ArknightsMap/scenes/encounters/SnowyMountainEncounter.tscn");
 
     public override string CustomBgm => "event:/ArknightsMap/music/yxhlc_bat";
