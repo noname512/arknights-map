@@ -106,7 +106,7 @@ public sealed class CreaturePositions : HookedSingletonModel
     {
         if (CurrentCombatState!.Encounter is AbstractSnowyMountainEncounter)
         {
-            if (c.IsMonster)
+            if (c.IsMonster && !c.IsPet)
             {
                 if (c.SlotName != null && (c.SlotName[0] <= '9') && (c.SlotName[0] >= '0'))
                 {
@@ -189,6 +189,8 @@ public sealed class CreaturePositions : HookedSingletonModel
     {
         List<Creature> creaturesInPos = GetCreaturesInPosition(direction == 1 ? 9 : 1);
         int startPos = direction == 1 ? 8 : 2;
+        bool blockMove = false;
+        bool blockMoveThisPos = false;
         if (creaturesInPos.Count > 0)
         {
             await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), creaturesInPos, damage, null, null, null);
@@ -237,13 +239,16 @@ public sealed class CreaturePositions : HookedSingletonModel
         }
         for (int pos = startPos; pos <= 9 && pos >= 1; pos -= direction)
         {
+            blockMoveThisPos = false;
             List<Creature> creatures = GetCreaturesInPosition(pos);
             foreach (Creature c in creatures)
             {
                 if (!ShouldHandleCreature(c, direction))
                 {
+                    blockMoveThisPos = true;
                     continue;
                 }
+                int moveDis = 1;
                 if (c.HasPower<RollingPower>())
                 {
                     if (Positions[CurrentCombatState!.PlayerCreatures.First()] == pos + direction * 2)
@@ -251,11 +256,10 @@ public sealed class CreaturePositions : HookedSingletonModel
                         await c.GetPower<RollingPower>()!.Explode();
                         continue;
                     }
-                    TriggerMove(c, pos + direction + 2, 0.25f);
-                    continue;
+                    moveDis = 2;
                 }
 
-                if (GetCreaturesInPosition(pos + direction).Count > 0)
+                if (blockMove)
                 {
                     continue;
                 }
@@ -263,8 +267,9 @@ public sealed class CreaturePositions : HookedSingletonModel
                 {
                     await ((AbstractSnowyMountainMonster)c.Monster).OnWindBlow();
                 }
-                TriggerMove(c, pos + direction, 0.25f);
+                TriggerMove(c, pos + direction * moveDis, 0.25f);
             }
+            blockMove = blockMoveThisPos;
         }
     }
 
