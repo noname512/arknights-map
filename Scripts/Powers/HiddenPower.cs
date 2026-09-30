@@ -43,11 +43,14 @@ public class HiddenPower : ModPowerTemplate
         {
             return amount;
         }
-        if (dealer != Target)
+        if (dealer != null && dealer.IsPet)
         {
-            return amount;
+            if (dealer.PetOwner != null && dealer.PetOwner.Creature != Target)
+            {
+                return amount;
+            }
         }
-        if (dealer != null && dealer.IsPet && dealer.PetOwner!.Creature != Target)
+        else if (dealer != Target)
         {
             return amount;
         }
@@ -65,12 +68,20 @@ public class HiddenPower : ModPowerTemplate
             modifiedAmount = amount;
             return false;
         }
-        if ((canonicalPower.Applier != Target) || (!shouldTrigger))
+        if (canonicalPower.Applier != null && canonicalPower.Applier.IsPet)
+        {
+            if (canonicalPower.Applier.PetOwner != null && canonicalPower.Applier.PetOwner.Creature != Target)
+            {
+                modifiedAmount = amount;
+                return false;
+            }
+        }
+        else if (canonicalPower.Applier != Target)
         {
             modifiedAmount = amount;
             return false;
         }
-        if (canonicalPower.Applier != null && canonicalPower.Applier.IsPet && canonicalPower.Applier.PetOwner!.Creature != Target)
+        if (!shouldTrigger)
         {
             modifiedAmount = amount;
             return false;
