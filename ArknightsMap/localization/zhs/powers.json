@@ -193,5 +193,12 @@
     "ARKNIGHTS_MAP_POWER_ROLLING_POWER.description": "这个敌人被[gold]暴风雪[/gold]吹动时会额外移动一个位置。若已经和你[gold]阻挡[/gold]，则会对你造成若干点伤害。",
     "ARKNIGHTS_MAP_POWER_WEAKNESS_POWER.title": "弱点",
     "ARKNIGHTS_MAP_POWER_WEAKNESS_POWER.smartDescription": "本回合中，[gold]{OwnerName}[/gold]受到的伤害增加至[blue]{Amount}%[/blue]。",
-    "ARKNIGHTS_MAP_POWER_WEAKNESS_POWER.description": "本回合中，这个敌人受到的伤害增加。"
+    "ARKNIGHTS_MAP_POWER_WEAKNESS_POWER.description": "本回合中，这个敌人受到的伤害增加。",
+
+    "ARKNIGHTS_MAP_POWER_CHARGE_POWER.title": "充能",
+    "ARKNIGHTS_MAP_POWER_CHARGE_POWER.smartDescription": "[gold]{OwnerName}[/gold]被击杀时，立刻对所有玩家造成[blue]{Amount}[/blue]点伤害。",
+    "ARKNIGHTS_MAP_POWER_CHARGE_POWER.description": "这个敌人被击杀时，立刻对所有玩家造成若干点伤害。",
+    "ARKNIGHTS_MAP_POWER_EMOTION_EXPANSION_POWER.title": "思维膨大",
+    "ARKNIGHTS_MAP_POWER_EMOTION_EXPANSION_POWER.smartDescription": "[gold]{OwnerName}[/gold]的最大生命和当前生命变为[blue]{Amount}[/blue]倍，在[gold]{OwnerName}的战术装备[/gold]被击杀后，使[gold]{OwnerName}[/gold]眩晕并解除生命值增加效果。",
+    "ARKNIGHTS_MAP_POWER_EMOTION_EXPANSION_POWER.description": "[gold]{OwnerName}[/gold]的最大生命和当前生命变为[blue]{Amount}[/blue]倍，在[gold]{OwnerName}的战术装备[/gold]被击杀后，使[gold]{OwnerName}[/gold]眩晕并解除生命值增加效果。"
 }
