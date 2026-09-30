@@ -1,12 +1,13 @@
-using ArknightsMap.Scripts.Utils;
+using ArknightsMap.Scripts.Monsters;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -14,30 +15,22 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Powers;
 
 [RegisterPower]
-public class ScorchingLightPower : ModPowerTemplate
+public class ChargePower : ModPowerTemplate
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-        [StaticTips.ReedBed, HoverTipFactory.FromPower<FlamingDamagePower>(), HoverTipFactory.FromPower<VulnerablePower>()];
 
+    // 自定义图标路径。1:1即可。原版游戏大图256x256，小图64x64。
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
-    public override async Task BeforeDamageReceived(
-        PlayerChoiceContext choiceContext,
-        Creature target,
-        decimal amount,
-        ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource
-    )
+
+    public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
     {
-        if (dealer == Owner) // && ReedBed.Burning)
+        if (Owner.CombatState!.ContainsMonster<Rosmontis>())
         {
-            Flash();
-            await PowerCmd.Apply<FlamingDamagePower>(choiceContext, target, Amount, dealer, null);
+            await CreatureCmd.Damage(choiceContext, Owner.CombatState.GetOpponentsOf(Owner), Amount, ValueProp.Unpowered, Owner);
         }
     }
 }

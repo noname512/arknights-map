@@ -9,7 +9,7 @@ script = ExtResource("1_8wk7n")
 [node name="Visuals" type="SpineSprite" parent="."]
 skeleton_data_res = ExtResource("1_7sh1w")
 preview_skin = "default"
-preview_animation = "A_Idle"
+preview_animation = "B_Skill_Begin"
 preview_frame = false
 preview_time = 0.0
 unique_name_in_owner = true

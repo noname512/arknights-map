@@ -1,0 +1,41 @@
+using ArknightsMap.Scripts.Acts;
+using ArknightsMap.Scripts.Encounters;
+using ArknightsMap.Scripts.Monsters;
+using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Acts;
+using MegaCrit.Sts2.Core.Rooms;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
+
+namespace Test.Scripts;
+
+[RegisterActEncounter(typeof(Laterano))]
+public class VectorRosmontis : AbstractLateranoEncounter
+{
+    // 所有可能出现的怪物
+    public override IEnumerable<MonsterModel> AllPossibleMonsters => 
+    [ModelDb.Monster<Rosmontis>(),
+     ModelDb.Monster<RosmontisEquipment>(),
+    ];
+
+    public override EncounterAssetProfile AssetProfile => new(EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn");
+    public override bool IsWeak => false;
+    public override RoomType RoomType => RoomType.Elite; // 这个遭遇的房间类型，这里是精英怪物
+
+    public override string CustomBgm => "event:/ArknightsMap/music/wdxl_bat";
+
+    
+
+public override IReadOnlyList<string> Slots => ["first", "second", "third"];
+    // 不要忘了这里的model需要调用ToMutable()，表示不是标准值而是战斗中的可变数据
+    protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
+        (ModelDb.Monster<Rosmontis>().ToMutable(), "third"),
+        
+        
+    ];
+
+    
+
+    
+}
