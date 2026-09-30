@@ -149,7 +149,14 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
 
                     await CreatureCmd.TriggerAnim(Creature, "A_Attack", 0.8f);
                     await Cmd.Wait(1.0f);
-                    await CreatureCmd.Add(chosen, CombatState, CombatSide.Enemy, CombatState.Encounter!.GetNextSlot(CombatState));
+                    string slot = CombatState.Encounter!.GetNextSlot(CombatState);
+                    if (!string.IsNullOrEmpty(slot))
+                    {
+                        Creature minion = await CreatureCmd.Add(chosen, CombatState, CombatSide.Enemy, slot);
+                        await PowerCmd.Apply<MinionPower>(
+                        new ThrowingPlayerChoiceContext(), minion, 1m, Creature, null);
+                    }
+                    
                     await PowerCmd.Apply<MinionPower>(
                         new ThrowingPlayerChoiceContext(),
                         CombatState.Enemies.First(c => c.Monster == chosen),
@@ -182,7 +189,14 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
 
                     await CreatureCmd.TriggerAnim(Creature, "B_Skill_Begin_2", 0.8f);
                     await Cmd.Wait(1.0f);
-                    await CreatureCmd.Add(chosen, CombatState, CombatSide.Enemy, CombatState.Encounter!.GetNextSlot(CombatState));
+                    string slot = CombatState.Encounter!.GetNextSlot(CombatState);
+                    if (!string.IsNullOrEmpty(slot))
+                    {
+                        Creature minion = await CreatureCmd.Add(chosen, CombatState, CombatSide.Enemy, slot);
+                        await PowerCmd.Apply<MinionPower>(
+                        new ThrowingPlayerChoiceContext(), minion, 1m, Creature, null);
+                    }
+                    
                     await PowerCmd.Apply<MinionPower>(
                         new ThrowingPlayerChoiceContext(),
                         CombatState.Enemies.First(c => c.Monster == chosen),

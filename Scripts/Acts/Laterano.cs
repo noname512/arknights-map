@@ -32,7 +32,7 @@ public sealed class Laterano : ModActTemplate
 
     public override Color MapBgColor => new Color("9B9562");
     protected override int NumberOfWeakEncounters => 2;
-    public override int Index => 3;
+    public override int Index => 2;
     public override bool IsDefault => false;
 
     public override bool IsUnlocked(UnlockState unlockState) => false;

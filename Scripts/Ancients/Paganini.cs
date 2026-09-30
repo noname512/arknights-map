@@ -1,8 +1,10 @@
 using ArknightsMap.Scripts.Acts;
 using ArknightsMap.Scripts.Relics;
 using Godot;
+using HarmonyLib;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Relics;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -38,7 +40,7 @@ public class Paganini : ModAncientEventTemplate
     private IReadOnlyList<EventOption> Pool2 =>
         [
             CreateModRelicOption<GiantGun>(), // 铳骑的巨铳
-            CreateModRelicOption<NoSugarIce>(), // 无糖冰淇淋
+            //CreateModRelicOption<NoSugarIce>(), // 无糖冰淇淋
             CreateModRelicOption<Target>(), // 靶子
         ];
     private IReadOnlyList<EventOption> Pool3 =>
@@ -55,6 +57,10 @@ public class Paganini : ModAncientEventTemplate
     // 生成选项
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
+        if (Owner!.GetRelic<IceCream>() != null)
+        {
+            Pool2.AddItem(CreateModRelicOption<NoSugarIce>());   
+        }
         return [Rng.NextItem(Pool1)!, Rng.NextItem(Pool2)!, Rng.NextItem(Pool3)!];
     }
 

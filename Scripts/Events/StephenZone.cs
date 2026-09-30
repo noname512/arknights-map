@@ -26,6 +26,8 @@ public sealed class StephenZone : ModEventTemplate
         
     ];
 
+    public override bool IsShared => true;
+
     protected override IReadOnlyList<EventOption> GenerateInitialOptions() =>
     [
         new EventOption(this, IceCream, InitialOptionKey("ICE_CREAM"), [.. HoverTipFactory.FromRelic<IcecreamMachine>()]),

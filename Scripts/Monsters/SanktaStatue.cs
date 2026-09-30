@@ -91,6 +91,7 @@ public class SanktaStatue : AbstractSankta
 
         attack_debuff.FollowUpState = prayBranch1;
         defend.FollowUpState = prayBranch2;
+        pray.FollowUpState = defend;
 
         list.Add(defend);
         list.Add(attack_debuff);
