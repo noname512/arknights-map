@@ -108,6 +108,7 @@ public class Catapult : AbstractSnowyMountainMonster
         creatureAnimator.AddAnyState("B_Attack", attackStateB);
         creatureAnimator.AddAnyState("Die", dieStateA, () => NextMove.StateId == "THROW" || NextMove.StateId == "ATTACK3");
         creatureAnimator.AddAnyState("Die", dieStateB, () => true);
+        creatureAnimator.AddAnyState("A_Idle", idleStateA);
 
         return creatureAnimator;
     }

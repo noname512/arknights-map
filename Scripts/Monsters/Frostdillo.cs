@@ -36,6 +36,7 @@ public class Frostdillo : AbstractSnowyMountainMonster
                 if (Stunned)
                 {
                     await CreatureCmd.TriggerAnim(Creature, "Stun_End", 0);
+                    Stunned = false;
                 }
                 await CreatureCmd.TriggerAnim(Creature, "Attack", 0);
                 await DamageCmd.Attack(Dmg1).FromMonster(this).WithNoAttackerAnim().Execute(null);
@@ -49,6 +50,7 @@ public class Frostdillo : AbstractSnowyMountainMonster
                 if (Stunned)
                 {
                     await CreatureCmd.TriggerAnim(Creature, "Stun_End", 0);
+                    Stunned = false;
                 }
                 await CreatureCmd.TriggerAnim(Creature, "Attack", 0);
                 await DamageCmd.Attack(Dmg2).FromMonster(this).WithNoAttackerAnim().Execute(null);

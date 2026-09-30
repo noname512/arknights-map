@@ -244,10 +244,6 @@ public sealed class CreaturePositions : HookedSingletonModel
                 {
                     continue;
                 }
-                if (c.IsMonster && c.Monster is AbstractSnowyMountainMonster)
-                {
-                    await ((AbstractSnowyMountainMonster)c.Monster).OnWindBlow();
-                }
                 if (c.HasPower<RollingPower>())
                 {
                     if (Positions[CurrentCombatState!.PlayerCreatures.First()] == pos + direction * 2)
@@ -256,11 +252,18 @@ public sealed class CreaturePositions : HookedSingletonModel
                         continue;
                     }
                     TriggerMove(c, pos + direction + 2, 0.25f);
+                    continue;
                 }
-                else
+
+                if (GetCreaturesInPosition(pos + direction).Count > 0)
                 {
-                    TriggerMove(c, pos + direction, 0.25f);
+                    continue;
                 }
+                if (c.IsMonster && c.Monster is AbstractSnowyMountainMonster)
+                {
+                    await ((AbstractSnowyMountainMonster)c.Monster).OnWindBlow();
+                }
+                TriggerMove(c, pos + direction, 0.25f);
             }
         }
     }
