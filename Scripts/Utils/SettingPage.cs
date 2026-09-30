@@ -1,4 +1,6 @@
 using System.Reflection;
+using MegaCrit.Sts2.Core.Localization;
+using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using STS2RitsuLib;
 using STS2RitsuLib.Data;
 using STS2RitsuLib.Settings;
@@ -29,7 +31,11 @@ public static class SettingsPage
                 Entry.ModId,
                 DataKey,
                 s => (bool)property.GetValue(s)!,
-                (s, v) => property.SetValue(s, v) //
+                (s, v) =>
+                {
+                    NModalContainer.Instance.Add(NSettingsConfirmPopup.Create());
+                    property.SetValue(s, v);
+                }
             ),
             () => true
         );
@@ -41,6 +47,11 @@ public static class SettingsPage
     public static readonly IModSettingsValueBinding<bool> WildsBinding = Bind("Wilds");
     public static readonly IModSettingsValueBinding<bool> LateranoBinding = Bind("Laterano");
     public static readonly IModSettingsValueBinding<bool> SnowyMountainBinding = Bind("SnowyMountain");
+
+    private static ModSettingsText T(string id)
+    {
+        return ModSettingsText.Dynamic(() => new LocString("settings_ui", "ARKNIGHTS_MAP_SETTINGS_UI_" + id).GetRawText());
+    }
 
     public static void Register()
     {
@@ -60,17 +71,17 @@ public static class SettingsPage
             Entry.ModId,
             page =>
             {
-                var result = page.WithModDisplayName(ModSettingsText.Literal("明日方舟地图 ArknightsMap"))
-                    .WithTitle(ModSettingsText.Literal("地图启用设置"))
-                    .WithDescription(ModSettingsText.Literal("重启游戏后生效"))
+                var result = page.WithModDisplayName(T("MOD_NAME"))
+                    .WithDescription(T("DESCRIPTION"))
+                    .WithTitle(T("TITLE"))
                     .WithVisibleOnHostSurfaces(ModSettingsHostSurface.MainMenu | ModSettingsHostSurface.RunPause)
                     .AddSection(
                         "act2",
                         section =>
                             section
-                                .WithTitle(ModSettingsText.Literal("第二幕启用地图"))
-                                .AddToggle("act2origin", ModSettingsText.Literal("原版地图"), Act2Binding, ModSettingsText.Literal("Original Map"))
-                                .AddToggle("wilds", ModSettingsText.Literal("原野"), WildsBinding, ModSettingsText.Literal("Wilds"))
+                                .WithTitle(T("SECTION_2")) //
+                                .AddToggle("act2origin", T("ORIGIN"), Act2Binding)
+                                .AddToggle("wilds", T("WILDS"), WildsBinding)
                     );
                 if (Entry.isDemo)
                 {
@@ -78,10 +89,10 @@ public static class SettingsPage
                         "act3",
                         section =>
                             section
-                                .WithTitle(ModSettingsText.Literal("第三幕启用地图"))
-                                .AddToggle("act3origin", ModSettingsText.Literal("原版地图"), Act3Binding, ModSettingsText.Literal("Original Map"))
-                                .AddToggle("snowymountain", ModSettingsText.Literal("雪山"), SnowyMountainBinding, ModSettingsText.Literal("Snowy Mountain"))
-                                .AddToggle("laterano", ModSettingsText.Literal("拉特兰"), LateranoBinding, ModSettingsText.Literal("Laterano"))
+                                .WithTitle(T("SECTION_3"))
+                                .AddToggle("act3origin", T("ORIGIN"), Act3Binding)
+                                .AddToggle("snowymountain", T("SNOWY_MOUNTAIN"), SnowyMountainBinding)
+                                .AddToggle("laterano", T("LATERANO"), LateranoBinding)
                     );
                 }
             }
