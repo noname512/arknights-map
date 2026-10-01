@@ -50,25 +50,34 @@ public sealed class SnowyMountain : ModActTemplate
         };
 
     public override IEnumerable<AncientEventModel> AllAncients =>
-        [ModelDb.AncientEvent<Pramanix>(), ModelDb.AncientEvent<Ratatos>(), ModelDb.AncientEvent<Arctosz>(), ModelDb.AncientEvent<Enciodes>()];
+        [
+            ModelDb.AncientEvent<Pramanix>(), // 不 
+            ModelDb.AncientEvent<Ratatos>(),  // 要
+            ModelDb.AncientEvent<Arctosz>(),  // 折
+            ModelDb.AncientEvent<Enciodes>()  // 叠
+        ];
 
     public override IEnumerable<EncounterModel> BossDiscoveryOrder => [ModelDb.Encounter<DegenbrecherBoss>(), ModelDb.Encounter<HaroldCraigavonBoss>()];
 
     public override IEnumerable<EncounterModel> GenerateAllEncounters() =>
         new EncounterModel[]
         {
+            // Weak
             ModelDb.Encounter<FluffySnowballWeak>(),
             ModelDb.Encounter<IceFieldHunterWeak>(),
             ModelDb.Encounter<FrozenMountainBurdenbeastWeak>(),
+            // Normal
             ModelDb.Encounter<IcefieldBerserkerNormal>(),
             ModelDb.Encounter<IsbitNormal>(),
             ModelDb.Encounter<SnowcapAndFowlbeastNormal>(),
             ModelDb.Encounter<DelegationShieldbearerAndCenturionNormal>(),
             ModelDb.Encounter<SnowcapAndFrostdilloNormal>(),
             ModelDb.Encounter<CatapultNormal>(),
+            // Elite
             ModelDb.Encounter<TschaggattasElite>(),
             ModelDb.Encounter<GreathornRhuulElite>(),
             ModelDb.Encounter<JetCanisterElite>(),
+            // Boss
             ModelDb.Encounter<DegenbrecherBoss>(),
             ModelDb.Encounter<HaroldCraigavonBoss>(),
         };

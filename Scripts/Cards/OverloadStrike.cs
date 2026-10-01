@@ -37,7 +37,7 @@ public class OverloadStrike : ModCardTemplate
         // BannerTexturePath: "" // 横幅（不同类型）
         );
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(12, ValueProp.Move), new EnergyVar(1), new RepeatVar(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(13, ValueProp.Move), new EnergyVar(1), new RepeatVar(3)];
 
     public OverloadStrike()
         : base(energyCost, type, rarity, targetType) { }
@@ -65,6 +65,6 @@ public class OverloadStrike : ModCardTemplate
     // 升级后的效果逻辑
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(6);
+        DynamicVars.Damage.UpgradeValueBy(7);
     }
 }

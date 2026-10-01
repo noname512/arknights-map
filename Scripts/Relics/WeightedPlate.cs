@@ -28,6 +28,8 @@ public class WeightedPlate : ModRelicTemplate
 
     private int _timesTrained;
 
+    public override bool ShowCounter => true;
+
     [SavedProperty]
     public int TimesTrained
     {
