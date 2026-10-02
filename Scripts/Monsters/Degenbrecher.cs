@@ -27,7 +27,7 @@ public class Degenbrecher : AbstractSnowyMountainMonster
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
     private int BlockedVulNum => 4;
     private int UnblockedVulNum => 2;
-    private int lowStrengthPower => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 8);
+    private int lowStrengthPower => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 15, 12);
     private int BasicDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 9, 8);
     private int AdmitRequest => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 24, 20);
 
