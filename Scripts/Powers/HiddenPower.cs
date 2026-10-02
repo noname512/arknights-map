@@ -3,6 +3,7 @@ using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -100,7 +101,7 @@ public class HiddenPower : ModPowerTemplate
         return true;
     }
 
-    private async Task ChooseBlockOrNot(PlayerChoiceContext choiceContext)
+    public async Task ChooseBlockOrNot(PlayerChoiceContext choiceContext)
     {
         if (Target!.IsDead || !Target.IsPlayer)
         {
@@ -122,9 +123,15 @@ public class HiddenPower : ModPowerTemplate
 
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (side == CombatSide.Enemy)
+        if ((side == CombatSide.Enemy) && (Owner.CombatState.Players.First().Creature == Target))
         {
-            await ChooseBlockOrNot(choiceContext);
+            List<Task> list = new List<Task>();
+            foreach (Player player in Owner.CombatState.Players)
+            {
+                HiddenPower power = (HiddenPower)Owner.Powers.First(power => power is HiddenPower && power.Target == player.Creature);
+                list.Add(power.ChooseBlockOrNot(choiceContext));
+            }
+            await Task.WhenAll(list);
         }
     }
 }

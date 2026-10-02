@@ -3,6 +3,7 @@ using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -112,7 +113,20 @@ public class HaroldCraigavon : AbstractSnowyMountainMonster
             {
                 await CreatureCmd.TriggerAnim(Creature, "Skill_2", 0.5f);
                 await Cmd.Wait(1f);
+                List<Task> list = new List<Task>();
+                
+                /*
+                foreach (Creature target in targets)
+                {
+                    AttackCommand command = DamageCmd.Attack(dmg4).FromMonster(this);
+                    command._combatState = null; // Private, Please noname hack it.
+                    list.Add(command.Targeting(target).WithHitCount(CalcRepeatTimes(target)).WithNoAttackerAnim().Execute(null));
+                }
+                */
+                
                 await DamageCmd.Attack(dmg4).FromMonster(this).WithHitCount(CalcRepeatTimes()).WithNoAttackerAnim().Execute(null);
+
+                await Task.WhenAll(list);
             },
             new MultiAttackIntent(dmg4, CalcRepeatTimes)
         );
@@ -149,13 +163,22 @@ public class HaroldCraigavon : AbstractSnowyMountainMonster
 
     public int CalcRepeatTimes()
     {
-        int times = 1;
         Player? me = LocalContext.GetMe(CombatState);
-        if (me != null)
+        if (me == null)
         {
-            times += me.PlayerCombatState!.Hand.Cards.Count(c => c is EstinguishedEmergencyHeater);
-            times += me.PlayerCombatState.DrawPile.Cards.Count(c => c is EstinguishedEmergencyHeater);
-            times += me.PlayerCombatState.DiscardPile.Cards.Count(c => c is EstinguishedEmergencyHeater);
+            return 1;
+        }
+        return CalcRepeatTimes(me.Creature);
+    }
+
+    public int CalcRepeatTimes(Creature target)
+    {
+        int times = 1;
+        if (target.Player != null)
+        {
+            times += target.Player.PlayerCombatState!.Hand.Cards.Count(c => c is EstinguishedEmergencyHeater);
+            times += target.Player.PlayerCombatState.DrawPile.Cards.Count(c => c is EstinguishedEmergencyHeater);
+            times += target.Player.PlayerCombatState.DiscardPile.Cards.Count(c => c is EstinguishedEmergencyHeater);
         }
         return times;
     }
