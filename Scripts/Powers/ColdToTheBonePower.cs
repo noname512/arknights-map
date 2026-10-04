@@ -1,4 +1,6 @@
+using ArknightsMap.Scripts.Cards;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -15,7 +17,7 @@ public class ColdToTheBonePower : ModPowerTemplate
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromPower<MyVigorPower>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromCard<Cold>()];
 
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
@@ -29,11 +31,9 @@ public class ColdToTheBonePower : ModPowerTemplate
         CardModel? cardSource
     )
     {
-        if (dealer == Owner && result.UnblockedDamage > 0)
+        if (dealer == Owner)
         {
-            MyVigorPower power = (MyVigorPower)ModelDb.Power<MyVigorPower>().ToMutable();
-            power.Target = target;
-            await PowerCmd.Apply(choiceContext, power, Owner, result.UnblockedDamage, Owner, null);
+            await CardPileCmd.AddToCombatAndPreview<Cold>(target, PileType.Hand, Amount, null);
         }
     }
 }

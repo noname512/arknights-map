@@ -28,9 +28,7 @@ public class Overexertion : ModRelicTemplate
             // 大图标（原版256x256）
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
-
-    private bool triggered;
-
+    
     public override decimal ModifyDamageMultiplicative(
         Creature? target,
         decimal amount,
@@ -52,13 +50,12 @@ public class Overexertion : ModRelicTemplate
         {
             return 1m;
         }
-        triggered = true;
         return 3m;
     }
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (triggered)
+        if ((cardPlay.Card.Type == CardType.Attack) && (!Owner.Creature.HasPower<WeakPower>()))
         {
             await PowerCmd.Apply<WeakPower>(choiceContext, Owner.Creature, DynamicVars.Weak.IntValue, Owner.Creature, null);
         }

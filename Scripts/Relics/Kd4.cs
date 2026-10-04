@@ -52,7 +52,7 @@ public class Kd4 : ModRelicTemplate
             await PowerCmd.Apply<StrengthPower>(choiceContext, combatState.Enemies, DynamicVars.Strength.IntValue, Owner.Creature, null);
             if (Owner.PlayerCombatState!.TurnNumber <= 1)
             {
-                await PowerCmd.Apply<DexterityPower>(choiceContext, combatState.Enemies, DynamicVars.Dexterity.IntValue, Owner.Creature, null);
+                await PowerCmd.Apply<DexterityPower>(choiceContext, Owner.Creature, DynamicVars.Dexterity.IntValue, Owner.Creature, null);
             }
         }
     }
