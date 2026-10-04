@@ -56,28 +56,36 @@ public class JetCanister : AbstractSnowyMountainMonster
             },
             new MultiAttackIntent(Dmg2, repeatCount)
         );
-        MoveState attack3 = new MoveState(
+        MoveState attack4 = new MoveState(
             "ATTACK_BUFF",
             async targets =>
             {
                 await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
                 await DamageCmd.Attack(Dmg3).FromMonster(this).WithNoAttackerAnim().Execute(null);
+            },
+            new SingleAttackIntent(Dmg3)
+        );
+        MoveState attack3 = new MoveState(
+            "ATTACK4",
+            async targets =>
+            {
+                await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
+                await DamageCmd.Attack(Dmg3).FromMonster(this).WithNoAttackerAnim().Execute(null);
                 await PowerCmd.Apply<ColdToTheBonePower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
-                if (count == 2)
-                {
-                    ((MoveState)MoveStateMachine.States["ATTACK2"]).FollowUpState = attack1;
-                }
+                ((MoveState)MoveStateMachine.States["ATTACK2"]).FollowUpState = attack4;
             },
             new SingleAttackIntent(Dmg3), new BuffIntent()
         );
 
         attack1.FollowUpState = attack2;
         attack2.FollowUpState = attack3;
-        attack3.FollowUpState = attack1;
+        attack3.FollowUpState = attack4;
+        attack4.FollowUpState = attack1;
 
         list.Add(attack1);
         list.Add(attack2);
         list.Add(attack3);
+        list.Add(attack4);
 
         return new MonsterMoveStateMachine(list, attack1);
     }

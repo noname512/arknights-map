@@ -55,12 +55,18 @@ public class Cold : ModCardTemplate
             return false;
         }
 
-        if (card == this)
+
+        if (this.Pile?.Type != PileType.Hand)
         {
             return false;
         }
 
-        if (this.Pile?.Type != PileType.Hand)
+        if ((card == this) && (Pile.Cards.Count(c => c is Cold) == 1))
+        {
+            return false;
+        }
+
+        if (Pile.Cards.First(c => c is Cold) != this)
         {
             return false;
         }

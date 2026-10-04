@@ -24,7 +24,7 @@
   "ARKNIGHTS_MAP_CARD_MILK.title": "奶浆",
   "ARKNIGHTS_MAP_CARD_MILK.description": "",
   "ARKNIGHTS_MAP_CARD_COLD.title": "寒冷",
-  "ARKNIGHTS_MAP_CARD_COLD.description": "如果这张牌在你的[gold]手牌[/gold]中，其他[gold]手牌[/gold]的耗能加1。",
+  "ARKNIGHTS_MAP_CARD_COLD.description": "如果这张牌在你的[gold]手牌[/gold]中，其他[gold]手牌[/gold]的耗能加1（每张牌最多被[gold]寒冷[/gold]增加1）。",
   "ARKNIGHTS_MAP_CARD_CALL_FOR_ASSISTANCE.title": "呼叫援助",
   "ARKNIGHTS_MAP_CARD_CALL_FOR_ASSISTANCE.description": "花费[blue]{Gold:diff()}[/blue][gold]金币[/gold]，造成[blue]{Damage:diff()}[/blue]点伤害并给予[blue]{WeakPower:diff()}[/blue]层[gold]虚弱[/gold]和[gold]易伤[/gold]。",
   "ARKNIGHTS_MAP_CARD_SOMETHING_FORM.title": "{CardName}形态",
