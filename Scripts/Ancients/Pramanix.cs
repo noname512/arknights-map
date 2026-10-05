@@ -38,7 +38,7 @@ public class Pramanix : ModAncientEventTemplate
             RelicOption<Pilgrimage>(), //圣巡
             RelicOption<SnowTracks>(), //雪迹
             RelicOption<ByKjeragandrPramanix>(), //耶拉冈德在上·初雪
-            RelicOption<PeaksCladInForest>(), //霜涛覆岭
+            RelicOption<PeaksCladInFrost>(), //霜涛覆岭
             RelicOption<TowardsTheMountainBow>(), //群山俯首
             RelicOption<BlessingOfKarlan>(), //圣山的祝福
             RelicOption<NatureDeterrent>(), //自然威慑
