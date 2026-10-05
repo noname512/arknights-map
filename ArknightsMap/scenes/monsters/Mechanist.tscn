@@ -20,13 +20,13 @@ unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
 offset_left = -160.0
-offset_top = -392.0
-offset_right = 218.0
+offset_top = -390.0
+offset_right = 160.0
 
 [node name="IntentPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -400)
+position = Vector2(0, -445)
 
 [node name="CenterPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -200)
+position = Vector2(0, -195)

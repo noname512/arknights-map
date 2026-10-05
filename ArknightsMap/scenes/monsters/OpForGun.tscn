@@ -4,7 +4,6 @@
 [ext_resource type="SpineSkeletonDataResource" uid="uid://bq81klm08iyhy" path="res://ArknightsMap/images/monsters/OpForGun/OpForGun.tres" id="1_2eko4"]
 
 [node name="OpForGun" type="Node2D"]
-scale = Vector2(1.5, 1.5)
 script = ExtResource("1_0b7r6")
 
 [node name="Visuals" type="SpineSprite" parent="."]
@@ -15,20 +14,20 @@ preview_frame = false
 preview_time = 0.0
 unique_name_in_owner = true
 rotation = -3.1415927
-scale = Vector2(1, -1)
+scale = Vector2(1.5, -1.5)
 
 [node name="Bounds" type="Control" parent="."]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
-offset_left = -107.0
-offset_top = -342.0
-offset_right = 107.0
-offset_bottom = 40.0
+offset_left = -160.0
+offset_top = -460.0
+offset_right = 160.0
 
 [node name="IntentPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -310)
+position = Vector2(0, -515)
 
 [node name="CenterPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(0, -230)

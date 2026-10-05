@@ -13,20 +13,20 @@ preview_animation = "B_Skill_Begin"
 preview_frame = false
 preview_time = 0.0
 unique_name_in_owner = true
-scale = Vector2(-1.5, 1.5)
+scale = Vector2(-1.3, 1.3)
 
 [node name="Bounds" type="Control" parent="."]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
-offset_left = -160.0
-offset_top = -392.0
-offset_right = 228.0
+offset_left = -185.0
+offset_top = -370.0
+offset_right = 185.0
 
 [node name="IntentPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -400)
+position = Vector2(0, -425)
 
 [node name="CenterPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -200)
+position = Vector2(0, -185)
