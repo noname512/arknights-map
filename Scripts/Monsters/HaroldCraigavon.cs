@@ -1,3 +1,4 @@
+using System.Reflection;
 using ArknightsMap.Scripts.Cards;
 using ArknightsMap.Scripts.Utils;
 using MegaCrit.Sts2.Core.Animation;
@@ -114,17 +115,14 @@ public class HaroldCraigavon : AbstractSnowyMountainMonster
                 await CreatureCmd.TriggerAnim(Creature, "Skill_2", 0.5f);
                 await Cmd.Wait(1f);
                 List<Task> list = new List<Task>();
-                
-                /*
+
                 foreach (Creature target in targets)
                 {
                     AttackCommand command = DamageCmd.Attack(dmg4).FromMonster(this);
-                    command._combatState = null; // Private, Please noname hack it.
+                    PropertyInfo property = typeof(ArknightsSettings).GetProperty("_combatState")!;
+                    property.SetValue(command, null);
                     list.Add(command.Targeting(target).WithHitCount(CalcRepeatTimes(target)).WithNoAttackerAnim().Execute(null));
                 }
-                */
-                
-                await DamageCmd.Attack(dmg4).FromMonster(this).WithHitCount(CalcRepeatTimes()).WithNoAttackerAnim().Execute(null);
 
                 await Task.WhenAll(list);
             },

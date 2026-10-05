@@ -133,7 +133,7 @@
     "ARKNIGHTS_MAP_RELIC_BY_KJERAGANDR_PRAMANIX.description": "每场战斗中，当你第一次将要受到致死的伤害时，阻止此次伤害。",
     "ARKNIGHTS_MAP_RELIC_BY_KJERAGANDR_PRAMANIX.flavor": "耶拉冈德在上，耶拉冈德在上，耶拉冈德在上！",
     "ARKNIGHTS_MAP_RELIC_PEAKS_CLAD_IN_FOREST.title": "霜涛覆岭",
-    "ARKNIGHTS_MAP_RELIC_PEAKS_CLAD_IN_FOREST.description": "若你本回合中仅打出过一种类别的牌，则下回合额外抽[blue]{Cards}[/blue]张牌且可以免费打出一张该类别的牌。",
+    "ARKNIGHTS_MAP_RELIC_PEAKS_CLAD_IN_FOREST.description": "若你本回合中仅打出过一种类别的牌，则下回合开始时额外抽[blue]{Cards}[/blue]张牌且它们当回合免费打出。",
     "ARKNIGHTS_MAP_RELIC_PEAKS_CLAD_IN_FOREST.flavor": "",
     "ARKNIGHTS_MAP_RELIC_TOWARDS_THE_MOUNTAIN_BOW.title": "群山俯首",
     "ARKNIGHTS_MAP_RELIC_TOWARDS_THE_MOUNTAIN_BOW.description": "在你的第[blue]{Turn}[/blue]回合开始时，[gold]击晕[/gold]所有敌人。这个遗物的回合数在每场战斗增加[blue]1[/blue]。",
