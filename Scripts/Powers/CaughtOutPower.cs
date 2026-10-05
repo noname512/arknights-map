@@ -30,35 +30,42 @@ public class CaughtOutPower : ModPowerTemplate
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature target, bool wasRemovalPrevented, float deathAnimLength)
     {
         if (wasRemovalPrevented || target != Owner)
+        {
             return;
-        await SummonSeed();
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            Creature c = await CreatureCmd.Add<CabbageSeedling>(CombatState, $"seed{i + 1}");
+            c.SetNodeVisible(false);
+            TaskHelper.RunSafely(RevealSeedAfterDeathAnim(c, deathAnimLength));
+        }
     }
 
     public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (side == CombatSide.Enemy && Owner.Monster!.IntendsToAttack)
+        if (!participants.Contains(Owner))
+        {
+            return;
+        }
+        if (Owner.Monster!.IntendsToAttack)
         {
             correctIntent++;
         }
-        if (side != Owner.Side)
-            return;
         if (correctIntent >= AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 5))
         {
-            await SummonSeed();
+            await CreatureCmd.Kill(Owner);
         }
     }
 
-    public async Task SummonSeed()
+    public async Task RevealSeedAfterDeathAnim(Creature c, float animLength)
     {
-        if (!summoned)
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                await CreatureCmd.Add<CabbageSeedling>(CombatState, $"seed{i + 1}");
-            }
-            summoned = true;
-        }
-        if (Owner.IsAlive)
-            await CreatureCmd.Kill(Owner);
+        await Cmd.CustomScaledWait(animLength, animLength);
+        c.SetNodeVisible(true);
+        await CreatureCmd.TriggerAnim(c, "Start", 0f);
+    }
+
+    public override bool ShouldStopCombatFromEnding()
+    {
+        return true;
     }
 }

@@ -98,7 +98,7 @@ public class CabbageSeedling : AbstractWildsMonster
         if (!IsBurning && creature.Monster is BurningVine)
         {
             IsBurning = true;
-            await CreatureCmd.TriggerAnim(Creature, "Start", 0);
+            await CreatureCmd.TriggerAnim(Creature, "StartBurning", 0);
             await PowerCmd.Apply<BurningPower>(new ThrowingPlayerChoiceContext(), Creature, 15m, Creature, null);
         }
     }
@@ -106,21 +106,24 @@ public class CabbageSeedling : AbstractWildsMonster
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
     {
         IsBurning = IsBurningVineInCombat();
-        AnimState startState = new AnimState("1to2");
+        AnimState startBurningState = new AnimState("1to2");
         AnimState idleState2 = new AnimState("2_Idle", isLooping: true);
         AnimState attackState2 = new AnimState("2_Attack");
         AnimState dieState2 = new AnimState("2_Die");
         AnimState idleState = new AnimState("Idle", isLooping: true);
         AnimState attackState = new AnimState("Attack");
         AnimState dieState = new AnimState("Die");
-        startState.NextState = idleState2;
+        AnimState startState = new AnimState("Start");
+        startBurningState.NextState = idleState2;
         attackState.NextState = idleState;
         attackState2.NextState = idleState2;
-        CreatureAnimator creatureAnimator = new CreatureAnimator(IsBurning ? startState : idleState, controller);
+        startState.NextState = idleState;
+        CreatureAnimator creatureAnimator = new CreatureAnimator(IsBurning ? startBurningState : idleState, controller);
         creatureAnimator.AddAnyState("Attack", attackState2, () => IsBurning);
         creatureAnimator.AddAnyState("Attack", attackState, () => !IsBurning);
         creatureAnimator.AddAnyState("Dead", dieState2, () => IsBurning);
         creatureAnimator.AddAnyState("Dead", dieState, () => !IsBurning);
+        creatureAnimator.AddAnyState("StartBurning", startBurningState);
         creatureAnimator.AddAnyState("Start", startState);
         return creatureAnimator;
     }
