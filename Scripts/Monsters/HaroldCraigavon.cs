@@ -119,8 +119,8 @@ public class HaroldCraigavon : AbstractSnowyMountainMonster
                 foreach (Creature target in targets)
                 {
                     AttackCommand command = DamageCmd.Attack(dmg4).FromMonster(this);
-                    PropertyInfo property = typeof(AttackCommand).GetProperty("_combatState")!;
-                    property.SetValue(command, null);
+                    FieldInfo field = typeof(AttackCommand).GetField("_combatState", BindingFlags.Instance | BindingFlags.NonPublic)!;
+                    field.SetValue(command, null);
                     list.Add(command.Targeting(target).WithHitCount(CalcRepeatTimes(target)).WithNoAttackerAnim().Execute(null));
                 }
 
