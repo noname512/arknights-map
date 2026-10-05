@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://vawbqabgrua4" path="res://Scripts/Utils/NSnowStormWarning.cs" id="1_8r1dy"]
 [ext_resource type="Texture2D" uid="uid://cnl8qqrguobsp" path="res://ArknightsMap/images/ui/snow_storm.png" id="2_dr0yt"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="3_ijbto"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="5_auir6"]
 
 [node name="SnowStormWarning" type="Control"]
 layout_mode = 3
@@ -22,3 +24,24 @@ texture = ExtResource("2_dr0yt")
 anchors_preset = 0
 offset_right = 102.4
 offset_bottom = 102.4
+
+[node name="AmountLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 77.0
+offset_top = 60.0
+offset_right = 105.0
+offset_bottom = 86.0
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.188235)
+theme_override_colors/font_outline_color = Color(0.12, 0.10208, 0.0816, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_ijbto")
+theme_override_font_sizes/font_size = 18
+text = "88"
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("5_auir6")
+AutoSizeEnabled = false

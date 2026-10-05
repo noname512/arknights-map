@@ -2,6 +2,7 @@ using System;
 using ArknightsMap.Scripts;
 using ArknightsMap.Scripts.Utils;
 using Godot;
+using MegaCrit.Sts2.addons.mega_text;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
@@ -17,12 +18,14 @@ public partial class NSnowStormWarning : Control
     public List<IHoverTip> HoverTips = [StaticTips.SnowStorm, new HoverTip()];
     public CombatState CurrentCombatState;
     public TextureRect Rect { get; private set; }
+    public MegaLabel AmountLabel { get; private set; }
     public List<DynamicVar> DynamicVars = [new IntVar("direction", 0), new IntVar("restTurn", 0)];
 
     public override void _Ready()
     {
         Hitbox = GetNode<Control>("Hitbox");
         Rect = GetNode<TextureRect>("TextureRect");
+        AmountLabel = GetNode<MegaLabel>("AmountLabel");
         Hitbox.Connect(Control.SignalName.FocusEntered, Callable.From(OnFocus));
         Hitbox.Connect(Control.SignalName.FocusExited, Callable.From(OnUnfocus));
         Hitbox.Connect(Control.SignalName.MouseEntered, Callable.From(OnFocus));
@@ -38,6 +41,7 @@ public partial class NSnowStormWarning : Control
 
     public void UpdateTips(int restTurn)
     {
+        AmountLabel.SetTextAutoSize(restTurn.ToString());
         DynamicVars[1].BaseValue = restTurn;
         string text = "ARKNIGHTS_MAP_STATIC_HOVER_TIPS_SNOW_STORM_WARNING";
         LocString title = new LocString("static_hover_tips", text + ".title");
