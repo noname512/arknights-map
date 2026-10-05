@@ -17,12 +17,7 @@ public partial class NSnowStormWarning : Control
     public List<IHoverTip> HoverTips = [StaticTips.SnowStorm, new HoverTip()];
     public CombatState CurrentCombatState;
     public TextureRect Rect { get; private set; }
-    public DynamicVar DirectionVar = new IntVar("direction", 0);
-
-    public bool ShowThisTurn()
-    {
-        return CreaturePositions.WindBlowTurn != 0 && CurrentCombatState.RoundNumber % CreaturePositions.WindBlowTurn == 0;
-    }
+    public List<DynamicVar> DynamicVars = [new IntVar("direction", 0), new IntVar("restTurn", 0)];
 
     public override void _Ready()
     {
@@ -37,21 +32,25 @@ public partial class NSnowStormWarning : Control
         {
             Rect.Scale = new Vector2(-Rect.Scale.X, Rect.Scale.Y);
         }
-        if (CreaturePositions.WindBlowTurn != 1)
-        {
-            Visible = false;
-        }
-        DirectionVar.BaseValue = CreaturePositions.WindBlowDirection;
+        DynamicVars[0].BaseValue = CreaturePositions.WindBlowDirection;
+        UpdateTips(CreaturePositions.WindBlowTurn - 1);
+    }
+
+    public void UpdateTips(int restTurn)
+    {
+        DynamicVars[1].BaseValue = restTurn;
         string text = "ARKNIGHTS_MAP_STATIC_HOVER_TIPS_SNOW_STORM_WARNING";
         LocString title = new LocString("static_hover_tips", text + ".title");
         LocString description = new LocString("static_hover_tips", text + ".description");
-        description.Add(DirectionVar);
+        foreach (DynamicVar var in DynamicVars)
+        {
+            description.Add(var);
+        }
         HoverTips[1] = new HoverTip(title, description);
     }
 
     private void OnFocus()
     {
-        GD.Print("OnFocus called!!!");
         if (IsFocused)
         {
             return;
@@ -68,7 +67,6 @@ public partial class NSnowStormWarning : Control
 
     private void OnUnfocus()
     {
-        GD.Print("OnUnfocus called!!!");
         IsFocused = false;
         NTargetManager.Instance.OnNodeUnhovered(this);
         CombatManager.Instance.StateTracker.CombatStateChanged -= ShowWarningHoverTips;
