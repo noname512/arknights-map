@@ -19,7 +19,7 @@ public class FireBomb : ModPotionTemplate
 
     public override PotionUsage Usage => PotionUsage.CombatOnly;
 
-    public override TargetType TargetType => TargetType.None;
+    public override TargetType TargetType => TargetType.AllEnemies;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 

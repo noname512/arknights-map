@@ -1,6 +1,7 @@
 using ArknightsMap.Scripts.Potions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
@@ -31,7 +32,8 @@ public class BurningHouse : ModRelicTemplate
 
     public override async Task AfterObtained()
     {
-        List<Reward> list = [new PotionReward(ModelDb.Potion<FireBomb>().ToMutable(), Owner)];
-        await RewardsCmd.OfferCustom(Owner, list);
+        int originalSlotCount = base.Owner.MaxPotionCount;
+        await PlayerCmd.GainMaxPotionCount(1, Owner);
+        await PotionCmd.TryToProcure(ModelDb.Potion<FireBomb>().ToMutable(), base.Owner, originalSlotCount);
     }
 }
