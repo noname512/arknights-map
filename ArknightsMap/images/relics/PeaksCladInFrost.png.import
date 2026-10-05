@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://wxq2kynasmi4"
-path="res://.godot/imported/PeaksCladInForest.png-d5fc44b1aa1d613cfeaf2ee874396e33.ctex"
+path="res://.godot/imported/PeaksCladInFrost.png-d5fc44b1aa1d613cfeaf2ee874396e33.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/relics/PeaksCladInForest.png"
-dest_files=["res://.godot/imported/PeaksCladInForest.png-d5fc44b1aa1d613cfeaf2ee874396e33.ctex"]
+source_file="res://ArknightsMap/images/relics/PeaksCladInFrost.png"
+dest_files=["res://.godot/imported/PeaksCladInFrost.png-d5fc44b1aa1d613cfeaf2ee874396e33.ctex"]
 
 [params]
 
