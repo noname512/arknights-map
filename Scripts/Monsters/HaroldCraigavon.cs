@@ -119,7 +119,7 @@ public class HaroldCraigavon : AbstractSnowyMountainMonster
                 foreach (Creature target in targets)
                 {
                     AttackCommand command = DamageCmd.Attack(dmg4).FromMonster(this);
-                    PropertyInfo property = typeof(ArknightsSettings).GetProperty("_combatState")!;
+                    PropertyInfo property = typeof(AttackCommand).GetProperty("_combatState")!;
                     property.SetValue(command, null);
                     list.Add(command.Targeting(target).WithHitCount(CalcRepeatTimes(target)).WithNoAttackerAnim().Execute(null));
                 }

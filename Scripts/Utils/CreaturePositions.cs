@@ -128,7 +128,8 @@ public sealed class CreaturePositions : HookedSingletonModel
     {
         if (side == CombatSide.Player && WindBlowTurn != 0 && nSnowStormWarning != null)
         {
-            nSnowStormWarning.Visible = CurrentCombatState!.RoundNumber % WindBlowTurn == 0;
+            int restTurn = (WindBlowTurn - CurrentCombatState!.RoundNumber % WindBlowTurn) % WindBlowTurn;
+            nSnowStormWarning.UpdateTips(restTurn);
         }
         return Task.CompletedTask;
     }
