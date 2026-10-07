@@ -31,7 +31,7 @@ public class ColdToTheBonePower : ModPowerTemplate
         CardModel? cardSource
     )
     {
-        if (dealer == Owner)
+        if ((target.Player != null) && (dealer == Owner))
         {
             await CardPileCmd.AddToCombatAndPreview<Cold>(target, PileType.Hand, Amount, null);
         }
