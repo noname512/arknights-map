@@ -55,7 +55,7 @@ public class Overexertion : ModRelicTemplate
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if ((cardPlay.Card.Type == CardType.Attack) && (!Owner.Creature.HasPower<WeakPower>()))
+        if ((cardPlay.Card.Owner == Owner) && (cardPlay.Card.Type == CardType.Attack) && (!Owner.Creature.HasPower<WeakPower>()))
         {
             await PowerCmd.Apply<WeakPower>(choiceContext, Owner.Creature, DynamicVars.Weak.IntValue, Owner.Creature, null);
         }
