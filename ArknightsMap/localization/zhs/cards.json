@@ -17,6 +17,8 @@
   "ARKNIGHTS_MAP_CARD_SHOTGUN_CARD.description": "对所有敌人造成{Damage:diff()}点伤害。\n回复{Heal:diff()}点生命。",
   "ARKNIGHTS_MAP_CARD_WARN.title": "鸣铳示警",
   "ARKNIGHTS_MAP_CARD_WARN.description": "所有敌人本回合失去{StrengthPower}点[gold]力量[/gold]，并获得{WeakPower}层[gold]虚弱[/gold]。\n你本回合获得等量的[gold]力量[/gold]。",
+  "ARKNIGHTS_MAP_CARD_SUVIVOR_PLUS.title": "掠食者",
+  "ARKNIGHTS_MAP_CARD_SUVIVOR_PLUS.description": "获得{Block:diff()}点[gold]格挡[/gold]，丢弃1到{Cards:diff()}张手牌并抽等量牌。",
   "ARKNIGHTS_MAP_CARD_NO_COMMUNICATION.title": "沟通不畅",
   "ARKNIGHTS_MAP_CARD_NO_COMMUNICATION.description": "每当抽到这张牌后，这张牌的耗能降低1。",
   "ARKNIGHTS_MAP_CARD_PERPLEXED.title": "困惑",
