@@ -44,10 +44,6 @@ public class TheSaintPower : ModPowerTemplate
             {
                 await theSaint.TriggerFlyState();
             }
-            if (creature.Monster is AllFlamesReturned allFlamesReturned)
-            {
-                await allFlamesReturned.TriggerDeadState();
-            }
         }
     }
 

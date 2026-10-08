@@ -260,7 +260,10 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
                 NRunMusicController.Instance?.PlayCustomMusic("event:/ArknightsMap/music/the_saint_bat_2");
             },
             [new BuffIntent()]
-        );
+        )
+        {
+            MustPerformOnceBeforeTransitioning = true,
+        };
 
         list.Add(GivePerplexed);
         list.Add(HeavyAttackPhase1);
