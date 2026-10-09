@@ -45,7 +45,7 @@ public sealed class AppleFlower : ModRelicTemplate
         }
     }
 
-    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (cardPlay.Player != Owner)
         {
@@ -53,8 +53,6 @@ public sealed class AppleFlower : ModRelicTemplate
         }
         if (cardPlay.Card?.Enchantment is { } enchantment && enchantment.Id == ModelDb.Enchantment<Sown>().Id)
         {
-            await cardPlay.Card.MoveToResultPileWithoutPlaying(choiceContext);
-
             CardModel? cardModel = CardFactory
                 .GetDistinctForCombat(
                     Owner,

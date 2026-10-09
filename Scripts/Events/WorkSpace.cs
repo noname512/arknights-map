@@ -30,59 +30,13 @@ public sealed class WorkSpace : ModEventTemplate
         
         new IntVar("Gold_Upgrade", 100),
         new IntVar("Gold_Remove", 200),
-        new IntVar("Gold_Transform", 325),
+        
         
     ];
 
-    public bool HasTransformCard(Player owner)
-    {
-        if (owner.Character is Ironclad)
-        {
-            return owner.Deck.Cards.Any(c => c is StrikeIronclad);
-        }
-        if (owner.Character is Silent)
-        {
-            return owner.Deck.Cards.Any(c => c is Survivor);
-        }
-        if (owner.Character is Regent)
-        {
-            return owner.Deck.Cards.Any(c => c is Venerate);
-        }
-        if (owner.Character is Defect)
-        {
-            return owner.Deck.Cards.Any(c => c is Zap);
-        }
-        if (owner.Character is Necrobinder)
-        {
-            return owner.Deck.Cards.Any(c => c is Bodyguard);
-        }
-        return false;
-    }
+    
 
-    public List<CardModel>? GetTransformCards(Player owner)
-    {
-        if (owner.Character is Ironclad)
-        {
-            return owner.Deck.Cards.Where(c => c is StrikeIronclad).ToList();
-        }
-        if (owner.Character is Silent)
-        {
-            return owner.Deck.Cards.Where(c => c is Survivor).ToList();
-        }
-        if (owner.Character is Regent)
-        {
-            return owner.Deck.Cards.Where(c => c is Venerate).ToList();
-        }
-        if (owner.Character is Defect)
-        {
-            return owner.Deck.Cards.Where(c => c is Zap).ToList();
-        }
-        if (owner.Character is Necrobinder)
-        {
-            return owner.Deck.Cards.Where(c => c is Bodyguard).ToList();
-        }
-        return null;
-    }
+    
     
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions() =>
@@ -93,9 +47,6 @@ public sealed class WorkSpace : ModEventTemplate
         Owner!.Gold >= 200
             ? new EventOption(this, Remove, InitialOptionKey("REMOVE"))
             : new EventOption(this, null, InitialOptionKey("REMOVE_LOCKED")),
-        Owner!.Gold >= 325 && HasTransformCard(Owner!)
-            ? new EventOption(this, Transform, InitialOptionKey("TRANSFORM"))
-            : new EventOption(this, null, InitialOptionKey("TRANSFORM_LOCKED")),
         new EventOption(this, Ice, InitialOptionKey("ICE")),
     ];
 
@@ -137,21 +88,7 @@ public sealed class WorkSpace : ModEventTemplate
     
 
     
-    private async Task Transform()
-    {
-        await PlayerCmd.LoseGold(325, Owner!);
-        foreach (
-            CardModel item in await CardSelectCmd.FromDeckForRemoval(
-                prefs: new CardSelectorPrefs(CardSelectorPrefs.RemoveSelectionPrompt, 1),
-                player: Owner!,
-                filter: c => GetTransformCards(Owner!).Contains(c)
-            )
-        )
-        {
-            
-        }
-        SetEventFinished(L10NLookup($"{Id.Entry}.pages.TRANSFORM.description"));
-    }
+    
 
     private async Task Ice()
     {

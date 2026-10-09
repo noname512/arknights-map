@@ -1,6 +1,7 @@
 using ArknightsMap.Scripts.Acts;
 using ArknightsMap.Scripts.Relics;
 using Godot;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -29,6 +30,8 @@ public class Executor : ModAncientEventTemplate
             RunHistoryIconOutlinePath: $"res://ArknightsMap/images/ancients/{GetType().Name}/avatar.png"
         );
 
+        
+
     private IReadOnlyList<EventOption> Pool1 =>
         [
             CreateModRelicOption<ExFoedere>(), // 圣约
@@ -36,10 +39,13 @@ public class Executor : ModAncientEventTemplate
             CreateModRelicOption<SaintMind>(), // 圣徒意志
             
         ];
-    private IReadOnlyList<EventOption> Pool2 =>
+    private IReadOnlyList<EventOption?> Pool2 =>
         [
             CreateModRelicOption<FinalRoad>(), // 最终旅程
             CreateModRelicOption<FinalModification>(), // 终结改装
+            (Owner is null || ExtraForce.HasTransformCard(Owner))
+                ? CreateModRelicOption<ExtraForce>()
+                : null
         ];
     private IReadOnlyList<EventOption> Pool3 =>
         [
@@ -49,12 +55,14 @@ public class Executor : ModAncientEventTemplate
         ];
 
     // 所有可能的选项
-    public override IEnumerable<EventOption> AllPossibleOptions => [.. Pool1, .. Pool2, .. Pool3];
+    public override IEnumerable<EventOption> AllPossibleOptions =>
+        [.. Pool1, .. Pool2.Where(option => option is not null).Cast<EventOption>(), .. Pool3];
 
     // 生成选项
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        return [Rng.NextItem(Pool1)!, Rng.NextItem(Pool2)!, Rng.NextItem(Pool3)!];
+        var availablePool2 = Pool2.Where(option => option is not null).Cast<EventOption>().ToArray();
+        return [Rng.NextItem(Pool1)!, Rng.NextItem(availablePool2)!, Rng.NextItem(Pool3)!];
     }
 
     public override bool IsValidForAct(ActModel act)

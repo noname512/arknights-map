@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
+using MegaCrit.Sts2.Core.Models.Orbs;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -12,9 +13,9 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Cards;
 
 [RegisterCard(typeof(EventCardPool))]
-public class SurvivorPlus : ModCardTemplate
+public class ZapPlus : ModCardTemplate
 {
-    public SurvivorPlus()
+    public ZapPlus()
         : base(energyCost, type, rarity, targetType) { }
 
     public override bool CanBeGeneratedInCombat => false;
@@ -31,7 +32,7 @@ public class SurvivorPlus : ModCardTemplate
     // 目标类型（AnyEnemy表示任意敌人）
     private const TargetType targetType = TargetType.Self;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(16, ValueProp.Move), new CardsVar(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
     // 卡图资源
     public override CardAssetProfile AssetProfile =>
@@ -46,26 +47,20 @@ public class SurvivorPlus : ModCardTemplate
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-        foreach (
-            CardModel item in await CardSelectCmd.FromHandForDiscard(
-                choiceContext,
-                player: Owner,
-                prefs: new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 1,DynamicVars.Cards.IntValue),
-                filter: null,
-                this
-            )
-        )
+        for (int i = 0; i < 3; i++){
+            await OrbCmd.Channel<LightningOrb>(choiceContext, Owner);
+        }
+        foreach (OrbModel orb in Owner.PlayerCombatState!.OrbQueue.Orbs)
         {
-            await CardCmd.Discard(choiceContext, item);
-            await CardPileCmd.Draw(choiceContext, Owner);
-            
+            if (orb is LightningOrb lightningOrb)
+            {
+                await OrbCmd.Passive(choiceContext, lightningOrb, null);
+            }
         }
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(4);
-        DynamicVars.Cards.UpgradeValueBy(2);
+        EnergyCost.UpgradeBy(-1);
     }
 }
