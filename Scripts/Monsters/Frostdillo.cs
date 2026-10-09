@@ -88,8 +88,8 @@ public class Frostdillo : AbstractSnowyMountainMonster
 
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleStateA, controller);
         creatureAnimator.AddAnyState("Attack", attackState);
-        creatureAnimator.AddAnyState("Die", dieStateB, () => Creature.HasPower<WeaknessPower>());
-        creatureAnimator.AddAnyState("Die", dieStateA, () => true);
+        creatureAnimator.AddAnyState("Dead", dieStateB, () => Creature.HasPower<WeaknessPower>());
+        creatureAnimator.AddAnyState("Dead", dieStateA, () => true);
         creatureAnimator.AddAnyState("Stun_Begin", stunBegin);
         creatureAnimator.AddAnyState("Stun_End", stunEnd);
 

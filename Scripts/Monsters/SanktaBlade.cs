@@ -106,7 +106,7 @@ public class SanktaBlade : AbstractSankta
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
         creatureAnimator.AddAnyState("Attack", attackState);
         creatureAnimator.AddAnyState("Skill", skillState);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
 
         return creatureAnimator;
     }

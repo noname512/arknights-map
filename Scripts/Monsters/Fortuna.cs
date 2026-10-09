@@ -132,7 +132,7 @@ public class Fortuna : AbstractSankta
         creatureAnimator.AddAnyState("Skill_Begin", skillbeginState);
         creatureAnimator.AddAnyState("Skill_Loop", skillloopState);
         creatureAnimator.AddAnyState("Skill_End", skillendState);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
         skillbeginState.NextState = skillloopState;
         skillloopState.NextState = skillendState;
         skillendState.NextState = idleState;

@@ -170,7 +170,7 @@ public class GreathornRhuul : AbstractSnowyMountainMonster
         creatureAnimator.AddAnyState("Skill_Begin", skillBeginState);
         creatureAnimator.AddAnyState("Skill_Break", skillBreakState);
         creatureAnimator.AddAnyState("Skill_End", skillEndState);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
 
         return creatureAnimator;
     }

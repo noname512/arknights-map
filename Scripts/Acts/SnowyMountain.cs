@@ -65,7 +65,7 @@ public sealed class SnowyMountain : ModActTemplate
         {
             // Weak
             ModelDb.Encounter<FluffySnowballWeak>(),
-            ModelDb.Encounter<IceFieldHunterWeak>(),
+            ModelDb.Encounter<IcefieldHunterWeak>(),
             ModelDb.Encounter<FrozenMountainBurdenbeastWeak>(),
             // Normal
             ModelDb.Encounter<IcefieldBerserkerNormal>(),
@@ -74,6 +74,7 @@ public sealed class SnowyMountain : ModActTemplate
             ModelDb.Encounter<DelegationShieldbearerAndCenturionNormal>(),
             ModelDb.Encounter<SnowcapAndFrostdilloNormal>(),
             ModelDb.Encounter<CatapultNormal>(),
+            ModelDb.Encounter<IcefieldArtsFighterNormal>(),
             // Elite
             ModelDb.Encounter<TschaggattasElite>(),
             ModelDb.Encounter<GreathornRhuulElite>(),

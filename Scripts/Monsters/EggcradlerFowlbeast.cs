@@ -97,7 +97,7 @@ public class EggcradlerFowlbeast : AbstractSnowyMountainMonster
 
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
         creatureAnimator.AddAnyState("Attack", attackState);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
 
         return creatureAnimator;
     }

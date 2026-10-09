@@ -37,7 +37,7 @@ public sealed class CreaturePositions : HookedSingletonModel
 
     public static List<Creature> GetCreaturesInPosition(int pos)
     {
-        return Positions.Where(kv => kv.Value == pos).Select(kv => kv.Key).ToList();
+        return Positions.Where(kv => kv.Value == pos && kv.Key.IsAlive).Select(kv => kv.Key).ToList();
     }
 
     public static int PositionOfCreature(Creature c)
@@ -199,6 +199,7 @@ public sealed class CreaturePositions : HookedSingletonModel
         int startPos = direction == 1 ? 8 : 2;
         bool blockMove = false;
         bool blockMoveThisPos = false;
+        List<AbstractSnowyMountainMonster> affectedCreature = [];
         if (creaturesInPos.Count > 0)
         {
             await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), creaturesInPos, damage, null, null, null);
@@ -210,7 +211,7 @@ public sealed class CreaturePositions : HookedSingletonModel
                 }
                 if (c.IsMonster && c.Monster is AbstractSnowyMountainMonster)
                 {
-                    await ((AbstractSnowyMountainMonster)c.Monster).OnWindBlow();
+                    affectedCreature.Add((AbstractSnowyMountainMonster)c.Monster);
                 }
                 GD.Print($"Creature {c.Name} hit wall.");
                 if (c.IsAlive)
@@ -273,12 +274,20 @@ public sealed class CreaturePositions : HookedSingletonModel
                 }
                 if (c.IsMonster && c.Monster is AbstractSnowyMountainMonster)
                 {
-                    await ((AbstractSnowyMountainMonster)c.Monster).OnWindBlow();
+                    affectedCreature.Add((AbstractSnowyMountainMonster)c.Monster);
                 }
                 TriggerMove(c, pos + direction * moveDis, 0.25f);
             }
             blockMove = blockMoveThisPos;
         }
+
+        List<Task> tasksToWait = [];
+        GD.Print($"affected creature count: {affectedCreature.Count()}");
+        foreach (AbstractSnowyMountainMonster m in affectedCreature)
+        {
+            tasksToWait.Add(m.OnWindBlow());
+        }
+        await Task.WhenAll(tasksToWait);
     }
 
     private static bool ShouldHandleCreature(Creature c, int direction)

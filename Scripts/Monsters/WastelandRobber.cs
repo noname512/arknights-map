@@ -99,7 +99,7 @@ public class WastelandRobber : ModMonsterTemplate
         creatureAnimator.AddAnyState("Attack_2", attackState2);
         creatureAnimator.AddAnyState("Start", startState);
 
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
 
         return creatureAnimator;
     }

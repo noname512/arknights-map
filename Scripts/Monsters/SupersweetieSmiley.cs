@@ -278,7 +278,7 @@ public class SupersweetieSmiley : AbstractSankta
         creatureAnimator.AddAnyState("Attack", attackState);
         creatureAnimator.AddAnyState("Skill_1", skill1State);
         creatureAnimator.AddAnyState("Skill_2", skill2State);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
         creatureAnimator.AddAnyState("Stun_Loop", startState);
         creatureAnimator.AddAnyState("Stun_End", startEndState);
 

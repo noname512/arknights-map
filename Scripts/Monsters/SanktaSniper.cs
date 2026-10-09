@@ -80,7 +80,7 @@ public class SanktaSniper : AbstractSankta
         creatureAnimator.AddAnyState("Skill_Start", skillstartState);
         creatureAnimator.AddAnyState("Skill_Loop", skillloopState);
         creatureAnimator.AddAnyState("Skill_End", skillendState);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
         skillstartState.NextState = skillloopState;
         skillloopState.NextState = skillendState;
         skillendState.NextState = idleState;

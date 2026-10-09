@@ -29,11 +29,12 @@ public class JetCanister : AbstractSnowyMountainMonster
     }
 
     public int count = 0;
+
     int repeatCount()
     {
         return count + 2;
     }
-    
+
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
@@ -74,7 +75,8 @@ public class JetCanister : AbstractSnowyMountainMonster
                 await PowerCmd.Apply<ColdToTheBonePower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
                 ((MoveState)MoveStateMachine.States["ATTACK2"]).FollowUpState = attack4;
             },
-            new SingleAttackIntent(Dmg3), new BuffIntent()
+            new SingleAttackIntent(Dmg3),
+            new BuffIntent()
         );
 
         attack1.FollowUpState = attack2;
@@ -104,7 +106,7 @@ public class JetCanister : AbstractSnowyMountainMonster
 
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
         creatureAnimator.AddAnyState("Attack", attackBeginState);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
 
         return creatureAnimator;
     }

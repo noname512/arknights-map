@@ -65,7 +65,7 @@ public class SanktaStatue : AbstractSankta
         );
 
         MoveState pray = new MoveState(
-            "PRAY", 
+            "PRAY",
             async targets =>
             {
                 foreach (Creature c in CombatState.GetOpponentsOf(Creature))
@@ -76,8 +76,7 @@ public class SanktaStatue : AbstractSankta
                         await CardPileCmd.Add(perplexed, PileType.Draw, CardPilePosition.Random, null);
                     }
                 }
-                
-            }, 
+            },
             new StatusIntent(1)
         );
 
@@ -118,7 +117,7 @@ public class SanktaStatue : AbstractSankta
         creatureAnimator.AddAnyState("Attack", attackState);
         creatureAnimator.AddAnyState("Skill", skillState);
         creatureAnimator.AddAnyState("Start", startState);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
 
         return creatureAnimator;
     }

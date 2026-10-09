@@ -166,7 +166,7 @@ public class BardSeamusWilliams : AbstractSnowyMountainMonster
         creatureAnimator.AddAnyState("Attack", attackState);
         creatureAnimator.AddAnyState("Skill_Begin", skillBeginState);
         creatureAnimator.AddAnyState("Skill_End", skillEndState);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
 
         return creatureAnimator;
     }

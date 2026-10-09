@@ -206,7 +206,7 @@ public class OpCar : AbstractSankta
 
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
         creatureAnimator.AddAnyState("Start", attackState);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
         creatureAnimator.AddAnyState("Skill_a", attackState);
 
         attackState.NextState = idleState;

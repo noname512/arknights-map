@@ -81,7 +81,7 @@ public class Isbit : AbstractSnowyMountainMonster
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
         creatureAnimator.AddAnyState("Attack", attackState);
         creatureAnimator.AddAnyState("Move", moveState);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
 
         return creatureAnimator;
     }

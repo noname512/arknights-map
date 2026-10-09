@@ -45,7 +45,7 @@ public class Snowball : AbstractSnowyMountainMonster
         AnimState dieState = new AnimState("Die");
 
         CreatureAnimator creatureAnimator = new CreatureAnimator(defaultState, controller);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
 
         return creatureAnimator;
     }

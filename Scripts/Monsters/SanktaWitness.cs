@@ -34,8 +34,6 @@ public class SanktaWitness : AbstractSankta
 
     public int Time = 1;
 
-    
-
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
@@ -110,7 +108,7 @@ public class SanktaWitness : AbstractSankta
 
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
         creatureAnimator.AddAnyState("Attack", attackState);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
 
         return creatureAnimator;
     }

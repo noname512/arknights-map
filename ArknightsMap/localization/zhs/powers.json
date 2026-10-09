@@ -202,5 +202,11 @@
     "ARKNIGHTS_MAP_POWER_EMOTION_EXPANSION_POWER.description": "这个敌人的最大生命和当前生命变为若干倍，在[gold]迷迭香的战术装备[/gold]被击杀后，[gold]击晕[/gold]这个敌人并解除其生命值增加效果。",
     "ARKNIGHTS_MAP_POWER_SANCTITY_POWER.title": "圣洁",
     "ARKNIGHTS_MAP_POWER_SANCTITY_POWER.smartDescription": "[gold]{OwnerName}免疫[/gold]负面效果和[gold]暴风雪[/gold]。被指向性卡牌手动指向并打出后，结束玩家回合并向[gold]{direction:cond:==1?右|左}[/gold]吹动[gold]暴风雪[/gold]。",
-    "ARKNIGHTS_MAP_POWER_SANCTITY_POWER.description": "这个敌人[gold]免疫[/gold]负面效果和[gold]暴风雪[/gold]。被指向性卡牌手动指向并打出后，结束玩家回合并吹动[gold]暴风雪[/gold]。"
+    "ARKNIGHTS_MAP_POWER_SANCTITY_POWER.description": "这个敌人[gold]免疫[/gold]负面效果和[gold]暴风雪[/gold]。被指向性卡牌手动指向并打出后，结束玩家回合并吹动[gold]暴风雪[/gold]。",
+    "ARKNIGHTS_MAP_POWER_CHAIN_REACTION_POWER.title": "连锁反应",
+    "ARKNIGHTS_MAP_POWER_CHAIN_REACTION_POWER.smartDescription": "[gold]{OwnerName}[/gold]死亡时，对相邻位置的所有角色造成相当于自身生命值上限的伤害。",
+    "ARKNIGHTS_MAP_POWER_CHAIN_REACTION_POWER.description": "这个敌人死亡时，对相邻位置的所有角色造成相当于自身生命值上限的伤害。",
+    "ARKNIGHTS_MAP_POWER_SCATTERED_TO_THE_WIND_POWER.title": "随风而散",
+    "ARKNIGHTS_MAP_POWER_SCATTERED_TO_THE_WIND_POWER.smartDescription": "[gold]{OwnerName}[/gold]被[gold]暴风雪[/gold]吹动时，受到[blue]{Damage}[/blue]点伤害。",
+    "ARKNIGHTS_MAP_POWER_SCATTERED_TO_THE_WIND_POWER.description": "这个敌人被[gold]暴风雪[/gold]吹动时，受到若干伤害。"
 }

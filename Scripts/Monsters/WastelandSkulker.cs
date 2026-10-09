@@ -107,7 +107,7 @@ public class WastelandSkulker : AbstractSankta
 
         creatureAnimator.AddAnyState("Start", startState);
 
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
 
         return creatureAnimator;
     }
