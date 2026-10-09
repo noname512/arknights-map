@@ -33,7 +33,7 @@ public static class SettingsPage
                 s => (bool)property.GetValue(s)!,
                 (s, v) =>
                 {
-                    NModalContainer.Instance.Add(NSettingsConfirmPopup.Create());
+                    // NModalContainer.Instance!.Add(NSettingsConfirmPopup.Create());
                     property.SetValue(s, v);
                 }
             ),

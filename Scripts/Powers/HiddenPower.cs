@@ -123,7 +123,7 @@ public class HiddenPower : ModPowerTemplate
 
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if ((side == CombatSide.Enemy) && (Owner.CombatState.Players.First().Creature == Target))
+        if ((side == CombatSide.Enemy) && (Owner.CombatState!.Players.First().Creature == Target))
         {
             List<Task> list = new List<Task>();
             foreach (Player player in Owner.CombatState.Players)

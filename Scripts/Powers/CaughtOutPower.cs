@@ -24,7 +24,7 @@ public class CaughtOutPower : ModPowerTemplate
     // 自定义图标路径。1:1即可。原版游戏大图256x256，小图64x64。
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
-    private bool summoned = false;
+
     private int correctIntent = 0;
 
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature target, bool wasRemovalPrevented, float deathAnimLength)
@@ -37,7 +37,7 @@ public class CaughtOutPower : ModPowerTemplate
         {
             Creature c = await CreatureCmd.Add<CabbageSeedling>(CombatState, $"seed{i + 1}");
             c.SetNodeVisible(false);
-            TaskHelper.RunSafely(RevealSeedAfterDeathAnim(c, deathAnimLength));
+            _ = TaskHelper.RunSafely(RevealSeedAfterDeathAnim(c, deathAnimLength));
         }
     }
 

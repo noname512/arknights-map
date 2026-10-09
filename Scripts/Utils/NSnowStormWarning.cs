@@ -13,12 +13,12 @@ using MegaCrit.Sts2.Core.Nodes.Rooms;
 
 public partial class NSnowStormWarning : Control
 {
-    public Control Hitbox { get; private set; }
+    public Control? Hitbox { get; private set; }
     public bool IsFocused { get; private set; }
     public List<IHoverTip> HoverTips = [StaticTips.SnowStorm, new HoverTip()];
-    public CombatState CurrentCombatState;
-    public TextureRect Rect { get; private set; }
-    public MegaLabel AmountLabel { get; private set; }
+    public CombatState? CurrentCombatState;
+    public TextureRect? Rect { get; private set; }
+    public MegaLabel? AmountLabel { get; private set; }
     public List<DynamicVar> DynamicVars = [new IntVar("direction", 0), new IntVar("restTurn", 0)];
 
     public override void _Ready()
@@ -41,7 +41,7 @@ public partial class NSnowStormWarning : Control
 
     public void UpdateTips(int restTurn)
     {
-        AmountLabel.SetTextAutoSize(restTurn.ToString());
+        AmountLabel!.SetTextAutoSize(restTurn.ToString());
         DynamicVars[1].BaseValue = restTurn;
         string text = "ARKNIGHTS_MAP_STATIC_HOVER_TIPS_SNOW_STORM_WARNING";
         LocString title = new LocString("static_hover_tips", text + ".title");
@@ -100,13 +100,13 @@ public partial class NSnowStormWarning : Control
         if (!NCombatRoom.Instance!.Ui.Hand.InCardPlay)
         {
             HideHoverTips();
-            NHoverTipSet.CreateAndShow(Hitbox, HoverTips, HoverTip.GetHoverTipAlignment(this, 0.5f));
+            NHoverTipSet.CreateAndShow(Hitbox!, HoverTips, HoverTip.GetHoverTipAlignment(this, 0.5f));
         }
     }
 
     public void HideHoverTips()
     {
-        NHoverTipSet.Remove(Hitbox);
+        NHoverTipSet.Remove(Hitbox!);
     }
 
     public static NSnowStormWarning Create(CombatState combatState)

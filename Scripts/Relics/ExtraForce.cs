@@ -1,10 +1,8 @@
 using ArknightsMap.Scripts.Cards;
-using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
@@ -23,10 +21,7 @@ public sealed class ExtraForce : ModRelicTemplate
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
-        
-        
-        ];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [];
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -88,32 +83,32 @@ public sealed class ExtraForce : ModRelicTemplate
         return null;
     }
 
-    public CardModel GetTransformTarget(Player owner)
-    {
-        if (owner.Character is Ironclad)
-        {
-            return owner.Deck.Cards.Where(c => c is StrikeIronclad).FirstOrDefault();
-        }
-        if (owner.Character is Silent)
-        {
-            return owner.Deck.Cards.Where(c => c is Survivor).FirstOrDefault();
-        }
-        if (owner.Character is Regent)
-        {
-            return owner.Deck.Cards.Where(c => c is Venerate).FirstOrDefault();
-        }
-        if (owner.Character is Defect)
-        {
-            return owner.Deck.Cards.Where(c => c is Zap).FirstOrDefault();
-        }
-        if (owner.Character is Necrobinder)
-        {
-            return owner.Deck.Cards.Where(c => c is Bodyguard).FirstOrDefault();
-        }
-        return null;
-    }
+    // public CardModel GetTransformTarget(Player owner)
+    // {
+    //     if (owner.Character is Ironclad)
+    //     {
+    //         return owner.Deck.Cards.Where(c => c is StrikeIronclad).FirstOrDefault();
+    //     }
+    //     if (owner.Character is Silent)
+    //     {
+    //         return owner.Deck.Cards.Where(c => c is Survivor).FirstOrDefault();
+    //     }
+    //     if (owner.Character is Regent)
+    //     {
+    //         return owner.Deck.Cards.Where(c => c is Venerate).FirstOrDefault();
+    //     }
+    //     if (owner.Character is Defect)
+    //     {
+    //         return owner.Deck.Cards.Where(c => c is Zap).FirstOrDefault();
+    //     }
+    //     if (owner.Character is Necrobinder)
+    //     {
+    //         return owner.Deck.Cards.Where(c => c is Bodyguard).FirstOrDefault();
+    //     }
+    //     return null;
+    // }
 
-    public CardModel GetTransformResult(Player owner)
+    public CardModel? GetTransformResult(Player owner)
     {
         if (owner.Character is Ironclad)
         {
@@ -144,12 +139,11 @@ public sealed class ExtraForce : ModRelicTemplate
             CardModel item in await CardSelectCmd.FromDeckForRemoval(
                 prefs: new CardSelectorPrefs(CardSelectorPrefs.TransformSelectionPrompt, 1),
                 player: Owner!,
-                filter: c => GetTransformCards(Owner!).Contains(c)
+                filter: c => GetTransformCards(Owner)!.Contains(c)
             )
         )
         {
-            await CardCmd.Transform(item, GetTransformResult(Owner!));
+            await CardCmd.Transform(item, GetTransformResult(Owner)!);
         }
-        
     }
 }

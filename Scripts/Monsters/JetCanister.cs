@@ -73,7 +73,7 @@ public class JetCanister : AbstractSnowyMountainMonster
                 await CreatureCmd.TriggerAnim(Creature, "Attack", 0.5f);
                 await DamageCmd.Attack(Dmg3).FromMonster(this).WithNoAttackerAnim().Execute(null);
                 await PowerCmd.Apply<ColdToTheBonePower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
-                ((MoveState)MoveStateMachine.States["ATTACK2"]).FollowUpState = attack4;
+                ((MoveState)MoveStateMachine!.States["ATTACK2"]).FollowUpState = attack4;
             },
             new SingleAttackIntent(Dmg3),
             new BuffIntent()
