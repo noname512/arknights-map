@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[node name="SnowyMountainEncounter" type="Control"]
+[node name="BardSeamusWilliamsBoss" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,3 +35,9 @@ position = Vector2(1550, 740)
 
 [node name="9" type="Marker2D" parent="."]
 position = Vector2(1750, 740)
+
+[node name="L" type="Marker2D" parent="."]
+position = Vector2(300, 400)
+
+[node name="R" type="Marker2D" parent="."]
+position = Vector2(1600, 400)

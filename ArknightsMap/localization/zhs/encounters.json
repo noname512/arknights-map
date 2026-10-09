@@ -74,6 +74,8 @@
     "ARKNIGHTS_MAP_ENCOUNTER_DEGENBRECHER_BOSS.loss": "{character}未能获得[gold]锏[/gold]的认可。",
     "ARKNIGHTS_MAP_ENCOUNTER_HAROLD_CRAIGAVON_BOSS.title": "哈洛德·克雷加文",
     "ARKNIGHTS_MAP_ENCOUNTER_HAROLD_CRAIGAVON_BOSS.loss": "{character}用尽了最后的点火石。",
+    "ARKNIGHTS_MAP_ENCOUNTER_BARD_SEAMUS_WILLIAMS_BOSS.title": "“诗人”西莫·威廉姆斯",
+    "ARKNIGHTS_MAP_ENCOUNTER_BARD_SEAMUS_WILLIAMS_BOSS.loss": "",
     "----------拉特兰---------": "-----------------",
     "ARKNIGHTS_MAP_ENCOUNTER_SANKTA_BLADE.title": "精英圣堂剑士",
     "ARKNIGHTS_MAP_ENCOUNTER_SANKTA_BLADE.loss": "{character}被[gold]{encounter}[/gold]击败。",
@@ -115,7 +117,6 @@
     "ARKNIGHTS_MAP_ENCOUNTER_OP_FOR_GUN_BOSS.loss": "{character}被淹没于源石遍布的圣堂中。",
     "ARKNIGHTS_MAP_ENCOUNTER_THE_SAINT_BOSS.title": "“圣徒”",
     "ARKNIGHTS_MAP_ENCOUNTER_THE_SAINT_BOSS.loss": "{character}在PCS系统的清洗下同化。",
-
     "ARKNIGHTS_MAP_ENCOUNTER_VECTOR_ROSMONTIS.title": "“迷迭香”，虚实之握",
     "ARKNIGHTS_MAP_ENCOUNTER_VECTOR_ROSMONTIS.loss": "{character}无法面对PRTS的歼灭。"
 }
