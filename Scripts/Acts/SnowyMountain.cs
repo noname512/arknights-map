@@ -51,13 +51,14 @@ public sealed class SnowyMountain : ModActTemplate
 
     public override IEnumerable<AncientEventModel> AllAncients =>
         [
-            ModelDb.AncientEvent<Pramanix>(), // 不 
-            ModelDb.AncientEvent<Ratatos>(),  // 要
-            ModelDb.AncientEvent<Arctosz>(),  // 折
-            ModelDb.AncientEvent<Enciodes>()  // 叠
+            ModelDb.AncientEvent<Pramanix>(), // 不
+            ModelDb.AncientEvent<Ratatos>(), // 要
+            ModelDb.AncientEvent<Arctosz>(), // 折
+            ModelDb.AncientEvent<Enciodes>(), // 叠
         ];
 
-    public override IEnumerable<EncounterModel> BossDiscoveryOrder => [ModelDb.Encounter<DegenbrecherBoss>(), ModelDb.Encounter<HaroldCraigavonBoss>()];
+    public override IEnumerable<EncounterModel> BossDiscoveryOrder =>
+        [ModelDb.Encounter<DegenbrecherBoss>(), ModelDb.Encounter<HaroldCraigavonBoss>(), ModelDb.Encounter<BardSeamusWilliamsBoss>()];
 
     public override IEnumerable<EncounterModel> GenerateAllEncounters() =>
         new EncounterModel[]
@@ -80,6 +81,7 @@ public sealed class SnowyMountain : ModActTemplate
             // Boss
             ModelDb.Encounter<DegenbrecherBoss>(),
             ModelDb.Encounter<HaroldCraigavonBoss>(),
+            ModelDb.Encounter<BardSeamusWilliamsBoss>(),
         };
 
     protected override void ApplyActDiscoveryOrderModifications(UnlockState unlockState) { }
