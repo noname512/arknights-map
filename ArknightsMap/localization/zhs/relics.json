@@ -344,5 +344,12 @@
     "ARKNIGHTS_MAP_RELIC_NUN_HABIT.flavor": "我去找件干净衣服给您。咦，好像没有常服，只有修女服了，您介意吗？",
     "ARKNIGHTS_MAP_RELIC_SKULLCRACKING_ELEGY.title": "开颅挽歌",
     "ARKNIGHTS_MAP_RELIC_SKULLCRACKING_ELEGY.description": "你的前[blue]{Times}[/blue]次攻击牌会额外打出一次。当你受到伤害时，重置该计数。",
-    "ARKNIGHTS_MAP_RELIC_SKULLCRACKING_ELEGY.flavor": "好像攻击造成[blue]150%[/blue]伤害的效果没体现出来啊……"
+    "ARKNIGHTS_MAP_RELIC_SKULLCRACKING_ELEGY.flavor": "好像攻击造成[blue]150%[/blue]伤害的效果没体现出来啊……",
+    "----Angelina----": "安洁莉娜遗物",
+    "ARKNIGHTS_MAP_RELIC_ACCELERATOR_FIELD.title": "加速立场",
+    "ARKNIGHTS_MAP_RELIC_ACCELERATOR_FIELD.description": "你的回合结束时效果触发两次。",
+    "ARKNIGHTS_MAP_RELIC_ACCELERATOR_FIELD.flavor": "",
+    "ARKNIGHTS_MAP_RELIC_CATASTROPHE_WARNING.title": "天灾预警",
+    "ARKNIGHTS_MAP_RELIC_CATASTROPHE_WARNING.description": "回合开始时，如果有敌人的攻击意图超过[blue]{Amount}[/blue]点，将一张具有[gold]虚无[/gold]的[gold]缓冲[/gold]放入你的手牌。",
+    "ARKNIGHTS_MAP_RELIC_CATASTROPHE_WARNING.flavor": ""
 }
