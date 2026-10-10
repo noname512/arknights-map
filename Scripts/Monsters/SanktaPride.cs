@@ -44,7 +44,7 @@ public class SanktaPride : AbstractSankta
         List<MonsterState> list = new List<MonsterState>();
 
         MoveState sleep = new MoveState(
-            "SLEEP", 
+            "SLEEP",
             async targets =>
             {
                 await CreatureCmd.TriggerAnim(Creature, "Skill", 0.8f);
@@ -56,8 +56,7 @@ public class SanktaPride : AbstractSankta
                         await CardPileCmd.Add(perplexed, PileType.Draw, CardPilePosition.Random, null, false);
                     }
                 }
-                
-            }, 
+            },
             new StatusIntent(1)
         );
 
@@ -104,7 +103,7 @@ public class SanktaPride : AbstractSankta
 
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
         creatureAnimator.AddAnyState("Skill", skillState);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
 
         return creatureAnimator;
     }

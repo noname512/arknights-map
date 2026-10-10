@@ -30,7 +30,7 @@ public sealed class FirstClass : ModEventTemplate
     // 失去生命
     private async Task TakeDamage()
     {
-        await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), Owner!.Creature, DynamicVars.Damage, null, null);
+        await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), Owner!.Creature, DynamicVars.Damage, null, null, null);
         await GainRelic();
     }
 

@@ -18,18 +18,12 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class RosmontisEquipment : ModMonsterTemplate
 {
-    
-
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 50, 50);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 50, 50);
-    
 
     private int Block => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 10);
 
-    public override async Task AfterAddedToRoom()
-    {
-        
-    }
+    public override async Task AfterAddedToRoom() { }
 
     public int MoveInt = 0;
 
@@ -51,7 +45,6 @@ public class RosmontisEquipment : ModMonsterTemplate
                     await PowerCmd.Apply<RingingPower>(new ThrowingPlayerChoiceContext(), c, 1, c, null);
                     await PowerCmd.Apply<ChargePower>(new ThrowingPlayerChoiceContext(), Creature, 5, Creature, null);
                 }
-                
             },
             [new DebuffIntent()]
         );
@@ -71,20 +64,16 @@ public class RosmontisEquipment : ModMonsterTemplate
                         }
                     }
                 }
-                
             },
             [new DefendIntent(), new BuffIntent()]
         );
 
-        
-
         knock.FollowUpState = block;
         block.FollowUpState = knock;
-        
 
         list.Add(knock);
         list.Add(block);
-        
+
         return new MonsterMoveStateMachine(list, knock);
     }
 
@@ -105,7 +94,7 @@ public class RosmontisEquipment : ModMonsterTemplate
         creatureAnimator.AddAnyState("Attack", attackState);
         creatureAnimator.AddAnyState("Skill", skillState);
         creatureAnimator.AddAnyState("Start", startState);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
 
         return creatureAnimator;
     }

@@ -11,11 +11,11 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Cards;
 
-[RegisterCard(typeof(SilentCardPool))]
+[RegisterCard(typeof(EventCardPool))]
 public class SurvivorPlus : ModCardTemplate
 {
     public SurvivorPlus()
-        : base(energyCost, type, rarity, targetType, false) { }
+        : base(energyCost, type, rarity, targetType) { }
 
     public override bool CanBeGeneratedInCombat => false;
 
@@ -26,7 +26,7 @@ public class SurvivorPlus : ModCardTemplate
     private const CardType type = CardType.Skill;
 
     // 卡牌稀有度
-    private const CardRarity rarity = CardRarity.Event;
+    private const CardRarity rarity = CardRarity.Ancient;
 
     // 目标类型（AnyEnemy表示任意敌人）
     private const TargetType targetType = TargetType.Self;

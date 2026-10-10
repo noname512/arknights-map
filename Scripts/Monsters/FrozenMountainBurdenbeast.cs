@@ -116,7 +116,7 @@ public class FrozenMountainBurdenbeast : AbstractSnowyMountainMonster
         CreatureAnimator creatureAnimator = new CreatureAnimator(sleepState, controller);
         creatureAnimator.AddAnyState("Awake", awakeState);
         creatureAnimator.AddAnyState("Attack", attackState);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
 
         return creatureAnimator;
     }

@@ -89,7 +89,7 @@ public class PathfinderCar : AbstractSankta
         creatureAnimator.AddAnyState("Attack_B", attack01State);
         creatureAnimator.AddAnyState("Attack_A", attack02State);
         creatureAnimator.AddAnyState("Skill", skillState);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
 
         return creatureAnimator;
     }

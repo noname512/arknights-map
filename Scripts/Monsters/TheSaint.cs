@@ -16,7 +16,6 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.Nodes.Audio;
-using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Combat.HealthBars;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -53,8 +52,6 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
 
     private MoveState? FlyState;
 
-    private bool HasStun = false;
-
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
@@ -69,9 +66,6 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
     {
         await PowerCmd.Apply<TheSaintPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
     }
-
-
-    
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
@@ -153,10 +147,9 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
                     if (!string.IsNullOrEmpty(slot))
                     {
                         Creature minion = await CreatureCmd.Add(chosen, CombatState, CombatSide.Enemy, slot);
-                        await PowerCmd.Apply<MinionPower>(
-                        new ThrowingPlayerChoiceContext(), minion, 1m, Creature, null);
+                        await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), minion, 1m, Creature, null);
                     }
-                    
+
                     await PowerCmd.Apply<MinionPower>(
                         new ThrowingPlayerChoiceContext(),
                         CombatState.Enemies.First(c => c.Monster == chosen),
@@ -193,10 +186,9 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
                     if (!string.IsNullOrEmpty(slot))
                     {
                         Creature minion = await CreatureCmd.Add(chosen, CombatState, CombatSide.Enemy, slot);
-                        await PowerCmd.Apply<MinionPower>(
-                        new ThrowingPlayerChoiceContext(), minion, 1m, Creature, null);
+                        await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), minion, 1m, Creature, null);
                     }
-                    
+
                     await PowerCmd.Apply<MinionPower>(
                         new ThrowingPlayerChoiceContext(),
                         CombatState.Enemies.First(c => c.Monster == chosen),
@@ -313,7 +305,6 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
         AnimState Phase2SkillStateEnd = new AnimState("B_Skill_End_2");
         AnimState Phase2FlyState = new AnimState("B_Leave_1");
 
-
         AnimState dieState = new AnimState("B_Die_2");
         AnimState skillState = new AnimState("Skill");
 
@@ -368,13 +359,10 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
         return Array.Empty<HealthBarForecastSegment>();
     }
 
-    
-
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
     {
         if (!wasRemovalPrevented && creature == this.Creature && Phase == 1)
         {
-            
             SetMoveImmediate(FlyState!, forceTransition: true);
         }
     }

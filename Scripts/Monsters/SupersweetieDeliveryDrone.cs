@@ -64,7 +64,7 @@ public class SupersweetieDeliveryDrone : AbstractSankta
 
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
         creatureAnimator.AddAnyState("Start", attackState);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
         attackState.NextState = idleState;
 
         return creatureAnimator;

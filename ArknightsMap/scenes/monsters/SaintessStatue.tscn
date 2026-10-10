@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://bordrbcqed6m5"]
+
+[ext_resource type="Script" uid="uid://dwe1rbe5v4g53" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_g2nie"]
+[ext_resource type="Texture2D" uid="uid://jn282cncou1f" path="res://ArknightsMap/images/monsters/SaintessStatue/SaintessStatue.png" id="2_6df83"]
+
+[node name="SaintessStatue" type="Node2D"]
+script = ExtResource("1_g2nie")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -105)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_6df83")
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -55.0
+offset_top = -210.0
+offset_right = 55.0
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -265)
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -105)

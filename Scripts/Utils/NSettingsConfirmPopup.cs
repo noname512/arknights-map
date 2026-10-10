@@ -11,7 +11,7 @@ namespace ArknightsMap.Scripts.Utils;
 public partial class NSettingsConfirmPopup : Control, IScreenContext
 {
     public Control? DefaultFocusedControl => throw new NotImplementedException();
-    private NVerticalPopup _verticalPopup;
+    private NVerticalPopup? _verticalPopup;
     private static readonly string _scenePath = "res://ArknightsMap/scenes/ui/settings_confirm_popup.tscn";
 
     public override void _Ready()

@@ -207,7 +207,7 @@ public class HaroldCraigavon : AbstractSnowyMountainMonster
         creatureAnimator.AddAnyState("Skill_1", skill1State);
         creatureAnimator.AddAnyState("Skill_2", skill2BeginState);
         creatureAnimator.AddAnyState("Move", moveState);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
 
         return creatureAnimator;
     }

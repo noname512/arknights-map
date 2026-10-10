@@ -35,8 +35,7 @@ public class OpForGun : AbstractSankta
 
     public int Attack_Time = 1;
 
-    private bool IsSlotOccupied(string slot) =>
-    CombatState.Enemies.Any(c => c.SlotName == slot);
+    private bool IsSlotOccupied(string slot) => CombatState.Enemies.Any(c => c.SlotName == slot);
 
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
@@ -122,7 +121,7 @@ public class OpForGun : AbstractSankta
                     GunPosition.GlobalPosition = new Vector2(550.0f, GunPosition.GlobalPosition.Y);
                     if (!IsSlotOccupied("second_left"))
                     {
-                       await CreatureCmd.Add<OpCar>(CombatState, "second_left"); 
+                        await CreatureCmd.Add<OpCar>(CombatState, "second_left");
                     }
                     await PowerCmd.Remove<BackAttackRightPower>(Creature);
                     await PowerCmd.Apply<BackAttackLeftPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
@@ -196,7 +195,7 @@ public class OpForGun : AbstractSankta
         creatureAnimator.AddAnyState("Attack", attackState);
         creatureAnimator.AddAnyState("Skill_1", RunState);
         creatureAnimator.AddAnyState("Skill_2", skill2State);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
         creatureAnimator.AddAnyState("Stun_Loop", startState);
         creatureAnimator.AddAnyState("Stun_End", startEndState);
 

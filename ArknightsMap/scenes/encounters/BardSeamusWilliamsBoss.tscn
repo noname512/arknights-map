@@ -1,0 +1,43 @@
+[gd_scene format=3]
+
+[node name="BardSeamusWilliamsBoss" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="1" type="Marker2D" parent="."]
+position = Vector2(150, 740)
+
+[node name="2" type="Marker2D" parent="."]
+position = Vector2(350, 740)
+
+[node name="3" type="Marker2D" parent="."]
+position = Vector2(550, 740)
+
+[node name="4" type="Marker2D" parent="."]
+position = Vector2(750, 740)
+
+[node name="5" type="Marker2D" parent="."]
+position = Vector2(950, 740)
+
+[node name="6" type="Marker2D" parent="."]
+position = Vector2(1150, 740)
+
+[node name="7" type="Marker2D" parent="."]
+position = Vector2(1350, 740)
+
+[node name="8" type="Marker2D" parent="."]
+position = Vector2(1550, 740)
+
+[node name="9" type="Marker2D" parent="."]
+position = Vector2(1750, 740)
+
+[node name="L" type="Marker2D" parent="."]
+position = Vector2(300, 400)
+
+[node name="R" type="Marker2D" parent="."]
+position = Vector2(1600, 400)

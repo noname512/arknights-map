@@ -83,7 +83,7 @@ public class Snowchild : AbstractSnowyMountainMonster
 
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState, controller);
         creatureAnimator.AddAnyState("Attack", attackState);
-        creatureAnimator.AddAnyState("Die", dieState);
+        creatureAnimator.AddAnyState("Dead", dieState);
         creatureAnimator.AddAnyState("Die_2", dieState2);
 
         return creatureAnimator;

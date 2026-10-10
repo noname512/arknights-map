@@ -77,7 +77,7 @@ public class FluffySnowball : AbstractSnowyMountainMonster
 
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState[0], controller);
         creatureAnimator.AddAnyState("Attack", state <= 3 ? attackState[state] : attackState[3]);
-        creatureAnimator.AddAnyState("Die", state <= 3 ? dieState[state] : dieState[3]);
+        creatureAnimator.AddAnyState("Dead", state <= 3 ? dieState[state] : dieState[3]);
         creatureAnimator.AddAnyState("Upgrade", upgradeState);
 
         return creatureAnimator;
