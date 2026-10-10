@@ -27,7 +27,6 @@
   "ARKNIGHTS_MAP_CARD_VENERATE_PLUS.description": "获得{Stars:diff()}{singleStarIcon}，[gold]铸造[/gold]相当于{singleStarIcon}的数值。",
   "ARKNIGHTS_MAP_CARD_BODY_GUARD_PLUS.title": "至死不渝",
   "ARKNIGHTS_MAP_CARD_BODY_GUARD_PLUS.description": "[gold]召唤[/gold]{Summon:diff()}。\n你在本回合中每抽1张牌，额外[gold]召唤[/gold]2。",
-  
   "ARKNIGHTS_MAP_CARD_NO_COMMUNICATION.title": "沟通不畅",
   "ARKNIGHTS_MAP_CARD_NO_COMMUNICATION.description": "每当抽到这张牌后，这张牌的耗能降低1。",
   "ARKNIGHTS_MAP_CARD_PERPLEXED.title": "困惑",
@@ -38,7 +37,8 @@
   "ARKNIGHTS_MAP_CARD_COLD.description": "如果这张牌在你的[gold]手牌[/gold]中，其他[gold]手牌[/gold]的耗能加1（每张牌最多被[gold]寒冷[/gold]增加1）。",
   "ARKNIGHTS_MAP_CARD_CALL_FOR_ASSISTANCE.title": "呼叫援助",
   "ARKNIGHTS_MAP_CARD_CALL_FOR_ASSISTANCE.description": "花费[blue]{Gold:diff()}[/blue][gold]金币[/gold]，造成[blue]{Damage:diff()}[/blue]点伤害并给予[blue]{WeakPower:diff()}[/blue]层[gold]虚弱[/gold]和[gold]易伤[/gold]。",
-  "ARKNIGHTS_MAP_CARD_SOMETHING_FORM.title": "{CardName}形态",
+  "ARKNIGHTS_MAP_CARD_SOMETHING_FORM.title": "形态",
+  "ARKNIGHTS_MAP_CARD_SOMETHING_FORM.real_title": "{CardName}形态",
   "ARKNIGHTS_MAP_CARD_SOMETHING_FORM.description": "每回合开始时，打出[gold]{CardName}[/gold]。",
   "ARKNIGHTS_MAP_CARD_COME_CLOSE.title": "近身搏斗",
   "ARKNIGHTS_MAP_CARD_COME_CLOSE.description": "选择此项，下回合不受[gold]隐匿[/gold]影响，但是受到来自的[gold]锏[/gold]伤害提高至[blue]{Percent}%[/blue]。",

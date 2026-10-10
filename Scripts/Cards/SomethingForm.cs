@@ -70,7 +70,7 @@ public class SomethingForm : ModCardTemplate
     {
         get
         {
-            LocString title = new("cards", Id.Entry + ".title");
+            LocString title = new("cards", Id.Entry + ".real_title");
             DynamicVars.AddTo(title);
             return title.GetFormattedText();
         }
