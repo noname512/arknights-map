@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://dwe1rbe5v4g53" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_ypn6e"]
 
 [node name="PathfinderWarrior" type="Node2D"]
-scale = Vector2(-1, 1)
 script = ExtResource("1_ypn6e")
 
 [node name="Visuals" type="SpineSprite" parent="."]
@@ -14,7 +13,7 @@ preview_animation = "Idle"
 preview_frame = false
 preview_time = 0.0
 unique_name_in_owner = true
-scale = Vector2(1, 1)
+scale = Vector2(-1, 1)
 
 [node name="Bounds" type="Control" parent="."]
 unique_name_in_owner = true

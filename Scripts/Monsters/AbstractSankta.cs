@@ -37,7 +37,7 @@ public abstract class AbstractSankta : ModMonsterTemplate
             {
                 bounds.AddChild(_bulletBar);
                 _bulletBar.FitToWidth(bounds.Size.X, BulletMax);
-                _bulletBar.Position = new Vector2(0, bounds.Size.Y - 50); // 贴在血条正下方
+                _bulletBar.Position = new Vector2(0, bounds.Size.Y - 20); // 贴在血条正下方
             }
             else
             {
