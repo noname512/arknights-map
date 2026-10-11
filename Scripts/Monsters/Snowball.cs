@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -25,6 +26,7 @@ public class Snowball : AbstractSnowyMountainMonster
     {
         await PowerCmd.Apply<TauntPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
         await PowerCmd.Apply<RollingPower>(new ThrowingPlayerChoiceContext(), Creature, ExplodeDamage, Creature, null);
+        await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()

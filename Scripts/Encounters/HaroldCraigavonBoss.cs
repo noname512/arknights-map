@@ -14,13 +14,9 @@ public class HaroldCraigavonBoss : AbstractSnowyMountainEncounter
 
     public override EncounterAssetProfile AssetProfile =>
         new(
-            RunHistoryIconPath: $"res://ArknightsMap/images/map/AFRBossHistory.png",
-            RunHistoryIconOutlinePath: $"res://ArknightsMap/images/map/AFRBossHistory_outline.png",
+            RunHistoryIconPath: $"res://ArknightsMap/images/map/{GetType().Name}History.png",
+            RunHistoryIconOutlinePath: $"res://ArknightsMap/images/map/{GetType().Name}History_outline.png",
             EncounterScenePath: $"res://ArknightsMap/scenes/encounters/SnowyMountainEncounter.tscn"
-        /*
-        RunHistoryIconPath: $"res://ArknightsMap/images/map/{GetType().Name}History.png",
-        RunHistoryIconOutlinePath: $"res://ArknightsMap/images/map/{GetType().Name}History_outline.png",
-        */
         );
 
     // public override string BossNodePath => $"res://ArknightsMap/images/map/{GetType().Name}Icon";

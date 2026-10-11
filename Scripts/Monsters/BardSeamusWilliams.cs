@@ -1,3 +1,4 @@
+using ArknightsMap.Scripts.Powers;
 using ArknightsMap.Scripts.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Animation;
@@ -32,7 +33,7 @@ public class BardSeamusWilliams : AbstractSnowyMountainMonster
 
     public override async Task AfterAddedToRoom()
     {
-        // TODO: 被打断提示power
+        await PowerCmd.Apply<UnluckyOnePower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
         facing = -1;
     }
 
@@ -87,7 +88,7 @@ public class BardSeamusWilliams : AbstractSnowyMountainMonster
                     }
                     IEnumerable<Node2D> enumerable = list.Select((Creature c) => NCombatRoom.Instance?.GetCreatureNode(c)?.Body)!;
                     foreach (Node2D node in enumerable)
-                        if (node != null && node.Scale.X * facing < 0)
+                        if (node != null && node.Scale.X * facing > 0)
                         {
                             node.Scale *= new Vector2(-1f, 1f);
                         }

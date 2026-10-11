@@ -208,5 +208,8 @@
     "ARKNIGHTS_MAP_POWER_CHAIN_REACTION_POWER.description": "这个敌人死亡时，对相邻位置的所有角色造成相当于自身生命值上限的伤害。",
     "ARKNIGHTS_MAP_POWER_SCATTERED_TO_THE_WIND_POWER.title": "随风而散",
     "ARKNIGHTS_MAP_POWER_SCATTERED_TO_THE_WIND_POWER.smartDescription": "[gold]{OwnerName}[/gold]被[gold]暴风雪[/gold]吹动时，受到[blue]{Damage}[/blue]点伤害。",
-    "ARKNIGHTS_MAP_POWER_SCATTERED_TO_THE_WIND_POWER.description": "这个敌人被[gold]暴风雪[/gold]吹动时，受到若干伤害。"
+    "ARKNIGHTS_MAP_POWER_SCATTERED_TO_THE_WIND_POWER.description": "这个敌人被[gold]暴风雪[/gold]吹动时，受到若干伤害。",
+    "ARKNIGHTS_MAP_POWER_UNLUCKY_ONE_POWER.title": "倒霉蛋",
+    "ARKNIGHTS_MAP_POWER_UNLUCKY_ONE_POWER.smartDescription": "[gold]{OwnerName}[/gold]的[gold]蓄力攻击[/gold]也可以被[gold]暴风雪[/gold]打断。",
+    "ARKNIGHTS_MAP_POWER_UNLUCKY_ONE_POWER.description": "这个敌人的的[gold]蓄力攻击[/gold]攻击也可以被[gold]暴风雪[/gold]打断。"
 }

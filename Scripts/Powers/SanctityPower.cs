@@ -20,6 +20,7 @@ public class SanctityPower : ModPowerTemplate
     public override PowerStackType StackType => PowerStackType.Single;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("direction", 1)];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [StaticTips.SnowStorm];
+    public override bool OwnerIsSecondaryEnemy => true;
 
     // 自定义图标路径。1:1即可。原版游戏大图256x256，小图64x64。
     public override PowerAssetProfile AssetProfile =>
