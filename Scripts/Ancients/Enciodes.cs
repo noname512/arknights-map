@@ -32,10 +32,11 @@ public class Enciodes : ModAncientEventTemplate
 
     public IEnumerable<EventOption> SinglePlayerOptions =>
         [
-            CreateModRelicOption<Tenzin>(), // 丹增
+            CreateModRelicOption<EagleEyes>(), // 鹰眼视觉
             CreateModRelicOption<OpenGame>(), // 开放性开局
             CreateModRelicOption<FixedTurret>(), // 定点炮台
             CreateModRelicOption<Kd4>(), // 以身入局
+            CreateModRelicOption<Tenzin>(), // 丹增
         ];
 
     // 所有可能的选项

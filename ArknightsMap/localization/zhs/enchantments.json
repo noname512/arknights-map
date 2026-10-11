@@ -19,7 +19,7 @@
   "ARKNIGHTS_MAP_ENCHANTMENT_WASTE.description": "无法被打出。",
   "ARKNIGHTS_MAP_ENCHANTMENT_USE_ONCE.title": "一次性",
   "ARKNIGHTS_MAP_ENCHANTMENT_USE_ONCE.extraCardText": "[gold]一次性[/gold]。",
-  "ARKNIGHTS_MAP_ENCHANTMENT_USE_ONCE.description": "[gold]一次性[/gold]。",
+  "ARKNIGHTS_MAP_ENCHANTMENT_USE_ONCE.description": "这张牌使用后将被从牌组中移除。",
   "ARKNIGHTS_MAP_ENCHANTMENT_FIRE.title": "开火",
   "ARKNIGHTS_MAP_ENCHANTMENT_FIRE.extraCardText": "打出后，对目标随机打出[blue]2[/blue]张本职业的攻击牌。",
   "ARKNIGHTS_MAP_ENCHANTMENT_FIRE.description": "这张牌被打出后，对目标随机打出[blue]2[/blue]张本职业的攻击牌。",

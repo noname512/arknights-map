@@ -1,13 +1,14 @@
-using MegaCrit.Sts2.Core.Combat;
+using ArknightsMap.Scripts.Cards;
+using ArknightsMap.Scripts.Enchantments;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Map;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.RelicPools;
+using MegaCrit.Sts2.Core.Rooms;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -19,22 +20,31 @@ public class Tenzin : ModRelicTemplate
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromCardWithCardHoverTips<Expose>();
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromEnchantment<UseOnce>();
 
-    public override async Task BeforeSideTurnStart(
-        PlayerChoiceContext choiceContext,
-        CombatSide side,
-        IReadOnlyList<Creature> participants,
-        ICombatState combatState
-    )
+    public override RelicAssetProfile AssetProfile =>
+        new(
+            // 小图标（原版85x85）
+            IconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png",
+            // 轮廓图标（原版85x85）
+            IconOutlinePath: $"res://ArknightsMap/images/relics/{GetType().Name}.png",
+            // 大图标（原版256x256）
+            BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
+        );
+
+    public override async Task AfterRoomEntered(AbstractRoom room)
     {
-        if (side == Owner.Creature.Side && combatState.RoundNumber <= 1)
+        if (!Owner.Creature.IsDead)
         {
-            Flash();
-            CardModel card = combatState.CreateCard<Expose>(Owner);
-            foreach (var enemy in Owner.Creature.CombatState!.Enemies.Where(e => e.IsAlive))
+            MapPoint? currentMapPoint = Owner.RunState.CurrentMapPoint;
+            if (currentMapPoint != null && currentMapPoint.PointType == MapPointType.Unknown && Owner.RunState.CurrentRoomCount <= 1)
             {
-                await CardCmd.AutoPlay(choiceContext, card.CreateDupe(Owner), enemy);
+                Flash();
+                List<CardPileAddResult> results = new List<CardPileAddResult>();
+                CardModel card = Owner.RunState.CreateCard<Scount>(Owner);
+                CardCmd.Enchant<UseOnce>(card, 1);
+                results.Add(await CardPileCmd.Add(card, PileType.Deck));
+                CardCmd.PreviewCardPileAdd(results, 1f);
             }
         }
     }
