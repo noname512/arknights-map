@@ -93,6 +93,7 @@ public sealed class Wilds : ModActTemplate
             ModelDb.Encounter<BurningWeeds>(),
             ModelDb.Encounter<DublinnFlamerazerNormal>(),
             ModelDb.Encounter<AshyMarsh>(),
+            ModelDb.Encounter<Breakout>()
         };
 
     protected override void ApplyActDiscoveryOrderModifications(UnlockState unlockState) { }
