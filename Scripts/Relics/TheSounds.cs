@@ -39,17 +39,19 @@ public class TheSounds : ModRelicTemplate
 
     public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
-        if (this.Status == RelicStatus.Active && amount > 0)
+        if (this.Status == RelicStatus.Active && amount > 0 && power.Owner == Owner.Creature)
         {
-            this.Status = RelicStatus.Disabled;
+            
             if (power is StrengthPower strengthPower || power is TemporaryStrengthPower)
             {
                 await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, 1, Owner.Creature, null);
+                this.Status = RelicStatus.Disabled;
             }
 
             if (power is DexterityPower dexterityPower || power is TemporaryDexterityPower)
             {
                 await PowerCmd.Apply<DexterityPower>(choiceContext, Owner.Creature, 1, Owner.Creature, null);
+                this.Status = RelicStatus.Disabled;
             }
 
             

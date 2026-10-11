@@ -91,7 +91,7 @@ public static class SettingsPage
                             section
                                 .WithTitle(T("SECTION_3"))
                                 .AddToggle("act3origin", T("ORIGIN"), Act3Binding)
-                                .AddToggle("snowymountain", T("SNOWY_MOUNTAIN"), SnowyMountainBinding)
+                                //.AddToggle("snowymountain", T("SNOWY_MOUNTAIN"), SnowyMountainBinding)
                                 .AddToggle("laterano", T("LATERANO"), LateranoBinding)
                     );
                 }

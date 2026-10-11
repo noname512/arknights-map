@@ -136,10 +136,14 @@ public sealed class ExtraForce : ModRelicTemplate
     public override async Task AfterObtained()
     {
         foreach (
-            CardModel item in await CardSelectCmd.FromDeckForRemoval(
-                prefs: new CardSelectorPrefs(CardSelectorPrefs.TransformSelectionPrompt, 1),
+            CardModel item in await CardSelectCmd.FromDeckForTransformation(
+                
                 player: Owner!,
-                filter: c => GetTransformCards(Owner)!.Contains(c)
+                prefs: new CardSelectorPrefs(CardSelectorPrefs.TransformSelectionPrompt, 1),
+                card => new MegaCrit.Sts2.Core.Entities.Cards.CardTransformation(
+                    card,
+                    GetTransformResult(Owner)!
+                )
             )
         )
         {
