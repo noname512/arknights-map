@@ -37,32 +37,30 @@ public class TheSounds : ModRelicTemplate
         );
 
 
-    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    
+
+    private bool _usedThisCombat;
+
+    public override decimal ModifyPowerAmountGivenAdditive(
+        PowerModel power, Creature giver, decimal amount, Creature? target, CardModel? cardSource)
     {
-        if (this.Status == RelicStatus.Active && amount > 0 && power.Owner == Owner.Creature)
+        if (_usedThisCombat || amount <= 0 || target != Owner.Creature) return 0m;
+        if (power is StrengthPower || power is TemporaryStrengthPower
+        || power is DexterityPower || power is TemporaryDexterityPower)
         {
-            
-            if (power is StrengthPower strengthPower || power is TemporaryStrengthPower)
-            {
-                await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, 1, Owner.Creature, null);
-                this.Status = RelicStatus.Disabled;
-            }
-
-            if (power is DexterityPower dexterityPower || power is TemporaryDexterityPower)
-            {
-                await PowerCmd.Apply<DexterityPower>(choiceContext, Owner.Creature, 1, Owner.Creature, null);
-                this.Status = RelicStatus.Disabled;
-            }
-
-            
+            _usedThisCombat = true;
+            base.Status = RelicStatus.Disabled;   // 这行只管变灰，别拿来当开关
+            return 1m;
         }
-        
-        
+        return 0m;
     }
+
+    
 
     public override async Task AfterPlayerTurnStartEarly(PlayerChoiceContext choiceContext, Player player)
     {
         this.Status = RelicStatus.Active;
+        _usedThisCombat = false;
     }
 
     
