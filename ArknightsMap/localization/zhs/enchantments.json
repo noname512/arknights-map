@@ -22,5 +22,8 @@
   "ARKNIGHTS_MAP_ENCHANTMENT_USE_ONCE.description": "[gold]一次性[/gold]。",
   "ARKNIGHTS_MAP_ENCHANTMENT_FIRE.title": "开火",
   "ARKNIGHTS_MAP_ENCHANTMENT_FIRE.extraCardText": "打出后，对目标随机打出[blue]2[/blue]张本职业的攻击牌。",
-  "ARKNIGHTS_MAP_ENCHANTMENT_FIRE.description": "这张牌被打出后，对目标随机打出[blue]2[/blue]张本职业的攻击牌。"
+  "ARKNIGHTS_MAP_ENCHANTMENT_FIRE.description": "这张牌被打出后，对目标随机打出[blue]2[/blue]张本职业的攻击牌。",
+  "ARKNIGHTS_MAP_ENCHANTMENT_PREPARATION.title": "预备",
+  "ARKNIGHTS_MAP_ENCHANTMENT_PREPARATION.extraCardText": "[gold]保留[/gold]时，减少[blue]{Energy}[/blue]点能量消耗。",
+  "ARKNIGHTS_MAP_ENCHANTMENT_PREPARATION.description": "这张牌获得[gold]保留[/gold]。[gold]保留[/gold]时，减少[blue]1[/blue]点能量消耗。"
 }

@@ -3,10 +3,13 @@ using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
+using MegaCrit.Sts2.Core.Nodes;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -43,7 +46,11 @@ public sealed class ChildrenBook : ModRelicTemplate
         )
         {
             CardCmd.Enchant<Empathy>(item, 1m);
-            CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(item, PileType.Deck));
+            NCardEnchantVfx? nCardEnchantVfx = NCardEnchantVfx.Create(item);
+            if (nCardEnchantVfx != null)
+            {
+                NRun.Instance?.GlobalUi.CardPreviewContainer.AddChildSafely(nCardEnchantVfx);
+            }
         }
     }
 }

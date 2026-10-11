@@ -3,11 +3,14 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Enchantments;
 using MegaCrit.Sts2.Core.Models.RelicPools;
+using MegaCrit.Sts2.Core.Nodes;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -40,7 +43,11 @@ public sealed class AppleFlower : ModRelicTemplate
             if (item.IsBasicStrikeOrDefend && ModelDb.Enchantment<Sown>().CanEnchant(item))
             {
                 CardCmd.Enchant<Sown>(item, 1m);
-                CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(item, PileType.Deck));
+                NCardEnchantVfx? nCardEnchantVfx = NCardEnchantVfx.Create(item);
+                if (nCardEnchantVfx != null)
+                {
+                    NRun.Instance?.GlobalUi.CardPreviewContainer.AddChildSafely(nCardEnchantVfx);
+                }
             }
         }
     }

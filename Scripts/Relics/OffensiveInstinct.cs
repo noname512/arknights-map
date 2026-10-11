@@ -14,7 +14,7 @@ namespace ArknightsMap.Scripts.Relics;
 public class OffensiveInstinct : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1), new CardsVar(1)];
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -37,6 +37,7 @@ public class OffensiveInstinct : ModRelicTemplate
         if (cardPlay.Card.Type == CardType.Attack)
         {
             await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);
+            await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
         }
         else
         {

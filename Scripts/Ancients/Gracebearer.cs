@@ -37,21 +37,21 @@ public class Gracebearer : ModAncientEventTemplate
     public override IEnumerable<EventOption> AllPossibleOptions =>
         [
             .. SinglePlayerChoice,
-            RelicOption<NunHabit>(), //修女服
+            CreateModRelicOption<NunHabit>(), //修女服
         ];
 
     public IEnumerable<EventOption> SinglePlayerChoice =>
         [
-            RelicOption<BloodBurst>(), //血性爆发
-            RelicOption<Lullaby>(), //安眠曲
-            RelicOption<PrayInvite>(), //祈祷邀约
-            RelicOption<ActAs>(), //“扮演”
-            RelicOption<OpportuneMercy>(), // 趁势怜悯
-            RelicOption<BloodedDress>(), // 染血的裙子
-            RelicOption<Luckily>(), // “幸运”
-            RelicOption<BreadWithSugar>(), // 加糖面包
-            RelicOption<Gospel>(), // 福音
-            RelicOption<SkullcrackingElegy>(), // 开颅挽歌
+            CreateModRelicOption<BloodBurst>(), //血性爆发
+            CreateModRelicOption<Lullaby>(), //安眠曲
+            CreateModRelicOption<PrayInvite>(), //祈祷邀约
+            CreateModRelicOption<ActAs>(), //“扮演”
+            CreateModRelicOption<OpportuneMercy>(), // 趁势怜悯
+            CreateModRelicOption<BloodedDress>(), // 染血的裙子
+            CreateModRelicOption<Luckily>(), // “幸运”
+            CreateModRelicOption<BreadWithSugar>(), // 加糖面包
+            CreateModRelicOption<Gospel>(), // 福音
+            CreateModRelicOption<SkullcrackingElegy>(), // 开颅挽歌
         ];
 
     // 生成选项

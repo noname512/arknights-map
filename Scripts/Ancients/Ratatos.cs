@@ -58,7 +58,7 @@ public class Ratatos : ModAncientEventTemplate
         List<EventOption> Pool1 = Pool1Single.ToList();
         if (Owner!.RunState.Players.Count > 1)
         {
-            Pool1.Add(RelicOption<TriClanCouncil>());
+            Pool1.Add(CreateModRelicOption<TriClanCouncil>());
         }
         return [Rng.NextItem(Pool1)!, Rng.NextItem(Pool2)!, Rng.NextItem(Pool3)!];
     }

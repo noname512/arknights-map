@@ -32,17 +32,17 @@ public class Enciodes : ModAncientEventTemplate
 
     public IEnumerable<EventOption> SinglePlayerOptions =>
         [
-            RelicOption<Tenzin>(), // 丹增
-            RelicOption<OpenGame>(), // 开放性开局
-            RelicOption<FixedTurret>(), // 定点炮台
-            RelicOption<Kd4>(), // 以身入局
+            CreateModRelicOption<Tenzin>(), // 丹增
+            CreateModRelicOption<OpenGame>(), // 开放性开局
+            CreateModRelicOption<FixedTurret>(), // 定点炮台
+            CreateModRelicOption<Kd4>(), // 以身入局
         ];
 
     // 所有可能的选项
     public override IEnumerable<EventOption> AllPossibleOptions =>
         [
             .. SinglePlayerOptions,
-            RelicOption<TriClanCouncil>(), // 三族议会
+            CreateModRelicOption<TriClanCouncil>(), // 三族议会
         ];
 
     // 生成选项
@@ -51,7 +51,7 @@ public class Enciodes : ModAncientEventTemplate
         List<EventOption> list = SinglePlayerOptions.ToList();
         if (Owner!.RunState.Players.Count > 1)
         {
-            list.Add(RelicOption<TriClanCouncil>());
+            list.Add(CreateModRelicOption<TriClanCouncil>());
         }
         list.UnstableShuffle(Rng);
         list = list.Take(3).ToList();

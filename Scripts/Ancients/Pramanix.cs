@@ -32,23 +32,23 @@ public class Pramanix : ModAncientEventTemplate
 
     public IEnumerable<EventOption> SinglePlayerOptions =>
         [
-            RelicOption<HerAllowance>(), //祂的许可
-            RelicOption<EreSnowBellsChime>(), //铃音吹雪
-            RelicOption<Faith>(), //信仰
-            RelicOption<Pilgrimage>(), //圣巡
-            RelicOption<SnowTracks>(), //雪迹
-            RelicOption<ByKjeragandrPramanix>(), //耶拉冈德在上·初雪
-            RelicOption<PeaksCladInFrost>(), //霜涛覆岭
-            RelicOption<TowardsTheMountainBow>(), //群山俯首
-            RelicOption<BlessingOfKarlan>(), //圣山的祝福
-            RelicOption<NatureDeterrent>(), //自然威慑
+            CreateModRelicOption<HerAllowance>(), //祂的许可
+            CreateModRelicOption<EreSnowBellsChime>(), //铃音吹雪
+            CreateModRelicOption<Faith>(), //信仰
+            CreateModRelicOption<Pilgrimage>(), //圣巡
+            CreateModRelicOption<SnowTracks>(), //雪迹
+            CreateModRelicOption<ByKjeragandrPramanix>(), //耶拉冈德在上·初雪
+            CreateModRelicOption<PeaksCladInFrost>(), //霜涛覆岭
+            CreateModRelicOption<TowardsTheMountainBow>(), //群山俯首
+            CreateModRelicOption<BlessingOfKarlan>(), //圣山的祝福
+            CreateModRelicOption<NatureDeterrent>(), //自然威慑
         ];
 
     // 所有可能的选项
     public override IEnumerable<EventOption> AllPossibleOptions =>
         [
             .. SinglePlayerOptions,
-            RelicOption<TriClanCouncil>(), //三族议会
+            CreateModRelicOption<TriClanCouncil>(), //三族议会
         ];
 
     // 生成选项
@@ -57,7 +57,7 @@ public class Pramanix : ModAncientEventTemplate
         List<EventOption> list = SinglePlayerOptions.ToList();
         if (Owner!.RunState.Players.Count > 1)
         {
-            list.Add(RelicOption<TriClanCouncil>());
+            list.Add(CreateModRelicOption<TriClanCouncil>());
         }
         list.UnstableShuffle(Rng);
         list = list.Take(3).ToList();

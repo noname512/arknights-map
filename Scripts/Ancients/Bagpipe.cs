@@ -44,21 +44,21 @@ public class Bagpipe : ModAncientEventTemplate
     public override IEnumerable<EventOption> AllPossibleOptions =>
         [
             .. SinglePlayerChoice,
-            RelicOption<OfferAssistance>(), //施以援手
+            CreateModRelicOption<OfferAssistance>(), //施以援手
         ];
 
     public IEnumerable<EventOption> SinglePlayerChoice =>
         [
-            RelicOption<HighImpactAssault>(), //高效冲击
-            RelicOption<TheSpear>(), //破城矛
-            RelicOption<LockedBreechBurst>(), //闭膛连发
-            RelicOption<LandenBeer>(), //兰登佳酿
-            RelicOption<PreciseReloading>(), //精密填弹
-            RelicOption<EjectionBullet>(), //弹射弹药
-            RelicOption<Haystack>(), //干草垛
-            RelicOption<WheatEar>(), //麦穗
-            RelicOption<StarrySkyPhoto>(), //星空照片
-            RelicOption<MartialTradition>(), //军事传统
+            CreateModRelicOption<HighImpactAssault>(), //高效冲击
+            CreateModRelicOption<TheSpear>(), //破城矛
+            CreateModRelicOption<LockedBreechBurst>(), //闭膛连发
+            CreateModRelicOption<LandenBeer>(), //兰登佳酿
+            CreateModRelicOption<PreciseReloading>(), //精密填弹
+            CreateModRelicOption<EjectionBullet>(), //弹射弹药
+            CreateModRelicOption<Haystack>(), //干草垛
+            CreateModRelicOption<WheatEar>(), //麦穗
+            CreateModRelicOption<StarrySkyPhoto>(), //星空照片
+            CreateModRelicOption<MartialTradition>(), //军事传统
         ];
 
     // 生成选项
@@ -70,7 +70,7 @@ public class Bagpipe : ModAncientEventTemplate
         if (Owner!.RunState.Players.Count > 1)
         {
             list = list.Take(2).ToList();
-            list.Add(RelicOption<OfferAssistance>());
+            list.Add(CreateModRelicOption<OfferAssistance>());
         }
         return list;
     }

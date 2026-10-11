@@ -16,7 +16,7 @@ namespace ArknightsMap.Scripts.Relics;
 public class AncientHeritage : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2), new IntVar("Increase", 50)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2), new IntVar("Increase", 100)];
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -80,6 +80,6 @@ public class AncientHeritage : ModRelicTemplate
         {
             return 1m;
         }
-        return 2m;
+        return 1 + DynamicVars["Increase"].IntValue / 100;
     }
 }

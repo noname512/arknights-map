@@ -16,7 +16,7 @@ namespace ArknightsMap.Scripts.Relics;
 public class MightyFrame : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<StrengthPower>(7)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<StrengthPower>(10)];
 
     public override RelicAssetProfile AssetProfile =>
         new(

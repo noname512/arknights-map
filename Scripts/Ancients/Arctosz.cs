@@ -2,7 +2,6 @@ using ArknightsMap.Scripts.Acts;
 using ArknightsMap.Scripts.Relics;
 using Godot;
 using MegaCrit.Sts2.Core.Events;
-using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -30,35 +29,39 @@ public class Arctosz : ModAncientEventTemplate
             RunHistoryIconOutlinePath: $"res://ArknightsMap/images/ancients/{GetType().Name}/avatar.png"
         );
 
-    public IEnumerable<EventOption> SinglePlayerOptions =>
+    private IEnumerable<EventOption> Pool1Single =>
         [
-            RelicOption<AncientHeritage>(), // 古老传承
-            RelicOption<HuntingTools>(), // 狩猎工具
-            RelicOption<ByKjeragandrArctosz>(), // 耶拉冈德在上·阿克托斯
-            RelicOption<OffensiveInstinct>(), // 进攻本能
-            RelicOption<MightyFrame>(), // 蛮力之躯
-            RelicOption<Overexertion>(), // 超负荷
-            RelicOption<WeightedPlate>(), // 配重片
+            CreateModRelicOption<ByKjeragandrArctosz>(), // 耶拉冈德在上·阿克托斯
+            CreateModRelicOption<AncientTome>(), // 旧典籍
+            CreateModRelicOption<CollectionRoom>(), // 收藏室
+            CreateModRelicOption<PlanSheet>(), // 计划单
+        ];
+    private IEnumerable<EventOption> Pool2 =>
+        [
+            CreateModRelicOption<MightyFrame>(), // 蛮力之躯
+            CreateModRelicOption<HuntingTools>(), // 狩猎工具
+            CreateModRelicOption<WeightedPlate>(), // 配重片
+            CreateModRelicOption<BlizzardCrossbow>(), // 风雪连弩
+        ];
+    private IEnumerable<EventOption> Pool3 =>
+        [
+            CreateModRelicOption<OffensiveInstinct>(), // 进攻本能
+            CreateModRelicOption<AncientHeritage>(), // 古老传承
+            CreateModRelicOption<Overexertion>(), // 超负荷
         ];
 
     // 所有可能的选项
-    public override IEnumerable<EventOption> AllPossibleOptions =>
-        [
-            .. SinglePlayerOptions,
-            RelicOption<TriClanCouncil>(), // 三族议会
-        ];
+    public override IEnumerable<EventOption> AllPossibleOptions => [.. Pool1Single, .. Pool2, .. Pool3, CreateModRelicOption<TriClanCouncil>()];
 
     // 生成选项
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        List<EventOption> list = SinglePlayerOptions.ToList();
+        List<EventOption> Pool1 = Pool1Single.ToList();
         if (Owner!.RunState.Players.Count > 1)
         {
-            list.Add(RelicOption<TriClanCouncil>());
+            Pool1.Add(CreateModRelicOption<TriClanCouncil>());
         }
-        list.UnstableShuffle(Rng);
-        list = list.Take(3).ToList();
-        return list;
+        return [Rng.NextItem(Pool1)!, Rng.NextItem(Pool2)!, Rng.NextItem(Pool3)!];
     }
 
     public override bool IsValidForAct(ActModel act)

@@ -1,11 +1,13 @@
 using ArknightsMap.Scripts.Encounters;
 using ArknightsMap.Scripts.Monsters;
 using ArknightsMap.Scripts.Powers;
+using ArknightsMap.Scripts.Relics;
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -282,10 +284,19 @@ public sealed class CreaturePositions : HookedSingletonModel
         }
 
         List<Task> tasksToWait = [];
-        GD.Print($"affected creature count: {affectedCreature.Count()}");
         foreach (AbstractSnowyMountainMonster m in affectedCreature)
         {
             tasksToWait.Add(m.OnWindBlow());
+        }
+        foreach (Player p in combatState.Players)
+        {
+            foreach (RelicModel r in p.Relics)
+            {
+                if (r is BlizzardCrossbow bc)
+                {
+                    tasksToWait.Add(bc.OnBlowWind());
+                }
+            }
         }
         await Task.WhenAll(tasksToWait);
     }
