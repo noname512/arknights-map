@@ -1,5 +1,6 @@
 using ArknightsMap.Scripts.Enchantments;
 using Godot;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Enchantments;
@@ -27,9 +28,11 @@ class EnchantmentMerchantUtils
 
     public static EnchantmentModel GenerateModel(CardModel? card, Rng rng)
     {
-        GD.Print($"GeneratingModel: card={card?.GetType().Name ?? "null"}, rng={rng?.GetType().Name ?? "null"}");
+        if (card != null && card.Enchantment != null)
+        {
+            CardCmd.ClearEnchantment(card);
+        }
         EnchantmentModel model = rng.NextItem(ValidEnchantments.Where(e => card == null ? true : e.CanEnchant(card)))!.ToMutable();
-        GD.Print($"GeneratedModel: model={model?.GetType().Name ?? "null"}");
         if (model is Sharp || model is Nimble)
         {
             model.Amount = rng.NextInt(1, 10);
