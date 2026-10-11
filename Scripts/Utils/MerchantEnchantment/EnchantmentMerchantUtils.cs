@@ -27,7 +27,9 @@ class EnchantmentMerchantUtils
 
     public static EnchantmentModel GenerateModel(CardModel? card, Rng rng)
     {
+        GD.Print($"GeneratingModel: card={card?.GetType().Name ?? "null"}, rng={rng?.GetType().Name ?? "null"}");
         EnchantmentModel model = rng.NextItem(ValidEnchantments.Where(e => card == null ? true : e.CanEnchant(card)))!.ToMutable();
+        GD.Print($"GeneratedModel: model={model?.GetType().Name ?? "null"}");
         if (model is Sharp || model is Nimble)
         {
             model.Amount = rng.NextInt(1, 10);
