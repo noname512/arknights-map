@@ -40,7 +40,7 @@ public class Executor : ModAncientEventTemplate
         [
             CreateModRelicOption<FinalRoad>(), // 最终旅程
             CreateModRelicOption<FinalModification>(), // 终结改装
-            CreateModRelicOption<ExtraForce>(),
+            CreateExtraForceOption(), 
         ];
     private IReadOnlyList<EventOption> Pool3 =>
         [
@@ -52,6 +52,13 @@ public class Executor : ModAncientEventTemplate
     // 所有可能的选项
     public override IEnumerable<EventOption> AllPossibleOptions => [.. Pool1, .. Pool2.Where(option => option is not null).Cast<EventOption>(), .. Pool3];
 
+    private EventOption? CreateExtraForceOption()
+{
+    var relic = ModelDb.Relic<ExtraForce>().ToMutable();
+    if (Owner != null && relic is ExtraForce extraForce && !extraForce.SetupForPlayer(Owner))
+        return null;
+    return CreateModRelicOption(relic);
+}
     // 生成选项
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
