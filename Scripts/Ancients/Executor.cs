@@ -40,7 +40,7 @@ public class Executor : ModAncientEventTemplate
         [
             CreateModRelicOption<FinalRoad>(), // 最终旅程
             CreateModRelicOption<FinalModification>(), // 终结改装
-            (Owner != null && ExtraForce.HasTransformCard(Owner)) ? CreateModRelicOption<ExtraForce>() : null,
+            CreateModRelicOption<ExtraForce>(),
         ];
     private IReadOnlyList<EventOption> Pool3 =>
         [

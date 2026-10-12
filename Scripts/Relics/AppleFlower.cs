@@ -80,7 +80,7 @@ public sealed class AppleFlower : ModRelicTemplate
             if (ModelDb.Enchantment<Sown>().CanEnchant(cardModel))
             {
                 CardCmd.Enchant<Sown>(cardModel, 1m);
-                CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(cardModel, PileType.Deck));
+                CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(cardModel, PileType.Discard));
             }
         }
     }

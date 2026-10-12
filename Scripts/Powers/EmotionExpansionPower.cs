@@ -50,4 +50,12 @@ public class EmotionExpansionPower : ModPowerTemplate
 
         
     }
+
+    public override async Task AfterRemoved(Creature oldOwner)
+    {
+        await CreatureCmd.SetCurrentHp(oldOwner, oldOwner.CurrentHp/currentAmount);
+        await CreatureCmd.SetMaxHp(oldOwner, oldOwner.MaxHp/currentAmount);
+        
+    }
+
 }

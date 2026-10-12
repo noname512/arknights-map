@@ -23,7 +23,10 @@ public class RosmontisEquipment : ModMonsterTemplate
 
     private int Block => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 10);
 
-    public override async Task AfterAddedToRoom() { }
+    public override async Task AfterAddedToRoom()
+    {
+        await PowerCmd.Apply<ChargePower>(new ThrowingPlayerChoiceContext(), Creature, 5, Creature, null);
+    }
 
     public int MoveInt = 0;
 

@@ -24,7 +24,7 @@ public class Rosmontis : ModMonsterTemplate
 
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 120, 120);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 120, 120);
-    private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 15, 18);
+    private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 20, 22);
 
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 12);
 
@@ -70,7 +70,13 @@ public class Rosmontis : ModMonsterTemplate
             {
                 await CreatureCmd.TriggerAnim(Creature, "Attack_A_2", 0.5f);
                 await DamageCmd.Attack(Damage2).FromMonster(this).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
-                
+                foreach (Creature c in CombatState.GetTeammatesOf(Creature))
+                {
+                    if (c.Monster is RosmontisEquipment)
+                    {
+                        await PowerCmd.Apply<ChargePower>(new ThrowingPlayerChoiceContext(), c, 5m, Creature, null);
+                    }
+                }
             },
             [new SingleAttackIntent(Damage2)]
         );

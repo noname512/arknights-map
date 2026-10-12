@@ -30,7 +30,15 @@ public class ChargePower : ModPowerTemplate
     {
         if (Owner.CombatState!.ContainsMonster<Rosmontis>())
         {
-            await CreatureCmd.Damage(choiceContext, Owner.CombatState.GetOpponentsOf(Owner), Amount, ValueProp.Unpowered, Owner);
+            await CreatureCmd.Damage(choiceContext, Owner.CombatState.GetOpponentsOf(creature), Amount, ValueProp.Unpowered, Owner);
+            foreach (Creature c in Owner.CombatState.GetTeammatesOf(creature))
+            {
+                if (c.Monster is Rosmontis r && r.Creature.HasPower<EmotionExpansionPower>())
+                {
+                    await CreatureCmd.Stun(r.Creature);
+                    await PowerCmd.Remove(r.Creature.GetPower<EmotionExpansionPower>());
+                }
+            }
         }
     }
 }
