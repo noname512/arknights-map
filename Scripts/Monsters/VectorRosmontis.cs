@@ -18,7 +18,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class Rosmontis : ModMonsterTemplate
+public class VectorRosmontis : ModMonsterTemplate
 {
     
 
@@ -52,7 +52,7 @@ public class Rosmontis : ModMonsterTemplate
             {
                 await CreatureCmd.TriggerAnim(Creature, "Attack_A_1", 0.5f);
                 await DamageCmd.Attack(Damage1).FromMonster(this).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
-                MonsterModel equipment = ModelDb.Monster<RosmontisEquipment>().ToMutable();
+                MonsterModel equipment = ModelDb.Monster<VectorRosmontisEquipment>().ToMutable();
                 await CreatureCmd.Add(equipment, CombatState, CombatSide.Enemy, CombatState.Encounter!.GetNextSlot(CombatState));
                     await PowerCmd.Apply<MinionPower>(
                         new ThrowingPlayerChoiceContext(),
@@ -72,7 +72,7 @@ public class Rosmontis : ModMonsterTemplate
                 await DamageCmd.Attack(Damage2).FromMonster(this).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
                 foreach (Creature c in CombatState.GetTeammatesOf(Creature))
                 {
-                    if (c.Monster is RosmontisEquipment)
+                    if (c.Monster is VectorRosmontisEquipment)
                     {
                         await PowerCmd.Apply<ChargePower>(new ThrowingPlayerChoiceContext(), c, 5m, Creature, null);
                     }

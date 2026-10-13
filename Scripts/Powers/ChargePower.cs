@@ -28,12 +28,12 @@ public class ChargePower : ModPowerTemplate
 
     public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
     {
-        if (Owner.CombatState!.ContainsMonster<Rosmontis>())
+        if (Owner.CombatState!.ContainsMonster<VectorRosmontis>())
         {
             await CreatureCmd.Damage(choiceContext, Owner.CombatState.GetOpponentsOf(creature), Amount, ValueProp.Unpowered, Owner);
             foreach (Creature c in Owner.CombatState.GetTeammatesOf(creature))
             {
-                if (c.Monster is Rosmontis r && r.Creature.HasPower<EmotionExpansionPower>())
+                if (c.Monster is VectorRosmontis r && r.Creature.HasPower<EmotionExpansionPower>())
                 {
                     await CreatureCmd.Stun(r.Creature);
                     await PowerCmd.Remove(r.Creature.GetPower<EmotionExpansionPower>());
