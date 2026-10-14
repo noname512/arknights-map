@@ -107,7 +107,7 @@ public class VectorMisery : ModMonsterTemplate
                 {
                     if (c.Player is not null)
                     {
-                        await PowerCmd.Apply<HurtPower>(new ThrowingPlayerChoiceContext(), c, 1m, Creature, null);
+                        await PowerCmd.Apply<HurtPower>(new ThrowingPlayerChoiceContext(), c, 8m, Creature, null);
                     }
                 }
             },
@@ -120,8 +120,7 @@ public class VectorMisery : ModMonsterTemplate
         debuff.FollowUpState = attack_steal;
 
         list.Add(attack_steal);
-        list.Add(attack_charge);
-        list.Add(attack_debuff);
+        
         return new MonsterMoveStateMachine(list, attack_steal);
     }
 
