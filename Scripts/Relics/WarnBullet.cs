@@ -10,7 +10,7 @@ using Test.Scripts.Powers;
 
 namespace ArknightsMap.Scripts.Relics;
 
-[RegisterRelic(typeof(SharedRelicPool))]
+//[RegisterRelic(typeof(SharedRelicPool))]
 public sealed class WarnBullet : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;

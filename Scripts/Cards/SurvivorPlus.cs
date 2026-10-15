@@ -11,7 +11,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Cards;
 
-[RegisterCard(typeof(SilentCardPool))]
+//[RegisterCard(typeof(SilentCardPool))]
 public class SurvivorPlus : ModCardTemplate
 {
     public SurvivorPlus()

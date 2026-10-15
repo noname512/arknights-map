@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0s6oeyyr02cp"
-path="res://.godot/imported/TheSound.png-70f47c244b86f989cd9d642a3441e24a.ctex"
+uid="uid://cxfgoh6g2ghy7"
+path="res://.godot/imported/TheSounds.png-b7d70fbb1c3bd227ee4c359412754fc5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/relics/TheSound.png"
-dest_files=["res://.godot/imported/TheSound.png-70f47c244b86f989cd9d642a3441e24a.ctex"]
+source_file="res://ArknightsMap/images/relics/TheSounds.png"
+dest_files=["res://.godot/imported/TheSounds.png-b7d70fbb1c3bd227ee4c359412754fc5.ctex"]
 
 [params]
 

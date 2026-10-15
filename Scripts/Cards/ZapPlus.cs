@@ -12,7 +12,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Cards;
 
-[RegisterCard(typeof(DefectCardPool))]
+//[RegisterCard(typeof(DefectCardPool))]
 public class ZapPlus : ModCardTemplate
 {
     public ZapPlus()
