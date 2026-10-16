@@ -83,16 +83,21 @@ public static class SettingsPage
                                 .AddToggle("act2origin", T("ORIGIN"), Act2Binding)
                                 .AddToggle("wilds", T("WILDS"), WildsBinding)
                     );
-                if (Entry.isDemo)
+                // if (Entry.isDemo)
                 {
                     result.AddSection(
                         "act3",
                         section =>
-                            section
-                                .WithTitle(T("SECTION_3"))
-                                .AddToggle("act3origin", T("ORIGIN"), Act3Binding)
-                                //.AddToggle("snowymountain", T("SNOWY_MOUNTAIN"), SnowyMountainBinding)
-                                .AddToggle("laterano", T("LATERANO"), LateranoBinding)
+                        {
+                            section.WithTitle(T("SECTION_3"))
+                                .AddToggle("act3origin", T("ORIGIN"), Act3Binding);
+                                if (Entry.isDemo)
+                                {
+                                    section.AddToggle("snowymountain", T("SNOWY_MOUNTAIN"), SnowyMountainBinding);
+                                }
+
+                                section.AddToggle("laterano", T("LATERANO"), LateranoBinding);
+                        }
                     );
                 }
             }

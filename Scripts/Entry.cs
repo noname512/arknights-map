@@ -75,15 +75,18 @@ public class Entry
             }
         }
         // act 3
-        if (isDemo)
         {
             // 有原版地图
             if (SettingsPage.Act2Binding.Read())
             {
-                if (SettingsPage.SnowyMountainBinding.Read())
+                if (isDemo)
                 {
-                    packBuilder.ActEnterUniformPoolCandidate<SnowyMountain>(2, ctx => true).Apply();
+                    if (SettingsPage.SnowyMountainBinding.Read())
+                    {
+                        packBuilder.ActEnterUniformPoolCandidate<SnowyMountain>(2, ctx => true).Apply();
+                    }
                 }
+
                 if (SettingsPage.LateranoBinding.Read())
                 {
                     packBuilder.ActEnterUniformPoolCandidate<Laterano>(2, ctx => true).Apply();
@@ -92,10 +95,15 @@ public class Entry
             else
             {
                 List<Action<int>> validActs = [];
-                if (SettingsPage.SnowyMountainBinding.Read())
+                if (isDemo)
                 {
-                    validActs.Add(res => packBuilder.ActEnterForce<SnowyMountain>(2, 100, ctx => ctx.Rng.NextInt(res) == 0).Apply());
+                    if (SettingsPage.SnowyMountainBinding.Read())
+                    {
+                        validActs.Add(res =>
+                            packBuilder.ActEnterForce<SnowyMountain>(2, 100, ctx => ctx.Rng.NextInt(res) == 0).Apply());
+                    }
                 }
+
                 if (SettingsPage.LateranoBinding.Read())
                 {
                     validActs.Add(res => packBuilder.ActEnterForce<Laterano>(2, 100, ctx => ctx.Rng.NextInt(res) == 0).Apply());
