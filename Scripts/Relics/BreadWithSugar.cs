@@ -1,10 +1,16 @@
+using ArknightsMap.Scripts.Powers;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Characters;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Relics;
@@ -13,7 +19,7 @@ namespace ArknightsMap.Scripts.Relics;
 public class BreadWithSugar : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1), new EnergyVar("Energy2", 1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1), new CardsVar(1)];
 
     public override RelicAssetProfile AssetProfile =>
         new(
@@ -25,53 +31,30 @@ public class BreadWithSugar : ModRelicTemplate
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
 
-    private int _remainTimes;
-    public override bool ShowCounter => true;
+    public override bool ShowCounter => false;
+    
+    private bool shouldTrigger = false;
 
-    [SavedProperty]
-    public int RemainTimes
+    public override Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
-        get { return _remainTimes; }
-        private set
-        {
-            AssertMutable();
-            _remainTimes = value;
-            UpdateDisplay();
-        }
-    }
-
-    private void UpdateDisplay()
-    {
-        if (RemainTimes > 0)
-        {
-            Status = RelicStatus.Normal;
-        }
-        else
-        {
-            Status = RelicStatus.Disabled;
-        }
-        InvokeDisplayAmountChanged();
-    }
-
-    public override int DisplayAmount => RemainTimes;
-
-    public override Task AfterObtained()
-    {
-        RemainTimes = 3;
+        shouldTrigger = true;
         return Task.CompletedTask;
     }
 
-    public override async Task AfterCurrentHpChanged(Creature creature, decimal delta)
+    public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (creature != Owner.Creature)
+        if (cardPlay.Player != Owner)
         {
             return;
         }
-        if (creature.CurrentHp <= creature.MaxHp * 0.5f && RemainTimes > 0)
+        if ((Owner.GetEnergy() == 0) && (shouldTrigger))
         {
             Flash();
-            await CreatureCmd.Heal(creature, creature.MaxHp);
-            RemainTimes--;
+            foreach (CardModel item in await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner))
+            {
+                item.SetToFreeThisTurn();
+            }
+            shouldTrigger = false;
         }
     }
 }
