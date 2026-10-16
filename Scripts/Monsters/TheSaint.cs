@@ -196,7 +196,10 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
                 await CreatureCmd.TriggerAnim(Creature, "A_Attack", 0.8f);
                 await Cmd.Wait(1.0f);
                 await DamageCmd.Attack(debuffAttackPhase1).FromMonster(this).WithNoAttackerAnim().Execute(null);
-                foreach (Creature c in targets) { }
+                foreach (Creature c in targets)
+                {
+                    await PowerCmd.Apply<FrailPower>(new ThrowingPlayerChoiceContext(), c, 1m, Creature, null);
+                }
             },
             [new SingleAttackIntent(debuffAttackPhase1), new DebuffIntent()]
         );
