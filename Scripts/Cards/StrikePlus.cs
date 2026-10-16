@@ -12,7 +12,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Cards;
 
-[RegisterCard(typeof(IroncladCardPool))]
+//[RegisterCard(typeof(IroncladCardPool))]
 public class StrikePlus : ModCardTemplate
 {
     public StrikePlus()

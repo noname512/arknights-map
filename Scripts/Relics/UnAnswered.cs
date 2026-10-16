@@ -10,7 +10,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Relics;
 
-[RegisterRelic(typeof(SharedRelicPool))]
+//[RegisterRelic(typeof(SharedRelicPool))]
 public sealed class UnAnswered : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;

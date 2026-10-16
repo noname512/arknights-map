@@ -8,7 +8,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Relics;
 
-[RegisterRelic(typeof(SharedRelicPool))]
+//[RegisterRelic(typeof(SharedRelicPool))]
 public sealed class SaintMind : ModRelicTemplate, IMaxHandSizeModifier
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;

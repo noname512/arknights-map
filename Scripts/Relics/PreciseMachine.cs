@@ -9,7 +9,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Relics;
 
-[RegisterRelic(typeof(SharedRelicPool))]
+//[RegisterRelic(typeof(SharedRelicPool))]
 public sealed class PreciseMachine : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;

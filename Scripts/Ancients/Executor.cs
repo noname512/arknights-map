@@ -9,7 +9,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Ancients;
 
-[RegisterSharedAncient]
+//[RegisterSharedAncient]
 public class Executor : ModAncientEventTemplate
 {
     // 选项按钮颜色

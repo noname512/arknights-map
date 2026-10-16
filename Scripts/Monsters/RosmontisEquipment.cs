@@ -16,7 +16,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Monsters;
 
 [RegisterMonster]
-public class RosmontisEquipment : ModMonsterTemplate
+public class VectorRosmontisEquipment : ModMonsterTemplate
 {
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 50, 50);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 50, 50);
@@ -57,11 +57,11 @@ public class RosmontisEquipment : ModMonsterTemplate
             async targets =>
             {
                 await CreatureCmd.GainBlock(Creature, Block, ValueProp.Unpowered, null);
-                if (Creature.CombatState!.ContainsMonster<Rosmontis>())
+                if (Creature.CombatState!.ContainsMonster<VectorRosmontis>())
                 {
                     foreach (Creature c in Creature.CombatState.HittableEnemies)
                     {
-                        if (c.Monster is Rosmontis)
+                        if (c.Monster is VectorRosmontis)
                         {
                             await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, 2, Creature, null);
                         }

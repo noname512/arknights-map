@@ -13,7 +13,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Cards;
 
-[RegisterCard(typeof(NecrobinderCardPool))]
+//[RegisterCard(typeof(NecrobinderCardPool))]
 public class BodyGuardPlus : ModCardTemplate
 {
     public BodyGuardPlus()

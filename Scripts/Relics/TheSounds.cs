@@ -48,6 +48,7 @@ public class TheSounds : ModRelicTemplate
         if (power is StrengthPower || power is TemporaryStrengthPower
         || power is DexterityPower || power is TemporaryDexterityPower)
         {
+            Flash();
             _usedThisCombat = true;
             base.Status = RelicStatus.Disabled;   // 这行只管变灰，别拿来当开关
             return 1m;

@@ -28,8 +28,8 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
     protected override int BulletMax => 0;
     protected override int InitialBullet => 0;
 
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 250, 250);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 250, 250);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 200, 200);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 200, 200);
 
     private int heavyAttackPhase1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 45, 45);
 
@@ -149,14 +149,6 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
                         Creature minion = await CreatureCmd.Add(chosen, CombatState, CombatSide.Enemy, slot);
                         await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), minion, 1m, Creature, null);
                     }
-
-                    await PowerCmd.Apply<MinionPower>(
-                        new ThrowingPlayerChoiceContext(),
-                        CombatState.Enemies.First(c => c.Monster == chosen),
-                        1m,
-                        Creature,
-                        null
-                    );
                 }
                 foreach (Creature c in CombatState.HittableEnemies)
                 {
@@ -188,14 +180,6 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
                         Creature minion = await CreatureCmd.Add(chosen, CombatState, CombatSide.Enemy, slot);
                         await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), minion, 1m, Creature, null);
                     }
-
-                    await PowerCmd.Apply<MinionPower>(
-                        new ThrowingPlayerChoiceContext(),
-                        CombatState.Enemies.First(c => c.Monster == chosen),
-                        1m,
-                        Creature,
-                        null
-                    );
                 }
                 foreach (Creature c in CombatState.HittableEnemies)
                 {
@@ -212,7 +196,10 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
                 await CreatureCmd.TriggerAnim(Creature, "A_Attack", 0.8f);
                 await Cmd.Wait(1.0f);
                 await DamageCmd.Attack(debuffAttackPhase1).FromMonster(this).WithNoAttackerAnim().Execute(null);
-                foreach (Creature c in targets) { }
+                foreach (Creature c in targets)
+                {
+                    await PowerCmd.Apply<FrailPower>(new ThrowingPlayerChoiceContext(), c, 1m, Creature, null);
+                }
             },
             [new SingleAttackIntent(debuffAttackPhase1), new DebuffIntent()]
         );
@@ -224,7 +211,10 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
                 await CreatureCmd.TriggerAnim(Creature, "B_Attack_Begin_2", 0.8f);
                 await Cmd.Wait(1.0f);
                 await DamageCmd.Attack(debuffAttackPhase2).FromMonster(this).WithNoAttackerAnim().Execute(null);
-                foreach (Creature c in targets) { }
+                foreach (Creature c in targets)
+                {
+                    await PowerCmd.Apply<FrailPower>(new ThrowingPlayerChoiceContext(), c, 2m, Creature, null);
+                }
             },
             [new SingleAttackIntent(debuffAttackPhase2), new DebuffIntent()]
         );

@@ -64,11 +64,11 @@ public class OpForGun : AbstractSankta
     {
         if (OnRight)
         {
-            GunPosition.Visuals.Scale = new Vector2(1.5f, 1.5f);
+            GunPosition.Visuals.Scale = new Vector2(1.0f, 1.0f);
         }
         else
         {
-            GunPosition.Visuals.Scale = new Vector2(-1.5f, 1.5f);
+            GunPosition.Visuals.Scale = new Vector2(-1.0f, 1.0f);
         }
     }
 

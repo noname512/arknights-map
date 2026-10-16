@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddskbpkmo28mr"
-path="res://.godot/imported/BloodedDressed.png-80434a6989d6be57dca0a9bd426b7105.ctex"
+uid="uid://ni8u558p2yh"
+path="res://.godot/imported/PrayInvite.png-5bf0a692be460cf031df66d64ec16ad8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArknightsMap/images/relics/BloodedDressed.png"
-dest_files=["res://.godot/imported/BloodedDressed.png-80434a6989d6be57dca0a9bd426b7105.ctex"]
+source_file="res://ArknightsMap/images/relics/PrayInvite.png"
+dest_files=["res://.godot/imported/PrayInvite.png-5bf0a692be460cf031df66d64ec16ad8.ctex"]
 
 [params]
 

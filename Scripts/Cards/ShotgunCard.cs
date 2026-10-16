@@ -9,7 +9,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Cards;
 
-[RegisterCard(typeof(TokenCardPool))]
+//[RegisterCard(typeof(TokenCardPool))]
 public class ShotgunCard : ModCardTemplate
 {
     public ShotgunCard()
