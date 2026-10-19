@@ -22,25 +22,35 @@ public class VectorRosmontis : ModMonsterTemplate
 {
     
 
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 120, 120);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 120, 120);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 150, 120);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 150, 120);
     private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 20, 22);
 
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 12);
 
     private int Damage3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 10);
 
+    private MoveState? FlyState;
+
+    public int Phase = 1;
     public override async Task AfterAddedToRoom()
     {
         await PowerCmd.Apply<EmotionExpansionPower>(new ThrowingPlayerChoiceContext(), Creature, 2, Creature, null);
+        await PowerCmd.Apply<RosPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
     }
 
-    public int MoveInt = 0;
+    
 
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
     private string GetAttackSfx() => "Attack";
+
+    public async Task TriggerFlyState()
+    {
+        await CreatureCmd.TriggerAnim(Creature, "Die_A", 0.5f);
+        SetMoveImmediate(FlyState!, forceTransition: true);
+    }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
@@ -54,12 +64,16 @@ public class VectorRosmontis : ModMonsterTemplate
                 await DamageCmd.Attack(Damage1).FromMonster(this).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
                 MonsterModel equipment = ModelDb.Monster<VectorRosmontisEquipment>().ToMutable();
                 await CreatureCmd.Add(equipment, CombatState, CombatSide.Enemy, CombatState.Encounter!.GetNextSlot(CombatState));
-                    await PowerCmd.Apply<MinionPower>(
+                if (Phase == 2)
+                {
+                    await PowerCmd.Apply<ThornsPower>(
                         new ThrowingPlayerChoiceContext(),
                         CombatState.Enemies.First(c => c.Monster == equipment),
-                        1m,
+                        2m,
                         Creature,
                         null);
+                }
+                
             },
             [new SingleAttackIntent(Damage1), new SummonIntent()]
         );
@@ -92,13 +106,35 @@ public class VectorRosmontis : ModMonsterTemplate
             [new MultiAttackIntent(Damage3, 3)]
         );
 
+        FlyState = new MoveState(
+            "FLY",   
+            async targets =>
+            {
+                Creature.GetPower<RosPower>()?.DoRevive();
+                await CreatureCmd.Heal(Creature, Creature.MaxHp - Creature.CurrentHp);
+                
+                Phase = 2;
+                await CreatureCmd.TriggerAnim(Creature, "BtoC_2", 0.8f);
+                await PowerCmd.Remove<EmotionExpansionPower>(Creature);
+                await PowerCmd.Apply<EmotionExpansionPower>(new ThrowingPlayerChoiceContext(), Creature, 5m, Creature, null);
+                
+            },
+            [new BuffIntent()]
+            
+        )
+        {
+            MustPerformOnceBeforeTransitioning = true,
+        };
+
         attack_summon.FollowUpState = attack_charge;
         attack_charge.FollowUpState = attack_debuff;
         attack_debuff.FollowUpState = attack_summon;
+        FlyState!.FollowUpState = attack_summon;
 
         list.Add(attack_summon);
         list.Add(attack_charge);
         list.Add(attack_debuff);
+        list.Add(FlyState!);
         return new MonsterMoveStateMachine(list, attack_summon);
     }
 
@@ -135,6 +171,7 @@ public class VectorRosmontis : ModMonsterTemplate
         AnimState stunendCState = new AnimState("BtoC_2");
         AnimState dieCState = new AnimState("C_Die");
 
+        reviveState.NextState = idleState_C;
         attackState_C_1.NextState = idleState_C;
         attackState_C_2.NextState = idleState_C;
         attackState_C_3.NextState = idleState_C;

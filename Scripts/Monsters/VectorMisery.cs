@@ -29,7 +29,7 @@ public class VectorMisery : ModMonsterTemplate
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 120, 120);
     private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 24, 25);
 
-    private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 12);
+    private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 12, 15);
 
     private int Damage3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 10);
 
@@ -86,13 +86,32 @@ public class VectorMisery : ModMonsterTemplate
             "ATTACK_STEAL",
             async targets =>
             {
-                await CreatureCmd.TriggerAnim(Creature, "Attack_A", 0.5f);
+                await CreatureCmd.TriggerAnim(Creature, "A_Skill_2_Begin", 0.5f);
                 await DamageCmd.Attack(Damage1).FromMonster(this).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
                 foreach (Creature c in CombatState.GetOpponentsOf(Creature))
                 {
                     if (c.Player is not null)
                     {
                         await PowerCmd.Apply<HurtPower>(new ThrowingPlayerChoiceContext(), c, 1m, Creature, null);
+                    }
+                }
+            },
+            [new SingleAttackIntent(Damage1), new DebuffIntent()]
+        );
+
+        MoveState attack_debuff = new MoveState(
+            "ATTACK_DEBUFF",
+            async targets =>
+            {
+                await CreatureCmd.TriggerAnim(Creature, "Attack_A", 0.5f);
+                await DamageCmd.Attack(Damage2).FromMonster(this).WithAttackerAnim("Attack", 0.8f).WithHitFx(sfx: GetAttackSfx()).Execute(null);
+                foreach (Creature c in CombatState.GetOpponentsOf(Creature))
+                {
+                    if (c.Player is not null)
+                    {
+                        await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), c, 2m, Creature, null);
+                        await PowerCmd.Apply<FrailPower>(new ThrowingPlayerChoiceContext(), c, 2m, Creature, null);
+                        await PowerCmd.Apply<VulnerablePower>(new ThrowingPlayerChoiceContext(), c, 2m, Creature, null);
                     }
                 }
             },
@@ -107,19 +126,23 @@ public class VectorMisery : ModMonsterTemplate
                 {
                     if (c.Player is not null)
                     {
-                        await PowerCmd.Apply<HurtPower>(new ThrowingPlayerChoiceContext(), c, 8m, Creature, null);
+                        await PowerCmd.Apply<MiseryDamagePower>(new ThrowingPlayerChoiceContext(), c, 8m, Creature, null);
                     }
                 }
             },
-            [new DefendIntent(), new DebuffIntent()]
+            [new DebuffIntent()]
         );
 
         
 
         attack_steal.FollowUpState = debuff;
-        debuff.FollowUpState = attack_steal;
+        
+        debuff.FollowUpState = attack_debuff;
+        attack_debuff.FollowUpState = debuff;
 
         list.Add(attack_steal);
+        list.Add(attack_debuff);
+        list.Add(debuff);
         
         return new MonsterMoveStateMachine(list, attack_steal);
     }
@@ -130,56 +153,37 @@ public class VectorMisery : ModMonsterTemplate
         AnimState idleState_A = new AnimState("A_Idle", isLooping: true);
         AnimState attackState_A_1 = new AnimState("A_Attack");
         AnimState attackState_A_2 = new AnimState("A_Attack");
-        AnimState attackState_A_3 = new AnimState("A_Skill");
+        AnimState skillState_A = new AnimState("A_Skill_2_Begin");
+        AnimState skillState_A_2 = new AnimState("A_Skill_2_End");
 
         
-        AnimState stunAState = new AnimState("A_Die_Begin");
-        AnimState stunloopAState = new AnimState("A_Die_Loop", isLooping: true);
-        AnimState stunendAState = new AnimState("A_Die_End");
-        AnimState dieAState = new AnimState("A_Die_Begin");
+        AnimState retreatBeginState = new AnimState("B_Skill_3_Retreat_Begin");
+        AnimState retreatEndState = new AnimState("B_Skill_3_Retreat_End");
+        
+        AnimState dieState = new AnimState("B_Die");
 
         startState.NextState = idleState_A;
         attackState_A_1.NextState = idleState_A;
         attackState_A_2.NextState = idleState_A;
-        attackState_A_3.NextState = idleState_A;
-        stunAState.NextState = stunloopAState;
-        stunendAState.NextState = idleState_A;
-        
-        AnimState reviveState = new AnimState("BtoC_2");
-        AnimState idleState_C = new AnimState("C_Idle", isLooping: true);
-        AnimState attackState_C_1 = new AnimState("C_Attack");
-        AnimState attackState_C_2 = new AnimState("C_Attack");
-        AnimState attackState_C_3 = new AnimState("B_Skill_Begin");
+        skillState_A.NextState = skillState_A_2;
+        skillState_A_2.NextState = idleState_A;
+        retreatBeginState.NextState = retreatEndState;
+        retreatEndState.NextState = idleState_A;
+
 
         
-        AnimState stunCState = new AnimState("A_Die_Begin");
-        AnimState stunloopCState = new AnimState("A_Die_Loop", isLooping: true);
-        AnimState stunendCState = new AnimState("BtoC_2");
-        AnimState dieCState = new AnimState("C_Die");
-
-        attackState_C_1.NextState = idleState_C;
-        attackState_C_2.NextState = idleState_C;
-        attackState_C_3.NextState = idleState_C;
-        stunCState.NextState = stunloopCState;
-        stunendCState.NextState = idleState_C;
+       
 
         CreatureAnimator creatureAnimator = new CreatureAnimator(idleState_A, controller);
-        creatureAnimator.AddAnyState("Attack_A_1", attackState_A_1);
+        creatureAnimator.AddAnyState("A_Attack", attackState_A_1);
         creatureAnimator.AddAnyState("Attack_A_2", attackState_A_2);
-        creatureAnimator.AddAnyState("Attack_A_3", attackState_A_3);
-        creatureAnimator.AddAnyState("Attack_C_1", attackState_C_1);
-        creatureAnimator.AddAnyState("Attack_C_2", attackState_C_2);
-        creatureAnimator.AddAnyState("Attack_C_3", attackState_C_3);
-        creatureAnimator.AddAnyState("Stun_A", stunAState);
-        creatureAnimator.AddAnyState("Stun_A_Loop", stunloopAState);
-        creatureAnimator.AddAnyState("Stun_A_End", stunendAState);
-        creatureAnimator.AddAnyState("Revive", reviveState);
-        creatureAnimator.AddAnyState("Stun_C", stunCState);
-        creatureAnimator.AddAnyState("Stun_C_Loop", stunloopCState);
-        creatureAnimator.AddAnyState("Stun_C_End", stunendCState);
-        creatureAnimator.AddAnyState("Die_A", dieAState);
+        creatureAnimator.AddAnyState("A_Skill_2_Begin", skillState_A);
+        creatureAnimator.AddAnyState("A_Skill_2_End", skillState_A_2);
+        creatureAnimator.AddAnyState("B_Skill_3_Retreat_Begin", retreatBeginState);
+        creatureAnimator.AddAnyState("B_Skill_3_Retreat_End", retreatEndState);
+
         creatureAnimator.AddAnyState("Start", startState);
-        creatureAnimator.AddAnyState("Die_C", dieCState);
+        creatureAnimator.AddAnyState("Die", dieState);
 
         return creatureAnimator;
     }

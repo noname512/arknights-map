@@ -70,7 +70,7 @@ public class SanktaWitness : AbstractSankta
                     .WithHitFx(sfx: GetAttackSfx())
                     .Execute(null);
             },
-            new SingleAttackIntent(MultiDamage)
+            new MultiAttackIntent(MultiDamage, 2)
         );
 
         MoveState skill = new MoveState(

@@ -26,6 +26,7 @@ public class VectorRosmontisEquipment : ModMonsterTemplate
     public override async Task AfterAddedToRoom()
     {
         await PowerCmd.Apply<ChargePower>(new ThrowingPlayerChoiceContext(), Creature, 5, Creature, null);
+        await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
     }
 
     public int MoveInt = 0;

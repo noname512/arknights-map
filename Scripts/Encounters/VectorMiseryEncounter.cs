@@ -10,13 +10,13 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace Test.Scripts;
 
-
-public class VectorRosmontisEncounter : AbstractLateranoEncounter
+//[RegisterGlobalEncounter]
+public class VectorMiseryEncounter : AbstractLateranoEncounter
 {
     // 所有可能出现的怪物
     public override IEnumerable<MonsterModel> AllPossibleMonsters => 
-    [ModelDb.Monster<VectorRosmontis>(),
-     ModelDb.Monster<VectorRosmontisEquipment>(),
+    [
+        ModelDb.Monster<VectorMisery>(),
     ];
 
     public override EncounterAssetProfile AssetProfile => new(EncounterScenePath: $"res://ArknightsMap/scenes/encounters/{GetType().Name}.tscn");
@@ -25,12 +25,12 @@ public class VectorRosmontisEncounter : AbstractLateranoEncounter
 
     public override string CustomBgm => "event:/ArknightsMap/music/wdxl_bat";
 
-    
+    public override bool FullyCenterPlayers => true;
 
-public override IReadOnlyList<string> Slots => ["first", "second", "third"];
+public override IReadOnlyList<string> Slots => ["first_right", "first_left"];
     // 不要忘了这里的model需要调用ToMutable()，表示不是标准值而是战斗中的可变数据
     protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
-        (ModelDb.Monster<VectorRosmontis>().ToMutable(), "third"),
+        (ModelDb.Monster<VectorMisery>().ToMutable(), "first_right"),
         
         
     ];

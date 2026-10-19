@@ -34,4 +34,28 @@ public class HurtPower : ModPowerTemplate
         modifiedCost = originalCost + Amount;
         return true;
     }
+
+    public override async Task BeforeApplied(Creature target, decimal amount, Creature? applier, CardModel? cardSource)
+    {
+        if (target.Player != null)
+        {
+            foreach (CardModel c in target.Player.PlayerCombatState.AllCards)
+            {
+                if (c.Type == CardType.Power)
+                {
+                    c.AddKeyword(CardKeyword.Ethereal);
+                }
+            }
+        }
+    }
+
+    public override async Task AfterCardEnteredCombat(CardModel card)
+    {
+        if (card.Owner.Creature == Owner && card.Type == CardType.Power)
+        {
+            card.AddKeyword(CardKeyword.Ethereal);
+        }
+    }
+
+    
 }

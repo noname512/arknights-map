@@ -1,15 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://q0w2umpanvok"]
 
-[ext_resource type="Script" uid="uid://dwe1rbe5v4g53" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_j1qa8"]
-[ext_resource type="SpineSkeletonDataResource" uid="uid://cfv62v4whsokf" path="res://ArknightsMap/images/monsters/Misery/Misery.tres" id="2_hqbim"]
+[ext_resource type="Script" uid="uid://dwe1rbe5v4g53" path="res://Scripts/Monsters/AbstractArknightsVisuals.cs" id="1_paltj"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cfv62v4whsokf" path="res://ArknightsMap/images/monsters/Misery/Misery.tres" id="2_kwkwm"]
 
 [node name="Misery" type="Node2D"]
-script = ExtResource("1_j1qa8")
+script = ExtResource("1_paltj")
 
 [node name="Visuals" type="SpineSprite" parent="."]
-skeleton_data_res = ExtResource("2_hqbim")
+skeleton_data_res = ExtResource("2_kwkwm")
 preview_skin = "default"
-preview_animation = "A_Idle"
+preview_animation = "B_Skill_3_Retreat_End"
 preview_frame = false
 preview_time = 0.0
 unique_name_in_owner = true

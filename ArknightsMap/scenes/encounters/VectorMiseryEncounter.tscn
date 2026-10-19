@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dlfni8dj2sx5w"]
+
+[node name="OpForGunBoss" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="first_right" type="Marker2D" parent="."]
+position = Vector2(1600, 750)
+
+[node name="first_left" type="Marker2D" parent="."]
+position = Vector2(400, 750)
