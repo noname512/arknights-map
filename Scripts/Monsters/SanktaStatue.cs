@@ -73,7 +73,8 @@ public class SanktaStatue : AbstractSankta
                     if (c.Player != null)
                     {
                         CardModel perplexed = CombatState.CreateCard<Perplexed>(c.Player);
-                        await CardPileCmd.Add(perplexed, PileType.Draw, CardPilePosition.Random, null);
+                        await CardPileCmd.AddCurseToDeck<Perplexed>(c.Player);
+
                     }
                 }
             },
