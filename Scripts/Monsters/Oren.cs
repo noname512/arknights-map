@@ -21,7 +21,7 @@ namespace ArknightsMap.Scripts.Monsters;
 public class Oren : AbstractSankta
 {
     protected override int BulletMax => 1;
-    protected override int InitialBullet => 0;
+    protected override int InitialBullet => 1;
 
     public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 250, 250);
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 250, 250);
@@ -30,6 +30,8 @@ public class Oren : AbstractSankta
     private int Damage_2_Hit => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 12, 10);
 
     private int Damage_1_Hit => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 16, 14);
+
+    private int Damage_3_Hit => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 10);
 
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
@@ -103,10 +105,12 @@ public class Oren : AbstractSankta
             {
                 await CreatureCmd.TriggerAnim(Creature, "Attack_A", 0.8f);
                 await Cmd.Wait(1.0f);
+                await DamageCmd.Attack(Damage_3_Hit).FromMonster(this).WithNoAttackerAnim().WithHitFx(sfx: GetAttackSfx()).Execute(null);
+                
                 await PowerCmd.Apply<VulnerablePower>(new ThrowingPlayerChoiceContext(), targets, 2, Creature, null);
                 await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), targets, 2, Creature, null);
             },
-            [new DebuffIntent()]
+            [new SingleAttackIntent(Damage_3_Hit), new DebuffIntent()]
         );
 
         ConditionalBranchState attackBranch1 = new ConditionalBranchState("ATTACK_BRANCH1");
@@ -135,7 +139,7 @@ public class Oren : AbstractSankta
         debuff.FollowUpState = attackBranch1;
         attack2Hit.FollowUpState = attackBranch2;
         attack1Hit.FollowUpState = attackBranch3;
-        return new MonsterMoveStateMachine(list, gainbullet);
+        return new MonsterMoveStateMachine(list, attackSkill);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

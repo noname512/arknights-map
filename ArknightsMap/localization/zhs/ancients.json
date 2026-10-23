@@ -176,6 +176,12 @@
     "ARKNIGHTS_MAP_EVENT_LEMUEN.talk.DEFECT.1-1r.ancient": "之前我看了看你缺的零件型号，正好我们厅里同事手里有一些，希望能帮到你。",
     "ARKNIGHTS_MAP_EVENT_LEMUEN.talk.DEFECT.1-1r.next": "继续",
     "ARKNIGHTS_MAP_EVENT_LEMUEN.talk.DEFECT.1-2r.char": "<激动的表情>",
+    "ARKNIGHTS_MAP_EVENT_LEMUEN.talk.ARCHETTO_CHARACTER_ARCHETTO.0-0r.char": "枢机大人？没想到能在这儿遇到您。",
+    "ARKNIGHTS_MAP_EVENT_LEMUEN.talk.ARCHETTO_CHARACTER_ARCHETTO.0-0r.next": "继续",
+    "ARKNIGHTS_MAP_EVENT_LEMUEN.talk.ARCHETTO_CHARACTER_ARCHETTO.0-1r.ancient": "不必拘谨，你我皆为处理目前重现的灾异现象而来。",
+    "ARKNIGHTS_MAP_EVENT_LEMUEN.talk.ARCHETTO_CHARACTER_ARCHETTO.1-0r.char": "兰登修道院能重新被调用，也是多亏您的推进。",
+    "ARKNIGHTS_MAP_EVENT_LEMUEN.talk.ARCHETTO_CHARACTER_ARCHETTO.1-0r.next": "继续",
+    "ARKNIGHTS_MAP_EVENT_LEMUEN.talk.ARCHETTO_CHARACTER_ARCHETTO.1-1r.ancient": "“拉特兰仍有救赎可言。”\n这就是我们要并肩前行的理由。",
 
     "以下是送葬人对话": "----------------------------------------------------------",
     "ARKNIGHTS_MAP_EVENT_EXECUTOR.title": "送葬人",

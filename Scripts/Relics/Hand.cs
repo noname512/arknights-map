@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -41,6 +42,7 @@ public sealed class Hand : ModRelicTemplate
             foreach (Creature c in Owner.Creature.CombatState!.HittableEnemies)
             {
                 await CreatureCmd.Damage(choiceContext, c, card.DynamicVars.Damage.BaseValue, ValueProp.Unpowered, Owner.Creature);
+                await PowerCmd.Apply<VulnerablePower>(choiceContext, c, 1, Owner.Creature, null);
             }
             Status = RelicStatus.Disabled;
         }
