@@ -282,7 +282,7 @@
     "ARKNIGHTS_MAP_RELIC_MEMENTO_MORI.description": "每场战斗开始时，以及这场战斗之后的每第4回合，随机造成[blue]{Damage}[/blue]点伤害8次。",
     "ARKNIGHTS_MAP_RELIC_MEMENTO_MORI.flavor": "",
     "ARKNIGHTS_MAP_RELIC_HAND.title": "剿袭之手",
-    "ARKNIGHTS_MAP_RELIC_HAND.description": "你每场战斗[gold]首次[/gold]抽到一张伤害不小于15的攻击牌后，对所有敌人造成那张牌伤害数值的伤害，并给予1点[gold]易伤[/gold]。",
+    "ARKNIGHTS_MAP_RELIC_HAND.description": "你每回合[gold]首次[/gold]抽到一张伤害不小于15的攻击牌后，对所有敌人造成那张牌伤害数值的伤害。",
     "ARKNIGHTS_MAP_RELIC_HAND.flavor": "",
     "ARKNIGHTS_MAP_RELIC_SWEET_DELIVERY.title": "甜品速递",
     "ARKNIGHTS_MAP_RELIC_SWEET_DELIVERY.description": "你在精英战的战斗后，额外获得1件[gold]甜品遗物[/gold]。",

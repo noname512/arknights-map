@@ -1,5 +1,6 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -27,6 +28,15 @@ public sealed class Hand : ModRelicTemplate
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
 
+    public bool used = false;
+
+    public override async Task AfterPlayerTurnStartEarly(PlayerChoiceContext choiceContext, Player player)
+    {
+        used = false;
+        Status = RelicStatus.Active;
+    }
+
+
     public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
         if (
@@ -35,7 +45,7 @@ public sealed class Hand : ModRelicTemplate
             && card.DynamicVars.TryGetValue("Damage", out var damageVar)
             && damageVar != null
             && damageVar.BaseValue >= 15
-            && Status == RelicStatus.Active
+            && !used
         )
         {
             Flash();
@@ -44,12 +54,14 @@ public sealed class Hand : ModRelicTemplate
                 await CreatureCmd.Damage(choiceContext, c, card.DynamicVars.Damage.BaseValue, ValueProp.Unpowered, Owner.Creature);
                 await PowerCmd.Apply<VulnerablePower>(choiceContext, c, 1, Owner.Creature, null);
             }
+            used = true;
             Status = RelicStatus.Disabled;
         }
     }
 
     public override Task AfterCombatVictory(CombatRoom room)
     {
+        used = false;
         Status = RelicStatus.Active;
         return Task.CompletedTask;
     }

@@ -25,15 +25,16 @@ public class OpForGun : AbstractSankta
 {
     protected override int BulletMax => 1;
     protected override int InitialBullet => 0;
+    
 
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 500, 500);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 500, 500);
+    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 520, 520);
+    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 520, 520);
 
     private int run => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 25, 25);
 
-    private int multi_attack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 6, 6);
+    private int multi_attack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 5, 4);
 
-    public int Attack_Time = 1;
+    public int Attack_Time = 2;
 
     private bool IsSlotOccupied(string slot) => CombatState.Enemies.Any(c => c.SlotName == slot);
 
