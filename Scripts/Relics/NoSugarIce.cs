@@ -39,11 +39,14 @@ public sealed class NoSugarIce : ModRelicTemplate
         {
             for (int i = 0; i < Owner.GetEnergy(); i++)
             {
+                await PlayerCmd.LoseEnergy(1, Owner);
                 await CreatureCmd.GainBlock(Owner.Creature, 8, ValueProp.Unpowered, null);
                 await PowerCmd.Apply<DrawCardsNextTurnPower>(choiceContext, Owner.Creature, 1, Owner.Creature, null);
             }
         }
     }
+
+    
 
     
 }

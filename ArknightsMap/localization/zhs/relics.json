@@ -257,7 +257,7 @@
     "ARKNIGHTS_MAP_RELIC_GIANT_GUN.description": "战斗开始时，获得6层[gold]荆棘[/gold]。[gold]荆棘[/gold]伤害会命中所有敌人。",
     "ARKNIGHTS_MAP_RELIC_GIANT_GUN.flavor": "铳械大师潘格尼尼的成名之作，亦是帕特里奇昂成为铳骑后的第一支巨型铳械，手工制作与军工制式相融合的杰作。",
     "ARKNIGHTS_MAP_RELIC_NO_SUGAR_ICE.title": "无糖冰淇淋",
-    "ARKNIGHTS_MAP_RELIC_NO_SUGAR_ICE.description": "你的回合结束时，每有1点剩余的{energyPrefix:energyIcons(1)}，获得8点[gold]格挡[/gold]，下回合抽1张牌。",
+    "ARKNIGHTS_MAP_RELIC_NO_SUGAR_ICE.description": "你的回合结束时，消耗剩余的{energyPrefix:energyIcons(1)}，每有1点，获得8点[gold]格挡[/gold]，下回合抽1张牌。",
     "ARKNIGHTS_MAP_RELIC_NO_SUGAR_ICE.flavor": "伊蒂达的杰作，就是可能不太合大部分萨科塔的口味。",
     "ARKNIGHTS_MAP_RELIC_TARGET.title": "靶子",
     "ARKNIGHTS_MAP_RELIC_TARGET.description": "每场战斗结束时，记录你战斗中你最后打出的攻击牌，将一张此牌的[gold]一次性[/gold]的，可以免费打出的[gold]原始版[/gold]复制放入牌组。",
