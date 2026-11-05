@@ -34,39 +34,39 @@ public class SanktaEye : AbstractSankta
 
     public int Time = 1;
 
-    private bool HasCurseInDraw(Player p) => p.PlayerCombatState!.DrawPile.Cards.Any(c => c.Type == CardType.Curse);
+    //private bool HasCurseInDraw(Player p) => p.PlayerCombatState!.DrawPile.Cards.Any(c => c.Type == CardType.Curse);
 
-    public override decimal ModifyDamageMultiplicative(
-        Creature? target,
-        decimal amount,
-        ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource,
-        CardPlay? cardPlay
-    )
-    {
-        if (target == null)
-        {
-            return 1m;
-        }
-        if (target.Side != CombatSide.Player)
-        {
-            return 1m;
-        }
-        if (target.Player != null && HasCurseInDraw(target.Player))
-        {
-            return 1m;
-        }
-        if (!props.IsPoweredAttack())
-        {
-            return 1m;
-        }
-        if (dealer != Creature)
-        {
-            return 1m;
-        }
-        return 1.5m;
-    }
+    //public override decimal ModifyDamageMultiplicative(
+        //Creature? target,
+        //decimal amount,
+        //ValueProp props,
+        //Creature? dealer,
+        //CardModel? cardSource,
+        //CardPlay? cardPlay
+    //)
+    //{
+        //if (target == null)
+        //{
+            //return 1m;
+        //}
+        //if (target.Side != CombatSide.Player)
+        //{
+            //return 1m;
+        //}
+        //if (target.Player != null && HasCurseInDraw(target.Player))
+        //{
+            //return 1m;
+        //}
+        //if (!props.IsPoweredAttack())
+        //{
+            //return 1m;
+        //}
+        //if (dealer != Creature)
+        //{
+            //return 1m;
+        //}
+        //return 1.5m;
+    //}
 
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
