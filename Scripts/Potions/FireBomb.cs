@@ -23,7 +23,8 @@ public class FireBomb : ModPotionTemplate
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
-    public override PotionAssetProfile AssetProfile => new(ImagePath: "res://icon.svg", OutlinePath: "res://icon.svg");
+    public override PotionAssetProfile AssetProfile =>
+        new(ImagePath: $"res://ArknightsMap/images/potions/{GetType().Name}.png", OutlinePath: $"res://ArknightsMap/images/potions/{GetType().Name}.png");
 
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {

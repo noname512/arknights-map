@@ -1,4 +1,3 @@
-using ArknightsMap.Scripts.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -26,11 +25,12 @@ public class IrisPerfume : ModPotionTemplate
 
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [];
 
-    public override PotionAssetProfile AssetProfile => new(ImagePath: $"res://ArknightsMap/images/potions/{GetType().Name}.png", OutlinePath: $"res://ArknightsMap/images/potions/{GetType().Name}.png");
+    public override PotionAssetProfile AssetProfile =>
+        new(ImagePath: $"res://ArknightsMap/images/potions/{GetType().Name}.png", OutlinePath: $"res://ArknightsMap/images/potions/{GetType().Name}.png");
 
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {
-        await CreatureCmd.Heal(target!, target!.MaxHp * DynamicVars.Heal.IntValue/100m, true);
+        await CreatureCmd.Heal(target!, target!.MaxHp * DynamicVars.Heal.IntValue / 100m, true);
         await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, target!.Player!);
         await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, target!.Player!);
     }

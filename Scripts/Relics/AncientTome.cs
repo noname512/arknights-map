@@ -45,7 +45,7 @@ public class AncientTome : ModRelicTemplate
                 [ModelDb.CardPool<EventCardPool>()],
                 CardCreationSource.Other,
                 (CardRarityOddsType)325,
-                c => c.Rarity == CardRarity.Ancient && c is not SomethingForm
+                c => c.Rarity == CardRarity.Ancient && c is not SomethingForm && c is not CustomMadeCard
             ).WithFlags(CardCreationFlags.NoRarityModification | CardCreationFlags.NoCardPoolModifications | CardCreationFlags.NoCardModelModifications);
             rewards.Add(new CardReward(options, 3, Owner));
         }

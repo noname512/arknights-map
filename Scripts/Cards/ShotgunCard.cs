@@ -2,9 +2,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.ValueProps;
-using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Cards;
@@ -24,7 +22,7 @@ public class ShotgunCard : ModCardTemplate
     private const CardType type = CardType.Attack;
 
     // 卡牌稀有度
-    private const CardRarity rarity = CardRarity.Event;
+    private const CardRarity rarity = CardRarity.Ancient;
 
     // 目标类型（AnyEnemy表示任意敌人）
     private const TargetType targetType = TargetType.AllEnemies;
