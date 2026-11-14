@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Merchant;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Multiplayer.Game;
@@ -94,7 +95,7 @@ class MerchantEntanchmentPatch
     public static class GetAllEntriesPatch
     {
         [HarmonyPrefix]
-        public static bool Prefix(MerchantInventory __instance, ref IEnumerable<MerchantEntry> __result)
+        public static bool Prefix(MerchantInventory __instance, ref List<MerchantEntry> __result)
         {
             if (!__instance.Player.Relics.Any(r => r is SnowyRealmShop))
             {
@@ -106,7 +107,7 @@ class MerchantEntanchmentPatch
                 __instance.GetEnchantmentEntries(),
                 __instance.CardRemovalEntry == null ? [] : [__instance.CardRemovalEntry],
             };
-            __result = obj.SelectMany((IEnumerable<MerchantEntry> e) => e);
+            __result = obj.SelectMany((IEnumerable<MerchantEntry> e) => e).ToList();
             return false;
         }
     }
@@ -304,24 +305,24 @@ class MerchantEntanchmentPatch
         }
     }
 
-    [HarmonyPatch]
-    public static class OnTryPurchaseDynamicPatch
-    {
-        [HarmonyTargetMethods]
-        public static IEnumerable<MethodBase> TargetMethods() => DiscoverMethods("OnTryPurchase", false);
+    // [HarmonyPatch]
+    // public static class OnTryPurchaseDynamicPatch
+    // {
+    //     [HarmonyTargetMethods]
+    //     public static IEnumerable<MethodBase> TargetMethods() => DiscoverMethods("OnTryPurchase", false);
 
-        [HarmonyPrefix]
-        public static bool Prefix(NMerchantSlot __instance, MerchantInventory? inventory, ref Task __result)
-        {
-            Player? player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
-            if (player == null || !player.Relics.Any(r => r is SnowyRealmShop))
-            {
-                return true;
-            }
-            __result = __instance.GetEnchantmentDatas().entry!.OnTryPurchaseWrapper(inventory);
-            return false;
-        }
-    }
+    //     [HarmonyPrefix]
+    //     public static bool Prefix(NMerchantSlot __instance, MerchantInventory? inventory, ref Task __result)
+    //     {
+    //         Player? player = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState());
+    //         if (player == null || !player.Relics.Any(r => r is SnowyRealmShop))
+    //         {
+    //             return true;
+    //         }
+    //         __result = __instance.GetEnchantmentDatas().entry!.OnTryPurchaseUnsynchronized(inventory);
+    //         return false;
+    //     }
+    // }
 
     [HarmonyPatch]
     public static class CreateHoverTipDynamicPatch

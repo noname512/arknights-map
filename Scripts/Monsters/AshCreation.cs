@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -60,7 +61,13 @@ public class AshCreation : AbstractWildsMonster
         return new MonsterMoveStateMachine(list, stun);
     }
 
-    public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature target, bool wasRemovalPrevented, float deathAnimLength)
+    public override async Task AfterDeath(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        CardModel? source,
+        bool wasRemovalPrevented,
+        float deathAnimLength
+    )
     {
         if (target.IsMonster && target.Monster is TreeShield)
         {

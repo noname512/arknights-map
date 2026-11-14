@@ -70,7 +70,7 @@ public sealed class WeiLaterano : ModRelicTemplate
 
     private bool IsInTriggeringCombat => CombatRewardsSeen > 0 && CombatRewardsSeen % 2 == 1;
 
-    public override bool IsAllowed(IRunState runState)
+    protected override bool IsAllowedInternal(IRunState runState)
     {
         return runState.Players.Count == 1;
     }

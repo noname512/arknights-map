@@ -35,9 +35,9 @@ public sealed class SweetDelivery : ModRelicTemplate
             BigIconPath: $"res://ArknightsMap/images/relics/{GetType().Name}.png"
         );
 
-    public override bool IsAllowed(IRunState runState)
+    protected override bool IsAllowedInternal(IRunState runState)
     {
-        return IsBeforeAct3TreasureChest(runState);
+        return !IsLateInAct3(runState);
     }
 
     public RelicModel Sweet(float chance)

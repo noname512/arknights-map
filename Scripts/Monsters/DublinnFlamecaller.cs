@@ -33,7 +33,7 @@ public class DublinnFlamecaller : AbstractWildsMonster
             "FIRE",
             async targets =>
             {
-                await ModelDb.Singleton<ReedBed>().SetBurningDurningCombat(true, CombatState);
+                await ModelDb.RunModel<ReedBed>().SetBurningDurningCombat(true, CombatState);
             },
             new IgniteIntent()
         );
@@ -62,7 +62,7 @@ public class DublinnFlamecaller : AbstractWildsMonster
                     .WithAttackerAnim("Attack", 0.5f)
                     .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}")
                     .Execute(null);
-                await ModelDb.Singleton<ReedBed>().SetBurningDurningCombat(true, CombatState);
+                await ModelDb.RunModel<ReedBed>().SetBurningDurningCombat(true, CombatState);
             },
             new SingleAttackIntent(AttackDamage),
             new IgniteIntent()

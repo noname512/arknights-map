@@ -3,15 +3,15 @@
   "name": "明日方舟地图",
   "author": "_noname, absi2011, wave",
   "description": "新增第二幕地图“原野”，第三幕地图“雪山”、“拉特兰”，包括相关的先古之民、事件、敌人。",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "has_pck": true,
   "has_dll": true,
   "dependencies": [
     {
       "id": "STS2-RitsuLib",
-      "min_version": "0.6.7"
+      "min_version": "0.6.12"
     }
   ],
   "affects_gameplay": true,
-  "min_game_version": "0.111.0"
+  "min_game_version": "0.113.0"
 }

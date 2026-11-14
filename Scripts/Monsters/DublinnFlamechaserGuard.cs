@@ -60,7 +60,7 @@ public class DublinnFlamechaserGuard : AbstractWildsMonster
             async targets =>
             {
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthGain, Creature, null);
-                await ModelDb.Singleton<ReedBed>().SetBurningDurningCombat(true, CombatState);
+                await ModelDb.RunModel<ReedBed>().SetBurningDurningCombat(true, CombatState);
             },
             new BuffIntent(),
             new IgniteIntent()
@@ -79,7 +79,7 @@ public class DublinnFlamechaserGuard : AbstractWildsMonster
             {
                 SfxCmd.Play($"event:/ArknightsMap/sfx/{GetType().Name}/reborn");
                 await (Creature.GetPower<ChaseFlamePower>()?.Revive() ?? Task.CompletedTask);
-                await ModelDb.Singleton<ReedBed>().SetBurningDurningCombat(true, CombatState);
+                await ModelDb.RunModel<ReedBed>().SetBurningDurningCombat(true, CombatState);
             },
             new HealIntent(),
             new IgniteIntent()

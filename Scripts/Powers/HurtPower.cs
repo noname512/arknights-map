@@ -1,13 +1,8 @@
-using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Cards;
-using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -39,7 +34,7 @@ public class HurtPower : ModPowerTemplate
     {
         if (target.Player != null)
         {
-            foreach (CardModel c in target.Player.PlayerCombatState.AllCards)
+            foreach (CardModel c in target.Player.PlayerCombatState!.AllCards)
             {
                 if (c.Type == CardType.Power)
                 {
@@ -56,6 +51,4 @@ public class HurtPower : ModPowerTemplate
             card.AddKeyword(CardKeyword.Ethereal);
         }
     }
-
-    
 }

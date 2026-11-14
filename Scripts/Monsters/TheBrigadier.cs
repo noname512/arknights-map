@@ -93,7 +93,7 @@ public class TheBrigadier : AbstractWildsMonster
             .OnlyPlayAnimOnce()
             .Execute(null);
         await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, StrengthGain, Creature, null);
-        await ModelDb.Singleton<ReedBed>().SetBurningDurningCombat(true, CombatState);
+        await ModelDb.RunModel<ReedBed>().SetBurningDurningCombat(true, CombatState);
     }
 
     public override async Task OnReedBedStatusChange(bool burning)

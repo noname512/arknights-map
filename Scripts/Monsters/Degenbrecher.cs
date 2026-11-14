@@ -134,7 +134,13 @@ public class Degenbrecher : AbstractSnowyMountainMonster
         return new MonsterMoveStateMachine(list, watch);
     }
 
-    public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
+    public override async Task AfterDeath(
+        PlayerChoiceContext choiceContext,
+        Creature creature,
+        CardModel? source,
+        bool wasRemovalPrevented,
+        float deathAnimLength
+    )
     {
         if ((creature.Monster is Tschaggatta) && (NextMove.Id == "WATCH"))
         {

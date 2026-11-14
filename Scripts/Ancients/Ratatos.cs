@@ -3,6 +3,7 @@ using ArknightsMap.Scripts.Relics;
 using Godot;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Runs;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -42,15 +43,15 @@ public class Ratatos : ModAncientEventTemplate
             CreateModRelicOption<Reinforcement>(), // 外援
             CreateModRelicOption<LoanSharking>(), // 高利贷
         ];
-    private IEnumerable<EventOption> Pool3 =>
+    private IEnumerable<EventOption> Pool3Normal =>
         [
             CreateModRelicOption<TradeMembershipCard>(), // 贸易会员卡
-            CreateModRelicOption<SnowyRealmShop>(), // 雪境专卖店
             CreateModRelicOption<TradeShippingOrder>(), // 货运委托书
         ];
 
     // 所有可能的选项
-    public override IEnumerable<EventOption> AllPossibleOptions => [.. Pool1Single, .. Pool2, .. Pool3, CreateModRelicOption<TriClanCouncil>()];
+    public override IEnumerable<EventOption> AllPossibleOptions =>
+        [.. Pool1Single, .. Pool2, .. Pool3Normal, CreateModRelicOption<TriClanCouncil>(), CreateModRelicOption<SnowyRealmShop>()];
 
     // 生成选项
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
@@ -59,6 +60,11 @@ public class Ratatos : ModAncientEventTemplate
         if (Owner!.RunState.Players.Count > 1)
         {
             Pool1.Add(CreateModRelicOption<TriClanCouncil>());
+        }
+        List<EventOption> Pool3 = Pool3Normal.ToList();
+        if (Owner!.RunState.GameMode != GameMode.Blitz)
+        {
+            Pool3.Add(CreateModRelicOption<SnowyRealmShop>());
         }
         return [Rng.NextItem(Pool1)!, Rng.NextItem(Pool2)!, Rng.NextItem(Pool3)!];
     }

@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -27,7 +28,13 @@ public class CaughtOutPower : ModPowerTemplate
 
     private int correctIntent = 0;
 
-    public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature target, bool wasRemovalPrevented, float deathAnimLength)
+    public override async Task AfterDeath(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        CardModel? source,
+        bool wasRemovalPrevented,
+        float deathAnimLength
+    )
     {
         if (wasRemovalPrevented || target != Owner)
         {

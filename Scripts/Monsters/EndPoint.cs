@@ -35,7 +35,7 @@ public class EndPoint : ModMonsterTemplate
         return target != Creature || stage == 2;
     }
 
-    public override bool IsHealthBarVisible => stage == 2;
+    public override bool IsInteractable => stage == 2;
 
     public override async Task AfterAddedToRoom()
     {
@@ -121,7 +121,7 @@ public class EndPoint : ModMonsterTemplate
     {
         stage = 2;
         StartBody!.Visible = false;
-        Creature.GetCreatureNode()!.ToggleIsInteractable(true);
+        Creature.GetCreatureNode()!.SetIsInteractable(true, true);
         await CreatureCmd.TriggerAnim(Creature, "Start", 0);
     }
 

@@ -260,7 +260,7 @@ public sealed class RandomDoors : ModEventTemplate
 
     private async Task EmperorsBlade()
     {
-        await CreatureCmd.LoseMaxHp(new ThrowingPlayerChoiceContext(), Owner!.Creature, 5, false);
+        await CreatureCmd.LoseMaxHp(new ThrowingPlayerChoiceContext(), Owner!.Creature, 5, null);
         SetEventFinished();
     }
 

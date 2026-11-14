@@ -24,7 +24,7 @@ public class TriClanCouncil : ModRelicTemplate
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromCard<Rally>(), HoverTipFactory.FromKeyword(CardKeyword.Retain), HoverTipFactory.Static(StaticHoverTip.Block)];
 
-    public override bool IsAllowed(IRunState runState)
+    protected override bool IsAllowedInternal(IRunState runState)
     {
         return runState.Players.Count > 1;
     }

@@ -90,7 +90,7 @@ public sealed class Campfire : ModEventTemplate
 
     private async Task LoseMaxHpAndHeal()
     {
-        await CreatureCmd.LoseMaxHp(new ThrowingPlayerChoiceContext(), Owner!.Creature, DynamicVars.HpLoss.BaseValue, false);
+        await CreatureCmd.LoseMaxHp(new ThrowingPlayerChoiceContext(), Owner!.Creature, DynamicVars.HpLoss.BaseValue, null);
         await CreatureCmd.Heal(Owner!.Creature, DynamicVars.Heal.BaseValue, true);
         SetEventFinished(L10NLookup($"{Id.Entry}.pages.LOSE_MAX_HP_AND_HEAL.description"));
     }

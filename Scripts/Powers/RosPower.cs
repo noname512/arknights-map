@@ -35,14 +35,23 @@ public class RosPower : ModPowerTemplate
         GetInternalData<Data>().isReviving = false;
     }
 
-    public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
+    public override async Task AfterDeath(
+        PlayerChoiceContext choiceContext,
+        Creature creature,
+        CardModel? source,
+        bool wasRemovalPrevented,
+        float deathAnimLength
+    )
     {
         if (!wasRemovalPrevented && creature == Owner)
         {
             GetInternalData<Data>().isReviving = true;
             if (creature.Monster is VectorRosmontis vectorRosmontis && vectorRosmontis.Phase == 1)
             {
-                var triggerFlyState = typeof(VectorRosmontis).GetMethod("TriggerFlyState", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic);
+                var triggerFlyState = typeof(VectorRosmontis).GetMethod(
+                    "TriggerFlyState",
+                    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic
+                );
                 if (triggerFlyState is not null)
                 {
                     var result = triggerFlyState.Invoke(vectorRosmontis, null);

@@ -61,7 +61,7 @@ public class BloodedDress : ModRelicTemplate
         return 1M;
     }
 
-    public override Task AfterDeath(PlayerChoiceContext choiceContext, Creature target, bool wasRemovalPrevented, float deathAnimLength)
+    public override Task AfterDeath(PlayerChoiceContext choiceContext, Creature target, CardModel? source, bool wasRemovalPrevented, float deathAnimLength)
     {
         if (target.Side != Owner.Creature.Side)
         {

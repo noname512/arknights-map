@@ -88,14 +88,14 @@ public sealed class OverlookingNasaoirsi : ModEventTemplate
 
     private async Task Vengeance()
     {
-        await CreatureCmd.LoseMaxHp(new BlockingPlayerChoiceContext(), Owner!.Creature, DynamicVars["MaxHp1"].IntValue, false);
+        await CreatureCmd.LoseMaxHp(new BlockingPlayerChoiceContext(), Owner!.Creature, DynamicVars["MaxHp1"].IntValue, null);
         await RelicCmd.Obtain<Vengeance>(Owner);
         SetEventFinished(L10NLookup($"{Id.Entry}.pages.VENGEANCE.description"));
     }
 
     private async Task Rebirth()
     {
-        await CreatureCmd.LoseMaxHp(new BlockingPlayerChoiceContext(), Owner!.Creature, DynamicVars["MaxHp2"].IntValue, false);
+        await CreatureCmd.LoseMaxHp(new BlockingPlayerChoiceContext(), Owner!.Creature, DynamicVars["MaxHp2"].IntValue, null);
         await RelicCmd.Obtain<Rebirth>(Owner);
         SetEventFinished(L10NLookup($"{Id.Entry}.pages.REBIRTH.description"));
     }

@@ -8,12 +8,9 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Rooms;
-using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Characters;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace ArknightsMap.Scripts.Relics;
@@ -61,7 +58,7 @@ public sealed class NeverStop : ModRelicTemplate
         {
             await PlayerCmd.GainEnergy(1, Owner);
             List<CardModel> attackCards = new();
-            foreach (CardModel c in Owner.PlayerCombatState.DrawPile.Cards)
+            foreach (CardModel c in Owner.PlayerCombatState!.DrawPile.Cards)
             {
                 if (c.Type == CardType.Attack)
                 {
@@ -79,6 +76,4 @@ public sealed class NeverStop : ModRelicTemplate
             }
         }
     }
-
-    
 }

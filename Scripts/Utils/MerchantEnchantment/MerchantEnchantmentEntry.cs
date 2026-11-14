@@ -42,9 +42,8 @@ public sealed class MerchantEnchantmentEntry : MerchantEntry
         Model = null;
     }
 
-    protected override async Task<(bool, int)> OnTryPurchase(MerchantInventory? inventory, bool ignoreCost)
+    protected override async Task<(bool, int)> OnTryPurchaseInternal(MerchantInventory? inventory, bool ignoreCost)
     {
-        GD.Print("OnTryPurchase");
         int goldToSpend = ignoreCost ? 0 : Cost;
         bool flag = await RunManager.Instance.GetEnchantSynchronizer().DoLocalEnchant(goldToSpend, Model!, true);
         return (flag, goldToSpend);

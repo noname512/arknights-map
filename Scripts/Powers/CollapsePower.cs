@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -27,7 +28,13 @@ public class CollapsePower : ModPowerTemplate
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
 
-    public override async Task AfterDeath(PlayerChoiceContext choiceContext, Creature target, bool wasRemovalPrevented, float deathAnimLength)
+    public override async Task AfterDeath(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        CardModel? source,
+        bool wasRemovalPrevented,
+        float deathAnimLength
+    )
     {
         if (wasRemovalPrevented || target != Owner)
             return;
@@ -75,13 +82,12 @@ public class CollapsePower : ModPowerTemplate
             }
 
             MoveState newState2;
-            if ((partner.Monster.IsPerformingMove) || 
-                CombatManager.Instance.History.Entries.Any(
-                    enrty => enrty is MonsterPerformedMoveEntry &&
-                             enrty.Actor == partner &&
-                             enrty.HappenedThisTurn(CombatState)
-                    )
+            if (
+                (partner.Monster.IsPerformingMove)
+                || CombatManager.Instance.History.Entries.Any(enrty =>
+                    enrty is MonsterPerformedMoveEntry && enrty.Actor == partner && enrty.HappenedThisTurn(CombatState)
                 )
+            )
             {
                 // Should be next turn
                 newState2 = new MoveState(
@@ -112,7 +118,7 @@ public class CollapsePower : ModPowerTemplate
         foreach (var m in enemies)
         {
             await CreatureCmd.Damage(choiceContext, m, Amount, ValueProp.Unpowered | ValueProp.Unblockable, m, null, null);
-            await CreatureCmd.LoseMaxHp(choiceContext, m, Amount, false);
+            await CreatureCmd.LoseMaxHp(choiceContext, m, Amount, null);
         }
     }
 }
