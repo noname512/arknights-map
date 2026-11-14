@@ -220,5 +220,8 @@
     "ARKNIGHTS_MAP_POWER_SCATTERED_TO_THE_WIND_POWER.description": "这个敌人被[gold]暴风雪[/gold]吹动时，受到若干伤害。",
     "ARKNIGHTS_MAP_POWER_UNLUCKY_ONE_POWER.title": "倒霉蛋",
     "ARKNIGHTS_MAP_POWER_UNLUCKY_ONE_POWER.smartDescription": "[gold]{OwnerName}[/gold]的[gold]蓄力攻击[/gold]也可以被[gold]暴风雪[/gold]打断。",
-    "ARKNIGHTS_MAP_POWER_UNLUCKY_ONE_POWER.description": "这个敌人的的[gold]蓄力攻击[/gold]攻击也可以被[gold]暴风雪[/gold]打断。"
+    "ARKNIGHTS_MAP_POWER_UNLUCKY_ONE_POWER.description": "这个敌人的的[gold]蓄力攻击[/gold]攻击也可以被[gold]暴风雪[/gold]打断。",
+    "ARKNIGHTS_MAP_POWER_ALL_FLAMES_RETURN_DOMINION_POWER.title": "“万火归一”的支配",
+    "ARKNIGHTS_MAP_POWER_ALL_FLAMES_RETURN_DOMINION_POWER.smartDescription": "每当一张[gold]灭火[/gold]被消耗时，将一张[gold]紫焰[/gold]放入你的[gold]手牌[/gold]。",
+    "ARKNIGHTS_MAP_POWER_ALL_FLAMES_RETURN_DOMINION_POWER.description": "每当一张[gold]灭火[/gold]被消耗时，将一张[gold]紫焰[/gold]放入你的[gold]手牌[/gold]。"
 }

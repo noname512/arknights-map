@@ -52,5 +52,5 @@
   "ARKNIGHTS_MAP_CARD_SET_TRAP.description": "若敌人攻击你并且造成伤害，在你的下回合开始时，[gold]击晕[/gold]该敌人{IfUpgraded:show:并给予其[blue]{VulnerablePower}[/blue]层[gold]易伤[/gold]}。",
   "ARKNIGHTS_MAP_CARD_SCOUT.title": "探查",
   "ARKNIGHTS_MAP_CARD_SCOUT.description": "从[gold]抽牌堆[/gold]中选择一张牌放入你的[gold]手牌[/gold]。",
-  "ARKNIGHTS_MAP_CARD_SCOUT.selectionScreenPrompt": "选择一张牌加入你的手牌。"
+  "ARKNIGHTS_MAP_CARD_SCOUT.selectionScreenPrompt": "选择一张牌放入你的手牌。"
 }

@@ -1,6 +1,8 @@
 using ArknightsMap.Scripts.Acts;
+using ArknightsMap.Scripts.Dominions;
 using ArknightsMap.Scripts.Monsters;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Dread;
 using MegaCrit.Sts2.Core.Rooms;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -31,4 +33,9 @@ public class MandragoraBoss : AbstractWildsEncounter
     // public override float GetCameraScaling() => 0.8f;
 
     protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [(ModelDb.Monster<Mandragora>().ToMutable(), "first")];
+
+    public override DominionModel GetDominion()
+    {
+        return ModelDb.Dominion<MandragoraDominion>();
+    }
 }
