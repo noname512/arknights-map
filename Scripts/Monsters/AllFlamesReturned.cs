@@ -242,7 +242,7 @@ public class AllFlamesReturned : AbstractWildsMonster
             NextMove.FollowUpState = p2Attack;
             await PowerCmd.Remove<RebornPower>(Creature);
             await PowerCmd.Remove<StrengthPower>(Creature);
-            await PowerCmd.Apply<FlameBathPower>(new ThrowingPlayerChoiceContext(), Creature, 50, Creature, null);
+            await PowerCmd.Apply<FlameBathPower>(new ThrowingPlayerChoiceContext(), Creature, AscensionHelper.IsDread() ? 75 : 50, Creature, null);
             await ModelDb.RunModel<ReedBed>().SetBurningDurningCombat(true, CombatState);
             if (AscensionHelper.IsDread())
             {
