@@ -8,7 +8,7 @@ using MegaCrit.Sts2.Core.Rooms;
 
 namespace ArknightsMap.Scripts.Dominions;
 
-public class AllFlamesReturnDominion : DominionModel
+public class AllFlamesReturnedDominion : DominionModel
 {
     public override IEnumerable<IHoverTip> ExtraHoverTips =>
         [.. HoverTipFactory.FromCardWithCardHoverTips<PutOutFire>(), .. HoverTipFactory.FromCardWithCardHoverTips<PurpleFlame>()];
@@ -17,7 +17,7 @@ public class AllFlamesReturnDominion : DominionModel
     {
         if (room is CombatRoom combatRoom)
         {
-            await PowerCmd.Apply<AllFlamesReturnDominionPower>(
+            await PowerCmd.Apply<AllFlamesReturnedDominionPower>(
                 new ThrowingPlayerChoiceContext(),
                 combatRoom.CombatState.Players.Select(p => p.Creature),
                 1m,

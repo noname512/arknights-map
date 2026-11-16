@@ -1,6 +1,7 @@
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
@@ -15,7 +16,7 @@ public class GiveAndTakePower : ModPowerTemplate
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("Exceed", 0)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar("Exceed", 0), new IntVar("Dread", AscensionHelper.IsDread() ? 1 : 0)];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => HoverTipFactory.FromPowerWithPowerHoverTips<FlamingDamagePower>();
     public override int DisplayAmount => DynamicVars["Exceed"].IntValue;
 
@@ -39,15 +40,16 @@ public class GiveAndTakePower : ModPowerTemplate
         {
             return 0;
         }
+        int extraDmg = (int)(DynamicVars["Exceed"].BaseValue / 10);
         if (Owner.Monster!.NextMove.StateId == "RETURN_FIRE1")
         {
-            return DynamicVars["Exceed"].BaseValue / 2;
+            return extraDmg + DynamicVars["Exceed"].BaseValue / (AscensionHelper.IsDread() ? 4 : 2);
         }
         if (Owner.Monster.NextMove.StateId == "RETURN_FIRE2")
         {
-            return DynamicVars["Exceed"].BaseValue;
+            return extraDmg + DynamicVars["Exceed"].BaseValue;
         }
-        return 0;
+        return extraDmg;
     }
 
     public void Return(decimal amount)

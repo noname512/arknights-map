@@ -36,6 +36,6 @@ public class AFRBoss : AbstractWildsEncounter
 
     public override DominionModel GetDominion()
     {
-        return ModelDb.Dominion<AllFlamesReturnDominion>();
+        return ModelDb.Dominion<AllFlamesReturnedDominion>();
     }
 }

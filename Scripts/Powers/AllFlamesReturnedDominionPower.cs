@@ -12,7 +12,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace ArknightsMap.Scripts.Powers;
 
 [RegisterPower]
-public class AllFlamesReturnDominionPower : ModPowerTemplate
+public class AllFlamesReturnedDominionPower : ModPowerTemplate
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Single;

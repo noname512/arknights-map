@@ -17,8 +17,8 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class Mandragora : AbstractWildsMonster
 {
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 385, 365);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 385, 365);
+    public override int MinInitialHp => AscensionHelper.IsDread() ? 290 : AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 385, 365);
+    public override int MaxInitialHp => MinInitialHp;
     private int Damage1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 45, 40);
     private int Damage2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 5, 5);
     private int HitCount2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 5);
@@ -27,11 +27,60 @@ public class Mandragora : AbstractWildsMonster
     private int Damage4 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 27, 25);
     public bool IsHovering => Creature.HasPower<StoneshieldPower>();
     private int SummonTimes { get; set; } = 0;
+    private int MaxSummonTimes => AscensionHelper.IsDread() ? 1 : 3;
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
         List<MonsterState> list = new List<MonsterState>();
+        MoveState summon = GetSummonState();
+        if (AscensionHelper.IsDread())
+        {
+            MoveState attack_dread1 = new MoveState(
+                "ATTACK_DREAD1",
+                async targets =>
+                {
+                    await DamageCmd
+                        .Attack(4)
+                        .WithHitCount(10)
+                        .FromMonster(this)
+                        .WithAttackerAnim("Skill1", 0.5f)
+                        .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/gaze")
+                        .OnlyPlayAnimOnce()
+                        .Execute(null);
+                    await PowerCmd.Apply<MandragoraGazePower>(new ThrowingPlayerChoiceContext(), targets, 4m, Creature, null);
+                },
+                new MultiAttackIntent(4, 10),
+                new DebuffIntent()
+            );
+            MoveState attack_dread2 = new MoveState(
+                "ATTACK_DREAD2",
+                async targets =>
+                {
+                    await DamageCmd
+                        .Attack(45)
+                        .FromMonster(this)
+                        .WithAttackerAnim("Attack", 0.5f)
+                        .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                        .OnlyPlayAnimOnce()
+                        .Execute(null);
+                    await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), targets, 2m, Creature, null);
+                    await PowerCmd.Apply<VulnerablePower>(new ThrowingPlayerChoiceContext(), targets, 2m, Creature, null);
+                },
+                new SingleAttackIntent(45),
+                new DebuffIntent()
+            );
+
+            attack_dread1.FollowUpState = attack_dread2;
+            attack_dread2.FollowUpState = attack_dread1;
+            summon.FollowUpState = attack_dread1;
+
+            list.Add(attack_dread1);
+            list.Add(attack_dread2);
+            list.Add(summon);
+
+            return new MonsterMoveStateMachine(list, summon);
+        }
         MoveState attack1 = new MoveState(
             "ATTACK1",
             async targets =>
@@ -89,7 +138,6 @@ public class Mandragora : AbstractWildsMonster
             new SingleAttackIntent(Damage4),
             new DebuffIntent()
         );
-        MoveState summon = GetSummonState();
 
         attack1.FollowUpState = attack2;
         attack2.FollowUpState = attack3;
@@ -108,9 +156,9 @@ public class Mandragora : AbstractWildsMonster
 
     public MoveState GetSummonState()
     {
-        if (SummonTimes >= 3)
+        if (SummonTimes >= MaxSummonTimes)
         {
-            return new MoveState("SUMMON" + SummonTimes, ShieldAndSummon, new StunIntent(), new BuffIntent());
+            return new MoveState("SUMMON" + SummonTimes, ShieldAndSummon, new BuffIntent());
         }
         return new MoveState("SUMMON" + SummonTimes, ShieldAndSummon, new SummonIntent(), new BuffIntent());
     }
@@ -119,7 +167,7 @@ public class Mandragora : AbstractWildsMonster
     {
         SfxCmd.Play($"event:/ArknightsMap/sfx/{GetType().Name}/block");
         await CreatureCmd.TriggerAnim(Creature, "Skill2", 0);
-        if (SummonTimes < 3)
+        if (SummonTimes < MaxSummonTimes)
         {
             Creature m = await CreatureCmd.Add<TatteredPillar>(CombatState, "second");
             await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), m, 1, Creature, null);

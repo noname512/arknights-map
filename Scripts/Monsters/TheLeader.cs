@@ -19,19 +19,23 @@ namespace ArknightsMap.Scripts.Monsters;
 [RegisterMonster]
 public class TheLeader : AbstractWildsMonster
 {
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 350, 325);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 350, 325);
-    private int ScorchingLightNum => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 2, 1);
-    private int Damage1_1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 18, 16);
-    private int Damage1_2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 1, 1);
-    private int Times1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 4, 3);
-    private int Damage1_3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 10, 10);
+    public override int MinInitialHp => AscensionHelper.IsDread() ? 540 : AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 350, 325);
+    public override int MaxInitialHp => MinInitialHp;
+    private int ScorchingLightNum => AscensionHelper.IsDread() ? 3 : AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 2, 1);
+    private int Damage1_1 => AscensionHelper.IsDread() ? 20 : AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 18, 16);
+    private int Damage1_2 => AscensionHelper.IsDread() ? 2 : 1;
+    private int Times1 => AscensionHelper.IsDread() ? 6 : AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 4, 3);
+    private int Damage1_3 => 10;
+    private int DamageIgn = 1;
+    private int TimesIgn = 3;
+
     private int Damage2_1 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 12, 10);
-    private int Damage2_2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 2, 2);
-    private int Times2 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 5, 4);
+    private int Damage2_2 => AscensionHelper.IsDread() ? 3 : AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 2, 2);
+    private int Times2 => AscensionHelper.IsDread() ? 7 : AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 5, 4);
     private int Damage2_3 => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 18, 15);
     public bool _isstage2 = false;
     private bool _firstFire2 = true;
+    private int FireThreshold => AscensionHelper.IsDread() ? 50 : 80;
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
     public override async Task AfterAddedToRoom()
@@ -137,6 +141,26 @@ public class TheLeader : AbstractWildsMonster
             new BuffIntent(),
             new IgniteIntent()
         );
+        MoveState ignite_dread = new MoveState(
+            "IGNITE_DREAD",
+            async targets =>
+            {
+                await DamageCmd
+                    .Attack(DamageIgn)
+                    .FromMonster(this)
+                    .WithHitCount(TimesIgn)
+                    .WithAttackerAnim("Ignite1", 0.5f)
+                    .WithHitFx(sfx: $"event:/ArknightsMap/sfx/{GetType().Name}/attack")
+                    .Execute(null);
+                DamageIgn++;
+                TimesIgn++;
+                await ModelDb.RunModel<ReedBed>().SetBurningDurningCombat(true, CombatState);
+                await Stage1Move();
+            },
+            new MultiAttackIntent(Damage1_3, TimesIgn),
+            new BuffIntent(),
+            new IgniteIntent()
+        );
         MoveState fire1 = new MoveState(
             "RETURN_FIRE1",
             async targets =>
@@ -151,7 +175,7 @@ public class TheLeader : AbstractWildsMonster
                 {
                     if (power is GiveAndTakePower giveAndTakePower)
                     {
-                        giveAndTakePower.Return(power.DynamicVars["Exceed"].IntValue / 2);
+                        giveAndTakePower.Return(power.DynamicVars["Exceed"].IntValue / (AscensionHelper.IsDread() ? 4 : 2));
                     }
                 }
                 await Stage1Move();
@@ -238,24 +262,28 @@ public class TheLeader : AbstractWildsMonster
         random1.AddBranch(attack1_1, MoveRepeatType.CanRepeatForever);
         random1.AddBranch(attack1_2, MoveRepeatType.CanRepeatForever);
         condition1.AddState(fire2, () => _isstage2);
-        condition1.AddState(ignite1, () => !ReedBed.Burning);
-        condition1.AddState(fire1, () => GTAmt >= 50);
+        condition1.AddState(AscensionHelper.IsDread() ? ignite_dread : ignite1, () => !ReedBed.Burning);
+        condition1.AddState(fire1, () => GTAmt >= FireThreshold);
         condition1.AddState(random1, () => true);
         ignite0.FollowUpState = condition1;
         attack1_1.FollowUpState = condition1;
         attack1_2.FollowUpState = condition1;
         ignite1.FollowUpState = condition1;
         fire1.FollowUpState = condition1;
-        condition2.AddState(ignite2, () => !ReedBed.Burning);
-        condition2.AddState(fire2, () => GTAmt >= 50);
-        condition2.AddState(fire2, () => GTAmt > 0 && RunRng.MonsterAi.NextInt(3) == 1);
-        condition2.AddState(random2, () => true);
+        condition2.AddState(AscensionHelper.IsDread() ? ignite_dread : ignite2, () => !ReedBed.Burning);
+        condition2.AddState(fire2, () => GTAmt >= FireThreshold);
+        condition2.AddState(fire2, () => GTAmt > 0 && RunRng.MonsterAi.NextInt(AscensionHelper.IsDread() ? 2 : 3) == 1);
+        condition2.AddState(AscensionHelper.IsDread() ? attack2_2 : random2, () => true);
         random2.AddBranch(attack2_1, MoveRepeatType.CanRepeatForever);
         random2.AddBranch(attack2_2, MoveRepeatType.CanRepeatForever);
         attack2_1.FollowUpState = condition2;
         attack2_2.FollowUpState = condition2;
         ignite2.FollowUpState = condition2;
         fire2.FollowUpState = condition2;
+        ConditionalBranchState igniteCondition = new ConditionalBranchState("IGNITE_CONDITION");
+        igniteCondition.AddState(condition1, () => !_isstage2);
+        igniteCondition.AddState(condition2, () => _isstage2);
+        ignite_dread.FollowUpState = igniteCondition;
 
         list.Add(ignite0);
         list.Add(attack1_1);
@@ -270,6 +298,8 @@ public class TheLeader : AbstractWildsMonster
         list.Add(random2);
         list.Add(condition1);
         list.Add(condition2);
+        list.Add(ignite_dread);
+        list.Add(igniteCondition);
 
         return new MonsterMoveStateMachine(list, ignite0);
     }
