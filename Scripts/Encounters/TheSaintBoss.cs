@@ -1,8 +1,10 @@
 using ArknightsMap.Scripts.Acts;
+using ArknightsMap.Scripts.Dominions;
 using ArknightsMap.Scripts.Encounters;
 using ArknightsMap.Scripts.Monsters;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Acts;
+using MegaCrit.Sts2.Core.Models.Dread;
 using MegaCrit.Sts2.Core.Rooms;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -36,6 +38,11 @@ public class TheSaintBoss : AbstractLateranoEncounter
             (ModelDb.Monster<TheSaint>().ToMutable(), "first"), // 如果不想指定怪物生成在哪个槽位，可以直接传null，系统会自动分配
         ];
 
+
+    public override DominionModel GetDominion()
+    {
+        return ModelDb.Dominion<TheSaintDominion>();
+    }
     // 可选的生成条件，例如只能在密林生成
     // public override bool IsValidForAct(ActModel act)
     // {

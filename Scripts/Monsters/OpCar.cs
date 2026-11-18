@@ -31,6 +31,7 @@ public class OpCar : AbstractSankta
     public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 65, 65);
     private int Damage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 3, 3);
 
+    public int Artifact_Num { get; private set; } = AscensionHelper.IsDread() ? 2 : 1;
     // 怪物场景
     public override MonsterAssetProfile AssetProfile => new(VisualsScenePath: $"res://ArknightsMap/scenes/monsters/{GetType().Name}.tscn");
 
@@ -83,7 +84,7 @@ public class OpCar : AbstractSankta
     {
         await base.AfterAddedToRoom();
         await PowerCmd.Apply<OpCarPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
-        await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
+        await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), Creature, Artifact_Num, Creature, null);
         await PowerCmd.Apply<ShieldPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
         await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
         if (OnRight)

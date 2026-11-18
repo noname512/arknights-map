@@ -3,6 +3,7 @@ using ArknightsMap.Scripts.Encounters;
 using ArknightsMap.Scripts.Monsters;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Acts;
+using MegaCrit.Sts2.Core.Models.Dread;
 using MegaCrit.Sts2.Core.Rooms;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -39,6 +40,11 @@ public class OpForGunBoss : AbstractLateranoEncounter
             (ModelDb.Monster<OpCar>().ToMutable(), "second_left"),
             (ModelDb.Monster<OpCar>().ToMutable(), "second_right"),
         ];
+
+    public override DominionModel GetDominion()
+    {
+        return ModelDb.Dominion<OpForGunDominion>();
+    }
 
     // 可选的生成条件，例如只能在密林生成
     // public override bool IsValidForAct(ActModel act)

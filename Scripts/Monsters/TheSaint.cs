@@ -106,6 +106,23 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
             [new SingleAttackIntent(heavyAttackPhase2)]
         );
 
+        MoveState HeavyAttackPhase2Dread = new MoveState(
+            "HEAVY_ATTACK_PHASE2_DREAD",
+            async targets =>
+            {
+                await CreatureCmd.TriggerAnim(Creature, "B_Attack_Begin_2", 0.8f);
+                await Cmd.Wait(1.0f);
+                await DamageCmd.Attack(heavyAttackPhase2).FromMonster(this).WithNoAttackerAnim().Execute(null);
+                foreach (Creature p in targets)
+                {
+                    await CardPileCmd.AddToCombatAndPreview<Perplexed>(p, PileType.Draw, 1, null, CardPilePosition.Random);
+                    await CardPileCmd.AddToCombatAndPreview<Perplexed>(p, PileType.Discard, 1, null, CardPilePosition.Random);
+                    await CardPileCmd.AddToCombatAndPreview<Perplexed>(p, PileType.Hand, 1, null, CardPilePosition.Random);
+                }
+            },
+            [new SingleAttackIntent(heavyAttackPhase2), new StatusIntent(3)]
+        );
+
         MoveState MultiAttackPhase1 = new MoveState(
             "MULTI_ATTACK_PHASE1",
             async targets =>
@@ -249,6 +266,7 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
 
         list.Add(GivePerplexed);
         list.Add(HeavyAttackPhase1);
+        list.Add(HeavyAttackPhase2Dread);
         list.Add(HeavyAttackPhase2);
         list.Add(MultiAttackPhase1);
         list.Add(MultiAttackPhase2);
@@ -267,8 +285,9 @@ public class TheSaint : AbstractSankta, IHealthBarForecastSource
         AttackDebuffPhase1.FollowUpState = SummonPhase1;
 
         Revive.FollowUpState = FlyState!;
-        FlyState!.FollowUpState = HeavyAttackPhase2;
+        FlyState!.FollowUpState = AscensionHelper.IsDread() ? HeavyAttackPhase2Dread : HeavyAttackPhase2;
         HeavyAttackPhase2.FollowUpState = SummonPhase2;
+        HeavyAttackPhase2Dread.FollowUpState = SummonPhase2;
         SummonPhase2.FollowUpState = MultiAttackPhase2;
         MultiAttackPhase2.FollowUpState = AttackDebuffPhase2;
         AttackDebuffPhase2.FollowUpState = SummonPhase2;

@@ -34,7 +34,9 @@ public class OpForGun : AbstractSankta
 
     private int multi_attack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 5, 4);
 
-    public int Attack_Time = 2;
+    public int Attack_Time { get; private set; } = AscensionHelper.IsDread() ? 3 : 2;
+
+    public int Artifact_Num { get; private set; } = AscensionHelper.IsDread() ? 3 : 2;
 
     private bool IsSlotOccupied(string slot) => CombatState.Enemies.Any(c => c.SlotName == slot);
 
@@ -79,7 +81,7 @@ public class OpForGun : AbstractSankta
         await PowerCmd.Apply<SurroundedPower>(new ThrowingPlayerChoiceContext(), CombatState.GetOpponentsOf(Creature), 1m, Creature, null);
 
         await PowerCmd.Apply<DealCorrosionDamagePower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
-        await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), Creature, 2m, Creature, null);
+        await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), Creature, Artifact_Num, Creature, null);
         await PowerCmd.Apply<ShieldPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
         await PowerCmd.Apply<BackAttackRightPower>(new ThrowingPlayerChoiceContext(), Creature, 1m, Creature, null);
     }
@@ -106,6 +108,16 @@ public class OpForGun : AbstractSankta
         }
         return shouldRun;
     }
+
+    public override async Task BeforeSideTurnEndEarly(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+    {
+        if (ShouldRun() && AscensionHelper.IsDread() && side == CombatSide.Enemy && participants.Contains(Creature))
+        {
+            await AddBullet(1);
+        }
+    }
+
+    
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
     {

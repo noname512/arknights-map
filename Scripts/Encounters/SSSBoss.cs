@@ -3,9 +3,11 @@ using ArknightsMap.Scripts.Encounters;
 using ArknightsMap.Scripts.Monsters;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Acts;
+using MegaCrit.Sts2.Core.Models.Dread;
 using MegaCrit.Sts2.Core.Rooms;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
+using ArknightsMap.Scripts.Dominions;
 
 namespace ArknightsMap.Scripts.Encounters;
 
@@ -38,6 +40,11 @@ public class SSSBoss : AbstractLateranoEncounter
     protected override IReadOnlyList<(MonsterModel, string?)> GenerateMonsters() => [
         (ModelDb.Monster<SupersweetieSmiley>().ToMutable(), "first")
     ];
+
+    public override DominionModel GetDominion()
+    {
+        return ModelDb.Dominion<SSSDominion>();
+    }
 
     // 可选的生成条件，例如只能在密林生成
     // public override bool IsValidForAct(ActModel act)

@@ -25,16 +25,16 @@ public class SupersweetieSmiley : AbstractSankta
     protected override int BulletMax => 15 + tolerance;
     protected override int InitialBullet => 0;
 
-    public override int MinInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 500, 500);
-    public override int MaxInitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 500, 500);
+    public override int MinInitialHp => AscensionHelper.IsDread() ? 600 : 500;
+    public override int MaxInitialHp => MinInitialHp;
 
-    private int heavyAttack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 25, 25);
+    private int heavyAttack => AscensionHelper.IsDread() ? 30 : 25;
 
-    private int heavyAttackEnhanced => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 36, 36);
+    private int heavyAttackEnhanced => AscensionHelper.IsDread() ? 42 : 36;
 
-    private int multiAttack => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 8, 8);
+    private int multiAttack => AscensionHelper.IsDread() ? 10 : 8;
 
-    private int multiAttackEnhanced => AscensionHelper.GetValueIfAscension(AscensionLevel.DoubleBoss, 10, 10);
+    private int multiAttackEnhanced => AscensionHelper.IsDread() ? 12 : 10;
 
     public int tolerance = 0;
 
@@ -49,6 +49,10 @@ public class SupersweetieSmiley : AbstractSankta
         await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), Creature, 2, Creature, null);
         int playernum = CombatState.PlayerCreatures.Count;
         await PowerCmd.Apply<SSSPower>(new ThrowingPlayerChoiceContext(), Creature, playernum, Creature, null);
+        if (AscensionHelper.IsDread())
+        {
+            await PowerCmd.Apply<WelcomePower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
+        }
     }
 
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
