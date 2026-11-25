@@ -153,7 +153,7 @@ public class AllFlamesReturned : AbstractWildsMonster
         DeadState2.FollowUpState = DeadState3;
 
         p2Attack.FollowUpState = breeth;
-        breeth.FollowUpState = (AscensionHelper.IsDread()?dreadSpecialMove:p2Attack);
+        breeth.FollowUpState = (AscensionHelper.IsDread() ? dreadSpecialMove : p2Attack);
         dreadSpecialMove.FollowUpState = p2Attack;
 
         list.Add(p1Attack);
@@ -163,6 +163,7 @@ public class AllFlamesReturned : AbstractWildsMonster
 
         list.Add(p2Attack);
         list.Add(breeth);
+        list.Add(dreadSpecialMove);
 
         return new MonsterMoveStateMachine(list, p1Attack);
     }
