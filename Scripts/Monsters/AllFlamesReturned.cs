@@ -34,7 +34,7 @@ public class AllFlamesReturned : AbstractWildsMonster
     private int P1PurpleFlame => AscensionHelper.IsDread() ? 2 : 1;
     private int StrengthGain => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 2, 1);
     private int RevivePurpleFlame => AscensionHelper.IsDread() ? 6 : 3;
-    private int P2AttackDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 26, 23);
+    private int P2AttackDamage => AscensionHelper.IsDread() ? 15 : AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 26, 23);
     private int P2PurpleFlame => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 4);
 
     private MoveState? p1Attack;
@@ -130,7 +130,7 @@ public class AllFlamesReturned : AbstractWildsMonster
 
                 foreach (Creature target in targets)
                 {
-                    AttackCommand command = DamageCmd.Attack(15).FromMonster(this);
+                    AttackCommand command = DamageCmd.Attack(P2AttackDamage).FromMonster(this);
                     FieldInfo field = typeof(AttackCommand).GetField("_combatState", BindingFlags.Instance | BindingFlags.NonPublic)!;
                     field.SetValue(command, null);
                     list.Add(command.Targeting(target).WithHitCount(CalcRepeatTimes(target)).WithNoAttackerAnim().Execute(null));
@@ -153,7 +153,8 @@ public class AllFlamesReturned : AbstractWildsMonster
         DeadState2.FollowUpState = DeadState3;
 
         p2Attack.FollowUpState = breeth;
-        breeth.FollowUpState = p2Attack;
+        breeth.FollowUpState = (AscensionHelper.IsDread()?dreadSpecialMove:p2Attack);
+        dreadSpecialMove.FollowUpState = p2Attack;
 
         list.Add(p1Attack);
         list.Add(DeadState);
