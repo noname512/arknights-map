@@ -41,7 +41,7 @@ public class OpCarPower : ModPowerTemplate
             {
                 if (c.Monster is OpForGun gun)
                 {
-                    gun.Creature.LoseHpInternal(result.UnblockedDamage, ValueProp.Unpowered);
+                    gun.Creature.LoseHpInternal(result.UnblockedDamage);
                 }
             }
         }
