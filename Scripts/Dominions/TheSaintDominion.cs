@@ -14,7 +14,7 @@ namespace ArknightsMap.Scripts.Dominions;
 
 public class TheSaintDominion : DominionModel
 {
-    public override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<ScorchingLightPower>()];
+    public override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<Perplexed>()];
 
     public override async Task AfterActEntered()
     {
