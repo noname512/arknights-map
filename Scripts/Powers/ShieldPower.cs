@@ -24,26 +24,26 @@ public class ShieldPower : ModPowerTemplate
 
     private int? _cachedArtifactNum;
 
-private int GetArtifactNum()
-{
-    // 已缓存（Owner 已确定）直接返回
-    if (_cachedArtifactNum.HasValue)
-        return _cachedArtifactNum.Value;
-
-    var num = Owner?.Monster switch
+    private int GetArtifactNum()
     {
-        OpForGun => 2,
-        OpCar    => 1,
-        _        => 1
-    };
+        // 已缓存（Owner 已确定）直接返回
+        if (_cachedArtifactNum.HasValue)
+            return _cachedArtifactNum.Value;
 
-    // 关键：模板克隆阶段 Owner 还是 null，此时不能缓存，
-    // 否则 OpCar 会永远拿到默认值 3
-    if (Owner?.Monster is not null)
-        _cachedArtifactNum = num;
+        var num = Owner?.Monster switch
+        {
+            OpForGun => 2,
+            OpCar => 1,
+            _ => 1,
+        };
 
-    return num;
-}
+        // 关键：模板克隆阶段 Owner 还是 null，此时不能缓存，
+        // 否则 OpCar 会永远拿到默认值 3
+        if (Owner?.Monster is not null)
+            _cachedArtifactNum = num;
+
+        return num;
+    }
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new IntVar("Cooldown", 2), new IntVar("CurrentCooldown", 0), new IntVar("ArtifactNum", GetArtifactNum())];
@@ -88,7 +88,7 @@ private int GetArtifactNum()
         }
     }
 
-    public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
+    public override async Task AfterSideTurnStartLate(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
         if (side == CombatSide.Enemy && Owner.GetPowerAmount<ArtifactPower>() == 0)
         {
@@ -96,8 +96,8 @@ private int GetArtifactNum()
             if (DynamicVars["CurrentCooldown"].IntValue <= 0)
             {
                 await PowerCmd.Apply<ArtifactPower>(new ThrowingPlayerChoiceContext(), Owner, GetArtifactNum(), Owner, null);
-                InvokeDisplayAmountChanged();
             }
+            InvokeDisplayAmountChanged();
         }
     }
 }

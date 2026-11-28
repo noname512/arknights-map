@@ -105,7 +105,7 @@
     "ARKNIGHTS_MAP_POWER_WELCOME_POWER.smartDescription": "每当[blue]{Amount}[/blue]张[gold]奶浆[/gold]被打出，[gold]{OwnerName}[/gold]获得[blue]{Amount}[/blue]点[gold]力量[/gold]。}",
     "ARKNIGHTS_MAP_POWER_WELCOME_POWER.description": "每当[blue]{Amount}[/blue]张[gold]奶浆[/gold]被打出，[gold]{OwnerName}[/gold]获得若干点[gold]力量[/gold]。",
     "ARKNIGHTS_MAP_POWER_SHIELD_POWER.title": "元素护盾",
-    "ARKNIGHTS_MAP_POWER_SHIELD_POWER.smartDescription": "{CurrentCooldown:cond:==0?[gold]{OwnerName}[/gold]受到的所有伤害降低[blue]50%[/blue]。\n失去所有[gold]人工制品[/gold]后，移除此效果，并在[blue]{Cooldown}[/blue]回合后恢复。|{CurrentCooldown}回合后，获得[blue]{ArtifactNum}[/blue]层[gold]人工制品[/gold]。}",
+    "ARKNIGHTS_MAP_POWER_SHIELD_POWER.smartDescription": "{CurrentCooldown:cond:==0?[gold]{OwnerName}[/gold]受到的所有伤害降低[blue]50%[/blue]。\n失去所有[gold]人工制品[/gold]后，移除此效果，并在[blue]{Cooldown}[/blue]回合后恢复。|[blue]{CurrentCooldown}[/blue]回合后，获得[blue]{ArtifactNum}[/blue]层[gold]人工制品[/gold]。}",
     "ARKNIGHTS_MAP_POWER_SHIELD_POWER.description": "这个敌人受到的所有伤害降低[blue]50%[/blue]。\n失去所有[gold]人工制品[/gold]后，移除此效果，并在[blue]3[/blue]回合后恢复。",
     "ARKNIGHTS_MAP_POWER_CORROSION_DAMAGE_POWER.title": "侵蚀损伤",
     "ARKNIGHTS_MAP_POWER_CORROSION_DAMAGE_POWER.smartDescription": "回合结束时，若累计到[blue]5[/blue]点，[gold]{OwnerName}[/gold]将受到[blue]5[/blue]点伤害，失去[blue]1[/blue]点[gold]敏捷[/gold]并失去此效果。",
@@ -224,7 +224,7 @@
     "ARKNIGHTS_MAP_POWER_UNLUCKY_ONE_POWER.title": "倒霉蛋",
     "ARKNIGHTS_MAP_POWER_UNLUCKY_ONE_POWER.smartDescription": "[gold]{OwnerName}[/gold]的[gold]蓄力攻击[/gold]也可以被[gold]暴风雪[/gold]打断。",
     "ARKNIGHTS_MAP_POWER_UNLUCKY_ONE_POWER.description": "这个敌人的的[gold]蓄力攻击[/gold]攻击也可以被[gold]暴风雪[/gold]打断。",
-    "ARKNIGHTS_MAP_POWER_ALL_FLAMES_RETURN_DOMINION_POWER.title": "“万火归一”的支配",
-    "ARKNIGHTS_MAP_POWER_ALL_FLAMES_RETURN_DOMINION_POWER.smartDescription": "每当一张[gold]灭火[/gold]被消耗时，将一张[gold]紫焰[/gold]放入你的[gold]手牌[/gold]。",
-    "ARKNIGHTS_MAP_POWER_ALL_FLAMES_RETURN_DOMINION_POWER.description": "每当一张[gold]灭火[/gold]被消耗时，将一张[gold]紫焰[/gold]放入你的[gold]手牌[/gold]。"
+    "ARKNIGHTS_MAP_POWER_ALL_FLAMES_RETURNED_DOMINION_POWER.title": "“万火归一”的支配",
+    "ARKNIGHTS_MAP_POWER_ALL_FLAMES_RETURNED_DOMINION_POWER.smartDescription": "每当一张[gold]灭火[/gold]被消耗时，将一张[gold]紫焰[/gold]放入你的[gold]手牌[/gold]。",
+    "ARKNIGHTS_MAP_POWER_ALL_FLAMES_RETURNED_DOMINION_POWER.description": "每当一张[gold]灭火[/gold]被消耗时，将一张[gold]紫焰[/gold]放入你的[gold]手牌[/gold]。"
 }
