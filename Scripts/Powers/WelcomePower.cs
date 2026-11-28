@@ -19,7 +19,7 @@ public class WelcomePower : ModPowerTemplate
 
     protected override IEnumerable<DynamicVar> CanonicalVars => new[] { new IntVar("Time", 0) };
 
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromPower<BulletPower>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.FromCard<Milk>()];
 
     public override PowerAssetProfile AssetProfile =>
         new(IconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png", BigIconPath: $"res://ArknightsMap/images/powers/{GetType().Name}.png");
@@ -43,23 +43,18 @@ public class WelcomePower : ModPowerTemplate
         if (DynamicVars["Time"].BaseValue > 0 && cardPlay.Card is Milk)
         {
             MilkCounter++;
-            if (MilkCounter >= 2 * CombatState.Players.Count)
+            if (MilkCounter >= 4 * CombatState.Players.Count)
             {
                 DynamicVars["Time"].BaseValue--;
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Owner, 1m, null, null);
                 InvokeDisplayAmountChanged();
-                MilkCounter = 0; // 只有弹药真正减少后才重置
+                MilkCounter = 0; 
             }
         }
     }
 
     public async Task UpdateTime(int time)
     {
-        var bullet = Owner.GetPower<BulletPower>();
-        if (bullet != null && Owner.Monster is AbstractSankta sankta)
-        {
-            await sankta.SetBullet(time);
-        }
 
         DynamicVars["Time"].BaseValue = time;
         InvokeDisplayAmountChanged();
